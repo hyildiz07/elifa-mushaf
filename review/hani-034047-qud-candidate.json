@@ -1,0 +1,84 @@
+{
+  "status": "unverified-review-only",
+  "verse_key": "34:47",
+  "source_url": "https://everyayah.com/data/Hani_Rifai_192kbps/034047.mp3",
+  "source_bytes": 369395,
+  "source_sha256": "cd844ae4b6a6ff7b86377355a9fe9f29c1d5f4cfc90530423a0e2ff56ff83b43",
+  "api_endpoint": "https://hetchyy-quranic-universal-aligner.hf.space/api/v1/align/url",
+  "request": {
+    "riwayah": "hafs",
+    "model_name": "Large",
+    "device": "CPU"
+  },
+  "received_at_utc": "2026-09-30T06:03:12.121Z",
+  "response": {
+    "audio_id": "f7c7fd2be568475cb1f1f663a6820746",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 1.46,
+        "time_to": 7.227,
+        "ref_from": "34:47:1",
+        "ref_to": "34:47:7",
+        "matched_text": "قُلْ مَا سَأَلْتُكُم مِّنْ أَجْرٍ فَهُوَ لَكُمْ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 7.257,
+        "time_to": 15.374,
+        "ref_from": "34:47:8",
+        "ref_to": "34:47:17",
+        "matched_text": "إِنْ أَجْرِىَ إِلَّا عَلَى ٱللَّهِ وَهُوَ عَلَىٰ كُلِّ شَىْءٍ شَهِيدٌ",
+        "confidence": 0.976,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null,
+        "pauses": [
+          {
+            "after_ref": "34:47:12",
+            "token_pos": 21,
+            "gain": 0.5999999999999999,
+            "separability": 1
+          },
+          {
+            "after_ref": "34:47:13",
+            "token_pos": 25,
+            "gain": 1.3499999999999999,
+            "separability": 2.1
+          }
+        ]
+      }
+    ],
+    "device": "CPU",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.3225219249725342,
+        "queue_seconds": 0.03417855338193476,
+        "total_seconds": 1.356700478354469
+      }
+    },
+    "url_metadata": {
+      "title": "034047",
+      "duration": null,
+      "source_url": "https://everyayah.com/data/Hani_Rifai_192kbps/034047.mp3"
+    }
+  }
+}

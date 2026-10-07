@@ -1,0 +1,153 @@
+{
+  "status": "unverified-review-only",
+  "verse_key": "2:145",
+  "source_url": "https://everyayah.com/data/Husary_Muallim_128kbps/002145.mp3",
+  "source_sha256_observed_local": "cc4640fa78a211b598a6e5f47880a5ff39112d3f8279d5260f860f1e1a1cad28",
+  "api_endpoint": "https://hetchyy-quranic-universal-aligner.hf.space/api/v1/align/url",
+  "request": {
+    "riwayah": "hafs",
+    "model_name": "Large",
+    "device": "GPU"
+  },
+  "received_at_utc": "2026-09-28T13:51:14.168Z",
+  "response": {
+    "audio_id": "67355701ec584910a29db2e0ab556bea",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0.3,
+        "time_to": 13.82,
+        "ref_from": "2:145:1",
+        "ref_to": "2:145:10",
+        "matched_text": "وَلَئِنْ أَتَيْتَ ٱلَّذِينَ أُوتُوا۟ ٱلْكِتَـٰبَ بِكُلِّ ءَايَةٍ مَّا تَبِعُوا۟ قِبْلَتَكَ",
+        "confidence": 0.984,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 17.52,
+        "time_to": 25.56,
+        "ref_from": "2:145:11",
+        "ref_to": "2:145:14",
+        "matched_text": "وَمَآ أَنتَ بِتَابِعٍ قِبْلَتَهُمْ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 28.88,
+        "time_to": 36.76,
+        "ref_from": "2:145:15",
+        "ref_to": "2:145:19",
+        "matched_text": "وَمَا بَعْضُهُم بِتَابِعٍ قِبْلَةَ بَعْضٍ",
+        "confidence": 0.97,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 4,
+        "time_from": 40.82,
+        "time_to": 61.06,
+        "ref_from": "2:145:20",
+        "ref_to": "2:145:32",
+        "matched_text": "وَلَئِنِ ٱتَّبَعْتَ أَهْوَآءَهُم مِّن بَعْدِ مَا جَآءَكَ مِنَ ٱلْعِلْمِ إِنَّكَ إِذًا لَّمِنَ ٱلظَّـٰلِمِينَ",
+        "confidence": 0.997,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 5,
+        "time_from": 66.84,
+        "time_to": 81.28,
+        "ref_from": "2:146:1",
+        "ref_to": "2:146:7",
+        "matched_text": "ٱلَّذِينَ ءَاتَيْنَـٰهُمُ ٱلْكِتَـٰبَ يَعْرِفُونَهُۥ كَمَا يَعْرِفُونَ أَبْنَآءَهُمْ",
+        "confidence": 0.967,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 6,
+        "time_from": 86.06,
+        "time_to": 97.9,
+        "ref_from": "2:146:8",
+        "ref_to": "2:146:14",
+        "matched_text": "وَإِنَّ فَرِيقًا مِّنْهُمْ لَيَكْتُمُونَ ٱلْحَقَّ وَهُمْ يَعْلَمُونَ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 7,
+        "time_from": 102.4,
+        "time_to": 106.16,
+        "ref_from": "2:147:1",
+        "ref_to": "2:147:3",
+        "matched_text": "ٱلْحَقُّ مِن رَّبِّكَ",
+        "confidence": 0.933,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 8,
+        "time_from": 109.18,
+        "time_to": 115.88,
+        "ref_from": "2:147:4",
+        "ref_to": "2:147:7",
+        "matched_text": "فَلَا تَكُونَنَّ مِنَ ٱلْمُمْتَرِينَ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "GPU",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.4671549797058105,
+        "queue_seconds": 1.5208164546638727,
+        "total_seconds": 2.9879714343696833
+      }
+    },
+    "url_metadata": {
+      "title": "002145",
+      "duration": null,
+      "source_url": "https://everyayah.com/data/Husary_Muallim_128kbps/002145.mp3"
+    }
+  }
+}

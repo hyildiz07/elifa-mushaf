@@ -1,0 +1,92 @@
+{
+  "status": "unverified-review-only",
+  "verse": "5:82",
+  "url": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/005082.mp3",
+  "endpoint": "https://hetchyy-quranic-universal-aligner.hf.space/api/v1/align/url",
+  "received_at_utc": "2026-09-28T13:57:22.725Z",
+  "result": {
+    "audio_id": "1dff480fc5414fae975f58aa1413f28e",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0.22,
+        "time_to": 9.72,
+        "ref_from": "5:82:1",
+        "ref_to": "5:82:9",
+        "matched_text": "لَتَجِدَنَّ أَشَدَّ ٱلنَّاسِ عَدَٰوَةً لِّلَّذِينَ ءَامَنُوا۟ ٱلْيَهُودَ وَٱلَّذِينَ أَشْرَكُوا۟",
+        "confidence": 0.984,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 9.75,
+        "time_to": 19.493,
+        "ref_from": "5:82:10",
+        "ref_to": "5:82:18",
+        "matched_text": "وَلَتَجِدَنَّ أَقْرَبَهُم مَّوَدَّةً لِّلَّذِينَ ءَامَنُوا۟ ٱلَّذِينَ قَالُوٓا۟ إِنَّا نَصَـٰرَىٰ",
+        "confidence": 0.885,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 19.523,
+        "time_to": 24.847,
+        "ref_from": "5:82:19",
+        "ref_to": "5:82:23",
+        "matched_text": "ذَٰلِكَ بِأَنَّ مِنْهُمْ قِسِّيسِينَ وَرُهْبَانًا",
+        "confidence": 0.85,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 4,
+        "time_from": 24.877,
+        "time_to": 30.212,
+        "ref_from": "5:82:23",
+        "ref_to": "5:82:26",
+        "matched_text": "وَرُهْبَانًا وَأَنَّهُمْ لَا يَسْتَكْبِرُونَ",
+        "confidence": 0.871,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 2.245852470397949,
+        "queue_seconds": 0.06391097768209875,
+        "total_seconds": 2.309763448080048
+      }
+    },
+    "url_metadata": {
+      "title": "005082",
+      "duration": null,
+      "source_url": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/005082.mp3"
+    }
+  }
+}

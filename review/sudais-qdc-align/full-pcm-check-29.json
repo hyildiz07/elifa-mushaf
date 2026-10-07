@@ -1,0 +1,71 @@
+[
+  {
+    "verse": "29:1",
+    "indexed_off": 0,
+    "full_off": 100,
+    "rate": 22050,
+    "comparisons": [
+      {
+        "at_ms": 400,
+        "rms_diff": 0,
+        "max_abs_diff": 0
+      },
+      {
+        "at_ms": 850,
+        "rms_diff": 0,
+        "max_abs_diff": 0
+      },
+      {
+        "at_ms": 1300,
+        "rms_diff": 0,
+        "max_abs_diff": 0
+      }
+    ]
+  },
+  {
+    "verse": "29:35",
+    "indexed_off": 449389.9773242631,
+    "full_off": 451989.9773242631,
+    "rate": 22050,
+    "comparisons": [
+      {
+        "at_ms": 452290,
+        "rms_diff": 7.2995781411504326e-9,
+        "max_abs_diff": 5.960464477539063e-8
+      },
+      {
+        "at_ms": 452740,
+        "rms_diff": 1.1727520080488882e-8,
+        "max_abs_diff": 1.1920928955078125e-7
+      },
+      {
+        "at_ms": 453190,
+        "rms_diff": 1.0960076842189849e-8,
+        "max_abs_diff": 5.960464477539063e-8
+      }
+    ]
+  },
+  {
+    "verse": "29:68",
+    "indexed_off": 874939.9999999999,
+    "full_off": 877540,
+    "rate": 22050,
+    "comparisons": [
+      {
+        "at_ms": 877840,
+        "rms_diff": 3.24133906568615e-8,
+        "max_abs_diff": 1.4901161193847656e-7
+      },
+      {
+        "at_ms": 878290,
+        "rms_diff": 2.8076914300439615e-8,
+        "max_abs_diff": 1.7881393432617188e-7
+      },
+      {
+        "at_ms": 878740,
+        "rms_diff": 3.996176668060282e-8,
+        "max_abs_diff": 1.7881393432617188e-7
+      }
+    ]
+  }
+]

@@ -1,0 +1,27 @@
+{
+  "status": "full-verse-source-candidate-v1",
+  "review_status": "hold-physical-tail-still-active",
+  "reciter": 5,
+  "recording": "Hani_Rifai_64kbps",
+  "audio_source": "EveryAyah",
+  "audio_rights": "© reciter / producer; external link only",
+  "word_timing_status": "unverified-do-not-use-for-splitting",
+  "rows": {
+    "6:139": {
+      "verse_key": "6:139",
+      "audio_url": "https://everyayah.com/data/Hani_Rifai_64kbps/006139.mp3",
+      "file_size": 216083,
+      "sha256": "793b023758cc4e0edb7576c3a53292370ad57c943d971478e3926dd3e27f07a6",
+      "audio_duration_ms": 26906,
+      "chapter_clip_start_ms": 2835125,
+      "next_verse_clip_start_ms": 2862106,
+      "tail_audit": {
+        "provider_last_word_end_ms": 2861169,
+        "model_last_word_end_ms": 26640,
+        "last_10ms_rms": 0.003651,
+        "chapter_25ms_rms_at_clip_end": 0.003541,
+        "note": "The end decays but is still nonzero. Human audition has not confirmed that no word sound is cut."
+      }
+    }
+  }
+}

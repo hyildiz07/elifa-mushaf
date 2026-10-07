@@ -1,0 +1,73 @@
+{
+  "status": "local-review-only",
+  "reciter": 3,
+  "evaluated_on": "2026-09-28",
+  "quran_cdn_audio": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/{surah}.mp3",
+  "qul_chapter_audio": "https://audio-cdn.tarteel.ai/quran/surah/abdulrahmanAlSudais/murattal/mp3/{surah_3digit}.mp3",
+  "method": "Three distinct 1-second PCM windows per verse, independently optimized within 100 ms of a common alignment; a single high window is not accepted as source identity. Quiet runs use the max 5 ms RMS across both channels of the QuranCDN MP3.",
+  "verified_closable_exceptions": 0,
+  "cases": [
+    {
+      "key": "24:35",
+      "qul_chapter_correlations": [0.8658, 0.9499, 0.4994],
+      "source_identity": "partial-match-only",
+      "everyayah_64kbps_source_identity": "same-performance-in-ten-independent-windows",
+      "everyayah_64kbps_correlations": [0.9295, 0.9088, 0.9443, 0.9096, 0.9247, 0.9329, 0.8771, 0.9226, 0.8752, 0.8940],
+      "everyayah_64kbps_offset_ms_range": [2493, 2506],
+      "acoustic_review": "The EveryAyah 64 kbps clip is the same performance across ten independent windows, but the existing four candidate cuts after words 9, 19, 25 and 32 do not form a complete partition of 48 canonical words into groups of at most eight. Every candidate still needs two-sided word audition; missing/repeated QuranCDN labels prevent automatic transfer.",
+      "closable_now": false
+    },
+    {
+      "key": "3:160",
+      "qul_chapter_correlations": [0.1141, 0.1759, 0.3645],
+      "source_identity": "not-established",
+      "acoustic_review": "One 140 ms internal quiet run; verse-tail provider conflict remains.",
+      "closable_now": false
+    },
+    {
+      "key": "39:54",
+      "qul_chapter_correlations": [0.9979, 0.9983, 0.9977],
+      "qul_to_quran_cdn_timeline_offset_ms": 0,
+      "source_identity": "verified-same-performance-this-verse",
+      "canonical_word_count": 13,
+      "qul_spoken_position_sequence": [1, 2, 3, 4, 5, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+      "acoustic_review": "A 1649 ms two-channel low-energy interval is centered near QuranCDN 799718 ms, during the repeated 4–5 phrase. The source labels span part of this silence. A cut there would separate two takes of words 4–5, so card text and repetition ownership need human review. Other candidate gaps are acoustically active.",
+      "closable_now": false
+    },
+    {
+      "key": "4:134",
+      "qul_chapter_correlations": [0.0899, 0.4297, 0.1051],
+      "source_identity": "not-established",
+      "acoustic_review": "No internal quiet run of at least 80 ms below 20% of the verse median. A 135 ms run appears only at the looser 30% threshold, with conflicting provider word positions.",
+      "closable_now": false
+    },
+    {
+      "key": "4:143",
+      "qul_chapter_correlations": [0.2414, 0.1209, 0.2252],
+      "source_identity": "not-established",
+      "acoustic_review": "Internal quiet runs exist, but the provider verse end precedes later word labels.",
+      "closable_now": false
+    },
+    {
+      "key": "5:5",
+      "qul_chapter_correlations": [0.1026, 0.3758, 0.1832],
+      "source_identity": "not-established",
+      "acoustic_review": "The provider verse range covers only about 9.5 seconds while its last word labels reach about 38.6 seconds from verse start; the same-source verse endpoint is unresolved.",
+      "closable_now": false
+    },
+    {
+      "key": "5:46",
+      "qul_chapter_correlations": [0.0600, 0.5197, 0.1938],
+      "source_identity": "not-established",
+      "acoustic_review": "A 309 ms quiet run is centered near 1086141 ms, but provider positions skip and repeat. One such cut still leaves a group far beyond the eight-word goal.",
+      "closable_now": false
+    },
+    {
+      "key": "5:82",
+      "qul_chapter_correlations": [0.1891, 0.2802, 0.2665],
+      "source_identity": "not-established",
+      "acoustic_review": "Two quiet runs of 234 and 165 ms are near 1856072 and 1867681 ms; provider positions skip and repeat. Neither establishes a complete small-chunk partition.",
+      "closable_now": false
+    }
+  ]
+}

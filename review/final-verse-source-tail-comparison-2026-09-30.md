@@ -1,0 +1,13 @@
+# Son âyet ses kuyruğu: kaynak karşılaştırması (2026-09-30)
+
+Bu inceleme üretim sûre MP3'lerini aynı kâriye ait EveryAyah 192 kbps âyet dosyalarıyla karşılaştırır. Yeniden çalıştırma: `node review/probe-final-verse-source-tails.mjs` (ağ ve kurulu `mpg123-decoder` gerekir). Betik yalnız uzaktaki dosyaları okur; üretim verisini değiştirmez.
+
+| Âyet | Üretim sûre dosyası | Âyet dosyası | Sonuç |
+| --- | --- | --- | --- |
+| Südeys 2:286 | [QDC 2.mp3](https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/2.mp3), 142.852.432 bayt | [EveryAyah 002286.mp3](https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/002286.mp3), 1.036.298 bayt | İlk 596 bayt (dosya başlığı) farklı; kalan **1.035.702 bayt bire bir aynı** ve her iki dosyanın son baytında bitiyor. Son 200 ms çözülmüş PCM farkı en çok `1,12×10⁻⁸`; son 10 ms RMS `0,01235`. |
+| Südeys 36:83 | [QDC 36.mp3](https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/36.mp3), 18.020.140 bayt | [EveryAyah 036083.mp3](https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/036083.mp3), 247.818 bayt | İlk 2.058 bayt farklı; kalan **245.760 bayt bire bir aynı** ve her iki dosyanın son baytında bitiyor. Son 200 ms PCM farkı en çok `1,12×10⁻⁸`; son 10 ms RMS `0,01082`. |
+| Hânî 2:286 | [QDC 2.mp3](https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/2.mp3), 114.163.714 bayt | [EveryAyah 002286.mp3](https://everyayah.com/data/Hani_Rifai_192kbps/002286.mp3), 1.181.281 bayt | Kodlama farklı olduğu için bayt eşitliği yok. Son kısma yakın 1,2 saniyelik PCM penceresi korelasyonu `0,819`; bu hizaya göre klip bitişi `7.135.186,94 ms`, sûre dosyasının hesaplanan bitişi `7.135.191,27 ms` (**yaklaşık 4,3 ms fark**). Son 10 ms RMS sûre/klip için `0,01477`/`0,01576`. Hizalama 1 ms çözünürlüklü tahmindir. |
+
+Üç üretim dosyası da fiziksel sonuna kadar etkin PCM taşır. Bu, son fonemin eksik olduğunu **kanıtlamaz**: doğal bitiş, yankı ve kesilmiş bir ses yalnız RMS veya son örnekle ayırt edilemez. Südeys'in iki ayrı âyet klibi kaynak sonunun ötesinde tek bayt sağlamaz; Hânî'nin eşleşen klibi de anlamlı bir devam sağlamaz. Önceki [son âyet denetimindeki](final-verse-audio-audit-2026-09-30.md) metadata taşmaları (Südeys 2:286 yaklaşık 25 ms, Hânî 2:286 yaklaşık 475 ms, Südeys 36:83 yaklaşık 21 ms) zaman damgası uzatılarak ses olarak geri getirilemez.
+
+**Üretim kararı:** Kaynak veya zamanlama yaması yapılmadı. Son fonemi nitelikli işitsel/fonetik incelemeyle doğrulayın. Eksik ses gerçekten saptanırsa, ancak aynı icranın daha uzun olduğu PCM hizasıyla kanıtlanan bir kayıt bulunup son hecenin devamı teyit edildikten sonra kaynak ve zamanlamayı birlikte değiştirin.

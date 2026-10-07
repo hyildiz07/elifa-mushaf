@@ -1,0 +1,242 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/5.mp3",
+  "source_file_size": 38326543,
+  "source_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+  "excerpt_file": "test-results/sudais-qdc-align/5-60.wav",
+  "excerpt_sha256": "8e8c88e4ae5ba92fc7098edfb323e72e0ce83b8671a9bbb71272aa4bb3f859b6",
+  "excerpt_from_ms": 1400610,
+  "excerpt_to_ms": 1427250,
+  "provider_segments": [
+    [
+      1,
+      1400610,
+      1401120
+    ],
+    [
+      2,
+      1401120,
+      1401450
+    ],
+    [
+      3,
+      1401450,
+      1402890
+    ],
+    [
+      4,
+      1402890,
+      1403640
+    ],
+    [
+      5,
+      1403640,
+      1404110
+    ],
+    [
+      6,
+      1404110,
+      1405420
+    ],
+    [
+      7,
+      1405420,
+      1406430
+    ],
+    [
+      8,
+      1406430,
+      1407170
+    ],
+    [
+      9,
+      1407170,
+      1407860
+    ],
+    [
+      10,
+      1407860,
+      1408070
+    ],
+    [
+      11,
+      1408070,
+      1408930
+    ],
+    [
+      12,
+      1408930,
+      1409680
+    ],
+    [
+      10,
+      1409680,
+      1410300
+    ],
+    [
+      11,
+      1410300,
+      1411110
+    ],
+    [
+      12,
+      1411110,
+      1411810
+    ],
+    [
+      13,
+      1411810,
+      1412370
+    ],
+    [
+      14,
+      1412370,
+      1413060
+    ],
+    [
+      15,
+      1413060,
+      1413690
+    ],
+    [
+      16,
+      1413690,
+      1414300
+    ],
+    [
+      17,
+      1414300,
+      1415240
+    ],
+    [
+      18,
+      1415240,
+      1416570
+    ],
+    [
+      19,
+      1416570,
+      1417240
+    ],
+    [
+      20,
+      1417240,
+      1418620
+    ],
+    [
+      21,
+      1418620,
+      1420700
+    ],
+    [
+      22,
+      1420700,
+      1421370
+    ],
+    [
+      23,
+      1421370,
+      1422820
+    ],
+    [
+      24,
+      1422820,
+      1423640
+    ],
+    [
+      25,
+      1423640,
+      1424130
+    ],
+    [
+      26,
+      1424130,
+      1425780
+    ],
+    [
+      27,
+      1425780,
+      1427005
+    ]
+  ],
+  "aligner": {
+    "audio_id": "a06d8e6a347745909e42d9a6618ecfe1",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 6.54,
+        "ref_from": "5:59:7",
+        "ref_to": "5:59:13",
+        "matched_text": "إِلَّآ أَنْ ءَامَنَّا بِٱللَّهِ وَمَآ أُنزِلَ إِلَيْنَا",
+        "confidence": 0.974,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 6.66,
+        "time_to": 14.88,
+        "ref_from": "5:59:11",
+        "ref_to": "5:59:20",
+        "matched_text": "وَمَآ أُنزِلَ إِلَيْنَا وَمَآ أُنزِلَ مِن قَبْلُ وَأَنَّ أَكْثَرَكُمْ فَـٰسِقُونَ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 15.04,
+        "time_to": 24.28,
+        "ref_from": "5:60:1",
+        "ref_to": "5:60:12",
+        "matched_text": "قُلْ هَلْ أُنَبِّئُكُم بِشَرٍّ مِّن ذَٰلِكَ مَثُوبَةً عِندَ ٱللَّهِ مَن لَّعَنَهُ ٱللَّهُ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 4,
+        "time_from": 24.31,
+        "time_to": 26.64,
+        "ref_from": "5:60:10",
+        "ref_to": "5:60:13",
+        "matched_text": "مَن لَّعَنَهُ ٱللَّهُ وَغَضِبَ",
+        "confidence": 0.957,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.7669427394866943,
+        "queue_seconds": 0.04190618958091363,
+        "total_seconds": 1.808848929067608
+      }
+    }
+  }
+}

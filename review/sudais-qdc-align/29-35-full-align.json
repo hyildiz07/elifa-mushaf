@@ -1,0 +1,99 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/29.mp3",
+  "source_file_size": 12885359,
+  "source_sha256": "525bcfbaaa6fbeece6c93e0e25d7d36393aaddd406366284ded5bd141107af67",
+  "excerpt_file": "test-results/sudais-qdc-align/29-35.wav",
+  "excerpt_sha256": "b0e8391d766ad3d1dbfa8a94cf9be71f6487d33fe6ffde44511c2265bdb2333c",
+  "excerpt_from_ms": 451890,
+  "excerpt_to_ms": 459730,
+  "provider_segments": [
+    [
+      1,
+      451890,
+      452870
+    ],
+    [
+      2,
+      452870,
+      453850
+    ],
+    [
+      3,
+      453850,
+      454610
+    ],
+    [
+      4,
+      454610,
+      455770
+    ],
+    [
+      5,
+      455770,
+      456920
+    ],
+    [
+      6,
+      456920,
+      458340
+    ],
+    [
+      7,
+      458340,
+      459465
+    ]
+  ],
+  "aligner": {
+    "audio_id": "eca7c0d8d62b4d7a9e9fcdcfc65a19fd",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 4.32,
+        "ref_from": "29:32:12",
+        "ref_to": "29:32:16",
+        "matched_text": "إِلَّا ٱمْرَأَتَهُۥ كَانَتْ مِنَ ٱلْغَـٰبِرِينَ",
+        "confidence": 0.835,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 4.35,
+        "time_to": 7.84,
+        "ref_from": "29:34:1",
+        "ref_to": "29:34:4",
+        "matched_text": "إِنَّا مُنزِلُونَ عَلَىٰٓ أَهْلِ",
+        "confidence": 0.917,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Base",
+      "effective_model": "Base",
+      "runtime": {
+        "processing_seconds": 0.3293111324310303,
+        "queue_seconds": 0.09234849200583994,
+        "total_seconds": 0.4216596244368702
+      }
+    }
+  }
+}

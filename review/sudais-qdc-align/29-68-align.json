@@ -1,0 +1,163 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/29.mp3",
+  "source_file_size": 12885359,
+  "source_sha256": "525bcfbaaa6fbeece6c93e0e25d7d36393aaddd406366284ded5bd141107af67",
+  "excerpt_file": "test-results/sudais-qdc-align/29-68.wav",
+  "excerpt_sha256": "357c86db2d0dc185aed47ad8d3a763133936af9853b686d793cb17d5df961189",
+  "excerpt_from_ms": 877440,
+  "excerpt_to_ms": 890420,
+  "provider_segments": [
+    [
+      1,
+      877440,
+      877820
+    ],
+    [
+      2,
+      877820,
+      878470
+    ],
+    [
+      3,
+      878470,
+      879210
+    ],
+    [
+      4,
+      879210,
+      879830
+    ],
+    [
+      5,
+      879830,
+      880110
+    ],
+    [
+      6,
+      880110,
+      880720
+    ],
+    [
+      7,
+      880720,
+      881300
+    ],
+    [
+      8,
+      881300,
+      881680
+    ],
+    [
+      9,
+      881680,
+      882340
+    ],
+    [
+      10,
+      882340,
+      883080
+    ],
+    [
+      11,
+      883080,
+      883740
+    ],
+    [
+      12,
+      883740,
+      885680
+    ],
+    [
+      13,
+      885680,
+      886310
+    ],
+    [
+      14,
+      886310,
+      886490
+    ],
+    [
+      15,
+      886490,
+      888150
+    ],
+    [
+      16,
+      888150,
+      888690
+    ],
+    [
+      17,
+      888690,
+      890325
+    ]
+  ],
+  "aligner": {
+    "audio_id": "2de8b367b9134166b99e4376d321a392",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 2.427,
+        "ref_from": "29:67:8",
+        "ref_to": "29:67:10",
+        "matched_text": "ٱلنَّاسُ مِنْ حَوْلِهِمْ",
+        "confidence": 0.75,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 2.457,
+        "time_to": 7.673,
+        "ref_from": "29:67:11",
+        "ref_to": "29:67:15",
+        "matched_text": "أَفَبِٱلْبَـٰطِلِ يُؤْمِنُونَ وَبِنِعْمَةِ ٱللَّهِ يَكْفُرُونَ",
+        "confidence": 0.973,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 7.703,
+        "time_to": 12.98,
+        "ref_from": "29:68:1",
+        "ref_to": "29:68:10",
+        "matched_text": "وَمَنْ أَظْلَمُ مِمَّنِ ٱفْتَرَىٰ عَلَى ٱللَّهِ كَذِبًا أَوْ كَذَّبَ بِٱلْحَقِّ",
+        "confidence": 1,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.035851240158081,
+        "queue_seconds": 0.04102670232532546,
+        "total_seconds": 1.0768779424834065
+      }
+    }
+  }
+}

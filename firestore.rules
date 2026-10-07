@@ -1,0 +1,15 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function admin() {
+      return request.auth != null
+        && request.auth.uid == '5N7pgwPnL2XGIOkntoOmhYAahxs2';
+    }
+    match /config/{doc} { allow read: if true; allow write: if admin(); }
+    match /duyurular/{doc} { allow read: if true; allow write: if admin(); }
+    match /stats/{doc} { allow read, write: if admin(); }
+    // Account backups are accessed only by the ID-token-verified Netlify Function.
+    // Admin SDK uses IAM; browser clients cannot read any user's backup directly.
+    match /{document=**} { allow read, write: if false; }
+  }
+}

@@ -1,0 +1,495 @@
+{
+  "status": "review-only-human-audition-required",
+  "verse": "24:35",
+  "chapter_audio_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/24.mp3",
+  "timing_audio_url": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_64kbps/024035.mp3",
+  "timing_credit": "QuranLab, quranlab/quran-audio, CC BY 4.0",
+  "timing_license_url": "https://huggingface.co/datasets/quranlab/quran-audio",
+  "source_identity": {
+    "evidence": "ten-independent-high-energy-pcm-windows",
+    "window_correlations": [
+      0.9295,
+      0.9088,
+      0.9443,
+      0.9096,
+      0.9247,
+      0.9329,
+      0.8771,
+      0.9226,
+      0.8752,
+      0.894
+    ],
+    "chapter_offset_ms": 617993,
+    "offset_spread_ms": 13
+  },
+  "current_qdc_range_ms": [
+    618000,
+    675030
+  ],
+  "next_qdc_start_ms": 675030,
+  "mapped_words": [
+    {
+      "position": 1,
+      "word": "ٱللَّهُ",
+      "from_ms": 618273,
+      "to_ms": 618913
+    },
+    {
+      "position": 2,
+      "word": "نُورُ",
+      "from_ms": 619113,
+      "to_ms": 619473
+    },
+    {
+      "position": 3,
+      "word": "ٱلسَّمَـٰوَٰتِ",
+      "from_ms": 619593,
+      "to_ms": 620733
+    },
+    {
+      "position": 4,
+      "word": "وَٱلْأَرْضِ",
+      "from_ms": 620893,
+      "to_ms": 621553
+    },
+    {
+      "position": 5,
+      "word": "مَثَلُ",
+      "from_ms": 622014,
+      "to_ms": 622394
+    },
+    {
+      "position": 6,
+      "word": "نُورِهِۦ",
+      "from_ms": 622534,
+      "to_ms": 622974
+    },
+    {
+      "position": 7,
+      "word": "كَمِشْكَوٰةٍ",
+      "from_ms": 623334,
+      "to_ms": 624294
+    },
+    {
+      "position": 8,
+      "word": "فِيهَا",
+      "from_ms": 624914,
+      "to_ms": 625374
+    },
+    {
+      "position": 9,
+      "word": "مِصْبَاحٌ",
+      "from_ms": 625615,
+      "to_ms": 626495
+    },
+    {
+      "position": 10,
+      "word": "ٱلْمِصْبَاحُ",
+      "from_ms": 627035,
+      "to_ms": 628095
+    },
+    {
+      "position": 11,
+      "word": "فِى",
+      "from_ms": 628295,
+      "to_ms": 628455
+    },
+    {
+      "position": 12,
+      "word": "زُجَاجَةٍ",
+      "from_ms": 628635,
+      "to_ms": 629436
+    },
+    {
+      "position": 13,
+      "word": "ٱلزُّجَاجَةُ",
+      "from_ms": 629716,
+      "to_ms": 630676
+    },
+    {
+      "position": 14,
+      "word": "كَأَنَّهَا",
+      "from_ms": 630856,
+      "to_ms": 631976
+    },
+    {
+      "position": 15,
+      "word": "كَوْكَبٌ",
+      "from_ms": 632216,
+      "to_ms": 632776
+    },
+    {
+      "position": 16,
+      "word": "دُرِّىٌّ",
+      "from_ms": 633397,
+      "to_ms": 634357
+    },
+    {
+      "position": 17,
+      "word": "يُوقَدُ",
+      "from_ms": 634597,
+      "to_ms": 635177
+    },
+    {
+      "position": 18,
+      "word": "مِن",
+      "from_ms": 635377,
+      "to_ms": 635437
+    },
+    {
+      "position": 19,
+      "word": "شَجَرَةٍ",
+      "from_ms": 635917,
+      "to_ms": 637918
+    },
+    {
+      "position": 20,
+      "word": "مُّبَـٰرَكَةٍ",
+      "from_ms": 638518,
+      "to_ms": 639438
+    },
+    {
+      "position": 21,
+      "word": "زَيْتُونَةٍ",
+      "from_ms": 640098,
+      "to_ms": 641079
+    },
+    {
+      "position": 22,
+      "word": "لَّا",
+      "from_ms": 641439,
+      "to_ms": 641599
+    },
+    {
+      "position": 23,
+      "word": "شَرْقِيَّةٍ",
+      "from_ms": 641819,
+      "to_ms": 642779
+    },
+    {
+      "position": 24,
+      "word": "وَلَا",
+      "from_ms": 643379,
+      "to_ms": 643699
+    },
+    {
+      "position": 25,
+      "word": "غَرْبِيَّةٍ",
+      "from_ms": 643919,
+      "to_ms": 644760
+    },
+    {
+      "position": 26,
+      "word": "يَكَادُ",
+      "from_ms": 645260,
+      "to_ms": 645840
+    },
+    {
+      "position": 27,
+      "word": "زَيْتُهَا",
+      "from_ms": 646020,
+      "to_ms": 646840
+    },
+    {
+      "position": 28,
+      "word": "يُضِىٓءُ",
+      "from_ms": 647020,
+      "to_ms": 649961
+    },
+    {
+      "position": 29,
+      "word": "وَلَوْ",
+      "from_ms": 650181,
+      "to_ms": 650661
+    },
+    {
+      "position": 30,
+      "word": "لَمْ",
+      "from_ms": 650861,
+      "to_ms": 651081
+    },
+    {
+      "position": 31,
+      "word": "تَمْسَسْهُ",
+      "from_ms": 651281,
+      "to_ms": 652142
+    },
+    {
+      "position": 32,
+      "word": "نَارٌ",
+      "from_ms": 652422,
+      "to_ms": 653742
+    },
+    {
+      "position": 33,
+      "word": "نُّورٌ",
+      "from_ms": 654362,
+      "to_ms": 655182
+    },
+    {
+      "position": 34,
+      "word": "عَلَىٰ",
+      "from_ms": 655683,
+      "to_ms": 656123
+    },
+    {
+      "position": 35,
+      "word": "نُورٍ",
+      "from_ms": 656863,
+      "to_ms": 658203
+    },
+    {
+      "position": 36,
+      "word": "يَهْدِى",
+      "from_ms": 658643,
+      "to_ms": 659124
+    },
+    {
+      "position": 37,
+      "word": "ٱللَّهُ",
+      "from_ms": 659264,
+      "to_ms": 659804
+    },
+    {
+      "position": 38,
+      "word": "لِنُورِهِۦ",
+      "from_ms": 659984,
+      "to_ms": 660664
+    },
+    {
+      "position": 39,
+      "word": "مَن",
+      "from_ms": 660984,
+      "to_ms": 661504
+    },
+    {
+      "position": 40,
+      "word": "يَشَآءُ",
+      "from_ms": 661784,
+      "to_ms": 663825
+    },
+    {
+      "position": 41,
+      "word": "وَيَضْرِبُ",
+      "from_ms": 664265,
+      "to_ms": 664985
+    },
+    {
+      "position": 42,
+      "word": "ٱللَّهُ",
+      "from_ms": 665125,
+      "to_ms": 665745
+    },
+    {
+      "position": 43,
+      "word": "ٱلْأَمْثَـٰلَ",
+      "from_ms": 665885,
+      "to_ms": 666626
+    },
+    {
+      "position": 44,
+      "word": "لِلنَّاسِ",
+      "from_ms": 666806,
+      "to_ms": 669106
+    },
+    {
+      "position": 45,
+      "word": "وَٱللَّهُ",
+      "from_ms": 669506,
+      "to_ms": 670266
+    },
+    {
+      "position": 46,
+      "word": "بِكُلِّ",
+      "from_ms": 670507,
+      "to_ms": 670947
+    },
+    {
+      "position": 47,
+      "word": "شَىْءٍ",
+      "from_ms": 671427,
+      "to_ms": 672027
+    },
+    {
+      "position": 48,
+      "word": "عَلِيمٌ",
+      "from_ms": 672547,
+      "to_ms": 673327
+    }
+  ],
+  "candidate_parts": [
+    {
+      "first_word": 1,
+      "last_word": 4,
+      "word_count": 4
+    },
+    {
+      "first_word": 5,
+      "last_word": 9,
+      "word_count": 5
+    },
+    {
+      "first_word": 10,
+      "last_word": 16,
+      "word_count": 7
+    },
+    {
+      "first_word": 17,
+      "last_word": 20,
+      "word_count": 4
+    },
+    {
+      "first_word": 21,
+      "last_word": 25,
+      "word_count": 5
+    },
+    {
+      "first_word": 26,
+      "last_word": 32,
+      "word_count": 7
+    },
+    {
+      "first_word": 33,
+      "last_word": 35,
+      "word_count": 3
+    },
+    {
+      "first_word": 36,
+      "last_word": 40,
+      "word_count": 5
+    },
+    {
+      "first_word": 41,
+      "last_word": 44,
+      "word_count": 4
+    },
+    {
+      "first_word": 45,
+      "last_word": 48,
+      "word_count": 4
+    }
+  ],
+  "candidate_cuts": [
+    {
+      "after_word": 4,
+      "left_word": "وَٱلْأَرْضِ",
+      "right_word": "مَثَلُ",
+      "left_end_ms": 621553,
+      "right_start_ms": 622014,
+      "gap_ms": 461,
+      "tentative_midpoint_ms": 621784,
+      "audition_status": "pending",
+      "pcm_middle_80ms_rms_max_channel": 0.071743,
+      "pcm_nearby_speech_median_20ms_rms_max_channel": 0.164717,
+      "pcm_middle_to_speech_ratio": 0.436
+    },
+    {
+      "after_word": 9,
+      "left_word": "مِصْبَاحٌ",
+      "right_word": "ٱلْمِصْبَاحُ",
+      "left_end_ms": 626495,
+      "right_start_ms": 627035,
+      "gap_ms": 540,
+      "tentative_midpoint_ms": 626765,
+      "audition_status": "pending",
+      "pcm_middle_80ms_rms_max_channel": 0.075533,
+      "pcm_nearby_speech_median_20ms_rms_max_channel": 0.202475,
+      "pcm_middle_to_speech_ratio": 0.373
+    },
+    {
+      "after_word": 16,
+      "left_word": "دُرِّىٌّ",
+      "right_word": "يُوقَدُ",
+      "left_end_ms": 634357,
+      "right_start_ms": 634597,
+      "gap_ms": 240,
+      "tentative_midpoint_ms": 634477,
+      "audition_status": "pending",
+      "pcm_middle_80ms_rms_max_channel": 0.077238,
+      "pcm_nearby_speech_median_20ms_rms_max_channel": 0.148567,
+      "pcm_middle_to_speech_ratio": 0.52
+    },
+    {
+      "after_word": 20,
+      "left_word": "مُّبَـٰرَكَةٍ",
+      "right_word": "زَيْتُونَةٍ",
+      "left_end_ms": 639438,
+      "right_start_ms": 640098,
+      "gap_ms": 660,
+      "tentative_midpoint_ms": 639768,
+      "audition_status": "pending",
+      "pcm_middle_80ms_rms_max_channel": 0.087372,
+      "pcm_nearby_speech_median_20ms_rms_max_channel": 0.114035,
+      "pcm_middle_to_speech_ratio": 0.766
+    },
+    {
+      "after_word": 25,
+      "left_word": "غَرْبِيَّةٍ",
+      "right_word": "يَكَادُ",
+      "left_end_ms": 644760,
+      "right_start_ms": 645260,
+      "gap_ms": 500,
+      "tentative_midpoint_ms": 645010,
+      "audition_status": "pending",
+      "pcm_middle_80ms_rms_max_channel": 0.039299,
+      "pcm_nearby_speech_median_20ms_rms_max_channel": 0.190024,
+      "pcm_middle_to_speech_ratio": 0.207
+    },
+    {
+      "after_word": 32,
+      "left_word": "نَارٌ",
+      "right_word": "نُّورٌ",
+      "left_end_ms": 653742,
+      "right_start_ms": 654362,
+      "gap_ms": 620,
+      "tentative_midpoint_ms": 654052,
+      "audition_status": "pending",
+      "pcm_middle_80ms_rms_max_channel": 0.050421,
+      "pcm_nearby_speech_median_20ms_rms_max_channel": 0.374681,
+      "pcm_middle_to_speech_ratio": 0.135
+    },
+    {
+      "after_word": 35,
+      "left_word": "نُورٍ",
+      "right_word": "يَهْدِى",
+      "left_end_ms": 658203,
+      "right_start_ms": 658643,
+      "gap_ms": 440,
+      "tentative_midpoint_ms": 658423,
+      "audition_status": "pending",
+      "pcm_middle_80ms_rms_max_channel": 0.058969,
+      "pcm_nearby_speech_median_20ms_rms_max_channel": 0.363731,
+      "pcm_middle_to_speech_ratio": 0.162
+    },
+    {
+      "after_word": 40,
+      "left_word": "يَشَآءُ",
+      "right_word": "وَيَضْرِبُ",
+      "left_end_ms": 663825,
+      "right_start_ms": 664265,
+      "gap_ms": 440,
+      "tentative_midpoint_ms": 664045,
+      "audition_status": "pending",
+      "pcm_middle_80ms_rms_max_channel": 0.094361,
+      "pcm_nearby_speech_median_20ms_rms_max_channel": 0.376823,
+      "pcm_middle_to_speech_ratio": 0.25
+    },
+    {
+      "after_word": 44,
+      "left_word": "لِلنَّاسِ",
+      "right_word": "وَٱللَّهُ",
+      "left_end_ms": 669106,
+      "right_start_ms": 669506,
+      "gap_ms": 400,
+      "tentative_midpoint_ms": 669306,
+      "audition_status": "pending",
+      "pcm_middle_80ms_rms_max_channel": 0.039592,
+      "pcm_nearby_speech_median_20ms_rms_max_channel": 0.228047,
+      "pcm_middle_to_speech_ratio": 0.174
+    }
+  ],
+  "blockers": [
+    "Word-boundary alignment is machine-generated and needs two-sided audition at every cut.",
+    "The QuranCDN recording and per-ayah recording are the same performance, but audio licensing must be assessed separately from CC BY timing."
+  ]
+}

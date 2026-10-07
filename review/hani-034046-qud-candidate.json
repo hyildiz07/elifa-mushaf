@@ -1,0 +1,112 @@
+{
+  "status": "unverified-review-only",
+  "verse_key": "34:46",
+  "source_url": "https://everyayah.com/data/Hani_Rifai_192kbps/034046.mp3",
+  "source_bytes": 669071,
+  "source_sha256": "d1a6f8f9f4776fb661852bcd53be9d2acfc0daf670076ad14e602f8b0879de76",
+  "api_endpoint": "https://hetchyy-quranic-universal-aligner.hf.space/api/v1/align/url",
+  "request": {
+    "riwayah": "hafs",
+    "model_name": "Large",
+    "device": "GPU"
+  },
+  "received_at_utc": "2026-09-28T13:57:14.356Z",
+  "response": {
+    "audio_id": "d523e01d27dd4b1d9b454c0770d66330",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0.02,
+        "time_to": 5.36,
+        "ref_from": "34:46:1",
+        "ref_to": "34:46:4",
+        "matched_text": "قُلْ إِنَّمَآ أَعِظُكُم بِوَٰحِدَةٍ",
+        "confidence": 0.897,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 5.39,
+        "time_to": 13.72,
+        "ref_from": "34:46:5",
+        "ref_to": "34:46:11",
+        "matched_text": "أَن تَقُومُوا۟ لِلَّهِ مَثْنَىٰ وَفُرَٰدَىٰ ثُمَّ تَتَفَكَّرُوا۟",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 13.75,
+        "time_to": 19.067,
+        "ref_from": "34:46:12",
+        "ref_to": "34:46:15",
+        "matched_text": "مَا بِصَاحِبِكُم مِّن جِنَّةٍ",
+        "confidence": 0.864,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 4,
+        "time_from": 19.097,
+        "time_to": 26.78,
+        "ref_from": "34:46:16",
+        "ref_to": "34:46:24",
+        "matched_text": "إِنْ هُوَ إِلَّا نَذِيرٌ لَّكُم بَيْنَ يَدَىْ عَذَابٍ شَدِيدٍ",
+        "confidence": 0.949,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 5,
+        "time_from": 27.18,
+        "time_to": 27.861,
+        "ref_from": "",
+        "ref_to": "",
+        "matched_text": "",
+        "confidence": 0,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": "Low confidence (0%)"
+      }
+    ],
+    "device": "GPU",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.210747241973877,
+        "queue_seconds": 11.843051597650629,
+        "total_seconds": 13.053798839624505
+      }
+    },
+    "url_metadata": {
+      "title": "034046",
+      "duration": null,
+      "source_url": "https://everyayah.com/data/Hani_Rifai_192kbps/034046.mp3"
+    }
+  }
+}

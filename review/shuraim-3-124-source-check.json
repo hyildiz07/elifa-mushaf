@@ -1,0 +1,176 @@
+{
+  "key": "3:124",
+  "sourceUrls": [
+    "https://download.quranicaudio.com/qdc/saud_ash-shuraym/murattal/003.mp3",
+    "https://server7.mp3quran.net/shur/003.mp3"
+  ],
+  "qdcRange": [
+    1730148,
+    1742748
+  ],
+  "quaRange": [
+    1731948,
+    1746748
+  ],
+  "offsetMs": -2743,
+  "correlation": 0.90022,
+  "points": [
+    0.91238,
+    0.94612,
+    0.9274,
+    0.84559,
+    0.86963
+  ],
+  "local": [
+    {
+      "quaPosition": 1734399.9818594104,
+      "offsetMs": -2743,
+      "correlation": 0.91238
+    },
+    {
+      "quaPosition": 1735199.9818594104,
+      "offsetMs": -2743,
+      "correlation": 0.94612
+    },
+    {
+      "quaPosition": 1737399.9818594104,
+      "offsetMs": -2743,
+      "correlation": 0.9274
+    },
+    {
+      "quaPosition": 1740199.9818594104,
+      "offsetMs": -2737,
+      "correlation": 0.87308
+    },
+    {
+      "quaPosition": 1743499.9818594104,
+      "offsetMs": -2743,
+      "correlation": 0.86963
+    }
+  ],
+  "note": "Waveform alignment supports the same recitation and a stable clock offset. Correlation does not prove every phoneme or word boundary.",
+  "qdcFirstRms": [
+    {
+      "at": 1730900,
+      "rms": 0.06281
+    },
+    {
+      "at": 1730950,
+      "rms": 0.06567
+    },
+    {
+      "at": 1731000,
+      "rms": 0.07814
+    },
+    {
+      "at": 1731050,
+      "rms": 0.05041
+    },
+    {
+      "at": 1731100,
+      "rms": 0.0303
+    },
+    {
+      "at": 1731150,
+      "rms": 0.01635
+    },
+    {
+      "at": 1731200,
+      "rms": 0.01654
+    },
+    {
+      "at": 1731250,
+      "rms": 0.01729
+    },
+    {
+      "at": 1731300,
+      "rms": 0.01543
+    },
+    {
+      "at": 1731350,
+      "rms": 0.01606
+    },
+    {
+      "at": 1731400,
+      "rms": 0.0114
+    },
+    {
+      "at": 1731450,
+      "rms": 0.01272
+    },
+    {
+      "at": 1731500,
+      "rms": 0.03644
+    },
+    {
+      "at": 1731550,
+      "rms": 0.07547
+    },
+    {
+      "at": 1731600,
+      "rms": 0.03411
+    },
+    {
+      "at": 1731650,
+      "rms": 0.01739
+    },
+    {
+      "at": 1731700,
+      "rms": 0.01354
+    },
+    {
+      "at": 1731750,
+      "rms": 0.09048
+    },
+    {
+      "at": 1731800,
+      "rms": 0.07926
+    },
+    {
+      "at": 1731850,
+      "rms": 0.02369
+    },
+    {
+      "at": 1731900,
+      "rms": 0.02796
+    },
+    {
+      "at": 1731950,
+      "rms": 0.08576
+    },
+    {
+      "at": 1732000,
+      "rms": 0.09371
+    },
+    {
+      "at": 1732050,
+      "rms": 0.11648
+    }
+  ],
+  "independentVerseClips": [
+    {
+      "url": "https://everyayah.com/data/Saood_ash-Shuraym_64kbps/003124.mp3",
+      "bytes": 84008,
+      "durationMs": 10370,
+      "startMs": 1731497,
+      "correlation": 0.61583,
+      "points": [
+        0.56889,
+        0.58641,
+        0.6922
+      ]
+    },
+    {
+      "url": "https://everyayah.com/data/Saood_ash-Shuraym_128kbps/003124.mp3",
+      "bytes": 166476,
+      "durationMs": 10396,
+      "startMs": 1731506,
+      "correlation": 0.55621,
+      "points": [
+        0.807,
+        0.57285,
+        0.28878
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # The currently published translations remain marked as drafts pending specialist review.
+  ELIFA_PUBLISH_TRANSLATION_DRAFTS = "1"
+
+[[redirects]]
+  from = "/api/account"
+  to = "/.netlify/functions/account"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/locale"
+  to = "/.netlify/functions/locale"
+  status = 200
+  force = true
+
+# /api/org → Netlify Function
+[[redirects]]
+  from = "/api/org"
+  to   = "/.netlify/functions/org"
+  status = 200
+  force  = true
+
+[functions]
+  node_bundler = "esbuild"

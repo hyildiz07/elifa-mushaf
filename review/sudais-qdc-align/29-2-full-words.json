@@ -1,0 +1,71 @@
+{
+  "status": "machine-review-only",
+  "source_sha256": "525bcfbaaa6fbeece6c93e0e25d7d36393aaddd406366284ded5bd141107af67",
+  "excerpt_from_ms": 7080,
+  "note": "Returned times are relative to exact source excerpt; add excerpt_from_ms to map into chapter time. Audition remains required.",
+  "result": {
+    "segments": [
+      {
+        "segment": 1,
+        "timing_status": "skipped"
+      },
+      {
+        "segment": 2,
+        "words": [
+          [
+            "29:2:1",
+            0.07,
+            0.95
+          ],
+          [
+            "29:2:2",
+            0.95,
+            1.78
+          ],
+          [
+            "29:2:3",
+            1.78,
+            2.29
+          ],
+          [
+            "29:2:4",
+            2.29,
+            3.07
+          ],
+          [
+            "29:2:5",
+            3.07,
+            3.72
+          ],
+          [
+            "29:2:6",
+            3.72,
+            4.48
+          ],
+          [
+            "29:2:7",
+            4.48,
+            5.66
+          ],
+          [
+            "29:2:8",
+            5.66,
+            6.1
+          ],
+          [
+            "29:2:9",
+            6.1,
+            6.34
+          ],
+          [
+            "29:2:10",
+            6.34,
+            6.84
+          ]
+        ],
+        "timing_status": "ok"
+      }
+    ],
+    "audio_id": "64d913cf589f4d20b889d1f80f67a74e"
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "source": "https://everyayah.com/data/Hani_Rifai_192kbps/006141.mp3",
+  "chapterMatchStartMs": 2881724,
+  "qudLargeFirstCanonicalWordOffsetMs": 4200,
+  "bins": [
+    {
+      "fromMs": 0,
+      "toMs": 200,
+      "rms": 0.01481,
+      "peak": 0.055045
+    },
+    {
+      "fromMs": 200,
+      "toMs": 400,
+      "rms": 0.008567,
+      "peak": 0.041853
+    },
+    {
+      "fromMs": 400,
+      "toMs": 600,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 600,
+      "toMs": 800,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 800,
+      "toMs": 1000,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 1000,
+      "toMs": 1200,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 1200,
+      "toMs": 1400,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 1400,
+      "toMs": 1600,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 1600,
+      "toMs": 1800,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 1800,
+      "toMs": 2000,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 2000,
+      "toMs": 2200,
+      "rms": 0.000001,
+      "peak": 0.000017
+    },
+    {
+      "fromMs": 2200,
+      "toMs": 2400,
+      "rms": 0.006836,
+      "peak": 0.034565
+    },
+    {
+      "fromMs": 2400,
+      "toMs": 2600,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 2600,
+      "toMs": 2800,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 2800,
+      "toMs": 3000,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 3000,
+      "toMs": 3200,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 3200,
+      "toMs": 3400,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 3400,
+      "toMs": 3600,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 3600,
+      "toMs": 3800,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 3800,
+      "toMs": 4000,
+      "rms": 0,
+      "peak": 0
+    },
+    {
+      "fromMs": 4000,
+      "toMs": 4200,
+      "rms": 0,
+      "peak": 0
+    }
+  ]
+}

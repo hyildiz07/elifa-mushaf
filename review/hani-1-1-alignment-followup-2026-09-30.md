@@ -1,0 +1,11 @@
+# Hânî 1:1 — bağımsız hizalama takibi
+
+Üretimdeki kayıt `https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/1.mp3` (SHA-256 `c420173faed0a1734b586c5f7883c56e75d3eb820508a86dd3eafd9b7fa25654`). Önceki [kaynak denetimi](./hani-1-1-source-audit.md), aynı icraya ait EveryAyah 192 kbps klibinin üretim dosyasıyla ses penceresi korelasyonunu `0,99989/0,99984` olarak ölçtü. Dolayısıyla klip ayrı dosya olsa bile farklı bir hocanın kaydı değildir; ancak bu eşleşme kelime sınırlarını kanıtlamaz.
+
+QuranCDN zamanlaması dört yazılı kelimeden yalnızca 2. konuma `[7, 3972]` ms verir. Aynı kayıt URL'sini kullanan QUA v3.2.0 arşivinde 1:1 için tam kelime occurrence'ı yoktur. Colin Fair 2016 Hânî hizalaması ilk iki kelimeyi `[0, 1810]` ms aralığında birleştirir. Böylece bu üç veri kaynağının hiçbiri dört ayrı, güvenilir kelime sınırı sağlamaz.
+
+Ek olarak 30 Eylül 2026'da QUD³ kamu hizalama API'sine aynı Hânî EveryAyah 192 kbps `001001.mp3` URL'siyle, `hafs` okuyuşu ve GPU üzerinde **Large** ve **Base** modelleri ayrı ayrı gönderildi. İki istek de HTTP `422`, `alignment_failed` döndü. Bu başarısızlık, kayıt veya tilavet yanlış demek değildir; bu modellerin bu kısa örnekte bağımsız bir kelime sınırı önerisi üretemediği anlamına gelir. Model tarafından doğrulanmış bir dört kelimelik zaman dizisi elde edilmedi.
+
+**Karar:** 1:1'e tahmini sınır veya başka hocanın sesiyle override eklenmemeli. Hânî'nin tam âyet seçimi mevcut doğrulanmış âyet aralığıyla çalınabilir; eksik konumlardan herhangi birini içeren kısmi seçim sessizce kısa ses çalmamalı, kapalı kalmalı. “Tek nefes” veya ses birleşmesi kesin fonetik teşhis olarak ileri sürülmüyor; eksik sınırların akustik sebebi uzman dinlemesi olmadan bilinmiyor.
+
+**Hedefli regresyon önerisi:** Gerçek `test-results/timings/5-1.json` verisiyle 1:1 için (1) tam dört kelime seçimi tek Hânî âyet aralığını açar; (2) yalnız 1., yalnız 3., yalnız 4. veya 1–2/2–4 gibi kısmi seçimlerin hiçbiri oynatma planı üretmez; (3) kaynak URL başka hocaya dönerse Hânî override'ı uygulanmaz. Mevcut `tests/audio.test.mjs` dosyasındaki genel eksik-kelime ve tam-âyet testleri bu davranışın soyut örneklerini kapsıyor; gerçek Hânî satırına bağlı bu sınır durumunu eklemek ayrıca yararlı olur.

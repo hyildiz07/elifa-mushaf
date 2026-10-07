@@ -1,0 +1,150 @@
+{
+  "status": "split-verse-source-candidate-v1",
+  "review_status": "not-connected-pending-word-audition",
+  "recording": "Hani_Rifai_64kbps",
+  "reciter": 5,
+  "dataset": "quranlab/quran-audio@55d48a9cfc9dec3836efc9b0f8631c4ff6399c28",
+  "dataset_url": "https://huggingface.co/datasets/quranlab/quran-audio",
+  "timing_source": "cpfair/quran-align",
+  "timing_license": "CC-BY-4.0",
+  "audio_source": "everyayah.com",
+  "audio_rights": "© reciter / producer; external link only",
+  "verification": {
+    "chapter_audio_url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/6.mp3",
+    "chapter_clip_start_ms": 2835125,
+    "three_window_correlation": [
+      0.855,
+      0.691,
+      0.662
+    ],
+    "max_window_shift_spread_ms": 10,
+    "next_verse_clip_start_ms": 2862106,
+    "next_verse_clip_correlation": 0.967,
+    "last_word_chapter_end_ms": 2861765,
+    "clip_chapter_end_ms": 2862031,
+    "independent_word_identity_confirmed": false
+  },
+  "rows": {
+    "6:139": {
+      "audio_url": "https://everyayah.com/data/Hani_Rifai_64kbps/006139.mp3",
+      "file_size": 216083,
+      "sha256": "793b023758cc4e0edb7576c3a53292370ad57c943d971478e3926dd3e27f07a6",
+      "audio_duration_ms": 26906,
+      "verse_key": "6:139",
+      "timestamp_from": 0,
+      "timestamp_to": 26640,
+      "segments": [
+        [
+          1,
+          30,
+          1110
+        ],
+        [
+          2,
+          1120,
+          1470
+        ],
+        [
+          3,
+          1480,
+          1870
+        ],
+        [
+          4,
+          1880,
+          2700
+        ],
+        [
+          5,
+          2710,
+          3510
+        ],
+        [
+          6,
+          3520,
+          4670
+        ],
+        [
+          7,
+          4680,
+          5770
+        ],
+        [
+          8,
+          5780,
+          7890
+        ],
+        [
+          9,
+          7900,
+          9370
+        ],
+        [
+          10,
+          9380,
+          9730
+        ],
+        [
+          11,
+          9740,
+          12110
+        ],
+        [
+          12,
+          12120,
+          13230
+        ],
+        [
+          13,
+          13240,
+          14200
+        ],
+        [
+          14,
+          14210,
+          15490
+        ],
+        [
+          15,
+          15500,
+          16110
+        ],
+        [
+          16,
+          16120,
+          16720
+        ],
+        [
+          17,
+          16730,
+          19430
+        ],
+        [
+          18,
+          19440,
+          20790
+        ],
+        [
+          19,
+          20800,
+          22240
+        ],
+        [
+          20,
+          22250,
+          23670
+        ],
+        [
+          21,
+          23680,
+          24720
+        ],
+        [
+          22,
+          24730,
+          26640
+        ]
+      ]
+    }
+  }
+}

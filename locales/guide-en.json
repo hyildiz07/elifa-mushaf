@@ -1,0 +1,168 @@
+{
+  "home": [
+    {
+      "t": "Elifa Mushaf",
+      "x": "This is the home screen. Below the logo is our web address; in the centre the Basmala and a wisdom that changes on every launch."
+    },
+    {
+      "t": "Find a surah",
+      "x": "Type a surah's name (e.g. \"Yasin\") or its number to find it quickly."
+    },
+    {
+      "t": "Surah list",
+      "x": "Tap a surah to open the reading screen."
+    },
+    {
+      "t": "Together",
+      "x": "Khatm/juz' sharing and group dhikr are here. Share all 30 juz' with a single link — no sign-up, no one needs to install the app. Everyone taps the link, picks a juz', and marks it when read."
+    },
+    {
+      "t": "Where you left off",
+      "x": "Return to the last verse you reached with a single tap."
+    },
+    {
+      "t": "Records",
+      "x": "Your collection, notes, bookmarks and difficult spots are gathered here."
+    },
+    {
+      "t": "Memorization tracking",
+      "x": "Test mode, daily revision plan and your memorization progress are here."
+    },
+    {
+      "t": "Memorization",
+      "x": "Your memorization tracking and daily revision plan."
+    },
+    {
+      "t": "Theme",
+      "x": "Change the app's colour and appearance from here."
+    }
+  ],
+  "reader": [
+    {
+      "t": "Page",
+      "x": "Jump directly to one of the Mushaf's 604 pages."
+    },
+    {
+      "t": "Juz'",
+      "x": "Jump to one of the 30 juz'. Each juz' starts at the top of its own page."
+    },
+    {
+      "t": "Surahs",
+      "x": "To move to another surah, pick it from the list or search."
+    },
+    {
+      "t": "Tap a word",
+      "x": "Tap a word and the verse is recited while the words are highlighted in sync. Press and hold to select word by word."
+    },
+    {
+      "t": "Transliteration",
+      "x": "Turns the Latin-letter transliteration under the verses on or off."
+    },
+    {
+      "t": "Script",
+      "x": "Set the script (Uthman Taha etc.) and the font size from here."
+    },
+    {
+      "t": "Line by line",
+      "x": "Lists the verses one under another, line by line — handy for memorizing."
+    },
+    {
+      "t": "Bookmark",
+      "x": "First tap the Bookmark button, then tap the verse where you want to place the ribbon."
+    },
+    {
+      "t": "Records",
+      "x": "Collection, notes, bookmarks and difficult spots."
+    },
+    {
+      "t": "Settings",
+      "x": "Fine-tune repetition, waiting, speed and the memorization programme."
+    },
+    {
+      "t": "Repeat",
+      "x": "Set how many times a verse/segment is repeated. Change it with − and +."
+    },
+    {
+      "t": "Accumulate (1+2)",
+      "x": "Reads the verses cumulatively: 1, then 1+2, then 1+2+3…"
+    },
+    {
+      "t": "Play / Pause",
+      "x": "Plays the selected verse or where you left off; your settings are applied."
+    }
+  ],
+  "ayarlar": [
+    {
+      "t": "Theme and appearance",
+      "x": "Set ready-made themes, night/paper mode and your own colour from here."
+    },
+    {
+      "t": "Reciter selection",
+      "x": "You can also change the default reciter from here."
+    },
+    {
+      "t": "Offline downloads",
+      "x": "Download surah audio and listen without internet."
+    },
+    {
+      "t": "Latin transliteration",
+      "x": "Turns on the transliteration for those who cannot read the Arabic script."
+    },
+    {
+      "t": "About and sources",
+      "x": "The text, script and audio sources are stated here."
+    }
+  ],
+  "ezber": [
+    {
+      "t": "Your memorization",
+      "x": "Verses you mark as \"memorized\" are gathered here; the app reminds you of revision times itself (as new memorization, near revision and far revision)."
+    }
+  ],
+  "birlikte": [
+    {
+      "t": "Khatm / Juz' sharing",
+      "x": "Share all 30 juz' with a single link. Tap \"Start khatm\" and write your intention. The app creates two links: a join link (send it to the group) and an admin link (keep it — don't give it to anyone)."
+    },
+    {
+      "t": "Shared intention — group dhikr",
+      "x": "Set a common goal: 1000 salawat, 313 Ayat al-Kursi… Count by tapping the ring, then press \"Add my share to the goal\". Who read how much is not shown — only the total."
+    },
+    {
+      "t": "Join with a link",
+      "x": "Paste the link from the group here. Or simply tapping the link is enough."
+    },
+    {
+      "t": "My organizations",
+      "x": "The khatms you started and joined are here."
+    }
+  ],
+  "org": [
+    {
+      "t": "Juz' table",
+      "x": "Grey = empty, tap to take. Yellow = taken, not yet read. Green = read. Red = overdue."
+    },
+    {
+      "t": "Send a reminder",
+      "x": "Creates a ready WhatsApp message listing the missing juz'."
+    }
+  ],
+  "saved": [
+    {
+      "t": "Collection",
+      "x": "Verses you saved with colours."
+    },
+    {
+      "t": "Notes",
+      "x": "Notes you wrote on verses."
+    },
+    {
+      "t": "Bookmarks",
+      "x": "Bookmarks you placed on pages."
+    },
+    {
+      "t": "Struggled with",
+      "x": "Spots you got stuck on; tap to go to that verse."
+    }
+  ]
+}

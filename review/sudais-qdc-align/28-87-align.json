@@ -1,0 +1,158 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/28.mp3",
+  "source_file_size": 16347617,
+  "source_sha256": "f8e5291cf10a3a29230fd443b5ddabc4297cf5b16c70250dda3bfe6314917576",
+  "excerpt_file": "test-results/sudais-qdc-align/28-87.wav",
+  "excerpt_sha256": "081e905c0a0509ccc0cc03ed7fb2a2c2ff00c639566bcbab223e54c9b68eb967",
+  "excerpt_from_ms": 1325740,
+  "excerpt_to_ms": 1340260,
+  "provider_segments": [
+    [
+      1,
+      1325740,
+      1326430
+    ],
+    [
+      2,
+      1326430,
+      1328050
+    ],
+    [
+      3,
+      1328050,
+      1328440
+    ],
+    [
+      4,
+      1328440,
+      1329430
+    ],
+    [
+      5,
+      1329430,
+      1330200
+    ],
+    [
+      6,
+      1330200,
+      1330790
+    ],
+    [
+      7,
+      1330790,
+      1331020
+    ],
+    [
+      8,
+      1331020,
+      1332889
+    ],
+    [
+      9,
+      1332890,
+      1333700
+    ],
+    [
+      10,
+      1333700,
+      1334280
+    ],
+    [
+      11,
+      1334280,
+      1334830
+    ],
+    [
+      12,
+      1334830,
+      1335550
+    ],
+    [
+      13,
+      1335550,
+      1336350
+    ],
+    [
+      14,
+      1336350,
+      1338040
+    ],
+    [
+      15,
+      1338040,
+      1338340
+    ],
+    [
+      16,
+      1338340,
+      1340045
+    ]
+  ],
+  "aligner": {
+    "audio_id": "3b35e7a501064325a02b353fe0b36be9",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0.36,
+        "time_to": 7.753,
+        "ref_from": "28:86:1",
+        "ref_to": "28:86:11",
+        "matched_text": "وَمَا كُنتَ تَرْجُوٓا۟ أَن يُلْقَىٰٓ إِلَيْكَ ٱلْكِتَـٰبُ إِلَّا رَحْمَةً مِّن رَّبِّكَ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 7.783,
+        "time_to": 12.033,
+        "ref_from": "28:86:12",
+        "ref_to": "28:86:15",
+        "matched_text": "فَلَا تَكُونَنَّ ظَهِيرًا لِّلْكَـٰفِرِينَ",
+        "confidence": 0.863,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 12.063,
+        "time_to": 14.52,
+        "ref_from": "28:87:1",
+        "ref_to": "28:87:3",
+        "matched_text": "وَلَا يَصُدُّنَّكَ عَنْ",
+        "confidence": 0.979,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.3621230125427246,
+        "queue_seconds": 0.05288707825820893,
+        "total_seconds": 1.4150100908009335
+      }
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "status": "research-only",
+  "method": "fully decoded QDC chapter and QUL per-ayah clip; 800 ms PCM cross-correlation",
+  "output": [
+    {
+      "key": "3:160",
+      "sourceVerseRangeMs": [
+        2658329,
+        2677110
+      ],
+      "clipUrl": "https://audio-cdn.tarteel.ai/quran/abdulrahmanAlSudais/003160.mp3",
+      "clipBytes": 452618,
+      "clipDurationMs": 18834,
+      "firstSegment": [
+        0,
+        1,
+        0,
+        70
+      ],
+      "firstSegmentRms": 0.0074549343406477234,
+      "following500MsRms": 0.06380329360655605,
+      "matches": [
+        {
+          "clipMs": 3606,
+          "qdcMs": 2661986,
+          "correlation": 0.37049195418170033
+        },
+        {
+          "clipMs": 9017,
+          "qdcMs": 2667384,
+          "correlation": 0.5865580209142588
+        },
+        {
+          "clipMs": 14427,
+          "qdcMs": 2672805,
+          "correlation": 0.6446665894075917
+        }
+      ]
+    },
+    {
+      "key": "4:143",
+      "sourceVerseRangeMs": [
+        2965818,
+        2980276
+      ],
+      "clipUrl": "https://audio-cdn.tarteel.ai/quran/abdulrahmanAlSudais/004143.mp3",
+      "clipBytes": 376842,
+      "clipDurationMs": 15673,
+      "firstSegment": [
+        0,
+        1,
+        0,
+        1000
+      ],
+      "firstSegmentRms": 0.0455823949476912,
+      "following500MsRms": 0.04024547517943388,
+      "matches": [
+        {
+          "clipMs": 2974,
+          "qdcMs": 2968696,
+          "correlation": 0.40347823247593184
+        },
+        {
+          "clipMs": 7436,
+          "qdcMs": 2939433,
+          "correlation": 0.28647567208325264
+        },
+        {
+          "clipMs": 11898,
+          "qdcMs": 2948123,
+          "correlation": 0.3723117225568275
+        }
+      ]
+    },
+    {
+      "key": "5:46",
+      "sourceVerseRangeMs": [
+        1082920,
+        1106180
+      ],
+      "clipUrl": "https://audio-cdn.tarteel.ai/quran/abdulrahmanAlSudais/005046.mp3",
+      "clipBytes": 571402,
+      "clipDurationMs": 23771,
+      "firstSegment": [
+        0,
+        1,
+        0,
+        1120
+      ],
+      "firstSegmentRms": 0.026193266170323446,
+      "following500MsRms": 0.014489421723036456,
+      "matches": [
+        {
+          "clipMs": 4594,
+          "qdcMs": 1090265,
+          "correlation": 0.6064793256340716
+        },
+        {
+          "clipMs": 11485,
+          "qdcMs": 1096834,
+          "correlation": 0.5444924373862214
+        },
+        {
+          "clipMs": 18376,
+          "qdcMs": 1071385,
+          "correlation": 0.2969607684064201
+        }
+      ]
+    },
+    {
+      "key": "28:87",
+      "sourceVerseRangeMs": [
+        1337676,
+        1350291
+      ],
+      "clipUrl": "https://audio-cdn.tarteel.ai/quran/abdulrahmanAlSudais/028087.mp3",
+      "clipBytes": 350218,
+      "clipDurationMs": 14524,
+      "firstSegment": [
+        0,
+        1,
+        0,
+        70
+      ],
+      "firstSegmentRms": 0.014041903396400228,
+      "following500MsRms": 0.08459966698298318,
+      "matches": [
+        {
+          "clipMs": 2744,
+          "qdcMs": 1351262,
+          "correlation": 0.28147774310840934
+        },
+        {
+          "clipMs": 6862,
+          "qdcMs": 1329301,
+          "correlation": 0.3107425969827027
+        },
+        {
+          "clipMs": 10979,
+          "qdcMs": 1341156,
+          "correlation": 0.287375490614044
+        }
+      ]
+    }
+  ]
+}

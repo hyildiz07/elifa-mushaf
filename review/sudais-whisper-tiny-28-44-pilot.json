@@ -1,0 +1,42 @@
+{
+  "status": "review-only-identity-probe-no-cut-approval",
+  "modelId": "Xenova/whisper-tiny",
+  "dtype": "q8",
+  "sourceFile": "test-results/sudais-qdc-28.mp3",
+  "sourceSha256": "f8e5291cf10a3a29230fd443b5ddabc4297cf5b16c70250dda3bfe6314917576",
+  "initSeconds": 18.936,
+  "language": "arabic",
+  "task": "transcribe",
+  "results": [
+    {
+      "name": "old-provider-meta",
+      "from": 643040,
+      "to": 652390,
+      "decodedFromMs": 643040,
+      "sampleRate": 16000,
+      "audioSha256": "55586e5130a08a157a2ea4e958855e849fc0966e270fe5df18fa87079687fadc",
+      "seconds": 2.132,
+      "text": " وصائم دصائر المناس وهده ورحمة لعلمهم يتدى"
+    },
+    {
+      "name": "corrected-target-and-neighbors",
+      "from": 651500,
+      "to": 666000,
+      "decodedFromMs": 651500,
+      "sampleRate": 16000,
+      "audioSha256": "f7677dfcde1eda4b99c7c06848321d5fc52218e638618be64acfdb2f1989f381",
+      "seconds": 2.163,
+      "text": " وما كنت بجانب الغربية القضين الاموس الأمر وما كنت من الشاهدين ولكن أن أجامب"
+    },
+    {
+      "name": "target-only-candidate",
+      "from": 653640,
+      "to": 663500,
+      "decodedFromMs": 653640,
+      "sampleRate": 16000,
+      "audioSha256": "7a2e0ac12e97ff59ec25848e001ba62d72e513c47766d74b3d61bf80b29326c2",
+      "seconds": 2.19,
+      "text": " وما كنت بجانب الغربية القضين إلى موصل الأمر وما كنت من الشاهدين"
+    }
+  ]
+}

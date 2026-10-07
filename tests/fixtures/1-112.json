@@ -1,0 +1,116 @@
+{
+  "rid": 1,
+  "sid": 112,
+  "source": "https://api.qurancdn.com/api/qdc/audio/reciters/1/audio_files?chapter=112&segments=true",
+  "audio_url": "https://download.quranicaudio.com/qdc/abdul_baset/mujawwad/112.mp3",
+  "file_size": 667776,
+  "verse_timings": [
+    {
+      "verse_key": "112:1",
+      "timestamp_from": 0,
+      "timestamp_to": 7660,
+      "duration": 7,
+      "segments": [
+        [
+          1,
+          2350,
+          2770
+        ],
+        [
+          2,
+          2780,
+          3840
+        ],
+        [
+          3,
+          3850,
+          5020
+        ],
+        [
+          4,
+          5030,
+          6020
+        ]
+      ]
+    },
+    {
+      "verse_key": "112:2",
+      "timestamp_from": 7660,
+      "timestamp_to": 13130,
+      "duration": 5,
+      "segments": [
+        [
+          1,
+          9220,
+          10370
+        ],
+        [
+          2,
+          10380,
+          13050
+        ]
+      ]
+    },
+    {
+      "verse_key": "112:3",
+      "timestamp_from": 13130,
+      "timestamp_to": 20300,
+      "duration": 7,
+      "segments": [
+        [
+          1,
+          14330,
+          14880
+        ],
+        [
+          2,
+          14890,
+          16050
+        ],
+        [
+          3,
+          16060,
+          17420
+        ],
+        [
+          4,
+          17430,
+          20240
+        ]
+      ]
+    },
+    {
+      "verse_key": "112:4",
+      "timestamp_from": 20300,
+      "timestamp_to": 29190,
+      "duration": 8,
+      "segments": [
+        [
+          1,
+          21810,
+          22820
+        ],
+        [
+          2,
+          22830,
+          24210
+        ],
+        [
+          3,
+          24220,
+          25350
+        ],
+        [
+          4,
+          25360,
+          27150
+        ],
+        [
+          5,
+          27160,
+          29120
+        ]
+      ]
+    }
+  ]
+}

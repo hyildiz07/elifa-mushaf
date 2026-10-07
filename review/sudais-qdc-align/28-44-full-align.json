@@ -1,0 +1,134 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/28.mp3",
+  "source_file_size": 16347617,
+  "source_sha256": "f8e5291cf10a3a29230fd443b5ddabc4297cf5b16c70250dda3bfe6314917576",
+  "excerpt_file": "test-results/sudais-qdc-align/28-44.wav",
+  "excerpt_sha256": "f652b8028e7d233b0b7480e139f25153db7fd8e9d7ef9298c4dc10e88269d76a",
+  "excerpt_from_ms": 643040,
+  "excerpt_to_ms": 652390,
+  "provider_segments": [
+    [
+      1,
+      643040,
+      643600
+    ],
+    [
+      2,
+      643600,
+      644490
+    ],
+    [
+      3,
+      644490,
+      645410
+    ],
+    [
+      4,
+      645410,
+      646430
+    ],
+    [
+      5,
+      646430,
+      646720
+    ],
+    [
+      6,
+      646720,
+      647600
+    ],
+    [
+      7,
+      647600,
+      648060
+    ],
+    [
+      8,
+      648060,
+      648620
+    ],
+    [
+      9,
+      648620,
+      649240
+    ],
+    [
+      10,
+      649240,
+      649680
+    ],
+    [
+      11,
+      649680,
+      650470
+    ],
+    [
+      12,
+      650470,
+      650810
+    ],
+    [
+      13,
+      650810,
+      652185
+    ]
+  ],
+  "aligner": {
+    "audio_id": "1e5dfc7d37a44d38ad8e53f5f2bc8307",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 2.74,
+        "ref_from": "28:43:11",
+        "ref_to": "28:43:11",
+        "matched_text": "بَصَآئِرَ",
+        "confidence": 0.969,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 2.9,
+        "time_to": 9.35,
+        "ref_from": "28:43:11",
+        "ref_to": "28:43:16",
+        "matched_text": "بَصَآئِرَ لِلنَّاسِ وَهُدًى وَرَحْمَةً لَّعَلَّهُمْ يَتَذَكَّرُونَ",
+        "confidence": 0.898,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Base",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 0.9923758506774902,
+        "queue_seconds": 0.1111079590045847,
+        "total_seconds": 1.103483809682075
+      },
+      "model_retry": {
+        "from": "Base",
+        "to": "Large",
+        "reason": "low_confidence"
+      }
+    }
+  }
+}

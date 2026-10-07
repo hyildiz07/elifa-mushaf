@@ -1,0 +1,9 @@
+# Südeys 24:35, kelime 40→41 fonem pilotu
+
+**Karar: dokuz kelimelik kartı bölmek için yeni kesim onaylanmadı.** Önceki [PCM incelemesi](sudais-24-35-word-40-41-pcm.json), eş kayıttan aktarılan kelime 40 bitişini 663825 ms, kelime 41 başlangıcını 664265 ms gösterdi; 440 ms metadata aralığındaki en sessiz 80 ms pencere bile yakındaki konuşma RMS değerinin %20,2'si düzeyindeydi.
+
+Bu turda uygulamanın `prepareSelectedRange` yoluyla **aynı üretim MP3'ünden** 660000–666000 ms penceresi alındı ve 16 kHz WAV'a dönüştürüldü (SHA-256 `ce052b65f8989d9bfcde72c5046d5c58998364c75e731ebbbffd7c789800f751`). Önceki pilotta kullanılan SHA-256 `582149e3e913a0fc7f29c116530e0b1b6ae7a7ab23eef4efc3fc2acc760e2b75` ağırlıklı [Arapça fonem CTC modeli](https://huggingface.co/MostafaMaroof/wav2vec2-arabic-phoneme-asr) serbest çözümlendi. [Ham çıktı](sudais-24-35-phoneme-pilot.json) 299 kare ve 34 fonem olayı içerir.
+
+Model, önceki kelimeye yakın `a y a $ aa` dizisini ve 664133,8–664153,8 ms'de `w` etiketini verdi. Bu `w`, kelime 41'in `وَيَضْرِبُ` başlangıcıyla uyumlu bir adaydır ve sağlayıcıdaki 664265 ms başlama etiketinden yaklaşık **131 ms önce** gelir. Modelin 662107–663993 ms uzun `|` etiketi fonem ayırıcıdır; önceki kelimenin gerçek son sesini veya yankısını çözmez. 663993–664134 ms aralığındaki CTC `blank` kareleri de PCM sessizliği anlamına gelmez. Önceki PCM profilinde bu çevrede yaklaşık 0,04–0,14 RMS düzeyinde aktif enerji vardı.
+
+Dolayısıyla fonem modeli, sağlayıcı boşluğunun tamamını kesime uygun sessizlik olarak yorumlamayı desteklemiyor; aynı zamanda kesin yeni sınır da kanıtlamıyor. 40'ın son fonemi, 41'in ilk fonemi ve yankının aidiyeti iki taraflı dinlemeyle doğrulanmadan üretim `allowedCuts` değişmedi. Tekrar üretim: `node review/pilot-sudais-24-35-phoneme.mjs`, ardından yerel CPU ortamında `python review/run-sudais-24-35-phoneme.py`. Model/venv ve WAV yalnız yok sayılan `test-results/review-phoneme/` dizinindedir.

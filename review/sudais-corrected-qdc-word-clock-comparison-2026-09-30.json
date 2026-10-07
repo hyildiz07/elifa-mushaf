@@ -1,0 +1,1105 @@
+{
+  "status": "review-only-no-cut-approval",
+  "generated_at_utc": "2026-09-30T20:18:20.071Z",
+  "method": "QUD Base and Large session word timestamps mapped by segment offset to pinned QDC chapter PCM; QUL source-matched nominal words; 20 ms PCM RMS bins",
+  "verses": {
+    "28:44": {
+      "qdc_sha256": "f8e5291cf10a3a29230fd443b5ddabc4297cf5b16c70250dda3bfe6314917576",
+      "wav_sha256": "ffc6a3c05494582730501528ec1531acb18f546ec7fa9294fad8ce1257175802",
+      "qdc_window_ms": [
+        651500,
+        666000
+      ],
+      "qdc_sample_rate": 22050,
+      "qul_words": [
+        {
+          "n": 1,
+          "start_ms": 653960,
+          "end_ms": 654550
+        },
+        {
+          "n": 2,
+          "start_ms": 654600,
+          "end_ms": 655310
+        },
+        {
+          "n": 3,
+          "start_ms": 655360,
+          "end_ms": 656310
+        },
+        {
+          "n": 4,
+          "start_ms": 656360,
+          "end_ms": 657190
+        },
+        {
+          "n": 5,
+          "start_ms": 657240,
+          "end_ms": 657590
+        },
+        {
+          "n": 6,
+          "start_ms": 657640,
+          "end_ms": 658470
+        },
+        {
+          "n": 7,
+          "start_ms": 658520,
+          "end_ms": 658990
+        },
+        {
+          "n": 8,
+          "start_ms": 659040,
+          "end_ms": 659510
+        },
+        {
+          "n": 9,
+          "start_ms": 659560,
+          "end_ms": 660150
+        },
+        {
+          "n": 10,
+          "start_ms": 660200,
+          "end_ms": 660790
+        },
+        {
+          "n": 11,
+          "start_ms": 660840,
+          "end_ms": 661390
+        },
+        {
+          "n": 12,
+          "start_ms": 661440,
+          "end_ms": 661910
+        },
+        {
+          "n": 13,
+          "start_ms": 661960,
+          "end_ms": 663092
+        }
+      ],
+      "models": {
+        "Base": {
+          "audio_id": "5e82367840b54c8c9fc5217ccaf31653",
+          "session_status": 200,
+          "segment_statuses": [
+            "ok",
+            "ok",
+            "ok"
+          ],
+          "words": [
+            {
+              "n": 1,
+              "start_ms": 653880,
+              "end_ms": 654360,
+              "segment": 2
+            },
+            {
+              "n": 2,
+              "start_ms": 654360,
+              "end_ms": 655230,
+              "segment": 2
+            },
+            {
+              "n": 3,
+              "start_ms": 655230,
+              "end_ms": 656140,
+              "segment": 2
+            },
+            {
+              "n": 4,
+              "start_ms": 656140,
+              "end_ms": 657170,
+              "segment": 2
+            },
+            {
+              "n": 5,
+              "start_ms": 657170,
+              "end_ms": 657520,
+              "segment": 2
+            },
+            {
+              "n": 6,
+              "start_ms": 657520,
+              "end_ms": 658430,
+              "segment": 2
+            },
+            {
+              "n": 7,
+              "start_ms": 658430,
+              "end_ms": 658910,
+              "segment": 2
+            },
+            {
+              "n": 8,
+              "start_ms": 658910,
+              "end_ms": 659410,
+              "segment": 2
+            },
+            {
+              "n": 9,
+              "start_ms": 659410,
+              "end_ms": 660080,
+              "segment": 2
+            },
+            {
+              "n": 10,
+              "start_ms": 660080,
+              "end_ms": 660640,
+              "segment": 2
+            },
+            {
+              "n": 11,
+              "start_ms": 660640,
+              "end_ms": 661380,
+              "segment": 2
+            },
+            {
+              "n": 12,
+              "start_ms": 661380,
+              "end_ms": 661730,
+              "segment": 2
+            },
+            {
+              "n": 13,
+              "start_ms": 661730,
+              "end_ms": 663160,
+              "segment": 2
+            }
+          ]
+        },
+        "Large": {
+          "audio_id": "46b67bc9f8644ea489aff58cecb69bec",
+          "session_status": 200,
+          "segment_statuses": [
+            "ok",
+            "ok",
+            "ok"
+          ],
+          "words": [
+            {
+              "n": 1,
+              "start_ms": 653880,
+              "end_ms": 654360,
+              "segment": 2
+            },
+            {
+              "n": 2,
+              "start_ms": 654360,
+              "end_ms": 655230,
+              "segment": 2
+            },
+            {
+              "n": 3,
+              "start_ms": 655230,
+              "end_ms": 656140,
+              "segment": 2
+            },
+            {
+              "n": 4,
+              "start_ms": 656140,
+              "end_ms": 657170,
+              "segment": 2
+            },
+            {
+              "n": 5,
+              "start_ms": 657170,
+              "end_ms": 657520,
+              "segment": 2
+            },
+            {
+              "n": 6,
+              "start_ms": 657520,
+              "end_ms": 658430,
+              "segment": 2
+            },
+            {
+              "n": 7,
+              "start_ms": 658430,
+              "end_ms": 658910,
+              "segment": 2
+            },
+            {
+              "n": 8,
+              "start_ms": 658910,
+              "end_ms": 659410,
+              "segment": 2
+            },
+            {
+              "n": 9,
+              "start_ms": 659410,
+              "end_ms": 660080,
+              "segment": 2
+            },
+            {
+              "n": 10,
+              "start_ms": 660080,
+              "end_ms": 660640,
+              "segment": 2
+            },
+            {
+              "n": 11,
+              "start_ms": 660640,
+              "end_ms": 661380,
+              "segment": 2
+            },
+            {
+              "n": 12,
+              "start_ms": 661380,
+              "end_ms": 661730,
+              "segment": 2
+            },
+            {
+              "n": 13,
+              "start_ms": 661730,
+              "end_ms": 663160,
+              "segment": 2
+            }
+          ]
+        }
+      },
+      "boundaries": [
+        {
+          "after_word": 1,
+          "qul_nominal_ms": 654550,
+          "base_end_ms": 654360,
+          "large_end_ms": 654360,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -190,
+            "Large": -190
+          },
+          "spread_ms": 190,
+          "rms20_at_qul": 0.24375008802506515,
+          "rms20_at_base": 0.06215017555397934,
+          "rms20_at_large": 0.06215017555397934,
+          "quietest_near_models": {
+            "at_ms": 654320,
+            "rms": 0.05017721479938584
+          },
+          "rms_between_extremes": 0.17565974841423207,
+          "review_cue": false
+        },
+        {
+          "after_word": 2,
+          "qul_nominal_ms": 655310,
+          "base_end_ms": 655230,
+          "large_end_ms": 655230,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -80,
+            "Large": -80
+          },
+          "spread_ms": 80,
+          "rms20_at_qul": 0.12009235555850323,
+          "rms20_at_base": 0.07973620304367318,
+          "rms20_at_large": 0.07973620304367318,
+          "quietest_near_models": {
+            "at_ms": 655240,
+            "rms": 0.06765437581218503
+          },
+          "rms_between_extremes": 0.09912417959046892,
+          "review_cue": false
+        },
+        {
+          "after_word": 3,
+          "qul_nominal_ms": 656310,
+          "base_end_ms": 656140,
+          "large_end_ms": 656140,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -170,
+            "Large": -170
+          },
+          "spread_ms": 170,
+          "rms20_at_qul": 0.06362600122190011,
+          "rms20_at_base": 0.0963391707547841,
+          "rms20_at_large": 0.0963391707547841,
+          "quietest_near_models": {
+            "at_ms": 656120,
+            "rms": 0.09199553405085498
+          },
+          "rms_between_extremes": 0.12395685419696455,
+          "review_cue": false
+        },
+        {
+          "after_word": 4,
+          "qul_nominal_ms": 657190,
+          "base_end_ms": 657170,
+          "large_end_ms": 657170,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -20,
+            "Large": -20
+          },
+          "spread_ms": 20,
+          "rms20_at_qul": 0.06648343892541295,
+          "rms20_at_base": 0.06952995406267112,
+          "rms20_at_large": 0.06952995406267112,
+          "quietest_near_models": {
+            "at_ms": 657180,
+            "rms": 0.06648343892541295
+          },
+          "rms_between_extremes": 0.06802375380448461,
+          "review_cue": false
+        },
+        {
+          "after_word": 5,
+          "qul_nominal_ms": 657590,
+          "base_end_ms": 657520,
+          "large_end_ms": 657520,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -70,
+            "Large": -70
+          },
+          "spread_ms": 70,
+          "rms20_at_qul": 0.15093709608282468,
+          "rms20_at_base": 0.03746429167439923,
+          "rms20_at_large": 0.03746429167439923,
+          "quietest_near_models": {
+            "at_ms": 657480,
+            "rms": 0.029229126530511115
+          },
+          "rms_between_extremes": 0.0908901787205171,
+          "review_cue": false
+        },
+        {
+          "after_word": 6,
+          "qul_nominal_ms": 658470,
+          "base_end_ms": 658430,
+          "large_end_ms": 658430,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -40,
+            "Large": -40
+          },
+          "spread_ms": 40,
+          "rms20_at_qul": 0.09943442226439456,
+          "rms20_at_base": 0.06605734875893858,
+          "rms20_at_large": 0.06605734875893858,
+          "quietest_near_models": {
+            "at_ms": 658400,
+            "rms": 0.05648857508611229
+          },
+          "rms_between_extremes": 0.07703519298041075,
+          "review_cue": false
+        },
+        {
+          "after_word": 7,
+          "qul_nominal_ms": 658990,
+          "base_end_ms": 658910,
+          "large_end_ms": 658910,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -80,
+            "Large": -80
+          },
+          "spread_ms": 80,
+          "rms20_at_qul": 0.14995944469351016,
+          "rms20_at_base": 0.11106021175906323,
+          "rms20_at_large": 0.11106021175906323,
+          "quietest_near_models": {
+            "at_ms": 658880,
+            "rms": 0.09738595545630696
+          },
+          "rms_between_extremes": 0.1272074399364879,
+          "review_cue": false
+        },
+        {
+          "after_word": 8,
+          "qul_nominal_ms": 659510,
+          "base_end_ms": 659410,
+          "large_end_ms": 659410,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -100,
+            "Large": -100
+          },
+          "spread_ms": 100,
+          "rms20_at_qul": 0.07224890776376942,
+          "rms20_at_base": 0.0645386679209364,
+          "rms20_at_large": 0.0645386679209364,
+          "quietest_near_models": {
+            "at_ms": 659540,
+            "rms": 0.06119438444809997
+          },
+          "rms_between_extremes": 0.08692419323833131,
+          "review_cue": false
+        },
+        {
+          "after_word": 9,
+          "qul_nominal_ms": 660150,
+          "base_end_ms": 660080,
+          "large_end_ms": 660080,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -70,
+            "Large": -70
+          },
+          "spread_ms": 70,
+          "rms20_at_qul": 0.14992677541003652,
+          "rms20_at_base": 0.09899457764916139,
+          "rms20_at_large": 0.09899457764916139,
+          "quietest_near_models": {
+            "at_ms": 660200,
+            "rms": 0.07816183692876473
+          },
+          "rms_between_extremes": 0.12373463165286583,
+          "review_cue": false
+        },
+        {
+          "after_word": 10,
+          "qul_nominal_ms": 660790,
+          "base_end_ms": 660640,
+          "large_end_ms": 660640,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -150,
+            "Large": -150
+          },
+          "spread_ms": 150,
+          "rms20_at_qul": 0.14579407057352803,
+          "rms20_at_base": 0.03673712459569329,
+          "rms20_at_large": 0.03673712459569329,
+          "quietest_near_models": {
+            "at_ms": 660640,
+            "rms": 0.030997575470352545
+          },
+          "rms_between_extremes": 0.1315595110890713,
+          "review_cue": false
+        },
+        {
+          "after_word": 11,
+          "qul_nominal_ms": 661390,
+          "base_end_ms": 661380,
+          "large_end_ms": 661380,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -10,
+            "Large": -10
+          },
+          "spread_ms": 10,
+          "rms20_at_qul": 0.09909847993446957,
+          "rms20_at_base": 0.1061884400154938,
+          "rms20_at_large": 0.1061884400154938,
+          "quietest_near_models": {
+            "at_ms": 661380,
+            "rms": 0.09909847993446957
+          },
+          "rms_between_extremes": 0.09909847993446957,
+          "review_cue": false
+        },
+        {
+          "after_word": 12,
+          "qul_nominal_ms": 661910,
+          "base_end_ms": 661730,
+          "large_end_ms": 661730,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -180,
+            "Large": -180
+          },
+          "spread_ms": 180,
+          "rms20_at_qul": 0.06343101603062057,
+          "rms20_at_base": 0.07210445724930827,
+          "rms20_at_large": 0.07210445724930827,
+          "quietest_near_models": {
+            "at_ms": 661700,
+            "rms": 0.06146654324216098
+          },
+          "rms_between_extremes": 0.07540859139931032,
+          "review_cue": false
+        }
+      ],
+      "outer_boundaries": [
+        {
+          "side": "start",
+          "qul_ms": 653640,
+          "qud_segment_ms": 653780,
+          "qud_word_ms": 653880,
+          "neighbor_segment_ms": 653680,
+          "rms20_at_qul": 0.03427059470033873,
+          "rms20_at_qud_segment": 0.02164532440527274,
+          "rms20_at_qud_word": 0.04910739609040495,
+          "gap_ms": 100
+        },
+        {
+          "side": "end",
+          "qul_ms": 663092,
+          "qud_segment_ms": 663460,
+          "qud_word_ms": 663160,
+          "neighbor_segment_ms": 663520,
+          "rms20_at_qul": 0.031691890813687514,
+          "rms20_at_qud_segment": 0.02056758999634339,
+          "rms20_at_qud_word": 0.03781661480852196,
+          "gap_ms": 60
+        }
+      ],
+      "verse_edges": {
+        "qul": [
+          653640,
+          663092
+        ],
+        "Base": [
+          653880,
+          663160
+        ],
+        "Large": [
+          653880,
+          663160
+        ]
+      }
+    },
+    "5:111": {
+      "qdc_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+      "wav_sha256": "8fc3fd6f796a089fed97d2c33fcb1f15f714ce65b6ffd133558590113ea8915a",
+      "qdc_window_ms": [
+        2494000,
+        2514000
+      ],
+      "qdc_sample_rate": 22050,
+      "qul_words": [
+        {
+          "n": 1,
+          "start_ms": 2496697,
+          "end_ms": 2497017
+        },
+        {
+          "n": 2,
+          "start_ms": 2497017,
+          "end_ms": 2498057
+        },
+        {
+          "n": 3,
+          "start_ms": 2498057,
+          "end_ms": 2498197
+        },
+        {
+          "n": 4,
+          "start_ms": 2498197,
+          "end_ms": 2499957
+        },
+        {
+          "n": 5,
+          "start_ms": 2499957,
+          "end_ms": 2500337
+        },
+        {
+          "n": 6,
+          "start_ms": 2500337,
+          "end_ms": 2501037
+        },
+        {
+          "n": 7,
+          "start_ms": 2501037,
+          "end_ms": 2501357
+        },
+        {
+          "n": 8,
+          "start_ms": 2501357,
+          "end_ms": 2503357
+        },
+        {
+          "n": 9,
+          "start_ms": 2503357,
+          "end_ms": 2504437
+        },
+        {
+          "n": 10,
+          "start_ms": 2504437,
+          "end_ms": 2505937
+        },
+        {
+          "n": 11,
+          "start_ms": 2505937,
+          "end_ms": 2506797
+        },
+        {
+          "n": 12,
+          "start_ms": 2506797,
+          "end_ms": 2508837
+        },
+        {
+          "n": 13,
+          "start_ms": 2508837,
+          "end_ms": 2511277
+        }
+      ],
+      "models": {
+        "Base": {
+          "audio_id": "d02bd1b6d5c44e25a10efe2a0660c126",
+          "session_status": 200,
+          "segment_statuses": [
+            "ok",
+            "ok",
+            "ok",
+            "ok"
+          ],
+          "words": [
+            {
+              "n": 1,
+              "start_ms": 2496670,
+              "end_ms": 2497090,
+              "segment": 2
+            },
+            {
+              "n": 2,
+              "start_ms": 2497090,
+              "end_ms": 2497970,
+              "segment": 2
+            },
+            {
+              "n": 3,
+              "start_ms": 2497970,
+              "end_ms": 2498290,
+              "segment": 2
+            },
+            {
+              "n": 4,
+              "start_ms": 2498290,
+              "end_ms": 2499880,
+              "segment": 2
+            },
+            {
+              "n": 5,
+              "start_ms": 2499880,
+              "end_ms": 2500190,
+              "segment": 2
+            },
+            {
+              "n": 6,
+              "start_ms": 2500190,
+              "end_ms": 2501230,
+              "segment": 2
+            },
+            {
+              "n": 7,
+              "start_ms": 2501230,
+              "end_ms": 2501590,
+              "segment": 2
+            },
+            {
+              "n": 8,
+              "start_ms": 2501590,
+              "end_ms": 2502910,
+              "segment": 2
+            },
+            {
+              "n": 9,
+              "start_ms": 2503340,
+              "end_ms": 2504190,
+              "segment": 3
+            },
+            {
+              "n": 10,
+              "start_ms": 2504190,
+              "end_ms": 2505950,
+              "segment": 3
+            },
+            {
+              "n": 11,
+              "start_ms": 2505950,
+              "end_ms": 2506800,
+              "segment": 3
+            },
+            {
+              "n": 12,
+              "start_ms": 2506800,
+              "end_ms": 2508850,
+              "segment": 3
+            },
+            {
+              "n": 13,
+              "start_ms": 2508850,
+              "end_ms": 2511430,
+              "segment": 3
+            }
+          ]
+        },
+        "Large": {
+          "audio_id": "0c3d63e3e86d45bbafe708cff1cf970b",
+          "session_status": 200,
+          "segment_statuses": [
+            "ok",
+            "ok",
+            "ok",
+            "ok"
+          ],
+          "words": [
+            {
+              "n": 1,
+              "start_ms": 2496670,
+              "end_ms": 2497090,
+              "segment": 2
+            },
+            {
+              "n": 2,
+              "start_ms": 2497090,
+              "end_ms": 2497970,
+              "segment": 2
+            },
+            {
+              "n": 3,
+              "start_ms": 2497970,
+              "end_ms": 2498290,
+              "segment": 2
+            },
+            {
+              "n": 4,
+              "start_ms": 2498290,
+              "end_ms": 2499880,
+              "segment": 2
+            },
+            {
+              "n": 5,
+              "start_ms": 2499880,
+              "end_ms": 2500190,
+              "segment": 2
+            },
+            {
+              "n": 6,
+              "start_ms": 2500190,
+              "end_ms": 2501230,
+              "segment": 2
+            },
+            {
+              "n": 7,
+              "start_ms": 2501230,
+              "end_ms": 2501590,
+              "segment": 2
+            },
+            {
+              "n": 8,
+              "start_ms": 2501590,
+              "end_ms": 2502910,
+              "segment": 2
+            },
+            {
+              "n": 9,
+              "start_ms": 2503340,
+              "end_ms": 2504190,
+              "segment": 3
+            },
+            {
+              "n": 10,
+              "start_ms": 2504190,
+              "end_ms": 2505950,
+              "segment": 3
+            },
+            {
+              "n": 11,
+              "start_ms": 2505950,
+              "end_ms": 2506800,
+              "segment": 3
+            },
+            {
+              "n": 12,
+              "start_ms": 2506800,
+              "end_ms": 2508850,
+              "segment": 3
+            },
+            {
+              "n": 13,
+              "start_ms": 2508850,
+              "end_ms": 2511430,
+              "segment": 3
+            }
+          ]
+        }
+      },
+      "boundaries": [
+        {
+          "after_word": 1,
+          "qul_nominal_ms": 2497017,
+          "base_end_ms": 2497090,
+          "large_end_ms": 2497090,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": 73,
+            "Large": 73
+          },
+          "spread_ms": 73,
+          "rms20_at_qul": 0.15433174526048385,
+          "rms20_at_base": 0.266983520915639,
+          "rms20_at_large": 0.266983520915639,
+          "quietest_near_models": {
+            "at_ms": 2496980,
+            "rms": 0.1231269008496042
+          },
+          "rms_between_extremes": 0.20719297012021515,
+          "review_cue": false
+        },
+        {
+          "after_word": 2,
+          "qul_nominal_ms": 2498057,
+          "base_end_ms": 2497970,
+          "large_end_ms": 2497970,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -87,
+            "Large": -87
+          },
+          "spread_ms": 87,
+          "rms20_at_qul": 0.13066954539794895,
+          "rms20_at_base": 0.1338208003754898,
+          "rms20_at_large": 0.1338208003754898,
+          "quietest_near_models": {
+            "at_ms": 2497860,
+            "rms": 0.09387839640161667
+          },
+          "rms_between_extremes": 0.13351229164086797,
+          "review_cue": false
+        },
+        {
+          "after_word": 3,
+          "qul_nominal_ms": 2498197,
+          "base_end_ms": 2498290,
+          "large_end_ms": 2498290,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": 93,
+            "Large": 93
+          },
+          "spread_ms": 93,
+          "rms20_at_qul": 0.20506547384907767,
+          "rms20_at_base": 0.14793356103855723,
+          "rms20_at_large": 0.14793356103855723,
+          "quietest_near_models": {
+            "at_ms": 2498420,
+            "rms": 0.09216648583834293
+          },
+          "rms_between_extremes": 0.2052784669576078,
+          "review_cue": false
+        },
+        {
+          "after_word": 4,
+          "qul_nominal_ms": 2499957,
+          "base_end_ms": 2499880,
+          "large_end_ms": 2499880,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -77,
+            "Large": -77
+          },
+          "spread_ms": 77,
+          "rms20_at_qul": 0.26265925919120775,
+          "rms20_at_base": 0.12880653439808673,
+          "rms20_at_large": 0.12880653439808673,
+          "quietest_near_models": {
+            "at_ms": 2499860,
+            "rms": 0.11444799018183087
+          },
+          "rms_between_extremes": 0.2150475204796405,
+          "review_cue": false
+        },
+        {
+          "after_word": 5,
+          "qul_nominal_ms": 2500337,
+          "base_end_ms": 2500190,
+          "large_end_ms": 2500190,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -147,
+            "Large": -147
+          },
+          "spread_ms": 147,
+          "rms20_at_qul": 0.4127962661251835,
+          "rms20_at_base": 0.13246846781219354,
+          "rms20_at_large": 0.13246846781219354,
+          "quietest_near_models": {
+            "at_ms": 2500200,
+            "rms": 0.06905968732761315
+          },
+          "rms_between_extremes": 0.22437820884090245,
+          "review_cue": false
+        },
+        {
+          "after_word": 6,
+          "qul_nominal_ms": 2501037,
+          "base_end_ms": 2501230,
+          "large_end_ms": 2501230,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": 193,
+            "Large": 193
+          },
+          "spread_ms": 193,
+          "rms20_at_qul": 0.21243773016122805,
+          "rms20_at_base": 0.0977862290454637,
+          "rms20_at_large": 0.0977862290454637,
+          "quietest_near_models": {
+            "at_ms": 2501220,
+            "rms": 0.0977862290454637
+          },
+          "rms_between_extremes": 0.2040208596927206,
+          "review_cue": false
+        },
+        {
+          "after_word": 7,
+          "qul_nominal_ms": 2501357,
+          "base_end_ms": 2501590,
+          "large_end_ms": 2501590,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": 233,
+            "Large": 233
+          },
+          "spread_ms": 233,
+          "rms20_at_qul": 0.24025931201801798,
+          "rms20_at_base": 0.2565881432953871,
+          "rms20_at_large": 0.2565881432953871,
+          "quietest_near_models": {
+            "at_ms": 2501720,
+            "rms": 0.1688211913017612
+          },
+          "rms_between_extremes": 0.24743293788731036,
+          "review_cue": false
+        },
+        {
+          "after_word": 8,
+          "qul_nominal_ms": 2503357,
+          "base_end_ms": 2502910,
+          "large_end_ms": 2502910,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -447,
+            "Large": -447
+          },
+          "spread_ms": 447,
+          "rms20_at_qul": 0.041193659908556515,
+          "rms20_at_base": 0.13619039500764876,
+          "rms20_at_large": 0.13619039500764876,
+          "quietest_near_models": {
+            "at_ms": 2502980,
+            "rms": 0.054584652672972925
+          },
+          "rms_between_extremes": 0.06253217264495588,
+          "review_cue": false
+        },
+        {
+          "after_word": 9,
+          "qul_nominal_ms": 2504437,
+          "base_end_ms": 2504190,
+          "large_end_ms": 2504190,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": -247,
+            "Large": -247
+          },
+          "spread_ms": 247,
+          "rms20_at_qul": 0.32284119131290295,
+          "rms20_at_base": 0.12864640592585402,
+          "rms20_at_large": 0.12864640592585402,
+          "quietest_near_models": {
+            "at_ms": 2504160,
+            "rms": 0.11836064888193398
+          },
+          "rms_between_extremes": 0.3514317001263992,
+          "review_cue": false
+        },
+        {
+          "after_word": 10,
+          "qul_nominal_ms": 2505937,
+          "base_end_ms": 2505950,
+          "large_end_ms": 2505950,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": 13,
+            "Large": 13
+          },
+          "spread_ms": 13,
+          "rms20_at_qul": 0.14135671551687037,
+          "rms20_at_base": 0.12873832947430205,
+          "rms20_at_large": 0.12873832947430205,
+          "quietest_near_models": {
+            "at_ms": 2506080,
+            "rms": 0.09603285548254567
+          },
+          "rms_between_extremes": 0.14135671551687037,
+          "review_cue": false
+        },
+        {
+          "after_word": 11,
+          "qul_nominal_ms": 2506797,
+          "base_end_ms": 2506800,
+          "large_end_ms": 2506800,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": 3,
+            "Large": 3
+          },
+          "spread_ms": 3,
+          "rms20_at_qul": 0.08544140438741973,
+          "rms20_at_base": 0.08544140438741973,
+          "rms20_at_large": 0.08544140438741973,
+          "quietest_near_models": {
+            "at_ms": 2506780,
+            "rms": 0.07453718380914268
+          },
+          "rms_between_extremes": 0.07453718380914268,
+          "review_cue": false
+        },
+        {
+          "after_word": 12,
+          "qul_nominal_ms": 2508837,
+          "base_end_ms": 2508850,
+          "large_end_ms": 2508850,
+          "base_large_delta_ms": 0,
+          "model_vs_qul_ms": {
+            "Base": 13,
+            "Large": 13
+          },
+          "spread_ms": 13,
+          "rms20_at_qul": 0.1630540946056696,
+          "rms20_at_base": 0.1625176890470116,
+          "rms20_at_large": 0.1625176890470116,
+          "quietest_near_models": {
+            "at_ms": 2508880,
+            "rms": 0.11742808777887395
+          },
+          "rms_between_extremes": 0.1630540946056696,
+          "review_cue": false
+        }
+      ],
+      "outer_boundaries": [
+        {
+          "side": "start",
+          "qul_ms": 2496497,
+          "qud_segment_ms": 2496560,
+          "qud_word_ms": 2496670,
+          "neighbor_segment_ms": 2496520,
+          "rms20_at_qul": 0.04206937241929679,
+          "rms20_at_qud_segment": 0.02859629474322658,
+          "rms20_at_qud_word": 0.11365352622772285,
+          "gap_ms": 40
+        },
+        {
+          "side": "end",
+          "qul_ms": 2511277,
+          "qud_segment_ms": 2511493,
+          "qud_word_ms": 2511430,
+          "neighbor_segment_ms": 2511523,
+          "rms20_at_qul": 0.03167736671582283,
+          "rms20_at_qud_segment": 0.015358780907792862,
+          "rms20_at_qud_word": 0.019623202803463222,
+          "gap_ms": 30
+        }
+      ],
+      "verse_edges": {
+        "qul": [
+          2496497,
+          2511277
+        ],
+        "Base": [
+          2496670,
+          2511430
+        ],
+        "Large": [
+          2496670,
+          2511430
+        ]
+      }
+    }
+  }
+}

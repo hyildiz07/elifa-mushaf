@@ -1,0 +1,107 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/29.mp3",
+  "source_file_size": 12885359,
+  "source_sha256": "525bcfbaaa6fbeece6c93e0e25d7d36393aaddd406366284ded5bd141107af67",
+  "excerpt_file": "test-results/sudais-qdc-align/29-35.wav",
+  "excerpt_sha256": "81a6c48a408871e3d5307c7b45f16e9fb5a2539c098e31dfb4408ea93d843959",
+  "excerpt_from_ms": 451890,
+  "excerpt_to_ms": 459730,
+  "provider_segments": [
+    [
+      1,
+      451890,
+      452870
+    ],
+    [
+      2,
+      452870,
+      453850
+    ],
+    [
+      3,
+      453850,
+      454610
+    ],
+    [
+      4,
+      454610,
+      455770
+    ],
+    [
+      5,
+      455770,
+      456920
+    ],
+    [
+      6,
+      456920,
+      458340
+    ],
+    [
+      7,
+      458340,
+      459465
+    ]
+  ],
+  "aligner": {
+    "audio_id": "cc1945e9e5754c808b74aa77a9cb0754",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 4.32,
+        "ref_from": "29:32:11",
+        "ref_to": "29:32:16",
+        "matched_text": "وَأَهْلَهُۥٓ إِلَّا ٱمْرَأَتَهُۥ كَانَتْ مِنَ ٱلْغَـٰبِرِينَ",
+        "confidence": 0.811,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null,
+        "pauses": [
+          {
+            "after_ref": "29:32:11",
+            "token_pos": 6,
+            "gain": 0.4499999999999993,
+            "separability": 1
+          }
+        ]
+      },
+      {
+        "segment": 2,
+        "time_from": 4.35,
+        "time_to": 7.84,
+        "ref_from": "29:34:1",
+        "ref_to": "29:34:4",
+        "matched_text": "إِنَّا مُنزِلُونَ عَلَىٰٓ أَهْلِ",
+        "confidence": 0.917,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 0.7302470207214355,
+        "queue_seconds": 0.11519224371295422,
+        "total_seconds": 0.8454392644343898
+      }
+    }
+  }
+}

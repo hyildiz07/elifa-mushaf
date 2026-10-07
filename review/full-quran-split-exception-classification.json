@@ -1,0 +1,2112 @@
+{
+  "source": "test-results/full-validation.json",
+  "counters": {
+    "medineSplitExceptionVerses": 488,
+    "bothOrthographiesSingleEightPlus": 264,
+    "bothOrthographiesOverlongParts": 994,
+    "bothOrthographiesAlignedOverlongParts": 878,
+    "bothOrthographiesFallbackOverlongParts": 116,
+    "structuralErrors": 0,
+    "totalVerseModes": 137192
+  },
+  "exceptionClassification": {
+    "fallback": 60,
+    "aligned": 428,
+    "single": 132,
+    "multi": 356,
+    "missingPositions": 238,
+    "repeatedPositions": 377,
+    "safeFeasibleUnderTwoToEightWordRule": 56,
+    "safeFeasibleFallback": 56,
+    "safeFeasibleAligned": 0,
+    "safeInfeasibleUnderTwoToEightWordRule": 432,
+    "labelShapes": {
+      "missingAndRepeated": 169,
+      "missingOnly": 69,
+      "repeatedOnly": 208,
+      "neither": 42
+    },
+    "alignedLabelShapes": {
+      "missingAndRepeated": 169,
+      "missingOnly": 67,
+      "repeatedOnly": 192,
+      "neither": 0
+    },
+    "completeOrderedRepeatCandidates": 74
+  },
+  "fallbackCausesBothOrthographies": {
+    "position overflow": 28,
+    "verse overlap": 114,
+    "no segments": 10,
+    "other": 4
+  },
+  "byReciter": {
+    "1": {
+      "verses": 6,
+      "fallback": 1,
+      "aligned": 5,
+      "single": 2,
+      "multi": 4,
+      "missingPositions": 6,
+      "repeatedPositions": 0,
+      "safeFeasible": 1,
+      "safeInfeasible": 5,
+      "overlongParts": 7,
+      "maxWords": 60
+    },
+    "2": {
+      "verses": 171,
+      "fallback": 44,
+      "aligned": 127,
+      "single": 96,
+      "multi": 75,
+      "missingPositions": 105,
+      "repeatedPositions": 96,
+      "safeFeasible": 43,
+      "safeInfeasible": 128,
+      "overlongParts": 180,
+      "maxWords": 69,
+      "completeOrderedRepeatCandidates": 19
+    },
+    "3": {
+      "verses": 8,
+      "fallback": 3,
+      "aligned": 5,
+      "single": 5,
+      "multi": 3,
+      "missingPositions": 5,
+      "repeatedPositions": 5,
+      "safeFeasible": 3,
+      "safeInfeasible": 5,
+      "overlongParts": 8,
+      "maxWords": 48
+    },
+    "4": {
+      "verses": 92,
+      "fallback": 2,
+      "aligned": 90,
+      "single": 7,
+      "multi": 85,
+      "missingPositions": 56,
+      "repeatedPositions": 75,
+      "safeFeasible": 1,
+      "safeInfeasible": 91,
+      "overlongParts": 91,
+      "maxWords": 128,
+      "completeOrderedRepeatCandidates": 7
+    },
+    "5": {
+      "verses": 2,
+      "fallback": 2,
+      "aligned": 0,
+      "single": 2,
+      "multi": 0,
+      "missingPositions": 0,
+      "repeatedPositions": 1,
+      "safeFeasible": 1,
+      "safeInfeasible": 1,
+      "overlongParts": 2,
+      "maxWords": 24
+    },
+    "6": {
+      "verses": 22,
+      "fallback": 0,
+      "aligned": 22,
+      "single": 0,
+      "multi": 22,
+      "missingPositions": 0,
+      "repeatedPositions": 22,
+      "safeFeasible": 0,
+      "safeInfeasible": 22,
+      "overlongParts": 22,
+      "maxWords": 78,
+      "completeOrderedRepeatCandidates": 22
+    },
+    "7": {
+      "verses": 144,
+      "fallback": 2,
+      "aligned": 142,
+      "single": 9,
+      "multi": 135,
+      "missingPositions": 55,
+      "repeatedPositions": 142,
+      "safeFeasible": 2,
+      "safeInfeasible": 142,
+      "overlongParts": 144,
+      "maxWords": 78,
+      "completeOrderedRepeatCandidates": 1
+    },
+    "9": {
+      "verses": 19,
+      "fallback": 1,
+      "aligned": 18,
+      "single": 4,
+      "multi": 15,
+      "missingPositions": 6,
+      "repeatedPositions": 18,
+      "safeFeasible": 1,
+      "safeInfeasible": 18,
+      "overlongParts": 19,
+      "maxWords": 51,
+      "completeOrderedRepeatCandidates": 12
+    },
+    "10": {
+      "verses": 5,
+      "fallback": 4,
+      "aligned": 1,
+      "single": 4,
+      "multi": 1,
+      "missingPositions": 2,
+      "repeatedPositions": 0,
+      "safeFeasible": 3,
+      "safeInfeasible": 2,
+      "overlongParts": 5,
+      "maxWords": 33
+    },
+    "12": {
+      "verses": 1,
+      "fallback": 1,
+      "aligned": 0,
+      "single": 1,
+      "multi": 0,
+      "missingPositions": 0,
+      "repeatedPositions": 0,
+      "safeFeasible": 1,
+      "safeInfeasible": 0,
+      "overlongParts": 1,
+      "maxWords": 32
+    },
+    "97": {
+      "verses": 18,
+      "fallback": 0,
+      "aligned": 18,
+      "single": 2,
+      "multi": 16,
+      "missingPositions": 3,
+      "repeatedPositions": 18,
+      "safeFeasible": 0,
+      "safeInfeasible": 18,
+      "overlongParts": 18,
+      "maxWords": 42,
+      "completeOrderedRepeatCandidates": 13
+    }
+  },
+  "orderedRepeatCandidates": [
+    {
+      "key": "2/10:88/medine",
+      "words": 29,
+      "parts": [
+        2,
+        10,
+        4,
+        7,
+        6
+      ],
+      "rows": 46,
+      "range": [
+        1886820,
+        1943120
+      ]
+    },
+    {
+      "key": "2/11:27/medine",
+      "words": 29,
+      "parts": [
+        5,
+        6,
+        9,
+        4,
+        5
+      ],
+      "rows": 38,
+      "range": [
+        547710,
+        584810
+      ]
+    },
+    {
+      "key": "2/11:31/medine",
+      "words": 31,
+      "parts": [
+        4,
+        5,
+        4,
+        9,
+        5,
+        4
+      ],
+      "rows": 44,
+      "range": [
+        658200,
+        716770
+      ]
+    },
+    {
+      "key": "2/13:25/medine",
+      "words": 23,
+      "parts": [
+        3,
+        4,
+        10,
+        6
+      ],
+      "rows": 33,
+      "range": [
+        630880,
+        667430
+      ]
+    },
+    {
+      "key": "2/16:80/medine",
+      "words": 25,
+      "parts": [
+        6,
+        11,
+        3,
+        5
+      ],
+      "rows": 36,
+      "range": [
+        1416670,
+        1466520
+      ]
+    },
+    {
+      "key": "2/18:49/medine",
+      "words": 27,
+      "parts": [
+        3,
+        4,
+        10,
+        5,
+        5
+      ],
+      "rows": 37,
+      "range": [
+        1097910,
+        1150530
+      ]
+    },
+    {
+      "key": "2/2:101/medine",
+      "words": 22,
+      "parts": [
+        4,
+        5,
+        10,
+        3
+      ],
+      "rows": 32,
+      "range": [
+        2193290,
+        2235140
+      ]
+    },
+    {
+      "key": "2/2:109/medine",
+      "words": 33,
+      "parts": [
+        5,
+        10,
+        4,
+        3,
+        5,
+        6
+      ],
+      "rows": 43,
+      "range": [
+        2492060,
+        2558570
+      ]
+    },
+    {
+      "key": "2/21:87/medine",
+      "words": 23,
+      "parts": [
+        5,
+        5,
+        9,
+        4
+      ],
+      "rows": 32,
+      "range": [
+        1351790,
+        1397610
+      ]
+    },
+    {
+      "key": "2/29:10/medine",
+      "words": 31,
+      "parts": [
+        6,
+        9,
+        6,
+        5,
+        5
+      ],
+      "rows": 40,
+      "range": [
+        163630,
+        218620
+      ]
+    },
+    {
+      "key": "2/4:43/medine",
+      "words": 48,
+      "parts": [
+        3,
+        9,
+        7,
+        5,
+        5,
+        5,
+        3,
+        5,
+        6
+      ],
+      "rows": 59,
+      "range": [
+        1431730,
+        1509970
+      ]
+    },
+    {
+      "key": "2/4:75/medine",
+      "words": 31,
+      "parts": [
+        4,
+        3,
+        5,
+        9,
+        5,
+        5
+      ],
+      "rows": 40,
+      "range": [
+        2267750,
+        2319160
+      ]
+    },
+    {
+      "key": "2/46:15/medine",
+      "words": 45,
+      "parts": [
+        4,
+        5,
+        5,
+        6,
+        11,
+        4,
+        4,
+        6
+      ],
+      "rows": 56,
+      "range": [
+        323500,
+        409080
+      ]
+    },
+    {
+      "key": "2/5:54/medine",
+      "words": 37,
+      "parts": [
+        3,
+        5,
+        10,
+        6,
+        5,
+        5,
+        3
+      ],
+      "rows": 50,
+      "range": [
+        1999200,
+        2069370
+      ]
+    },
+    {
+      "key": "2/5:57/medine",
+      "words": 23,
+      "parts": [
+        3,
+        13,
+        4,
+        3
+      ],
+      "rows": 37,
+      "range": [
+        2104070,
+        2152980
+      ]
+    },
+    {
+      "key": "2/5:83/medine",
+      "words": 21,
+      "parts": [
+        6,
+        9,
+        6
+      ],
+      "rows": 30,
+      "range": [
+        2879360,
+        2920170
+      ]
+    },
+    {
+      "key": "2/59:11/medine",
+      "words": 28,
+      "parts": [
+        6,
+        6,
+        9,
+        3,
+        4
+      ],
+      "rows": 37,
+      "range": [
+        350250,
+        397150
+      ]
+    },
+    {
+      "key": "2/6:93/medine",
+      "words": 49,
+      "parts": [
+        3,
+        4,
+        9,
+        5,
+        5,
+        3,
+        5,
+        5,
+        5,
+        5
+      ],
+      "rows": 58,
+      "range": [
+        2451170,
+        2536470
+      ]
+    },
+    {
+      "key": "2/8:70/medine",
+      "words": 24,
+      "parts": [
+        4,
+        6,
+        9,
+        5
+      ],
+      "rows": 34,
+      "range": [
+        1471230,
+        1517940
+      ]
+    },
+    {
+      "key": "4/12:100/medine",
+      "words": 46,
+      "parts": [
+        4,
+        5,
+        5,
+        5,
+        6,
+        9,
+        3,
+        5,
+        4
+      ],
+      "rows": 58,
+      "range": [
+        2013101,
+        2077357
+      ]
+    },
+    {
+      "key": "4/16:27/medine",
+      "words": 21,
+      "parts": [
+        9,
+        6,
+        6
+      ],
+      "rows": 35,
+      "range": [
+        350207,
+        392982
+      ]
+    },
+    {
+      "key": "4/3:183/medine",
+      "words": 28,
+      "parts": [
+        4,
+        5,
+        5,
+        9,
+        5
+      ],
+      "rows": 41,
+      "range": [
+        3651440,
+        3698223
+      ]
+    },
+    {
+      "key": "4/30:54/medine",
+      "words": 24,
+      "parts": [
+        5,
+        10,
+        3,
+        6
+      ],
+      "rows": 35,
+      "range": [
+        835229,
+        869863
+      ]
+    },
+    {
+      "key": "4/43:77/medine",
+      "words": 8,
+      "parts": [
+        8
+      ],
+      "rows": 16,
+      "range": [
+        873441,
+        913104
+      ]
+    },
+    {
+      "key": "4/5:3/medine",
+      "words": 61,
+      "parts": [
+        6,
+        5,
+        4,
+        5,
+        5,
+        4,
+        5,
+        5,
+        11,
+        5,
+        6
+      ],
+      "rows": 78,
+      "range": [
+        89315,
+        170950
+      ]
+    },
+    {
+      "key": "4/67:30/medine",
+      "words": 10,
+      "parts": [
+        10
+      ],
+      "rows": 23,
+      "range": [
+        351226,
+        381741
+      ]
+    },
+    {
+      "key": "6/10:98/medine",
+      "words": 21,
+      "parts": [
+        6,
+        12,
+        3
+      ],
+      "rows": 33,
+      "range": [
+        3163210,
+        3224780
+      ]
+    },
+    {
+      "key": "6/16:80/medine",
+      "words": 25,
+      "parts": [
+        6,
+        9,
+        7,
+        3
+      ],
+      "rows": 39,
+      "range": [
+        2084720,
+        2167500
+      ]
+    },
+    {
+      "key": "6/18:14/medine",
+      "words": 19,
+      "parts": [
+        5,
+        10,
+        4
+      ],
+      "rows": 29,
+      "range": [
+        207310,
+        255010
+      ]
+    },
+    {
+      "key": "6/2:61/medine",
+      "words": 59,
+      "parts": [
+        3,
+        5,
+        10,
+        4,
+        5,
+        5,
+        4,
+        3,
+        5,
+        5,
+        5,
+        5
+      ],
+      "rows": 69,
+      "range": [
+        1781740,
+        1901560
+      ]
+    },
+    {
+      "key": "6/2:101/medine",
+      "words": 22,
+      "parts": [
+        4,
+        5,
+        9,
+        4
+      ],
+      "rows": 31,
+      "range": [
+        3273860,
+        3322810
+      ]
+    },
+    {
+      "key": "6/2:264/medine",
+      "words": 38,
+      "parts": [
+        4,
+        9,
+        5,
+        5,
+        4,
+        6,
+        5
+      ],
+      "rows": 47,
+      "range": [
+        10639800,
+        10727750
+      ]
+    },
+    {
+      "key": "6/24:31/medine",
+      "words": 78,
+      "parts": [
+        5,
+        4,
+        5,
+        4,
+        4,
+        5,
+        5,
+        5,
+        5,
+        5,
+        9,
+        6,
+        5,
+        5,
+        6
+      ],
+      "rows": 92,
+      "range": [
+        992780,
+        1184310
+      ]
+    },
+    {
+      "key": "6/28:81/medine",
+      "words": 17,
+      "parts": [
+        4,
+        11,
+        2
+      ],
+      "rows": 28,
+      "range": [
+        2833080,
+        2879790
+      ]
+    },
+    {
+      "key": "6/29:10/medine",
+      "words": 31,
+      "parts": [
+        6,
+        9,
+        6,
+        5,
+        5
+      ],
+      "rows": 40,
+      "range": [
+        220340,
+        293430
+      ]
+    },
+    {
+      "key": "6/3:156/medine",
+      "words": 36,
+      "parts": [
+        3,
+        4,
+        9,
+        5,
+        5,
+        5,
+        5
+      ],
+      "rows": 46,
+      "range": [
+        5231910,
+        5308950
+      ]
+    },
+    {
+      "key": "6/36:47/medine",
+      "words": 24,
+      "parts": [
+        3,
+        4,
+        11,
+        6
+      ],
+      "rows": 35,
+      "range": [
+        750940,
+        804880
+      ]
+    },
+    {
+      "key": "6/39:8/medine",
+      "words": 34,
+      "parts": [
+        3,
+        5,
+        10,
+        3,
+        5,
+        4,
+        4
+      ],
+      "rows": 44,
+      "range": [
+        284820,
+        352920
+      ]
+    },
+    {
+      "key": "6/4:77/medine",
+      "words": 48,
+      "parts": [
+        5,
+        3,
+        4,
+        9,
+        5,
+        5,
+        5,
+        5,
+        4,
+        3
+      ],
+      "rows": 57,
+      "range": [
+        2965650,
+        3057500
+      ]
+    },
+    {
+      "key": "6/5:2/medine",
+      "words": 52,
+      "parts": [
+        3,
+        11,
+        5,
+        3,
+        4,
+        5,
+        5,
+        5,
+        5,
+        6
+      ],
+      "rows": 63,
+      "range": [
+        39710,
+        150630
+      ]
+    },
+    {
+      "key": "6/5:32/medine",
+      "words": 40,
+      "parts": [
+        3,
+        4,
+        10,
+        4,
+        6,
+        5,
+        5,
+        3
+      ],
+      "rows": 53,
+      "range": [
+        1649550,
+        1745710
+      ]
+    },
+    {
+      "key": "6/5:69/medine",
+      "words": 20,
+      "parts": [
+        3,
+        4,
+        10,
+        3
+      ],
+      "rows": 30,
+      "range": [
+        3397580,
+        3451890
+      ]
+    },
+    {
+      "key": "6/5:77/medine",
+      "words": 23,
+      "parts": [
+        5,
+        4,
+        10,
+        4
+      ],
+      "rows": 33,
+      "range": [
+        3744120,
+        3806840
+      ]
+    },
+    {
+      "key": "6/58:7/medine",
+      "words": 47,
+      "parts": [
+        4,
+        5,
+        5,
+        5,
+        5,
+        9,
+        3,
+        6,
+        5
+      ],
+      "rows": 56,
+      "range": [
+        268820,
+        356700
+      ]
+    },
+    {
+      "key": "6/6:52/medine",
+      "words": 25,
+      "parts": [
+        4,
+        5,
+        12,
+        4
+      ],
+      "rows": 37,
+      "range": [
+        1604590,
+        1665350
+      ]
+    },
+    {
+      "key": "6/64:9/medine",
+      "words": 27,
+      "parts": [
+        4,
+        3,
+        5,
+        9,
+        6
+      ],
+      "rows": 36,
+      "range": [
+        212760,
+        283420
+      ]
+    },
+    {
+      "key": "6/66:11/medine",
+      "words": 24,
+      "parts": [
+        3,
+        4,
+        9,
+        3,
+        5
+      ],
+      "rows": 33,
+      "range": [
+        481160,
+        537240
+      ]
+    },
+    {
+      "key": "6/9:18/medine",
+      "words": 23,
+      "parts": [
+        3,
+        14,
+        6
+      ],
+      "rows": 37,
+      "range": [
+        647160,
+        712390
+      ]
+    },
+    {
+      "key": "7/29:10/medine",
+      "words": 31,
+      "parts": [
+        6,
+        9,
+        6,
+        5,
+        5
+      ],
+      "rows": 41,
+      "range": [
+        144530,
+        194890
+      ]
+    },
+    {
+      "key": "9/12:80/medine",
+      "words": 37,
+      "parts": [
+        3,
+        4,
+        10,
+        4,
+        5,
+        5,
+        6
+      ],
+      "rows": 48,
+      "range": [
+        1926140,
+        1991180
+      ]
+    },
+    {
+      "key": "9/18:42/medine",
+      "words": 19,
+      "parts": [
+        2,
+        9,
+        4,
+        4
+      ],
+      "rows": 30,
+      "range": [
+        874660,
+        913030
+      ]
+    },
+    {
+      "key": "9/19:73/medine",
+      "words": 16,
+      "parts": [
+        5,
+        9,
+        2
+      ],
+      "rows": 25,
+      "range": [
+        969140,
+        1003540
+      ]
+    },
+    {
+      "key": "9/2:101/medine",
+      "words": 22,
+      "parts": [
+        4,
+        5,
+        9,
+        4
+      ],
+      "rows": 31,
+      "range": [
+        2351460,
+        2383930
+      ]
+    },
+    {
+      "key": "9/29:10/medine",
+      "words": 31,
+      "parts": [
+        6,
+        9,
+        6,
+        5,
+        5
+      ],
+      "rows": 40,
+      "range": [
+        129960,
+        174630
+      ]
+    },
+    {
+      "key": "9/4:18/medine",
+      "words": 24,
+      "parts": [
+        5,
+        9,
+        5,
+        5
+      ],
+      "rows": 33,
+      "range": [
+        611540,
+        652890
+      ]
+    },
+    {
+      "key": "9/4:73/medine",
+      "words": 18,
+      "parts": [
+        5,
+        10,
+        3
+      ],
+      "rows": 28,
+      "range": [
+        2228160,
+        2265460
+      ]
+    },
+    {
+      "key": "9/4:167/medine",
+      "words": 11,
+      "parts": [
+        11
+      ],
+      "rows": 21,
+      "range": [
+        4874400,
+        4898120
+      ]
+    },
+    {
+      "key": "9/42:13/medine",
+      "words": 38,
+      "parts": [
+        5,
+        3,
+        9,
+        5,
+        7,
+        5,
+        4
+      ],
+      "rows": 47,
+      "range": [
+        194410,
+        251570
+      ]
+    },
+    {
+      "key": "9/5:32/medine",
+      "words": 40,
+      "parts": [
+        3,
+        4,
+        10,
+        4,
+        6,
+        5,
+        5,
+        3
+      ],
+      "rows": 54,
+      "range": [
+        1351910,
+        1418730
+      ]
+    },
+    {
+      "key": "9/5:106/medine",
+      "words": 51,
+      "parts": [
+        5,
+        6,
+        8,
+        3,
+        5,
+        4,
+        4,
+        9,
+        3,
+        4
+      ],
+      "rows": 68,
+      "range": [
+        3541230,
+        3610530
+      ]
+    },
+    {
+      "key": "9/8:53/medine",
+      "words": 18,
+      "parts": [
+        3,
+        11,
+        4
+      ],
+      "rows": 29,
+      "range": [
+        1163960,
+        1203170
+      ]
+    },
+    {
+      "key": "97/10:61/medine",
+      "words": 42,
+      "parts": [
+        4,
+        5,
+        5,
+        6,
+        12,
+        6,
+        4
+      ],
+      "rows": 64,
+      "range": [
+        1276150,
+        1334300
+      ]
+    },
+    {
+      "key": "97/17:88/medine",
+      "words": 19,
+      "parts": [
+        11,
+        3,
+        5
+      ],
+      "rows": 30,
+      "range": [
+        1375910,
+        1408920
+      ]
+    },
+    {
+      "key": "97/19:93/medine",
+      "words": 10,
+      "parts": [
+        10
+      ],
+      "rows": 21,
+      "range": [
+        1057320,
+        1081900
+      ]
+    },
+    {
+      "key": "97/20:109/medine",
+      "words": 12,
+      "parts": [
+        9,
+        3
+      ],
+      "rows": 21,
+      "range": [
+        1087680,
+        1107520
+      ]
+    },
+    {
+      "key": "97/23:27/medine",
+      "words": 32,
+      "parts": [
+        3,
+        5,
+        9,
+        5,
+        5,
+        5
+      ],
+      "rows": 43,
+      "range": [
+        264430,
+        310220
+      ]
+    },
+    {
+      "key": "97/3:173/medine",
+      "words": 17,
+      "parts": [
+        10,
+        7
+      ],
+      "rows": 28,
+      "range": [
+        3690330,
+        3719370
+      ]
+    },
+    {
+      "key": "97/32:17/medine",
+      "words": 13,
+      "parts": [
+        9,
+        4
+      ],
+      "rows": 22,
+      "range": [
+        274350,
+        300820
+      ]
+    },
+    {
+      "key": "97/32:22/medine",
+      "words": 13,
+      "parts": [
+        9,
+        4
+      ],
+      "rows": 22,
+      "range": [
+        365830,
+        389220
+      ]
+    },
+    {
+      "key": "97/38:28/medine",
+      "words": 13,
+      "parts": [
+        9,
+        4
+      ],
+      "rows": 21,
+      "range": [
+        332750,
+        355660
+      ]
+    },
+    {
+      "key": "97/42:52/medine",
+      "words": 27,
+      "parts": [
+        3,
+        5,
+        5,
+        9,
+        5
+      ],
+      "rows": 38,
+      "range": [
+        914390,
+        953190
+      ]
+    },
+    {
+      "key": "97/5:83/medine",
+      "words": 21,
+      "parts": [
+        11,
+        4,
+        6
+      ],
+      "rows": 32,
+      "range": [
+        2366760,
+        2402960
+      ]
+    },
+    {
+      "key": "97/57:16/medine",
+      "words": 28,
+      "parts": [
+        4,
+        5,
+        4,
+        11,
+        4
+      ],
+      "rows": 40,
+      "range": [
+        318630,
+        363060
+      ]
+    },
+    {
+      "key": "97/97:4/medine",
+      "words": 9,
+      "parts": [
+        9
+      ],
+      "rows": 21,
+      "range": [
+        17600,
+        42860
+      ]
+    }
+  ],
+  "examples": {
+    "eligibleButStillLong": [
+      {
+        "key": "1/14:1/medine",
+        "words": 16,
+        "parts": [
+          16
+        ],
+        "safe": [
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ]
+      },
+      {
+        "key": "10/12:50/medine",
+        "words": 22,
+        "parts": [
+          22
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21
+        ]
+      },
+      {
+        "key": "10/12:75/medine",
+        "words": 11,
+        "parts": [
+          11
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      },
+      {
+        "key": "10/40:64/medine",
+        "words": 21,
+        "parts": [
+          21
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ]
+      },
+      {
+        "key": "12/2:145/medine",
+        "words": 32,
+        "parts": [
+          32
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31
+        ]
+      },
+      {
+        "key": "2/2:25/medine",
+        "words": 34,
+        "parts": [
+          34
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33
+        ]
+      },
+      {
+        "key": "2/2:49/medine",
+        "words": 18,
+        "parts": [
+          18
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      },
+      {
+        "key": "2/2:50/medine",
+        "words": 10,
+        "parts": [
+          10
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ]
+      },
+      {
+        "key": "2/2:51/medine",
+        "words": 12,
+        "parts": [
+          12
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11
+        ]
+      },
+      {
+        "key": "2/2:52/medine",
+        "words": 8,
+        "parts": [
+          8
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7
+        ]
+      },
+      {
+        "key": "2/2:54/medine",
+        "words": 26,
+        "parts": [
+          26
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25
+        ]
+      },
+      {
+        "key": "2/2:55/medine",
+        "words": 14,
+        "parts": [
+          14
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ]
+      },
+      {
+        "key": "2/2:57/medine",
+        "words": 18,
+        "parts": [
+          18
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17
+        ]
+      },
+      {
+        "key": "2/2:58/medine",
+        "words": 20,
+        "parts": [
+          20
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19
+        ]
+      },
+      {
+        "key": "2/2:59/medine",
+        "words": 18,
+        "parts": [
+          18
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ]
+      },
+      {
+        "key": "2/2:60/medine",
+        "words": 28,
+        "parts": [
+          28
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      }
+    ],
+    "noFeasibleCut": [
+      {
+        "key": "1/11:46/medine",
+        "words": 23,
+        "parts": [
+          10,
+          4,
+          5,
+          4
+        ],
+        "safe": [
+          1,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          19,
+          22
+        ]
+      },
+      {
+        "key": "1/20:81/medine",
+        "words": 17,
+        "parts": [
+          17
+        ],
+        "safe": [
+          1
+        ]
+      },
+      {
+        "key": "1/3:180/medine",
+        "words": 30,
+        "parts": [
+          3,
+          4,
+          9,
+          4,
+          5,
+          5
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          16,
+          17,
+          18,
+          19,
+          20,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29
+        ]
+      },
+      {
+        "key": "1/4:92/medine",
+        "words": 60,
+        "parts": [
+          5,
+          5,
+          5,
+          4,
+          9,
+          5,
+          9,
+          5,
+          3,
+          5,
+          5
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          28,
+          31,
+          32,
+          33,
+          34,
+          35,
+          42,
+          45,
+          46,
+          47,
+          48,
+          49,
+          50,
+          51,
+          52,
+          53,
+          54,
+          55,
+          56,
+          57,
+          58,
+          59
+        ]
+      },
+      {
+        "key": "1/60:8/medine",
+        "words": 21,
+        "parts": [
+          5,
+          10,
+          6
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20
+        ]
+      },
+      {
+        "key": "10/12:76/medine",
+        "words": 33,
+        "parts": [
+          33
+        ],
+        "safe": []
+      },
+      {
+        "key": "10/78:40/medine",
+        "words": 15,
+        "parts": [
+          2,
+          13
+        ],
+        "safe": [
+          1,
+          2,
+          14
+        ]
+      },
+      {
+        "key": "2/10:88/medine",
+        "words": 29,
+        "parts": [
+          2,
+          10,
+          4,
+          7,
+          6
+        ],
+        "safe": [
+          1,
+          2,
+          12,
+          13,
+          14,
+          15,
+          16,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ]
+      },
+      {
+        "key": "2/11:27/medine",
+        "words": 29,
+        "parts": [
+          5,
+          6,
+          9,
+          4,
+          5
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28
+        ]
+      },
+      {
+        "key": "2/11:31/medine",
+        "words": 31,
+        "parts": [
+          4,
+          5,
+          4,
+          9,
+          5,
+          4
+        ],
+        "safe": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          13,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30
+        ]
+      }
+    ],
+    "fallback": [
+      "1/14:1/medine",
+      "10/12:50/medine",
+      "10/12:75/medine",
+      "10/12:76/medine",
+      "10/40:64/medine",
+      "12/2:145/medine"
+    ],
+    "orderedRepeatExamples": [
+      "2/10:88/medine",
+      "2/11:27/medine",
+      "2/11:31/medine",
+      "2/13:25/medine",
+      "2/16:80/medine",
+      "2/18:49/medine",
+      "2/2:101/medine",
+      "2/2:109/medine",
+      "2/21:87/medine",
+      "2/29:10/medine",
+      "2/4:43/medine",
+      "2/4:75/medine",
+      "2/46:15/medine",
+      "2/5:54/medine",
+      "2/5:57/medine"
+    ]
+  },
+  "interpretation": "A metadata-safe boundary only proves nonoverlap of timestamps and adjacent word labels. It does not prove an audible phoneme boundary. Safe-feasible exceptions warrant a focused algorithm/plan audit; they are not automatically safe production fixes."
+}

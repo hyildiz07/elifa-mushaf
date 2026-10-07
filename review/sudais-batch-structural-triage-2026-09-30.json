@@ -1,0 +1,6157 @@
+{
+  "status": "research-only-no-cut-approval",
+  "chapters": {
+    "3": {
+      "total": 200,
+      "sourceMatched": 200,
+      "structuralCandidates": 164,
+      "sourceAndStructureCandidates": 164,
+      "rows": [
+        {
+          "key": "3:1",
+          "sourceMatched": true,
+          "canonicalWords": 1,
+          "timingRows": 1,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:2",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:3",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:4",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:5",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:6",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:7",
+          "sourceMatched": true,
+          "canonicalWords": 46,
+          "timingRows": 53,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:8",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:9",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:10",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:11",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 16,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:12",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:13",
+          "sourceMatched": true,
+          "canonicalWords": 29,
+          "timingRows": 29,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:14",
+          "sourceMatched": true,
+          "canonicalWords": 24,
+          "timingRows": 27,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:15",
+          "sourceMatched": true,
+          "canonicalWords": 24,
+          "timingRows": 26,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:16",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:17",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:18",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:19",
+          "sourceMatched": true,
+          "canonicalWords": 26,
+          "timingRows": 26,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:20",
+          "sourceMatched": true,
+          "canonicalWords": 26,
+          "timingRows": 26,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:21",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:22",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 14,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:23",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:24",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:25",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:26",
+          "sourceMatched": true,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:27",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 25,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:28",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:29",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:30",
+          "sourceMatched": true,
+          "canonicalWords": 26,
+          "timingRows": 26,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:31",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:32",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:33",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:34",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:35",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:36",
+          "sourceMatched": true,
+          "canonicalWords": 24,
+          "timingRows": 24,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:37",
+          "sourceMatched": true,
+          "canonicalWords": 34,
+          "timingRows": 34,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:38",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:39",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 26,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:40",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:41",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:42",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:43",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:44",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:45",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:46",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:47",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 23,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:48",
+          "sourceMatched": true,
+          "canonicalWords": 5,
+          "timingRows": 5,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:49",
+          "sourceMatched": true,
+          "canonicalWords": 45,
+          "timingRows": 45,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:50",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:51",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:52",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:53",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:54",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:55",
+          "sourceMatched": true,
+          "canonicalWords": 30,
+          "timingRows": 34,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:56",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:57",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:58",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:59",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:60",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:61",
+          "sourceMatched": true,
+          "canonicalWords": 25,
+          "timingRows": 27,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:62",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:63",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:64",
+          "sourceMatched": true,
+          "canonicalWords": 31,
+          "timingRows": 35,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:65",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 18,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:66",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:67",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:68",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:69",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "time-outside-verse",
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:70",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:71",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:72",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 19,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:73",
+          "sourceMatched": true,
+          "canonicalWords": 32,
+          "timingRows": 34,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:74",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:75",
+          "sourceMatched": true,
+          "canonicalWords": 36,
+          "timingRows": 36,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:76",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:77",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 39,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:78",
+          "sourceMatched": true,
+          "canonicalWords": 29,
+          "timingRows": 29,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:79",
+          "sourceMatched": true,
+          "canonicalWords": 28,
+          "timingRows": 37,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:80",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:81",
+          "sourceMatched": true,
+          "canonicalWords": 33,
+          "timingRows": 33,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:82",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:83",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 16,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:84",
+          "sourceMatched": true,
+          "canonicalWords": 29,
+          "timingRows": 29,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:85",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:86",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:87",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 15,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:88",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:89",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:90",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 26,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:91",
+          "sourceMatched": true,
+          "canonicalWords": 24,
+          "timingRows": 24,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:92",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:93",
+          "sourceMatched": true,
+          "canonicalWords": 24,
+          "timingRows": 26,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:94",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:95",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:96",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:97",
+          "sourceMatched": true,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:98",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:99",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 26,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:100",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:101",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:102",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:103",
+          "sourceMatched": true,
+          "canonicalWords": 34,
+          "timingRows": 34,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:104",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:105",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:106",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:107",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:108",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:109",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:110",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 23,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:111",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:112",
+          "sourceMatched": true,
+          "canonicalWords": 35,
+          "timingRows": 35,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:113",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:114",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 18,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:115",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:116",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:117",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 26,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:118",
+          "sourceMatched": true,
+          "canonicalWords": 30,
+          "timingRows": 30,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:119",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:120",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:121",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:122",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:123",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:124",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:125",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 17,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:126",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:127",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:128",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:129",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:130",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:131",
+          "sourceMatched": true,
+          "canonicalWords": 5,
+          "timingRows": 5,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:132",
+          "sourceMatched": true,
+          "canonicalWords": 5,
+          "timingRows": 5,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:133",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:134",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:135",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 25,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:136",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:137",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:138",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:139",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:140",
+          "sourceMatched": true,
+          "canonicalWords": 24,
+          "timingRows": 24,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:141",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:142",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:143",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:144",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:145",
+          "sourceMatched": true,
+          "canonicalWords": 24,
+          "timingRows": 24,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:146",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:147",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 22,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:148",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:149",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 15,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:150",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:151",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:152",
+          "sourceMatched": true,
+          "canonicalWords": 40,
+          "timingRows": 40,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:153",
+          "sourceMatched": true,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:154",
+          "sourceMatched": true,
+          "canonicalWords": 75,
+          "timingRows": 75,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:155",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:156",
+          "sourceMatched": true,
+          "canonicalWords": 36,
+          "timingRows": 39,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:157",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:158",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:159",
+          "sourceMatched": true,
+          "canonicalWords": 30,
+          "timingRows": 30,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:160",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:161",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:162",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:163",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:164",
+          "sourceMatched": true,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:165",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 25,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:166",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:167",
+          "sourceMatched": true,
+          "canonicalWords": 33,
+          "timingRows": 33,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:168",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:169",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:170",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:171",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:172",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:173",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:174",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:175",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:176",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:177",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:178",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:179",
+          "sourceMatched": true,
+          "canonicalWords": 36,
+          "timingRows": 36,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:180",
+          "sourceMatched": true,
+          "canonicalWords": 30,
+          "timingRows": 30,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:181",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:182",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:183",
+          "sourceMatched": true,
+          "canonicalWords": 28,
+          "timingRows": 31,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:184",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:185",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 27,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:186",
+          "sourceMatched": true,
+          "canonicalWords": 24,
+          "timingRows": 24,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:187",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:188",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:189",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:190",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:191",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:192",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:193",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:194",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:195",
+          "sourceMatched": true,
+          "canonicalWords": 43,
+          "timingRows": 47,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:196",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:197",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:198",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "3:199",
+          "sourceMatched": true,
+          "canonicalWords": 30,
+          "timingRows": 32,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "3:200",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        }
+      ]
+    },
+    "4": {
+      "total": 176,
+      "sourceMatched": 176,
+      "structuralCandidates": 138,
+      "sourceAndStructureCandidates": 138,
+      "rows": [
+        {
+          "key": "4:1",
+          "sourceMatched": true,
+          "canonicalWords": 28,
+          "timingRows": 31,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:2",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:3",
+          "sourceMatched": true,
+          "canonicalWords": 28,
+          "timingRows": 28,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:4",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:5",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:6",
+          "sourceMatched": true,
+          "canonicalWords": 37,
+          "timingRows": 37,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:7",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:8",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:9",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 17,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:10",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:11",
+          "sourceMatched": true,
+          "canonicalWords": 71,
+          "timingRows": 71,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:12",
+          "sourceMatched": true,
+          "canonicalWords": 88,
+          "timingRows": 88,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:13",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:14",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:15",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:16",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:17",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 24,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:18",
+          "sourceMatched": true,
+          "canonicalWords": 24,
+          "timingRows": 28,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:19",
+          "sourceMatched": true,
+          "canonicalWords": 34,
+          "timingRows": 34,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:20",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:21",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:22",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:23",
+          "sourceMatched": true,
+          "canonicalWords": 54,
+          "timingRows": 61,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:24",
+          "sourceMatched": true,
+          "canonicalWords": 42,
+          "timingRows": 43,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:25",
+          "sourceMatched": true,
+          "canonicalWords": 58,
+          "timingRows": 69,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:26",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:27",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:28",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:29",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 23,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:30",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:31",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:32",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:33",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:34",
+          "sourceMatched": true,
+          "canonicalWords": 40,
+          "timingRows": 49,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:35",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:36",
+          "sourceMatched": true,
+          "canonicalWords": 32,
+          "timingRows": 34,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:37",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:38",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:39",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:40",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:41",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:42",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 18,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:43",
+          "sourceMatched": true,
+          "canonicalWords": 48,
+          "timingRows": 52,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:44",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:45",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:46",
+          "sourceMatched": true,
+          "canonicalWords": 38,
+          "timingRows": 38,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:47",
+          "sourceMatched": true,
+          "canonicalWords": 28,
+          "timingRows": 33,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:48",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:49",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:50",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:51",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:52",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:53",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:54",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:55",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:56",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:57",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:58",
+          "sourceMatched": true,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:59",
+          "sourceMatched": true,
+          "canonicalWords": 28,
+          "timingRows": 28,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:60",
+          "sourceMatched": true,
+          "canonicalWords": 30,
+          "timingRows": 30,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:61",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:62",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:63",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:64",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 26,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:65",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:66",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 29,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:67",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:68",
+          "sourceMatched": true,
+          "canonicalWords": 3,
+          "timingRows": 3,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:69",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 20,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:70",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:71",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:72",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 22,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:73",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:74",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:75",
+          "sourceMatched": true,
+          "canonicalWords": 31,
+          "timingRows": 31,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:76",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:77",
+          "sourceMatched": true,
+          "canonicalWords": 48,
+          "timingRows": 52,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:78",
+          "sourceMatched": true,
+          "canonicalWords": 36,
+          "timingRows": 36,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:79",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:80",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:81",
+          "sourceMatched": true,
+          "canonicalWords": 24,
+          "timingRows": 24,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:82",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 15,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:83",
+          "sourceMatched": true,
+          "canonicalWords": 30,
+          "timingRows": 30,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:84",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:85",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:86",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:87",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:88",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:89",
+          "sourceMatched": true,
+          "canonicalWords": 28,
+          "timingRows": 28,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:90",
+          "sourceMatched": true,
+          "canonicalWords": 36,
+          "timingRows": 38,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:91",
+          "sourceMatched": true,
+          "canonicalWords": 32,
+          "timingRows": 32,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:92",
+          "sourceMatched": true,
+          "canonicalWords": 60,
+          "timingRows": 68,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:93",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 20,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:94",
+          "sourceMatched": true,
+          "canonicalWords": 39,
+          "timingRows": 39,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:95",
+          "sourceMatched": true,
+          "canonicalWords": 33,
+          "timingRows": 33,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:96",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:97",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:98",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:99",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:100",
+          "sourceMatched": true,
+          "canonicalWords": 31,
+          "timingRows": 31,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:101",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 25,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:102",
+          "sourceMatched": true,
+          "canonicalWords": 62,
+          "timingRows": 66,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:103",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:104",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:105",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:106",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:107",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:108",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:109",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:110",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:111",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:112",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 17,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:113",
+          "sourceMatched": true,
+          "canonicalWords": 33,
+          "timingRows": 33,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:114",
+          "sourceMatched": true,
+          "canonicalWords": 26,
+          "timingRows": 26,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:115",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 23,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:116",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:117",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:118",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:119",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:120",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:121",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:122",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:123",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 22,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:124",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 19,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:125",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:126",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:127",
+          "sourceMatched": true,
+          "canonicalWords": 40,
+          "timingRows": 40,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:128",
+          "sourceMatched": true,
+          "canonicalWords": 29,
+          "timingRows": 36,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:129",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:130",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:131",
+          "sourceMatched": true,
+          "canonicalWords": 32,
+          "timingRows": 32,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:132",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:133",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:134",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:135",
+          "sourceMatched": true,
+          "canonicalWords": 37,
+          "timingRows": 37,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:136",
+          "sourceMatched": true,
+          "canonicalWords": 28,
+          "timingRows": 28,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:137",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 25,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:138",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:139",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:140",
+          "sourceMatched": true,
+          "canonicalWords": 33,
+          "timingRows": 36,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:141",
+          "sourceMatched": true,
+          "canonicalWords": 36,
+          "timingRows": 36,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:142",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:143",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:144",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:145",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:146",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 21,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:147",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:148",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:149",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 18,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:150",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 28,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:151",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:152",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:153",
+          "sourceMatched": true,
+          "canonicalWords": 37,
+          "timingRows": 37,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:154",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:155",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:156",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:157",
+          "sourceMatched": true,
+          "canonicalWords": 34,
+          "timingRows": 34,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:158",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:159",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:160",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:161",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:162",
+          "sourceMatched": true,
+          "canonicalWords": 26,
+          "timingRows": 26,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:163",
+          "sourceMatched": true,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:164",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:165",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:166",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:167",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:168",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:169",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:170",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 24,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:171",
+          "sourceMatched": true,
+          "canonicalWords": 53,
+          "timingRows": 54,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:172",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:173",
+          "sourceMatched": true,
+          "canonicalWords": 26,
+          "timingRows": 26,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:174",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 13,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "4:175",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "4:176",
+          "sourceMatched": true,
+          "canonicalWords": 50,
+          "timingRows": 50,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        }
+      ]
+    },
+    "5": {
+      "total": 120,
+      "sourceMatched": 10,
+      "structuralCandidates": 93,
+      "sourceAndStructureCandidates": 9,
+      "rows": [
+        {
+          "key": "5:1",
+          "sourceMatched": false,
+          "canonicalWords": 23,
+          "timingRows": 23,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:2",
+          "sourceMatched": false,
+          "canonicalWords": 52,
+          "timingRows": 55,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:3",
+          "sourceMatched": false,
+          "canonicalWords": 61,
+          "timingRows": 63,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:4",
+          "sourceMatched": false,
+          "canonicalWords": 31,
+          "timingRows": 32,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:5",
+          "sourceMatched": false,
+          "canonicalWords": 43,
+          "timingRows": 46,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:6",
+          "sourceMatched": false,
+          "canonicalWords": 61,
+          "timingRows": 63,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:7",
+          "sourceMatched": false,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:8",
+          "sourceMatched": false,
+          "canonicalWords": 26,
+          "timingRows": 26,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:9",
+          "sourceMatched": false,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:10",
+          "sourceMatched": false,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:11",
+          "sourceMatched": false,
+          "canonicalWords": 23,
+          "timingRows": 23,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:12",
+          "sourceMatched": false,
+          "canonicalWords": 45,
+          "timingRows": 48,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:13",
+          "sourceMatched": false,
+          "canonicalWords": 32,
+          "timingRows": 32,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:14",
+          "sourceMatched": false,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:15",
+          "sourceMatched": false,
+          "canonicalWords": 23,
+          "timingRows": 26,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:16",
+          "sourceMatched": false,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:17",
+          "sourceMatched": false,
+          "canonicalWords": 42,
+          "timingRows": 43,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:18",
+          "sourceMatched": false,
+          "canonicalWords": 30,
+          "timingRows": 30,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:19",
+          "sourceMatched": false,
+          "canonicalWords": 28,
+          "timingRows": 30,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:20",
+          "sourceMatched": false,
+          "canonicalWords": 22,
+          "timingRows": 23,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:21",
+          "sourceMatched": false,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:22",
+          "sourceMatched": false,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:23",
+          "sourceMatched": false,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:24",
+          "sourceMatched": false,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:25",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:26",
+          "sourceMatched": false,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:27",
+          "sourceMatched": false,
+          "canonicalWords": 24,
+          "timingRows": 24,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:28",
+          "sourceMatched": false,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:29",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:30",
+          "sourceMatched": false,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:31",
+          "sourceMatched": false,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:32",
+          "sourceMatched": false,
+          "canonicalWords": 40,
+          "timingRows": 44,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:33",
+          "sourceMatched": false,
+          "canonicalWords": 34,
+          "timingRows": 41,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:34",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:35",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:36",
+          "sourceMatched": false,
+          "canonicalWords": 24,
+          "timingRows": 26,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:37",
+          "sourceMatched": false,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:38",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:39",
+          "sourceMatched": false,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:40",
+          "sourceMatched": false,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:41",
+          "sourceMatched": false,
+          "canonicalWords": 67,
+          "timingRows": 72,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:42",
+          "sourceMatched": false,
+          "canonicalWords": 26,
+          "timingRows": 26,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:43",
+          "sourceMatched": false,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:44",
+          "sourceMatched": false,
+          "canonicalWords": 41,
+          "timingRows": 42,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:45",
+          "sourceMatched": false,
+          "canonicalWords": 31,
+          "timingRows": 33,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:46",
+          "sourceMatched": false,
+          "canonicalWords": 26,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:47",
+          "sourceMatched": false,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:48",
+          "sourceMatched": false,
+          "canonicalWords": 51,
+          "timingRows": 51,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:49",
+          "sourceMatched": false,
+          "canonicalWords": 33,
+          "timingRows": 33,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:50",
+          "sourceMatched": false,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:51",
+          "sourceMatched": false,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:52",
+          "sourceMatched": false,
+          "canonicalWords": 28,
+          "timingRows": 30,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:53",
+          "sourceMatched": false,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:54",
+          "sourceMatched": false,
+          "canonicalWords": 37,
+          "timingRows": 38,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:55",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:56",
+          "sourceMatched": false,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:57",
+          "sourceMatched": false,
+          "canonicalWords": 23,
+          "timingRows": 27,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:58",
+          "sourceMatched": false,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:59",
+          "sourceMatched": false,
+          "canonicalWords": 20,
+          "timingRows": 23,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:60",
+          "sourceMatched": false,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:61",
+          "sourceMatched": false,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:62",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:63",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:64",
+          "sourceMatched": false,
+          "canonicalWords": 47,
+          "timingRows": 47,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:65",
+          "sourceMatched": false,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:66",
+          "sourceMatched": false,
+          "canonicalWords": 24,
+          "timingRows": 27,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:67",
+          "sourceMatched": false,
+          "canonicalWords": 24,
+          "timingRows": 24,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:68",
+          "sourceMatched": false,
+          "canonicalWords": 30,
+          "timingRows": 33,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:69",
+          "sourceMatched": false,
+          "canonicalWords": 20,
+          "timingRows": 26,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:70",
+          "sourceMatched": false,
+          "canonicalWords": 19,
+          "timingRows": 21,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:71",
+          "sourceMatched": false,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:72",
+          "sourceMatched": false,
+          "canonicalWords": 33,
+          "timingRows": 33,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:73",
+          "sourceMatched": false,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:74",
+          "sourceMatched": false,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:75",
+          "sourceMatched": false,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:76",
+          "sourceMatched": false,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:77",
+          "sourceMatched": false,
+          "canonicalWords": 23,
+          "timingRows": 27,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:78",
+          "sourceMatched": false,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:79",
+          "sourceMatched": false,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:80",
+          "sourceMatched": false,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:81",
+          "sourceMatched": false,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:82",
+          "sourceMatched": false,
+          "canonicalWords": 26,
+          "timingRows": 26,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:83",
+          "sourceMatched": false,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:84",
+          "sourceMatched": false,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:85",
+          "sourceMatched": false,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:86",
+          "sourceMatched": false,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:87",
+          "sourceMatched": false,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:88",
+          "sourceMatched": false,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:89",
+          "sourceMatched": false,
+          "canonicalWords": 45,
+          "timingRows": 47,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:90",
+          "sourceMatched": false,
+          "canonicalWords": 15,
+          "timingRows": 19,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:91",
+          "sourceMatched": false,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:92",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:93",
+          "sourceMatched": false,
+          "canonicalWords": 24,
+          "timingRows": 24,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:94",
+          "sourceMatched": false,
+          "canonicalWords": 23,
+          "timingRows": 23,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:95",
+          "sourceMatched": false,
+          "canonicalWords": 50,
+          "timingRows": 52,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:96",
+          "sourceMatched": false,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:97",
+          "sourceMatched": false,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:98",
+          "sourceMatched": false,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:99",
+          "sourceMatched": false,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:100",
+          "sourceMatched": false,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:101",
+          "sourceMatched": false,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:102",
+          "sourceMatched": false,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:103",
+          "sourceMatched": false,
+          "canonicalWords": 21,
+          "timingRows": 23,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:104",
+          "sourceMatched": false,
+          "canonicalWords": 24,
+          "timingRows": 26,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:105",
+          "sourceMatched": false,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:106",
+          "sourceMatched": false,
+          "canonicalWords": 51,
+          "timingRows": 61,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:107",
+          "sourceMatched": false,
+          "canonicalWords": 26,
+          "timingRows": 31,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:108",
+          "sourceMatched": false,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:109",
+          "sourceMatched": false,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "5:110",
+          "sourceMatched": false,
+          "canonicalWords": 63,
+          "timingRows": 68,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:111",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "5:112",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "5:113",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 19,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "5:114",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "5:115",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "5:116",
+          "sourceMatched": true,
+          "canonicalWords": 44,
+          "timingRows": 44,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "5:117",
+          "sourceMatched": true,
+          "canonicalWords": 29,
+          "timingRows": 29,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "5:118",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "5:119",
+          "sourceMatched": true,
+          "canonicalWords": 24,
+          "timingRows": 24,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "5:120",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        }
+      ]
+    },
+    "28": {
+      "total": 88,
+      "sourceMatched": 88,
+      "structuralCandidates": 76,
+      "sourceAndStructureCandidates": 76,
+      "rows": [
+        {
+          "key": "28:1",
+          "sourceMatched": true,
+          "canonicalWords": 1,
+          "timingRows": 1,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:2",
+          "sourceMatched": true,
+          "canonicalWords": 4,
+          "timingRows": 4,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:3",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:4",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 21,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:5",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:6",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:7",
+          "sourceMatched": true,
+          "canonicalWords": 22,
+          "timingRows": 22,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:8",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:9",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:10",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:11",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:12",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:13",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:14",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:15",
+          "sourceMatched": true,
+          "canonicalWords": 38,
+          "timingRows": 38,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:16",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:17",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:18",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:19",
+          "sourceMatched": true,
+          "canonicalWords": 32,
+          "timingRows": 34,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:20",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:21",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:22",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:23",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:24",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:25",
+          "sourceMatched": true,
+          "canonicalWords": 26,
+          "timingRows": 29,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:26",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:27",
+          "sourceMatched": true,
+          "canonicalWords": 29,
+          "timingRows": 29,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:28",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:29",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:30",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 24,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:31",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:32",
+          "sourceMatched": true,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:33",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:34",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:35",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:36",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 20,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:37",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:38",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:39",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:40",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:41",
+          "sourceMatched": true,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:42",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:43",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:44",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:45",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:46",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 24,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:47",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 20,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:48",
+          "sourceMatched": true,
+          "canonicalWords": 26,
+          "timingRows": 26,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:49",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:50",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 23,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:51",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:52",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:53",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 19,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:54",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:55",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:56",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:57",
+          "sourceMatched": true,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:58",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:59",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:60",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:61",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:62",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:63",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:64",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:65",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:66",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:67",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:68",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:69",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:70",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:71",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:72",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:73",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 16,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:74",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:75",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:76",
+          "sourceMatched": true,
+          "canonicalWords": 29,
+          "timingRows": 29,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:77",
+          "sourceMatched": true,
+          "canonicalWords": 26,
+          "timingRows": 26,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:78",
+          "sourceMatched": true,
+          "canonicalWords": 28,
+          "timingRows": 28,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:79",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:80",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:81",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:82",
+          "sourceMatched": true,
+          "canonicalWords": 26,
+          "timingRows": 33,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "28:83",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:84",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:85",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:86",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:87",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "28:88",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        }
+      ]
+    },
+    "29": {
+      "total": 69,
+      "sourceMatched": 45,
+      "structuralCandidates": 65,
+      "sourceAndStructureCandidates": 42,
+      "rows": [
+        {
+          "key": "29:1",
+          "sourceMatched": true,
+          "canonicalWords": 1,
+          "timingRows": 1,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:2",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:3",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:4",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:5",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:6",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:7",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:8",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:9",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:10",
+          "sourceMatched": true,
+          "canonicalWords": 31,
+          "timingRows": 31,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:11",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:12",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 23,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "29:13",
+          "sourceMatched": true,
+          "canonicalWords": 11,
+          "timingRows": 11,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:14",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:15",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:16",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:17",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:18",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:19",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:20",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:21",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:22",
+          "sourceMatched": true,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:23",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "29:24",
+          "sourceMatched": true,
+          "canonicalWords": 20,
+          "timingRows": 20,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:25",
+          "sourceMatched": true,
+          "canonicalWords": 27,
+          "timingRows": 27,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:26",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 13,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "29:27",
+          "sourceMatched": true,
+          "canonicalWords": 18,
+          "timingRows": 18,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:28",
+          "sourceMatched": true,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:29",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 23,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:30",
+          "sourceMatched": true,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:31",
+          "sourceMatched": true,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:32",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:33",
+          "sourceMatched": true,
+          "canonicalWords": 23,
+          "timingRows": 23,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:34",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:35",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:36",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:37",
+          "sourceMatched": true,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:38",
+          "sourceMatched": true,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:39",
+          "sourceMatched": true,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:40",
+          "sourceMatched": true,
+          "canonicalWords": 28,
+          "timingRows": 28,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:41",
+          "sourceMatched": true,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:42",
+          "sourceMatched": true,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:43",
+          "sourceMatched": true,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:44",
+          "sourceMatched": true,
+          "canonicalWords": 10,
+          "timingRows": 10,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:45",
+          "sourceMatched": true,
+          "canonicalWords": 21,
+          "timingRows": 21,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": true,
+          "reasons": []
+        },
+        {
+          "key": "29:46",
+          "sourceMatched": false,
+          "canonicalWords": 25,
+          "timingRows": 25,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:47",
+          "sourceMatched": false,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:48",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:49",
+          "sourceMatched": false,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:50",
+          "sourceMatched": false,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:51",
+          "sourceMatched": false,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:52",
+          "sourceMatched": false,
+          "canonicalWords": 19,
+          "timingRows": 19,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:53",
+          "sourceMatched": false,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:54",
+          "sourceMatched": false,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:55",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:56",
+          "sourceMatched": false,
+          "canonicalWords": 8,
+          "timingRows": 8,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:57",
+          "sourceMatched": false,
+          "canonicalWords": 7,
+          "timingRows": 7,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:58",
+          "sourceMatched": false,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:59",
+          "sourceMatched": false,
+          "canonicalWords": 5,
+          "timingRows": 5,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:60",
+          "sourceMatched": false,
+          "canonicalWords": 12,
+          "timingRows": 12,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:61",
+          "sourceMatched": false,
+          "canonicalWords": 13,
+          "timingRows": 13,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:62",
+          "sourceMatched": false,
+          "canonicalWords": 14,
+          "timingRows": 14,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:63",
+          "sourceMatched": false,
+          "canonicalWords": 22,
+          "timingRows": 28,
+          "structuralCandidate": false,
+          "sourceAndStructureCandidate": false,
+          "reasons": [
+            "repeat-or-label-regression"
+          ]
+        },
+        {
+          "key": "29:64",
+          "sourceMatched": false,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:65",
+          "sourceMatched": false,
+          "canonicalWords": 16,
+          "timingRows": 16,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:66",
+          "sourceMatched": false,
+          "canonicalWords": 6,
+          "timingRows": 6,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:67",
+          "sourceMatched": false,
+          "canonicalWords": 15,
+          "timingRows": 15,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:68",
+          "sourceMatched": false,
+          "canonicalWords": 17,
+          "timingRows": 17,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        },
+        {
+          "key": "29:69",
+          "sourceMatched": false,
+          "canonicalWords": 9,
+          "timingRows": 9,
+          "structuralCandidate": true,
+          "sourceAndStructureCandidate": false,
+          "reasons": []
+        }
+      ]
+    }
+  }
+}

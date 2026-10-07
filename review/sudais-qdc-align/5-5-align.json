@@ -1,0 +1,289 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/5.mp3",
+  "source_file_size": 38326543,
+  "source_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+  "excerpt_file": "test-results/sudais-qdc-align/5-5.wav",
+  "excerpt_sha256": "89a7a1427aca95028b7b36ad03461844f956a0c31c440a489014d0d6e47407f3",
+  "excerpt_from_ms": 156770,
+  "excerpt_to_ms": 166230,
+  "provider_segments": [
+    [
+      1,
+      156770,
+      157760
+    ],
+    [
+      2,
+      157760,
+      158450
+    ],
+    [
+      3,
+      158450,
+      158950
+    ],
+    [
+      4,
+      158950,
+      160170
+    ],
+    [
+      5,
+      160170,
+      160960
+    ],
+    [
+      6,
+      160960,
+      161760
+    ],
+    [
+      7,
+      161760,
+      162220
+    ],
+    [
+      8,
+      162220,
+      163110
+    ],
+    [
+      9,
+      163110,
+      163500
+    ],
+    [
+      10,
+      163500,
+      164340
+    ],
+    [
+      11,
+      164340,
+      165500
+    ],
+    [
+      12,
+      165500,
+      165880
+    ],
+    [
+      13,
+      165880,
+      166780
+    ],
+    [
+      14,
+      166780,
+      168480
+    ],
+    [
+      15,
+      168480,
+      168780
+    ],
+    [
+      16,
+      168780,
+      169870
+    ],
+    [
+      17,
+      169870,
+      171130
+    ],
+    [
+      18,
+      171130,
+      171380
+    ],
+    [
+      19,
+      171380,
+      172290
+    ],
+    [
+      20,
+      172290,
+      172800
+    ],
+    [
+      21,
+      172800,
+      173640
+    ],
+    [
+      22,
+      173640,
+      174140
+    ],
+    [
+      23,
+      174140,
+      175010
+    ],
+    [
+      24,
+      175010,
+      175520
+    ],
+    [
+      25,
+      175520,
+      177250
+    ],
+    [
+      24,
+      177250,
+      178420
+    ],
+    [
+      25,
+      178420,
+      180500
+    ],
+    [
+      26,
+      180500,
+      181850
+    ],
+    [
+      27,
+      181850,
+      182810
+    ],
+    [
+      28,
+      182810,
+      183320
+    ],
+    [
+      29,
+      183320,
+      184530
+    ],
+    [
+      30,
+      184530,
+      184950
+    ],
+    [
+      31,
+      184950,
+      185930
+    ],
+    [
+      32,
+      185930,
+      186820
+    ],
+    [
+      33,
+      186820,
+      187720
+    ],
+    [
+      34,
+      187720,
+      188580
+    ],
+    [
+      35,
+      188580,
+      189830
+    ],
+    [
+      36,
+      189830,
+      190350
+    ],
+    [
+      37,
+      190350,
+      191170
+    ],
+    [
+      38,
+      191170,
+      192240
+    ],
+    [
+      39,
+      192240,
+      192710
+    ],
+    [
+      40,
+      192710,
+      192900
+    ],
+    [
+      41,
+      192900,
+      193840
+    ],
+    [
+      42,
+      193840,
+      194160
+    ],
+    [
+      43,
+      194160,
+      195385
+    ]
+  ],
+  "aligner": {
+    "audio_id": "31b4899add6e4b75aabaa334c5228d39",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 8.26,
+        "ref_from": "5:5:3",
+        "ref_to": "5:5:13",
+        "matched_text": "لَكُمُ ٱلطَّيِّبَـٰتُ وَطَعَامُ ٱلَّذِينَ أُوتُوا۟ ٱلْكِتَـٰبَ حِلٌّ لَّكُمْ وَطَعَامُكُمْ حِلٌّ لَّهُمْ",
+        "confidence": 0.971,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 8.29,
+        "time_to": 9.46,
+        "ref_from": "5:5:14",
+        "ref_to": "5:5:14",
+        "matched_text": "وَٱلْمُحْصَنَـٰتُ",
+        "confidence": 0.909,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.0552101135253906,
+        "queue_seconds": 0.01895978901302442,
+        "total_seconds": 1.074169902538415
+      }
+    }
+  }
+}

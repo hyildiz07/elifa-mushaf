@@ -1,0 +1,161 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/27.mp3",
+  "source_file_size": 21703176,
+  "source_sha256": "8f9aaac51110a6d2f2297230e8f56c492c6cbda9236053b958ce0afe147e6b27",
+  "excerpt_file": "test-results/sudais-qdc-align/27-92.wav",
+  "excerpt_sha256": "dba191c0012b4b3eed659dc8ab0e0cfd86c394b4047dde86bc8a00ff44ded7b2",
+  "excerpt_from_ms": 1008640,
+  "excerpt_to_ms": 1019750,
+  "provider_segments": [
+    [
+      1,
+      1008640,
+      1008950
+    ],
+    [
+      2,
+      1008950,
+      1009580
+    ],
+    [
+      3,
+      1009580,
+      1010890
+    ],
+    [
+      4,
+      1010890,
+      1011650
+    ],
+    [
+      5,
+      1011650,
+      1012160
+    ],
+    [
+      6,
+      1012160,
+      1013190
+    ],
+    [
+      7,
+      1013190,
+      1013890
+    ],
+    [
+      8,
+      1013890,
+      1014870
+    ],
+    [
+      9,
+      1014870,
+      1015200
+    ],
+    [
+      10,
+      1015200,
+      1015970
+    ],
+    [
+      11,
+      1015970,
+      1016430
+    ],
+    [
+      12,
+      1016430,
+      1017350
+    ],
+    [
+      13,
+      1017350,
+      1017660
+    ],
+    [
+      14,
+      1017660,
+      1018010
+    ],
+    [
+      15,
+      1018010,
+      1019495
+    ]
+  ],
+  "aligner": {
+    "audio_id": "01346508bc45477f8f85dc932ed8ac26",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 2.173,
+        "ref_from": "27:92:1",
+        "ref_to": "27:92:3",
+        "matched_text": "",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 2.203,
+        "time_to": 5.94,
+        "ref_from": "27:92:4",
+        "ref_to": "27:92:8",
+        "matched_text": "فَمَنِ ٱهْتَدَىٰ فَإِنَّمَا يَهْتَدِى لِنَفْسِهِۦ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 5.97,
+        "time_to": 11.11,
+        "ref_from": "27:92:9",
+        "ref_to": "27:93:1",
+        "matched_text": "وَمَن ضَلَّ فَقُلْ إِنَّمَآ أَنَا۠ مِنَ ٱلْمُنذِرِينَ وَقُلِ",
+        "confidence": 0.937,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null,
+        "pauses": [
+          {
+            "after_ref": "27:92:15",
+            "token_pos": 36,
+            "gain": 0.6000000000000001,
+            "separability": 1
+          }
+        ]
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 0.9608850479125977,
+        "queue_seconds": 0.04185140319168568,
+        "total_seconds": 1.0027364511042833
+      }
+    }
+  }
+}

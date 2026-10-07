@@ -1,0 +1,37 @@
+{
+  "status": "machine-verified-full-verse-source-candidate",
+  "connected_to_app": false,
+  "reciter": 5,
+  "verse_key": "6:139",
+  "scope": "whole single verse and whole-verse repeat only",
+  "word_split_verified": false,
+  "source_url": "https://everyayah.com/data/Hani_Rifai_192kbps/006139.mp3",
+  "source_bytes": 647755,
+  "source_sha256": "f8a51b189b7f35c5fb566d9366323a8e79126c4adcb15f119bb4c4f076cef26f",
+  "decoded_duration_ms": 26984.48979591837,
+  "independent_evidence": {
+    "qud_candidate": "hani-006139-qud-candidate.json",
+    "qud_audio_id": "2437eb2fc36b455b8a39b9a37152ab10",
+    "qud_model": "Large",
+    "qud_canonical_word_positions": "1-22 in five contiguous segments, no missing/repeated flags",
+    "qud_last_segment_text": "إِنَّهُۥ حَكِيمٌ عَلِيمٌ",
+    "qud_last_segment_ms": [22197, 26973],
+    "qud_last_segment_confidence": 1,
+    "chapter_acoustics": "hani-independent-acoustics.json",
+    "chapter_matched_source_start_ms": 2835105,
+    "chapter_matched_source_end_ms": 2862089.4897959186,
+    "chapter_rms_first_10ms_after_end": 0.000035,
+    "chapter_rms_next_10ms_after_end": 0.000003,
+    "next_verse_192kbps_first_20ms_rms": 0,
+    "next_verse_audio_id": "a1288e73bc5d4b71aca7acf865f1d424",
+    "next_verse_qud_candidate": "hani-006140-qud-candidate.json",
+    "next_verse_qud_first_word_ms_in_clip": 20,
+    "next_verse_chapter_matched_start_ms": 2862080,
+    "estimated_gap_from_clip_end_to_next_word_ms": 10.51
+  },
+  "limits": [
+    "An automated alignment can identify canonical text without proving every phoneme boundary.",
+    "No word-level timing or split boundaries are approved by this candidate.",
+    "Cumulative and multi-verse playback still require a separately verified source-switching plan."
+  ]
+}

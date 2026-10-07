@@ -1,0 +1,79 @@
+{
+  "status": "machine-review-only",
+  "key": "29:45",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/29.mp3",
+  "source_file": "test-results/sudais-qdc-29.mp3",
+  "source_size": 12885359,
+  "source_sha256": "525bcfbaaa6fbeece6c93e0e25d7d36393aaddd406366284ded5bd141107af67",
+  "source_excerpt_ms": [
+    575420,
+    600700
+  ],
+  "decoded_excerpt_from_ms": 575420,
+  "excerpt_sha256": "d8c98f98d03cf6796cc599f58bbc46024467e8d96caabdb3d0de5f35c9a0c475",
+  "excerpt_bytes": 2229740,
+  "requested_model": "Large",
+  "requested_device": "GPU",
+  "response_status": 200,
+  "decode_seconds": 0.746,
+  "request_seconds": 20.636,
+  "model_runtime": {
+    "processing_seconds": 2.1979563236236572,
+    "queue_seconds": 0.053905557841062546,
+    "total_seconds": 2.2518618814647198
+  },
+  "effective_model": "Large",
+  "segments": [
+    {
+      "from": "29:42:9",
+      "to": "29:42:12",
+      "source_from_ms": 575420,
+      "source_to_ms": 579513,
+      "confidence": 1,
+      "missing": true,
+      "repeated": false,
+      "error": null
+    },
+    {
+      "from": "29:43:1",
+      "to": "29:43:8",
+      "source_from_ms": 579543,
+      "source_to_ms": 588507,
+      "confidence": 1,
+      "missing": false,
+      "repeated": false,
+      "error": null
+    },
+    {
+      "from": "29:44:1",
+      "to": "29:44:5",
+      "source_from_ms": 588537,
+      "source_to_ms": 593640,
+      "confidence": 1,
+      "missing": false,
+      "repeated": false,
+      "error": null
+    },
+    {
+      "from": "29:44:6",
+      "to": "29:44:10",
+      "source_from_ms": 593670,
+      "source_to_ms": 598667,
+      "confidence": 1,
+      "missing": false,
+      "repeated": false,
+      "error": null
+    },
+    {
+      "from": "29:45:1",
+      "to": "29:45:3",
+      "source_from_ms": 598697,
+      "source_to_ms": 600700,
+      "confidence": 0.82,
+      "missing": true,
+      "repeated": false,
+      "error": null
+    }
+  ],
+  "provider_error": null
+}

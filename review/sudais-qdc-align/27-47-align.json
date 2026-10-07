@@ -1,0 +1,129 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/27.mp3",
+  "source_file_size": 21703176,
+  "source_sha256": "8f9aaac51110a6d2f2297230e8f56c492c6cbda9236053b958ce0afe147e6b27",
+  "excerpt_file": "test-results/sudais-qdc-align/27-47.wav",
+  "excerpt_sha256": "b2910b0ab2b0bbe1275c449b82125e29e7ebecd336d7d363f968e540afa2b38c",
+  "excerpt_from_ms": 530300,
+  "excerpt_to_ms": 542340,
+  "provider_segments": [
+    [
+      1,
+      530300,
+      530920
+    ],
+    [
+      2,
+      530920,
+      532050
+    ],
+    [
+      3,
+      532050,
+      532470
+    ],
+    [
+      4,
+      532470,
+      533210
+    ],
+    [
+      5,
+      533210,
+      534480
+    ],
+    [
+      6,
+      534480,
+      534960
+    ],
+    [
+      7,
+      534960,
+      536670
+    ],
+    [
+      8,
+      536670,
+      537590
+    ],
+    [
+      9,
+      537590,
+      538230
+    ],
+    [
+      10,
+      538230,
+      538530
+    ],
+    [
+      11,
+      538530,
+      539530
+    ],
+    [
+      12,
+      539530,
+      540670
+    ],
+    [
+      13,
+      540670,
+      541985
+    ]
+  ],
+  "aligner": {
+    "audio_id": "d66e58d60fd3410e8295fcb7258f0587",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 4.1,
+        "ref_from": "27:47:1",
+        "ref_to": "27:47:5",
+        "matched_text": "قَالُوا۟ ٱطَّيَّرْنَا بِكَ وَبِمَن مَّعَكَ",
+        "confidence": 0.962,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 4.13,
+        "time_to": 12.04,
+        "ref_from": "27:47:6",
+        "ref_to": "27:47:13",
+        "matched_text": "قَالَ طَـٰٓئِرُكُمْ عِندَ ٱللَّهِ بَلْ أَنتُمْ قَوْمٌ تُفْتَنُونَ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.0929553508758545,
+        "queue_seconds": 0.02268240856938064,
+        "total_seconds": 1.1156377594452351
+      }
+    }
+  }
+}

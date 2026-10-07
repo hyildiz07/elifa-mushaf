@@ -1,0 +1,109 @@
+{
+  "status": "machine-review-only",
+  "source_sha256": "8f9aaac51110a6d2f2297230e8f56c492c6cbda9236053b958ce0afe147e6b27",
+  "excerpt_from_ms": 1008640,
+  "note": "Returned times are relative to exact source excerpt; add excerpt_from_ms to map into chapter time. Audition remains required.",
+  "result": {
+    "segments": [
+      {
+        "segment": 1,
+        "words": [
+          [
+            "27:92:1",
+            0,
+            0.28
+          ],
+          [
+            "27:92:2",
+            0.28,
+            0.68
+          ],
+          [
+            "27:92:3",
+            0.68,
+            1.95
+          ]
+        ],
+        "timing_status": "ok"
+      },
+      {
+        "segment": 2,
+        "words": [
+          [
+            "27:92:4",
+            0,
+            0.56
+          ],
+          [
+            "27:92:5",
+            0.56,
+            1.11
+          ],
+          [
+            "27:92:6",
+            1.11,
+            2.09
+          ],
+          [
+            "27:92:7",
+            2.09,
+            2.81
+          ],
+          [
+            "27:92:8",
+            2.81,
+            3.71
+          ]
+        ],
+        "timing_status": "ok"
+      },
+      {
+        "segment": 3,
+        "words": [
+          [
+            "27:92:9",
+            0.03,
+            0.68
+          ],
+          [
+            "27:92:10",
+            0.68,
+            1.11
+          ],
+          [
+            "27:92:11",
+            1.11,
+            1.53
+          ],
+          [
+            "27:92:12",
+            1.53,
+            2.5
+          ],
+          [
+            "27:92:13",
+            2.5,
+            2.82
+          ],
+          [
+            "27:92:14",
+            2.82,
+            3.13
+          ],
+          [
+            "27:92:15",
+            3.13,
+            4.86
+          ],
+          [
+            "27:93:1",
+            4.86,
+            5.14
+          ]
+        ],
+        "timing_status": "ok"
+      }
+    ],
+    "audio_id": "01346508bc45477f8f85dc932ed8ac26"
+  }
+}

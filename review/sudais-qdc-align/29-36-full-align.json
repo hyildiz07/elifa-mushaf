@@ -1,0 +1,144 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/29.mp3",
+  "source_file_size": 12885359,
+  "source_sha256": "525bcfbaaa6fbeece6c93e0e25d7d36393aaddd406366284ded5bd141107af67",
+  "excerpt_file": "test-results/sudais-qdc-align/29-36.wav",
+  "excerpt_sha256": "cfcdb46119ec957bdb37979bac13c3a01d9bb37b746d689bb62eae05e9e7b2fb",
+  "excerpt_from_ms": 459730,
+  "excerpt_to_ms": 471090,
+  "provider_segments": [
+    [
+      1,
+      459730,
+      460440
+    ],
+    [
+      2,
+      460440,
+      461100
+    ],
+    [
+      3,
+      461100,
+      461880
+    ],
+    [
+      4,
+      461880,
+      462960
+    ],
+    [
+      5,
+      462960,
+      463710
+    ],
+    [
+      6,
+      463710,
+      464460
+    ],
+    [
+      7,
+      464460,
+      464960
+    ],
+    [
+      8,
+      464960,
+      465630
+    ],
+    [
+      9,
+      465630,
+      466120
+    ],
+    [
+      10,
+      466120,
+      466620
+    ],
+    [
+      11,
+      466620,
+      467460
+    ],
+    [
+      12,
+      467460,
+      468220
+    ],
+    [
+      13,
+      468220,
+      468980
+    ],
+    [
+      14,
+      468980,
+      469170
+    ],
+    [
+      15,
+      469170,
+      469850
+    ],
+    [
+      16,
+      469850,
+      470915
+    ]
+  ],
+  "aligner": {
+    "audio_id": "5314ac6726b04c98ae88206fbeb5cf08",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 6.92,
+        "ref_from": "29:34:5",
+        "ref_to": "29:34:12",
+        "matched_text": "هَـٰذِهِ ٱلْقَرْيَةِ رِجْزًا مِّنَ ٱلسَّمَآءِ بِمَا كَانُوا۟ يَفْسُقُونَ",
+        "confidence": 0.956,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 7,
+        "time_to": 11.36,
+        "ref_from": "29:35:1",
+        "ref_to": "29:35:5",
+        "matched_text": "وَلَقَد تَّرَكْنَا مِنْهَآ ءَايَةً بَيِّنَةً",
+        "confidence": 0.97,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Base",
+      "effective_model": "Base",
+      "runtime": {
+        "processing_seconds": 0.5278449058532715,
+        "queue_seconds": 0.01857978740008548,
+        "total_seconds": 0.546424693253357
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/27.mp3",
+  "source_file_size": 21703176,
+  "source_sha256": "8f9aaac51110a6d2f2297230e8f56c492c6cbda9236053b958ce0afe147e6b27",
+  "excerpt_file": "test-results/sudais-qdc-align/27-1.wav",
+  "excerpt_sha256": "b86981ab1a5e199a784cae7ce8f2f6c578476a08c7e34918e0dddd8e8bd9fa9a",
+  "excerpt_from_ms": 0,
+  "excerpt_to_ms": 9350,
+  "provider_segments": [
+    [
+      1,
+      0,
+      4260
+    ],
+    [
+      2,
+      4260,
+      5060
+    ],
+    [
+      3,
+      5060,
+      5900
+    ],
+    [
+      4,
+      5900,
+      6800
+    ],
+    [
+      5,
+      6800,
+      7680
+    ],
+    [
+      6,
+      7680,
+      9105
+    ]
+  ],
+  "aligner": {
+    "audio_id": "9dde5229160644afaca24d1e62447a82",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0.02,
+        "time_to": 4.46,
+        "ref_from": "27:1:1",
+        "ref_to": "27:1:1",
+        "matched_text": "طسٓ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 4.49,
+        "time_to": 9.35,
+        "ref_from": "27:1:2",
+        "ref_to": "27:1:6",
+        "matched_text": "تِلْكَ ءَايَـٰتُ ٱلْقُرْءَانِ وَكِتَابٍ مُّبِينٍ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 0.9148197174072266,
+        "queue_seconds": 0.014929077355191112,
+        "total_seconds": 0.9297487947624177
+      }
+    }
+  }
+}

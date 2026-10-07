@@ -1,0 +1,120 @@
+{
+  "status": "machine-review-only",
+  "source_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+  "excerpt_from_ms": 1814130,
+  "note": "Returned times are relative to exact source excerpt; add excerpt_from_ms to map into chapter time. Audition remains required.",
+  "result": {
+    "segments": [
+      {
+        "segment": 1,
+        "words": [
+          [
+            "5:78:13",
+            0,
+            0.67
+          ],
+          [
+            "5:78:14",
+            0.67,
+            0.97
+          ],
+          [
+            "5:78:15",
+            0.97,
+            1.59
+          ],
+          [
+            "5:78:16",
+            1.59,
+            2.46
+          ],
+          [
+            "5:78:17",
+            2.46,
+            3.92
+          ]
+        ],
+        "timing_status": "ok"
+      },
+      {
+        "segment": 2,
+        "words": [
+          [
+            "5:79:1",
+            0.06,
+            1.06
+          ],
+          [
+            "5:79:2",
+            1.06,
+            1.46
+          ],
+          [
+            "5:79:3",
+            1.46,
+            2.81
+          ],
+          [
+            "5:79:4",
+            2.81,
+            3.66
+          ],
+          [
+            "5:79:5",
+            3.66,
+            5.16
+          ],
+          [
+            "5:79:6",
+            5.16,
+            6.91
+          ]
+        ],
+        "timing_status": "ok"
+      },
+      {
+        "segment": 3,
+        "words": [
+          [
+            "5:79:7",
+            0.09,
+            0.77
+          ],
+          [
+            "5:79:8",
+            0.77,
+            1.15
+          ],
+          [
+            "5:79:9",
+            1.15,
+            1.93
+          ],
+          [
+            "5:79:10",
+            1.93,
+            3.36
+          ]
+        ],
+        "timing_status": "ok"
+      },
+      {
+        "segment": 4,
+        "words": [
+          [
+            "5:80:1",
+            0.06,
+            0.48
+          ],
+          [
+            "5:80:2",
+            0.48,
+            0.99
+          ]
+        ],
+        "timing_status": "ok"
+      }
+    ],
+    "audio_id": "1fea2a4e9ad74418813113230655b563"
+  }
+}

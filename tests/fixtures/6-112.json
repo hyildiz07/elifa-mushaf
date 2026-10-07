@@ -1,0 +1,116 @@
+{
+  "rid": 6,
+  "sid": 112,
+  "source": "https://api.qurancdn.com/api/qdc/audio/reciters/6/audio_files?chapter=112&segments=true",
+  "audio_url": "https://download.quranicaudio.com/qdc/khalil_al_husary/murattal/112.mp3",
+  "file_size": 565376,
+  "verse_timings": [
+    {
+      "verse_key": "112:1",
+      "timestamp_from": 0,
+      "timestamp_to": 5900,
+      "duration": -5900,
+      "segments": [
+        [
+          1,
+          0,
+          1420
+        ],
+        [
+          2,
+          1420,
+          2650
+        ],
+        [
+          3,
+          2650,
+          3680
+        ],
+        [
+          4,
+          3680,
+          4660
+        ]
+      ]
+    },
+    {
+      "verse_key": "112:2",
+      "timestamp_from": 5900,
+      "timestamp_to": 11020,
+      "duration": -5120,
+      "segments": [
+        [
+          1,
+          5900,
+          7360
+        ],
+        [
+          2,
+          7360,
+          9670
+        ]
+      ]
+    },
+    {
+      "verse_key": "112:3",
+      "timestamp_from": 11020,
+      "timestamp_to": 17030,
+      "duration": -6010,
+      "segments": [
+        [
+          1,
+          11020,
+          12000
+        ],
+        [
+          2,
+          12000,
+          13030
+        ],
+        [
+          3,
+          13030,
+          14420
+        ],
+        [
+          4,
+          14420,
+          15880
+        ]
+      ]
+    },
+    {
+      "verse_key": "112:4",
+      "timestamp_from": 17030,
+      "timestamp_to": 25230,
+      "duration": -8200,
+      "segments": [
+        [
+          1,
+          17030,
+          18210
+        ],
+        [
+          2,
+          18210,
+          19078
+        ],
+        [
+          3,
+          19078,
+          20650
+        ],
+        [
+          4,
+          20650,
+          22410
+        ],
+        [
+          5,
+          22410,
+          23210
+        ]
+      ]
+    }
+  ]
+}

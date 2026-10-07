@@ -1,0 +1,501 @@
+{
+  "status": "local-human-listening-review-only",
+  "reciter": "Hânî er-Rifâî",
+  "question": "Belirsiz tekrar ve kelime sınırlarını insan dinlemesiyle doğrulayın; bu manifest uygulamanın zamanlarını değiştirmez.",
+  "cases": [
+    {
+      "id": "6:139",
+      "title": "En‘âm 6:139 — 17/18 ve son âyet sınırı",
+      "chapterAudio": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/6.mp3",
+      "verseAudio": "https://everyayah.com/data/Hani_Rifai_64kbps/006139.mp3",
+      "nextVerseAudio": "https://everyayah.com/data/Hani_Rifai_64kbps/006140.mp3",
+      "verseAudio192": "https://everyayah.com/data/Hani_Rifai_192kbps/006139.mp3",
+      "nextVerseAudio192": "https://everyayah.com/data/Hani_Rifai_192kbps/006140.mp3",
+      "chapterClipStartMs": 2835125,
+      "verseAudioSha256": "793b023758cc4e0edb7576c3a53292370ad57c943d971478e3926dd3e27f07a6",
+      "wordContext": [
+        {
+          "position": 1,
+          "arabic": "وَقَالُوا۟",
+          "candidateMs": [
+            2835155,
+            2836235
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 2,
+          "arabic": "مَا",
+          "candidateMs": [
+            2836245,
+            2836595
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 3,
+          "arabic": "فِى",
+          "candidateMs": [
+            2836605,
+            2836995
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 4,
+          "arabic": "بُطُونِ",
+          "candidateMs": [
+            2837005,
+            2837825
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 5,
+          "arabic": "هَـٰذِهِ",
+          "candidateMs": [
+            2837835,
+            2838635
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 6,
+          "arabic": "ٱلْأَنْعَـٰمِ",
+          "candidateMs": [
+            2838645,
+            2839795
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 7,
+          "arabic": "خَالِصَةٌۭ",
+          "candidateMs": [
+            2839805,
+            2840895
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 8,
+          "arabic": "لِّذُكُورِنَا",
+          "candidateMs": [
+            2840905,
+            2843015
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 9,
+          "arabic": "وَمُحَرَّمٌ",
+          "candidateMs": [
+            2843025,
+            2844495
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 10,
+          "arabic": "عَلَىٰٓ",
+          "candidateMs": [
+            2844505,
+            2844855
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 11,
+          "arabic": "أَزْوَٰجِنَا ۖ",
+          "candidateMs": [
+            2844865,
+            2847235
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 12,
+          "arabic": "وَإِن",
+          "candidateMs": [
+            2847245,
+            2848355
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 13,
+          "arabic": "يَكُن",
+          "candidateMs": [
+            2848365,
+            2849325
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 14,
+          "arabic": "مَّيْتَةًۭ",
+          "candidateMs": [
+            2849335,
+            2850615
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 15,
+          "arabic": "فَهُمْ",
+          "candidateMs": [
+            2850625,
+            2851235
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 16,
+          "arabic": "فِيهِ",
+          "candidateMs": [
+            2851245,
+            2851845
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 17,
+          "arabic": "شُرَكَآءُ ۚ",
+          "candidateMs": [
+            2851855,
+            2854555
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 18,
+          "arabic": "سَيَجْزِيهِمْ",
+          "candidateMs": [
+            2854565,
+            2855915
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 19,
+          "arabic": "وَصْفَهُمْ ۚ",
+          "candidateMs": [
+            2855925,
+            2857365
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 20,
+          "arabic": "إِنَّهُۥ",
+          "candidateMs": [
+            2857375,
+            2858795
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 21,
+          "arabic": "حَكِيمٌ",
+          "candidateMs": [
+            2858805,
+            2859845
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+          "position": 22,
+          "arabic": "عَلِيمٌۭ",
+          "candidateMs": [
+            2859855,
+            2861765
+          ],
+          "basis": "QuranLab klibi ve aynı kaydın sûre MP3 eşleşmesi"
+        },
+        {
+      "position": "6:140/klip",
+          "arabic": "قَدْ",
+          "candidateMs": [
+            2862106,
+        null
+          ],
+      "basis": "6:140 ayrı klibinin başlangıcı; ilk kelimenin bitişi doğrulanmadı"
+        }
+      ],
+      "boundaries": [
+        {
+          "name": "QuranLab 17/18 adayı",
+          "ms": 2854560,
+          "basis": "550 ms düşük enerji aralığının ardından"
+        },
+        {
+          "name": "Eski etiket 17/18",
+          "ms": 2851594,
+          "basis": "eski sağlayıcı; sesin ortasında"
+        },
+        {
+          "name": "Eski yinelenen 18",
+          "ms": 2853194,
+          "basis": "gerçek tekrar olup olmadığı belirsiz"
+        },
+        {
+          "name": "QuranLab son kelime bitişi",
+          "ms": 2861765,
+          "basis": "6:140 klip başlangıcından 341 ms önce"
+        },
+        {
+          "name": "Bağımsız 6:140 klip başlangıcı",
+          "ms": 2862106,
+          "basis": "aynı sûre MP3'ünde Pearson 0,967"
+        }
+      ],
+      "windows": [
+        {
+          "id": "6-decision-context",
+          "label": "Karar 1: 6:139 son kelime → 6:140 ilk ses",
+          "source": "chapter",
+          "fromMs": 2861450,
+          "toMs": 2862650
+        },
+        {
+          "id": "6-decision-192",
+          "label": "Karar 1: 192 kbps 6:139 son 0,9 saniye",
+          "source": "verse192",
+          "fromMs": 26050,
+          "toMs": 26980
+        },
+        {
+          "id": "6-decision-next192",
+          "label": "Karar 1: 192 kbps 6:140 ilk 0,9 saniye",
+          "source": "next192",
+          "fromMs": 0,
+          "toMs": 900
+        },
+        {
+          "id": "6-whole",
+          "label": "6:139 bağlamı: 16–19. kelimeler",
+          "source": "chapter",
+          "fromMs": 2851000,
+          "toMs": 2857600
+        },
+        {
+          "id": "6-17",
+          "label": "Aday 17: شُرَكَآءُ",
+          "source": "chapter",
+          "fromMs": 2851750,
+          "toMs": 2854555
+        },
+        {
+          "id": "6-18",
+          "label": "Aday 18: سَيَجْزِيهِمْ",
+          "source": "chapter",
+          "fromMs": 2854560,
+          "toMs": 2856000
+        },
+        {
+          "id": "6-old",
+          "label": "Eski etiketlerin tekrar görünen alanı",
+          "source": "chapter",
+          "fromMs": 2852200,
+          "toMs": 2855350
+        },
+        {
+          "id": "6-isolated",
+          "label": "Ayrı 6:139 klibinde 16–19. kelimeler",
+          "source": "verse",
+          "fromMs": 16000,
+          "toMs": 22500
+        },
+        {
+          "id": "6-tail",
+          "label": "6:139 sonu ve 6:140 başlangıcı",
+          "source": "chapter",
+          "fromMs": 2859500,
+          "toMs": 2863400
+        },
+        {
+          "id": "6-next",
+          "label": "Ayrı 6:140 klibi başlangıcı",
+          "source": "next",
+          "fromMs": 0,
+          "toMs": 1800
+        }
+      ],
+      "reviewPrompts": [
+        "Karar 1: 192 kbps 6:139 klibinde son kelime tam bitiyor mu? Sûre bağlamında klibin sonundan sonra 6:139'a ait bir hece kalıyor mu veya 6:140'ın قَدْ kelimesi klibe giriyor mu? Duyduğunuz kelimeyi yazın.",
+        "Karar 2: 17–18. kelime arasında gerçek bir tekrar var mı? 17. شُرَكَآءُ ve 18. سَيَجْزِيهِمْ sınırını kesmeden ayırabiliyor musunuz?"
+      ],
+      "focusPositions": [
+        17,
+        18,
+        22,
+      "6:140/klip"
+      ]
+    },
+    {
+      "id": "34:46",
+      "title": "Sebe 34:46 — ek sesin kelime kimliği",
+      "chapterAudio": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/34.mp3",
+      "verseAudio": "https://everyayah.com/data/Hani_Rifai_64kbps/034046.mp3",
+      "nextVerseAudio": "https://everyayah.com/data/Hani_Rifai_64kbps/034047.mp3",
+      "verseAudio192": "https://everyayah.com/data/Hani_Rifai_192kbps/034046.mp3",
+      "nextVerseAudio192": "https://everyayah.com/data/Hani_Rifai_192kbps/034047.mp3",
+      "comparisonAudio": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/100.mp3",
+      "chapterClipStartMs": 844852,
+      "wordContext": [
+        {
+          "position": 23,
+          "arabic": "عَذَابٍۢ",
+          "candidateMs": [
+            868555,
+            870325
+          ],
+          "basis": "QUA 34:46 kelime satırı"
+        },
+        {
+          "position": 24,
+          "arabic": "شَدِيدٍۢ",
+          "candidateMs": [
+            870325,
+            871245
+          ],
+          "basis": "QUA 34:46; QuranLab ayrı klipte yaklaşık 870202–871452 ms"
+        },
+        {
+          "position": "ek ses",
+          "arabic": "Kimliği belirsiz",
+          "candidateMs": [
+            872100,
+            872825
+          ],
+          "basis": "Akustik inceleme bölgesi; kelime sınırı veya kimliği değil"
+        },
+        {
+          "position": "34:47/1",
+          "arabic": "قُلْ",
+          "candidateMs": [
+            874260,
+            874620
+          ],
+          "basis": "QUA 34:47 ikinci tam dizi"
+        },
+        {
+          "position": "34:47/17",
+          "arabic": "شَهِيدٌۭ",
+          "candidateMs": [
+            886465,
+            887795
+          ],
+          "basis": "QUA 34:47 ikinci tam dizi"
+        }
+      ],
+      "boundaries": [
+        {
+          "name": "34:46 son doğrulanmış kelime",
+          "ms": 871452,
+          "basis": "ayrı klip modelinin son kelimesi"
+        },
+        {
+          "name": "Ek ses bölgesi",
+          "ms": 872100,
+          "basis": "34:46 klibinde de kısmen mevcut; kelime kimliği belirsiz"
+        },
+        {
+          "name": "34:47 gerçek ilk kelime",
+          "ms": 874260,
+          "basis": "ikinci QUA dizisi ve ayrı âyet klibi"
+        }
+      ],
+      "windows": [
+        {
+          "id": "34-decision-context",
+          "label": "Karar 1: son kelime → ek ses → sonraki âyet",
+          "source": "chapter",
+          "fromMs": 870100,
+          "toMs": 874650
+        },
+        {
+          "id": "34-decision-shahid",
+          "label": "Karar 1: 34:47 sonundaki شَهِيدٌۭ karşılaştırması",
+          "source": "chapter",
+          "fromMs": 886300,
+          "toMs": 888100
+        },
+        {
+          "id": "34-reference-shadid",
+          "label": "Aynı hoca, 100:8 sonundaki لَشَدِيدٌ karşılaştırması",
+          "source": "comparison",
+          "fromMs": 29650,
+          "toMs": 31950
+        },
+        {
+          "id": "34-reference-shahid",
+          "label": "Aynı hoca, 100:7 sonundaki لَشَهِيدٌ karşılaştırması",
+          "source": "comparison",
+          "fromMs": 24500,
+          "toMs": 26700
+        },
+        {
+          "id": "34-decision-192",
+          "label": "Karar 2: 192 kbps 34:46 son 1 saniye",
+          "source": "verse192",
+          "fromMs": 26850,
+          "toMs": 27870
+        },
+        {
+          "id": "34-decision-next192",
+          "label": "Karar 2: 192 kbps 34:47 ilk 1,5 saniye",
+          "source": "next192",
+          "fromMs": 0,
+          "toMs": 1500
+        },
+        {
+          "id": "34-context",
+          "label": "34:46 sonu → ek ses → 34:47 başlangıcı",
+          "source": "chapter",
+          "fromMs": 869900,
+          "toMs": 875000
+        },
+        {
+          "id": "34-final",
+          "label": "34:46 son kelime: شَدِيدٍۢ",
+          "source": "chapter",
+          "fromMs": 870100,
+          "toMs": 871550
+        },
+        {
+          "id": "34-extra",
+          "label": "34:46 sonrasındaki ek ses",
+          "source": "chapter",
+          "fromMs": 872000,
+          "toMs": 872950
+        },
+        {
+          "id": "34-next",
+          "label": "34:47 ilk kelime: قُلْ",
+          "source": "chapter",
+          "fromMs": 874100,
+          "toMs": 874850
+        },
+        {
+          "id": "34-isolated",
+          "label": "Ayrı 34:46 klibinin sonu",
+          "source": "verse",
+          "fromMs": 25300,
+          "toMs": 27790
+        },
+        {
+          "id": "34-next-isolated",
+          "label": "Ayrı 34:47 klibinin başlangıcı",
+          "source": "next",
+          "fromMs": 1400,
+          "toMs": 2500
+        }
+      ],
+      "reviewPrompts": [
+        "Karar 1: 872100–872900 ms ek sesinde tam olarak hangi kelime duyuluyor: 34:46'nın شَدِيدٍۢ kelimesinin tekrarı, 34:47'nin شَهِيدٌۭ kelimesi, yoksa başka bir ses? Aynı hocanın 100:8 ve 100:7 örneklerini de dinleyin; kelimeyi açıkça yazın.",
+        "Karar 2: 192 kbps 34:46 klibinin sonu bu kelimeyi tamamlıyor mu? 34:47 klibinin ilk 1,5 saniyesinde aynı kelimenin kalanı duyuluyor mu?"
+      ]
+    }
+  ]
+}

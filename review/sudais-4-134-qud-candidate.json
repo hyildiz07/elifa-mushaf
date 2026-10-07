@@ -1,0 +1,63 @@
+{
+  "status": "unverified-review-only",
+  "verse": "4:134",
+  "url": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/004134.mp3",
+  "endpoint": "https://hetchyy-quranic-universal-aligner.hf.space/api/v1/align/url",
+  "received_at_utc": "2026-09-28T13:56:57.735Z",
+  "result": {
+    "audio_id": "8d6ecb11c36c4935a60dea09e71ebec8",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 9.553,
+        "ref_from": "4:134:1",
+        "ref_to": "4:134:10",
+        "matched_text": "مَّن كَانَ يُرِيدُ ثَوَابَ ٱلدُّنْيَا فَعِندَ ٱللَّهِ ثَوَابُ ٱلدُّنْيَا وَٱلْـَٔاخِرَةِ",
+        "confidence": 0.965,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 9.583,
+        "time_to": 16.942,
+        "ref_from": "4:134:11",
+        "ref_to": "4:134:14",
+        "matched_text": "وَكَانَ ٱللَّهُ سَمِيعًا بَصِيرًا",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "GPU",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.0953693389892578,
+        "queue_seconds": 4.009088753780816,
+        "total_seconds": 5.104458092770074
+      }
+    },
+    "url_metadata": {
+      "title": "004134",
+      "duration": null,
+      "source_url": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/004134.mp3"
+    }
+  }
+}

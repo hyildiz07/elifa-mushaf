@@ -1,0 +1,398 @@
+{
+  "status": "review-only-no-production-cut",
+  "verse": "24:35",
+  "after_word": 40,
+  "left_word": "يَشَآءُ",
+  "right_word": "وَيَضْرِبُ",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/24.mp3",
+  "qa_source": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_64kbps/024035.mp3",
+  "same_performance_evidence": "review/sudais-24-35-transfer-candidate.json: ten PCM windows, 0.875–0.944 correlation and 13ms alignment spread",
+  "source_word_gap_ms": [
+    663825,
+    664265
+  ],
+  "gap_duration_ms": 440,
+  "nearby_speech_median_rms": 0.295023,
+  "best_80ms": {
+    "center_ms": 663905,
+    "rms": 0.0597,
+    "ratio": 0.202
+  },
+  "profile": [
+    {
+      "from_ms": 663675,
+      "rms": 0.392974,
+      "ratio": 1.332
+    },
+    {
+      "from_ms": 663685,
+      "rms": 0.398698,
+      "ratio": 1.351
+    },
+    {
+      "from_ms": 663695,
+      "rms": 0.353596,
+      "ratio": 1.199
+    },
+    {
+      "from_ms": 663705,
+      "rms": 0.343977,
+      "ratio": 1.166
+    },
+    {
+      "from_ms": 663715,
+      "rms": 0.386005,
+      "ratio": 1.308
+    },
+    {
+      "from_ms": 663725,
+      "rms": 0.440887,
+      "ratio": 1.494
+    },
+    {
+      "from_ms": 663735,
+      "rms": 0.408363,
+      "ratio": 1.384
+    },
+    {
+      "from_ms": 663745,
+      "rms": 0.362624,
+      "ratio": 1.229
+    },
+    {
+      "from_ms": 663755,
+      "rms": 0.391412,
+      "ratio": 1.327
+    },
+    {
+      "from_ms": 663765,
+      "rms": 0.408159,
+      "ratio": 1.383
+    },
+    {
+      "from_ms": 663775,
+      "rms": 0.421569,
+      "ratio": 1.429
+    },
+    {
+      "from_ms": 663785,
+      "rms": 0.367594,
+      "ratio": 1.246
+    },
+    {
+      "from_ms": 663795,
+      "rms": 0.221414,
+      "ratio": 0.75
+    },
+    {
+      "from_ms": 663805,
+      "rms": 0.171071,
+      "ratio": 0.58
+    },
+    {
+      "from_ms": 663815,
+      "rms": 0.14743,
+      "ratio": 0.5
+    },
+    {
+      "from_ms": 663825,
+      "rms": 0.164741,
+      "ratio": 0.558
+    },
+    {
+      "from_ms": 663835,
+      "rms": 0.144665,
+      "ratio": 0.49
+    },
+    {
+      "from_ms": 663845,
+      "rms": 0.110868,
+      "ratio": 0.376
+    },
+    {
+      "from_ms": 663855,
+      "rms": 0.07442,
+      "ratio": 0.252
+    },
+    {
+      "from_ms": 663865,
+      "rms": 0.059458,
+      "ratio": 0.202
+    },
+    {
+      "from_ms": 663875,
+      "rms": 0.067213,
+      "ratio": 0.228
+    },
+    {
+      "from_ms": 663885,
+      "rms": 0.055857,
+      "ratio": 0.189
+    },
+    {
+      "from_ms": 663895,
+      "rms": 0.076039,
+      "ratio": 0.258
+    },
+    {
+      "from_ms": 663905,
+      "rms": 0.079041,
+      "ratio": 0.268
+    },
+    {
+      "from_ms": 663915,
+      "rms": 0.056891,
+      "ratio": 0.193
+    },
+    {
+      "from_ms": 663925,
+      "rms": 0.056011,
+      "ratio": 0.19
+    },
+    {
+      "from_ms": 663935,
+      "rms": 0.065001,
+      "ratio": 0.22
+    },
+    {
+      "from_ms": 663945,
+      "rms": 0.084145,
+      "ratio": 0.285
+    },
+    {
+      "from_ms": 663955,
+      "rms": 0.120504,
+      "ratio": 0.408
+    },
+    {
+      "from_ms": 663965,
+      "rms": 0.122311,
+      "ratio": 0.415
+    },
+    {
+      "from_ms": 663975,
+      "rms": 0.097229,
+      "ratio": 0.33
+    },
+    {
+      "from_ms": 663985,
+      "rms": 0.1398,
+      "ratio": 0.474
+    },
+    {
+      "from_ms": 663995,
+      "rms": 0.137571,
+      "ratio": 0.466
+    },
+    {
+      "from_ms": 664005,
+      "rms": 0.101118,
+      "ratio": 0.343
+    },
+    {
+      "from_ms": 664015,
+      "rms": 0.087335,
+      "ratio": 0.296
+    },
+    {
+      "from_ms": 664025,
+      "rms": 0.101157,
+      "ratio": 0.343
+    },
+    {
+      "from_ms": 664035,
+      "rms": 0.12748,
+      "ratio": 0.432
+    },
+    {
+      "from_ms": 664045,
+      "rms": 0.121066,
+      "ratio": 0.41
+    },
+    {
+      "from_ms": 664055,
+      "rms": 0.088416,
+      "ratio": 0.3
+    },
+    {
+      "from_ms": 664065,
+      "rms": 0.065805,
+      "ratio": 0.223
+    },
+    {
+      "from_ms": 664075,
+      "rms": 0.057911,
+      "ratio": 0.196
+    },
+    {
+      "from_ms": 664085,
+      "rms": 0.067489,
+      "ratio": 0.229
+    },
+    {
+      "from_ms": 664095,
+      "rms": 0.070733,
+      "ratio": 0.24
+    },
+    {
+      "from_ms": 664105,
+      "rms": 0.084261,
+      "ratio": 0.286
+    },
+    {
+      "from_ms": 664115,
+      "rms": 0.092075,
+      "ratio": 0.312
+    },
+    {
+      "from_ms": 664125,
+      "rms": 0.078466,
+      "ratio": 0.266
+    },
+    {
+      "from_ms": 664135,
+      "rms": 0.060149,
+      "ratio": 0.204
+    },
+    {
+      "from_ms": 664145,
+      "rms": 0.042244,
+      "ratio": 0.143
+    },
+    {
+      "from_ms": 664155,
+      "rms": 0.061264,
+      "ratio": 0.208
+    },
+    {
+      "from_ms": 664165,
+      "rms": 0.092327,
+      "ratio": 0.313
+    },
+    {
+      "from_ms": 664175,
+      "rms": 0.116797,
+      "ratio": 0.396
+    },
+    {
+      "from_ms": 664185,
+      "rms": 0.109248,
+      "ratio": 0.37
+    },
+    {
+      "from_ms": 664195,
+      "rms": 0.093012,
+      "ratio": 0.315
+    },
+    {
+      "from_ms": 664205,
+      "rms": 0.115312,
+      "ratio": 0.391
+    },
+    {
+      "from_ms": 664215,
+      "rms": 0.19955,
+      "ratio": 0.676
+    },
+    {
+      "from_ms": 664225,
+      "rms": 0.25735,
+      "ratio": 0.872
+    },
+    {
+      "from_ms": 664235,
+      "rms": 0.248754,
+      "ratio": 0.843
+    },
+    {
+      "from_ms": 664245,
+      "rms": 0.253299,
+      "ratio": 0.859
+    },
+    {
+      "from_ms": 664255,
+      "rms": 0.326072,
+      "ratio": 1.105
+    },
+    {
+      "from_ms": 664265,
+      "rms": 0.367782,
+      "ratio": 1.247
+    },
+    {
+      "from_ms": 664275,
+      "rms": 0.401873,
+      "ratio": 1.362
+    },
+    {
+      "from_ms": 664285,
+      "rms": 0.450289,
+      "ratio": 1.526
+    },
+    {
+      "from_ms": 664295,
+      "rms": 0.397218,
+      "ratio": 1.346
+    },
+    {
+      "from_ms": 664305,
+      "rms": 0.388768,
+      "ratio": 1.318
+    },
+    {
+      "from_ms": 664315,
+      "rms": 0.407436,
+      "ratio": 1.381
+    },
+    {
+      "from_ms": 664325,
+      "rms": 0.421777,
+      "ratio": 1.43
+    },
+    {
+      "from_ms": 664335,
+      "rms": 0.291281,
+      "ratio": 0.987
+    },
+    {
+      "from_ms": 664345,
+      "rms": 0.289201,
+      "ratio": 0.98
+    },
+    {
+      "from_ms": 664355,
+      "rms": 0.312121,
+      "ratio": 1.058
+    },
+    {
+      "from_ms": 664365,
+      "rms": 0.344894,
+      "ratio": 1.169
+    },
+    {
+      "from_ms": 664375,
+      "rms": 0.352973,
+      "ratio": 1.196
+    },
+    {
+      "from_ms": 664385,
+      "rms": 0.402233,
+      "ratio": 1.363
+    },
+    {
+      "from_ms": 664395,
+      "rms": 0.408275,
+      "ratio": 1.384
+    },
+    {
+      "from_ms": 664405,
+      "rms": 0.440041,
+      "ratio": 1.492
+    },
+    {
+      "from_ms": 664415,
+      "rms": 0.411143,
+      "ratio": 1.394
+    }
+  ]
+}

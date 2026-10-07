@@ -1,0 +1,18 @@
+ELİFA — Netlify Yükleme (sürüm 70)
+
+Bu paket TEK uygulamadır: Birlikte (hatim & cüz paylaşımı + ortak niyet) artık
+uygulamanın İÇİNDE, native bir ekrandır. Ayrı /birlikte/ sayfası yoktur.
+
+DOSYALAR:
+- index.html ............ Elifa uygulaması (v70, Birlikte dahil)
+- manifest.json, service-worker.js, pwa_*.png ... PWA
+- netlify.toml, package.json
+- netlify/functions/org.mjs ... Birlikte paylaşım backend'i (/api/org)
+
+GERÇEK PAYLAŞIM İÇİN (linklerin başka cihazlarda çalışması):
+Netlify'a Git/CLI ile deploy edin (sürükle-bırak değil), ki Functions + Blobs
+çalışsın. Blobs otomatik gelir; ek ayar gerekmez.
+Sürükle-bırak da çalışır AMA o zaman paylaşım "çevrimdışı önizleme" olur
+(linkler yalnızca aynı cihazda). Fonksiyon aktifse otomatik gerçek moda geçer.
+
+Kaynaklar: Tanzil/KFGQPC (metin & hat), QUL/Tarteel (ses), QuranCDN (segment).

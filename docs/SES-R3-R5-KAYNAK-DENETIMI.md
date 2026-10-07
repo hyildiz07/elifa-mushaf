@@ -1,0 +1,13 @@
+# Südeys ve Hânî: kalan ses zamanı istisnalarının kaynak denetimi
+
+v246 istisna listesindeki hoca 3 (Abdurrahman es-Südeys) ve hoca 5 (Hânî er-Rifâî) için [QuranLab per-âyet kayıtları](https://huggingface.co/datasets/quranlab/quran-audio) incelendi. Bu kayıtlar uygulamadaki sûre MP3 dosyalarıyla aynı URL değildir. Dolayısıyla zaman damgaları doğrudan kopyalanmadı. Her hedef âyette per-âyet klibin baş, orta ve sonundan üç ayrı ses penceresi, uygulamanın sûre MP3'ündeki pencereyle PCM düzeyinde karşılaştırıldı. Tekil korelasyon tepesi ve üç pencerenin ortak zaman kayması arandı. Fâtiha'daki eşleşme başka sûreler için kanıt sayılmadı.
+
+Yedi Südeys âyetinde aynı okumanın açık kanıtı vardı: 16:71, 2:114, 2:223, 48:29, 6:38, 61:14 ve 9:74. Bu âyetlerde **yalnızca yanlış kelime numarası etiketleri** düzeltildi; sûre MP3 URL'si, bütün özgün segment başlangıç/bitişleri ve âyet aralığı korundu. Düzeltme ve üç pencere ölçümleri `assets/audio-timing-overrides-r3-r5.json` içindedir. Bağımsız testte her âyet kısa parçalara ayrıldı; hiçbir kelime segmenti dışarıda kalmadı veya sonraki âyete geçmedi.
+
+Üç başka Südeys âyeti (3:160, 4:134, 4:143) ve Mâide 5:5, 5:46, 5:82, QuranLab klibiyle aynı kayıt olduğunu kanıtlayacak PCM eşleşmesini vermedi. Bu altı âyete başka kaydın zamanları uygulanmamalıdır. Özellikle 3:160, 4:143 ve 5:5'te sağlayıcının âyet bitişi ile son kelime segmenti çakışır; yalnızca sayısal zamanları uzatmak sonraki âyet sesini de alabilir.
+
+Südeys 24:35 aynı okumayla güçlü biçimde eşleşti; ancak sağlayıcı 48 kelime için 47 ses satırı verdi ve 33–35. kelimelerin güvenli iç sınırları kanıtlanamadı. 39:54'te 13 kelime tek ses satırında; QuranLab'ın model zamanları özgün kelime uçlarına göre yaklaşık 100 ms içeri kırpılmış, 12 olası aralıkta sürekli sessiz durak doğrulanmadı. Bu iki âyette metni kısa kartlara ayırmak mümkün olsa da o kartların sesini kelime yutmadan kesmek henüz doğrulanmadı.
+
+Hânî 6:139 per-âyet klibi de aynı okumayla eşleşti; fakat eski sûre metadatası âyet başlangıcını önceki âyetle çakıştırıyor ve 17–18. kelime için model ile sağlayıcı etiketleri uyuşmuyor. [QUA v3.2.0](https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0) aynı sûre MP3'ünü kullansa da 6:139 için kelime veya tam-âyet zaman satırı yayımlamamış. Bu âyette kelime zamanı uydurulmadı.
+
+`quraniio/quran-timing-helper` aynı MP3 üzerinde yeni kelime hizası üretebilen bir [açık kaynak araçtır](https://github.com/quraniio/quran-timing-helper); hazır, bu hedeflere ait ölçüm sunmaz. Büyük model çıktısı da aracın `needs_review`/`needs_fix` denetiminden ve sesli kontrolden geçmeden kesin sınır sayılamaz.

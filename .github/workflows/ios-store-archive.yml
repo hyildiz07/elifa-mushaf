@@ -1,0 +1,85 @@
+name: iOS App Store archive
+on:
+  workflow_dispatch:
+    inputs:
+      upload_to_app_store:
+        description: Upload the signed IPA to App Store Connect after export
+        type: boolean
+        required: true
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  app-store:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Check Xcode
+        run: |
+          xcodebuild -version
+          test "$(xcodebuild -version | awk '/Xcode/{print $2}' | cut -d. -f1)" -ge 26
+      - run: npm ci
+      - name: Prepare Firebase and Apple credentials
+        env:
+          IOS_FIREBASE_PLIST_BASE64: ${{ secrets.IOS_FIREBASE_PLIST_BASE64 }}
+          APPSTORE_API_KEY_PRIVATE_BASE64: ${{ secrets.APPSTORE_API_KEY_PRIVATE_BASE64 }}
+          APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          APPSTORE_API_ISSUER_ID: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          for value in "$IOS_FIREBASE_PLIST_BASE64" "$APPSTORE_API_KEY_PRIVATE_BASE64" "$APPSTORE_API_KEY_ID" "$APPSTORE_API_ISSUER_ID" "$APPLE_TEAM_ID"; do
+            test -n "$value" || { echo 'Missing iOS App Store workflow secret'; exit 1; }
+          done
+          printf '%s' "$IOS_FIREBASE_PLIST_BASE64" | base64 -D > "$RUNNER_TEMP/GoogleService-Info.plist"
+          printf '%s' "$APPSTORE_API_KEY_PRIVATE_BASE64" | base64 -D > "$RUNNER_TEMP/AuthKey.p8"
+          chmod 600 "$RUNNER_TEMP/AuthKey.p8"
+          npm run ios:firebase -- "$RUNNER_TEMP/GoogleService-Info.plist"
+      - run: npm run ios:sync
+      - run: npm run ios:check
+      - name: Archive with Apple automatic signing
+        env:
+          APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          APPSTORE_API_ISSUER_ID: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Release \
+            -destination 'generic/platform=iOS' -archivePath "$RUNNER_TEMP/ElifaMushaf.xcarchive" \
+            -allowProvisioningUpdates -authenticationKeyPath "$RUNNER_TEMP/AuthKey.p8" \
+            -authenticationKeyID "$APPSTORE_API_KEY_ID" -authenticationKeyIssuerID "$APPSTORE_API_ISSUER_ID" \
+            DEVELOPMENT_TEAM="$APPLE_TEAM_ID" CODE_SIGN_STYLE=Automatic archive
+      - name: Export signed IPA
+        env:
+          APPSTORE_API_KEY_ID: ${{ secrets.APPSTORE_API_KEY_ID }}
+          APPSTORE_API_ISSUER_ID: ${{ secrets.APPSTORE_API_ISSUER_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          UPLOAD_TO_APP_STORE: ${{ inputs.upload_to_app_store }}
+        run: |
+          destination=export
+          if [ "$UPLOAD_TO_APP_STORE" = true ]; then destination=upload; fi
+          cat > "$RUNNER_TEMP/ExportOptions.plist" <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store-connect</string>
+            <key>destination</key><string>$destination</string>
+            <key>signingStyle</key><string>automatic</string>
+            <key>teamID</key><string>$APPLE_TEAM_ID</string>
+          </dict></plist>
+          EOF
+          xcodebuild -exportArchive -archivePath "$RUNNER_TEMP/ElifaMushaf.xcarchive" \
+            -exportPath "$RUNNER_TEMP/ElifaExport" -exportOptionsPlist "$RUNNER_TEMP/ExportOptions.plist" \
+            -allowProvisioningUpdates -authenticationKeyPath "$RUNNER_TEMP/AuthKey.p8" \
+            -authenticationKeyID "$APPSTORE_API_KEY_ID" -authenticationKeyIssuerID "$APPSTORE_API_ISSUER_ID"
+      - name: Save exported IPA
+        if: ${{ !inputs.upload_to_app_store }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: Elifa-Mushaf-iOS-IPA
+          path: ${{ runner.temp }}/ElifaExport/*.ipa
+          if-no-files-found: error

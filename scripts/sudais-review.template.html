@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Südeys âyet sesi incelemesi</title>
+<style>
+  :root{font:16px/1.45 system-ui,sans-serif;color:#173027;background:#f4f4ed}
+  *{box-sizing:border-box}body{margin:0}main{max-width:1240px;margin:auto;padding:20px}
+  h1{font-size:clamp(1.5rem,3vw,2rem);margin:.2em 0}h2{font-size:1.18rem;margin:0 0 12px}
+  p{margin:.6em 0}small,.muted{color:#576c62}.warning{background:#fff1d8;border-left:5px solid #a86514;padding:14px;margin:18px 0}
+  .panel{background:#fff;border:1px solid #d5dfd3;border-radius:12px;padding:16px;margin:14px 0;box-shadow:0 2px 8px #142c1a0a}
+  .row{display:flex;flex-wrap:wrap;align-items:center;gap:9px}.row>*{flex:none}
+  label{display:inline-flex;align-items:center;gap:6px}button,input,select,textarea{font:inherit}
+  button,select,input{padding:7px 10px}button{cursor:pointer;border:1px solid #809988;border-radius:7px;background:#f4faf5;color:#18352a}
+  button:hover{background:#dfefe2}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #f5b341}
+  input[type=number]{width:135px}input[type=text]{min-width:260px;flex:1}audio{max-width:100%;width:580px}
+  #wave{display:block;width:100%;height:230px;cursor:crosshair;background:#f8fcfa;border:1px solid #aec3b3;border-radius:7px}
+  .words{display:flex;flex-wrap:wrap;gap:8px;direction:rtl}.word{font:1.33rem/1.75 serif;direction:rtl;background:#fafbf8;border:1px solid #b9c9b9}
+  .word small{font:12px system-ui;display:inline-block;vertical-align:top;padding-inline:3px}.word.selected{background:#dbf2e2;border-color:#367a55}
+  table{width:100%;border-collapse:collapse}th,td{text-align:left;border-bottom:1px solid #d8e0d7;padding:7px 5px;vertical-align:top}
+  .scroll{overflow:auto}.candidate{border:1px solid #d9e1d5;border-radius:10px;padding:12px;margin:10px 0}
+  .candidate strong{font-size:1.05rem}.candidate audio{width:250px;display:block;margin:5px 0}
+  .candidate .clips{display:flex;flex-wrap:wrap;gap:14px}.candidate .clips label{display:block}
+  .arabic{font:1.35rem serif;direction:rtl;unicode-bidi:isolate}.tag{display:inline-block;padding:2px 7px;border-radius:15px;background:#e5efe8;color:#28543c}
+  .verdict{border:1px solid #d5dfd3;border-radius:9px;margin:14px 0 0;padding:12px}.verdict legend{font-weight:700}
+  .verdict label{flex-wrap:wrap}.verdict select{max-width:100%}
+  #status{min-height:1.5em;color:#8a5218}details summary{cursor:pointer;font-weight:600}
+  @media(max-width:700px){main{padding:12px}.panel{padding:12px}audio{width:100%}input[type=text]{min-width:100%}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Südeys — âyet sesi incelemesi</h1>
+  <p class="muted">Sekiz açık istisna · aynı kaynak sûre MP3'ü · kanonik mushaf kelimeleri</p>
+  <div class="warning"><strong>Yalnız inceleme taslağı.</strong> Sağlayıcı zamanları ve akustik adaylar yanlış olabilir. Kesimler ancak sesin iki tarafı insan tarafından dinlenip kelime bütünlüğü doğrulandıktan sonra ikinci incelemeye alınabilir. Bu sayfa üretim uygulamasına bağlanmaz; dışa aktarılan kayıtlar otomatik onay sayılmaz.</div>
+
+  <section class="panel">
+    <div class="row"><label for="verse">Âyet <select id="verse"></select></label><span id="issue"></span></div>
+    <p><audio id="audio" controls preload="metadata"></audio></p>
+    <p class="muted">Kaynak: <a id="source" target="_blank" rel="noreferrer">QuranCDN sûre MP3'ü</a> · <span id="sourceInfo"></span></p>
+    <div class="row"><label>Başlangıç (s) <input id="from" type="number" min="0" step="0.01"></label>
+      <label>Bitiş (s) <input id="to" type="number" min="0" step="0.01"></label>
+      <button id="playRange">Aralığı dinle</button><label><input id="loop" type="checkbox"> Tekrar et</label>
+      <button id="markStart">Şimdiki zamanı başlangıç yap</button><button id="markEnd">Şimdiki zamanı bitiş yap</button>
+      <button id="stop">Durdur</button></div>
+    <p id="status" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="panel"><h2>Ses dalgası</h2><canvas id="wave" width="1200" height="230" aria-label="Seçilen âyetin kaynak MP3 dalga özeti"></canvas>
+    <p class="muted">Tıkla: başlangıç · Shift+tıkla: bitiş. Turuncu: âyetin sağlayıcı bitişi; mor: sonraki âyet başlangıcı. Noktalı çizgiler yalnız inceleme adaylarıdır. Dalga görünümü kaynak MP3'ün aynı PCM penceresinden ölçüldü.</p></section>
+
+  <section class="panel"><h2>Kanonik âyet kelimeleri</h2><div class="words" id="words" lang="ar"></div>
+    <p class="muted">Kelimeye tıkla: ilk kelime · Shift+tıkla: son kelime.</p>
+    <div class="row"><label>İlk kelime <input id="first" type="number" min="1" step="1"></label>
+      <label>Son kelime <input id="last" type="number" min="1" step="1"></label>
+      <label>Dinleme notu <input id="note" type="text" placeholder="Duyulan kelimeler ve kesim hakkında not"></label></div>
+    <fieldset class="verdict"><legend>Dinleme sonucu (her sınırı iki taraftan dinleyin)</legend>
+      <div class="row"><label>İlk kelime eksiksiz mi? <select id="firstComplete"><option value="unknown">Emin değilim</option><option value="yes">Evet</option><option value="no">Hayır</option></select></label>
+        <label>Son kelime eksiksiz mi? <select id="lastComplete"><option value="unknown">Emin değilim</option><option value="yes">Evet</option><option value="no">Hayır</option></select></label>
+        <label>Sonraki kelimeden ses sızmıyor mu? <select id="noLeak"><option value="unknown">Emin değilim</option><option value="yes">Evet, sızmıyor</option><option value="no">Hayır, sızıyor</option></select></label></div>
+      <p><label><input id="listened" type="checkbox"> Bu aralığı ve komşu sesleri bizzat dinledim</label></p>
+      <p class="muted">“Evet” işaretleri bile yalnız insan dinleme adayıdır. İkinci bağımsız kontrol ve kaynak eşlemesi olmadan uygulamaya aktarılmaz.</p>
+    </fieldset>
+    <p><button id="add">İnceleme satırı ekle</button></p>
+  </section>
+
+  <section class="panel" id="candidatesPanel"><h2>24:35 akustik adayları</h2>
+    <p class="muted">Aşağıdaki kesimler model ve iki kanallı PCM enerji ölçümünden geldi. Kelime sınırı olarak onaylanmadı. Bağlam kaydında önerilen kesim tam 1,5. saniyededir; önce ve sonra kayıtlarını ayrıca dinleyin.</p>
+    <p class="muted">WAV dosyaları için sayfayı <code>node scripts/serve-sudais-review.mjs</code> ile açın (yerel 4174 portu); uygulama geliştirme sunucusu inceleme WAV'larını bilerek sunmaz.</p>
+    <div id="candidates"></div></section>
+
+  <section class="panel"><h2>Elle işaretlenen aralıklar</h2><div class="scroll"><table><thead><tr><th>Ses</th><th>Kelimeler</th><th>Dinleme sonucu</th><th>Not</th><th>İşlem</th></tr></thead><tbody id="annotations"></tbody></table></div>
+    <p class="row"><button id="export">Bu âyeti JSON dışa aktar</button><button id="exportAll">Sekiz âyeti JSON dışa aktar</button><button id="clear">Bu âyetin taslağını temizle</button></p>
+    <p class="muted">Taslak bu tarayıcının yerel deposunda tutulur. JSON, kaynak MP3 adresini ve kelime aralıklarını içerir; üretim zaman dosyası değildir.</p></section>
+
+  <details class="panel"><summary>Sağlayıcının ham kelime etiketleri (doğrulanmamış)</summary>
+    <p class="muted">Sıra tekrarları ve çakışmalar olabilir; bu tabloyu doğrudan kesim verisi olarak kullanmayın.</p>
+    <div class="scroll"><table><thead><tr><th>Etiket</th><th>Başlangıç</th><th>Bitiş</th></tr></thead><tbody id="provider"></tbody></table></div></details>
+</main>
+<!--REVIEW_DATA-->
+<script>
+const data=JSON.parse(document.getElementById('review-data').textContent);
+const $=id=>document.getElementById(id),audio=$('audio'),canvas=$('wave'),ctx=canvas.getContext('2d');
+const storageKey='elifa-sudais-verse-review-v1';
+let drafts={};try{const saved=JSON.parse(localStorage.getItem(storageKey)||'{}');if(saved&&typeof saved==='object'&&!Array.isArray(saved))drafts=saved;}catch{}
+let current=data.records[0],rangePlaying=false;
+const fmt=ms=>(ms/1000).toFixed(2);
+const status=message=>{$('status').textContent=message};
+function save(){try{localStorage.setItem(storageKey,JSON.stringify(drafts));status('İnceleme taslağı bu tarayıcıda kaydedildi.')}catch{status('Yerel kayıt engellendi; JSON dışa aktarmayı kullanın.')}renderAnnotations()}
+function waveEnd(){return current.waveStart+current.rms.length*current.waveFrameMs}
+function xAt(ms){return (ms-current.waveStart)/(waveEnd()-current.waveStart)*canvas.width}
+function draw(){const w=canvas.width,h=canvas.height;ctx.fillStyle='#f8fcfa';ctx.fillRect(0,0,w,h);
+  const a=xAt(Number($('from').value)*1000),b=xAt(Number($('to').value)*1000);
+  ctx.fillStyle='#e0f1e5';ctx.fillRect(Math.max(0,a),0,Math.max(0,Math.min(w,b)-Math.max(0,a)),h);
+  const values=current.rms,max=Math.max(.0001,...values);ctx.fillStyle='#427760';
+  for(let x=0;x<w;x++){const lo=Math.floor(x/w*values.length),hi=Math.max(lo+1,Math.floor((x+1)/w*values.length));
+    let peak=0;for(let i=lo;i<hi;i++)peak=Math.max(peak,values[i]);
+    const amp=Math.min(h*.43,peak/max*h*.43);ctx.fillRect(x,h/2-amp,1,amp*2);}
+  const marker=(ms,color,dashed=false)=>{const x=xAt(ms);if(x<0||x>w)return;ctx.strokeStyle=color;ctx.lineWidth=2;
+    ctx.setLineDash(dashed?[5,4]:[]);ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();ctx.setLineDash([])};
+  marker(current.providerRange[1],'#d27a16');if(current.nextStart!=null)marker(current.nextStart,'#8258a5');
+  for(const candidate of current.reviewCandidates)marker(candidate.cutMs,'#bf402f',true);
+  marker(audio.currentTime*1000,'#135c9c');
+  ctx.fillStyle='#284438';ctx.font='12px system-ui';for(let t=Math.ceil(current.waveStart/10000)*10000;t<waveEnd();t+=10000)
+    ctx.fillText(fmt(t)+' s',Math.max(2,xAt(t)+2),h-6);
+}
+function renderWords(){const box=$('words');box.replaceChildren();current.words.forEach((word,i)=>{
+  const button=document.createElement('button');button.type='button';button.className='word'+(i+1>=Number($('first').value)&&i+1<=Number($('last').value)?' selected':'');
+  const number=document.createElement('small');number.textContent=String(i+1);button.append(number,document.createTextNode(' '+word));
+  button.onclick=event=>{(event.shiftKey?$('last'):$('first')).value=i+1;renderWords()};box.append(button);});}
+function renderProvider(){const body=$('provider');body.replaceChildren();for(const [pos,from,to] of current.providerSegments){
+  const row=document.createElement('tr');for(const text of [String(pos)+(current.words[pos-1]?' · '+current.words[pos-1]:''),fmt(from),fmt(to)]){
+    const cell=document.createElement('td');cell.textContent=text;row.append(cell);}body.append(row);}}
+function candidateClip(file){const wrapper=document.createElement('label'),player=document.createElement('audio');
+  wrapper.textContent=file.label;player.controls=true;player.preload='none';player.src='../test-results/review-sudais-24-35/'+file.name;
+  wrapper.append(player);return wrapper;}
+function renderCandidates(){const panel=$('candidatesPanel'),box=$('candidates');box.replaceChildren();panel.hidden=current.key!=='24:35';
+  if(panel.hidden)return;for(const c of current.reviewCandidates){const section=document.createElement('div');section.className='candidate';
+    const heading=document.createElement('strong');heading.textContent=`${c.afterWord}/${c.beforeWord}. kelime · ${fmt(c.cutMs)} sn · düşük enerji ${c.quietRunMs} ms`;
+    const text=document.createElement('p');text.className='arabic';text.textContent=c.previousArabic+'  |  '+c.nextArabic;
+    const clips=document.createElement('div');clips.className='clips';
+    clips.append(candidateClip({label:'Bağlam (kesim 1,5. saniyede)',name:c.files.context}),
+      candidateClip({label:'Kesim öncesi',name:c.files.before}),candidateClip({label:'Kesim sonrası',name:c.files.after}));
+    const button=document.createElement('button');button.type='button';button.textContent='Kesimi ana MP3 üzerinde işaretle';
+    button.onclick=()=>{$('from').value=((c.cutMs-1500)/1000).toFixed(3);$('to').value=((c.cutMs+1500)/1000).toFixed(3);
+      $('first').value=c.afterWord;$('last').value=c.beforeWord;renderWords();draw();window.scrollTo({top:0,behavior:'smooth'})};
+    section.append(heading,text,clips,button);box.append(section);}}
+function renderAnnotations(){const body=$('annotations');body.replaceChildren();for(const [i,item] of (drafts[current.key]||[]).entries()){
+  const checks=item.listening_checks||{},result=item.review_status==='human_listened_candidate'?'Dinlendi · ikinci kontrol gerekli':
+    item.review_status==='human_found_problem'?'Hata duyuldu':'Belirsiz / dinlenmedi';
+  const row=document.createElement('tr');for(const text of [`${fmt(item.from_ms)}–${fmt(item.to_ms)} sn`,`${item.first_word}–${item.last_word}`,
+    `${result} · ilk ${checks.first_complete||'?'} · son ${checks.last_complete||'?'} · sızma yok ${checks.no_next_word_leak||'?'}`,item.note]){
+    const cell=document.createElement('td');cell.textContent=text;row.append(cell);}
+  const actions=document.createElement('td'),play=document.createElement('button'),remove=document.createElement('button');
+  play.type='button';play.textContent='Dinle';play.onclick=()=>{$('from').value=fmt(item.from_ms);$('to').value=fmt(item.to_ms);playRange()};
+  remove.type='button';remove.textContent='Sil';remove.onclick=()=>{drafts[current.key].splice(i,1);save()};
+  actions.append(play,remove);row.append(actions);body.append(row);}}
+function showVerse(key){const next=data.records.find(record=>record.key===key);if(!next)return;
+  rangePlaying=false;audio.pause();current=next;audio.src=current.audioUrl;audio.load();
+  $('issue').textContent=current.issue;$('source').href=current.audioUrl;
+  $('sourceInfo').textContent=`${current.words.length} kelime · ${current.providerSegments.length} ham etiket · ${current.audioBytes||'?'} bayt`;
+  $('from').value=(Math.max(0,current.providerRange[0]-1000)/1000).toFixed(2);
+  $('to').value=((Math.max(current.providerRange[1],current.lastWordEnd)+1000)/1000).toFixed(2);
+  $('first').max=$('last').max=current.words.length;$('first').value=1;$('last').value=Math.min(5,current.words.length);
+  $('note').value='';for(const id of ['firstComplete','lastComplete','noLeak'])$(id).value='unknown';$('listened').checked=false;
+  status('Sağlayıcı zamanları doğrulanmadı; dinleyerek işaretleyin.');
+  renderWords();renderProvider();renderCandidates();renderAnnotations();draw();}
+async function playRange(){const from=Number($('from').value),to=Number($('to').value);
+  if(!Number.isFinite(from)||!Number.isFinite(to)||from<0||to<=from){status('Geçerli bir ses aralığı girin.');return}
+  try{rangePlaying=true;audio.currentTime=from;await audio.play();status(`${from.toFixed(2)}–${to.toFixed(2)} saniye dinleniyor.`)}
+  catch(error){rangePlaying=false;status('Ses açılamadı: '+String(error.message||error));}}
+function exportRows(all){const selected=all?data.records:[current];const payload={kind:'human-listening-review-draft',review_status:'unverified',
+  reciter:data.reciter,source_note:data.sourceNote,exported_at:new Date().toISOString(),
+  verses:selected.map(record=>({verse_key:record.key,audio_url:record.audioUrl,audio_bytes:record.audioBytes,
+    canonical_words:record.words,provider_range_ms:record.providerRange,next_verse_start_ms:record.nextStart,
+    annotations:drafts[record.key]||[]}))};
+  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');
+  link.href=url;link.download=all?'sudais-eight-verses-review.json':`sudais-${current.sid}-${current.ay}-review.json`;
+  document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  status('JSON dışa aktarıldı; tüm satırlar hâlâ doğrulanmamış inceleme taslağıdır.');}
+for(const record of data.records){const option=document.createElement('option');option.value=record.key;option.textContent=`${record.key} · ${record.words.length} kelime`;$('verse').append(option)}
+$('verse').onchange=()=>showVerse($('verse').value);
+canvas.onclick=event=>{const box=canvas.getBoundingClientRect(),ratio=Math.max(0,Math.min(1,(event.clientX-box.left)/box.width));
+  const seconds=(current.waveStart+ratio*(waveEnd()-current.waveStart))/1000;
+  (event.shiftKey?$('to'):$('from')).value=seconds.toFixed(3);draw()};
+for(const id of ['from','to'])$(id).oninput=draw;
+for(const id of ['first','last'])$(id).oninput=renderWords;
+$('playRange').onclick=playRange;$('stop').onclick=()=>{rangePlaying=false;audio.pause();status('Durduruldu.')};
+$('markStart').onclick=()=>{$('from').value=audio.currentTime.toFixed(3);draw()};
+$('markEnd').onclick=()=>{$('to').value=audio.currentTime.toFixed(3);draw()};
+audio.ontimeupdate=()=>{if(rangePlaying&&audio.currentTime>=Number($('to').value)-.03){
+  if($('loop').checked)audio.currentTime=Number($('from').value);else{rangePlaying=false;audio.pause();status('Aralık tamamlandı.')}}draw()};
+audio.onerror=()=>status('Kaynak MP3 yüklenemedi. Ağ bağlantısını ve kaynak adresini kontrol edin.');
+$('add').onclick=()=>{const from=Number($('from').value),to=Number($('to').value),first=Number($('first').value),last=Number($('last').value);
+  if(!Number.isFinite(from)||!Number.isFinite(to)||from<0||to<=from||!Number.isInteger(first)||!Number.isInteger(last)||first<1||last<first||last>current.words.length){
+    status('Ses ve kelime aralıklarını düzeltin.');return;}
+  const checks={first_complete:$('firstComplete').value,last_complete:$('lastComplete').value,
+    no_next_word_leak:$('noLeak').value},listened=$('listened').checked;
+  const answers=Object.values(checks),reviewStatus=listened&&answers.some(value=>value==='no')?'human_found_problem':
+    listened&&answers.every(value=>value==='yes')?'human_listened_candidate':'unverified';
+  const item={from_ms:Math.round(from*1000),to_ms:Math.round(to*1000),first_word:first,last_word:last,
+    note:$('note').value.trim(),listening_checks:checks,listened,review_status:reviewStatus,created_at:new Date().toISOString()};
+  (drafts[current.key]??=[]).push(item);save();
+  for(const id of ['firstComplete','lastComplete','noLeak'])$(id).value='unknown';$('listened').checked=false;$('note').value='';};
+$('export').onclick=()=>exportRows(false);$('exportAll').onclick=()=>exportRows(true);
+$('clear').onclick=()=>{if(confirm(`${current.key} âyetinin yalnız bu tarayıcıdaki taslağı silinsin mi?`)){
+  drafts[current.key]=[];save();}};
+showVerse(data.records[0].key);
+</script>
+</body>
+</html>

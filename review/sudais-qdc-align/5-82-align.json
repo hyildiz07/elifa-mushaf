@@ -1,0 +1,201 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/5.mp3",
+  "source_file_size": 38326543,
+  "source_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+  "excerpt_file": "review/sudais-qdc-align/5-82.wav",
+  "excerpt_sha256": "fd3864e0aca82ae71c0b5c3c5c123bd704d7dd97ba9cdd7e29aa189ea17dd999",
+  "excerpt_from_ms": 1852870,
+  "excerpt_to_ms": 1883090,
+  "provider_segments": [
+    [
+      1,
+      1852870,
+      1854540
+    ],
+    [
+      2,
+      1854540,
+      1855260
+    ],
+    [
+      3,
+      1855260,
+      1856130
+    ],
+    [
+      4,
+      1856130,
+      1857100
+    ],
+    [
+      5,
+      1857100,
+      1858500
+    ],
+    [
+      6,
+      1858500,
+      1859170
+    ],
+    [
+      7,
+      1859170,
+      1859910
+    ],
+    [
+      8,
+      1859910,
+      1861200
+    ],
+    [
+      10,
+      1861230,
+      1864030
+    ],
+    [
+      11,
+      1864030,
+      1865430
+    ],
+    [
+      12,
+      1865430,
+      1866340
+    ],
+    [
+      13,
+      1866340,
+      1867370
+    ],
+    [
+      14,
+      1867370,
+      1868170
+    ],
+    [
+      15,
+      1868170,
+      1869010
+    ],
+    [
+      16,
+      1869010,
+      1869970
+    ],
+    [
+      17,
+      1869970,
+      1870330
+    ],
+    [
+      14,
+      1870330,
+      1870990
+    ],
+    [
+      15,
+      1870990,
+      1874290
+    ],
+    [
+      6,
+      1874291,
+      1879310
+    ],
+    [
+      24,
+      1879310,
+      1880600
+    ],
+    [
+      25,
+      1880600,
+      1880950
+    ],
+    [
+      26,
+      1880950,
+      1882335
+    ]
+  ],
+  "aligner": {
+    "audio_id": "55b0942637204f2097df4c665621b8f9",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 3.14,
+        "ref_from": "5:81:11",
+        "ref_to": "5:81:11",
+        "matched_text": "أَوْلِيَآءَ",
+        "confidence": 0.667,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 3.24,
+        "time_to": 14.853,
+        "ref_from": "5:81:9",
+        "ref_to": "5:81:15",
+        "matched_text": "مَا ٱتَّخَذُوهُمْ أَوْلِيَآءَ وَلَـٰكِنَّ كَثِيرًا مِّنْهُمْ فَـٰسِقُونَ",
+        "confidence": 1,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 14.883,
+        "time_to": 24,
+        "ref_from": "5:82:1",
+        "ref_to": "5:82:9",
+        "matched_text": "لَتَجِدَنَّ أَشَدَّ ٱلنَّاسِ عَدَٰوَةً لِّلَّذِينَ ءَامَنُوا۟ ٱلْيَهُودَ وَٱلَّذِينَ أَشْرَكُوا۟",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 4,
+        "time_from": 24.14,
+        "time_to": 30.22,
+        "ref_from": "5:82:10",
+        "ref_to": "5:82:15",
+        "matched_text": "وَلَتَجِدَنَّ أَقْرَبَهُم مَّوَدَّةً لِّلَّذِينَ ءَامَنُوا۟ ٱلَّذِينَ",
+        "confidence": 0.958,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "GPU",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.3936498165130615,
+        "queue_seconds": 2.367584511230234,
+        "total_seconds": 3.7612343277432956
+      }
+    }
+  }
+}

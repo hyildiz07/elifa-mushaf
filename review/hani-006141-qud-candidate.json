@@ -1,0 +1,126 @@
+{
+  "status": "unverified-review-only",
+  "verse_key": "6:141",
+  "source_url": "https://everyayah.com/data/Hani_Rifai_192kbps/006141.mp3",
+  "source_bytes": 1012008,
+  "source_sha256": "ebad882ab5871aa23c889c50a458912328de2be8bdf96ddba93734a485dbdb54",
+  "api_endpoint": "https://hetchyy-quranic-universal-aligner.hf.space/api/v1/align/url",
+  "request": {
+    "riwayah": "hafs",
+    "model_name": "Large",
+    "device": "CPU"
+  },
+  "received_at_utc": "2026-09-30T08:07:20.432Z",
+  "response": {
+    "audio_id": "0f9e9f34ec11461aa7b11658fc4a26a9",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 4.2,
+        "time_to": 13.84,
+        "ref_from": "6:141:1",
+        "ref_to": "6:141:7",
+        "matched_text": "وَهُوَ ٱلَّذِىٓ أَنشَأَ جَنَّـٰتٍ مَّعْرُوشَـٰتٍ وَغَيْرَ مَعْرُوشَـٰتٍ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 13.87,
+        "time_to": 19.047,
+        "ref_from": "6:141:8",
+        "ref_to": "6:141:11",
+        "matched_text": "وَٱلنَّخْلَ وَٱلزَّرْعَ مُخْتَلِفًا أُكُلُهُۥ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 19.077,
+        "time_to": 26.433,
+        "ref_from": "6:141:12",
+        "ref_to": "6:141:16",
+        "matched_text": "وَٱلزَّيْتُونَ وَٱلرُّمَّانَ مُتَشَـٰبِهًا وَغَيْرَ مُتَشَـٰبِهٍ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 4,
+        "time_from": 26.463,
+        "time_to": 30.833,
+        "ref_from": "6:141:17",
+        "ref_to": "6:141:21",
+        "matched_text": "كُلُوا۟ مِن ثَمَرِهِۦٓ إِذَآ أَثْمَرَ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 5,
+        "time_from": 30.863,
+        "time_to": 37.1,
+        "ref_from": "6:141:22",
+        "ref_to": "6:141:27",
+        "matched_text": "وَءَاتُوا۟ حَقَّهُۥ يَوْمَ حَصَادِهِۦ وَلَا تُسْرِفُوٓا۟",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 6,
+        "time_from": 37.13,
+        "time_to": 42.15,
+        "ref_from": "6:141:28",
+        "ref_to": "6:141:31",
+        "matched_text": "إِنَّهُۥ لَا يُحِبُّ ٱلْمُسْرِفِينَ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 3.2065865993499756,
+        "queue_seconds": 0.06338952598161995,
+        "total_seconds": 3.2699761253315955
+      }
+    },
+    "url_metadata": {
+      "title": "006141",
+      "duration": null,
+      "source_url": "https://everyayah.com/data/Hani_Rifai_192kbps/006141.mp3"
+    }
+  }
+}

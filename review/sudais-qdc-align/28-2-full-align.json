@@ -1,0 +1,75 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/28.mp3",
+  "source_file_size": 16347617,
+  "source_sha256": "f8e5291cf10a3a29230fd443b5ddabc4297cf5b16c70250dda3bfe6314917576",
+  "excerpt_file": "test-results/sudais-qdc-align/28-2.wav",
+  "excerpt_sha256": "7076c72e5f963b2cff9f56ceb85fa30907e3c3f5269661014cf26fd6a10deb9e",
+  "excerpt_from_ms": 6980,
+  "excerpt_to_ms": 10460,
+  "provider_segments": [
+    [
+      1,
+      6980,
+      7570
+    ],
+    [
+      2,
+      7570,
+      8400
+    ],
+    [
+      3,
+      8400,
+      9220
+    ],
+    [
+      4,
+      9220,
+      10255
+    ]
+  ],
+  "aligner": {
+    "audio_id": "9734e988649c426b9d2f2ee069c1e7a2",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 3.48,
+        "ref_from": "28:2:1",
+        "ref_to": "28:2:4",
+        "matched_text": "تِلْكَ ءَايَـٰتُ ٱلْكِتَـٰبِ ٱلْمُبِينِ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Base",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 0.6697027683258057,
+        "queue_seconds": 0.02586728724418208,
+        "total_seconds": 0.6955700555699877
+      },
+      "model_retry": {
+        "from": "Base",
+        "to": "Large",
+        "reason": "anchor_failed"
+      }
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "status": "machine-review-only",
+  "key": "5:111",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/5.mp3",
+  "source_file": "test-results/sudais-qdc-5.mp3",
+  "source_size": 38326543,
+  "source_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+  "source_excerpt_ms": [
+    2474190,
+    2490960
+  ],
+  "decoded_excerpt_from_ms": 2474189.977324263,
+  "excerpt_sha256": "39eaa8ab0b5ff3df370f638064090eef0c0cac6dc4996c1faf31c7d05962e27e",
+  "excerpt_bytes": 1479160,
+  "requested_model": "Large",
+  "requested_device": "GPU",
+  "response_status": 200,
+  "decode_seconds": 2.577,
+  "request_seconds": 7.627,
+  "model_runtime": {
+    "processing_seconds": 1.9753196239471436,
+    "queue_seconds": 0.09874036067049019,
+    "total_seconds": 2.0740599846176337
+  },
+  "effective_model": "Large",
+  "segments": [
+    {
+      "from": "5:110:39",
+      "to": "5:110:46",
+      "source_from_ms": 2474390,
+      "source_to_ms": 2481060,
+      "confidence": 0.78,
+      "missing": true,
+      "repeated": false,
+      "error": null
+    },
+    {
+      "from": "5:110:1",
+      "to": "5:110:1",
+      "source_from_ms": 2481060,
+      "source_to_ms": 2481430,
+      "confidence": 0.78,
+      "missing": true,
+      "repeated": false,
+      "error": null
+    },
+    {
+      "from": "5:110:47",
+      "to": "5:110:54",
+      "source_from_ms": 2481460,
+      "source_to_ms": 2489483,
+      "confidence": 1,
+      "missing": false,
+      "repeated": false,
+      "error": null
+    },
+    {
+      "from": "5:110:55",
+      "to": "5:110:56",
+      "source_from_ms": 2489513,
+      "source_to_ms": 2490960,
+      "confidence": 0.727,
+      "missing": true,
+      "repeated": false,
+      "error": null
+    }
+  ],
+  "provider_error": null
+}

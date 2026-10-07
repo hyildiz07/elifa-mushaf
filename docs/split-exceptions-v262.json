@@ -1,0 +1,655 @@
+{
+  "version": "v262",
+  "source": "full Quran, Medine orthography, verified candidate recordings",
+  "structuralErrors": 0,
+  "singleEightPlusBothOrthographies": 14,
+  "partsOverEightBothOrthographies": 24,
+  "cases": [
+    {
+      "reciter": 12,
+      "verse": "2:145",
+      "words": 32,
+      "parts": [
+        10,
+        4,
+        5,
+        13
+      ],
+      "fallback": false,
+      "blocked": false,
+      "rows": 32,
+      "uniquePositions": 32,
+      "safePositions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "overlappingBoundaries": []
+    },
+    {
+      "reciter": 3,
+      "verse": "24:35",
+      "words": 48,
+      "parts": [
+        36,
+        4,
+        4,
+        4
+      ],
+      "fallback": false,
+      "blocked": false,
+      "rows": 47,
+      "uniquePositions": 45,
+      "safePositions": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "overlappingBoundaries": [
+        {
+          "pos": 1,
+          "ms": -39110
+        },
+        {
+          "pos": 2,
+          "ms": -38660
+        },
+        {
+          "pos": 3,
+          "ms": -37320
+        },
+        {
+          "pos": 4,
+          "ms": -36250
+        },
+        {
+          "pos": 5,
+          "ms": -35710
+        },
+        {
+          "pos": 6,
+          "ms": -34910
+        },
+        {
+          "pos": 7,
+          "ms": -33400
+        },
+        {
+          "pos": 8,
+          "ms": -32650
+        },
+        {
+          "pos": 9,
+          "ms": -31610
+        },
+        {
+          "pos": 10,
+          "ms": -29930
+        },
+        {
+          "pos": 11,
+          "ms": -29630
+        },
+        {
+          "pos": 12,
+          "ms": -28600
+        },
+        {
+          "pos": 13,
+          "ms": -27390
+        },
+        {
+          "pos": 14,
+          "ms": -26140
+        },
+        {
+          "pos": 15,
+          "ms": -24890
+        },
+        {
+          "pos": 16,
+          "ms": -23940
+        },
+        {
+          "pos": 17,
+          "ms": -22870
+        },
+        {
+          "pos": 18,
+          "ms": -22550
+        },
+        {
+          "pos": 19,
+          "ms": -21480
+        },
+        {
+          "pos": 20,
+          "ms": -18500
+        },
+        {
+          "pos": 21,
+          "ms": -16810
+        },
+        {
+          "pos": 22,
+          "ms": -16520
+        },
+        {
+          "pos": 23,
+          "ms": -14850
+        },
+        {
+          "pos": 24,
+          "ms": -14370
+        },
+        {
+          "pos": 25,
+          "ms": -13120
+        },
+        {
+          "pos": 26,
+          "ms": -12260
+        },
+        {
+          "pos": 27,
+          "ms": -11260
+        },
+        {
+          "pos": 28,
+          "ms": -8350
+        },
+        {
+          "pos": 29,
+          "ms": -7430
+        },
+        {
+          "pos": 30,
+          "ms": -7100
+        },
+        {
+          "pos": 31,
+          "ms": -5850
+        }
+      ]
+    },
+    {
+      "reciter": 3,
+      "verse": "3:160",
+      "words": 18,
+      "parts": [
+        18
+      ],
+      "fallback": true,
+      "blocked": true,
+      "rows": 18,
+      "uniquePositions": 18,
+      "safePositions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "overlappingBoundaries": []
+    },
+    {
+      "reciter": 3,
+      "verse": "39:54",
+      "words": 13,
+      "parts": [
+        13
+      ],
+      "fallback": false,
+      "blocked": false,
+      "rows": 1,
+      "uniquePositions": 1,
+      "safePositions": [],
+      "overlappingBoundaries": []
+    },
+    {
+      "reciter": 3,
+      "verse": "4:134",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "blocked": false,
+      "rows": 15,
+      "uniquePositions": 13,
+      "safePositions": [],
+      "overlappingBoundaries": [
+        {
+          "pos": 1,
+          "ms": -13540
+        },
+        {
+          "pos": 2,
+          "ms": -12940
+        },
+        {
+          "pos": 3,
+          "ms": -12150
+        },
+        {
+          "pos": 4,
+          "ms": -11290
+        },
+        {
+          "pos": 5,
+          "ms": -10290
+        },
+        {
+          "pos": 6,
+          "ms": -9060
+        },
+        {
+          "pos": 7,
+          "ms": -10655
+        },
+        {
+          "pos": 8,
+          "ms": -9895
+        },
+        {
+          "pos": 9,
+          "ms": -8865
+        },
+        {
+          "pos": 10,
+          "ms": -7075
+        },
+        {
+          "pos": 11,
+          "ms": -5995
+        },
+        {
+          "pos": 12,
+          "ms": -4915
+        }
+      ]
+    },
+    {
+      "reciter": 3,
+      "verse": "4:143",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": true,
+      "blocked": true,
+      "rows": 16,
+      "uniquePositions": 16,
+      "safePositions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "overlappingBoundaries": []
+    },
+    {
+      "reciter": 3,
+      "verse": "5:5",
+      "words": 43,
+      "parts": [
+        43
+      ],
+      "fallback": true,
+      "blocked": true,
+      "rows": 45,
+      "uniquePositions": 43,
+      "safePositions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42
+      ],
+      "overlappingBoundaries": [
+        {
+          "pos": 24,
+          "ms": -2900
+        }
+      ]
+    },
+    {
+      "reciter": 3,
+      "verse": "5:46",
+      "words": 26,
+      "parts": [
+        4,
+        15,
+        4,
+        3
+      ],
+      "fallback": false,
+      "blocked": false,
+      "rows": 24,
+      "uniquePositions": 20,
+      "safePositions": [
+        1,
+        2,
+        3,
+        4,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "overlappingBoundaries": [
+        {
+          "pos": 5,
+          "ms": -4780
+        },
+        {
+          "pos": 6,
+          "ms": -9140
+        },
+        {
+          "pos": 7,
+          "ms": -9620
+        },
+        {
+          "pos": 8,
+          "ms": -8950
+        },
+        {
+          "pos": 9,
+          "ms": -8480
+        },
+        {
+          "pos": 10,
+          "ms": -7820
+        },
+        {
+          "pos": 11,
+          "ms": -7460
+        }
+      ]
+    },
+    {
+      "reciter": 3,
+      "verse": "5:82",
+      "words": 26,
+      "parts": [
+        5,
+        19,
+        2
+      ],
+      "fallback": false,
+      "blocked": false,
+      "rows": 22,
+      "uniquePositions": 19,
+      "safePositions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        24,
+        25
+      ],
+      "overlappingBoundaries": [
+        {
+          "pos": 6,
+          "ms": -20140
+        },
+        {
+          "pos": 7,
+          "ms": -19400
+        },
+        {
+          "pos": 10,
+          "ms": -15280
+        },
+        {
+          "pos": 11,
+          "ms": -13880
+        },
+        {
+          "pos": 12,
+          "ms": -12970
+        },
+        {
+          "pos": 13,
+          "ms": -11940
+        },
+        {
+          "pos": 14,
+          "ms": -11140
+        },
+        {
+          "pos": 15,
+          "ms": -10300
+        },
+        {
+          "pos": 16,
+          "ms": -9340
+        }
+      ]
+    },
+    {
+      "reciter": 5,
+      "verse": "34:46",
+      "words": 24,
+      "parts": [
+        24
+      ],
+      "fallback": true,
+      "blocked": true,
+      "rows": 24,
+      "uniquePositions": 24,
+      "safePositions": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "overlappingBoundaries": []
+    },
+    {
+      "reciter": 5,
+      "verse": "6:139",
+      "words": 22,
+      "parts": [
+        22
+      ],
+      "fallback": true,
+      "blocked": true,
+      "rows": 24,
+      "uniquePositions": 22,
+      "safePositions": [
+        1,
+        18,
+        19,
+        20,
+        21
+      ],
+      "overlappingBoundaries": [
+        {
+          "pos": 2,
+          "ms": -17340
+        },
+        {
+          "pos": 3,
+          "ms": -16880
+        },
+        {
+          "pos": 4,
+          "ms": -16130
+        },
+        {
+          "pos": 5,
+          "ms": -15350
+        },
+        {
+          "pos": 6,
+          "ms": -14150
+        },
+        {
+          "pos": 7,
+          "ms": -13030
+        },
+        {
+          "pos": 8,
+          "ms": -11280
+        },
+        {
+          "pos": 9,
+          "ms": -9800
+        },
+        {
+          "pos": 10,
+          "ms": -8690
+        },
+        {
+          "pos": 11,
+          "ms": -6660
+        },
+        {
+          "pos": 12,
+          "ms": -5600
+        },
+        {
+          "pos": 13,
+          "ms": -5070
+        },
+        {
+          "pos": 14,
+          "ms": -3290
+        },
+        {
+          "pos": 15,
+          "ms": -2780
+        },
+        {
+          "pos": 16,
+          "ms": -2050
+        },
+        {
+          "pos": 17,
+          "ms": -1600
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "status": "machine-review-only",
+  "source_sha256": "f8e5291cf10a3a29230fd443b5ddabc4297cf5b16c70250dda3bfe6314917576",
+  "excerpt_from_ms": 0,
+  "note": "Returned times are relative to exact source excerpt; add excerpt_from_ms to map into chapter time. Audition remains required.",
+  "result": {
+    "segments": [
+      {
+        "segment": 1,
+        "words": [
+          [
+            "26:1:1",
+            0,
+            6.85
+          ]
+        ],
+        "timing_status": "ok"
+      }
+    ],
+    "audio_id": "bf776b9645474132aefd329b37c7345c"
+  }
+}

@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.elifaplatform.mushaf",
+      "sha256_cert_fingerprints": [
+        "EA:05:80:6E:96:BA:79:74:07:7D:9E:55:7F:34:E0:5A:EF:93:48:4B:E3:6C:38:12:FC:E1:06:99:CF:EA:7F:8C",
+        "61:24:DF:40:FD:18:05:81:82:BD:9C:60:1E:2D:C1:80:AC:23:77:11:57:49:A6:89:BF:B8:75:28:CF:96:BF:9C"
+      ]
+    }
+  }
+]

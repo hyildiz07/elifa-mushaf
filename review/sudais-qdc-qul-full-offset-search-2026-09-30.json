@@ -1,0 +1,1472 @@
+{
+  "status": "research-only-not-for-production",
+  "method": "full-chapter 1ms PCM search with 12-bit sign fingerprint (0 to 3 bit errors), then 300ms PCM correlation >=0.95 and independent three-anchor offset agreement <=20ms",
+  "chapters": {
+    "5": {
+      "qdcSha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+      "qulSha256": "032a6942fb76c70a5bc0c6f334fc67fb0ee04889b0188dfa545ebf8588a586f9",
+      "sha256MatchesPriorScreen": true,
+      "qdcDurationMs": 2701207.800453515,
+      "qulDurationMs": 2575164.2857142854,
+      "calibration": {
+        "knownWindows": 30,
+        "fingerprintMisses": 0,
+        "minCorrelation": 0.984534,
+        "maxDifferingBits": 2
+      },
+      "searched": 111,
+      "newlyMatched": 0,
+      "rows": [
+        {
+          "key": "5:1",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:2",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:3",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:4",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:5",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:6",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:7",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:8",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:9",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:10",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:11",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:12",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:13",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:14",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:15",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:16",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:17",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:18",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:19",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:20",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:21",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:22",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:23",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:24",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:25",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:26",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:27",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:28",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:29",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:30",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:31",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:32",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:33",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:34",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:35",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:36",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:37",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:38",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:39",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:40",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:41",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:42",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:43",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:44",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:45",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:46",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:47",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:48",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:49",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:50",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:51",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:52",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:53",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:54",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:55",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:56",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:57",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:58",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:59",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:60",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:61",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:62",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:63",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:64",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:65",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:66",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:67",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:68",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:69",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:70",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:71",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:72",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:73",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:74",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:75",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:76",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:77",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:78",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:79",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:80",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:81",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:82",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:83",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:84",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:85",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:86",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:87",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:88",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:89",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:90",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:91",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:92",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:93",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:94",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:95",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:96",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:97",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:98",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:99",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:100",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:101",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:102",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:103",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:104",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:105",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:106",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:107",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:108",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:109",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:110",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "5:111",
+          "previousSameRecording": true,
+          "anchorMatchCounts": [
+            1,
+            2,
+            1
+          ],
+          "candidates": [
+            {
+              "offsetMs": 126057,
+              "qdcCentersMs": [
+                2498127,
+                2501197,
+                2506367
+              ],
+              "correlations": [
+                0.986058,
+                0.991081,
+                0.988624
+              ]
+            }
+          ]
+        }
+      ],
+      "elapsedSec": 29.5
+    },
+    "28": {
+      "qdcSha256": "f8e5291cf10a3a29230fd443b5ddabc4297cf5b16c70250dda3bfe6314917576",
+      "qulSha256": "72d812ed020ef5947a98d5afbaa8572c3a6802bf86b9e4bb7a9efa0cddbae33a",
+      "sha256MatchesPriorScreen": true,
+      "qdcDurationMs": 1368766.2131519273,
+      "qulDurationMs": 1368766.2131519273,
+      "calibration": {
+        "knownWindows": 264,
+        "fingerprintMisses": 0,
+        "minCorrelation": 0.999681,
+        "maxDifferingBits": 1
+      },
+      "searched": 1,
+      "newlyMatched": 0,
+      "rows": [
+        {
+          "key": "28:44",
+          "previousSameRecording": true,
+          "anchorMatchCounts": [
+            1,
+            1,
+            1
+          ],
+          "candidates": [
+            {
+              "offsetMs": 0,
+              "qdcCentersMs": [
+                655835,
+                658755,
+                661115
+              ],
+              "correlations": [
+                0.999972,
+                0.999943,
+                0.99992
+              ]
+            }
+          ]
+        }
+      ],
+      "elapsedSec": 31.7
+    },
+    "29": {
+      "qdcSha256": "525bcfbaaa6fbeece6c93e0e25d7d36393aaddd406366284ded5bd141107af67",
+      "qulSha256": "93fad7e94aa87bdf7bd8cb6bc53e1bc18107410bf4264dd3849d11faa9e9918e",
+      "sha256MatchesPriorScreen": true,
+      "qdcDurationMs": 908655.3287981859,
+      "qulDurationMs": 931122,
+      "calibration": {
+        "knownWindows": 135,
+        "fingerprintMisses": 0,
+        "minCorrelation": 0.989636,
+        "maxDifferingBits": 3
+      },
+      "searched": 25,
+      "newlyMatched": 0,
+      "rows": [
+        {
+          "key": "29:45",
+          "previousSameRecording": true,
+          "anchorMatchCounts": [
+            1,
+            1,
+            1
+          ],
+          "candidates": [
+            {
+              "offsetMs": 100,
+              "qdcCentersMs": [
+                601075,
+                607375,
+                617315
+              ],
+              "correlations": [
+                0.995087,
+                0.995055,
+                0.997151
+              ]
+            }
+          ]
+        },
+        {
+          "key": "29:46",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:47",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:48",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:49",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:50",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:51",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:52",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:53",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:54",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:55",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:56",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:57",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:58",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:59",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:60",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:61",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:62",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:63",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:64",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:65",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:66",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:67",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:68",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        },
+        {
+          "key": "29:69",
+          "previousSameRecording": false,
+          "anchorMatchCounts": [
+            0,
+            0,
+            0
+          ],
+          "candidates": []
+        }
+      ],
+      "elapsedSec": 35.5
+    }
+  }
+}

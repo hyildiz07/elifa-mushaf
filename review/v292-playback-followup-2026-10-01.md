@@ -1,0 +1,9 @@
+# Yerel v292 oynatma takip denetimi — 1 Ekim 2026
+
+Sûre sonu taraması 1.254 hoca–sûre kaydını içerdi. Ham MP3 bitişinden sonra işaretlenen 223 son âyetin 221'i 650 ms sınırının altında; iki büyük fark önceden korunmuş Südeys 4:176 ve v290'da korunmuş Hânî 65:12. Gerçek kaynakta en büyük altı güvenli adayın parçalı ve seçili pencere hazırlanması sınandı. Südeys 27:93, doğrulanmış VBR indeksindeki `fileSize` alanı `size` yerine kullanıldığı için başarısız oluyordu; v291 düzeltmesi sonrasında altısı da teknik olarak hazırlandı. Son fonemlerin işitsel tamlığı bu testte ölçülmedi. Ayrıntı: `v290-final-eof-playback-audit-2026-10-01.md`.
+
+Kod incelemesinde parçalı oynatmanın tam PCM penceresi yokken âyet sonunu sessizce `splitBuf.hi` konumuna kırpabildiği görüldü. Artık yalnız doğrulanmış indeksli dosya sonu için kırpıyor; diğer eksik pencereler görünür hata veriyor. Hânî 65:12 gibi güvenli olmayan bir adımı içeren 1+2 planı da başlamadan reddediliyor. Okuyucu ▶ düğmesi, 1+2 açıkken seçili tam âyeti tekli seçim olarak başlatıp bu kontrolü geçebiliyordu; v292 tam âyet seçimini 1+2 programına yönlendiriyor. Kısmi kelime seçimleri kendi seçim yolunda kalıyor.
+
+`npm run build`: 239 test, 237 başarılı, 2 Firebase ortam testi atlandı. `node scripts/verify-all-audio.mjs --candidate-dir=assets/verified-audio --report-file=test-results/v291-validation.json`: 1.254 kayıt, 137.192 âyet/görünüm, 604.116 oynatma adımı, **0 yapısal hata**. Beklenen güvenlik engelleri raporda ayrıdır. Canlı siteye dağıtım yapılmadı.
+
+Yerel Chrome arayüzünde Südeys 27:93 iki parçaya (5+6 kelime) ayrıldı; son parça ilk dokunuşta `Parça 2 · 1/6` durumuna geçti ve yükleme uyarısı çıkmadı. v292'de Hânî Talâk 65:1 için 1+2 ve tekrar açıkken ▶ düğmesi güvenlik uyarısını gösterdi; oynatma simgesi duraklatmaya dönmedi. Bu gözlem akışı doğrular, işitsel son harfleri değil.

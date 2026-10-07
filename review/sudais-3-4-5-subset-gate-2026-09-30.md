@@ -1,0 +1,16 @@
+# Südeys 3/4/5: altküme açma kapısı (inceleme, üretim değil)
+
+Üretim kaynakları QDC sûre MP3'leridir. QUL 3/4 MP3'leriyle yapılan önceki baş/orta/son PCM eşleşmeleri sıfır milisaniye ofset ve 0,9997–0,9999 korelasyon göstermişti. Bu, QUL zamanlarını aynı yaklaşık ses ekseninde **aday** yapar; her âyetin bütün kelimelerini veya fonem kesimlerini onaylamaz. Hesaplar `node review/sudais-3-4-candidate-gates.mjs` ile `sudais-3-4-candidate-gates.json` dosyasına yeniden yazılır. Bütün ölçüler `test-results/sudais-qul-timings-{3,4}.json` ile `test-results/timings/3-{3,4}.json` verilerinden gelir.
+
+| Sûre | QUL satırı yapısal kapıyı geçen | Kapıda kalan | Üretim sağlayıcısı ile örtüşmeyen âyet aralıkları | Başlangıç mutlak farkı, ortanca / %90 / en yüksek |
+| --- | ---: | --- | ---: | --- |
+| 3 | 194/200 | 3:69, 90, 91, 99, 100, 153 | 94/200 | 12.350 / 55.513 / 56.378 ms |
+| 4 | 173/176 | 4:12, 135, 174 | 129/176 | 27.691 / 91.135 / 98.635 ms |
+
+Üçüncü sûrede sağlayıcı başlangıcı 116 âyette, dördüncü sûrede 175 âyette QUL adayından bir saniyeden fazla uzak. Bunlar QUL'un mutlak doğru olduğunu tek başına kanıtlamaz. Ancak mevcut sağlayıcı aralıklarını küçük düzeltmeyle kullanmanın neden güvenli olmadığını ve bölüm geneli korumanın neden yerinde olduğunu nicel olarak gösterir. Örnek: 3:160'da üretim 2.610.330–2.622.580 ms iken aynı QDC PCM'de iki QUD modeli 2.658.483–2.677.407 ms buldu; 4:143'te üretim 3.041.450–3.054.380 ms, model adayı 2.966.063–2.980.867 ms.
+
+**Otomatik aday kapısı:** (1) Üretim URL'si, tam MP3 SHA-256 ve VBR indeks kimliği sabit; kaynaktan baştan çözülmüş PCM ile indeksli pencere eşleşiyor. (2) Hedef ile önceki/sonraki âyet QUD Base ve Large'da aynı sıra ve yaklaşık sınırla tanınıyor; QUL yalnız 3/4'te destekleyici aday. (3) Bütün kanonik kelimeler, gerçek tekrarlar dahil, okunma sırasında mevcut; hiçbir satır komşu âyet aralığına taşmıyor. Bu son yapısal koşulu 3'te 194, 4'te 173 âyet geçiyor. (4) Seçilen her sınırda gerçek PCM dalgasının iki yanı inceleniyor; başlangıç/son harf ile bitişte sonraki âyet girişi işitilerek kaydediliyor. (5) Tam âyet, kısa parça, serbest kelime seçimi ve 1+2/tekrar kipleri ayrı ayrı deneniyor. İlk üç kapı otomatik taranabilir. Dördüncü ve beşinci kapı geçmeden üretim izni verilmez. QUL zamanlarının ve özgün sesin kullanım/atıf koşulları da ayrıca netleşmelidir.
+
+**5. sûre:** QUL/QDC kaynakları bütün sûre boyunca aynı değil; QUL'un örneklenen 5:5, 5:46, 5:82 ve 5:119 zamanlarını toplu aktarmak hatalıdır. Yalnız QDC'nin kendi tam MP3'ünde QUD Base/Large ile doğrulanan dar adaylar vardır: 5:5 yaklaşık 155.137–192.853 ms, 5:46 yaklaşık 1.086.190–1.108.617 ms, 5:82 yaklaşık 1.867.803–1.897.033 ms. 5:5 son kelimesi ile 5:6 girişi arasındaki model farkı yaklaşık 56 ms; 5:46 ve 5:82 için tekrar ve iç kesim sahipliği belirsiz. Modelin bulduğu sınırlar işitsel kesim onayı değildir. Bu üç âyet de üretim kapısını geçmedi; 5. sûre için QDC tam kaydından âyet bazında yeniden hizalama gerekir.
+
+**Bugünkü açılabilir altküme: sıfır.** 3/4'teki 367 yapısal aday ancak sonraki fonetik/komşu-âyet ve kip denetimi için çalışma listesi oluşturur. Bu sıfır, temiz bir âyetin olamayacağı anlamına gelmez; henüz tam kanıt kümesinin bulunmadığı anlamına gelir. Üretim `audioTimingUnverified` koruması kaldırılmadı, Netlify'ye bir şey gönderilmedi.

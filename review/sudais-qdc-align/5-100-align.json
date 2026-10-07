@@ -1,0 +1,139 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/5.mp3",
+  "source_file_size": 38326543,
+  "source_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+  "excerpt_file": "test-results/sudais-qdc-align/5-100.wav",
+  "excerpt_sha256": "e94e9d2bf5459d98a684b8335797c1f8648fd33914d6c2889f1bc8146b1efc11",
+  "excerpt_from_ms": 2216320,
+  "excerpt_to_ms": 2229980,
+  "provider_segments": [
+    [
+      1,
+      2216320,
+      2217030
+    ],
+    [
+      2,
+      2217030,
+      2217590
+    ],
+    [
+      3,
+      2217590,
+      2218140
+    ],
+    [
+      4,
+      2218140,
+      2219080
+    ],
+    [
+      5,
+      2219080,
+      2220090
+    ],
+    [
+      6,
+      2220090,
+      2220560
+    ],
+    [
+      7,
+      2220560,
+      2221480
+    ],
+    [
+      8,
+      2221480,
+      2222230
+    ],
+    [
+      9,
+      2222230,
+      2223160
+    ],
+    [
+      10,
+      2223160,
+      2224440
+    ],
+    [
+      11,
+      2224440,
+      2225140
+    ],
+    [
+      12,
+      2225140,
+      2226230
+    ],
+    [
+      13,
+      2226230,
+      2227250
+    ],
+    [
+      14,
+      2227250,
+      2228350
+    ],
+    [
+      15,
+      2228350,
+      2229735
+    ]
+  ],
+  "aligner": {
+    "audio_id": "6eb68305f89d4f0b8d90cf6751e51470",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 7.66,
+        "ref_from": "5:99:1",
+        "ref_to": "5:99:11",
+        "matched_text": "مَّا عَلَى ٱلرَّسُولِ إِلَّا ٱلْبَلَـٰغُ وَٱللَّهُ يَعْلَمُ مَا تُبْدُونَ وَمَا تَكْتُمُونَ",
+        "confidence": 0.996,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 7.74,
+        "time_to": 13.66,
+        "ref_from": "5:100:1",
+        "ref_to": "5:100:9",
+        "matched_text": "قُل لَّا يَسْتَوِى ٱلْخَبِيثُ وَٱلطَّيِّبُ وَلَوْ أَعْجَبَكَ كَثْرَةُ ٱلْخَبِيثِ",
+        "confidence": 0.962,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.302656888961792,
+        "queue_seconds": 0.024008326523471624,
+        "total_seconds": 1.3266652154852636
+      }
+    }
+  }
+}

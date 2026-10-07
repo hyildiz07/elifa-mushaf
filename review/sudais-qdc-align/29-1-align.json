@@ -1,0 +1,55 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/29.mp3",
+  "source_file_size": 12885359,
+  "source_sha256": "525bcfbaaa6fbeece6c93e0e25d7d36393aaddd406366284ded5bd141107af67",
+  "excerpt_file": "test-results/sudais-qdc-align/29-1.wav",
+  "excerpt_sha256": "29003fe13734cbb1ac97aae4caac02d776179cfc80f545703d2baf760863bf22",
+  "excerpt_from_ms": 0,
+  "excerpt_to_ms": 7080,
+  "provider_segments": [
+    [
+      1,
+      0,
+      6865
+    ]
+  ],
+  "aligner": {
+    "audio_id": "567d503b05014c9f8f323d99cba45782",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 7.08,
+        "ref_from": "2:1:1",
+        "ref_to": "2:1:1",
+        "matched_text": "الٓمٓ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 0.7095158100128174,
+        "queue_seconds": 0.005575166258495301,
+        "total_seconds": 0.7150909762713127
+      }
+    }
+  }
+}

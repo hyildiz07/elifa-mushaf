@@ -1,0 +1,97 @@
+/* Keep the home actions light and unboxed at every screen size. */
+#home .homebar .brandmark,
+#home .homebar .iconbtn,
+#home .homebar .account-home {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 50% !important;
+}
+#home .homebar .account-home { border-radius: 10px !important; }
+#home .homebar .brandmark::after { display: none !important; }
+body[data-family="saray"]:not([data-theme="saraygece"]) #home .homebar .iconbtn {
+  color: #17395d !important;
+}
+body[data-theme="saraygece"] #home .homebar .iconbtn {
+  color: #f4d273 !important;
+}
+body[data-theme="nahlyildizlari"] #home .homebar .iconbtn {
+  color: #f8faff !important;
+}
+body[data-theme="saraygece"] #home .homebar .account-home { color:#f4d273!important; }
+body[data-theme="nahlyildizlari"] #home .homebar .account-home { color:#f8faff!important; }
+
+/* Give the home header breathing room on phones. */
+@media (max-width: 700px) {
+  #home .homebar {
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+  }
+  #home .homebar .spacer { display: none; }
+  #home .homebar .brand,
+  #home .homebar .brandmark { flex-shrink: 0; }
+  #home .homebar .brandmark {
+    width: 42px !important;
+    height: 42px !important;
+    flex-basis: 42px !important;
+    background: transparent !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    box-shadow: none !important;
+  }
+  #home .homebar .brandmark::after { display: none !important; }
+  #home .homebar .iconbtn {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 42px !important;
+    min-width: 42px !important;
+    height: 42px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 50% !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+  #home .homebar .iconbtn svg {
+    width: 23px !important;
+    height: 23px !important;
+  }
+  #home .homebar .iconbtn:active {
+    transform: scale(.94);
+    background: color-mix(in srgb, currentColor 12%, transparent) !important;
+  }
+  #home .homebar .iconbtn:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 1px;
+  }
+  body[data-family="saray"]:not([data-theme="saraygece"]) #home .homebar .iconbtn {
+    color: #17395d !important;
+  }
+  body[data-theme="saraygece"] #home .homebar .iconbtn {
+    color: #f4d273 !important;
+  }
+  #home .homebar .account-home {
+    min-height: 40px;
+    padding-inline: 9px;
+  }
+}
+
+@media (max-width: 350px) {
+  #home .homebar .brandmark {
+    width: 38px !important;
+    height: 38px !important;
+    flex-basis: 38px !important;
+  }
+  #home .homebar .iconbtn {
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 40px !important;
+  }
+  #home .homebar .iconbtn svg {
+    width: 21px !important;
+    height: 21px !important;
+  }
+  #home .homebar .account-home { padding-inline: 7px; }
+}

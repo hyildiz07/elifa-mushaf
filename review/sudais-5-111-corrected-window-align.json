@@ -1,0 +1,174 @@
+{
+  "status": "review-only-no-cut-approval",
+  "source_file": "test-results/sudais-qdc-5.mp3",
+  "source_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/5.mp3",
+  "requested_window_ms": [
+    2494000,
+    2514000
+  ],
+  "decoded_window_ms": [
+    2494000,
+    2514000
+  ],
+  "sample_rate": 22050,
+  "wav_sha256": "8fc3fd6f796a089fed97d2c33fcb1f15f714ce65b6ffd133558590113ea8915a",
+  "qul_source_matched_candidate_ms": {
+    "5:110": [
+      2439617,
+      2496297
+    ],
+    "5:111": [
+      2496497,
+      2511277
+    ],
+    "5:112": [
+      2511477,
+      2529177
+    ]
+  },
+  "provider_meta_ms": {
+    "5:111": [
+      2475690,
+      2489460
+    ]
+  },
+  "models": {
+    "Base": {
+      "http_status": 200,
+      "audio_id": "d02bd1b6d5c44e25a10efe2a0660c126",
+      "meta": {
+        "schema_version": 2,
+        "reference_id": "qul-text-qpc-hafs-312",
+        "reference_riwayah": "hafs",
+        "recitation_riwayah": "hafs",
+        "output_edition_id": "qul-text-qpc-hafs-312",
+        "output_riwayah": "hafs",
+        "projection_id": null,
+        "projection_sha256": null,
+        "requested_model": "Base",
+        "effective_model": "Base",
+        "runtime": {
+          "processing_seconds": 1.1694447994232178,
+          "queue_seconds": 0.04082286241464317,
+          "total_seconds": 1.210267661837861
+        }
+      },
+      "error": null,
+      "segments": [
+        {
+          "ref_from": "5:110:62",
+          "ref_to": "5:110:63",
+          "source_from_ms": 2494000,
+          "source_to_ms": 2496520,
+          "confidence": 0.833,
+          "has_missing_words": true,
+          "has_repeated_words": false,
+          "matched_text": "سِحْرٌ مُّبِينٌ",
+          "error": null
+        },
+        {
+          "ref_from": "5:111:1",
+          "ref_to": "5:111:8",
+          "source_from_ms": 2496560,
+          "source_to_ms": 2503240,
+          "confidence": 1,
+          "has_missing_words": false,
+          "has_repeated_words": false,
+          "matched_text": "وَإِذْ أَوْحَيْتُ إِلَى ٱلْحَوَارِيِّـۧنَ أَنْ ءَامِنُوا۟ بِى وَبِرَسُولِى",
+          "error": null
+        },
+        {
+          "ref_from": "5:111:9",
+          "ref_to": "5:111:13",
+          "source_from_ms": 2503270,
+          "source_to_ms": 2511493,
+          "confidence": 1,
+          "has_missing_words": false,
+          "has_repeated_words": false,
+          "matched_text": "قَالُوٓا۟ ءَامَنَّا وَٱشْهَدْ بِأَنَّنَا مُسْلِمُونَ",
+          "error": null
+        },
+        {
+          "ref_from": "5:112:1",
+          "ref_to": "5:112:3",
+          "source_from_ms": 2511523,
+          "source_to_ms": 2514000,
+          "confidence": 0.972,
+          "has_missing_words": true,
+          "has_repeated_words": false,
+          "matched_text": "إِذْ قَالَ ٱلْحَوَارِيُّونَ",
+          "error": null
+        }
+      ]
+    },
+    "Large": {
+      "http_status": 200,
+      "audio_id": "0c3d63e3e86d45bbafe708cff1cf970b",
+      "meta": {
+        "schema_version": 2,
+        "reference_id": "qul-text-qpc-hafs-312",
+        "reference_riwayah": "hafs",
+        "recitation_riwayah": "hafs",
+        "output_edition_id": "qul-text-qpc-hafs-312",
+        "output_riwayah": "hafs",
+        "projection_id": null,
+        "projection_sha256": null,
+        "requested_model": "Large",
+        "effective_model": "Large",
+        "runtime": {
+          "processing_seconds": 3.0877206325531006,
+          "queue_seconds": 0.0471642836346291,
+          "total_seconds": 3.1348849161877297
+        }
+      },
+      "error": null,
+      "segments": [
+        {
+          "ref_from": "5:110:62",
+          "ref_to": "5:110:63",
+          "source_from_ms": 2494000,
+          "source_to_ms": 2496520,
+          "confidence": 0.833,
+          "has_missing_words": true,
+          "has_repeated_words": false,
+          "matched_text": "سِحْرٌ مُّبِينٌ",
+          "error": null
+        },
+        {
+          "ref_from": "5:111:1",
+          "ref_to": "5:111:8",
+          "source_from_ms": 2496560,
+          "source_to_ms": 2503240,
+          "confidence": 1,
+          "has_missing_words": false,
+          "has_repeated_words": false,
+          "matched_text": "وَإِذْ أَوْحَيْتُ إِلَى ٱلْحَوَارِيِّـۧنَ أَنْ ءَامِنُوا۟ بِى وَبِرَسُولِى",
+          "error": null
+        },
+        {
+          "ref_from": "5:111:9",
+          "ref_to": "5:111:13",
+          "source_from_ms": 2503270,
+          "source_to_ms": 2511493,
+          "confidence": 1,
+          "has_missing_words": false,
+          "has_repeated_words": false,
+          "matched_text": "قَالُوٓا۟ ءَامَنَّا وَٱشْهَدْ بِأَنَّنَا مُسْلِمُونَ",
+          "error": null
+        },
+        {
+          "ref_from": "5:112:1",
+          "ref_to": "5:112:3",
+          "source_from_ms": 2511523,
+          "source_to_ms": 2514000,
+          "confidence": 0.9,
+          "has_missing_words": true,
+          "has_repeated_words": false,
+          "matched_text": "إِذْ قَالَ ٱلْحَوَارِيُّونَ",
+          "error": null
+        }
+      ]
+    }
+  }
+}

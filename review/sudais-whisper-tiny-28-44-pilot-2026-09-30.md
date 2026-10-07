@@ -1,0 +1,15 @@
+# Südeys 28:44: bağımsız konuşma tanıma pilotu
+
+**Sonuç:** Özgün QDC 28. sûre sesinde ikinci bir model, 28:44'ü düzeltilmiş 653640–663500 ms çevresinde metin olarak tanıdı. Eski sağlayıcı 643040–652390 ms aralığındaki çıktı hedef âyetin metni değildi. Bu yalnız âyet **kimliği/konumu** için bağımsız destek; kelime veya fonem sınırı ve üretim kesimi onayı değildir.
+
+| QDC kaynak penceresi | Whisper tiny q8 Arapça serbest tanıma | Yorum |
+| --- | --- | --- |
+| 643040–652390 ms (eski meta) | `وصائم دصائر المناس وهده ورحمة لعلمهم يتدى` | Hedef âyetin ayırt edici `وما كنت بجانب` açılışı ve `من الشاهدين` kapanışı yok. Modelin burada yazdığı metin de hatalı olduğundan tam âyet kimliği iddiası taşımaz. |
+| 651500–666000 ms (hedef ve komşular) | `وما كنت بجانب الغربية القضين الاموس الأمر وما كنت من الشاهدين ولكن أن أجامب` | Hedef âyetin açılışı ve kapanışı ile 28:45'in `ولكن` girişi çıktı. Orta kelimelerde açık yazım/tanıma hataları var. |
+| 653640–663500 ms (hedef adayı) | `وما كنت بجانب الغربية القضين إلى موصل الأمر وما كنت من الشاهدين` | Açılış ve kapanış yine çıktı; orta kısım yine kusurlu. |
+
+Girdi, `test-results/sudais-qdc-28.mp3` dosyasından bayt sıfırdan çözülüp mono 16 kHz float örneklere çevrildi. MP3 SHA-256: `f8e5291cf10a3a29230fd443b5ddabc4297cf5b16c70250dda3bfe6314917576`. Her pencerenin örnek SHA-256'sı, ham tanıma metni ve süreleri [pilot JSON](sudais-whisper-tiny-28-44-pilot.json) içindedir. Tekrar betiği: [pilot betiği](pilot-sudais-whisper-tiny-28-44.mjs). Model `Xenova/whisper-tiny`, q8 ONNX, CPU; Arapça transkripsiyon açıkça seçildi. `@huggingface/transformers` sürümü 4.3.0. Model başlangıcı yaklaşık 18,9 saniye; üç tanıma her biri yaklaşık 2,1 saniye sürdü. Kurulum yaklaşık 1 dakika sürdü.
+
+[Dönüştürülmüş model kartı](https://huggingface.co/Xenova/whisper-tiny) lisansı **Apache-2.0** olarak etiketler ve [temel OpenAI modeline](https://huggingface.co/openai/whisper-tiny) bağlanır; temel kart da Apache-2.0 olarak etiketlidir. İkisi de giriş veya koşul kabulü gerektirmedi. q8 ağırlıkları `test-results/independent-asr/model-cache` içine indirildi: toplam **43.622.127 bayt** (iki ONNX ağırlığı 30.727.765 ve 10.124.910 bayt). ONNX SHA-256 değerleri sırasıyla `6c0c125986b007d2e3734bec84c18bda0152071b90b87fadac6d7764499927a0` ve `fd9d995b9dcb0520f0dbf6cf68651af639fc385f594d9d876e69ca2802dc438e`. npm paketleri ve model önbelleğinin diskte açılmış toplamı **539.081.019 bayt**; ağdan aktarılan sıkıştırılmış npm baytları ölçülmedi. Bunlar `test-results` altında kaldı, üretim bağımlılıklarına eklenmedi.
+
+Whisper tiny bu örnekte `الغربي`, `قضينا`, `موسى` gibi kelimeleri bozuyor; çıktı için otomatik hata oranı veya tam kelime hizası çıkarmadım. 28:44 sonundaki `الشاهدين` ve 28:45 başındaki `ولكن` aynı geniş pencerede görünse de model bunların milisaniye sınırını vermez. [QUD düzeltilmiş pencere](sudais-corrected-qdc-window-pilot-2026-09-30.md) bulgusundan ayrı bir modelle âyetin konumu desteklendi; kesim kararı için iki taraflı işitsel/fonem incelemesi hâlâ gerekli. Üretim zamanları ve uygulama dosyaları değiştirilmedi.

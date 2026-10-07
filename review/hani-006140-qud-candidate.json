@@ -1,0 +1,84 @@
+{
+  "status": "unverified-review-only",
+  "verse_key": "6:140",
+  "source_url": "https://everyayah.com/data/Hani_Rifai_192kbps/006140.mp3",
+  "source_bytes": 471586,
+  "source_sha256": "ef1412dd74aa416b3a99e0bfc65ea02ffbd387678253ff415cce6061e8ed6b05",
+  "api_endpoint": "https://hetchyy-quranic-universal-aligner.hf.space/api/v1/align/url",
+  "request": {
+    "riwayah": "hafs",
+    "model_name": "Large",
+    "device": "CPU"
+  },
+  "received_at_utc": "2026-09-30T06:04:25.516Z",
+  "response": {
+    "audio_id": "a1288e73bc5d4b71aca7acf865f1d424",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0.02,
+        "time_to": 7.547,
+        "ref_from": "6:140:1",
+        "ref_to": "6:140:8",
+        "matched_text": "قَدْ خَسِرَ ٱلَّذِينَ قَتَلُوٓا۟ أَوْلَـٰدَهُمْ سَفَهًا بِغَيْرِ عِلْمٍ",
+        "confidence": 0.98,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 7.577,
+        "time_to": 14.693,
+        "ref_from": "6:140:9",
+        "ref_to": "6:140:15",
+        "matched_text": "وَحَرَّمُوا۟ مَا رَزَقَهُمُ ٱللَّهُ ٱفْتِرَآءً عَلَى ٱللَّهِ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 14.723,
+        "time_to": 19.632,
+        "ref_from": "6:140:16",
+        "ref_to": "6:140:20",
+        "matched_text": "قَدْ ضَلُّوا۟ وَمَا كَانُوا۟ مُهْتَدِينَ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.646329402923584,
+        "queue_seconds": 0.0447322583058849,
+        "total_seconds": 1.6910616612294689
+      }
+    },
+    "url_metadata": {
+      "title": "006140",
+      "duration": null,
+      "source_url": "https://everyayah.com/data/Hani_Rifai_192kbps/006140.mp3"
+    }
+  }
+}

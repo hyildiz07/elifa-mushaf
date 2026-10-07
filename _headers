@@ -1,0 +1,39 @@
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+/sw.js
+  Cache-Control: no-store
+  Service-Worker-Allowed: /
+  Content-Type: application/javascript; charset=utf-8
+
+/index.html
+  Cache-Control: no-cache, must-revalidate
+
+/
+  Cache-Control: no-cache, must-revalidate
+
+/manifest.json
+  Content-Type: application/manifest+json; charset=utf-8
+  Cache-Control: no-cache, must-revalidate
+
+/api/*
+  Cache-Control: no-store
+
+/*.png
+  Cache-Control: public, max-age=604800
+
+/.well-known/assetlinks.json
+  Content-Type: application/json
+  Cache-Control: public, max-age=300
+
+/f/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/version.json
+  Content-Type: application/json
+  Cache-Control: no-store
+
+/service-worker.js
+  Cache-Control: no-store
+  Service-Worker-Allowed: /

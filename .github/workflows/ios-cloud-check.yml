@@ -1,0 +1,35 @@
+name: iOS cloud compile check
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ios-simulator:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Check Xcode
+        run: |
+          xcodebuild -version
+          test "$(xcodebuild -version | awk '/Xcode/{print $2}' | cut -d. -f1)" -ge 26
+      - run: npm ci
+      - name: Add Firebase iOS configuration
+        env:
+          IOS_FIREBASE_PLIST_BASE64: ${{ secrets.IOS_FIREBASE_PLIST_BASE64 }}
+        run: |
+          test -n "$IOS_FIREBASE_PLIST_BASE64" || { echo 'Set IOS_FIREBASE_PLIST_BASE64 repository secret'; exit 1; }
+          printf '%s' "$IOS_FIREBASE_PLIST_BASE64" | base64 -D > "$RUNNER_TEMP/GoogleService-Info.plist"
+          npm run ios:firebase -- "$RUNNER_TEMP/GoogleService-Info.plist"
+      - run: npm run ios:sync
+      - run: npm run ios:check
+      - name: Compile iOS Simulator app without signing
+        run: |
+          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' -derivedDataPath "$RUNNER_TEMP/ElifaDerivedData" \
+            CODE_SIGNING_ALLOWED=NO build

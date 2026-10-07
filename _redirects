@@ -1,0 +1,6 @@
+# .well-known catch-all'a YAKALANMAMALI (TWA doğrulaması buna bağlı)
+/.well-known/*   /.well-known/:splat        200
+/api/org         /.netlify/functions/org    200
+/api/account     /.netlify/functions/account 200
+/api/locale      /.netlify/functions/locale  200
+/*               /index.html                200

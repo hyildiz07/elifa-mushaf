@@ -1,0 +1,21 @@
+{
+  "de": {"Hoca":"Koranrezitator","Yedekle ve geri yükle":"Sichern und wiederherstellen","▶ Aralığı başlat ve menüyü kapat":"▶ Versbereich starten und Menü schließen"},
+  "ru": {"Hoca":"Чтец Корана","Yedekle ve geri yükle":"Резервное копирование и восстановление","▶ Aralığı başlat ve menüyü kapat":"▶ Начать чтение отрывка и закрыть меню"},
+  "ar": {"Hoca":"القارئ","Yedekle ve geri yükle":"النسخ الاحتياطي والاستعادة","▶ Aralığı başlat ve menüyü kapat":"▶ ابدأ تلاوة الآيات المحددة وأغلق القائمة"},
+  "fr": {"Hoca":"Récitateur","Yedekle ve geri yükle":"Sauvegarder et restaurer","▶ Aralığı başlat ve menüyü kapat":"▶ Lancer la lecture du passage et fermer le menu"},
+  "es": {"Hoca":"Recitador","Yedekle ve geri yükle":"Copia de seguridad y restauración","▶ Aralığı başlat ve menüyü kapat":"▶ Reproducir el pasaje y cerrar el menú"},
+  "el": {"Hoca":"Αναγνώστης Κορανίου","Yedekle ve geri yükle":"Δημιουργία αντιγράφου και επαναφορά","▶ Aralığı başlat ve menüyü kapat":"▶ Έναρξη ανάγνωσης του αποσπάσματος και κλείσιμο του μενού"},
+  "zh": {"Hoca":"诵经者","Yedekle ve geri yükle":"备份与恢复","▶ Aralığı başlat ve menüyü kapat":"▶ 开始播放所选经文并关闭菜单"},
+  "ja": {"Hoca":"朗誦者","Yedekle ve geri yükle":"バックアップと復元","▶ Aralığı başlat ve menüyü kapat":"▶ 選択した節を再生してメニューを閉じる"},
+  "ko": {"Hoca":"낭송자","Yedekle ve geri yükle":"백업 및 복원","▶ Aralığı başlat ve menüyü kapat":"▶ 선택한 구절 재생 후 메뉴 닫기"},
+  "hi": {"Hoca":"क़ुरआन पाठक","Yedekle ve geri yükle":"बैकअप और पुनर्स्थापना","▶ Aralığı başlat ve menüyü kapat":"▶ चुनी हुई आयतें चलाएँ और मेनू बंद करें"},
+  "ur": {"Hoca":"قاری","Yedekle ve geri yükle":"بیک اپ اور بحالی","▶ Aralığı başlat ve menüyü kapat":"▶ منتخب آیات چلائیں اور مینو بند کریں"},
+  "it": {"Hoca":"Recitatore","Yedekle ve geri yükle":"Backup e ripristino","▶ Aralığı başlat ve menüyü kapat":"▶ Avvia il brano e chiudi il menu"},
+  "id": {"Hoca":"Qari","Yedekle ve geri yükle":"Cadangkan dan pulihkan","▶ Aralığı başlat ve menüyü kapat":"▶ Putar rentang ayat dan tutup menu"},
+  "nl": {"Hoca":"Koranrecitator","Yedekle ve geri yükle":"Back-up maken en herstellen","▶ Aralığı başlat ve menüyü kapat":"▶ Speel de verzen af en sluit het menu"},
+  "pt": {"Hoca":"Recitador","Yedekle ve geri yükle":"Fazer backup e restaurar","▶ Aralığı başlat ve menüyü kapat":"▶ Reproduzir o trecho e fechar o menu"},
+  "fa": {"Hoca":"قاری","Yedekle ve geri yükle":"پشتیبان‌گیری و بازیابی","▶ Aralığı başlat ve menüyü kapat":"▶ پخش آیات انتخاب‌شده و بستن منو"},
+  "bn": {"Hoca":"কোরআন তিলাওয়াতকারী","Yedekle ve geri yükle":"ব্যাকআপ ও পুনরুদ্ধার","▶ Aralığı başlat ve menüyü kapat":"▶ নির্বাচিত আয়াত চালু করুন এবং মেনু বন্ধ করুন"},
+  "ms": {"Hoca":"Qari","Yedekle ve geri yükle":"Sandarkan dan pulihkan","▶ Aralığı başlat ve menüyü kapat":"▶ Mainkan ayat terpilih dan tutup menu"},
+  "sw": {"Hoca":"Msomaji wa Qurani","Yedekle ve geri yükle":"Hifadhi nakala na urejeshe","▶ Aralığı başlat ve menüyü kapat":"▶ Cheza aya ulizochagua na ufunge menyu"}
+}

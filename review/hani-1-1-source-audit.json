@@ -1,0 +1,101 @@
+{
+  "verse": "1:1",
+  "production": {
+    "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/1.mp3",
+    "bytes": 608383,
+    "sha256": "c420173faed0a1734b586c5f7883c56e75d3eb820508a86dd3eafd9b7fa25654",
+    "verse": {
+      "verse_key": "1:1",
+      "timestamp_from": 7,
+      "timestamp_to": 4065,
+      "duration": -4058,
+      "segments": [
+        [
+          2,
+          7,
+          3972
+        ]
+      ]
+    }
+  },
+  "quaV320CompleteOccurrences": 0,
+  "cpfair2016": {
+    "source": "quran-align-data-2016-11-24.zip/Hani_Rifai_192kbps.json",
+    "firstRow": {
+      "ayah": 1,
+      "segments": [
+        [
+          0,
+          2,
+          0,
+          1810
+        ],
+        [
+          2,
+          3,
+          1820,
+          2770
+        ],
+        [
+          3,
+          4,
+          2780,
+          3710
+        ]
+      ],
+      "surah": 1,
+      "stats": {
+        "deletions": 2,
+        "transpositions": 0,
+        "insertions": 0
+      }
+    }
+  },
+  "matches": [
+    {
+      "url": "https://everyayah.com/data/Hani_Rifai_192kbps/001001.mp3",
+      "bytes": 107335,
+      "durationMs": 4466,
+      "local": [
+        {
+          "mark": 350,
+          "startMs": 0,
+          "correlation": 0
+        },
+        {
+          "mark": 1200,
+          "startMs": 0,
+          "correlation": 0.99989
+        },
+        {
+          "mark": 2500,
+          "startMs": 0,
+          "correlation": 0.99984
+        }
+      ]
+    },
+    {
+      "url": "https://everyayah.com/data/Hani_Rifai_64kbps/001001.mp3",
+      "bytes": 36152,
+      "durationMs": 4414,
+      "local": [
+        {
+          "mark": 350,
+          "startMs": 0,
+          "correlation": 0
+        },
+        {
+          "mark": 1200,
+          "startMs": 0,
+          "correlation": 0.99777
+        },
+        {
+          "mark": 2500,
+          "startMs": 0,
+          "correlation": 0.997
+        }
+      ]
+    }
+  ],
+  "conclusion": "QDC omits three word positions; QUA omits the entire occurrence; cpfair fuses words 1–2. No independently verified four-word boundary set."
+}

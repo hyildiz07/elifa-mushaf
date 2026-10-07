@@ -1,0 +1,24 @@
+{
+  "status": "review-only",
+  "key": "2:101",
+  "qdc_url": "https://download.quranicaudio.com/qdc/abdul_baset/murattal/2.mp3",
+  "qua_url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/002.mp3",
+  "qdc_range": [
+    2193290,
+    2235140
+  ],
+  "qua_range": [
+    2667045,
+    2706825
+  ],
+  "best": {
+    "shift_ms": -1928,
+    "timeline_offset_ms": -475683.0113378684,
+    "average": 0.1775,
+    "correlations": [
+      0.1891,
+      0.0414,
+      0.3019
+    ]
+  }
+}

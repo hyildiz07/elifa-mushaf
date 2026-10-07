@@ -1,0 +1,446 @@
+{
+  "status": "research-only-no-cut-approval",
+  "verse": "24:35",
+  "after_word": 40,
+  "word_40_provider_end_ms": 663825,
+  "word_41_provider_start_ms": 664265,
+  "model": "MostafaMaroof/wav2vec2-arabic-phoneme-asr",
+  "model_sha256": "582149e3e913a0fc7f29c116530e0b1b6ae7a7ab23eef4efc3fc2acc760e2b75",
+  "wav_sha256": "ce052b65f8989d9bfcde72c5046d5c58998364c75e731ebbbffd7c789800f751",
+  "frame_ms": 20.066889632107024,
+  "greedy_phonemes": "a y a $ aa w a y A D r i b u ll a h",
+  "events": [
+    {
+      "token": "|",
+      "start_ms": 660682.3,
+      "end_ms": 661043.5,
+      "mean_probability": 0.8843
+    },
+    {
+      "token": "a",
+      "start_ms": 661043.5,
+      "end_ms": 661063.5,
+      "mean_probability": 0.7027
+    },
+    {
+      "token": "|",
+      "start_ms": 661063.5,
+      "end_ms": 661765.9,
+      "mean_probability": 0.9396
+    },
+    {
+      "token": "y",
+      "start_ms": 661765.9,
+      "end_ms": 661786.0,
+      "mean_probability": 0.4862
+    },
+    {
+      "token": "|",
+      "start_ms": 661786.0,
+      "end_ms": 661846.2,
+      "mean_probability": 0.9948
+    },
+    {
+      "token": "a",
+      "start_ms": 661846.2,
+      "end_ms": 661866.2,
+      "mean_probability": 0.5938
+    },
+    {
+      "token": "|",
+      "start_ms": 661866.2,
+      "end_ms": 661986.6,
+      "mean_probability": 0.9904
+    },
+    {
+      "token": "$",
+      "start_ms": 661986.6,
+      "end_ms": 662006.7,
+      "mean_probability": 0.8779
+    },
+    {
+      "token": "|",
+      "start_ms": 662006.7,
+      "end_ms": 662087.0,
+      "mean_probability": 0.9889
+    },
+    {
+      "token": "aa",
+      "start_ms": 662087.0,
+      "end_ms": 662107.0,
+      "mean_probability": 0.7834
+    },
+    {
+      "token": "|",
+      "start_ms": 662107.0,
+      "end_ms": 663993.3,
+      "mean_probability": 0.9678
+    },
+    {
+      "token": "w",
+      "start_ms": 664133.8,
+      "end_ms": 664153.8,
+      "mean_probability": 0.9751
+    },
+    {
+      "token": "|",
+      "start_ms": 664153.8,
+      "end_ms": 664294.3,
+      "mean_probability": 0.9959
+    },
+    {
+      "token": "a",
+      "start_ms": 664294.3,
+      "end_ms": 664314.4,
+      "mean_probability": 0.9797
+    },
+    {
+      "token": "|",
+      "start_ms": 664314.4,
+      "end_ms": 664394.6,
+      "mean_probability": 0.9981
+    },
+    {
+      "token": "y",
+      "start_ms": 664394.6,
+      "end_ms": 664414.7,
+      "mean_probability": 0.9767
+    },
+    {
+      "token": "|",
+      "start_ms": 664414.7,
+      "end_ms": 664454.8,
+      "mean_probability": 0.9968
+    },
+    {
+      "token": "A",
+      "start_ms": 664454.8,
+      "end_ms": 664474.9,
+      "mean_probability": 0.6168
+    },
+    {
+      "token": "|",
+      "start_ms": 664474.9,
+      "end_ms": 664655.5,
+      "mean_probability": 0.9885
+    },
+    {
+      "token": "D",
+      "start_ms": 664655.5,
+      "end_ms": 664675.6,
+      "mean_probability": 0.621
+    },
+    {
+      "token": "|",
+      "start_ms": 664675.6,
+      "end_ms": 664775.9,
+      "mean_probability": 0.986
+    },
+    {
+      "token": "r",
+      "start_ms": 664775.9,
+      "end_ms": 664796.0,
+      "mean_probability": 0.9849
+    },
+    {
+      "token": "|",
+      "start_ms": 664796.0,
+      "end_ms": 664836.1,
+      "mean_probability": 0.9958
+    },
+    {
+      "token": "i",
+      "start_ms": 664836.1,
+      "end_ms": 664856.2,
+      "mean_probability": 0.7786
+    },
+    {
+      "token": "|",
+      "start_ms": 664856.2,
+      "end_ms": 664956.5,
+      "mean_probability": 0.9972
+    },
+    {
+      "token": "b",
+      "start_ms": 664956.5,
+      "end_ms": 664996.7,
+      "mean_probability": 0.7758
+    },
+    {
+      "token": "|",
+      "start_ms": 664996.7,
+      "end_ms": 665056.9,
+      "mean_probability": 0.997
+    },
+    {
+      "token": "u",
+      "start_ms": 665056.9,
+      "end_ms": 665076.9,
+      "mean_probability": 0.8006
+    },
+    {
+      "token": "|",
+      "start_ms": 665076.9,
+      "end_ms": 665317.7,
+      "mean_probability": 0.9934
+    },
+    {
+      "token": "ll",
+      "start_ms": 665317.7,
+      "end_ms": 665337.8,
+      "mean_probability": 0.9786
+    },
+    {
+      "token": "|",
+      "start_ms": 665337.8,
+      "end_ms": 665377.9,
+      "mean_probability": 0.9982
+    },
+    {
+      "token": "a",
+      "start_ms": 665377.9,
+      "end_ms": 665398.0,
+      "mean_probability": 0.6641
+    },
+    {
+      "token": "|",
+      "start_ms": 665398.0,
+      "end_ms": 665719.1,
+      "mean_probability": 0.9827
+    },
+    {
+      "token": "h",
+      "start_ms": 665719.1,
+      "end_ms": 665739.1,
+      "mean_probability": 0.9886
+    }
+  ],
+  "boundary_frames": [
+    {
+      "ms": 663602.0,
+      "token": "|",
+      "blank_probability": 0.0003
+    },
+    {
+      "ms": 663622.1,
+      "token": "|",
+      "blank_probability": 0.0003
+    },
+    {
+      "ms": 663642.1,
+      "token": "|",
+      "blank_probability": 0.0003
+    },
+    {
+      "ms": 663662.2,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 663682.3,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 663702.3,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 663722.4,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 663742.5,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 663762.5,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 663782.6,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 663802.7,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 663822.7,
+      "token": "|",
+      "blank_probability": 0.0001
+    },
+    {
+      "ms": 663842.8,
+      "token": "|",
+      "blank_probability": 0.0001
+    },
+    {
+      "ms": 663862.9,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 663882.9,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 663903.0,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 663923.1,
+      "token": "|",
+      "blank_probability": 0.0004
+    },
+    {
+      "ms": 663943.1,
+      "token": "|",
+      "blank_probability": 0.0004
+    },
+    {
+      "ms": 663963.2,
+      "token": "|",
+      "blank_probability": 0.001
+    },
+    {
+      "ms": 663983.3,
+      "token": "|",
+      "blank_probability": 0.0038
+    },
+    {
+      "ms": 664003.3,
+      "token": "[PAD]",
+      "blank_probability": 0.7636
+    },
+    {
+      "ms": 664023.4,
+      "token": "[PAD]",
+      "blank_probability": 0.9989
+    },
+    {
+      "ms": 664043.5,
+      "token": "[PAD]",
+      "blank_probability": 0.9993
+    },
+    {
+      "ms": 664063.5,
+      "token": "[PAD]",
+      "blank_probability": 0.9996
+    },
+    {
+      "ms": 664083.6,
+      "token": "[PAD]",
+      "blank_probability": 0.9996
+    },
+    {
+      "ms": 664103.7,
+      "token": "[PAD]",
+      "blank_probability": 0.9996
+    },
+    {
+      "ms": 664123.7,
+      "token": "[PAD]",
+      "blank_probability": 0.9993
+    },
+    {
+      "ms": 664143.8,
+      "token": "w",
+      "blank_probability": 0.0007
+    },
+    {
+      "ms": 664163.9,
+      "token": "|",
+      "blank_probability": 0.0026
+    },
+    {
+      "ms": 664183.9,
+      "token": "|",
+      "blank_probability": 0.0004
+    },
+    {
+      "ms": 664204.0,
+      "token": "|",
+      "blank_probability": 0.0001
+    },
+    {
+      "ms": 664224.1,
+      "token": "|",
+      "blank_probability": 0.0001
+    },
+    {
+      "ms": 664244.1,
+      "token": "|",
+      "blank_probability": 0.0001
+    },
+    {
+      "ms": 664264.2,
+      "token": "|",
+      "blank_probability": 0.0001
+    },
+    {
+      "ms": 664284.3,
+      "token": "|",
+      "blank_probability": 0.0001
+    },
+    {
+      "ms": 664304.3,
+      "token": "a",
+      "blank_probability": 0.0
+    },
+    {
+      "ms": 664324.4,
+      "token": "|",
+      "blank_probability": 0.0003
+    },
+    {
+      "ms": 664344.5,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 664364.5,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 664384.6,
+      "token": "|",
+      "blank_probability": 0.0004
+    },
+    {
+      "ms": 664404.7,
+      "token": "y",
+      "blank_probability": 0.0
+    },
+    {
+      "ms": 664424.7,
+      "token": "|",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 664444.8,
+      "token": "|",
+      "blank_probability": 0.0001
+    },
+    {
+      "ms": 664464.9,
+      "token": "A",
+      "blank_probability": 0.0002
+    },
+    {
+      "ms": 664484.9,
+      "token": "|",
+      "blank_probability": 0.0001
+    }
+  ],
+  "caveat": "Free-decoded CTC tokens are not forced word alignment; blank is not silence and | is a phoneme separator."
+}

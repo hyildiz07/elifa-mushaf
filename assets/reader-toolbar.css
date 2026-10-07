@@ -1,0 +1,622 @@
+/* Compact reader toolbar for phone screens. */
+/* Give the reader navigation its own balanced row without changing the theme palette. */
+body[data-layout="saray"] #reader .rtop-head {
+  width: min(100%, 720px);
+  margin-inline: auto;
+  justify-content: space-between;
+}
+body[data-layout="saray"] #reader .rtop-head .spacer { display: none; }
+body[data-layout="saray"] #reader .rtop-head .back,
+body[data-layout="saray"] #reader .rtop-head .pagechip,
+body[data-layout="saray"] #reader .rtop-head .helpbtn {
+  margin: 0;
+  flex-shrink: 0;
+}
+body[data-layout="saray"] #reader .rtop-head .pagechip {
+  min-height: 36px;
+  padding-inline: 12px;
+  border-radius: 12px;
+}
+body[data-layout="saray"] #reader .rtop-head .helpbtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+}
+
+/* Disabled actions remain legible, while their quieter color signals that a
+   word or verse must be selected first. */
+body[data-layout="saray"] #selbar .ss:disabled { opacity: 1 !important; }
+body[data-layout="saray"] #selbar .ss:disabled .ico {
+  background: rgba(255,255,255,.09) !important;
+  color: #d3deed !important;
+  border: 1px solid rgba(214,226,245,.18) !important;
+}
+body[data-layout="saray"] #selbar .ss:disabled .lbl {
+  color: #d5dfec !important;
+  -webkit-text-fill-color: #d5dfec !important;
+}
+
+@media (max-width: 600px) {
+  body[data-layout="saray"] #reader .rtop {
+    padding: calc(env(safe-area-inset-top) + 5px) 9px 8px !important;
+    gap: 6px !important;
+    background: linear-gradient(180deg, #fffaf0 0%, #f8efd9 100%) !important;
+    box-shadow: 0 5px 18px rgba(14, 44, 85, .11) !important;
+  }
+  body[data-layout="saray"] #reader .rtop-head {
+    gap: 4px !important;
+    padding: 0 2px 2px !important;
+    min-height: 38px !important;
+    display: grid !important;
+    grid-template-columns: 36px minmax(69px,1fr) minmax(42px,.7fr) minmax(77px,1.2fr) 49px 34px;
+    overflow-x: visible !important;
+  }
+  body[data-layout="saray"] #reader .rtop-head > button {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 36px !important;
+    padding: 5px 3px !important;
+    font-size: 11px !important;
+    white-space: nowrap;
+  }
+  body[data-layout="saray"] #reader .rtop-head .helpbtn { margin: 0 !important; }
+  body[data-layout="saray"] #reader .rtop-head .pagechip svg { width: 12px !important; height: 12px !important; margin-right: 2px !important; }
+  body[data-layout="saray"] #selbar .ss .lbl {
+    font-size: clamp(8px, 2.4vw, 9.5px) !important;
+    font-weight: 700 !important;
+  }
+  body[data-layout="saray"] #reader .rtop-head .pagechip,
+  body[data-layout="saray"] #reader .rtop-head .helpbtn,
+  body[data-layout="saray"] #reader .rtop-head .back {
+    background: #fffdf8 !important;
+    border-color: rgba(185, 141, 55, .52) !important;
+    box-shadow: 0 1px 3px rgba(14, 44, 85, .055) !important;
+  }
+  body[data-layout="saray"] #reader .rtop-head .recchip {
+    background: #113358 !important;
+    color: #f6d889 !important;
+    border-color: #b98d37 !important;
+    font-weight: 750 !important;
+    box-shadow: 0 2px 6px rgba(14, 44, 85, .18) !important;
+  }
+  body[data-layout="saray"] #reader .rtop-tools {
+    display: grid !important;
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+    gap: 0 !important;
+    width: 100% !important;
+    padding: 4px 3px 3px !important;
+    border: 1px solid rgba(185, 141, 55, .55) !important;
+    border-radius: 15px !important;
+    background: linear-gradient(180deg, #fffefd, #fdf8eb) !important;
+    box-shadow: 0 4px 12px rgba(14, 44, 85, .08), inset 0 1px 0 #fff !important;
+  }
+  body[data-layout="saray"] #reader .rtool {
+    width: 100% !important;
+    min-width: 0 !important;
+    gap: 2px !important;
+    padding: 3px 1px 2px !important;
+    border-radius: 10px !important;
+  }
+  body[data-layout="saray"] #reader .rtool .ico,
+  body[data-layout="saray"] #reader .rtool:nth-child(-n+3) .ico,
+  body[data-layout="saray"] #reader .testtopbtn .ico {
+    width: 36px !important;
+    max-width: 100% !important;
+    height: 32px !important;
+    border: 1px solid transparent !important;
+    border-radius: 9px !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    color: #17395d !important;
+  }
+  body[data-layout="saray"] #reader .rtool.on .ico,
+  body[data-layout="saray"] #reader .latbtn.on .ico,
+  body[data-layout="saray"] #reader .testtopbtn.on .ico {
+    background: linear-gradient(145deg, #143e68, #082748) !important;
+    color: #f5d681 !important;
+    border-color: #c99a35 !important;
+    box-shadow: 0 3px 8px rgba(5, 30, 56, .22) !important;
+  }
+  body[data-layout="saray"] #reader .rtool .lbl {
+    font-size: 8.5px !important;
+    line-height: 1.15 !important;
+    font-weight: 700 !important;
+    color: #31445c !important;
+  }
+  body[data-layout="saray"] #reader .zentab {
+    right: 10px !important;
+    background: #fff9eb !important;
+    border-color: rgba(185, 141, 55, .65) !important;
+    box-shadow: 0 3px 9px rgba(14, 44, 85, .10) !important;
+  }
+}
+
+@media (max-width: 360px) {
+  body[data-layout="saray"] #reader .rtop-head {
+    grid-template-columns: 32px minmax(62px,1fr) minmax(39px,.65fr) minmax(70px,1.15fr) 42px 30px;
+    gap: 3px !important;
+  }
+  body[data-layout="saray"] #reader .rtop-head > button {
+    height: 34px !important;
+    font-size: 10px !important;
+  }
+}
+
+/* The compact layout must follow the dark Saray palette as well. */
+@media (max-width: 600px) {
+  body[data-theme="saraygece"][data-layout="saray"] #reader .rtop {
+    background: #101927 !important;
+    border-color: #a98136 !important;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, .3) !important;
+  }
+  body[data-theme="saraygece"][data-layout="saray"] #reader .rtop-head .pagechip,
+  body[data-theme="saraygece"][data-layout="saray"] #reader .rtop-head .helpbtn,
+  body[data-theme="saraygece"][data-layout="saray"] #reader .rtop-head .back {
+    background: #1b2b42 !important;
+    color: #f4d273 !important;
+    border-color: #a98136 !important;
+    box-shadow: none !important;
+  }
+  body[data-theme="saraygece"][data-layout="saray"] #reader .rtop-tools {
+    background: #17263b !important;
+    border-color: #a98136 !important;
+    box-shadow: inset 0 1px 0 rgba(244, 210, 115, .1) !important;
+  }
+  body[data-theme="saraygece"][data-layout="saray"] #reader .rtool .ico,
+  body[data-theme="saraygece"][data-layout="saray"] #reader .rtool:nth-child(-n+3) .ico,
+  body[data-theme="saraygece"][data-layout="saray"] #reader .testtopbtn .ico {
+    color: #f4d273 !important;
+  }
+  body[data-theme="saraygece"][data-layout="saray"] #reader .rtool .lbl {
+    color: #f4d273 !important;
+  }
+  body[data-theme="saraygece"][data-layout="saray"] #reader .rtool.on .ico,
+  body[data-theme="saraygece"][data-layout="saray"] #reader .latbtn.on .ico,
+  body[data-theme="saraygece"][data-layout="saray"] #reader .testtopbtn.on .ico {
+    background: #f4d273 !important;
+    color: #0b1320 !important;
+    border-color: #f4d273 !important;
+  }
+  body[data-theme="saraygece"][data-layout="saray"] #reader .zentab {
+    background: #17263b !important;
+    color: #f4d273 !important;
+    border-color: #a98136 !important;
+  }
+}
+
+/* Nahl Yıldızları is dark even though it shares the compact reader layout. */
+@media (max-width: 600px) {
+  body[data-theme="nahlyildizlari"] #reader .rtop {
+    background:#0B1228!important;
+    border-color:#6387E0!important;
+    box-shadow:0 5px 18px rgba(0,0,0,.3)!important;
+  }
+  body[data-theme="nahlyildizlari"] #reader .rtop-head .pagechip,
+  body[data-theme="nahlyildizlari"] #reader .rtop-head .helpbtn,
+  body[data-theme="nahlyildizlari"] #reader .rtop-head .back {
+    background:#182749!important;
+    color:#F8FAFF!important;
+    border-color:#6387E0!important;
+    box-shadow:none!important;
+  }
+  body[data-theme="nahlyildizlari"] #reader .rtop-tools {
+    background:#162343!important;
+    border-color:#6387E0!important;
+    box-shadow:inset 0 1px 0 rgba(220,231,255,.12)!important;
+  }
+  body[data-theme="nahlyildizlari"] #reader .rtool .ico,
+  body[data-theme="nahlyildizlari"] #reader .rtool:nth-child(-n+3) .ico,
+  body[data-theme="nahlyildizlari"] #reader .testtopbtn .ico,
+  body[data-theme="nahlyildizlari"] #reader .rtool .lbl {
+    color:#F8FAFF!important;
+  }
+  body[data-theme="nahlyildizlari"] #reader .rtool.on .ico,
+  body[data-theme="nahlyildizlari"] #reader .latbtn.on .ico,
+  body[data-theme="nahlyildizlari"] #reader .testtopbtn.on .ico {
+    background:#DCE7FF!important;
+    color:#101A32!important;
+    border-color:#6387E0!important;
+  }
+  body[data-theme="nahlyildizlari"] #reader .zentab {
+    background:#162343!important;
+    color:#F8FAFF!important;
+    border-color:#6387E0!important;
+  }
+}
+
+/* Keep the reader's cream header; remove the individual icon boxes at every
+   width. The separate verse-action strip below retains its navy background. */
+body[data-layout="saray"] #reader .rtop-tools {
+  display: grid !important;
+  grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  width: min(920px, 100%) !important;
+  margin: 0 auto !important;
+  padding: 7px 4px 6px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 11px !important;
+  box-shadow: none !important;
+}
+body[data-layout="saray"] #reader .rtool {
+  width: 100% !important;
+  min-width: 0 !important;
+  gap: 2px !important;
+  padding: 2px 1px !important;
+}
+body[data-layout="saray"] #reader .rtool .ico,
+body[data-layout="saray"] #reader .rtool:nth-child(-n+3) .ico,
+body[data-layout="saray"] #reader .testtopbtn .ico,
+body[data-layout="saray"] #reader .rtool.on .ico,
+body[data-layout="saray"] #reader .latbtn.on .ico,
+body[data-layout="saray"] #reader .testtopbtn.on .ico {
+  width: 100% !important;
+  max-width: 58px !important;
+  height: 34px !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: #14395f !important;
+}
+body[data-layout="saray"] #reader .rtool.on .ico,
+body[data-layout="saray"] #reader .latbtn.on .ico,
+body[data-layout="saray"] #reader .testtopbtn.on .ico {
+  border-bottom: 2px solid #14395f !important;
+}
+body[data-layout="saray"] #reader .rtool .lbl,
+body[data-layout="saray"] #reader .rtool.on .lbl {
+  color: #31445c !important;
+  -webkit-text-fill-color: #31445c !important;
+  font-size: clamp(8.5px, 1.5vw, 10.5px) !important;
+  font-weight: 700 !important;
+}
+body[data-theme="saraygece"][data-layout="saray"] #reader .rtop-tools {
+  background: transparent !important;
+  border: 0 !important;
+}
+body[data-theme="nahlyildizlari"] #reader .rtop-tools {
+  background: transparent !important;
+  border: 0 !important;
+}
+body[data-theme="saraygece"][data-layout="saray"] #reader .rtool .ico,
+body[data-theme="saraygece"][data-layout="saray"] #reader .rtool:nth-child(-n+3) .ico,
+body[data-theme="saraygece"][data-layout="saray"] #reader .testtopbtn .ico,
+body[data-theme="saraygece"][data-layout="saray"] #reader .rtool.on .ico,
+body[data-theme="saraygece"][data-layout="saray"] #reader .latbtn.on .ico,
+body[data-theme="saraygece"][data-layout="saray"] #reader .testtopbtn.on .ico {
+  color: #f4d273 !important;
+  background: transparent !important;
+  border-color: #f4d273 !important;
+}
+body[data-theme="saraygece"][data-layout="saray"] #reader .rtool .lbl,
+body[data-theme="saraygece"][data-layout="saray"] #reader .rtool.on .lbl {
+  color: #f4d273 !important;
+  -webkit-text-fill-color: #f4d273 !important;
+}
+body[data-theme="nahlyildizlari"] #reader .rtool .ico,
+body[data-theme="nahlyildizlari"] #reader .rtool:nth-child(-n+3) .ico,
+body[data-theme="nahlyildizlari"] #reader .testtopbtn .ico,
+body[data-theme="nahlyildizlari"] #reader .rtool.on .ico,
+body[data-theme="nahlyildizlari"] #reader .latbtn.on .ico,
+body[data-theme="nahlyildizlari"] #reader .testtopbtn.on .ico {
+  color: #f8faff !important;
+  background: transparent !important;
+  border-color: #dce7ff !important;
+}
+body[data-theme="nahlyildizlari"] #reader .rtool .lbl,
+body[data-theme="nahlyildizlari"] #reader .rtool.on .lbl {
+  color: #f8faff !important;
+  -webkit-text-fill-color: #f8faff !important;
+}
+
+/* The expandable verse actions continue the same header surface. */
+body[data-layout="saray"] #selbar.seltop {
+  background: linear-gradient(180deg, #fffaf0, #f8efd9) !important;
+  color: #17395d !important;
+  border-bottom: 1px solid rgba(185,141,55,.55) !important;
+}
+body[data-layout="saray"] #selbar .selinfo,
+body[data-layout="saray"] #selbar .selinfo b,
+body[data-layout="saray"] #selbar .selinfo .sub {
+  color: #17395d !important;
+  -webkit-text-fill-color: #17395d !important;
+}
+body[data-layout="saray"] #selbar .ss .ico,
+body[data-layout="saray"] #selbar .ss#selErr .ico {
+  background: transparent !important;
+  color: #17395d !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body[data-layout="saray"] #selbar .ss .lbl,
+body[data-layout="saray"] #selbar .ss.x .lbl {
+  color: #17395d !important;
+  -webkit-text-fill-color: #17395d !important;
+}
+body[data-layout="saray"] #selbar .ss:disabled .ico {
+  background: transparent !important;
+  color: #64758a !important;
+  border: 0 !important;
+}
+body[data-layout="saray"] #selbar .ss:disabled .lbl {
+  color: #64758a !important;
+  -webkit-text-fill-color: #64758a !important;
+}
+body[data-theme="saraygece"][data-layout="saray"] #selbar.seltop {
+  background: #101927 !important;
+  color: #f4d273 !important;
+}
+body[data-theme="saraygece"][data-layout="saray"] #selbar .selinfo,
+body[data-theme="saraygece"][data-layout="saray"] #selbar .selinfo b,
+body[data-theme="saraygece"][data-layout="saray"] #selbar .selinfo .sub,
+body[data-theme="saraygece"][data-layout="saray"] #selbar .ss .ico,
+body[data-theme="saraygece"][data-layout="saray"] #selbar .ss .lbl {
+  color: #f4d273 !important;
+  -webkit-text-fill-color: #f4d273 !important;
+}
+body[data-theme="saraygece"][data-layout="saray"] #selbar .ss:disabled .ico,
+body[data-theme="saraygece"][data-layout="saray"] #selbar .ss:disabled .lbl {
+  color: #b9c5d6 !important;
+  -webkit-text-fill-color: #b9c5d6 !important;
+}
+body[data-theme="nahlyildizlari"] #selbar.seltop {
+  background: #0b1228 !important;
+  color: #f8faff !important;
+}
+body[data-theme="nahlyildizlari"] #selbar .selinfo,
+body[data-theme="nahlyildizlari"] #selbar .selinfo b,
+body[data-theme="nahlyildizlari"] #selbar .selinfo .sub,
+body[data-theme="nahlyildizlari"] #selbar .ss .ico,
+body[data-theme="nahlyildizlari"] #selbar .ss .lbl {
+  color: #f8faff !important;
+  -webkit-text-fill-color: #f8faff !important;
+}
+body[data-theme="nahlyildizlari"] #selbar .ss:disabled .ico,
+body[data-theme="nahlyildizlari"] #selbar .ss:disabled .lbl {
+  color: #c3d1ee !important;
+  -webkit-text-fill-color: #c3d1ee !important;
+}
+
+/* The handle hangs from the lower edge of whichever toolbar is visible. */
+#reader .rtop .zentab {
+  bottom: calc(-25px - var(--selection-slide, 0px)) !important;
+  transition: color .18s ease !important;
+}
+@media (min-width: 700px) {
+  #reader .rtop .zentab { bottom: calc(-31px - var(--selection-slide, 0px)) !important; }
+}
+@media (min-width: 1100px) {
+  #reader .rtop .zentab { bottom: calc(-37px - var(--selection-slide, 0px)) !important; }
+}
+
+/* Six even touch targets with icons aligned above their labels. */
+#reader #selbar .selrow {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 2px !important;
+}
+#reader #selbar .ss {
+  width: 100% !important;
+  min-width: 0 !important;
+  min-height: 54px;
+  padding: 3px 1px !important;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9px;
+}
+#reader #selbar .ss svg { width: 20px; height: 20px; }
+#reader #selbar .ss .lbl {
+  font-size: clamp(8px, 2.35vw, 10px) !important;
+  font-weight: 700 !important;
+}
+#reader #selbar .ss:not(:disabled):focus-visible {
+  outline: 2px solid #bd8f39;
+  outline-offset: 1px;
+}
+#reader #selbar .ss.choosing {
+  background: rgba(189,143,57,.22) !important;
+  box-shadow: inset 0 -3px #a87621 !important;
+}
+body[data-theme="saraygece"] #reader #selbar .ss.choosing,
+body[data-theme="nahlyildizlari"] #reader #selbar .ss.choosing {
+  background: rgba(244,210,115,.24) !important;
+  box-shadow: inset 0 -3px #f4d273 !important;
+}
+
+/* Navigation reads as one calm row instead of six outlined pills. Keep the
+   existing full-size button hit areas, including on narrow phones. */
+body[data-layout="saray"] #reader .rtop-head > button,
+body[data-layout="saray"] #reader .rtop-head .pagechip,
+body[data-layout="saray"] #reader .rtop-head .helpbtn,
+body[data-layout="saray"] #reader .rtop-head .back,
+body[data-layout="saray"] #reader .rtop-head .recchip {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  color: #17395d !important;
+}
+body[data-layout="saray"] #reader .rtop-head > button:focus-visible {
+  outline: 2px solid #b98d37 !important;
+  outline-offset: 1px;
+  border-radius: 6px !important;
+}
+body[data-layout="saray"] #reader .rtop-head > button:active {
+  transform: translateY(1px);
+}
+body[data-theme="saraygece"][data-layout="saray"] #reader .rtop-head .pagechip,
+body[data-theme="saraygece"][data-layout="saray"] #reader .rtop-head .helpbtn,
+body[data-theme="saraygece"][data-layout="saray"] #reader .rtop-head .back,
+body[data-theme="nahlyildizlari"] #reader .rtop-head .pagechip,
+body[data-theme="nahlyildizlari"] #reader .rtop-head .helpbtn,
+body[data-theme="nahlyildizlari"] #reader .rtop-head .back {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body[data-theme="saraygece"][data-layout="saray"] #reader .rtop-head > button { color: #f4d273 !important; }
+body[data-theme="nahlyildizlari"] #reader .rtop-head > button { color: #f8faff !important; }
+body[data-theme="saraygece"][data-layout="saray"] #reader .rtop-head .recchip { color: #f4d273 !important; }
+body[data-theme="nahlyildizlari"] #reader .rtop-head .recchip { color: #f8faff !important; }
+body[data-layout="saray"] #reader .rtop-head #pageChip::after,
+body[data-layout="saray"] #reader .rtop-head #juzChip::after,
+body[data-layout="saray"] #reader .rtop-head #readerReciter::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-left: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  vertical-align: middle;
+  opacity: .85;
+}
+body[data-layout="saray"] #reader .rtop-head > button {
+  font-size: 12px !important;
+  font-weight: 750 !important;
+}
+@media (max-width: 600px) {
+  body[data-layout="saray"] #reader .rtop-head > button { height: 40px !important; }
+}
+@media (max-width: 360px) {
+  body[data-layout="saray"] #reader .rtop-head #pageChip::after,
+  body[data-layout="saray"] #reader .rtop-head #juzChip::after,
+  body[data-layout="saray"] #reader .rtop-head #readerReciter::after { margin-left: 3px; }
+  body[data-layout="saray"] #reader .rtop-head {
+    grid-template-columns: 32px minmax(60px,1fr) minmax(38px,.65fr) minmax(66px,1.15fr) 42px 30px;
+  }
+  body[data-layout="saray"] #reader .rtop-head > button { height: 38px !important; font-size: 11px !important; }
+}
+
+/* Show the selected teacher in the reader; use a recognizable short name on phones. */
+body[data-layout="saray"] #reader #readerReciter {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 0;
+}
+body[data-layout="saray"] #reader #readerReciter .reciter-full,
+body[data-layout="saray"] #reader #readerReciter .reciter-short {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+body[data-layout="saray"] #reader #readerReciter .reciter-short { display: none; }
+body[data-layout="saray"] #reader #readerReciter::after { flex: none; margin-left: 2px; }
+@media (max-width: 600px) {
+  body[data-layout="saray"] #reader #readerReciter .reciter-full { display: none; }
+  body[data-layout="saray"] #reader #readerReciter .reciter-short { display: block; }
+  body[data-layout="saray"] #reader .rtop-head {
+    grid-template-columns: 36px minmax(65px,1fr) minmax(40px,.6fr) minmax(67px,1fr) minmax(65px,1.25fr) 34px;
+  }
+}
+@media (max-width: 360px) {
+  body[data-layout="saray"] #reader .rtop-head {
+    grid-template-columns: 32px minmax(59px,1fr) minmax(36px,.6fr) minmax(61px,1fr) minmax(53px,1fr) 30px;
+  }
+  body[data-layout="saray"] #reader #readerReciter { font-size: 10px !important; }
+}
+
+/* Keep the selected teacher visible in the split view, including narrow phones. */
+#split .topbar #splitReciter {
+  width: auto;
+  max-width: min(42vw, 220px);
+  min-width: 0;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  gap: 4px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+}
+#split #splitReciter .reciter-full,
+#split #splitReciter .reciter-short {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+#split #splitReciter .reciter-short { display: none; }
+#split #splitReciter::after {
+  content: "";
+  flex: none;
+  width: 5px;
+  height: 5px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg) translateY(-2px);
+  opacity: .8;
+}
+@media (max-width: 600px) {
+  #split .topbar #splitReciter { max-width: 110px; }
+  #split #splitReciter .reciter-full { display: none; }
+  #split #splitReciter .reciter-short { display: block; }
+}
+
+/* The night theme must never place gold lettering over a gold-to-blue gradient. */
+body[data-theme="saraygece"] #reader .surahHead .sno {
+  background: #f4d273 !important;
+  border-color: #f8e7a2 !important;
+  color: #102947 !important;
+  -webkit-text-fill-color: #102947 !important;
+}
+body[data-theme="saraygece"] #reader .surahHead .stitle {
+  color: #f4d273 !important;
+  -webkit-text-fill-color: #f4d273 !important;
+}
+body[data-theme="saraygece"] #reader .surnav button {
+  background: #1b304d !important;
+  border: 1px solid #bfa052 !important;
+  color: #f7f8fc !important;
+  -webkit-text-fill-color: #f7f8fc !important;
+}
+body[data-theme="saraygece"] #reader .surnav button .ar {
+  color: #f4d273 !important;
+  -webkit-text-fill-color: #f4d273 !important;
+}
+
+/* Nahl's error icon has an older id-specific dark color; keep every action visible. */
+body[data-theme="nahlyildizlari"] #reader .rtop {
+  z-index: 42 !important;
+}
+body[data-theme="nahlyildizlari"][data-layout="saray"] #reader .rtop-head > button {
+  color: #f8faff !important;
+}
+body[data-theme="nahlyildizlari"] #reader #selbar.seltop {
+  position: relative !important;
+  top: 0 !important;
+  z-index: 41 !important;
+}
+body[data-theme="nahlyildizlari"] #reader #selbar.seltop .ss .ico,
+body[data-theme="nahlyildizlari"] #reader #selbar.seltop .ss#selErr .ico {
+  background: transparent !important;
+  color: #f8faff !important;
+  -webkit-text-fill-color: #f8faff !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+body[data-theme="nahlyildizlari"] #reader #selbar.seltop .ss .lbl,
+body[data-theme="nahlyildizlari"] #reader #selbar.seltop .selinfo {
+  color: #f8faff !important;
+  -webkit-text-fill-color: #f8faff !important;
+}
+body[data-theme="nahlyildizlari"] #reader #selbar.seltop .ss:disabled .ico,
+body[data-theme="nahlyildizlari"] #reader #selbar.seltop .ss:disabled .lbl {
+  color: #c3d1ee !important;
+  -webkit-text-fill-color: #c3d1ee !important;
+}
+
+body[data-theme="nahlyildizlari"] #reader .surahHead .sno {
+  background: #eaf0ff !important;
+  border-color: #a9bae0 !important;
+  color: #172343 !important;
+  -webkit-text-fill-color: #172343 !important;
+}
+

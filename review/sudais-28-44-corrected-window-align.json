@@ -1,0 +1,160 @@
+{
+  "status": "review-only-no-cut-approval",
+  "source_file": "test-results/sudais-qdc-28.mp3",
+  "source_sha256": "f8e5291cf10a3a29230fd443b5ddabc4297cf5b16c70250dda3bfe6314917576",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/28.mp3",
+  "requested_window_ms": [
+    651500,
+    666000
+  ],
+  "decoded_window_ms": [
+    651500,
+    666000
+  ],
+  "sample_rate": 22050,
+  "wav_sha256": "ffc6a3c05494582730501528ec1531acb18f546ec7fa9294fad8ce1257175802",
+  "qul_source_matched_candidate_ms": {
+    "28:43": [
+      635492,
+      653440
+    ],
+    "28:44": [
+      653640,
+      663092
+    ],
+    "28:45": [
+      663292,
+      682853
+    ]
+  },
+  "provider_meta_ms": {
+    "28:43": [
+      625690,
+      643040
+    ],
+    "28:44": [
+      643040,
+      652390
+    ],
+    "28:45": [
+      652390,
+      671720
+    ]
+  },
+  "models": {
+    "Base": {
+      "http_status": 200,
+      "audio_id": "5e82367840b54c8c9fc5217ccaf31653",
+      "meta": {
+        "schema_version": 2,
+        "reference_id": "qul-text-qpc-hafs-312",
+        "reference_riwayah": "hafs",
+        "recitation_riwayah": "hafs",
+        "output_edition_id": "qul-text-qpc-hafs-312",
+        "output_riwayah": "hafs",
+        "projection_id": null,
+        "projection_sha256": null,
+        "requested_model": "Base",
+        "effective_model": "Base",
+        "runtime": {
+          "processing_seconds": 1.203657865524292,
+          "queue_seconds": 0.04529308318160474,
+          "total_seconds": 1.2489509487058967
+        }
+      },
+      "error": null,
+      "segments": [
+        {
+          "ref_from": "28:43:16",
+          "ref_to": "28:43:16",
+          "source_from_ms": 651500,
+          "source_to_ms": 653680,
+          "confidence": 0.786,
+          "has_missing_words": true,
+          "has_repeated_words": false,
+          "matched_text": "يَتَذَكَّرُونَ",
+          "error": null
+        },
+        {
+          "ref_from": "28:44:1",
+          "ref_to": "28:44:13",
+          "source_from_ms": 653780,
+          "source_to_ms": 663460,
+          "confidence": 0.971,
+          "has_missing_words": false,
+          "has_repeated_words": false,
+          "matched_text": "وَمَا كُنتَ بِجَانِبِ ٱلْغَرْبِىِّ إِذْ قَضَيْنَآ إِلَىٰ مُوسَى ٱلْأَمْرَ وَمَا كُنتَ مِنَ ٱلشَّـٰهِدِينَ",
+          "error": null
+        },
+        {
+          "ref_from": "28:45:1",
+          "ref_to": "28:45:2",
+          "source_from_ms": 663520,
+          "source_to_ms": 666000,
+          "confidence": 0.75,
+          "has_missing_words": true,
+          "has_repeated_words": false,
+          "matched_text": "وَلَـٰكِنَّآ أَنشَأْنَا",
+          "error": null
+        }
+      ]
+    },
+    "Large": {
+      "http_status": 200,
+      "audio_id": "46b67bc9f8644ea489aff58cecb69bec",
+      "meta": {
+        "schema_version": 2,
+        "reference_id": "qul-text-qpc-hafs-312",
+        "reference_riwayah": "hafs",
+        "recitation_riwayah": "hafs",
+        "output_edition_id": "qul-text-qpc-hafs-312",
+        "output_riwayah": "hafs",
+        "projection_id": null,
+        "projection_sha256": null,
+        "requested_model": "Large",
+        "effective_model": "Large",
+        "runtime": {
+          "processing_seconds": 2.6944708824157715,
+          "queue_seconds": 0.02229998545954004,
+          "total_seconds": 2.7167708678753115
+        }
+      },
+      "error": null,
+      "segments": [
+        {
+          "ref_from": "28:43:16",
+          "ref_to": "28:43:16",
+          "source_from_ms": 651500,
+          "source_to_ms": 653680,
+          "confidence": 0.786,
+          "has_missing_words": true,
+          "has_repeated_words": false,
+          "matched_text": "يَتَذَكَّرُونَ",
+          "error": null
+        },
+        {
+          "ref_from": "28:44:1",
+          "ref_to": "28:44:13",
+          "source_from_ms": 653780,
+          "source_to_ms": 663460,
+          "confidence": 1,
+          "has_missing_words": false,
+          "has_repeated_words": false,
+          "matched_text": "وَمَا كُنتَ بِجَانِبِ ٱلْغَرْبِىِّ إِذْ قَضَيْنَآ إِلَىٰ مُوسَى ٱلْأَمْرَ وَمَا كُنتَ مِنَ ٱلشَّـٰهِدِينَ",
+          "error": null
+        },
+        {
+          "ref_from": "28:45:1",
+          "ref_to": "28:45:2",
+          "source_from_ms": 663520,
+          "source_to_ms": 666000,
+          "confidence": 0.938,
+          "has_missing_words": true,
+          "has_repeated_words": false,
+          "matched_text": "وَلَـٰكِنَّآ أَنشَأْنَا",
+          "error": null
+        }
+      ]
+    }
+  }
+}

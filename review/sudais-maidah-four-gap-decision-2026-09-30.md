@@ -1,0 +1,16 @@
+# Südeys Mâide 5:46, 5:82, 5:91, 5:103: kaynak ve geri açma kararı
+
+**Karar:** Dört eksik-kelime vakasına üretim zaman satırı eklenmedi. Aynı üretim sûre MP3'ünün SHA-256 değeri `16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb`; Base/Large model adayları kelimeleri buluyor. Fakat sağlayıcı âyet sınırları kaymış, bazı iç kesimler etkin ses taşıyor ve 5:46/5:82/5:103'te tekrarlanan söylenişler bulunuyor. Birkaç kelimenin saatini doldurmak yanlış âyet aralığını ve güvenli olmayan parça kesimini düzeltmez.
+
+| Âyet | Sağlayıcının âyet aralığı (ms) | Aynı MP3'te Base/Large hedefi ve sonraki âyet (ms) | Açık risk |
+| --- | ---: | ---: | --- |
+| 5:46 | Eski âyet aralığı 5:45'in 12–31. kelimelerini ve 5:46'nın yalnız 1–8. kelimelerini içeriyor | 1.086.190–1.108.617; 5:47 ≈1.108.647 | 24. kelime yeniden okunuyor. Önerilen dört iç kesimin üçünde model boşluğu yok; 30 ms'lik âyet sonu fonetik onay değildir. |
+| 5:82 | 1.852.870–1.883.090 | 1.867.803–1.897.033; 5:83 ≈1.897.510 | Eski aralık 5:81 sonunu alıp 5:82 sonunu atıyor. 23. kelime yeniden okunuyor; ≤8 kelimelik kart için gereken kesimlerde sessizlik doğrulanmadı. |
+| 5:91 | 2.035.190–2.053.790 | 2.046.420–2.064.540; 5:92 ≈2.064.620 | Sağlayıcı aralığı gerçek âyetin başlangıcından önce açılıyor ve bitişten yaklaşık 10,75 saniye önce kapanıyor; 5–6. kelimelerin zamanını eklemek tam âyeti kurtarmaz. |
+| 5:103 | 2.258.090–2.278.050 | 2.264.943–2.284.373; 5:104 ≈2.284.403 | İlk 1–2 kelime modelde var; 10–11 ayrıca söyleniyor. Eski aralık son ~6,32 saniyeyi atlıyor, modelin son/sonraki âyet ayrımı yalnız 30 ms. |
+
+5:91 ve 5:103 için aynı MP3'ün baştan çözülen PCM pencereleri `test-results/sudais-small-gap-window-evidence.json` içinde, Base/Large sözcük yanıtları `test-results/sudais-small-gap-word-evidence.json` içinde. İki model de 5:91 için 1–20 ve 5:103 için 1–21 dizisini; 5:103'te 10–11 tekrarını buldu. İlgili pencerelerin WAV SHA-256 değerleri sırasıyla `93e3b1366a70bed335ae85f2d29e6d2adef589dfb45e5b820fa0a1020fb95ccc` ve `5b61e642775c2c08bf3a455d2f9d18d6e73088ae8b208cbd805dc7bdbdca7c60`. Model uzlaşması kimlik ve sıra lehine kanıttır; fonemin bütünüyle korunacağı kesim izni değildir.
+
+5:46 için [`5-46-prototype.json`](sudais-qdc-align/5-46-prototype.json), 5:82 için [`5-82-prototype.json`](sudais-qdc-align/5-82-prototype.json) aynı kaynağın iki modelini ve tekrarları kaydeder. 5:82'nin üç olası durak alanında ölçülen en düşük 20 ms RMS 0,07782/0,10819/0,09740; sessiz kesim diye kullanılamaz. Ayrıntılı mevcut dinleme sınırı [`sudais-six-quarantine-source-followup-2026-09-30.md`](sudais-six-quarantine-source-followup-2026-09-30.md) içindedir.
+
+**Geri açma koşulu:** 5. sûrenin aynı kaynak MP3'ünde bütün âyet aralıkları komşu geçişleriyle yeniden hizalanmalı; tekrarlar kanonik kelime ile ayrı söylenişler olarak temsil edilmeli; hedef âyetin ilk/son sesi ve her önerilen parça sınırının iki tarafı işitsel/fonetik olarak doğrulanmalı. Sonra normal okuma, tekrar, bütün ve kısmi seçim, çevrimdışı/yavaş bağlantı yolları birlikte sınanmalı. Bu kapılar geçilmeden tekil override veya sağlayıcı saatine dayalı sanal âyet aralığı yayımlanmamalı. Bu incelemede uygulama kodu, ses varlığı ve dağıtım değiştirilmedi.

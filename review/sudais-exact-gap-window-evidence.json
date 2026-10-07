@@ -1,0 +1,262 @@
+[
+  {
+    "key": "4:134",
+    "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/4.mp3",
+    "source_sha256": "60adc3638bc3cdf6dbfcf110ab1102f810794ea21e74f3764cd159b3f13d122d",
+    "excerpt": [
+      2772000,
+      2804000
+    ],
+    "wav_sha256": "736ac3b035d9732897a9c323a35e243c898828231520c40bc6c1497994397d8f",
+    "matches": {
+      "Large": {
+        "audio_id": "6d28c61a7a14493c89cff1e0fc921608",
+        "segments": [
+          {
+            "from": "4:133:5",
+            "to": "4:133:7",
+            "start_ms": 2772000,
+            "end_ms": 2776080,
+            "confidence": 0.913,
+            "missing": true,
+            "repeated": false
+          },
+          {
+            "from": "4:133:8",
+            "to": "4:133:12",
+            "start_ms": 2776110,
+            "end_ms": 2780580,
+            "confidence": 1,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "4:134:1",
+            "to": "4:134:10",
+            "start_ms": 2780610,
+            "end_ms": 2789713,
+            "confidence": 1,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "4:134:11",
+            "to": "4:134:14",
+            "start_ms": 2789743,
+            "end_ms": 2796893,
+            "confidence": 1,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "4:135:1",
+            "to": "4:135:7",
+            "start_ms": 2796923,
+            "end_ms": 2804000,
+            "confidence": 0.979,
+            "missing": true,
+            "repeated": false
+          }
+        ]
+      },
+      "Base": {
+        "audio_id": "014730d8c6ba4685acb17ccdcbb30fb9",
+        "segments": [
+          {
+            "from": "4:133:4",
+            "to": "4:133:7",
+            "start_ms": 2772000,
+            "end_ms": 2776080,
+            "confidence": 0.913,
+            "missing": true,
+            "repeated": false
+          },
+          {
+            "from": "4:133:8",
+            "to": "4:133:12",
+            "start_ms": 2776110,
+            "end_ms": 2780580,
+            "confidence": 1,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "4:134:1",
+            "to": "4:134:10",
+            "start_ms": 2780610,
+            "end_ms": 2789713,
+            "confidence": 1,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "4:134:11",
+            "to": "4:134:14",
+            "start_ms": 2789743,
+            "end_ms": 2796887,
+            "confidence": 1,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "4:135:1",
+            "to": "4:135:7",
+            "start_ms": 2796917,
+            "end_ms": 2804000,
+            "confidence": 0.92,
+            "missing": true,
+            "repeated": false
+          }
+        ]
+      }
+    }
+  },
+  {
+    "key": "5:82",
+    "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/5.mp3",
+    "source_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+    "excerpt": [
+      1868000,
+      1912000
+    ],
+    "wav_sha256": "5e9193f10ecba8d9aa57a02b8ae89059a9ad51614f04e517f25b26b9fd11570f",
+    "matches": {
+      "Large": {
+        "audio_id": "6bd1177688304b4993ef6146e4de333f",
+        "segments": [
+          {
+            "from": "5:82:1",
+            "to": "5:82:9",
+            "start_ms": 1868000,
+            "end_ms": 1876780,
+            "confidence": 0.953,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "5:82:10",
+            "to": "5:82:18",
+            "start_ms": 1877020,
+            "end_ms": 1886607,
+            "confidence": 0.952,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "5:82:19",
+            "to": "5:82:23",
+            "start_ms": 1886637,
+            "end_ms": 1891873,
+            "confidence": 0.943,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "5:82:23",
+            "to": "5:82:26",
+            "start_ms": 1891903,
+            "end_ms": 1897240,
+            "confidence": 0.968,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "5:83:1",
+            "to": "5:83:11",
+            "start_ms": 1897500,
+            "end_ms": 1905787,
+            "confidence": 1,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "5:83:9",
+            "to": "5:83:15",
+            "start_ms": 1905817,
+            "end_ms": 1910947,
+            "confidence": 0.97,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "5:83:16",
+            "to": "5:83:16",
+            "start_ms": 1910977,
+            "end_ms": 1912000,
+            "confidence": 0.857,
+            "missing": true,
+            "repeated": false
+          }
+        ]
+      },
+      "Base": {
+        "audio_id": "5524a891f1ae4a29ab334a332f34c550",
+        "segments": [
+          {
+            "from": "5:82:1",
+            "to": "5:82:9",
+            "start_ms": 1868000,
+            "end_ms": 1876780,
+            "confidence": 0.902,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "5:82:10",
+            "to": "5:82:18",
+            "start_ms": 1877020,
+            "end_ms": 1886607,
+            "confidence": 0.921,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "5:82:19",
+            "to": "5:82:23",
+            "start_ms": 1886637,
+            "end_ms": 1891873,
+            "confidence": 0.886,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "5:82:23",
+            "to": "5:82:26",
+            "start_ms": 1891903,
+            "end_ms": 1897240,
+            "confidence": 0.867,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "5:83:1",
+            "to": "5:83:11",
+            "start_ms": 1897500,
+            "end_ms": 1905787,
+            "confidence": 0.95,
+            "missing": false,
+            "repeated": false
+          },
+          {
+            "from": "5:83:9",
+            "to": "5:83:15",
+            "start_ms": 1905817,
+            "end_ms": 1910947,
+            "confidence": 0.909,
+            "missing": true,
+            "repeated": false
+          },
+          {
+            "from": "5:83:5",
+            "to": "5:83:5",
+            "start_ms": 1910977,
+            "end_ms": 1912000,
+            "confidence": 0.667,
+            "missing": false,
+            "repeated": false
+          }
+        ]
+      }
+    }
+  }
+]

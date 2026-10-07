@@ -1,0 +1,198 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/5.mp3",
+  "source_file_size": 38326543,
+  "source_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+  "excerpt_file": "test-results/sudais-qdc-align/5-119.wav",
+  "excerpt_sha256": "328928b7cbbec3aaee2e0ef5d5e969fbf9e243fd1d49e60471d7aa7b144a6221",
+  "excerpt_from_ms": 2632580,
+  "excerpt_to_ms": 2651780,
+  "provider_segments": [
+    [
+      1,
+      2632580,
+      2633380
+    ],
+    [
+      2,
+      2633380,
+      2634090
+    ],
+    [
+      3,
+      2634090,
+      2634640
+    ],
+    [
+      4,
+      2634640,
+      2635120
+    ],
+    [
+      5,
+      2635120,
+      2635920
+    ],
+    [
+      6,
+      2635920,
+      2637050
+    ],
+    [
+      7,
+      2637050,
+      2637920
+    ],
+    [
+      8,
+      2637920,
+      2638730
+    ],
+    [
+      9,
+      2638730,
+      2640000
+    ],
+    [
+      10,
+      2640000,
+      2640790
+    ],
+    [
+      11,
+      2640790,
+      2641080
+    ],
+    [
+      12,
+      2641080,
+      2641950
+    ],
+    [
+      13,
+      2641950,
+      2642850
+    ],
+    [
+      14,
+      2642850,
+      2643790
+    ],
+    [
+      15,
+      2643790,
+      2644530
+    ],
+    [
+      16,
+      2644530,
+      2645270
+    ],
+    [
+      17,
+      2645270,
+      2646080
+    ],
+    [
+      18,
+      2646080,
+      2646730
+    ],
+    [
+      19,
+      2646730,
+      2647410
+    ],
+    [
+      20,
+      2647410,
+      2648030
+    ],
+    [
+      21,
+      2648030,
+      2648560
+    ],
+    [
+      22,
+      2648560,
+      2649540
+    ],
+    [
+      23,
+      2649540,
+      2650240
+    ],
+    [
+      24,
+      2650240,
+      2651645
+    ]
+  ],
+  "aligner": {
+    "audio_id": "a7b659fe71b247a99e9a554340ce4f13",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 9.82,
+        "ref_from": "5:117:20",
+        "ref_to": "5:117:29",
+        "matched_text": "تَوَفَّيْتَنِى كُنتَ أَنتَ ٱلرَّقِيبَ عَلَيْهِمْ وَأَنتَ عَلَىٰ كُلِّ شَىْءٍ شَهِيدٌ",
+        "confidence": 0.918,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 9.96,
+        "time_to": 15.08,
+        "ref_from": "5:118:1",
+        "ref_to": "5:118:4",
+        "matched_text": "إِن تُعَذِّبْهُمْ فَإِنَّهُمْ عِبَادُكَ",
+        "confidence": 1,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 16.04,
+        "time_to": 19.2,
+        "ref_from": "5:118:1",
+        "ref_to": "5:118:3",
+        "matched_text": "إِن تُعَذِّبْهُمْ فَإِنَّهُمْ",
+        "confidence": 0.761,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.6611566543579102,
+        "queue_seconds": 0.0839847187162377,
+        "total_seconds": 1.7451413730741479
+      }
+    }
+  }
+}

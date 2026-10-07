@@ -1,0 +1,126 @@
+{
+  "status": "review-only-no-audio-cut-approved",
+  "meaning": "Even structurally simple rows need independent phonetic first/last boundary and adjacent-verse checks on the exact QDC PCM before production use.",
+  "total": {
+    "verses": 519,
+    "providerDisjoint": 276,
+    "cleanWordShape": 429,
+    "repeatOrLabelReview": 90,
+    "bothNeighborsMatched": 509,
+    "nextMatched": 514,
+    "nextNotMatched": 5,
+    "needsDirectNextBoundary": 1,
+    "edgeLabelsWithinCandidate": 519,
+    "structurallySimpleWithNext": 424,
+    "structurallySimpleWithNextAndDisjointProvider": 238,
+    "nextCandidateOverlaps": 0
+  },
+  "chapters": {
+    "3": {
+      "verses": 200,
+      "providerDisjoint": 94,
+      "cleanWordShape": 164,
+      "repeatOrLabelReview": 36,
+      "bothNeighborsMatched": 198,
+      "nextMatched": 199,
+      "nextNotMatched": 1,
+      "needsDirectNextBoundary": 0,
+      "edgeLabelsWithinCandidate": 200,
+      "structurallySimpleWithNext": 163,
+      "structurallySimpleWithNextAndDisjointProvider": 79,
+      "nextCandidateOverlaps": 0
+    },
+    "4": {
+      "verses": 176,
+      "providerDisjoint": 129,
+      "cleanWordShape": 138,
+      "repeatOrLabelReview": 38,
+      "bothNeighborsMatched": 174,
+      "nextMatched": 175,
+      "nextNotMatched": 1,
+      "needsDirectNextBoundary": 0,
+      "edgeLabelsWithinCandidate": 176,
+      "structurallySimpleWithNext": 137,
+      "structurallySimpleWithNextAndDisjointProvider": 110,
+      "nextCandidateOverlaps": 0
+    },
+    "5": {
+      "verses": 10,
+      "providerDisjoint": 9,
+      "cleanWordShape": 9,
+      "repeatOrLabelReview": 1,
+      "bothNeighborsMatched": 8,
+      "nextMatched": 9,
+      "nextNotMatched": 1,
+      "needsDirectNextBoundary": 0,
+      "edgeLabelsWithinCandidate": 10,
+      "structurallySimpleWithNext": 8,
+      "structurallySimpleWithNextAndDisjointProvider": 7,
+      "nextCandidateOverlaps": 0
+    },
+    "28": {
+      "verses": 88,
+      "providerDisjoint": 29,
+      "cleanWordShape": 76,
+      "repeatOrLabelReview": 12,
+      "bothNeighborsMatched": 86,
+      "nextMatched": 87,
+      "nextNotMatched": 1,
+      "needsDirectNextBoundary": 0,
+      "edgeLabelsWithinCandidate": 88,
+      "structurallySimpleWithNext": 75,
+      "structurallySimpleWithNextAndDisjointProvider": 28,
+      "nextCandidateOverlaps": 0
+    },
+    "29": {
+      "verses": 45,
+      "providerDisjoint": 15,
+      "cleanWordShape": 42,
+      "repeatOrLabelReview": 3,
+      "bothNeighborsMatched": 43,
+      "nextMatched": 44,
+      "nextNotMatched": 1,
+      "needsDirectNextBoundary": 1,
+      "edgeLabelsWithinCandidate": 45,
+      "structurallySimpleWithNext": 41,
+      "structurallySimpleWithNextAndDisjointProvider": 14,
+      "nextCandidateOverlaps": 0
+    }
+  },
+  "focus": [
+    {
+      "key": "28:44",
+      "sourceMatched": true,
+      "cleanWordShape": true,
+      "providerOverlapsCandidate": false,
+      "previousMatched": true,
+      "nextMatched": true,
+      "candidate": [
+        653640,
+        663092
+      ],
+      "firstWordLeadMs": 320,
+      "lastWordTailMs": 0,
+      "edgeLabelsWithinCandidate": true,
+      "nextCandidateGapMs": 200,
+      "needsDirectNextBoundary": false
+    },
+    {
+      "key": "29:45",
+      "sourceMatched": true,
+      "cleanWordShape": true,
+      "providerOverlapsCandidate": true,
+      "previousMatched": true,
+      "nextMatched": false,
+      "candidate": [
+        598558,
+        622530
+      ],
+      "firstWordLeadMs": 302,
+      "lastWordTailMs": 0,
+      "edgeLabelsWithinCandidate": true,
+      "nextCandidateGapMs": null,
+      "needsDirectNextBoundary": true
+    }
+  ]
+}

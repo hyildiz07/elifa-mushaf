@@ -1,0 +1,168 @@
+{
+  "home": [
+    {
+      "t": "Elifa Mushaf",
+      "x": "Ini ialah skrin utama. Di bawah logo adalah alamat web kami; di tengah-tengah Basmala dan kebijaksanaan yang berubah pada setiap pelancaran."
+    },
+    {
+      "t": "Cari surah",
+      "x": "Taip nama surah (cth. \"Yasin\") atau nombornya untuk mencarinya dengan cepat."
+    },
+    {
+      "t": "Senarai surah",
+      "x": "Ketik surah untuk membuka skrin bacaan."
+    },
+    {
+      "t": "bersama-sama",
+      "x": "Perkongsian khatm/juz' dan zikir berkumpulan ada di sini. Kongsi semua 30 juz' dengan satu pautan — tiada pendaftaran, tiada siapa perlu memasang apl itu. Semua orang mengetik pautan, memilih juz', dan menandakannya apabila dibaca."
+    },
+    {
+      "t": "Di mana anda berhenti",
+      "x": "Kembali ke ayat terakhir yang anda capai dengan satu ketukan."
+    },
+    {
+      "t": "Rekod",
+      "x": "Koleksi, nota, penanda halaman dan tempat sukar anda dikumpulkan di sini."
+    },
+    {
+      "t": "Penjejakan hafalan",
+      "x": "Mod ujian, rancangan semakan harian dan kemajuan hafalan anda ada di sini."
+    },
+    {
+      "t": "Menghafal",
+      "x": "Penjejakan hafalan anda dan pelan semakan harian."
+    },
+    {
+      "t": "Tema",
+      "x": "Tukar warna dan rupa apl dari sini."
+    }
+  ],
+  "reader": [
+    {
+      "t": "Halaman",
+      "x": "Lompat terus ke salah satu daripada 604 muka surat Mushaf."
+    },
+    {
+      "t": "Juz'",
+      "x": "Lompat ke salah satu daripada 30 juz'. Setiap juz' bermula di bahagian atas halamannya sendiri."
+    },
+    {
+      "t": "Surah",
+      "x": "Untuk berpindah ke surah lain, pilihnya daripada senarai atau cari."
+    },
+    {
+      "t": "Ketik perkataan",
+      "x": "Ketik perkataan dan ayat itu dibacakan sementara perkataan diserlahkan secara serentak. Tekan dan tahan untuk memilih perkataan demi perkataan."
+    },
+    {
+      "t": "Alih huruf",
+      "x": "Menghidupkan atau mematikan transliterasi huruf Latin di bawah ayat."
+    },
+    {
+      "t": "Skrip",
+      "x": "Tetapkan skrip (Uthman Taha dll.) dan saiz fon dari sini."
+    },
+    {
+      "t": "Baris demi baris",
+      "x": "Menyenaraikan ayat-ayat satu di bawah satu sama lain, baris demi baris — berguna untuk menghafal."
+    },
+    {
+      "t": "Penanda buku",
+      "x": "Pertama ketik butang Penanda Halaman, kemudian ketik ayat di mana anda mahu meletakkan reben."
+    },
+    {
+      "t": "Rekod",
+      "x": "Koleksi, nota, penanda halaman dan tempat yang sukar."
+    },
+    {
+      "t": "tetapan",
+      "x": "Perhalusi ulangan, menunggu, kelajuan dan program hafalan."
+    },
+    {
+      "t": "ulang",
+      "x": "Tetapkan berapa kali ayat/segmen diulang. Tukar dengan − dan +."
+    },
+    {
+      "t": "Terkumpul (1+2)",
+      "x": "Membaca ayat-ayat secara kumulatif: 1, kemudian 1+2, kemudian 1+2+3…"
+    },
+    {
+      "t": "Main / Jeda",
+      "x": "Memainkan ayat yang dipilih atau tempat anda berhenti; tetapan anda digunakan."
+    }
+  ],
+  "ayarlar": [
+    {
+      "t": "Tema dan penampilan",
+      "x": "Tetapkan tema siap sedia, mod malam/kertas dan warna anda sendiri dari sini."
+    },
+    {
+      "t": "Pemilihan qari",
+      "x": "Anda juga boleh menukar qari lalai dari sini."
+    },
+    {
+      "t": "Muat turun luar talian",
+      "x": "Muat turun audio surah dan dengar tanpa internet."
+    },
+    {
+      "t": "Alih huruf Latin",
+      "x": "Menghidupkan transliterasi bagi mereka yang tidak boleh membaca tulisan Arab."
+    },
+    {
+      "t": "Mengenai dan sumber",
+      "x": "Sumber teks, skrip dan audio dinyatakan di sini."
+    }
+  ],
+  "ezber": [
+    {
+      "t": "hafalan anda",
+      "x": "Ayat-ayat yang anda tandakan sebagai \"hafal\" dikumpulkan di sini; apl itu mengingatkan anda tentang masa semakan itu sendiri (sebagai hafalan baharu, semakan hampir dan semakan jauh)."
+    }
+  ],
+  "birlikte": [
+    {
+      "t": "Perkongsian Khatm / Juz'",
+      "x": "Kongsi semua 30 juz' dengan satu pautan. Ketik \"Mulakan khatm\" dan tulis niat anda. Apl mencipta dua pautan: pautan sertai (hantar kepada kumpulan) dan pautan pentadbir (simpan — jangan berikan kepada sesiapa)."
+    },
+    {
+      "t": "Niat bersama — zikir berkumpulan",
+      "x": "Tetapkan matlamat bersama: 1000 selawat, 313 Ayat al-Kursi… Kira dengan mengetik cincin, kemudian tekan \"Tambah bahagian saya ke matlamat\". Siapa yang membaca berapa banyak yang tidak ditunjukkan — hanya jumlahnya."
+    },
+    {
+      "t": "Sertai dengan pautan",
+      "x": "Tampal pautan daripada kumpulan di sini. Atau cukup dengan mengetik pautan."
+    },
+    {
+      "t": "organisasi saya",
+      "x": "Khatms yang anda mulakan dan sertai ada di sini."
+    }
+  ],
+  "org": [
+    {
+      "t": "meja Juz",
+      "x": "Kelabu = kosong, ketik untuk mengambil. Kuning = diambil, belum dibaca. Hijau = baca. Merah = tertunggak."
+    },
+    {
+      "t": "Hantar peringatan",
+      "x": "Mencipta mesej WhatsApp sedia menyenaraikan juz yang hilang."
+    }
+  ],
+  "saved": [
+    {
+      "t": "Koleksi",
+      "x": "Ayat yang anda simpan dengan warna."
+    },
+    {
+      "t": "Nota",
+      "x": "Nota yang anda tulis pada ayat."
+    },
+    {
+      "t": "Penanda buku",
+      "x": "Penanda halaman yang anda letakkan pada halaman."
+    },
+    {
+      "t": "Berjuang dengan",
+      "x": "Tempat yang anda tersangkut; ketik untuk pergi ke ayat itu."
+    }
+  ]
+}

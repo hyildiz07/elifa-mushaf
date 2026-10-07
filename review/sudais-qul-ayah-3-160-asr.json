@@ -1,0 +1,78 @@
+{
+  "key": "3:160",
+  "clipUrl": "https://audio-cdn.tarteel.ai/quran/abdulrahmanAlSudais/003160.mp3",
+  "clipBytes": 452618,
+  "providedFirstSegment": [
+    0,
+    1,
+    0,
+    70
+  ],
+  "responseStatus": 200,
+  "result": {
+    "audio_id": "9da1c82580a14e11a7088503317c7288",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0.04,
+        "time_to": 5.78,
+        "ref_from": "3:160:1",
+        "ref_to": "3:160:6",
+        "matched_text": "",
+        "confidence": 0.931,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 5.81,
+        "time_to": 12.193,
+        "ref_from": "3:160:7",
+        "ref_to": "3:160:14",
+        "matched_text": "وَإِن يَخْذُلْكُمْ فَمَن ذَا ٱلَّذِى يَنصُرُكُم مِّن بَعْدِهِۦ",
+        "confidence": 0.83,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 12.223,
+        "time_to": 18.8,
+        "ref_from": "3:160:15",
+        "ref_to": "3:160:18",
+        "matched_text": "وَعَلَى ٱللَّهِ فَلْيَتَوَكَّلِ ٱلْمُؤْمِنُونَ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Base",
+      "effective_model": "Base",
+      "runtime": {
+        "processing_seconds": 1.1494685603538528,
+        "queue_seconds": 0.13726210934692062,
+        "total_seconds": 1.2867306697007734
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "source": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/6.mp3",
+  "clip140": {
+    "start": {
+      "startMs": 2862080,
+      "correlation": 0.9999791644186282
+    },
+    "durationMs": 19644.081632653062,
+    "matchedEndMs": 2881724.0816326533
+  },
+  "clip141": {
+    "start": {
+      "startMs": 2881724,
+      "correlation": 0.8470945017949993
+    },
+    "firstQudWordOffsetMs": 4200,
+    "estimatedFirstWordMs": 2885924
+  },
+  "gapMs": -0.08163265325129032
+}

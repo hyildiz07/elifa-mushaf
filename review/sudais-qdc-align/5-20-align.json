@@ -1,0 +1,212 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/5.mp3",
+  "source_file_size": 38326543,
+  "source_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+  "excerpt_file": "test-results/sudais-qdc-align/5-20.wav",
+  "excerpt_sha256": "afa2bb9e9711b94c2345028b41fccf029fdb5e567f4264a4c5a1e98249b3b6cd",
+  "excerpt_from_ms": 535160,
+  "excerpt_to_ms": 555690,
+  "provider_segments": [
+    [
+      1,
+      535160,
+      535740
+    ],
+    [
+      2,
+      535740,
+      536320
+    ],
+    [
+      3,
+      536320,
+      536990
+    ],
+    [
+      4,
+      536990,
+      538110
+    ],
+    [
+      5,
+      538110,
+      538880
+    ],
+    [
+      6,
+      538880,
+      539510
+    ],
+    [
+      7,
+      539510,
+      540210
+    ],
+    [
+      8,
+      540210,
+      540840
+    ],
+    [
+      9,
+      540840,
+      541730
+    ],
+    [
+      10,
+      541730,
+      541910
+    ],
+    [
+      11,
+      541910,
+      542560
+    ],
+    [
+      12,
+      542560,
+      543240
+    ],
+    [
+      13,
+      543240,
+      545410
+    ],
+    [
+      14,
+      545410,
+      546480
+    ],
+    [
+      15,
+      546480,
+      547460
+    ],
+    [
+      14,
+      547460,
+      549130
+    ],
+    [
+      15,
+      549130,
+      550320
+    ],
+    [
+      16,
+      550320,
+      551460
+    ],
+    [
+      17,
+      551460,
+      552120
+    ],
+    [
+      18,
+      552120,
+      552400
+    ],
+    [
+      19,
+      552400,
+      552920
+    ],
+    [
+      20,
+      552920,
+      553580
+    ],
+    [
+      21,
+      553580,
+      554140
+    ],
+    [
+      22,
+      554140,
+      555575
+    ]
+  ],
+  "aligner": {
+    "audio_id": "3c7699dc2ae343e3a80c336bfb084307",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 6.467,
+        "ref_from": "5:19:5",
+        "ref_to": "5:19:13",
+        "matched_text": "رَسُولُنَا يُبَيِّنُ لَكُمْ عَلَىٰ فَتْرَةٍ مِّنَ ٱلرُّسُلِ أَن تَقُولُوا۟",
+        "confidence": 0.961,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 6.497,
+        "time_to": 13.407,
+        "ref_from": "5:19:12",
+        "ref_to": "5:19:19",
+        "matched_text": "أَن تَقُولُوا۟ مَا جَآءَنَا مِن بَشِيرٍ وَلَا نَذِيرٍ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 13.437,
+        "time_to": 19.553,
+        "ref_from": "5:19:20",
+        "ref_to": "5:19:23",
+        "matched_text": "فَقَدْ جَآءَكُم بَشِيرٌ وَنَذِيرٌ",
+        "confidence": 1,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 4,
+        "time_from": 19.583,
+        "time_to": 20.53,
+        "ref_from": "5:19:24",
+        "ref_to": "5:19:24",
+        "matched_text": "وَٱللَّهُ",
+        "confidence": 1,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Large",
+      "effective_model": "Large",
+      "runtime": {
+        "processing_seconds": 1.4788298606872559,
+        "queue_seconds": 0.03040236432570964,
+        "total_seconds": 1.5092322250129655
+      }
+    }
+  }
+}

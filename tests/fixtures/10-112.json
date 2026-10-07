@@ -1,0 +1,116 @@
+{
+  "rid": 10,
+  "sid": 112,
+  "source": "https://api.qurancdn.com/api/qdc/audio/reciters/10/audio_files?chapter=112&segments=true",
+  "audio_url": "https://download.quranicaudio.com/qdc/saud_ash-shuraym/murattal/112.mp3",
+  "file_size": 206976,
+  "verse_timings": [
+    {
+      "verse_key": "112:1",
+      "timestamp_from": 0,
+      "timestamp_to": 2010,
+      "duration": 2020,
+      "segments": [
+        [
+          1,
+          31,
+          261
+        ],
+        [
+          2,
+          271,
+          551
+        ],
+        [
+          3,
+          561,
+          1221
+        ],
+        [
+          4,
+          1231,
+          1771
+        ]
+      ]
+    },
+    {
+      "verse_key": "112:2",
+      "timestamp_from": 2001,
+      "timestamp_to": 3731,
+      "duration": 1730,
+      "segments": [
+        [
+          1,
+          2082,
+          2802
+        ],
+        [
+          2,
+          2812,
+          3462
+        ]
+      ]
+    },
+    {
+      "verse_key": "112:3",
+      "timestamp_from": 3722,
+      "timestamp_to": 5952,
+      "duration": 2230,
+      "segments": [
+        [
+          1,
+          3822,
+          4032
+        ],
+        [
+          2,
+          4042,
+          4532
+        ],
+        [
+          3,
+          4542,
+          5002
+        ],
+        [
+          4,
+          5012,
+          5702
+        ]
+      ]
+    },
+    {
+      "verse_key": "112:4",
+      "timestamp_from": 5943,
+      "timestamp_to": 9213,
+      "duration": 3270,
+      "segments": [
+        [
+          1,
+          6043,
+          6443
+        ],
+        [
+          2,
+          6453,
+          6943
+        ],
+        [
+          3,
+          6953,
+          7463
+        ],
+        [
+          4,
+          7473,
+          8183
+        ],
+        [
+          5,
+          8193,
+          8723
+        ]
+      ]
+    }
+  ]
+}

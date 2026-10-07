@@ -1,0 +1,50 @@
+{
+  "status": "verified-phrase-partition-v253",
+  "verse_key": "2:145",
+  "source_audio_url": "https://everyayah.com/data/Husary_Muallim_128kbps/002145.mp3",
+  "source_sha256": "cc4640fa78a211b598a6e5f47880a5ff39112d3f8279d5260f860f1e1a1cad28",
+  "playback_end_ms": 61250,
+  "rationale": "Three internal cut points lie in broad silence gaps independently bracketed by QUD phrase labels and QuranLab word times. The last card is thirteen words long; no unverified internal cut is added.",
+  "parts": [
+    {
+      "from_word": 1,
+      "to_word": 10,
+      "word_count": 10,
+      "from_ms": 0,
+      "to_ms": 15465,
+      "qud_speech_from_ms": 300,
+      "qud_speech_to_ms": 13820,
+      "cut_rms_100ms": 0.000952
+    },
+    {
+      "from_word": 11,
+      "to_word": 14,
+      "word_count": 4,
+      "from_ms": 15465,
+      "to_ms": 27140,
+      "qud_speech_from_ms": 17520,
+      "qud_speech_to_ms": 25560,
+      "cut_rms_100ms": 0.000782
+    },
+    {
+      "from_word": 15,
+      "to_word": 19,
+      "word_count": 5,
+      "from_ms": 27140,
+      "to_ms": 38665,
+      "qud_speech_from_ms": 28880,
+      "qud_speech_to_ms": 36760,
+      "cut_rms_100ms": 0.00088
+    },
+    {
+      "from_word": 20,
+      "to_word": 32,
+      "word_count": 13,
+      "from_ms": 38665,
+      "to_ms": 61250,
+      "qud_speech_from_ms": 40820,
+      "qud_speech_to_ms": 61060,
+      "cut_rms_100ms": null
+    }
+  ]
+}

@@ -1,0 +1,7469 @@
+{
+  "version": "v244",
+  "note": "Canonical Medine orthography only; Turkish form is audited separately in test-results/full-validation.json.",
+  "cases": [
+    {
+      "reciter": 1,
+      "verse": "3:180",
+      "words": 30,
+      "parts": [
+        3,
+        4,
+        9,
+        4,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 22,
+      "safeCuts": 19,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 1,
+      "verse": "4:92",
+      "words": 60,
+      "parts": [
+        5,
+        5,
+        5,
+        4,
+        9,
+        5,
+        9,
+        5,
+        3,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 46,
+      "safeCuts": 41,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 1,
+      "verse": "11:46",
+      "words": 23,
+      "parts": [
+        10,
+        4,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 14,
+      "safeCuts": 10,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 1,
+      "verse": "14:1",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": true,
+      "timingRows": 15,
+      "safeCuts": 11,
+      "longestUnsafeRun": 5
+    },
+    {
+      "reciter": 1,
+      "verse": "20:81",
+      "words": 17,
+      "parts": [
+        17
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 1,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 1,
+      "verse": "60:8",
+      "words": 21,
+      "parts": [
+        5,
+        10,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 11,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "2:25",
+      "words": 34,
+      "parts": [
+        34
+      ],
+      "fallback": true,
+      "timingRows": 34,
+      "safeCuts": 33,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:49",
+      "words": 18,
+      "parts": [
+        18
+      ],
+      "fallback": true,
+      "timingRows": 18,
+      "safeCuts": 17,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:50",
+      "words": 10,
+      "parts": [
+        10
+      ],
+      "fallback": true,
+      "timingRows": 10,
+      "safeCuts": 9,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:51",
+      "words": 12,
+      "parts": [
+        12
+      ],
+      "fallback": true,
+      "timingRows": 12,
+      "safeCuts": 11,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:52",
+      "words": 8,
+      "parts": [
+        8
+      ],
+      "fallback": true,
+      "timingRows": 8,
+      "safeCuts": 7,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:54",
+      "words": 26,
+      "parts": [
+        26
+      ],
+      "fallback": true,
+      "timingRows": 27,
+      "safeCuts": 25,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:55",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": true,
+      "timingRows": 14,
+      "safeCuts": 13,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:57",
+      "words": 18,
+      "parts": [
+        18
+      ],
+      "fallback": true,
+      "timingRows": 18,
+      "safeCuts": 17,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:58",
+      "words": 20,
+      "parts": [
+        20
+      ],
+      "fallback": true,
+      "timingRows": 20,
+      "safeCuts": 19,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:59",
+      "words": 18,
+      "parts": [
+        18
+      ],
+      "fallback": true,
+      "timingRows": 19,
+      "safeCuts": 16,
+      "longestUnsafeRun": 2
+    },
+    {
+      "reciter": 2,
+      "verse": "2:60",
+      "words": 28,
+      "parts": [
+        28
+      ],
+      "fallback": true,
+      "timingRows": 28,
+      "safeCuts": 27,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:61",
+      "words": 59,
+      "parts": [
+        59
+      ],
+      "fallback": true,
+      "timingRows": 71,
+      "safeCuts": 48,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "2:62",
+      "words": 24,
+      "parts": [
+        24
+      ],
+      "fallback": true,
+      "timingRows": 28,
+      "safeCuts": 20,
+      "longestUnsafeRun": 4
+    },
+    {
+      "reciter": 2,
+      "verse": "2:63",
+      "words": 15,
+      "parts": [
+        15
+      ],
+      "fallback": true,
+      "timingRows": 15,
+      "safeCuts": 14,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:64",
+      "words": 13,
+      "parts": [
+        13
+      ],
+      "fallback": true,
+      "timingRows": 13,
+      "safeCuts": 12,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:65",
+      "words": 12,
+      "parts": [
+        12
+      ],
+      "fallback": true,
+      "timingRows": 12,
+      "safeCuts": 11,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:66",
+      "words": 9,
+      "parts": [
+        9
+      ],
+      "fallback": true,
+      "timingRows": 9,
+      "safeCuts": 8,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:67",
+      "words": 20,
+      "parts": [
+        20
+      ],
+      "fallback": true,
+      "timingRows": 23,
+      "safeCuts": 17,
+      "longestUnsafeRun": 3
+    },
+    {
+      "reciter": 2,
+      "verse": "2:68",
+      "words": 23,
+      "parts": [
+        23
+      ],
+      "fallback": true,
+      "timingRows": 23,
+      "safeCuts": 22,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:69",
+      "words": 18,
+      "parts": [
+        18
+      ],
+      "fallback": true,
+      "timingRows": 18,
+      "safeCuts": 17,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:70",
+      "words": 17,
+      "parts": [
+        17
+      ],
+      "fallback": true,
+      "timingRows": 17,
+      "safeCuts": 16,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:79",
+      "words": 24,
+      "parts": [
+        24
+      ],
+      "fallback": true,
+      "timingRows": 24,
+      "safeCuts": 23,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:80",
+      "words": 23,
+      "parts": [
+        23
+      ],
+      "fallback": true,
+      "timingRows": 23,
+      "safeCuts": 22,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:101",
+      "words": 22,
+      "parts": [
+        4,
+        5,
+        10,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 32,
+      "safeCuts": 12,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "2:109",
+      "words": 33,
+      "parts": [
+        5,
+        10,
+        4,
+        3,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 43,
+      "safeCuts": 23,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "2:140",
+      "words": 30,
+      "parts": [
+        30
+      ],
+      "fallback": true,
+      "timingRows": 30,
+      "safeCuts": 29,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:150",
+      "words": 31,
+      "parts": [
+        31
+      ],
+      "fallback": true,
+      "timingRows": 35,
+      "safeCuts": 27,
+      "longestUnsafeRun": 4
+    },
+    {
+      "reciter": 2,
+      "verse": "2:151",
+      "words": 17,
+      "parts": [
+        17
+      ],
+      "fallback": true,
+      "timingRows": 20,
+      "safeCuts": 14,
+      "longestUnsafeRun": 3
+    },
+    {
+      "reciter": 2,
+      "verse": "2:153",
+      "words": 10,
+      "parts": [
+        10
+      ],
+      "fallback": true,
+      "timingRows": 10,
+      "safeCuts": 9,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:154",
+      "words": 13,
+      "parts": [
+        13
+      ],
+      "fallback": true,
+      "timingRows": 13,
+      "safeCuts": 12,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:155",
+      "words": 12,
+      "parts": [
+        12
+      ],
+      "fallback": true,
+      "timingRows": 12,
+      "safeCuts": 11,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:156",
+      "words": 10,
+      "parts": [
+        10
+      ],
+      "fallback": true,
+      "timingRows": 10,
+      "safeCuts": 9,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:157",
+      "words": 9,
+      "parts": [
+        9
+      ],
+      "fallback": true,
+      "timingRows": 9,
+      "safeCuts": 8,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:158",
+      "words": 24,
+      "parts": [
+        24
+      ],
+      "fallback": true,
+      "timingRows": 24,
+      "safeCuts": 23,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:159",
+      "words": 20,
+      "parts": [
+        20
+      ],
+      "fallback": true,
+      "timingRows": 23,
+      "safeCuts": 17,
+      "longestUnsafeRun": 3
+    },
+    {
+      "reciter": 2,
+      "verse": "2:160",
+      "words": 11,
+      "parts": [
+        11
+      ],
+      "fallback": true,
+      "timingRows": 11,
+      "safeCuts": 10,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:170",
+      "words": 22,
+      "parts": [
+        22
+      ],
+      "fallback": true,
+      "timingRows": 22,
+      "safeCuts": 21,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:179",
+      "words": 8,
+      "parts": [
+        8
+      ],
+      "fallback": true,
+      "timingRows": 8,
+      "safeCuts": 7,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:180",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": true,
+      "timingRows": 16,
+      "safeCuts": 15,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:184",
+      "words": 32,
+      "parts": [
+        32
+      ],
+      "fallback": true,
+      "timingRows": 32,
+      "safeCuts": 31,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:185",
+      "words": 44,
+      "parts": [
+        44
+      ],
+      "fallback": true,
+      "timingRows": 44,
+      "safeCuts": 43,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:186",
+      "words": 17,
+      "parts": [
+        17
+      ],
+      "fallback": true,
+      "timingRows": 22,
+      "safeCuts": 12,
+      "longestUnsafeRun": 5
+    },
+    {
+      "reciter": 2,
+      "verse": "2:187",
+      "words": 65,
+      "parts": [
+        65
+      ],
+      "fallback": true,
+      "timingRows": 67,
+      "safeCuts": 64,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:188",
+      "words": 17,
+      "parts": [
+        17
+      ],
+      "fallback": true,
+      "timingRows": 18,
+      "safeCuts": 16,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:189",
+      "words": 27,
+      "parts": [
+        27
+      ],
+      "fallback": true,
+      "timingRows": 27,
+      "safeCuts": 26,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "2:190",
+      "words": 13,
+      "parts": [
+        13
+      ],
+      "fallback": true,
+      "timingRows": 13,
+      "safeCuts": 12,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 2,
+      "verse": "4:43",
+      "words": 48,
+      "parts": [
+        3,
+        9,
+        7,
+        5,
+        5,
+        5,
+        3,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 59,
+      "safeCuts": 38,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "4:75",
+      "words": 31,
+      "parts": [
+        4,
+        3,
+        5,
+        9,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 40,
+      "safeCuts": 22,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "5:54",
+      "words": 37,
+      "parts": [
+        3,
+        5,
+        10,
+        6,
+        5,
+        5,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 50,
+      "safeCuts": 27,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "5:57",
+      "words": 23,
+      "parts": [
+        3,
+        13,
+        4,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 37,
+      "safeCuts": 10,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 2,
+      "verse": "5:83",
+      "words": 21,
+      "parts": [
+        6,
+        9,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 12,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "5:110",
+      "words": 63,
+      "parts": [
+        5,
+        5,
+        5,
+        5,
+        6,
+        6,
+        6,
+        5,
+        9,
+        6,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 90,
+      "safeCuts": 39,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "6:93",
+      "words": 49,
+      "parts": [
+        3,
+        4,
+        9,
+        5,
+        5,
+        3,
+        5,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 58,
+      "safeCuts": 40,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "8:70",
+      "words": 24,
+      "parts": [
+        4,
+        6,
+        9,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 34,
+      "safeCuts": 15,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "9:36",
+      "words": 36,
+      "parts": [
+        3,
+        5,
+        4,
+        5,
+        9,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 41,
+      "safeCuts": 24,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "10:88",
+      "words": 29,
+      "parts": [
+        2,
+        10,
+        4,
+        7,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 46,
+      "safeCuts": 13,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "11:27",
+      "words": 29,
+      "parts": [
+        5,
+        6,
+        9,
+        4,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 38,
+      "safeCuts": 20,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "11:31",
+      "words": 31,
+      "parts": [
+        4,
+        5,
+        4,
+        9,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 44,
+      "safeCuts": 19,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "13:25",
+      "words": 23,
+      "parts": [
+        3,
+        4,
+        10,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 33,
+      "safeCuts": 13,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "16:80",
+      "words": 25,
+      "parts": [
+        6,
+        11,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 36,
+      "safeCuts": 14,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "18:49",
+      "words": 27,
+      "parts": [
+        3,
+        4,
+        10,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 37,
+      "safeCuts": 17,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "21:87",
+      "words": 23,
+      "parts": [
+        5,
+        5,
+        9,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 32,
+      "safeCuts": 14,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "29:10",
+      "words": 31,
+      "parts": [
+        6,
+        9,
+        6,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 40,
+      "safeCuts": 22,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "30:48",
+      "words": 28,
+      "parts": [
+        28
+      ],
+      "fallback": false,
+      "timingRows": 3,
+      "safeCuts": 0,
+      "longestUnsafeRun": 28
+    },
+    {
+      "reciter": 2,
+      "verse": "30:53",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 0,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "30:54",
+      "words": 24,
+      "parts": [
+        24
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 24
+    },
+    {
+      "reciter": 2,
+      "verse": "30:56",
+      "words": 20,
+      "parts": [
+        16,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 6,
+      "safeCuts": 4,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 2,
+      "verse": "30:58",
+      "words": 19,
+      "parts": [
+        19
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 0,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 2,
+      "verse": "32:4",
+      "words": 24,
+      "parts": [
+        15,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 9,
+      "safeCuts": 6,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 2,
+      "verse": "32:9",
+      "words": 14,
+      "parts": [
+        12,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 2,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 2,
+      "verse": "32:14",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "32:20",
+      "words": 21,
+      "parts": [
+        21
+      ],
+      "fallback": false,
+      "timingRows": 3,
+      "safeCuts": 0,
+      "longestUnsafeRun": 21
+    },
+    {
+      "reciter": 2,
+      "verse": "32:22",
+      "words": 13,
+      "parts": [
+        13
+      ],
+      "fallback": false,
+      "timingRows": 6,
+      "safeCuts": 1,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 2,
+      "verse": "32:23",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 0,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "32:26",
+      "words": 18,
+      "parts": [
+        16,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 8,
+      "safeCuts": 2,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 2,
+      "verse": "32:27",
+      "words": 17,
+      "parts": [
+        17
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 2,
+      "verse": "33:2",
+      "words": 12,
+      "parts": [
+        12
+      ],
+      "fallback": false,
+      "timingRows": 3,
+      "safeCuts": 0,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 2,
+      "verse": "33:4",
+      "words": 28,
+      "parts": [
+        2,
+        10,
+        2,
+        14
+      ],
+      "fallback": false,
+      "timingRows": 9,
+      "safeCuts": 4,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "33:5",
+      "words": 28,
+      "parts": [
+        28
+      ],
+      "fallback": false,
+      "timingRows": 5,
+      "safeCuts": 0,
+      "longestUnsafeRun": 28
+    },
+    {
+      "reciter": 2,
+      "verse": "33:6",
+      "words": 29,
+      "parts": [
+        29
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 1,
+      "longestUnsafeRun": 28
+    },
+    {
+      "reciter": 2,
+      "verse": "33:7",
+      "words": 17,
+      "parts": [
+        17
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 2,
+      "verse": "33:8",
+      "words": 8,
+      "parts": [
+        8
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 8
+    },
+    {
+      "reciter": 2,
+      "verse": "33:9",
+      "words": 21,
+      "parts": [
+        21
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 21
+    },
+    {
+      "reciter": 2,
+      "verse": "33:13",
+      "words": 25,
+      "parts": [
+        3,
+        5,
+        17
+      ],
+      "fallback": false,
+      "timingRows": 9,
+      "safeCuts": 6,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 2,
+      "verse": "33:17",
+      "words": 24,
+      "parts": [
+        24
+      ],
+      "fallback": false,
+      "timingRows": 10,
+      "safeCuts": 0,
+      "longestUnsafeRun": 24
+    },
+    {
+      "reciter": 2,
+      "verse": "33:18",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "33:19",
+      "words": 35,
+      "parts": [
+        35
+      ],
+      "fallback": false,
+      "timingRows": 6,
+      "safeCuts": 0,
+      "longestUnsafeRun": 35
+    },
+    {
+      "reciter": 2,
+      "verse": "33:20",
+      "words": 23,
+      "parts": [
+        2,
+        21
+      ],
+      "fallback": false,
+      "timingRows": 10,
+      "safeCuts": 1,
+      "longestUnsafeRun": 21
+    },
+    {
+      "reciter": 2,
+      "verse": "33:22",
+      "words": 18,
+      "parts": [
+        18
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 2,
+      "verse": "33:23",
+      "words": 18,
+      "parts": [
+        18
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 1,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 2,
+      "verse": "33:25",
+      "words": 16,
+      "parts": [
+        10,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 1,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "33:26",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 2,
+      "verse": "33:27",
+      "words": 13,
+      "parts": [
+        13
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 2,
+      "verse": "33:30",
+      "words": 16,
+      "parts": [
+        14,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 2,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "33:32",
+      "words": 19,
+      "parts": [
+        19
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 2,
+      "verse": "33:33",
+      "words": 25,
+      "parts": [
+        14,
+        3,
+        8
+      ],
+      "fallback": false,
+      "timingRows": 5,
+      "safeCuts": 4,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "33:34",
+      "words": 14,
+      "parts": [
+        9,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 5,
+      "safeCuts": 1,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "33:35",
+      "words": 30,
+      "parts": [
+        30
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 1,
+      "longestUnsafeRun": 29
+    },
+    {
+      "reciter": 2,
+      "verse": "33:36",
+      "words": 24,
+      "parts": [
+        24
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 24
+    },
+    {
+      "reciter": 2,
+      "verse": "33:37",
+      "words": 48,
+      "parts": [
+        48
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 0,
+      "longestUnsafeRun": 48
+    },
+    {
+      "reciter": 2,
+      "verse": "33:38",
+      "words": 22,
+      "parts": [
+        22
+      ],
+      "fallback": false,
+      "timingRows": 5,
+      "safeCuts": 0,
+      "longestUnsafeRun": 22
+    },
+    {
+      "reciter": 2,
+      "verse": "33:39",
+      "words": 13,
+      "parts": [
+        3,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 5,
+      "safeCuts": 3,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "33:40",
+      "words": 17,
+      "parts": [
+        17
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 2,
+      "verse": "33:43",
+      "words": 13,
+      "parts": [
+        13
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 2,
+      "verse": "33:50",
+      "words": 61,
+      "parts": [
+        4,
+        5,
+        5,
+        26,
+        21
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 16,
+      "longestUnsafeRun": 26
+    },
+    {
+      "reciter": 2,
+      "verse": "33:51",
+      "words": 35,
+      "parts": [
+        5,
+        16,
+        4,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 20,
+      "safeCuts": 10,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 2,
+      "verse": "33:53",
+      "words": 69,
+      "parts": [
+        41,
+        7,
+        8,
+        7,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 18,
+      "longestUnsafeRun": 40
+    },
+    {
+      "reciter": 2,
+      "verse": "33:55",
+      "words": 30,
+      "parts": [
+        3,
+        4,
+        5,
+        4,
+        14
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 13,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "33:59",
+      "words": 21,
+      "parts": [
+        6,
+        4,
+        11
+      ],
+      "fallback": false,
+      "timingRows": 8,
+      "safeCuts": 5,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "33:60",
+      "words": 19,
+      "parts": [
+        19
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 2,
+      "verse": "33:63",
+      "words": 15,
+      "parts": [
+        15
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 0,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 2,
+      "verse": "33:69",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": false,
+      "timingRows": 3,
+      "safeCuts": 1,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 2,
+      "verse": "33:71",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "33:72",
+      "words": 18,
+      "parts": [
+        4,
+        11,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 6,
+      "safeCuts": 4,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "34:1",
+      "words": 17,
+      "parts": [
+        15,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 3,
+      "safeCuts": 1,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 2,
+      "verse": "34:3",
+      "words": 32,
+      "parts": [
+        10,
+        5,
+        5,
+        6,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 24,
+      "safeCuts": 21,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "34:8",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": false,
+      "timingRows": 5,
+      "safeCuts": 0,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 2,
+      "verse": "34:9",
+      "words": 29,
+      "parts": [
+        8,
+        2,
+        16,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 4,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 2,
+      "verse": "34:11",
+      "words": 12,
+      "parts": [
+        12
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 0,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 2,
+      "verse": "34:12",
+      "words": 27,
+      "parts": [
+        10,
+        3,
+        14
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 4,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "34:13",
+      "words": 19,
+      "parts": [
+        12,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 2,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 2,
+      "verse": "34:14",
+      "words": 27,
+      "parts": [
+        9,
+        4,
+        3,
+        11
+      ],
+      "fallback": false,
+      "timingRows": 9,
+      "safeCuts": 8,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "34:15",
+      "words": 20,
+      "parts": [
+        9,
+        11
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 1,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "34:18",
+      "words": 17,
+      "parts": [
+        4,
+        9,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 8,
+      "safeCuts": 6,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "34:19",
+      "words": 19,
+      "parts": [
+        11,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 6,
+      "safeCuts": 5,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "34:23",
+      "words": 22,
+      "parts": [
+        22
+      ],
+      "fallback": false,
+      "timingRows": 5,
+      "safeCuts": 1,
+      "longestUnsafeRun": 21
+    },
+    {
+      "reciter": 2,
+      "verse": "34:31",
+      "words": 32,
+      "parts": [
+        27,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 9,
+      "safeCuts": 6,
+      "longestUnsafeRun": 26
+    },
+    {
+      "reciter": 2,
+      "verse": "34:32",
+      "words": 15,
+      "parts": [
+        13,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 5,
+      "safeCuts": 3,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 2,
+      "verse": "34:33",
+      "words": 34,
+      "parts": [
+        11,
+        2,
+        21
+      ],
+      "fallback": false,
+      "timingRows": 9,
+      "safeCuts": 5,
+      "longestUnsafeRun": 20
+    },
+    {
+      "reciter": 2,
+      "verse": "34:37",
+      "words": 23,
+      "parts": [
+        4,
+        10,
+        9
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 5,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "34:43",
+      "words": 34,
+      "parts": [
+        21,
+        3,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 15,
+      "safeCuts": 13,
+      "longestUnsafeRun": 21
+    },
+    {
+      "reciter": 2,
+      "verse": "34:45",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "34:50",
+      "words": 16,
+      "parts": [
+        5,
+        11
+      ],
+      "fallback": false,
+      "timingRows": 8,
+      "safeCuts": 5,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "34:53",
+      "words": 10,
+      "parts": [
+        10
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "34:54",
+      "words": 15,
+      "parts": [
+        10,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 5,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "35:1",
+      "words": 24,
+      "parts": [
+        7,
+        5,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 17,
+      "safeCuts": 7,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "35:4",
+      "words": 11,
+      "parts": [
+        11
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 0,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "35:8",
+      "words": 25,
+      "parts": [
+        9,
+        5,
+        11
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 6,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "35:9",
+      "words": 17,
+      "parts": [
+        10,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 5,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "35:10",
+      "words": 24,
+      "parts": [
+        15,
+        4,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 11,
+      "safeCuts": 7,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 2,
+      "verse": "35:11",
+      "words": 34,
+      "parts": [
+        4,
+        4,
+        9,
+        5,
+        3,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 24,
+      "safeCuts": 21,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "35:12",
+      "words": 28,
+      "parts": [
+        28
+      ],
+      "fallback": false,
+      "timingRows": 10,
+      "safeCuts": 0,
+      "longestUnsafeRun": 28
+    },
+    {
+      "reciter": 2,
+      "verse": "35:13",
+      "words": 28,
+      "parts": [
+        4,
+        6,
+        6,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 18,
+      "safeCuts": 16,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 2,
+      "verse": "35:14",
+      "words": 18,
+      "parts": [
+        18
+      ],
+      "fallback": false,
+      "timingRows": 3,
+      "safeCuts": 0,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 2,
+      "verse": "35:18",
+      "words": 34,
+      "parts": [
+        19,
+        5,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 7,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 2,
+      "verse": "35:28",
+      "words": 17,
+      "parts": [
+        17
+      ],
+      "fallback": false,
+      "timingRows": 10,
+      "safeCuts": 0,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 2,
+      "verse": "35:29",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 2,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "35:31",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 0,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 2,
+      "verse": "35:32",
+      "words": 21,
+      "parts": [
+        3,
+        18
+      ],
+      "fallback": false,
+      "timingRows": 6,
+      "safeCuts": 3,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 2,
+      "verse": "35:33",
+      "words": 13,
+      "parts": [
+        11,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 2,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "35:35",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "35:36",
+      "words": 18,
+      "parts": [
+        18
+      ],
+      "fallback": false,
+      "timingRows": 3,
+      "safeCuts": 1,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 2,
+      "verse": "35:37",
+      "words": 25,
+      "parts": [
+        9,
+        4,
+        5,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 16,
+      "safeCuts": 14,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "35:39",
+      "words": 24,
+      "parts": [
+        24
+      ],
+      "fallback": false,
+      "timingRows": 15,
+      "safeCuts": 1,
+      "longestUnsafeRun": 23
+    },
+    {
+      "reciter": 2,
+      "verse": "35:40",
+      "words": 33,
+      "parts": [
+        8,
+        25
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 2,
+      "longestUnsafeRun": 24
+    },
+    {
+      "reciter": 2,
+      "verse": "35:41",
+      "words": 19,
+      "parts": [
+        16,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 4,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 2,
+      "verse": "35:42",
+      "words": 19,
+      "parts": [
+        19
+      ],
+      "fallback": false,
+      "timingRows": 8,
+      "safeCuts": 1,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 2,
+      "verse": "35:43",
+      "words": 26,
+      "parts": [
+        2,
+        10,
+        10,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 6,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 2,
+      "verse": "35:44",
+      "words": 30,
+      "parts": [
+        27,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 9,
+      "safeCuts": 3,
+      "longestUnsafeRun": 27
+    },
+    {
+      "reciter": 2,
+      "verse": "35:45",
+      "words": 25,
+      "parts": [
+        15,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 3,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 2,
+      "verse": "36:12",
+      "words": 14,
+      "parts": [
+        3,
+        11
+      ],
+      "fallback": false,
+      "timingRows": 5,
+      "safeCuts": 3,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "36:30",
+      "words": 11,
+      "parts": [
+        2,
+        9
+      ],
+      "fallback": false,
+      "timingRows": 3,
+      "safeCuts": 1,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "36:40",
+      "words": 15,
+      "parts": [
+        15
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 2,
+      "verse": "36:52",
+      "words": 12,
+      "parts": [
+        12
+      ],
+      "fallback": false,
+      "timingRows": 3,
+      "safeCuts": 1,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "36:76",
+      "words": 9,
+      "parts": [
+        9
+      ],
+      "fallback": false,
+      "timingRows": 2,
+      "safeCuts": 0,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "36:81",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "timingRows": 4,
+      "safeCuts": 0,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 2,
+      "verse": "37:102",
+      "words": 26,
+      "parts": [
+        24,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 11,
+      "safeCuts": 2,
+      "longestUnsafeRun": 24
+    },
+    {
+      "reciter": 2,
+      "verse": "39:8",
+      "words": 34,
+      "parts": [
+        3,
+        5,
+        12,
+        5,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 46,
+      "safeCuts": 22,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 2,
+      "verse": "46:15",
+      "words": 45,
+      "parts": [
+        4,
+        5,
+        5,
+        6,
+        11,
+        4,
+        4,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 56,
+      "safeCuts": 34,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 2,
+      "verse": "59:11",
+      "words": 28,
+      "parts": [
+        6,
+        6,
+        9,
+        3,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 37,
+      "safeCuts": 19,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 2,
+      "verse": "60:4",
+      "words": 52,
+      "parts": [
+        5,
+        4,
+        11,
+        6,
+        5,
+        7,
+        5,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 72,
+      "safeCuts": 34,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 3,
+      "verse": "2:114",
+      "words": 30,
+      "parts": [
+        5,
+        6,
+        11,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 31,
+      "safeCuts": 19,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 3,
+      "verse": "2:223",
+      "words": 16,
+      "parts": [
+        6,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 17,
+      "safeCuts": 6,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 3,
+      "verse": "3:160",
+      "words": 18,
+      "parts": [
+        18
+      ],
+      "fallback": true,
+      "timingRows": 18,
+      "safeCuts": 17,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 3,
+      "verse": "4:134",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "timingRows": 15,
+      "safeCuts": 0,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 3,
+      "verse": "4:143",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": true,
+      "timingRows": 16,
+      "safeCuts": 15,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 3,
+      "verse": "5:5",
+      "words": 43,
+      "parts": [
+        43
+      ],
+      "fallback": true,
+      "timingRows": 45,
+      "safeCuts": 41,
+      "longestUnsafeRun": 2
+    },
+    {
+      "reciter": 3,
+      "verse": "5:46",
+      "words": 26,
+      "parts": [
+        4,
+        15,
+        4,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 24,
+      "safeCuts": 11,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 3,
+      "verse": "5:82",
+      "words": 26,
+      "parts": [
+        5,
+        19,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 22,
+      "safeCuts": 7,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 3,
+      "verse": "6:38",
+      "words": 22,
+      "parts": [
+        17,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 6,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 3,
+      "verse": "9:74",
+      "words": 46,
+      "parts": [
+        4,
+        6,
+        10,
+        4,
+        5,
+        6,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 47,
+      "safeCuts": 36,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 3,
+      "verse": "10:90",
+      "words": 27,
+      "parts": [
+        4,
+        4,
+        5,
+        11,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 38,
+      "safeCuts": 16,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 3,
+      "verse": "11:89",
+      "words": 22,
+      "parts": [
+        4,
+        10,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 32,
+      "safeCuts": 12,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 3,
+      "verse": "16:71",
+      "words": 22,
+      "parts": [
+        3,
+        17,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 5,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 3,
+      "verse": "16:92",
+      "words": 32,
+      "parts": [
+        9,
+        5,
+        5,
+        5,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 41,
+      "safeCuts": 23,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 3,
+      "verse": "24:35",
+      "words": 48,
+      "parts": [
+        36,
+        4,
+        4,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 47,
+      "safeCuts": 12,
+      "longestUnsafeRun": 36
+    },
+    {
+      "reciter": 3,
+      "verse": "33:36",
+      "words": 24,
+      "parts": [
+        5,
+        9,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 33,
+      "safeCuts": 15,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 3,
+      "verse": "39:54",
+      "words": 13,
+      "parts": [
+        13
+      ],
+      "fallback": false,
+      "timingRows": 1,
+      "safeCuts": 0,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 3,
+      "verse": "39:56",
+      "words": 14,
+      "parts": [
+        10,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 24,
+      "safeCuts": 4,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 3,
+      "verse": "42:25",
+      "words": 12,
+      "parts": [
+        9,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 3,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 3,
+      "verse": "43:18",
+      "words": 9,
+      "parts": [
+        9
+      ],
+      "fallback": false,
+      "timingRows": 18,
+      "safeCuts": 0,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 3,
+      "verse": "48:29",
+      "words": 54,
+      "parts": [
+        3,
+        6,
+        37,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 55,
+      "safeCuts": 17,
+      "longestUnsafeRun": 37
+    },
+    {
+      "reciter": 3,
+      "verse": "50:30",
+      "words": 9,
+      "parts": [
+        9
+      ],
+      "fallback": false,
+      "timingRows": 18,
+      "safeCuts": 0,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 3,
+      "verse": "57:16",
+      "words": 28,
+      "parts": [
+        9,
+        4,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 37,
+      "safeCuts": 19,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 3,
+      "verse": "57:21",
+      "words": 25,
+      "parts": [
+        10,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 35,
+      "safeCuts": 15,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 3,
+      "verse": "61:14",
+      "words": 35,
+      "parts": [
+        5,
+        6,
+        3,
+        15,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 41,
+      "safeCuts": 16,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 4,
+      "verse": "2:54",
+      "words": 26,
+      "parts": [
+        5,
+        13,
+        4,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 13,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 4,
+      "verse": "2:114",
+      "words": 30,
+      "parts": [
+        5,
+        6,
+        11,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 31,
+      "safeCuts": 19,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 4,
+      "verse": "2:282",
+      "words": 128,
+      "parts": [
+        3,
+        6,
+        5,
+        3,
+        5,
+        5,
+        6,
+        85,
+        4,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 136,
+      "safeCuts": 43,
+      "longestUnsafeRun": 85
+    },
+    {
+      "reciter": 4,
+      "verse": "3:103",
+      "words": 34,
+      "parts": [
+        4,
+        3,
+        12,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 37,
+      "safeCuts": 22,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 4,
+      "verse": "3:119",
+      "words": 27,
+      "parts": [
+        5,
+        5,
+        5,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 19,
+      "safeCuts": 13,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 4,
+      "verse": "3:135",
+      "words": 23,
+      "parts": [
+        4,
+        17,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 6,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 4,
+      "verse": "3:152",
+      "words": 40,
+      "parts": [
+        3,
+        4,
+        15,
+        5,
+        5,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 53,
+      "safeCuts": 25,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 4,
+      "verse": "3:154",
+      "words": 75,
+      "parts": [
+        3,
+        5,
+        5,
+        5,
+        19,
+        3,
+        5,
+        5,
+        3,
+        4,
+        5,
+        5,
+        4,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 77,
+      "safeCuts": 56,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 4,
+      "verse": "3:183",
+      "words": 28,
+      "parts": [
+        4,
+        5,
+        5,
+        9,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 41,
+      "safeCuts": 17,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "3:195",
+      "words": 43,
+      "parts": [
+        30,
+        4,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 44,
+      "safeCuts": 14,
+      "longestUnsafeRun": 29
+    },
+    {
+      "reciter": 4,
+      "verse": "4:11",
+      "words": 71,
+      "parts": [
+        4,
+        4,
+        5,
+        6,
+        5,
+        6,
+        37,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 73,
+      "safeCuts": 34,
+      "longestUnsafeRun": 37
+    },
+    {
+      "reciter": 4,
+      "verse": "4:23",
+      "words": 54,
+      "parts": [
+        4,
+        5,
+        5,
+        4,
+        32,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 67,
+      "safeCuts": 21,
+      "longestUnsafeRun": 32
+    },
+    {
+      "reciter": 4,
+      "verse": "4:57",
+      "words": 20,
+      "parts": [
+        6,
+        5,
+        9
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 10,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "4:90",
+      "words": 36,
+      "parts": [
+        4,
+        5,
+        27
+      ],
+      "fallback": false,
+      "timingRows": 10,
+      "safeCuts": 9,
+      "longestUnsafeRun": 27
+    },
+    {
+      "reciter": 4,
+      "verse": "4:95",
+      "words": 33,
+      "parts": [
+        11,
+        3,
+        4,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 37,
+      "safeCuts": 22,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 4,
+      "verse": "4:102",
+      "words": 62,
+      "parts": [
+        6,
+        6,
+        41,
+        3,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 71,
+      "safeCuts": 21,
+      "longestUnsafeRun": 41
+    },
+    {
+      "reciter": 4,
+      "verse": "5:2",
+      "words": 52,
+      "parts": [
+        3,
+        28,
+        5,
+        5,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 60,
+      "safeCuts": 24,
+      "longestUnsafeRun": 28
+    },
+    {
+      "reciter": 4,
+      "verse": "5:3",
+      "words": 61,
+      "parts": [
+        6,
+        5,
+        4,
+        5,
+        5,
+        4,
+        5,
+        5,
+        11,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 78,
+      "safeCuts": 48,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 4,
+      "verse": "5:13",
+      "words": 32,
+      "parts": [
+        22,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 34,
+      "safeCuts": 11,
+      "longestUnsafeRun": 21
+    },
+    {
+      "reciter": 4,
+      "verse": "5:116",
+      "words": 44,
+      "parts": [
+        2,
+        10,
+        3,
+        5,
+        6,
+        5,
+        4,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 47,
+      "safeCuts": 34,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 4,
+      "verse": "5:117",
+      "words": 29,
+      "parts": [
+        6,
+        5,
+        6,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 12,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 4,
+      "verse": "6:80",
+      "words": 25,
+      "parts": [
+        22,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 4,
+      "longestUnsafeRun": 21
+    },
+    {
+      "reciter": 4,
+      "verse": "7:40",
+      "words": 23,
+      "parts": [
+        4,
+        4,
+        15
+      ],
+      "fallback": false,
+      "timingRows": 9,
+      "safeCuts": 8,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 4,
+      "verse": "7:50",
+      "words": 20,
+      "parts": [
+        15,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 5,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 4,
+      "verse": "7:51",
+      "words": 19,
+      "parts": [
+        5,
+        14
+      ],
+      "fallback": false,
+      "timingRows": 3,
+      "safeCuts": 1,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 4,
+      "verse": "7:57",
+      "words": 29,
+      "parts": [
+        3,
+        10,
+        6,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 31,
+      "safeCuts": 17,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 4,
+      "verse": "7:75",
+      "words": 23,
+      "parts": [
+        5,
+        5,
+        13
+      ],
+      "fallback": false,
+      "timingRows": 11,
+      "safeCuts": 10,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 4,
+      "verse": "7:87",
+      "words": 19,
+      "parts": [
+        9,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 11,
+      "longestUnsafeRun": 8
+    },
+    {
+      "reciter": 4,
+      "verse": "7:157",
+      "words": 43,
+      "parts": [
+        4,
+        5,
+        30,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 54,
+      "safeCuts": 13,
+      "longestUnsafeRun": 30
+    },
+    {
+      "reciter": 4,
+      "verse": "7:162",
+      "words": 17,
+      "parts": [
+        9,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 18,
+      "safeCuts": 9,
+      "longestUnsafeRun": 8
+    },
+    {
+      "reciter": 4,
+      "verse": "7:163",
+      "words": 27,
+      "parts": [
+        4,
+        5,
+        3,
+        15
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 12,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 4,
+      "verse": "8:65",
+      "words": 26,
+      "parts": [
+        6,
+        13,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 29,
+      "safeCuts": 13,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 4,
+      "verse": "8:72",
+      "words": 45,
+      "parts": [
+        3,
+        4,
+        35,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 53,
+      "safeCuts": 10,
+      "longestUnsafeRun": 35
+    },
+    {
+      "reciter": 4,
+      "verse": "9:36",
+      "words": 36,
+      "parts": [
+        11,
+        5,
+        5,
+        4,
+        6,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 44,
+      "safeCuts": 25,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 4,
+      "verse": "9:54",
+      "words": 22,
+      "parts": [
+        2,
+        16,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 29,
+      "safeCuts": 6,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 4,
+      "verse": "9:92",
+      "words": 23,
+      "parts": [
+        5,
+        6,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 12,
+      "safeCuts": 11,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 4,
+      "verse": "9:118",
+      "words": 31,
+      "parts": [
+        4,
+        12,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 33,
+      "safeCuts": 19,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 4,
+      "verse": "10:24",
+      "words": 43,
+      "parts": [
+        5,
+        5,
+        6,
+        19,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 44,
+      "safeCuts": 23,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 4,
+      "verse": "10:26",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": false,
+      "timingRows": 8,
+      "safeCuts": 0,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 4,
+      "verse": "10:75",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "timingRows": 16,
+      "safeCuts": 0,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 4,
+      "verse": "10:90",
+      "words": 27,
+      "parts": [
+        4,
+        5,
+        12,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 15,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 4,
+      "verse": "10:107",
+      "words": 24,
+      "parts": [
+        4,
+        16,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 25,
+      "safeCuts": 8,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 4,
+      "verse": "10:108",
+      "words": 22,
+      "parts": [
+        4,
+        18
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 4,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 4,
+      "verse": "11:36",
+      "words": 17,
+      "parts": [
+        3,
+        9,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 22,
+      "safeCuts": 8,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "11:42",
+      "words": 19,
+      "parts": [
+        2,
+        13,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 6,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 4,
+      "verse": "11:52",
+      "words": 17,
+      "parts": [
+        3,
+        5,
+        9
+      ],
+      "fallback": false,
+      "timingRows": 9,
+      "safeCuts": 8,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "11:101",
+      "words": 24,
+      "parts": [
+        14,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 25,
+      "safeCuts": 10,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 4,
+      "verse": "12:24",
+      "words": 19,
+      "parts": [
+        2,
+        5,
+        2,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 5,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 4,
+      "verse": "12:100",
+      "words": 46,
+      "parts": [
+        4,
+        5,
+        5,
+        5,
+        6,
+        9,
+        3,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 58,
+      "safeCuts": 37,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "13:11",
+      "words": 35,
+      "parts": [
+        5,
+        6,
+        5,
+        5,
+        4,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 36,
+      "safeCuts": 25,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 4,
+      "verse": "13:31",
+      "words": 51,
+      "parts": [
+        4,
+        5,
+        5,
+        35,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 55,
+      "safeCuts": 16,
+      "longestUnsafeRun": 35
+    },
+    {
+      "reciter": 4,
+      "verse": "14:22",
+      "words": 44,
+      "parts": [
+        5,
+        3,
+        4,
+        6,
+        14,
+        7,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 46,
+      "safeCuts": 30,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 4,
+      "verse": "16:10",
+      "words": 13,
+      "parts": [
+        2,
+        11
+      ],
+      "fallback": false,
+      "timingRows": 14,
+      "safeCuts": 3,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 4,
+      "verse": "16:27",
+      "words": 21,
+      "parts": [
+        9,
+        6,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 35,
+      "safeCuts": 12,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "16:92",
+      "words": 32,
+      "parts": [
+        4,
+        5,
+        5,
+        18
+      ],
+      "fallback": false,
+      "timingRows": 16,
+      "safeCuts": 14,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 4,
+      "verse": "17:12",
+      "words": 23,
+      "parts": [
+        23
+      ],
+      "fallback": true,
+      "timingRows": 24,
+      "safeCuts": 22,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 4,
+      "verse": "17:88",
+      "words": 19,
+      "parts": [
+        19
+      ],
+      "fallback": false,
+      "timingRows": 22,
+      "safeCuts": 0,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 4,
+      "verse": "20:120",
+      "words": 13,
+      "parts": [
+        3,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 18,
+      "safeCuts": 4,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "22:52",
+      "words": 27,
+      "parts": [
+        27
+      ],
+      "fallback": true,
+      "timingRows": 55,
+      "safeCuts": 3,
+      "longestUnsafeRun": 24
+    },
+    {
+      "reciter": 4,
+      "verse": "22:73",
+      "words": 28,
+      "parts": [
+        4,
+        6,
+        18
+      ],
+      "fallback": false,
+      "timingRows": 32,
+      "safeCuts": 10,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 4,
+      "verse": "22:78",
+      "words": 44,
+      "parts": [
+        5,
+        5,
+        3,
+        25,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 49,
+      "safeCuts": 19,
+      "longestUnsafeRun": 25
+    },
+    {
+      "reciter": 4,
+      "verse": "23:24",
+      "words": 26,
+      "parts": [
+        4,
+        5,
+        5,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 17,
+      "safeCuts": 13,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 4,
+      "verse": "24:2",
+      "words": 26,
+      "parts": [
+        4,
+        4,
+        4,
+        4,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 17,
+      "safeCuts": 16,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 4,
+      "verse": "24:35",
+      "words": 48,
+      "parts": [
+        4,
+        6,
+        19,
+        6,
+        5,
+        4,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 52,
+      "safeCuts": 29,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 4,
+      "verse": "24:45",
+      "words": 31,
+      "parts": [
+        6,
+        25
+      ],
+      "fallback": false,
+      "timingRows": 33,
+      "safeCuts": 7,
+      "longestUnsafeRun": 24
+    },
+    {
+      "reciter": 4,
+      "verse": "24:61",
+      "words": 76,
+      "parts": [
+        4,
+        4,
+        6,
+        47,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 89,
+      "safeCuts": 28,
+      "longestUnsafeRun": 47
+    },
+    {
+      "reciter": 4,
+      "verse": "25:68",
+      "words": 22,
+      "parts": [
+        3,
+        5,
+        14
+      ],
+      "fallback": false,
+      "timingRows": 9,
+      "safeCuts": 8,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 4,
+      "verse": "27:7",
+      "words": 16,
+      "parts": [
+        4,
+        3,
+        9
+      ],
+      "fallback": false,
+      "timingRows": 8,
+      "safeCuts": 7,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "27:18",
+      "words": 19,
+      "parts": [
+        9,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 9,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "28:4",
+      "words": 19,
+      "parts": [
+        5,
+        5,
+        9
+      ],
+      "fallback": false,
+      "timingRows": 11,
+      "safeCuts": 10,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "28:18",
+      "words": 16,
+      "parts": [
+        2,
+        9,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 18,
+      "safeCuts": 7,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "28:30",
+      "words": 19,
+      "parts": [
+        3,
+        13,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 25,
+      "safeCuts": 6,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 4,
+      "verse": "28:70",
+      "words": 15,
+      "parts": [
+        10,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 19,
+      "safeCuts": 5,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 4,
+      "verse": "29:46",
+      "words": 25,
+      "parts": [
+        4,
+        5,
+        16
+      ],
+      "fallback": false,
+      "timingRows": 26,
+      "safeCuts": 10,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 4,
+      "verse": "30:29",
+      "words": 16,
+      "parts": [
+        2,
+        10,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 17,
+      "safeCuts": 6,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 4,
+      "verse": "30:54",
+      "words": 24,
+      "parts": [
+        5,
+        10,
+        3,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 35,
+      "safeCuts": 14,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 4,
+      "verse": "33:9",
+      "words": 21,
+      "parts": [
+        3,
+        5,
+        13
+      ],
+      "fallback": false,
+      "timingRows": 9,
+      "safeCuts": 8,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 4,
+      "verse": "34:19",
+      "words": 19,
+      "parts": [
+        3,
+        4,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 8,
+      "safeCuts": 7,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 4,
+      "verse": "35:45",
+      "words": 25,
+      "parts": [
+        6,
+        9,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 29,
+      "safeCuts": 16,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 4,
+      "verse": "39:38",
+      "words": 36,
+      "parts": [
+        5,
+        5,
+        5,
+        10,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 40,
+      "safeCuts": 26,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 4,
+      "verse": "40:16",
+      "words": 15,
+      "parts": [
+        3,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 19,
+      "safeCuts": 3,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 4,
+      "verse": "40:21",
+      "words": 30,
+      "parts": [
+        5,
+        6,
+        19
+      ],
+      "fallback": false,
+      "timingRows": 12,
+      "safeCuts": 11,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 4,
+      "verse": "40:28",
+      "words": 39,
+      "parts": [
+        2,
+        37
+      ],
+      "fallback": false,
+      "timingRows": 43,
+      "safeCuts": 2,
+      "longestUnsafeRun": 37
+    },
+    {
+      "reciter": 4,
+      "verse": "41:12",
+      "words": 19,
+      "parts": [
+        12,
+        3,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 19,
+      "safeCuts": 7,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 4,
+      "verse": "41:22",
+      "words": 20,
+      "parts": [
+        14,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 24,
+      "safeCuts": 6,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 4,
+      "verse": "41:25",
+      "words": 25,
+      "parts": [
+        4,
+        6,
+        13,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 12,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 4,
+      "verse": "43:77",
+      "words": 8,
+      "parts": [
+        8
+      ],
+      "fallback": false,
+      "timingRows": 16,
+      "safeCuts": 0,
+      "longestUnsafeRun": 8
+    },
+    {
+      "reciter": 4,
+      "verse": "46:21",
+      "words": 25,
+      "parts": [
+        3,
+        4,
+        14,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 36,
+      "safeCuts": 11,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 4,
+      "verse": "48:12",
+      "words": 20,
+      "parts": [
+        17,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 3,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 4,
+      "verse": "57:20",
+      "words": 39,
+      "parts": [
+        5,
+        5,
+        5,
+        5,
+        12,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 45,
+      "safeCuts": 27,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 4,
+      "verse": "59:9",
+      "words": 31,
+      "parts": [
+        26,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 5,
+      "longestUnsafeRun": 26
+    },
+    {
+      "reciter": 4,
+      "verse": "67:30",
+      "words": 10,
+      "parts": [
+        10
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 0,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 5,
+      "verse": "2:145",
+      "words": 32,
+      "parts": [
+        5,
+        5,
+        4,
+        5,
+        9,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 41,
+      "safeCuts": 23,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 5,
+      "verse": "4:140",
+      "words": 33,
+      "parts": [
+        5,
+        9,
+        5,
+        4,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 45,
+      "safeCuts": 22,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 5,
+      "verse": "6:139",
+      "words": 22,
+      "parts": [
+        18,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 24,
+      "safeCuts": 5,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 5,
+      "verse": "46:26",
+      "words": 32,
+      "parts": [
+        5,
+        6,
+        13,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 45,
+      "safeCuts": 19,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 5,
+      "verse": "57:27",
+      "words": 39,
+      "parts": [
+        5,
+        6,
+        9,
+        5,
+        6,
+        5,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 48,
+      "safeCuts": 30,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 5,
+      "verse": "61:14",
+      "words": 35,
+      "parts": [
+        6,
+        10,
+        5,
+        5,
+        4,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 50,
+      "safeCuts": 25,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 6,
+      "verse": "2:61",
+      "words": 59,
+      "parts": [
+        3,
+        5,
+        10,
+        4,
+        5,
+        5,
+        4,
+        3,
+        5,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 69,
+      "safeCuts": 49,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 6,
+      "verse": "2:101",
+      "words": 22,
+      "parts": [
+        4,
+        5,
+        9,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 31,
+      "safeCuts": 13,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 6,
+      "verse": "2:264",
+      "words": 38,
+      "parts": [
+        4,
+        9,
+        5,
+        5,
+        4,
+        6,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 47,
+      "safeCuts": 29,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 6,
+      "verse": "3:156",
+      "words": 36,
+      "parts": [
+        3,
+        4,
+        9,
+        5,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 46,
+      "safeCuts": 27,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 6,
+      "verse": "4:77",
+      "words": 48,
+      "parts": [
+        5,
+        3,
+        4,
+        9,
+        5,
+        5,
+        5,
+        5,
+        4,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 57,
+      "safeCuts": 39,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 6,
+      "verse": "5:2",
+      "words": 52,
+      "parts": [
+        3,
+        11,
+        5,
+        3,
+        4,
+        5,
+        5,
+        5,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 63,
+      "safeCuts": 41,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 6,
+      "verse": "5:32",
+      "words": 40,
+      "parts": [
+        3,
+        4,
+        10,
+        4,
+        6,
+        5,
+        5,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 53,
+      "safeCuts": 28,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 6,
+      "verse": "5:69",
+      "words": 20,
+      "parts": [
+        3,
+        4,
+        10,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 10,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 6,
+      "verse": "5:77",
+      "words": 23,
+      "parts": [
+        5,
+        4,
+        10,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 33,
+      "safeCuts": 13,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 6,
+      "verse": "6:52",
+      "words": 25,
+      "parts": [
+        4,
+        5,
+        12,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 37,
+      "safeCuts": 13,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 6,
+      "verse": "9:18",
+      "words": 23,
+      "parts": [
+        3,
+        14,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 37,
+      "safeCuts": 9,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 6,
+      "verse": "10:98",
+      "words": 21,
+      "parts": [
+        6,
+        12,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 33,
+      "safeCuts": 9,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 6,
+      "verse": "16:80",
+      "words": 25,
+      "parts": [
+        6,
+        9,
+        7,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 39,
+      "safeCuts": 12,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 6,
+      "verse": "18:14",
+      "words": 19,
+      "parts": [
+        5,
+        10,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 29,
+      "safeCuts": 9,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 6,
+      "verse": "24:31",
+      "words": 78,
+      "parts": [
+        5,
+        4,
+        5,
+        4,
+        4,
+        5,
+        5,
+        5,
+        5,
+        5,
+        9,
+        6,
+        5,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 92,
+      "safeCuts": 66,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 6,
+      "verse": "28:81",
+      "words": 17,
+      "parts": [
+        4,
+        11,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 6,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 6,
+      "verse": "29:10",
+      "words": 31,
+      "parts": [
+        6,
+        9,
+        6,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 40,
+      "safeCuts": 22,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 6,
+      "verse": "36:47",
+      "words": 24,
+      "parts": [
+        3,
+        4,
+        11,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 35,
+      "safeCuts": 13,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 6,
+      "verse": "39:8",
+      "words": 34,
+      "parts": [
+        3,
+        5,
+        10,
+        3,
+        5,
+        4,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 44,
+      "safeCuts": 24,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 6,
+      "verse": "58:7",
+      "words": 47,
+      "parts": [
+        4,
+        5,
+        5,
+        5,
+        5,
+        9,
+        3,
+        6,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 56,
+      "safeCuts": 38,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 6,
+      "verse": "64:9",
+      "words": 27,
+      "parts": [
+        4,
+        3,
+        5,
+        9,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 36,
+      "safeCuts": 18,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 6,
+      "verse": "66:11",
+      "words": 24,
+      "parts": [
+        3,
+        4,
+        9,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 33,
+      "safeCuts": 15,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "2:30",
+      "words": 28,
+      "parts": [
+        4,
+        10,
+        3,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 29,
+      "safeCuts": 18,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "2:165",
+      "words": 31,
+      "parts": [
+        5,
+        9,
+        3,
+        5,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 32,
+      "safeCuts": 22,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "2:197",
+      "words": 29,
+      "parts": [
+        29
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 0,
+      "longestUnsafeRun": 29
+    },
+    {
+      "reciter": 7,
+      "verse": "2:217",
+      "words": 57,
+      "parts": [
+        5,
+        5,
+        4,
+        4,
+        5,
+        5,
+        5,
+        5,
+        11,
+        5,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 59,
+      "safeCuts": 46,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 7,
+      "verse": "3:36",
+      "words": 24,
+      "parts": [
+        2,
+        9,
+        3,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 33,
+      "safeCuts": 15,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "3:195",
+      "words": 43,
+      "parts": [
+        5,
+        5,
+        6,
+        5,
+        5,
+        10,
+        3,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 54,
+      "safeCuts": 33,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "4:6",
+      "words": 37,
+      "parts": [
+        3,
+        6,
+        11,
+        3,
+        5,
+        4,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 39,
+      "safeCuts": 26,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 7,
+      "verse": "4:25",
+      "words": 58,
+      "parts": [
+        5,
+        30,
+        4,
+        7,
+        5,
+        4,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 63,
+      "safeCuts": 28,
+      "longestUnsafeRun": 30
+    },
+    {
+      "reciter": 7,
+      "verse": "4:48",
+      "words": 20,
+      "parts": [
+        6,
+        9,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 11,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "4:74",
+      "words": 21,
+      "parts": [
+        11,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 22,
+      "safeCuts": 11,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "4:77",
+      "words": 48,
+      "parts": [
+        4,
+        34,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 51,
+      "safeCuts": 14,
+      "longestUnsafeRun": 34
+    },
+    {
+      "reciter": 7,
+      "verse": "4:91",
+      "words": 32,
+      "parts": [
+        2,
+        20,
+        4,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 32,
+      "safeCuts": 12,
+      "longestUnsafeRun": 20
+    },
+    {
+      "reciter": 7,
+      "verse": "4:92",
+      "words": 60,
+      "parts": [
+        3,
+        5,
+        4,
+        5,
+        5,
+        6,
+        5,
+        5,
+        19,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 66,
+      "safeCuts": 40,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 7,
+      "verse": "4:102",
+      "words": 62,
+      "parts": [
+        6,
+        52,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 78,
+      "safeCuts": 10,
+      "longestUnsafeRun": 52
+    },
+    {
+      "reciter": 7,
+      "verse": "4:171",
+      "words": 53,
+      "parts": [
+        4,
+        37,
+        4,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 55,
+      "safeCuts": 16,
+      "longestUnsafeRun": 37
+    },
+    {
+      "reciter": 7,
+      "verse": "5:17",
+      "words": 42,
+      "parts": [
+        4,
+        3,
+        5,
+        14,
+        5,
+        6,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 43,
+      "safeCuts": 28,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "5:52",
+      "words": 28,
+      "parts": [
+        6,
+        5,
+        15,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 12,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 7,
+      "verse": "5:54",
+      "words": 37,
+      "parts": [
+        3,
+        20,
+        5,
+        4,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 48,
+      "safeCuts": 17,
+      "longestUnsafeRun": 20
+    },
+    {
+      "reciter": 7,
+      "verse": "5:64",
+      "words": 47,
+      "parts": [
+        5,
+        5,
+        5,
+        5,
+        5,
+        5,
+        14,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 48,
+      "safeCuts": 33,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "5:72",
+      "words": 33,
+      "parts": [
+        4,
+        5,
+        5,
+        5,
+        14
+      ],
+      "fallback": false,
+      "timingRows": 35,
+      "safeCuts": 20,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 7,
+      "verse": "5:89",
+      "words": 45,
+      "parts": [
+        6,
+        5,
+        16,
+        4,
+        5,
+        4,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 46,
+      "safeCuts": 29,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 7,
+      "verse": "5:94",
+      "words": 23,
+      "parts": [
+        17,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 26,
+      "safeCuts": 7,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 7,
+      "verse": "5:106",
+      "words": 51,
+      "parts": [
+        5,
+        5,
+        6,
+        33,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 63,
+      "safeCuts": 15,
+      "longestUnsafeRun": 33
+    },
+    {
+      "reciter": 7,
+      "verse": "5:108",
+      "words": 22,
+      "parts": [
+        2,
+        10,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 25,
+      "safeCuts": 12,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "7:37",
+      "words": 37,
+      "parts": [
+        5,
+        5,
+        3,
+        14,
+        4,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 39,
+      "safeCuts": 23,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "7:82",
+      "words": 13,
+      "parts": [
+        4,
+        9
+      ],
+      "fallback": false,
+      "timingRows": 19,
+      "safeCuts": 4,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "7:89",
+      "words": 42,
+      "parts": [
+        5,
+        4,
+        5,
+        5,
+        10,
+        4,
+        3,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 43,
+      "safeCuts": 32,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "7:146",
+      "words": 36,
+      "parts": [
+        5,
+        20,
+        4,
+        4,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 37,
+      "safeCuts": 16,
+      "longestUnsafeRun": 20
+    },
+    {
+      "reciter": 7,
+      "verse": "7:156",
+      "words": 30,
+      "parts": [
+        2,
+        26,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 31,
+      "safeCuts": 4,
+      "longestUnsafeRun": 26
+    },
+    {
+      "reciter": 7,
+      "verse": "7:157",
+      "words": 43,
+      "parts": [
+        20,
+        3,
+        5,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 52,
+      "safeCuts": 23,
+      "longestUnsafeRun": 20
+    },
+    {
+      "reciter": 7,
+      "verse": "7:158",
+      "words": 31,
+      "parts": [
+        3,
+        4,
+        5,
+        4,
+        15
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 16,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 7,
+      "verse": "7:160",
+      "words": 43,
+      "parts": [
+        31,
+        6,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 45,
+      "safeCuts": 12,
+      "longestUnsafeRun": 31
+    },
+    {
+      "reciter": 7,
+      "verse": "7:195",
+      "words": 26,
+      "parts": [
+        24,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 3,
+      "longestUnsafeRun": 23
+    },
+    {
+      "reciter": 7,
+      "verse": "8:2",
+      "words": 17,
+      "parts": [
+        15,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 24,
+      "safeCuts": 3,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "8:42",
+      "words": 35,
+      "parts": [
+        25,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 41,
+      "safeCuts": 11,
+      "longestUnsafeRun": 24
+    },
+    {
+      "reciter": 7,
+      "verse": "8:72",
+      "words": 45,
+      "parts": [
+        4,
+        5,
+        5,
+        5,
+        6,
+        17,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 48,
+      "safeCuts": 26,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 7,
+      "verse": "9:38",
+      "words": 28,
+      "parts": [
+        6,
+        17,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 11,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 7,
+      "verse": "9:59",
+      "words": 19,
+      "parts": [
+        5,
+        12,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 7,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 7,
+      "verse": "9:99",
+      "words": 27,
+      "parts": [
+        3,
+        19,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 8,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 7,
+      "verse": "9:118",
+      "words": 31,
+      "parts": [
+        5,
+        5,
+        5,
+        14,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 33,
+      "safeCuts": 17,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "9:120",
+      "words": 52,
+      "parts": [
+        4,
+        5,
+        25,
+        3,
+        5,
+        4,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 59,
+      "safeCuts": 27,
+      "longestUnsafeRun": 25
+    },
+    {
+      "reciter": 7,
+      "verse": "9:124",
+      "words": 18,
+      "parts": [
+        18
+      ],
+      "fallback": false,
+      "timingRows": 18,
+      "safeCuts": 2,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 7,
+      "verse": "9:128",
+      "words": 14,
+      "parts": [
+        3,
+        9,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 17,
+      "safeCuts": 5,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "10:108",
+      "words": 22,
+      "parts": [
+        6,
+        16
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 6,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 7,
+      "verse": "11:3",
+      "words": 25,
+      "parts": [
+        4,
+        9,
+        6,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 26,
+      "safeCuts": 16,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "11:12",
+      "words": 27,
+      "parts": [
+        5,
+        22
+      ],
+      "fallback": false,
+      "timingRows": 31,
+      "safeCuts": 6,
+      "longestUnsafeRun": 21
+    },
+    {
+      "reciter": 7,
+      "verse": "11:17",
+      "words": 39,
+      "parts": [
+        37,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 41,
+      "safeCuts": 3,
+      "longestUnsafeRun": 36
+    },
+    {
+      "reciter": 7,
+      "verse": "11:36",
+      "words": 17,
+      "parts": [
+        3,
+        9,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 8,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "11:40",
+      "words": 26,
+      "parts": [
+        6,
+        20
+      ],
+      "fallback": false,
+      "timingRows": 34,
+      "safeCuts": 6,
+      "longestUnsafeRun": 20
+    },
+    {
+      "reciter": 7,
+      "verse": "11:62",
+      "words": 21,
+      "parts": [
+        4,
+        5,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 22,
+      "safeCuts": 10,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 7,
+      "verse": "11:101",
+      "words": 24,
+      "parts": [
+        4,
+        9,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 25,
+      "safeCuts": 15,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "11:113",
+      "words": 17,
+      "parts": [
+        2,
+        12,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 26,
+      "safeCuts": 5,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 7,
+      "verse": "12:6",
+      "words": 25,
+      "parts": [
+        4,
+        18,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 26,
+      "safeCuts": 7,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 7,
+      "verse": "12:9",
+      "words": 14,
+      "parts": [
+        9,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 17,
+      "safeCuts": 5,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "12:21",
+      "words": 32,
+      "parts": [
+        6,
+        12,
+        5,
+        4,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 38,
+      "safeCuts": 20,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 7,
+      "verse": "12:36",
+      "words": 27,
+      "parts": [
+        4,
+        23
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 5,
+      "longestUnsafeRun": 22
+    },
+    {
+      "reciter": 7,
+      "verse": "12:40",
+      "words": 32,
+      "parts": [
+        25,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 34,
+      "safeCuts": 8,
+      "longestUnsafeRun": 24
+    },
+    {
+      "reciter": 7,
+      "verse": "12:72",
+      "words": 12,
+      "parts": [
+        2,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 16,
+      "safeCuts": 2,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "13:8",
+      "words": 15,
+      "parts": [
+        12,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 16,
+      "safeCuts": 3,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 7,
+      "verse": "13:11",
+      "words": 35,
+      "parts": [
+        5,
+        5,
+        25
+      ],
+      "fallback": false,
+      "timingRows": 36,
+      "safeCuts": 10,
+      "longestUnsafeRun": 25
+    },
+    {
+      "reciter": 7,
+      "verse": "13:33",
+      "words": 39,
+      "parts": [
+        3,
+        5,
+        5,
+        5,
+        16,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 40,
+      "safeCuts": 23,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 7,
+      "verse": "14:17",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": true,
+      "timingRows": 18,
+      "safeCuts": 14,
+      "longestUnsafeRun": 2
+    },
+    {
+      "reciter": 7,
+      "verse": "14:21",
+      "words": 34,
+      "parts": [
+        3,
+        4,
+        6,
+        5,
+        16
+      ],
+      "fallback": false,
+      "timingRows": 40,
+      "safeCuts": 14,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 7,
+      "verse": "16:26",
+      "words": 21,
+      "parts": [
+        3,
+        12,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 9,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 7,
+      "verse": "16:81",
+      "words": 25,
+      "parts": [
+        3,
+        5,
+        11,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 14,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 7,
+      "verse": "16:89",
+      "words": 24,
+      "parts": [
+        4,
+        17,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 25,
+      "safeCuts": 7,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 7,
+      "verse": "17:5",
+      "words": 17,
+      "parts": [
+        11,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 25,
+      "safeCuts": 7,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "17:97",
+      "words": 27,
+      "parts": [
+        5,
+        4,
+        14,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 13,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "18:17",
+      "words": 34,
+      "parts": [
+        4,
+        5,
+        6,
+        14,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 36,
+      "safeCuts": 20,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "19:26",
+      "words": 18,
+      "parts": [
+        4,
+        5,
+        9
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 9,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "19:75",
+      "words": 25,
+      "parts": [
+        23,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 26,
+      "safeCuts": 3,
+      "longestUnsafeRun": 22
+    },
+    {
+      "reciter": 7,
+      "verse": "20:71",
+      "words": 26,
+      "parts": [
+        5,
+        19,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 7,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 7,
+      "verse": "21:39",
+      "words": 16,
+      "parts": [
+        13,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 29,
+      "safeCuts": 3,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 7,
+      "verse": "22:5",
+      "words": 69,
+      "parts": [
+        4,
+        39,
+        5,
+        5,
+        5,
+        4,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 85,
+      "safeCuts": 27,
+      "longestUnsafeRun": 39
+    },
+    {
+      "reciter": 7,
+      "verse": "22:18",
+      "words": 37,
+      "parts": [
+        4,
+        5,
+        18,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 40,
+      "safeCuts": 19,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 7,
+      "verse": "22:40",
+      "words": 35,
+      "parts": [
+        9,
+        5,
+        5,
+        4,
+        4,
+        4,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 36,
+      "safeCuts": 26,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "22:73",
+      "words": 28,
+      "parts": [
+        4,
+        3,
+        9,
+        4,
+        5,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 19,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "24:2",
+      "words": 26,
+      "parts": [
+        4,
+        4,
+        6,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 14,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 7,
+      "verse": "24:33",
+      "words": 48,
+      "parts": [
+        5,
+        5,
+        32,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 49,
+      "safeCuts": 16,
+      "longestUnsafeRun": 32
+    },
+    {
+      "reciter": 7,
+      "verse": "24:41",
+      "words": 21,
+      "parts": [
+        6,
+        10,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 22,
+      "safeCuts": 11,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "24:47",
+      "words": 15,
+      "parts": [
+        15
+      ],
+      "fallback": false,
+      "timingRows": 17,
+      "safeCuts": 1,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "24:51",
+      "words": 18,
+      "parts": [
+        2,
+        12,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 20,
+      "safeCuts": 6,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 7,
+      "verse": "24:61",
+      "words": 76,
+      "parts": [
+        4,
+        4,
+        4,
+        3,
+        52,
+        4,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 93,
+      "safeCuts": 22,
+      "longestUnsafeRun": 52
+    },
+    {
+      "reciter": 7,
+      "verse": "25:2",
+      "words": 19,
+      "parts": [
+        5,
+        9,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 10,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "25:3",
+      "words": 22,
+      "parts": [
+        2,
+        11,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 11,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 7,
+      "verse": "27:40",
+      "words": 38,
+      "parts": [
+        4,
+        30,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 43,
+      "safeCuts": 8,
+      "longestUnsafeRun": 30
+    },
+    {
+      "reciter": 7,
+      "verse": "27:44",
+      "words": 28,
+      "parts": [
+        18,
+        4,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 29,
+      "safeCuts": 10,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 7,
+      "verse": "27:60",
+      "words": 27,
+      "parts": [
+        4,
+        6,
+        17
+      ],
+      "fallback": false,
+      "timingRows": 29,
+      "safeCuts": 10,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 7,
+      "verse": "27:61",
+      "words": 21,
+      "parts": [
+        6,
+        15
+      ],
+      "fallback": false,
+      "timingRows": 24,
+      "safeCuts": 7,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "27:64",
+      "words": 19,
+      "parts": [
+        17,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 20,
+      "safeCuts": 3,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 7,
+      "verse": "28:9",
+      "words": 18,
+      "parts": [
+        5,
+        10,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 26,
+      "safeCuts": 8,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "28:23",
+      "words": 27,
+      "parts": [
+        6,
+        21
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 6,
+      "longestUnsafeRun": 21
+    },
+    {
+      "reciter": 7,
+      "verse": "28:32",
+      "words": 25,
+      "parts": [
+        3,
+        4,
+        11,
+        3,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 31,
+      "safeCuts": 14,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 7,
+      "verse": "28:61",
+      "words": 17,
+      "parts": [
+        13,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 5,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 7,
+      "verse": "29:10",
+      "words": 31,
+      "parts": [
+        6,
+        9,
+        6,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 41,
+      "safeCuts": 22,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "30:25",
+      "words": 16,
+      "parts": [
+        16
+      ],
+      "fallback": false,
+      "timingRows": 15,
+      "safeCuts": 2,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "33:17",
+      "words": 24,
+      "parts": [
+        5,
+        6,
+        9,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 25,
+      "safeCuts": 15,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "33:53",
+      "words": 69,
+      "parts": [
+        5,
+        6,
+        4,
+        5,
+        6,
+        35,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 74,
+      "safeCuts": 31,
+      "longestUnsafeRun": 35
+    },
+    {
+      "reciter": 7,
+      "verse": "34:43",
+      "words": 34,
+      "parts": [
+        32,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 43,
+      "safeCuts": 2,
+      "longestUnsafeRun": 32
+    },
+    {
+      "reciter": 7,
+      "verse": "35:1",
+      "words": 24,
+      "parts": [
+        4,
+        3,
+        5,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 12,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 7,
+      "verse": "35:13",
+      "words": 28,
+      "parts": [
+        2,
+        11,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 29,
+      "safeCuts": 17,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 7,
+      "verse": "38:24",
+      "words": 32,
+      "parts": [
+        5,
+        5,
+        6,
+        16
+      ],
+      "fallback": false,
+      "timingRows": 34,
+      "safeCuts": 16,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 7,
+      "verse": "38:26",
+      "words": 30,
+      "parts": [
+        4,
+        4,
+        20,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 34,
+      "safeCuts": 10,
+      "longestUnsafeRun": 20
+    },
+    {
+      "reciter": 7,
+      "verse": "39:3",
+      "words": 33,
+      "parts": [
+        20,
+        3,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 39,
+      "safeCuts": 10,
+      "longestUnsafeRun": 20
+    },
+    {
+      "reciter": 7,
+      "verse": "39:4",
+      "words": 16,
+      "parts": [
+        3,
+        13
+      ],
+      "fallback": false,
+      "timingRows": 17,
+      "safeCuts": 3,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 7,
+      "verse": "39:23",
+      "words": 34,
+      "parts": [
+        5,
+        5,
+        5,
+        5,
+        4,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 36,
+      "safeCuts": 25,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "39:26",
+      "words": 12,
+      "parts": [
+        9,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 4,
+      "longestUnsafeRun": 8
+    },
+    {
+      "reciter": 7,
+      "verse": "39:43",
+      "words": 14,
+      "parts": [
+        3,
+        11
+      ],
+      "fallback": false,
+      "timingRows": 15,
+      "safeCuts": 4,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "39:54",
+      "words": 13,
+      "parts": [
+        2,
+        11
+      ],
+      "fallback": false,
+      "timingRows": 19,
+      "safeCuts": 2,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 7,
+      "verse": "40:34",
+      "words": 30,
+      "parts": [
+        3,
+        5,
+        11,
+        4,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 31,
+      "safeCuts": 19,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 7,
+      "verse": "40:78",
+      "words": 32,
+      "parts": [
+        5,
+        19,
+        5,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 33,
+      "safeCuts": 13,
+      "longestUnsafeRun": 19
+    },
+    {
+      "reciter": 7,
+      "verse": "42:13",
+      "words": 38,
+      "parts": [
+        2,
+        36
+      ],
+      "fallback": false,
+      "timingRows": 40,
+      "safeCuts": 2,
+      "longestUnsafeRun": 36
+    },
+    {
+      "reciter": 7,
+      "verse": "45:10",
+      "words": 19,
+      "parts": [
+        14,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 5,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "46:4",
+      "words": 29,
+      "parts": [
+        5,
+        22,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 7,
+      "longestUnsafeRun": 22
+    },
+    {
+      "reciter": 7,
+      "verse": "46:5",
+      "words": 18,
+      "parts": [
+        2,
+        13,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 19,
+      "safeCuts": 5,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 7,
+      "verse": "46:7",
+      "words": 14,
+      "parts": [
+        5,
+        9
+      ],
+      "fallback": false,
+      "timingRows": 18,
+      "safeCuts": 5,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 7,
+      "verse": "46:10",
+      "words": 24,
+      "parts": [
+        19,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 26,
+      "safeCuts": 6,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 7,
+      "verse": "46:15",
+      "words": 45,
+      "parts": [
+        4,
+        5,
+        4,
+        4,
+        6,
+        4,
+        11,
+        4,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 50,
+      "safeCuts": 32,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 7,
+      "verse": "46:32",
+      "words": 18,
+      "parts": [
+        16,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 19,
+      "safeCuts": 3,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 7,
+      "verse": "47:4",
+      "words": 38,
+      "parts": [
+        6,
+        10,
+        5,
+        5,
+        4,
+        5,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 39,
+      "safeCuts": 28,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "47:15",
+      "words": 44,
+      "parts": [
+        5,
+        31,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 47,
+      "safeCuts": 13,
+      "longestUnsafeRun": 31
+    },
+    {
+      "reciter": 7,
+      "verse": "47:32",
+      "words": 21,
+      "parts": [
+        19,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 24,
+      "safeCuts": 3,
+      "longestUnsafeRun": 18
+    },
+    {
+      "reciter": 7,
+      "verse": "48:25",
+      "words": 40,
+      "parts": [
+        33,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 42,
+      "safeCuts": 8,
+      "longestUnsafeRun": 32
+    },
+    {
+      "reciter": 7,
+      "verse": "49:11",
+      "words": 39,
+      "parts": [
+        11,
+        5,
+        6,
+        6,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 40,
+      "safeCuts": 29,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "53:23",
+      "words": 25,
+      "parts": [
+        4,
+        5,
+        14,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 11,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "53:26",
+      "words": 18,
+      "parts": [
+        3,
+        15
+      ],
+      "fallback": false,
+      "timingRows": 24,
+      "safeCuts": 4,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "57:9",
+      "words": 17,
+      "parts": [
+        17
+      ],
+      "fallback": false,
+      "timingRows": 13,
+      "safeCuts": 0,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 7,
+      "verse": "57:22",
+      "words": 21,
+      "parts": [
+        4,
+        5,
+        12
+      ],
+      "fallback": false,
+      "timingRows": 25,
+      "safeCuts": 10,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 7,
+      "verse": "57:25",
+      "words": 28,
+      "parts": [
+        4,
+        3,
+        6,
+        10,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 34,
+      "safeCuts": 18,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "57:29",
+      "words": 22,
+      "parts": [
+        3,
+        4,
+        12,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 10,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 7,
+      "verse": "59:7",
+      "words": 37,
+      "parts": [
+        21,
+        5,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 46,
+      "safeCuts": 16,
+      "longestUnsafeRun": 21
+    },
+    {
+      "reciter": 7,
+      "verse": "60:9",
+      "words": 21,
+      "parts": [
+        6,
+        13,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 22,
+      "safeCuts": 8,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 7,
+      "verse": "60:10",
+      "words": 55,
+      "parts": [
+        3,
+        5,
+        5,
+        17,
+        4,
+        5,
+        5,
+        6,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 56,
+      "safeCuts": 38,
+      "longestUnsafeRun": 17
+    },
+    {
+      "reciter": 7,
+      "verse": "60:11",
+      "words": 21,
+      "parts": [
+        21
+      ],
+      "fallback": true,
+      "timingRows": 21,
+      "safeCuts": 20,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 7,
+      "verse": "64:9",
+      "words": 27,
+      "parts": [
+        4,
+        3,
+        4,
+        16
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 12,
+      "longestUnsafeRun": 15
+    },
+    {
+      "reciter": 7,
+      "verse": "65:2",
+      "words": 30,
+      "parts": [
+        3,
+        5,
+        4,
+        3,
+        12,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 31,
+      "safeCuts": 18,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 7,
+      "verse": "65:11",
+      "words": 34,
+      "parts": [
+        6,
+        16,
+        5,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 41,
+      "safeCuts": 18,
+      "longestUnsafeRun": 16
+    },
+    {
+      "reciter": 7,
+      "verse": "66:6",
+      "words": 22,
+      "parts": [
+        5,
+        6,
+        11
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 10,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "66:8",
+      "words": 45,
+      "parts": [
+        3,
+        5,
+        24,
+        3,
+        10
+      ],
+      "fallback": false,
+      "timingRows": 59,
+      "safeCuts": 11,
+      "longestUnsafeRun": 24
+    },
+    {
+      "reciter": 7,
+      "verse": "67:15",
+      "words": 14,
+      "parts": [
+        14
+      ],
+      "fallback": false,
+      "timingRows": 15,
+      "safeCuts": 0,
+      "longestUnsafeRun": 14
+    },
+    {
+      "reciter": 7,
+      "verse": "70:38",
+      "words": 8,
+      "parts": [
+        8
+      ],
+      "fallback": false,
+      "timingRows": 7,
+      "safeCuts": 1,
+      "longestUnsafeRun": 7
+    },
+    {
+      "reciter": 7,
+      "verse": "72:23",
+      "words": 16,
+      "parts": [
+        5,
+        11
+      ],
+      "fallback": false,
+      "timingRows": 20,
+      "safeCuts": 6,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 7,
+      "verse": "73:20",
+      "words": 78,
+      "parts": [
+        5,
+        5,
+        5,
+        6,
+        32,
+        3,
+        4,
+        5,
+        5,
+        4,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 78,
+      "safeCuts": 46,
+      "longestUnsafeRun": 32
+    },
+    {
+      "reciter": 7,
+      "verse": "74:31",
+      "words": 57,
+      "parts": [
+        5,
+        5,
+        5,
+        6,
+        34,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 60,
+      "safeCuts": 23,
+      "longestUnsafeRun": 34
+    },
+    {
+      "reciter": 9,
+      "verse": "2:90",
+      "words": 27,
+      "parts": [
+        6,
+        6,
+        13,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 27,
+      "safeCuts": 14,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 9,
+      "verse": "2:101",
+      "words": 22,
+      "parts": [
+        4,
+        5,
+        9,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 31,
+      "safeCuts": 13,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 9,
+      "verse": "2:256",
+      "words": 24,
+      "parts": [
+        9,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 15,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 9,
+      "verse": "4:18",
+      "words": 24,
+      "parts": [
+        5,
+        9,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 33,
+      "safeCuts": 15,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 9,
+      "verse": "4:73",
+      "words": 18,
+      "parts": [
+        5,
+        10,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 8,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 9,
+      "verse": "4:145",
+      "words": 11,
+      "parts": [
+        11
+      ],
+      "fallback": false,
+      "timingRows": 23,
+      "safeCuts": 0,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 9,
+      "verse": "4:167",
+      "words": 11,
+      "parts": [
+        11
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 1,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 9,
+      "verse": "4:168",
+      "words": 12,
+      "parts": [
+        12
+      ],
+      "fallback": false,
+      "timingRows": 10,
+      "safeCuts": 0,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 9,
+      "verse": "4:169",
+      "words": 11,
+      "parts": [
+        2,
+        9
+      ],
+      "fallback": false,
+      "timingRows": 19,
+      "safeCuts": 2,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 9,
+      "verse": "5:32",
+      "words": 40,
+      "parts": [
+        3,
+        4,
+        10,
+        4,
+        6,
+        5,
+        5,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 54,
+      "safeCuts": 27,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 9,
+      "verse": "5:106",
+      "words": 51,
+      "parts": [
+        5,
+        6,
+        8,
+        3,
+        5,
+        4,
+        4,
+        9,
+        3,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 68,
+      "safeCuts": 35,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 9,
+      "verse": "8:53",
+      "words": 18,
+      "parts": [
+        3,
+        11,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 29,
+      "safeCuts": 7,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 9,
+      "verse": "12:40",
+      "words": 32,
+      "parts": [
+        4,
+        5,
+        5,
+        9,
+        4,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 34,
+      "safeCuts": 21,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 9,
+      "verse": "12:80",
+      "words": 37,
+      "parts": [
+        3,
+        4,
+        10,
+        4,
+        5,
+        5,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 48,
+      "safeCuts": 27,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 9,
+      "verse": "13:2",
+      "words": 26,
+      "parts": [
+        26
+      ],
+      "fallback": true,
+      "timingRows": 26,
+      "safeCuts": 25,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 9,
+      "verse": "18:42",
+      "words": 19,
+      "parts": [
+        2,
+        9,
+        4,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 9,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 9,
+      "verse": "19:73",
+      "words": 16,
+      "parts": [
+        5,
+        9,
+        2
+      ],
+      "fallback": false,
+      "timingRows": 25,
+      "safeCuts": 7,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 9,
+      "verse": "29:10",
+      "words": 31,
+      "parts": [
+        6,
+        9,
+        6,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 40,
+      "safeCuts": 22,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 9,
+      "verse": "42:13",
+      "words": 38,
+      "parts": [
+        5,
+        3,
+        9,
+        5,
+        7,
+        5,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 47,
+      "safeCuts": 29,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 10,
+      "verse": "12:50",
+      "words": 22,
+      "parts": [
+        22
+      ],
+      "fallback": true,
+      "timingRows": 22,
+      "safeCuts": 21,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 10,
+      "verse": "12:75",
+      "words": 11,
+      "parts": [
+        11
+      ],
+      "fallback": true,
+      "timingRows": 11,
+      "safeCuts": 10,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 10,
+      "verse": "12:76",
+      "words": 33,
+      "parts": [
+        33
+      ],
+      "fallback": true,
+      "timingRows": 0,
+      "safeCuts": 0,
+      "longestUnsafeRun": 33
+    },
+    {
+      "reciter": 10,
+      "verse": "40:64",
+      "words": 21,
+      "parts": [
+        21
+      ],
+      "fallback": true,
+      "timingRows": 21,
+      "safeCuts": 20,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 10,
+      "verse": "78:40",
+      "words": 15,
+      "parts": [
+        2,
+        13
+      ],
+      "fallback": false,
+      "timingRows": 5,
+      "safeCuts": 3,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 12,
+      "verse": "2:145",
+      "words": 32,
+      "parts": [
+        4,
+        10,
+        5,
+        9,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 42,
+      "safeCuts": 11,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 12,
+      "verse": "3:127",
+      "words": 9,
+      "parts": [
+        9
+      ],
+      "fallback": true,
+      "timingRows": 9,
+      "safeCuts": 8,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 12,
+      "verse": "3:177",
+      "words": 12,
+      "parts": [
+        12
+      ],
+      "fallback": true,
+      "timingRows": 12,
+      "safeCuts": 11,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 12,
+      "verse": "4:9",
+      "words": 15,
+      "parts": [
+        15
+      ],
+      "fallback": true,
+      "timingRows": 17,
+      "safeCuts": 13,
+      "longestUnsafeRun": 2
+    },
+    {
+      "reciter": 12,
+      "verse": "4:10",
+      "words": 13,
+      "parts": [
+        13
+      ],
+      "fallback": true,
+      "timingRows": 13,
+      "safeCuts": 12,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 12,
+      "verse": "4:11",
+      "words": 71,
+      "parts": [
+        71
+      ],
+      "fallback": true,
+      "timingRows": 71,
+      "safeCuts": 70,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 12,
+      "verse": "4:23",
+      "words": 54,
+      "parts": [
+        54
+      ],
+      "fallback": true,
+      "timingRows": 64,
+      "safeCuts": 49,
+      "longestUnsafeRun": 3
+    },
+    {
+      "reciter": 12,
+      "verse": "5:64",
+      "words": 47,
+      "parts": [
+        47
+      ],
+      "fallback": true,
+      "timingRows": 47,
+      "safeCuts": 46,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 12,
+      "verse": "9:36",
+      "words": 36,
+      "parts": [
+        4,
+        5,
+        10,
+        4,
+        3,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 32,
+      "safeCuts": 22,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 12,
+      "verse": "28:71",
+      "words": 19,
+      "parts": [
+        5,
+        5,
+        9
+      ],
+      "fallback": false,
+      "timingRows": 24,
+      "safeCuts": 10,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 12,
+      "verse": "43:32",
+      "words": 25,
+      "parts": [
+        25
+      ],
+      "fallback": true,
+      "timingRows": 25,
+      "safeCuts": 24,
+      "longestUnsafeRun": 1
+    },
+    {
+      "reciter": 97,
+      "verse": "3:173",
+      "words": 17,
+      "parts": [
+        10,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 8,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 97,
+      "verse": "4:74",
+      "words": 21,
+      "parts": [
+        9,
+        5,
+        3,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 28,
+      "safeCuts": 12,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 97,
+      "verse": "5:83",
+      "words": 21,
+      "parts": [
+        11,
+        4,
+        6
+      ],
+      "fallback": false,
+      "timingRows": 32,
+      "safeCuts": 11,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 97,
+      "verse": "6:27",
+      "words": 16,
+      "parts": [
+        12,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 29,
+      "safeCuts": 2,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 97,
+      "verse": "10:61",
+      "words": 42,
+      "parts": [
+        4,
+        5,
+        5,
+        6,
+        12,
+        6,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 64,
+      "safeCuts": 24,
+      "longestUnsafeRun": 12
+    },
+    {
+      "reciter": 97,
+      "verse": "11:12",
+      "words": 27,
+      "parts": [
+        3,
+        4,
+        13,
+        7
+      ],
+      "fallback": false,
+      "timingRows": 43,
+      "safeCuts": 14,
+      "longestUnsafeRun": 13
+    },
+    {
+      "reciter": 97,
+      "verse": "17:88",
+      "words": 19,
+      "parts": [
+        11,
+        3,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 30,
+      "safeCuts": 9,
+      "longestUnsafeRun": 10
+    },
+    {
+      "reciter": 97,
+      "verse": "19:93",
+      "words": 10,
+      "parts": [
+        10
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 1,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 97,
+      "verse": "20:109",
+      "words": 12,
+      "parts": [
+        9,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 4,
+      "longestUnsafeRun": 8
+    },
+    {
+      "reciter": 97,
+      "verse": "23:27",
+      "words": 32,
+      "parts": [
+        3,
+        5,
+        9,
+        5,
+        5,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 43,
+      "safeCuts": 23,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 97,
+      "verse": "32:17",
+      "words": 13,
+      "parts": [
+        9,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 22,
+      "safeCuts": 5,
+      "longestUnsafeRun": 8
+    },
+    {
+      "reciter": 97,
+      "verse": "32:22",
+      "words": 13,
+      "parts": [
+        9,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 22,
+      "safeCuts": 5,
+      "longestUnsafeRun": 8
+    },
+    {
+      "reciter": 97,
+      "verse": "35:44",
+      "words": 30,
+      "parts": [
+        4,
+        5,
+        6,
+        11,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 39,
+      "safeCuts": 19,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 97,
+      "verse": "38:28",
+      "words": 13,
+      "parts": [
+        9,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 5,
+      "longestUnsafeRun": 8
+    },
+    {
+      "reciter": 97,
+      "verse": "42:52",
+      "words": 27,
+      "parts": [
+        3,
+        5,
+        5,
+        9,
+        5
+      ],
+      "fallback": false,
+      "timingRows": 38,
+      "safeCuts": 18,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 97,
+      "verse": "57:16",
+      "words": 28,
+      "parts": [
+        4,
+        5,
+        4,
+        11,
+        4
+      ],
+      "fallback": false,
+      "timingRows": 40,
+      "safeCuts": 17,
+      "longestUnsafeRun": 11
+    },
+    {
+      "reciter": 97,
+      "verse": "57:22",
+      "words": 21,
+      "parts": [
+        4,
+        5,
+        9,
+        3
+      ],
+      "fallback": false,
+      "timingRows": 34,
+      "safeCuts": 12,
+      "longestUnsafeRun": 9
+    },
+    {
+      "reciter": 97,
+      "verse": "97:4",
+      "words": 9,
+      "parts": [
+        9
+      ],
+      "fallback": false,
+      "timingRows": 21,
+      "safeCuts": 1,
+      "longestUnsafeRun": 8
+    }
+  ]
+}

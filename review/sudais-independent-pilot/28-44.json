@@ -1,0 +1,49 @@
+{
+  "status": "machine-review-only",
+  "key": "28:44",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/28.mp3",
+  "source_file": "test-results/sudais-qdc-28.mp3",
+  "source_size": 16347617,
+  "source_sha256": "f8e5291cf10a3a29230fd443b5ddabc4297cf5b16c70250dda3bfe6314917576",
+  "source_excerpt_ms": [
+    641540,
+    653890
+  ],
+  "decoded_excerpt_from_ms": 641540,
+  "excerpt_sha256": "5e9ba9290b087a15d74b93342eb8177eebd0232ec4fe4ca30222cfee021a95b4",
+  "excerpt_bytes": 1089316,
+  "requested_model": "Large",
+  "requested_device": "GPU",
+  "response_status": 200,
+  "decode_seconds": 0.634,
+  "request_seconds": 5.505,
+  "model_runtime": {
+    "processing_seconds": 2.298166275024414,
+    "queue_seconds": 0.057569938828237355,
+    "total_seconds": 2.3557362138526514
+  },
+  "effective_model": "Large",
+  "segments": [
+    {
+      "from": "28:43:9",
+      "to": "28:43:11",
+      "source_from_ms": 641540,
+      "source_to_ms": 645780,
+      "confidence": 1,
+      "missing": true,
+      "repeated": false,
+      "error": null
+    },
+    {
+      "from": "28:43:11",
+      "to": "28:43:16",
+      "source_from_ms": 645940,
+      "source_to_ms": 653880,
+      "confidence": 1,
+      "missing": false,
+      "repeated": false,
+      "error": null
+    }
+  ],
+  "provider_error": null
+}

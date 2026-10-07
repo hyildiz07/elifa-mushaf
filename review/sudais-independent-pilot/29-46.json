@@ -1,0 +1,79 @@
+{
+  "status": "machine-review-only",
+  "key": "29:46",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/29.mp3",
+  "source_file": "test-results/sudais-qdc-29.mp3",
+  "source_size": 12885359,
+  "source_sha256": "525bcfbaaa6fbeece6c93e0e25d7d36393aaddd406366284ded5bd141107af67",
+  "source_excerpt_ms": [
+    597700,
+    623170
+  ],
+  "decoded_excerpt_from_ms": 597700,
+  "excerpt_sha256": "612d9a412edf3a7d76ce9292e41e21fff2f7aa56d1172c39c34139f83ceb4e6c",
+  "excerpt_bytes": 2246500,
+  "requested_model": "Large",
+  "requested_device": "GPU",
+  "response_status": 200,
+  "decode_seconds": 0.717,
+  "request_seconds": 6.037,
+  "model_runtime": {
+    "processing_seconds": 1.7504816055297852,
+    "queue_seconds": 0.04321542286197655,
+    "total_seconds": 1.7936970283917617
+  },
+  "effective_model": "Large",
+  "segments": [
+    {
+      "from": "",
+      "to": "",
+      "source_from_ms": 597700,
+      "source_to_ms": 598680,
+      "confidence": 0,
+      "missing": false,
+      "repeated": false,
+      "error": "Low confidence (0%)"
+    },
+    {
+      "from": "29:45:1",
+      "to": "29:45:8",
+      "source_from_ms": 598710,
+      "source_to_ms": 605053,
+      "confidence": 1,
+      "missing": false,
+      "repeated": false,
+      "error": null
+    },
+    {
+      "from": "29:45:9",
+      "to": "29:45:14",
+      "source_from_ms": 605083,
+      "source_to_ms": 612933,
+      "confidence": 1,
+      "missing": false,
+      "repeated": false,
+      "error": null
+    },
+    {
+      "from": "29:45:15",
+      "to": "29:45:17",
+      "source_from_ms": 612963,
+      "source_to_ms": 616440,
+      "confidence": 1,
+      "missing": false,
+      "repeated": false,
+      "error": null
+    },
+    {
+      "from": "29:45:18",
+      "to": "29:45:21",
+      "source_from_ms": 616470,
+      "source_to_ms": 623170,
+      "confidence": 1,
+      "missing": false,
+      "repeated": false,
+      "error": null
+    }
+  ],
+  "provider_error": null
+}

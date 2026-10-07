@@ -1,0 +1,347 @@
+{
+  "status": "review-only-do-not-enable-repeated-playback",
+  "key": "43:77",
+  "qdc_url": "https://download.quranicaudio.com/qdc/abu_bakr_shatri/murattal/43.mp3",
+  "qua_url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/043.mp3",
+  "qua_release": "https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0",
+  "production_url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/043.mp3",
+  "production_source_matches_qua_url": true,
+  "production_existing_range_ms": [873585, 884229],
+  "production_next_verse_start_ms": 916745,
+  "qdc_window_start_ms": 870940.9977324264,
+  "qua_window_start_ms": 871084.9886621315,
+  "independent_window_chapter_ms": [
+    875000,
+    880000,
+    886000,
+    891000,
+    901000,
+    908000
+  ],
+  "best_pcm_match": {
+    "shift_ms": 144,
+    "chapter_offset_ms": 0.00907029490917921,
+    "mean_correlation": 0.9992,
+    "correlations": [
+      0.999,
+      0.9994,
+      0.9986,
+      0.9996,
+      0.9988,
+      0.9998
+    ]
+  },
+  "qdc_spoken_positions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "qua_spoken_positions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "candidate_full_three_take_segments_review_only": [
+    [
+      1,
+      873685,
+      874675
+    ],
+    [
+      2,
+      874675,
+      875875
+    ],
+    [
+      3,
+      875875,
+      876655
+    ],
+    [
+      4,
+      876655,
+      877655
+    ],
+    [
+      5,
+      877655,
+      878415
+    ],
+    [
+      6,
+      878895,
+      879515
+    ],
+    [
+      7,
+      879515,
+      882155
+    ],
+    [
+      8,
+      882155,
+      883995
+    ],
+    [
+      1,
+      884395,
+      885375
+    ],
+    [
+      2,
+      885375,
+      887095
+    ],
+    [
+      3,
+      887095,
+      887905
+    ],
+    [
+      4,
+      887905,
+      889015
+    ],
+    [
+      5,
+      889015,
+      889715
+    ],
+    [
+      6,
+      890275,
+      890895
+    ],
+    [
+      7,
+      890895,
+      893995
+    ],
+    [
+      8,
+      893995,
+      896285
+    ],
+    [
+      1,
+      899695,
+      900975
+    ],
+    [
+      2,
+      900975,
+      902765
+    ],
+    [
+      3,
+      902765,
+      903715
+    ],
+    [
+      4,
+      903715,
+      904825
+    ],
+    [
+      5,
+      904825,
+      906035
+    ],
+    [
+      6,
+      906635,
+      907615
+    ],
+    [
+      7,
+      907615,
+      910615
+    ],
+    [
+      8,
+      910615,
+      913025
+    ]
+  ],
+  "qdc_verse_range_ms": [
+    873441,
+    913104
+  ],
+  "qdc_next_verse_start_ms": 913104,
+  "qua_occurrences": [
+    {
+      "from_ms": 873585,
+      "to_ms": 884229,
+      "words": 8
+    },
+    {
+      "from_ms": 884269,
+      "to_ms": 913075,
+      "words": 16
+    }
+  ],
+  "candidate_parts": [
+    {
+      "canonical_positions": [
+        1,
+        5
+      ],
+      "spoken_takes": 3
+    },
+    {
+      "canonical_positions": [
+        6,
+        8
+      ],
+      "spoken_takes": 3
+    }
+  ],
+  "candidate_audio_ranges_review_only": {
+    "words_1_to_5": [
+      {
+        "from_ms": 873585,
+        "to_ms": 878415
+      },
+      {
+        "from_ms": 884395,
+        "to_ms": 889715
+      },
+      {
+        "from_ms": 899695,
+        "to_ms": 906035
+      }
+    ],
+    "words_6_to_8": [
+      {
+        "from_ms": 878895,
+        "to_ms": 883995
+      },
+      {
+        "from_ms": 890275,
+        "to_ms": 896285
+      },
+      {
+        "from_ms": 906635,
+        "to_ms": 913075
+      }
+    ]
+  },
+  "candidate_after_word_five": [
+    {
+      "take": 1,
+      "after_word": 5,
+      "left_end_ms": 878415,
+      "right_start_ms": 878895,
+      "gap_ms": 480,
+      "candidate_cut_ms": 878655,
+      "middle_80ms_rms_max_channel": 0.009887,
+      "nearby_speech_median_20ms_rms_max_channel": 0.131579,
+      "middle_to_speech_ratio": 0.075,
+      "audition_status": "pending"
+    },
+    {
+      "take": 2,
+      "after_word": 5,
+      "left_end_ms": 889715,
+      "right_start_ms": 890275,
+      "gap_ms": 560,
+      "candidate_cut_ms": 889995,
+      "middle_80ms_rms_max_channel": 0.009115,
+      "nearby_speech_median_20ms_rms_max_channel": 0.113908,
+      "middle_to_speech_ratio": 0.08,
+      "audition_status": "pending"
+    },
+    {
+      "take": 3,
+      "after_word": 5,
+      "left_end_ms": 906035,
+      "right_start_ms": 906635,
+      "gap_ms": 600,
+      "candidate_cut_ms": 906335,
+      "middle_80ms_rms_max_channel": 0.002476,
+      "nearby_speech_median_20ms_rms_max_channel": 0.123497,
+      "middle_to_speech_ratio": 0.02,
+      "audition_status": "pending"
+    }
+  ],
+  "candidate_final_words": [
+    {
+      "take": 1,
+      "word": 8,
+      "from_ms": 882155,
+      "to_ms": 883995,
+      "final_500ms_rms_max_channel": 0.059399
+    },
+    {
+      "take": 2,
+      "word": 8,
+      "from_ms": 893995,
+      "to_ms": 896285,
+      "final_500ms_rms_max_channel": 0.010321
+    },
+    {
+      "take": 3,
+      "word": 8,
+      "from_ms": 910615,
+      "to_ms": 913025,
+      "final_500ms_rms_max_channel": 0.012294
+    }
+  ],
+  "review_audio": [
+    {
+      "file": "test-results/review-shatri-43-77/take-1-word-5-6-context.wav",
+      "from_ms": 877155,
+      "to_ms": 880155
+    },
+    {
+      "file": "test-results/review-shatri-43-77/take-2-word-5-6-context.wav",
+      "from_ms": 888495,
+      "to_ms": 891495
+    },
+    {
+      "file": "test-results/review-shatri-43-77/take-3-word-5-6-context.wav",
+      "from_ms": 904835,
+      "to_ms": 907835
+    },
+    {
+      "file": "test-results/review-shatri-43-77/middle-full-take.wav",
+      "from_ms": 884195,
+      "to_ms": 896485
+    }
+  ],
+  "blocker": "The production MP3 URL equals the QUA URL, but its asset contains only the first take. Human listening must confirm the middle and last recitations and all three word-5/word-6 acoustic joins before enabling a production split."
+}

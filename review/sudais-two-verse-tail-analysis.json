@@ -1,0 +1,375 @@
+{
+  "status": "review-only-no-production-asset",
+  "method": "First-channel 40ms normalized autocorrelation across 70–350 Hz and PCM RMS on locally exported 64/192 kbps last-1.5s WAVs.",
+  "qud_source_catalog": "Qur’anic Universal Audio v3.2.0 public catalog: no Sudais recording; no same-take timing alternative found.",
+  "cases": {
+    "3:160": {
+      "status": "blocked-final-phoneme-completeness-unproven",
+      "recording_64": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_64kbps/003160.mp3",
+      "recording_192": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/003160.mp3",
+      "quranlab_64_word_end_ms": 18583,
+      "independent_64_to_192_correlations": [
+        0.9062,
+        0.9306,
+        0.9327,
+        0.9609
+      ],
+      "next_verse_head_max_correlation": 0.1651,
+      "recordings": {
+        "64": {
+          "file": "test-results/review-sudais-full-verses/3-160-64-tail-1p5s.wav",
+          "sample_rate": 22050,
+          "last_500ms_40ms_windows": [
+            {
+              "from_tail_ms": 1020,
+              "rms": 0.08907,
+              "periodicity": 0.976,
+              "pitch_hz": 206
+            },
+            {
+              "from_tail_ms": 1060,
+              "rms": 0.09094,
+              "periodicity": 0.982,
+              "pitch_hz": 206
+            },
+            {
+              "from_tail_ms": 1100,
+              "rms": 0.09427,
+              "periodicity": 0.959,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1140,
+              "rms": 0.09073,
+              "periodicity": 0.923,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1180,
+              "rms": 0.07424,
+              "periodicity": 0.969,
+              "pitch_hz": 206
+            },
+            {
+              "from_tail_ms": 1220,
+              "rms": 0.05792,
+              "periodicity": 0.907,
+              "pitch_hz": 206
+            },
+            {
+              "from_tail_ms": 1260,
+              "rms": 0.04261,
+              "periodicity": 0.961,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1300,
+              "rms": 0.04221,
+              "periodicity": 0.98,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1340,
+              "rms": 0.04264,
+              "periodicity": 0.981,
+              "pitch_hz": 206
+            },
+            {
+              "from_tail_ms": 1380,
+              "rms": 0.02945,
+              "periodicity": 0.947,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1420,
+              "rms": 0.02005,
+              "periodicity": 0.964,
+              "pitch_hz": 206
+            },
+            {
+              "from_tail_ms": 1460,
+              "rms": 0.02091,
+              "periodicity": 0.968,
+              "pitch_hz": 206
+            }
+          ],
+          "final_window": {
+            "from_tail_ms": 1460,
+            "rms": 0.02091,
+            "periodicity": 0.968,
+            "pitch_hz": 206
+          }
+        },
+        "192": {
+          "file": "test-results/review-sudais-full-verses/3-160-192-tail-1p5s.wav",
+          "sample_rate": 44100,
+          "last_500ms_40ms_windows": [
+            {
+              "from_tail_ms": 1020,
+              "rms": 0.09628,
+              "periodicity": 0.975,
+              "pitch_hz": 206
+            },
+            {
+              "from_tail_ms": 1060,
+              "rms": 0.09321,
+              "periodicity": 0.962,
+              "pitch_hz": 207
+            },
+            {
+              "from_tail_ms": 1100,
+              "rms": 0.0932,
+              "periodicity": 0.955,
+              "pitch_hz": 207
+            },
+            {
+              "from_tail_ms": 1140,
+              "rms": 0.07092,
+              "periodicity": 0.952,
+              "pitch_hz": 206
+            },
+            {
+              "from_tail_ms": 1180,
+              "rms": 0.05311,
+              "periodicity": 0.879,
+              "pitch_hz": 206
+            },
+            {
+              "from_tail_ms": 1220,
+              "rms": 0.04282,
+              "periodicity": 0.972,
+              "pitch_hz": 207
+            },
+            {
+              "from_tail_ms": 1260,
+              "rms": 0.04468,
+              "periodicity": 0.984,
+              "pitch_hz": 207
+            },
+            {
+              "from_tail_ms": 1300,
+              "rms": 0.04073,
+              "periodicity": 0.982,
+              "pitch_hz": 206
+            },
+            {
+              "from_tail_ms": 1340,
+              "rms": 0.02407,
+              "periodicity": 0.906,
+              "pitch_hz": 206
+            },
+            {
+              "from_tail_ms": 1380,
+              "rms": 0.02092,
+              "periodicity": 0.974,
+              "pitch_hz": 207
+            },
+            {
+              "from_tail_ms": 1420,
+              "rms": 0.02024,
+              "periodicity": 0.972,
+              "pitch_hz": 207
+            },
+            {
+              "from_tail_ms": 1460,
+              "rms": 0.0145,
+              "periodicity": 0.874,
+              "pitch_hz": 207
+            }
+          ],
+          "final_window": {
+            "from_tail_ms": 1460,
+            "rms": 0.0145,
+            "periodicity": 0.874,
+            "pitch_hz": 207
+          }
+        }
+      },
+      "interpretation": "The end remains periodic voiced audio; amplitude falls on 3:160 but remains substantial on 4:143. These measurements cannot distinguish a naturally finished phoneme with reverberation from a clipped final vowel. Human two-sided auditory review is required."
+    },
+    "4:143": {
+      "status": "blocked-final-phoneme-completeness-unproven",
+      "recording_64": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_64kbps/004143.mp3",
+      "recording_192": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/004143.mp3",
+      "quranlab_64_word_end_ms": 15082,
+      "independent_64_to_192_correlations": [
+        0.9389,
+        0.9452,
+        0.9542,
+        0.9679
+      ],
+      "next_verse_head_max_correlation": 0.1518,
+      "recordings": {
+        "64": {
+          "file": "test-results/review-sudais-full-verses/4-143-64-tail-1p5s.wav",
+          "sample_rate": 22050,
+          "last_500ms_40ms_windows": [
+            {
+              "from_tail_ms": 1020,
+              "rms": 0.15804,
+              "periodicity": 0.991,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1060,
+              "rms": 0.16352,
+              "periodicity": 0.992,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1100,
+              "rms": 0.14384,
+              "periodicity": 0.93,
+              "pitch_hz": 212
+            },
+            {
+              "from_tail_ms": 1140,
+              "rms": 0.0467,
+              "periodicity": 0.779,
+              "pitch_hz": 212
+            },
+            {
+              "from_tail_ms": 1180,
+              "rms": 0.04186,
+              "periodicity": 0.971,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1220,
+              "rms": 0.03371,
+              "periodicity": 0.855,
+              "pitch_hz": 210
+            },
+            {
+              "from_tail_ms": 1260,
+              "rms": 0.02547,
+              "periodicity": 0.873,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1300,
+              "rms": 0.02338,
+              "periodicity": 0.882,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1340,
+              "rms": 0.02793,
+              "periodicity": 0.901,
+              "pitch_hz": 210
+            },
+            {
+              "from_tail_ms": 1380,
+              "rms": 0.02894,
+              "periodicity": 0.877,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1420,
+              "rms": 0.0286,
+              "periodicity": 0.856,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1460,
+              "rms": 0.02862,
+              "periodicity": 0.879,
+              "pitch_hz": 208
+            }
+          ],
+          "final_window": {
+            "from_tail_ms": 1460,
+            "rms": 0.02862,
+            "periodicity": 0.879,
+            "pitch_hz": 208
+          }
+        },
+        "192": {
+          "file": "test-results/review-sudais-full-verses/4-143-192-tail-1p5s.wav",
+          "sample_rate": 44100,
+          "last_500ms_40ms_windows": [
+            {
+              "from_tail_ms": 1020,
+              "rms": 0.17464,
+              "periodicity": 0.992,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1060,
+              "rms": 0.11898,
+              "periodicity": 0.897,
+              "pitch_hz": 215
+            },
+            {
+              "from_tail_ms": 1100,
+              "rms": 0.03854,
+              "periodicity": 0.946,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1140,
+              "rms": 0.04479,
+              "periodicity": 0.97,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1180,
+              "rms": 0.02956,
+              "periodicity": 0.82,
+              "pitch_hz": 209
+            },
+            {
+              "from_tail_ms": 1220,
+              "rms": 0.02558,
+              "periodicity": 0.877,
+              "pitch_hz": 209
+            },
+            {
+              "from_tail_ms": 1260,
+              "rms": 0.0267,
+              "periodicity": 0.889,
+              "pitch_hz": 209
+            },
+            {
+              "from_tail_ms": 1300,
+              "rms": 0.02867,
+              "periodicity": 0.9,
+              "pitch_hz": 208
+            },
+            {
+              "from_tail_ms": 1340,
+              "rms": 0.0323,
+              "periodicity": 0.885,
+              "pitch_hz": 209
+            },
+            {
+              "from_tail_ms": 1380,
+              "rms": 0.02872,
+              "periodicity": 0.877,
+              "pitch_hz": 104
+            },
+            {
+              "from_tail_ms": 1420,
+              "rms": 0.02608,
+              "periodicity": 0.88,
+              "pitch_hz": 209
+            },
+            {
+              "from_tail_ms": 1460,
+              "rms": 0.01952,
+              "periodicity": 0.925,
+              "pitch_hz": 208
+            }
+          ],
+          "final_window": {
+            "from_tail_ms": 1460,
+            "rms": 0.01952,
+            "periodicity": 0.925,
+            "pitch_hz": 208
+          }
+        }
+      },
+      "interpretation": "The end remains periodic voiced audio; amplitude falls on 3:160 but remains substantial on 4:143. These measurements cannot distinguish a naturally finished phoneme with reverberation from a clipped final vowel. Human two-sided auditory review is required."
+    }
+  }
+}

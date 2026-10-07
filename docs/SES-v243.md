@@ -1,0 +1,9 @@
+# v243 — aynı kayıt için bağımsız kelime zamanları
+
+[Qur'anic Universal Audio v3.2.0](https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0) içindeki Hânî er-Rifâî kaydı, uygulamanın QuranCDN hoca 5 MP3 URL'leriyle aynı kaynaktır. İçe aktarma betiği indirdiği ZIP ve mushaf kelime dosyasının SHA-256 değerlerini sürüm manifestiyle karşılaştırır. Her aday âyette ses URL'si, Arapça kelime sırası ve sayısı, ardışık kelime zamanları, âyet aralığı ve sonraki âyet başlangıcı kontrol edilir. Tekrar edilmiş veya metin eşleşmesi belirsiz âyetlere yeni zaman uygulanmaz. Kullanılan ek verinin lisansı CC BY 4.0'dır; uygulamanın Hakkında ekranında kaynak belirtilir.
+
+v242 istisna listesindeki Hânî'ye ait 48 kaydın 25'i bu denetimden geçti ve `assets/audio-timing-overrides-v1.json` içine alındı. 23 kayıt eşleşmeyen kelime sayısı, tekrar veya eksik veri nedeniyle dışarıda kaldı. Uygulama ek dosyayı çevrimdışı önbelleğe alır; dosya yüklenemezse mevcut QuranCDN zamanına döner. Aynı hocanın başka bir kaydı için zamanları taşımaz.
+
+1254 hoca–sûre dosyası, iki mushaf yazımı ve 137192 âyet durumu yeniden tarandı. Oynatma planında **yapısal hata: 0**. 8+ ses kelimesi olup tek kalan durum **312 → 286** (iki yazım birlikte); 8 kelimeyi aşan parçalar **1142 → 1094** oldu. Hânî'de tek parça kalan 17 hoca–âyet kaydı 4'e, toplam bölme istisnası 48'den 23'e indi. Tam liste: `docs/split-exceptions-v243.json`.
+
+Bu sayıların sıfıra inmesi için diğer hocaların **uygulamada kullanılan aynı MP3 kayıtları** üzerinde metin-ses zorunlu hizalaması, kaynakla bağımsız karşılaştırma ve şüpheli sınırların dinlenerek onayı gerekir. Farklı kaydın milisaniyelerini yalnız hoca adı aynı diye aktarmak yanlış bölme üretir. Otomatik hizalamanın verdiği her sınır uzman dinleme yerine geçmez. `node scripts/verify-all-audio.mjs --strict-splits` mevcut istisnalar nedeniyle hâlâ başarısız çıkar.

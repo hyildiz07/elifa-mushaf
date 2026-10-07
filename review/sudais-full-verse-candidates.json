@@ -1,0 +1,57 @@
+{
+  "status": "local-human-listening-review-only",
+  "review_status": "pending-final-phoneme-audition",
+  "reciter": 3,
+  "reciter_name": "Abdurrahmaan As-Sudais",
+  "proposed_use": "normal-full-verse-playback-only-after-audition",
+  "word_timing_transfer": false,
+  "quranlab_dataset": "quranlab/quran-audio@55d48a9cfc9dec3836efc9b0f8631c4ff6399c28",
+  "quranlab_audio_source": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_64kbps/",
+  "candidate_audio_source": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/",
+  "local_audio_review_manifest": "test-results/review-sudais-full-verses/manifest.json",
+  "finding": "All canonical words are labeled in the 64 kbps QuranLab clips and the 192 kbps clips match the same performance in four separate PCM windows. However, the final 10 ms of every candidate is acoustically active, so a complete final phoneme cannot be established without listening. The chapter recordings are different performances and cannot inherit these word timings.",
+  "rows": {
+    "3:160": {
+      "verse_key": "3:160",
+      "audio_url": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/003160.mp3",
+      "sha256": "3ee6d1579ff324a2de75c12fc18ad6891e52fa3af63fcc792cfec9e8f45f5fed",
+      "file_size": 452618,
+      "decoded_duration_ms": 18834,
+      "canonical_word_count": 18,
+      "final_word": "ٱلْمُؤْمِنُونَ",
+      "quranlab_64kbps_last_word_end_ms": 18583,
+      "pcm_64_to_192_correlation": [0.9062, 0.9306, 0.9327, 0.9609],
+      "end_rms_10ms": 0.01471,
+      "next_verse_url": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/003161.mp3",
+      "next_verse_head_max_correlation": 0.1651
+    },
+    "4:143": {
+      "verse_key": "4:143",
+      "audio_url": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/004143.mp3",
+      "sha256": "4c37e602b79f6b9278f2529ee95b8f6308d2cbacc0f6eb541b0ddcb341491d4a",
+      "file_size": 376842,
+      "decoded_duration_ms": 15673,
+      "canonical_word_count": 16,
+      "final_word": "سَبِيلًۭا",
+      "quranlab_64kbps_last_word_end_ms": 15082,
+      "pcm_64_to_192_correlation": [0.9389, 0.9452, 0.9542, 0.9679],
+      "end_rms_10ms": 0.02817,
+      "next_verse_url": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/004144.mp3",
+      "next_verse_head_max_correlation": 0.1518
+    },
+    "5:5": {
+      "verse_key": "5:5",
+      "audio_url": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/005005.mp3",
+      "sha256": "0abbda08e865fbe56cae2e6168883332004c584779136f0d208f66ac3ddc63d9",
+      "file_size": 931850,
+      "decoded_duration_ms": 38740,
+      "canonical_word_count": 43,
+      "final_word": "ٱلْخَـٰسِرِينَ",
+      "quranlab_64kbps_last_word_end_ms": 38509,
+      "pcm_64_to_192_correlation": [0.9038, 0.9604, 0.8865, 0.9143],
+      "end_rms_10ms": 0.02904,
+      "next_verse_url": "https://everyayah.com/data/Abdurrahmaan_As-Sudais_192kbps/005006.mp3",
+      "next_verse_head_max_correlation": 0.2427
+    }
+  }
+}

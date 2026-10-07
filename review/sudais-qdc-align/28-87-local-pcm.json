@@ -1,0 +1,6 @@
+{
+  "verse": "28:87",
+  "source": "same MP3, full-stream decode vs VBR-indexed range decode",
+  "suspect_blocks_10ms": 0,
+  "blocks": []
+}

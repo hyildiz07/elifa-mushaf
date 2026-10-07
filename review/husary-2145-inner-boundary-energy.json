@@ -1,0 +1,292 @@
+{
+  "source": "https://everyayah.com/data/Husary_Muallim_128kbps/002145.mp3",
+  "sampleRate": 44100,
+  "boundaries": [
+    {
+      "afterWord": 5,
+      "labelGapMs": 10,
+      "modelMidMs": 6735,
+      "atModelMid40ms": {
+        "rms": 0.135387,
+        "peak": 0.358447
+      },
+      "min40msWithin500ms": {
+        "centerMs": 6825,
+        "rms": 0.016814,
+        "peak": 0.040448
+      },
+      "before100ms": {
+        "rms": 0.115081,
+        "peak": 0.33089
+      },
+      "after100ms": {
+        "rms": 0.08772,
+        "peak": 0.358447
+      }
+    },
+    {
+      "afterWord": 10,
+      "labelGapMs": 4300,
+      "modelMidMs": 15550,
+      "atModelMid40ms": {
+        "rms": 0.001268,
+        "peak": 0.003403
+      },
+      "min40msWithin500ms": {
+        "centerMs": 15400,
+        "rms": 0.000574,
+        "peak": 0.001941
+      },
+      "before100ms": {
+        "rms": 0.001151,
+        "peak": 0.003403
+      },
+      "after100ms": {
+        "rms": 0.00135,
+        "peak": 0.00349
+      }
+    },
+    {
+      "afterWord": 14,
+      "labelGapMs": 3650,
+      "modelMidMs": 27225,
+      "atModelMid40ms": {
+        "rms": 0.00092,
+        "peak": 0.003019
+      },
+      "min40msWithin500ms": {
+        "centerMs": 27365,
+        "rms": 0.000501,
+        "peak": 0.001882
+      },
+      "before100ms": {
+        "rms": 0.000857,
+        "peak": 0.00304
+      },
+      "after100ms": {
+        "rms": 0.000772,
+        "peak": 0.002594
+      }
+    },
+    {
+      "afterWord": 19,
+      "labelGapMs": 4500,
+      "modelMidMs": 38750,
+      "atModelMid40ms": {
+        "rms": 0.001077,
+        "peak": 0.002623
+      },
+      "min40msWithin500ms": {
+        "centerMs": 38970,
+        "rms": 0.000406,
+        "peak": 0.001574
+      },
+      "before100ms": {
+        "rms": 0.001099,
+        "peak": 0.002782
+      },
+      "after100ms": {
+        "rms": 0.000763,
+        "peak": 0.002579
+      }
+    },
+    {
+      "afterWord": 20,
+      "labelGapMs": 10,
+      "modelMidMs": 41925,
+      "atModelMid40ms": {
+        "rms": 0.051476,
+        "peak": 0.157157
+      },
+      "min40msWithin500ms": {
+        "centerMs": 42125,
+        "rms": 0.001197,
+        "peak": 0.004169
+      },
+      "before100ms": {
+        "rms": 0.054083,
+        "peak": 0.172532
+      },
+      "after100ms": {
+        "rms": 0.025583,
+        "peak": 0.149768
+      }
+    },
+    {
+      "afterWord": 22,
+      "labelGapMs": 10,
+      "modelMidMs": 47925,
+      "atModelMid40ms": {
+        "rms": 0.032524,
+        "peak": 0.070422
+      },
+      "min40msWithin500ms": {
+        "centerMs": 47935,
+        "rms": 0.032363,
+        "peak": 0.075289
+      },
+      "before100ms": {
+        "rms": 0.033981,
+        "peak": 0.078419
+      },
+      "after100ms": {
+        "rms": 0.043606,
+        "peak": 0.156294
+      }
+    },
+    {
+      "afterWord": 23,
+      "labelGapMs": 10,
+      "modelMidMs": 48895,
+      "atModelMid40ms": {
+        "rms": 0.028227,
+        "peak": 0.080167
+      },
+      "min40msWithin500ms": {
+        "centerMs": 48975,
+        "rms": 0.013182,
+        "peak": 0.027447
+      },
+      "before100ms": {
+        "rms": 0.034008,
+        "peak": 0.082764
+      },
+      "after100ms": {
+        "rms": 0.01629,
+        "peak": 0.059652
+      }
+    },
+    {
+      "afterWord": 24,
+      "labelGapMs": 10,
+      "modelMidMs": 49885,
+      "atModelMid40ms": {
+        "rms": 0.035704,
+        "peak": 0.085661
+      },
+      "min40msWithin500ms": {
+        "centerMs": 49635,
+        "rms": 0.024858,
+        "peak": 0.112096
+      },
+      "before100ms": {
+        "rms": 0.046545,
+        "peak": 0.150663
+      },
+      "after100ms": {
+        "rms": 0.066108,
+        "peak": 0.306774
+      }
+    },
+    {
+      "afterWord": 25,
+      "labelGapMs": 10,
+      "modelMidMs": 50545,
+      "atModelMid40ms": {
+        "rms": 0.080644,
+        "peak": 0.251734
+      },
+      "min40msWithin500ms": {
+        "centerMs": 50615,
+        "rms": 0.018406,
+        "peak": 0.052118
+      },
+      "before100ms": {
+        "rms": 0.120575,
+        "peak": 0.356804
+      },
+      "after100ms": {
+        "rms": 0.02687,
+        "peak": 0.141245
+      }
+    },
+    {
+      "afterWord": 26,
+      "labelGapMs": 10,
+      "modelMidMs": 53065,
+      "atModelMid40ms": {
+        "rms": 0.050666,
+        "peak": 0.159333
+      },
+      "min40msWithin500ms": {
+        "centerMs": 53095,
+        "rms": 0.037559,
+        "peak": 0.081459
+      },
+      "before100ms": {
+        "rms": 0.09174,
+        "peak": 0.321859
+      },
+      "after100ms": {
+        "rms": 0.040721,
+        "peak": 0.135772
+      }
+    },
+    {
+      "afterWord": 27,
+      "labelGapMs": 10,
+      "modelMidMs": 53585,
+      "atModelMid40ms": {
+        "rms": 0.093096,
+        "peak": 0.310814
+      },
+      "min40msWithin500ms": {
+        "centerMs": 53395,
+        "rms": 0.037541,
+        "peak": 0.084789
+      },
+      "before100ms": {
+        "rms": 0.087893,
+        "peak": 0.310814
+      },
+      "after100ms": {
+        "rms": 0.066836,
+        "peak": 0.295575
+      }
+    },
+    {
+      "afterWord": 28,
+      "labelGapMs": 10,
+      "modelMidMs": 54885,
+      "atModelMid40ms": {
+        "rms": 0.016264,
+        "peak": 0.072054
+      },
+      "min40msWithin500ms": {
+        "centerMs": 54915,
+        "rms": 0.008446,
+        "peak": 0.037325
+      },
+      "before100ms": {
+        "rms": 0.036437,
+        "peak": 0.115832
+      },
+      "after100ms": {
+        "rms": 0.016452,
+        "peak": 0.089445
+      }
+    },
+    {
+      "afterWord": 29,
+      "labelGapMs": 10,
+      "modelMidMs": 56385,
+      "atModelMid40ms": {
+        "rms": 0.109315,
+        "peak": 0.327059
+      },
+      "min40msWithin500ms": {
+        "centerMs": 56175,
+        "rms": 0.007721,
+        "peak": 0.022438
+      },
+      "before100ms": {
+        "rms": 0.107156,
+        "peak": 0.343055
+      },
+      "after100ms": {
+        "rms": 0.096596,
+        "peak": 0.325552
+      }
+    }
+  ]
+}

@@ -1,0 +1,3805 @@
+{
+  "status": "review-only-no-production-approval",
+  "rule": "Exact source SHA, complete canonical word structure, both adjacent verse cuts with >=120 ms quiet PCM, independent source-bound phonetic and playback proof for every enabled mode.",
+  "limitations": [
+    "The existing acoustic report has no source SHA or per-cut decoder provenance; its quiet-run values are screening evidence only.",
+    "A quiet interval cannot establish that a final consonant was not clipped or the next first consonant was not included.",
+    "No independent phonetic hold-out or full player-mode evidence is present for the whole candidate set.",
+    "Internal word cuts require their own exact-source acoustic and phonetic checks; verse-level evidence cannot approve them."
+  ],
+  "chapters": {
+    "3": {
+      "verseCount": 200,
+      "sourceFile": "test-results/sudais-qdc-3.mp3",
+      "sourceSha256": "7a52d1efb56e31d8c84436aec39cbeebde8498dfa43acaf2c082c7c145153614",
+      "sourceMatches": true,
+      "structuralCandidates": 194,
+      "quietAdjacentCandidates": 0,
+      "productionApproved": 0,
+      "wordCutApproved": 0,
+      "rows": [
+        {
+          "key": "3:1",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:2",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:3",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:4",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:5",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:6",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:7",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:8",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:9",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:10",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:11",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:12",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:13",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:14",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:15",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:16",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:17",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:18",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:19",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:20",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:21",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:22",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:23",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:24",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:25",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:26",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:27",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:28",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:29",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:30",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:31",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:32",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:33",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:34",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:35",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:36",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:37",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:38",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:39",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:40",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:41",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:42",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:43",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:44",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:45",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:46",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:47",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:48",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:49",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:50",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:51",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:52",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:53",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:54",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:55",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:56",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:57",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:58",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:59",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:60",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:61",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:62",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:63",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:64",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:65",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:66",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:67",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:68",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:69",
+          "structuralCandidate": false,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "canonical-word-structure-failed",
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:70",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:71",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:72",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:73",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:74",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:75",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:76",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:77",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:78",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:79",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:80",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:81",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:82",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:83",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:84",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:85",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:86",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:87",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:88",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:89",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:90",
+          "structuralCandidate": false,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "canonical-word-structure-failed",
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:91",
+          "structuralCandidate": false,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "canonical-word-structure-failed",
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:92",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:93",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:94",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:95",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:96",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:97",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:98",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:99",
+          "structuralCandidate": false,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "canonical-word-structure-failed",
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:100",
+          "structuralCandidate": false,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "canonical-word-structure-failed",
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:101",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:102",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:103",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:104",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:105",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:106",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:107",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:108",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:109",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:110",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:111",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:112",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:113",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:114",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:115",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:116",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:117",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:118",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:119",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:120",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:121",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:122",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:123",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:124",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:125",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:126",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:127",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:128",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:129",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:130",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:131",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:132",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:133",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:134",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:135",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:136",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:137",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:138",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:139",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:140",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:141",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:142",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:143",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:144",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:145",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:146",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:147",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:148",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:149",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:150",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:151",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:152",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:153",
+          "structuralCandidate": false,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "canonical-word-structure-failed",
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:154",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:155",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:156",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:157",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:158",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:159",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:160",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:161",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:162",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:163",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:164",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:165",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:166",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:167",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:168",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:169",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:170",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:171",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:172",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:173",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:174",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:175",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:176",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:177",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:178",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:179",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:180",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:181",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:182",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:183",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:184",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:185",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:186",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:187",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:188",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:189",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:190",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:191",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:192",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:193",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:194",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:195",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:196",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:197",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:198",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:199",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "3:200",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        }
+      ]
+    },
+    "4": {
+      "verseCount": 176,
+      "sourceFile": "test-results/sudais-qdc-4.mp3",
+      "sourceSha256": "60adc3638bc3cdf6dbfcf110ab1102f810794ea21e74f3764cd159b3f13d122d",
+      "sourceMatches": true,
+      "structuralCandidates": 173,
+      "quietAdjacentCandidates": 0,
+      "productionApproved": 0,
+      "wordCutApproved": 0,
+      "rows": [
+        {
+          "key": "4:1",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:2",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:3",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:4",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:5",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:6",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:7",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:8",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:9",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:10",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:11",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:12",
+          "structuralCandidate": false,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "canonical-word-structure-failed",
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:13",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:14",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:15",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:16",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:17",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:18",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:19",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:20",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:21",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:22",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:23",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:24",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:25",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:26",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:27",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:28",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:29",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:30",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:31",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:32",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:33",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:34",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:35",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:36",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:37",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:38",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:39",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:40",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:41",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:42",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:43",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:44",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:45",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:46",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:47",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:48",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:49",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:50",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:51",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:52",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:53",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:54",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:55",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:56",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:57",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:58",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:59",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:60",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:61",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:62",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:63",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:64",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:65",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:66",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:67",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:68",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:69",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:70",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:71",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:72",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:73",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:74",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:75",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:76",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:77",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:78",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:79",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:80",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:81",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:82",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:83",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:84",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:85",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:86",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:87",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:88",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:89",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:90",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:91",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:92",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:93",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:94",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:95",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:96",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:97",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:98",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:99",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:100",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:101",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:102",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:103",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:104",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:105",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:106",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:107",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:108",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:109",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:110",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:111",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:112",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:113",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:114",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:115",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:116",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:117",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:118",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:119",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:120",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:121",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:122",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:123",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:124",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:125",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:126",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:127",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:128",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:129",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:130",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:131",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:132",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:133",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:134",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:135",
+          "structuralCandidate": false,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "canonical-word-structure-failed",
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:136",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:137",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:138",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:139",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:140",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:141",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:142",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:143",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:144",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:145",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:146",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:147",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:148",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:149",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:150",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:151",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:152",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:153",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:154",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:155",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:156",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:157",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:158",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:159",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:160",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:161",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:162",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:163",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:164",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:165",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:166",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:167",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:168",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:169",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:170",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:171",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:172",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:173",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:174",
+          "structuralCandidate": false,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "canonical-word-structure-failed",
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:175",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        },
+        {
+          "key": "4:176",
+          "structuralCandidate": true,
+          "adjacentQuietCandidate": false,
+          "automaticProductionApproval": false,
+          "reasons": [
+            "adjacent-quiet-cut-not-established",
+            "independent-phonetic-and-player-mode-proof-missing"
+          ]
+        }
+      ]
+    }
+  }
+}

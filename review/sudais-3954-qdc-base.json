@@ -1,0 +1,74 @@
+{
+  "status": "review-only",
+  "model": "Base",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/39.mp3",
+  "excerpt_from_ms": 793070,
+  "excerpt_to_ms": 807660,
+  "response_status": 200,
+  "result": {
+    "audio_id": "4f9c4a08964146419ae4c5835e1a266f",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 1.34,
+        "ref_from": "",
+        "ref_to": "",
+        "matched_text": "",
+        "confidence": 0,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": "Low confidence (0%)"
+      },
+      {
+        "segment": 2,
+        "time_from": 2.48,
+        "time_to": 6.58,
+        "ref_from": "39:54:1",
+        "ref_to": "39:54:5",
+        "matched_text": "وَأَنِيبُوٓا۟ إِلَىٰ رَبِّكُمْ وَأَسْلِمُوا۟ لَهُۥ",
+        "confidence": 0.75,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 3,
+        "time_from": 7.38,
+        "time_to": 13.92,
+        "ref_from": "39:54:4",
+        "ref_to": "39:54:13",
+        "matched_text": "وَأَسْلِمُوا۟ لَهُۥ مِن قَبْلِ أَن يَأْتِيَكُمُ ٱلْعَذَابُ ثُمَّ لَا تُنصَرُونَ",
+        "confidence": 0.933,
+        "has_missing_words": false,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Base",
+      "effective_model": "Base",
+      "runtime": {
+        "processing_seconds": 0.775559663772583,
+        "queue_seconds": 0.050424836634192616,
+        "total_seconds": 0.8259845004067756
+      }
+    }
+  }
+}

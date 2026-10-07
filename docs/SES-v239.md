@@ -1,0 +1,9 @@
+# v239 — Türk mushafı kelime eşleştirmesi ve uzun âyet denetimi
+
+Âl-i İmrân 3:4 Türk imlâsında 17 yazılı kelime gösterir. Ses zamanlaması 18 kelimeye bağlıdır; son iki ses kelimesi yazıda bitişiktir. Önceki sürüm farklı kelime sayısını tek parça gerekçesi sayıyordu. v239, bitişik yazıyı aynen koruyarak iki ayrı ses konumuna eşler ve bu iki konumun arasına parça sınırı koymaz. Aynı türdeki 28 âyet düzeltildi. Mâide 5:95 ile Enfâl 8:29'da toplam sayı eşit olmasına rağmen kelime konumları kaymıştı; bunlar da tek tek eşleştirilir. 6236 Türk imlâlı âyetin tamamında yazılı metnin birleşimden sonra özgün veriyle birebir aynı kaldığı otomatik sınanır.
+
+Ses zamanlaması kaynağındaki sıfır süreli satırlar çıkarılır. Bir hoca kaydının son kelime etiketi sonraki âyetin başlangıcını en fazla 300 ms aşarsa önceki güvenli iç sınırlar kullanılabilir; son parça kaynak âyet aralığında sonlanır. Daha büyük çakışmalarda veya başka çelişkilerde ses kesimi tahmin edilmez. Bu tercih, son kelimenin akustik bitişinin bütün kayıtlarda doğrulandığı anlamına gelmez.
+
+Yerel toplu denetim 1254 hoca-sûre zamanlama dosyasını, iki mushaf imlâsında 137192 âyet durumunu ve 673604 oynatma adımını taradı. Yapısal plan hatası: 0. Buna karşın **8 veya daha çok ses kelimesi bulunan 796 durum hâlâ tek parça** (iki imlâ birlikte; yaklaşık 398 hoca-âyet kaydı). 8 kelimeyi aşan 1724 parça da kaldı; bunların 1134'ü başka parçaları bölünebilen âyetlerin içindedir. Kaynak zamanlamasındaki büyük âyet çakışmaları, eksik kelime konumları veya tekrarlanan kıraatler bu istisnaların başlıca nedenidir. Bu kayıtların hepsini güvenle küçük parçalara böldüğümüz veya bütün ses bitişlerini dinleyerek doğruladığımız iddia edilmemelidir.
+
+`node scripts/verify-all-audio.mjs` yeniden tarama yapar ve ayrıntılı sonucu `test-results/full-validation.json` dosyasına yazar. Âl-i İmrân 3:4 için 11 gerçek hoca zamanlaması `tests/fixtures/al-imran-4-timings.json` içindedir. Kaynak Arapça metinler değiştirilmedi.

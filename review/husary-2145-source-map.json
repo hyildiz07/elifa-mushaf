@@ -1,0 +1,851 @@
+{
+  "status": "unverified-review-only",
+  "verse_key": "2:145",
+  "audio_url": "https://everyayah.com/data/Husary_Muallim_128kbps/002145.mp3",
+  "audio_bytes": 1890314,
+  "audio_sha256": "cc4640fa78a211b598a6e5f47880a5ff39112d3f8279d5260f860f1e1a1cad28",
+  "duration_ms": 118073,
+  "words": [
+    "وَلَئِنْ",
+    "أَتَيْتَ",
+    "ٱلَّذِينَ",
+    "أُوتُوا۟",
+    "ٱلْكِتَـٰبَ",
+    "بِكُلِّ",
+    "ءَايَةٍۢ",
+    "مَّا",
+    "تَبِعُوا۟",
+    "قِبْلَتَكَ ۚ",
+    "وَمَآ",
+    "أَنتَ",
+    "بِتَابِعٍۢ",
+    "قِبْلَتَهُمْ ۚ",
+    "وَمَا",
+    "بَعْضُهُم",
+    "بِتَابِعٍۢ",
+    "قِبْلَةَ",
+    "بَعْضٍۢ ۚ",
+    "وَلَئِنِ",
+    "ٱتَّبَعْتَ",
+    "أَهْوَآءَهُم",
+    "مِّنۢ",
+    "بَعْدِ",
+    "مَا",
+    "جَآءَكَ",
+    "مِنَ",
+    "ٱلْعِلْمِ ۙ",
+    "إِنَّكَ",
+    "إِذًۭا",
+    "لَّمِنَ",
+    "ٱلظَّـٰلِمِينَ"
+  ],
+  "quality": {
+    "qf_missing_positions": [
+      23,
+      24,
+      25,
+      26,
+      27,
+      30,
+      31,
+      32
+    ],
+    "qf_last_ms": 115405,
+    "cpfair_stats": {
+      "deletions": 0,
+      "transpositions": 1,
+      "insertions": 36
+    },
+    "cpfair_last_ms": 60750,
+    "both_sources_near_start_250ms": 7,
+    "both_end_early": true
+  },
+  "word_comparison": [
+    {
+      "position": 1,
+      "text": "وَلَئِنْ",
+      "qf_occurrences": [
+        [
+          0,
+          1380
+        ]
+      ],
+      "cpfair_span": [
+        500,
+        1550
+      ],
+      "nearest_start_difference_ms": 500
+    },
+    {
+      "position": 2,
+      "text": "أَتَيْتَ",
+      "qf_occurrences": [
+        [
+          1380,
+          2680
+        ]
+      ],
+      "cpfair_span": [
+        1650,
+        2710
+      ],
+      "nearest_start_difference_ms": 270
+    },
+    {
+      "position": 3,
+      "text": "ٱلَّذِينَ",
+      "qf_occurrences": [
+        [
+          2680,
+          4090
+        ]
+      ],
+      "cpfair_span": [
+        2720,
+        4170
+      ],
+      "nearest_start_difference_ms": 40
+    },
+    {
+      "position": 4,
+      "text": "أُوتُوا۟",
+      "qf_occurrences": [
+        [
+          4090,
+          5060
+        ]
+      ],
+      "cpfair_span": [
+        4180,
+        5160
+      ],
+      "nearest_start_difference_ms": 90
+    },
+    {
+      "position": 5,
+      "text": "ٱلْكِتَـٰبَ",
+      "qf_occurrences": [
+        [
+          5060,
+          6650
+        ],
+        [
+          11970,
+          19950
+        ]
+      ],
+      "cpfair_span": [
+        5170,
+        6730
+      ],
+      "nearest_start_difference_ms": 110
+    },
+    {
+      "position": 6,
+      "text": "بِكُلِّ",
+      "qf_occurrences": [
+        [
+          6650,
+          7940
+        ],
+        [
+          19950,
+          20790
+        ]
+      ],
+      "cpfair_span": [
+        6740,
+        8020
+      ],
+      "nearest_start_difference_ms": 90
+    },
+    {
+      "position": 7,
+      "text": "ءَايَةٍۢ",
+      "qf_occurrences": [
+        [
+          7940,
+          10077
+        ],
+        [
+          20790,
+          21580
+        ],
+        [
+          35721,
+          41760
+        ]
+      ],
+      "cpfair_span": [
+        8030,
+        10130
+      ],
+      "nearest_start_difference_ms": 90
+    },
+    {
+      "position": 8,
+      "text": "مَّا",
+      "qf_occurrences": [
+        [
+          10077,
+          10570
+        ],
+        [
+          21580,
+          21820
+        ],
+        [
+          41760,
+          41850
+        ]
+      ],
+      "cpfair_span": [
+        10140,
+        10650
+      ],
+      "nearest_start_difference_ms": 63
+    },
+    {
+      "position": 9,
+      "text": "تَبِعُوا۟",
+      "qf_occurrences": [
+        [
+          10570,
+          11950
+        ],
+        [
+          21820,
+          23330
+        ],
+        [
+          41850,
+          42800
+        ]
+      ],
+      "cpfair_span": [
+        10660,
+        12040
+      ],
+      "nearest_start_difference_ms": 90
+    },
+    {
+      "position": 10,
+      "text": "قِبْلَتَكَ ۚ",
+      "qf_occurrences": [
+        [
+          23330,
+          25210
+        ],
+        [
+          42800,
+          44180
+        ]
+      ],
+      "cpfair_span": [
+        12050,
+        13400
+      ],
+      "nearest_start_difference_ms": 11280
+    },
+    {
+      "position": 11,
+      "text": "وَمَآ",
+      "qf_occurrences": [
+        [
+          25230,
+          29810
+        ],
+        [
+          44180,
+          46909
+        ]
+      ],
+      "cpfair_span": [
+        17700,
+        19780
+      ],
+      "nearest_start_difference_ms": 7530
+    },
+    {
+      "position": 12,
+      "text": "أَنتَ",
+      "qf_occurrences": [
+        [
+          29810,
+          31800
+        ],
+        [
+          46909,
+          47850
+        ]
+      ],
+      "cpfair_span": [
+        19790,
+        21150
+      ],
+      "nearest_start_difference_ms": 10020
+    },
+    {
+      "position": 13,
+      "text": "بِتَابِعٍۢ",
+      "qf_occurrences": [
+        [
+          31800,
+          34210
+        ],
+        [
+          47850,
+          48340
+        ]
+      ],
+      "cpfair_span": [
+        21160,
+        23480
+      ],
+      "nearest_start_difference_ms": 10640
+    },
+    {
+      "position": 14,
+      "text": "قِبْلَتَهُمْ ۚ",
+      "qf_occurrences": [
+        [
+          34210,
+          35700
+        ],
+        [
+          48340,
+          48650
+        ]
+      ],
+      "cpfair_span": [
+        23490,
+        25400
+      ],
+      "nearest_start_difference_ms": 10720
+    },
+    {
+      "position": 15,
+      "text": "وَمَا",
+      "qf_occurrences": [
+        [
+          48650,
+          48790
+        ]
+      ],
+      "cpfair_span": [
+        29050,
+        29870
+      ],
+      "nearest_start_difference_ms": 19600
+    },
+    {
+      "position": 16,
+      "text": "بَعْضُهُم",
+      "qf_occurrences": [
+        [
+          48790,
+          49540
+        ]
+      ],
+      "cpfair_span": [
+        29880,
+        31780
+      ],
+      "nearest_start_difference_ms": 18910
+    },
+    {
+      "position": 17,
+      "text": "بِتَابِعٍۢ",
+      "qf_occurrences": [
+        [
+          49540,
+          50490
+        ]
+      ],
+      "cpfair_span": [
+        31790,
+        34240
+      ],
+      "nearest_start_difference_ms": 17750
+    },
+    {
+      "position": 18,
+      "text": "قِبْلَةَ",
+      "qf_occurrences": [
+        [
+          50490,
+          52730
+        ]
+      ],
+      "cpfair_span": [
+        34250,
+        35520
+      ],
+      "nearest_start_difference_ms": 16240
+    },
+    {
+      "position": 19,
+      "text": "بَعْضٍۢ ۚ",
+      "qf_occurrences": [
+        [
+          52730,
+          52950
+        ]
+      ],
+      "cpfair_span": [
+        35530,
+        36500
+      ],
+      "nearest_start_difference_ms": 17200
+    },
+    {
+      "position": 20,
+      "text": "وَلَئِنِ",
+      "qf_occurrences": [
+        [
+          52950,
+          60370
+        ],
+        [
+          60391,
+          77987
+        ],
+        [
+          80911,
+          95500
+        ]
+      ],
+      "cpfair_span": [
+        41000,
+        41920
+      ],
+      "nearest_start_difference_ms": 11950
+    },
+    {
+      "position": 21,
+      "text": "ٱتَّبَعْتَ",
+      "qf_occurrences": [
+        [
+          77987,
+          78420
+        ],
+        [
+          95500,
+          95940
+        ]
+      ],
+      "cpfair_span": [
+        41930,
+        43600
+      ],
+      "nearest_start_difference_ms": 36057
+    },
+    {
+      "position": 22,
+      "text": "أَهْوَآءَهُم",
+      "qf_occurrences": [
+        [
+          78420,
+          80890
+        ],
+        [
+          95940,
+          97350
+        ]
+      ],
+      "cpfair_span": [
+        43610,
+        47920
+      ],
+      "nearest_start_difference_ms": 34810
+    },
+    {
+      "position": 23,
+      "text": "مِّنۢ",
+      "qf_occurrences": [],
+      "cpfair_span": [
+        47930,
+        48890
+      ],
+      "nearest_start_difference_ms": null
+    },
+    {
+      "position": 24,
+      "text": "بَعْدِ",
+      "qf_occurrences": [],
+      "cpfair_span": [
+        48900,
+        49880
+      ],
+      "nearest_start_difference_ms": null
+    },
+    {
+      "position": 25,
+      "text": "مَا",
+      "qf_occurrences": [],
+      "cpfair_span": [
+        49890,
+        50540
+      ],
+      "nearest_start_difference_ms": null
+    },
+    {
+      "position": 26,
+      "text": "جَآءَكَ",
+      "qf_occurrences": [],
+      "cpfair_span": [
+        50550,
+        53060
+      ],
+      "nearest_start_difference_ms": null
+    },
+    {
+      "position": 27,
+      "text": "مِنَ",
+      "qf_occurrences": [],
+      "cpfair_span": [
+        53070,
+        53580
+      ],
+      "nearest_start_difference_ms": null
+    },
+    {
+      "position": 28,
+      "text": "ٱلْعِلْمِ ۙ",
+      "qf_occurrences": [
+        [
+          97370,
+          105650
+        ],
+        [
+          105670,
+          113850
+        ]
+      ],
+      "cpfair_span": [
+        53590,
+        54880
+      ],
+      "nearest_start_difference_ms": 43780
+    },
+    {
+      "position": 29,
+      "text": "إِنَّكَ",
+      "qf_occurrences": [
+        [
+          113850,
+          115405
+        ]
+      ],
+      "cpfair_span": [
+        54890,
+        56380
+      ],
+      "nearest_start_difference_ms": 58960
+    },
+    {
+      "position": 30,
+      "text": "إِذًۭا",
+      "qf_occurrences": [],
+      "cpfair_span": [
+        56390,
+        57010
+      ],
+      "nearest_start_difference_ms": null
+    },
+    {
+      "position": 31,
+      "text": "لَّمِنَ",
+      "qf_occurrences": [],
+      "cpfair_span": [
+        57020,
+        58100
+      ],
+      "nearest_start_difference_ms": null
+    },
+    {
+      "position": 32,
+      "text": "ٱلظَّـٰلِمِينَ",
+      "qf_occurrences": [],
+      "cpfair_span": [
+        58110,
+        60750
+      ],
+      "nearest_start_difference_ms": null
+    }
+  ],
+  "qf_runs": [
+    {
+      "from_word": 1,
+      "to_word": 9,
+      "from_ms": 0,
+      "to_ms": 11950,
+      "count": 9
+    },
+    {
+      "from_word": 5,
+      "to_word": 14,
+      "from_ms": 11970,
+      "to_ms": 35700,
+      "count": 10
+    },
+    {
+      "from_word": 7,
+      "to_word": 20,
+      "from_ms": 35721,
+      "to_ms": 60370,
+      "count": 14
+    },
+    {
+      "from_word": 20,
+      "to_word": 22,
+      "from_ms": 60391,
+      "to_ms": 80890,
+      "count": 3
+    },
+    {
+      "from_word": 20,
+      "to_word": 22,
+      "from_ms": 80911,
+      "to_ms": 97350,
+      "count": 3
+    },
+    {
+      "from_word": 28,
+      "to_word": 28,
+      "from_ms": 97370,
+      "to_ms": 105650,
+      "count": 1
+    },
+    {
+      "from_word": 28,
+      "to_word": 29,
+      "from_ms": 105670,
+      "to_ms": 115405,
+      "count": 2
+    }
+  ],
+  "qf_unlabeled_spans": [
+    {
+      "from_ms": 115405,
+      "to_ms": 118073,
+      "duration_ms": 2668
+    }
+  ],
+  "quiet_candidates": [
+    {
+      "from_ms": 25320,
+      "to_ms": 28980
+    },
+    {
+      "from_ms": 42100,
+      "to_ms": 42420
+    },
+    {
+      "from_ms": 94080,
+      "to_ms": 94260
+    },
+    {
+      "from_ms": 97560,
+      "to_ms": 102520
+    },
+    {
+      "from_ms": 115480,
+      "to_ms": 116360
+    }
+  ],
+  "cpfair_segments": [
+    [
+      0,
+      1,
+      500,
+      1550
+    ],
+    [
+      1,
+      2,
+      1650,
+      2710
+    ],
+    [
+      2,
+      3,
+      2720,
+      4170
+    ],
+    [
+      3,
+      4,
+      4180,
+      5160
+    ],
+    [
+      4,
+      5,
+      5170,
+      6730
+    ],
+    [
+      5,
+      6,
+      6740,
+      8020
+    ],
+    [
+      6,
+      7,
+      8030,
+      10130
+    ],
+    [
+      7,
+      8,
+      10140,
+      10650
+    ],
+    [
+      8,
+      9,
+      10660,
+      12040
+    ],
+    [
+      9,
+      10,
+      12050,
+      13400
+    ],
+    [
+      10,
+      11,
+      17700,
+      19780
+    ],
+    [
+      11,
+      12,
+      19790,
+      21150
+    ],
+    [
+      12,
+      13,
+      21160,
+      23480
+    ],
+    [
+      13,
+      14,
+      23490,
+      25400
+    ],
+    [
+      14,
+      15,
+      29050,
+      29870
+    ],
+    [
+      15,
+      16,
+      29880,
+      31780
+    ],
+    [
+      16,
+      17,
+      31790,
+      34240
+    ],
+    [
+      17,
+      18,
+      34250,
+      35520
+    ],
+    [
+      18,
+      19,
+      35530,
+      36500
+    ],
+    [
+      19,
+      20,
+      41000,
+      41920
+    ],
+    [
+      20,
+      21,
+      41930,
+      43600
+    ],
+    [
+      21,
+      22,
+      43610,
+      47920
+    ],
+    [
+      22,
+      23,
+      47930,
+      48890
+    ],
+    [
+      23,
+      24,
+      48900,
+      49880
+    ],
+    [
+      24,
+      25,
+      49890,
+      50540
+    ],
+    [
+      25,
+      26,
+      50550,
+      53060
+    ],
+    [
+      26,
+      27,
+      53070,
+      53580
+    ],
+    [
+      27,
+      28,
+      53590,
+      54880
+    ],
+    [
+      28,
+      29,
+      54890,
+      56380
+    ],
+    [
+      29,
+      30,
+      56390,
+      57010
+    ],
+    [
+      30,
+      31,
+      57020,
+      58100
+    ],
+    [
+      31,
+      32,
+      58110,
+      60750
+    ]
+  ]
+}

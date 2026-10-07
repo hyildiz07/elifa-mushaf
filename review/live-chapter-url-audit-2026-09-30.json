@@ -1,0 +1,1391 @@
+{
+  "checkedAt": "2026-09-30T18:36:36.674Z",
+  "total": 1254,
+  "ok": 1254,
+  "failures": [],
+  "metadataByteMismatch": [
+    {
+      "file": "10-1.json",
+      "selected": "test-results/timings/10-1.json",
+      "metadataBytes": 614528,
+      "bytes": 554466
+    },
+    {
+      "file": "10-3.json",
+      "selected": "test-results/timings/10-3.json",
+      "metadataBytes": 45295744,
+      "bytes": 45223018
+    },
+    {
+      "file": "3-1.json",
+      "selected": "test-results/timings/3-1.json",
+      "metadataBytes": 927872,
+      "bytes": 838888
+    },
+    {
+      "file": "3-10.json",
+      "selected": "test-results/timings/3-10.json",
+      "metadataBytes": 41949312,
+      "bytes": 41950398
+    },
+    {
+      "file": "3-100.json",
+      "selected": "test-results/timings/3-100.json",
+      "metadataBytes": 1347712,
+      "bytes": 1256429
+    },
+    {
+      "file": "3-101.json",
+      "selected": "test-results/timings/3-101.json",
+      "metadataBytes": 1263744,
+      "bytes": 1170538
+    },
+    {
+      "file": "3-102.json",
+      "selected": "test-results/timings/3-102.json",
+      "metadataBytes": 1028224,
+      "bytes": 934181
+    },
+    {
+      "file": "3-103.json",
+      "selected": "test-results/timings/3-103.json",
+      "metadataBytes": 624768,
+      "bytes": 523538
+    },
+    {
+      "file": "3-104.json",
+      "selected": "test-results/timings/3-104.json",
+      "metadataBytes": 1007744,
+      "bytes": 901582
+    },
+    {
+      "file": "3-105.json",
+      "selected": "test-results/timings/3-105.json",
+      "metadataBytes": 850048,
+      "bytes": 744221
+    },
+    {
+      "file": "3-106.json",
+      "selected": "test-results/timings/3-106.json",
+      "metadataBytes": 733312,
+      "bytes": 631998
+    },
+    {
+      "file": "3-107.json",
+      "selected": "test-results/timings/3-107.json",
+      "metadataBytes": 835712,
+      "bytes": 739832
+    },
+    {
+      "file": "3-108.json",
+      "selected": "test-results/timings/3-108.json",
+      "metadataBytes": 415872,
+      "bytes": 317902
+    },
+    {
+      "file": "3-109.json",
+      "selected": "test-results/timings/3-109.json",
+      "metadataBytes": 743552,
+      "bytes": 643282
+    },
+    {
+      "file": "3-11.json",
+      "selected": "test-results/timings/3-11.json",
+      "metadataBytes": 45207680,
+      "bytes": 45129605
+    },
+    {
+      "file": "3-110.json",
+      "selected": "test-results/timings/3-110.json",
+      "metadataBytes": 645248,
+      "bytes": 547362
+    },
+    {
+      "file": "3-111.json",
+      "selected": "test-results/timings/3-111.json",
+      "metadataBytes": 716928,
+      "bytes": 616325
+    },
+    {
+      "file": "3-112.json",
+      "selected": "test-results/timings/3-112.json",
+      "metadataBytes": 424064,
+      "bytes": 309125
+    },
+    {
+      "file": "3-113.json",
+      "selected": "test-results/timings/3-113.json",
+      "metadataBytes": 624768,
+      "bytes": 514760
+    },
+    {
+      "file": "3-114.json",
+      "selected": "test-results/timings/3-114.json",
+      "metadataBytes": 737408,
+      "bytes": 628864
+    },
+    {
+      "file": "3-12.json",
+      "selected": "test-results/timings/3-12.json",
+      "metadataBytes": 39092352,
+      "bytes": 39058332
+    },
+    {
+      "file": "3-13.json",
+      "selected": "test-results/timings/3-13.json",
+      "metadataBytes": 21393536,
+      "bytes": 21312201
+    },
+    {
+      "file": "3-14.json",
+      "selected": "test-results/timings/3-14.json",
+      "metadataBytes": 18886784,
+      "bytes": 18755542
+    },
+    {
+      "file": "3-15.json",
+      "selected": "test-results/timings/3-15.json",
+      "metadataBytes": 15812736,
+      "bytes": 15767557
+    },
+    {
+      "file": "3-16.json",
+      "selected": "test-results/timings/3-16.json",
+      "metadataBytes": 41498752,
+      "bytes": 41475175
+    },
+    {
+      "file": "3-17.json",
+      "selected": "test-results/timings/3-17.json",
+      "metadataBytes": 36520064,
+      "bytes": 36469698
+    },
+    {
+      "file": "3-18.json",
+      "selected": "test-results/timings/3-18.json",
+      "metadataBytes": 34109568,
+      "bytes": 34020878
+    },
+    {
+      "file": "3-19.json",
+      "selected": "test-results/timings/3-19.json",
+      "metadataBytes": 22583424,
+      "bytes": 22524707
+    },
+    {
+      "file": "3-2.json",
+      "selected": "test-results/timings/3-2.json",
+      "metadataBytes": 87198694,
+      "bytes": 142852432
+    },
+    {
+      "file": "3-20.json",
+      "selected": "test-results/timings/3-20.json",
+      "metadataBytes": 27453568,
+      "bytes": 27430496
+    },
+    {
+      "file": "3-21.json",
+      "selected": "test-results/timings/3-21.json",
+      "metadataBytes": 27472000,
+      "bytes": 27432376
+    },
+    {
+      "file": "3-22.json",
+      "selected": "test-results/timings/3-22.json",
+      "metadataBytes": 28512384,
+      "bytes": 28407896
+    },
+    {
+      "file": "3-23.json",
+      "selected": "test-results/timings/3-23.json",
+      "metadataBytes": 23875712,
+      "bytes": 23851301
+    },
+    {
+      "file": "3-24.json",
+      "selected": "test-results/timings/3-24.json",
+      "metadataBytes": 31504512,
+      "bytes": 31428484
+    },
+    {
+      "file": "3-25.json",
+      "selected": "test-results/timings/3-25.json",
+      "metadataBytes": 20306048,
+      "bytes": 20239511
+    },
+    {
+      "file": "3-26.json",
+      "selected": "test-results/timings/3-26.json",
+      "metadataBytes": 28792960,
+      "bytes": 28775280
+    },
+    {
+      "file": "3-27.json",
+      "selected": "test-results/timings/3-27.json",
+      "metadataBytes": 17173812,
+      "bytes": 21703176
+    },
+    {
+      "file": "3-28.json",
+      "selected": "test-results/timings/3-28.json",
+      "metadataBytes": 21116840,
+      "bytes": 16347617
+    },
+    {
+      "file": "3-29.json",
+      "selected": "test-results/timings/3-29.json",
+      "metadataBytes": 21690496,
+      "bytes": 12885359
+    },
+    {
+      "file": "3-3.json",
+      "selected": "test-results/timings/3-3.json",
+      "metadataBytes": 79571072,
+      "bytes": 58539904
+    },
+    {
+      "file": "3-30.json",
+      "selected": "test-results/timings/3-30.json",
+      "metadataBytes": 17166464,
+      "bytes": 17138038
+    },
+    {
+      "file": "3-31.json",
+      "selected": "test-results/timings/3-31.json",
+      "metadataBytes": 12449920,
+      "bytes": 12375189
+    },
+    {
+      "file": "3-32.json",
+      "selected": "test-results/timings/3-32.json",
+      "metadataBytes": 8386688,
+      "bytes": 8309492
+    },
+    {
+      "file": "3-33.json",
+      "selected": "test-results/timings/3-33.json",
+      "metadataBytes": 34435200,
+      "bytes": 34379486
+    },
+    {
+      "file": "3-34.json",
+      "selected": "test-results/timings/3-34.json",
+      "metadataBytes": 20752512,
+      "bytes": 20686515
+    },
+    {
+      "file": "3-35.json",
+      "selected": "test-results/timings/3-35.json",
+      "metadataBytes": 16709760,
+      "bytes": 16620819
+    },
+    {
+      "file": "3-36.json",
+      "selected": "test-results/timings/3-36.json",
+      "metadataBytes": 18145408,
+      "bytes": 18020140
+    },
+    {
+      "file": "3-37.json",
+      "selected": "test-results/timings/3-37.json",
+      "metadataBytes": 20412544,
+      "bytes": 20425078
+    },
+    {
+      "file": "3-38.json",
+      "selected": "test-results/timings/3-38.json",
+      "metadataBytes": 16580736,
+      "bytes": 16544962
+    },
+    {
+      "file": "3-39.json",
+      "selected": "test-results/timings/3-39.json",
+      "metadataBytes": 27132032,
+      "bytes": 27074395
+    },
+    {
+      "file": "3-4.json",
+      "selected": "test-results/timings/3-4.json",
+      "metadataBytes": 87697536,
+      "bytes": 50806960
+    },
+    {
+      "file": "3-40.json",
+      "selected": "test-results/timings/3-40.json",
+      "metadataBytes": 28981376,
+      "bytes": 28918848
+    },
+    {
+      "file": "3-41.json",
+      "selected": "test-results/timings/3-41.json",
+      "metadataBytes": 18358400,
+      "bytes": 18215749
+    },
+    {
+      "file": "3-42.json",
+      "selected": "test-results/timings/3-42.json",
+      "metadataBytes": 21436544,
+      "bytes": 21371134
+    },
+    {
+      "file": "3-43.json",
+      "selected": "test-results/timings/3-43.json",
+      "metadataBytes": 23058560,
+      "bytes": 23017469
+    },
+    {
+      "file": "3-44.json",
+      "selected": "test-results/timings/3-44.json",
+      "metadataBytes": 9347200,
+      "bytes": 9282501
+    },
+    {
+      "file": "3-45.json",
+      "selected": "test-results/timings/3-45.json",
+      "metadataBytes": 11989120,
+      "bytes": 11908747
+    },
+    {
+      "file": "3-46.json",
+      "selected": "test-results/timings/3-46.json",
+      "metadataBytes": 15198336,
+      "bytes": 15116791
+    },
+    {
+      "file": "3-47.json",
+      "selected": "test-results/timings/3-47.json",
+      "metadataBytes": 13318272,
+      "bytes": 13236602
+    },
+    {
+      "file": "3-48.json",
+      "selected": "test-results/timings/3-48.json",
+      "metadataBytes": 9273472,
+      "bytes": 9213955
+    },
+    {
+      "file": "3-49.json",
+      "selected": "test-results/timings/3-49.json",
+      "metadataBytes": 5927040,
+      "bytes": 5853981
+    },
+    {
+      "file": "3-5.json",
+      "selected": "test-results/timings/3-5.json",
+      "metadataBytes": 64643200,
+      "bytes": 38326543
+    },
+    {
+      "file": "3-50.json",
+      "selected": "test-results/timings/3-50.json",
+      "metadataBytes": 10578048,
+      "bytes": 10501270
+    },
+    {
+      "file": "3-51.json",
+      "selected": "test-results/timings/3-51.json",
+      "metadataBytes": 9715840,
+      "bytes": 9644245
+    },
+    {
+      "file": "3-52.json",
+      "selected": "test-results/timings/3-52.json",
+      "metadataBytes": 8110208,
+      "bytes": 8032385
+    },
+    {
+      "file": "3-53.json",
+      "selected": "test-results/timings/3-53.json",
+      "metadataBytes": 9539712,
+      "bytes": 9469330
+    },
+    {
+      "file": "3-54.json",
+      "selected": "test-results/timings/3-54.json",
+      "metadataBytes": 8325248,
+      "bytes": 8270618
+    },
+    {
+      "file": "3-55.json",
+      "selected": "test-results/timings/3-55.json",
+      "metadataBytes": 11401344,
+      "bytes": 11361428
+    },
+    {
+      "file": "3-56.json",
+      "selected": "test-results/timings/3-56.json",
+      "metadataBytes": 9097344,
+      "bytes": 9060564
+    },
+    {
+      "file": "3-57.json",
+      "selected": "test-results/timings/3-57.json",
+      "metadataBytes": 12669056,
+      "bytes": 12578943
+    },
+    {
+      "file": "3-58.json",
+      "selected": "test-results/timings/3-58.json",
+      "metadataBytes": 9367593,
+      "bytes": 11744489
+    },
+    {
+      "file": "3-59.json",
+      "selected": "test-results/timings/3-59.json",
+      "metadataBytes": 11180160,
+      "bytes": 11094353
+    },
+    {
+      "file": "3-6.json",
+      "selected": "test-results/timings/3-6.json",
+      "metadataBytes": 67815552,
+      "bytes": 67824164
+    },
+    {
+      "file": "3-60.json",
+      "selected": "test-results/timings/3-60.json",
+      "metadataBytes": 8827008,
+      "bytes": 8734554
+    },
+    {
+      "file": "3-61.json",
+      "selected": "test-results/timings/3-61.json",
+      "metadataBytes": 5589120,
+      "bytes": 5497669
+    },
+    {
+      "file": "3-62.json",
+      "selected": "test-results/timings/3-62.json",
+      "metadataBytes": 4368512,
+      "bytes": 4273886
+    },
+    {
+      "file": "3-63.json",
+      "selected": "test-results/timings/3-63.json",
+      "metadataBytes": 4769920,
+      "bytes": 4670739
+    },
+    {
+      "file": "3-64.json",
+      "selected": "test-results/timings/3-64.json",
+      "metadataBytes": 5898368,
+      "bytes": 5806752
+    },
+    {
+      "file": "3-65.json",
+      "selected": "test-results/timings/3-65.json",
+      "metadataBytes": 6918272,
+      "bytes": 6822392
+    },
+    {
+      "file": "3-66.json",
+      "selected": "test-results/timings/3-66.json",
+      "metadataBytes": 6766720,
+      "bytes": 6673181
+    },
+    {
+      "file": "3-67.json",
+      "selected": "test-results/timings/3-67.json",
+      "metadataBytes": 8589440,
+      "bytes": 8506977
+    },
+    {
+      "file": "3-68.json",
+      "selected": "test-results/timings/3-68.json",
+      "metadataBytes": 7932032,
+      "bytes": 7864363
+    },
+    {
+      "file": "3-69.json",
+      "selected": "test-results/timings/3-69.json",
+      "metadataBytes": 7815296,
+      "bytes": 7749007
+    },
+    {
+      "file": "3-7.json",
+      "selected": "test-results/timings/3-7.json",
+      "metadataBytes": 77170816,
+      "bytes": 77127929
+    },
+    {
+      "file": "3-70.json",
+      "selected": "test-results/timings/3-70.json",
+      "metadataBytes": 6967424,
+      "bytes": 6904522
+    },
+    {
+      "file": "3-71.json",
+      "selected": "test-results/timings/3-71.json",
+      "metadataBytes": 6094976,
+      "bytes": 6011761
+    },
+    {
+      "file": "3-72.json",
+      "selected": "test-results/timings/3-72.json",
+      "metadataBytes": 6482048,
+      "bytes": 6394190
+    },
+    {
+      "file": "3-73.json",
+      "selected": "test-results/timings/3-73.json",
+      "metadataBytes": 4900992,
+      "bytes": 4810546
+    },
+    {
+      "file": "3-74.json",
+      "selected": "test-results/timings/3-74.json",
+      "metadataBytes": 6174848,
+      "bytes": 6105799
+    },
+    {
+      "file": "3-75.json",
+      "selected": "test-results/timings/3-75.json",
+      "metadataBytes": 3854464,
+      "bytes": 3779858
+    },
+    {
+      "file": "3-76.json",
+      "selected": "test-results/timings/3-76.json",
+      "metadataBytes": 6021248,
+      "bytes": 5924614
+    },
+    {
+      "file": "3-77.json",
+      "selected": "test-results/timings/3-77.json",
+      "metadataBytes": 4987008,
+      "bytes": 4916494
+    },
+    {
+      "file": "3-78.json",
+      "selected": "test-results/timings/3-78.json",
+      "metadataBytes": 5075072,
+      "bytes": 4992984
+    },
+    {
+      "file": "3-79.json",
+      "selected": "test-results/timings/3-79.json",
+      "metadataBytes": 4309120,
+      "bytes": 4227491
+    },
+    {
+      "file": "3-8.json",
+      "selected": "test-results/timings/3-8.json",
+      "metadataBytes": 28856448,
+      "bytes": 28820418
+    },
+    {
+      "file": "3-80.json",
+      "selected": "test-results/timings/3-80.json",
+      "metadataBytes": 3575936,
+      "bytes": 3492722
+    },
+    {
+      "file": "3-81.json",
+      "selected": "test-results/timings/3-81.json",
+      "metadataBytes": 2455680,
+      "bytes": 2371128
+    },
+    {
+      "file": "3-82.json",
+      "selected": "test-results/timings/3-82.json",
+      "metadataBytes": 1839232,
+      "bytes": 1743561
+    },
+    {
+      "file": "3-83.json",
+      "selected": "test-results/timings/3-83.json",
+      "metadataBytes": 4079744,
+      "bytes": 4010571
+    },
+    {
+      "file": "3-84.json",
+      "selected": "test-results/timings/3-84.json",
+      "metadataBytes": 2562176,
+      "bytes": 2482092
+    },
+    {
+      "file": "3-85.json",
+      "selected": "test-results/timings/3-85.json",
+      "metadataBytes": 2642048,
+      "bytes": 2562345
+    },
+    {
+      "file": "3-86.json",
+      "selected": "test-results/timings/3-86.json",
+      "metadataBytes": 1683584,
+      "bytes": 1597482
+    },
+    {
+      "file": "3-87.json",
+      "selected": "test-results/timings/3-87.json",
+      "metadataBytes": 1747072,
+      "bytes": 1662059
+    },
+    {
+      "file": "3-88.json",
+      "selected": "test-results/timings/3-88.json",
+      "metadataBytes": 2437248,
+      "bytes": 2356080
+    },
+    {
+      "file": "3-89.json",
+      "selected": "test-results/timings/3-89.json",
+      "metadataBytes": 3494016,
+      "bytes": 3417487
+    },
+    {
+      "file": "3-9.json",
+      "selected": "test-results/timings/3-9.json",
+      "metadataBytes": 58914944,
+      "bytes": 58897806
+    },
+    {
+      "file": "3-90.json",
+      "selected": "test-results/timings/3-90.json",
+      "metadataBytes": 1915008,
+      "bytes": 1830704
+    },
+    {
+      "file": "3-91.json",
+      "selected": "test-results/timings/3-91.json",
+      "metadataBytes": 1462400,
+      "bytes": 1364890
+    },
+    {
+      "file": "3-92.json",
+      "selected": "test-results/timings/3-92.json",
+      "metadataBytes": 1859712,
+      "bytes": 1769891
+    },
+    {
+      "file": "3-93.json",
+      "selected": "test-results/timings/3-93.json",
+      "metadataBytes": 1101952,
+      "bytes": 1015059
+    },
+    {
+      "file": "3-94.json",
+      "selected": "test-results/timings/3-94.json",
+      "metadataBytes": 637056,
+      "bytes": 545480
+    },
+    {
+      "file": "3-95.json",
+      "selected": "test-results/timings/3-95.json",
+      "metadataBytes": 917632,
+      "bytes": 824469
+    },
+    {
+      "file": "3-96.json",
+      "selected": "test-results/timings/3-96.json",
+      "metadataBytes": 1699968,
+      "bytes": 1611904
+    },
+    {
+      "file": "3-97.json",
+      "selected": "test-results/timings/3-97.json",
+      "metadataBytes": 780416,
+      "bytes": 687168
+    },
+    {
+      "file": "3-98.json",
+      "selected": "test-results/timings/3-98.json",
+      "metadataBytes": 2246784,
+      "bytes": 2143548
+    },
+    {
+      "file": "3-99.json",
+      "selected": "test-results/timings/3-99.json",
+      "metadataBytes": 1206400,
+      "bytes": 1111607
+    },
+    {
+      "file": "5-1.json",
+      "selected": "test-results/timings/5-1.json",
+      "metadataBytes": 1163392,
+      "bytes": 608383
+    },
+    {
+      "file": "5-10.json",
+      "selected": "test-results/timings/5-10.json",
+      "metadataBytes": 51734656,
+      "bytes": 34325986
+    },
+    {
+      "file": "5-100.json",
+      "selected": "test-results/timings/5-100.json",
+      "metadataBytes": 1411200,
+      "bytes": 766790
+    },
+    {
+      "file": "5-101.json",
+      "selected": "test-results/timings/5-101.json",
+      "metadataBytes": 1296512,
+      "bytes": 681108
+    },
+    {
+      "file": "5-102.json",
+      "selected": "test-results/timings/5-102.json",
+      "metadataBytes": 1177728,
+      "bytes": 617996
+    },
+    {
+      "file": "5-103.json",
+      "selected": "test-results/timings/5-103.json",
+      "metadataBytes": 686208,
+      "bytes": 287808
+    },
+    {
+      "file": "5-104.json",
+      "selected": "test-results/timings/5-104.json",
+      "metadataBytes": 1167488,
+      "bytes": 597516
+    },
+    {
+      "file": "5-105.json",
+      "selected": "test-results/timings/5-105.json",
+      "metadataBytes": 936064,
+      "bytes": 446215
+    },
+    {
+      "file": "5-106.json",
+      "selected": "test-results/timings/5-106.json",
+      "metadataBytes": 845952,
+      "bytes": 383521
+    },
+    {
+      "file": "5-107.json",
+      "selected": "test-results/timings/5-107.json",
+      "metadataBytes": 999552,
+      "bytes": 484249
+    },
+    {
+      "file": "5-108.json",
+      "selected": "test-results/timings/5-108.json",
+      "metadataBytes": 608384,
+      "bytes": 225533
+    },
+    {
+      "file": "5-109.json",
+      "selected": "test-results/timings/5-109.json",
+      "metadataBytes": 991360,
+      "bytes": 495116
+    },
+    {
+      "file": "5-11.json",
+      "selected": "test-results/timings/5-11.json",
+      "metadataBytes": 52951168,
+      "bytes": 35119691
+    },
+    {
+      "file": "5-110.json",
+      "selected": "test-results/timings/5-110.json",
+      "metadataBytes": 794752,
+      "bytes": 351756
+    },
+    {
+      "file": "5-111.json",
+      "selected": "test-results/timings/5-111.json",
+      "metadataBytes": 850048,
+      "bytes": 390626
+    },
+    {
+      "file": "5-112.json",
+      "selected": "test-results/timings/5-112.json",
+      "metadataBytes": 585856,
+      "bytes": 206724
+    },
+    {
+      "file": "5-113.json",
+      "selected": "test-results/timings/5-113.json",
+      "metadataBytes": 817280,
+      "bytes": 360533
+    },
+    {
+      "file": "5-114.json",
+      "selected": "test-results/timings/5-114.json",
+      "metadataBytes": 1032320,
+      "bytes": 478398
+    },
+    {
+      "file": "5-12.json",
+      "selected": "test-results/timings/5-12.json",
+      "metadataBytes": 48595072,
+      "bytes": 32235773
+    },
+    {
+      "file": "5-13.json",
+      "selected": "test-results/timings/5-13.json",
+      "metadataBytes": 24576128,
+      "bytes": 16188648
+    },
+    {
+      "file": "5-14.json",
+      "selected": "test-results/timings/5-14.json",
+      "metadataBytes": 24486016,
+      "bytes": 16141418
+    },
+    {
+      "file": "5-15.json",
+      "selected": "test-results/timings/5-15.json",
+      "metadataBytes": 19236992,
+      "bytes": 12670685
+    },
+    {
+      "file": "5-16.json",
+      "selected": "test-results/timings/5-16.json",
+      "metadataBytes": 35883136,
+      "bytes": 36068040
+    },
+    {
+      "file": "5-17.json",
+      "selected": "test-results/timings/5-17.json",
+      "metadataBytes": 42541184,
+      "bytes": 28204974
+    },
+    {
+      "file": "5-18.json",
+      "selected": "test-results/timings/5-18.json",
+      "metadataBytes": 41490560,
+      "bytes": 27478979
+    },
+    {
+      "file": "5-19.json",
+      "selected": "test-results/timings/5-19.json",
+      "metadataBytes": 26634368,
+      "bytes": 17526117
+    },
+    {
+      "file": "5-2.json",
+      "selected": "test-results/timings/5-2.json",
+      "metadataBytes": 171346048,
+      "bytes": 114163714
+    },
+    {
+      "file": "5-20.json",
+      "selected": "test-results/timings/5-20.json",
+      "metadataBytes": 36284544,
+      "bytes": 23998633
+    },
+    {
+      "file": "5-21.json",
+      "selected": "test-results/timings/5-21.json",
+      "metadataBytes": 34117760,
+      "bytes": 22598888
+    },
+    {
+      "file": "5-22.json",
+      "selected": "test-results/timings/5-22.json",
+      "metadataBytes": 36563072,
+      "bytes": 24144083
+    },
+    {
+      "file": "5-23.json",
+      "selected": "test-results/timings/5-23.json",
+      "metadataBytes": 31479936,
+      "bytes": 20762375
+    },
+    {
+      "file": "5-24.json",
+      "selected": "test-results/timings/5-24.json",
+      "metadataBytes": 27076929,
+      "bytes": 26885059
+    },
+    {
+      "file": "5-25.json",
+      "selected": "test-results/timings/5-25.json",
+      "metadataBytes": 26728576,
+      "bytes": 17628935
+    },
+    {
+      "file": "5-26.json",
+      "selected": "test-results/timings/5-26.json",
+      "metadataBytes": 38328448,
+      "bytes": 25367031
+    },
+    {
+      "file": "5-27.json",
+      "selected": "test-results/timings/5-27.json",
+      "metadataBytes": 35043456,
+      "bytes": 23160625
+    },
+    {
+      "file": "5-28.json",
+      "selected": "test-results/timings/5-28.json",
+      "metadataBytes": 41472128,
+      "bytes": 27469366
+    },
+    {
+      "file": "5-29.json",
+      "selected": "test-results/timings/5-29.json",
+      "metadataBytes": 29169792,
+      "bytes": 19274440
+    },
+    {
+      "file": "5-3.json",
+      "selected": "test-results/timings/5-3.json",
+      "metadataBytes": 96655488,
+      "bytes": 64370564
+    },
+    {
+      "file": "5-30.json",
+      "selected": "test-results/timings/5-30.json",
+      "metadataBytes": 22999168,
+      "bytes": 15137062
+    },
+    {
+      "file": "5-31.json",
+      "selected": "test-results/timings/5-31.json",
+      "metadataBytes": 10205170,
+      "bytes": 10021660
+    },
+    {
+      "file": "5-32.json",
+      "selected": "test-results/timings/5-32.json",
+      "metadataBytes": 11509888,
+      "bytes": 7478378
+    },
+    {
+      "file": "5-33.json",
+      "selected": "test-results/timings/5-33.json",
+      "metadataBytes": 36872320,
+      "bytes": 24409905
+    },
+    {
+      "file": "5-34.json",
+      "selected": "test-results/timings/5-34.json",
+      "metadataBytes": 23476352,
+      "bytes": 15456801
+    },
+    {
+      "file": "5-35.json",
+      "selected": "test-results/timings/5-35.json",
+      "metadataBytes": 22749312,
+      "bytes": 14987851
+    },
+    {
+      "file": "5-36.json",
+      "selected": "test-results/timings/5-36.json",
+      "metadataBytes": 20740224,
+      "bytes": 13652889
+    },
+    {
+      "file": "5-37.json",
+      "selected": "test-results/timings/5-37.json",
+      "metadataBytes": 24782976,
+      "bytes": 16362937
+    },
+    {
+      "file": "5-38.json",
+      "selected": "test-results/timings/5-38.json",
+      "metadataBytes": 21895296,
+      "bytes": 14412321
+    },
+    {
+      "file": "5-39.json",
+      "selected": "test-results/timings/5-39.json",
+      "metadataBytes": 32186496,
+      "bytes": 21261000
+    },
+    {
+      "file": "5-4.json",
+      "selected": "test-results/timings/5-4.json",
+      "metadataBytes": 105355392,
+      "bytes": 70174764
+    },
+    {
+      "file": "5-40.json",
+      "selected": "test-results/timings/5-40.json",
+      "metadataBytes": 34961536,
+      "bytes": 23150176
+    },
+    {
+      "file": "5-41.json",
+      "selected": "test-results/timings/5-41.json",
+      "metadataBytes": 23779456,
+      "bytes": 15662019
+    },
+    {
+      "file": "5-42.json",
+      "selected": "test-results/timings/5-42.json",
+      "metadataBytes": 23224448,
+      "bytes": 15299648
+    },
+    {
+      "file": "5-43.json",
+      "selected": "test-results/timings/5-43.json",
+      "metadataBytes": 24930432,
+      "bytes": 16435244
+    },
+    {
+      "file": "5-44.json",
+      "selected": "test-results/timings/5-44.json",
+      "metadataBytes": 11700352,
+      "bytes": 7620484
+    },
+    {
+      "file": "5-45.json",
+      "selected": "test-results/timings/5-45.json",
+      "metadataBytes": 13971584,
+      "bytes": 9143946
+    },
+    {
+      "file": "5-46.json",
+      "selected": "test-results/timings/5-46.json",
+      "metadataBytes": 17145984,
+      "bytes": 11250878
+    },
+    {
+      "file": "5-47.json",
+      "selected": "test-results/timings/5-47.json",
+      "metadataBytes": 15298688,
+      "bytes": 10019152
+    },
+    {
+      "file": "5-48.json",
+      "selected": "test-results/timings/5-48.json",
+      "metadataBytes": 15933568,
+      "bytes": 10426244
+    },
+    {
+      "file": "5-49.json",
+      "selected": "test-results/timings/5-49.json",
+      "metadataBytes": 10020992,
+      "bytes": 6491577
+    },
+    {
+      "file": "5-5.json",
+      "selected": "test-results/timings/5-5.json",
+      "metadataBytes": 78850176,
+      "bytes": 52493836
+    },
+    {
+      "file": "5-50.json",
+      "selected": "test-results/timings/5-50.json",
+      "metadataBytes": 11067520,
+      "bytes": 7216318
+    },
+    {
+      "file": "5-51.json",
+      "selected": "test-results/timings/5-51.json",
+      "metadataBytes": 10510464,
+      "bytes": 6817585
+    },
+    {
+      "file": "5-52.json",
+      "selected": "test-results/timings/5-52.json",
+      "metadataBytes": 8974464,
+      "bytes": 5792749
+    },
+    {
+      "file": "5-53.json",
+      "selected": "test-results/timings/5-53.json",
+      "metadataBytes": 9613440,
+      "bytes": 6217395
+    },
+    {
+      "file": "5-54.json",
+      "selected": "test-results/timings/5-54.json",
+      "metadataBytes": 9609344,
+      "bytes": 6217813
+    },
+    {
+      "file": "5-55.json",
+      "selected": "test-results/timings/5-55.json",
+      "metadataBytes": 12822656,
+      "bytes": 8366124
+    },
+    {
+      "file": "5-56.json",
+      "selected": "test-results/timings/5-56.json",
+      "metadataBytes": 12918912,
+      "bytes": 8435505
+    },
+    {
+      "file": "5-57.json",
+      "selected": "test-results/timings/5-57.json",
+      "metadataBytes": 16412800,
+      "bytes": 10776912
+    },
+    {
+      "file": "5-58.json",
+      "selected": "test-results/timings/5-58.json",
+      "metadataBytes": 13518976,
+      "bytes": 8828386
+    },
+    {
+      "file": "5-59.json",
+      "selected": "test-results/timings/5-59.json",
+      "metadataBytes": 12972160,
+      "bytes": 8467688
+    },
+    {
+      "file": "5-6.json",
+      "selected": "test-results/timings/5-6.json",
+      "metadataBytes": 86069376,
+      "bytes": 57215939
+    },
+    {
+      "file": "5-60.json",
+      "selected": "test-results/timings/5-60.json",
+      "metadataBytes": 10107008,
+      "bytes": 6554270
+    },
+    {
+      "file": "5-61.json",
+      "selected": "test-results/timings/5-61.json",
+      "metadataBytes": 6158464,
+      "bytes": 3912350
+    },
+    {
+      "file": "5-62.json",
+      "selected": "test-results/timings/5-62.json",
+      "metadataBytes": 4898944,
+      "bytes": 3088135
+    },
+    {
+      "file": "5-63.json",
+      "selected": "test-results/timings/5-63.json",
+      "metadataBytes": 5435520,
+      "bytes": 3440475
+    },
+    {
+      "file": "5-64.json",
+      "selected": "test-results/timings/5-64.json",
+      "metadataBytes": 6695040,
+      "bytes": 4282662
+    },
+    {
+      "file": "5-65.json",
+      "selected": "test-results/timings/5-65.json",
+      "metadataBytes": 7889024,
+      "bytes": 5065500
+    },
+    {
+      "file": "5-66.json",
+      "selected": "test-results/timings/5-66.json",
+      "metadataBytes": 7360640,
+      "bytes": 4739074
+    },
+    {
+      "file": "5-67.json",
+      "selected": "test-results/timings/5-67.json",
+      "metadataBytes": 8745088,
+      "bytes": 5650225
+    },
+    {
+      "file": "5-68.json",
+      "selected": "test-results/timings/5-68.json",
+      "metadataBytes": 8591488,
+      "bytes": 5547407
+    },
+    {
+      "file": "5-69.json",
+      "selected": "test-results/timings/5-69.json",
+      "metadataBytes": 7932032,
+      "bytes": 5098519
+    },
+    {
+      "file": "5-7.json",
+      "selected": "test-results/timings/5-7.json",
+      "metadataBytes": 96465024,
+      "bytes": 64159495
+    },
+    {
+      "file": "5-70.json",
+      "selected": "test-results/timings/5-70.json",
+      "metadataBytes": 6393984,
+      "bytes": 4075773
+    },
+    {
+      "file": "5-71.json",
+      "selected": "test-results/timings/5-71.json",
+      "metadataBytes": 6092928,
+      "bytes": 3892706
+    },
+    {
+      "file": "5-72.json",
+      "selected": "test-results/timings/5-72.json",
+      "metadataBytes": 7755904,
+      "bytes": 4992775
+    },
+    {
+      "file": "5-73.json",
+      "selected": "test-results/timings/5-73.json",
+      "metadataBytes": 5566592,
+      "bytes": 3539949
+    },
+    {
+      "file": "5-74.json",
+      "selected": "test-results/timings/5-74.json",
+      "metadataBytes": 6598784,
+      "bytes": 4216625
+    },
+    {
+      "file": "5-75.json",
+      "selected": "test-results/timings/5-75.json",
+      "metadataBytes": 4327552,
+      "bytes": 2711972
+    },
+    {
+      "file": "5-76.json",
+      "selected": "test-results/timings/5-76.json",
+      "metadataBytes": 7096448,
+      "bytes": 4540961
+    },
+    {
+      "file": "5-77.json",
+      "selected": "test-results/timings/5-77.json",
+      "metadataBytes": 5703808,
+      "bytes": 3662411
+    },
+    {
+      "file": "5-78.json",
+      "selected": "test-results/timings/5-78.json",
+      "metadataBytes": 5705856,
+      "bytes": 3560429
+    },
+    {
+      "file": "5-79.json",
+      "selected": "test-results/timings/5-79.json",
+      "metadataBytes": 5109888,
+      "bytes": 3240272
+    },
+    {
+      "file": "5-8.json",
+      "selected": "test-results/timings/5-8.json",
+      "metadataBytes": 36489344,
+      "bytes": 24189640
+    },
+    {
+      "file": "5-80.json",
+      "selected": "test-results/timings/5-80.json",
+      "metadataBytes": 3995776,
+      "bytes": 2484184
+    },
+    {
+      "file": "5-81.json",
+      "selected": "test-results/timings/5-81.json",
+      "metadataBytes": 2947200,
+      "bytes": 1797059
+    },
+    {
+      "file": "5-82.json",
+      "selected": "test-results/timings/5-82.json",
+      "metadataBytes": 2365568,
+      "bytes": 1390803
+    },
+    {
+      "file": "5-83.json",
+      "selected": "test-results/timings/5-83.json",
+      "metadataBytes": 5060736,
+      "bytes": 3191789
+    },
+    {
+      "file": "5-84.json",
+      "selected": "test-results/timings/5-84.json",
+      "metadataBytes": 3010688,
+      "bytes": 1838019
+    },
+    {
+      "file": "5-85.json",
+      "selected": "test-results/timings/5-85.json",
+      "metadataBytes": 3133568,
+      "bytes": 1909908
+    },
+    {
+      "file": "5-86.json",
+      "selected": "test-results/timings/5-86.json",
+      "metadataBytes": 1861760,
+      "bytes": 1068974
+    },
+    {
+      "file": "5-87.json",
+      "selected": "test-results/timings/5-87.json",
+      "metadataBytes": 2140288,
+      "bytes": 1259146
+    },
+    {
+      "file": "5-88.json",
+      "selected": "test-results/timings/5-88.json",
+      "metadataBytes": 2670720,
+      "bytes": 1599782
+    },
+    {
+      "file": "5-89.json",
+      "selected": "test-results/timings/5-89.json",
+      "metadataBytes": 3977344,
+      "bytes": 2482512
+    },
+    {
+      "file": "5-9.json",
+      "selected": "test-results/timings/5-9.json",
+      "metadataBytes": 71649408,
+      "bytes": 47675603
+    },
+    {
+      "file": "5-90.json",
+      "selected": "test-results/timings/5-90.json",
+      "metadataBytes": 2087040,
+      "bytes": 1208155
+    },
+    {
+      "file": "5-91.json",
+      "selected": "test-results/timings/5-91.json",
+      "metadataBytes": 1728640,
+      "bytes": 968664
+    },
+    {
+      "file": "5-92.json",
+      "selected": "test-results/timings/5-92.json",
+      "metadataBytes": 2158720,
+      "bytes": 1256220
+    },
+    {
+      "file": "5-93.json",
+      "selected": "test-results/timings/5-93.json",
+      "metadataBytes": 1360000,
+      "bytes": 735443
+    },
+    {
+      "file": "5-94.json",
+      "selected": "test-results/timings/5-94.json",
+      "metadataBytes": 940160,
+      "bytes": 444543
+    },
+    {
+      "file": "5-95.json",
+      "selected": "test-results/timings/5-95.json",
+      "metadataBytes": 1323136,
+      "bytes": 704096
+    },
+    {
+      "file": "5-96.json",
+      "selected": "test-results/timings/5-96.json",
+      "metadataBytes": 2091136,
+      "bytes": 1215260
+    },
+    {
+      "file": "5-97.json",
+      "selected": "test-results/timings/5-97.json",
+      "metadataBytes": 993408,
+      "bytes": 481742
+    },
+    {
+      "file": "5-98.json",
+      "selected": "test-results/timings/5-98.json",
+      "metadataBytes": 2685056,
+      "bytes": 1625696
+    },
+    {
+      "file": "5-99.json",
+      "selected": "test-results/timings/5-99.json",
+      "metadataBytes": 1316992,
+      "bytes": 699498
+    }
+  ],
+  "byStatus": {
+    "200": 1254
+  }
+}

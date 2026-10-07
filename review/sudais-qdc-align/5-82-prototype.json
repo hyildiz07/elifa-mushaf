@@ -1,0 +1,288 @@
+{
+  "status": "review-only-not-for-production",
+  "verse": "5:82",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/5.mp3",
+  "source_sha256": "16fad03b000d69492da95e9f970f220ae097a6693815917924b43f1730ae8cdb",
+  "excerpt_sha256": "71ff1966eb165720bda5564b960d04857c7a56b3925ef4139ce4263003339d47",
+  "excerpt_from_ms": 1852870,
+  "excerpt_to_ms": 1919170,
+  "models": [
+    "Large",
+    "Base"
+  ],
+  "model_agreement_max_ms": 20,
+  "canonical_positions": 26,
+  "spoken_positions": 27,
+  "repeated_position": 23,
+  "model_verse_start_ms": 1867803,
+  "model_last_word_end_ms": 1897033,
+  "model_next_verse_start_ms": 1897510,
+  "terminal_gap_ms": 477,
+  "terminal_minimum_20ms_energy": {
+    "at_ms": 1897312,
+    "rms": 0.05823
+  },
+  "proposed_phrase_groups": [
+    [
+      1,
+      9
+    ],
+    [
+      10,
+      18
+    ],
+    [
+      19,
+      23
+    ],
+    [
+      23,
+      26
+    ]
+  ],
+  "note": "The final group contains the second occurrence of word 23. The first two groups have nine words, so this is not eight-word compliance.",
+  "words": [
+    {
+      "key": "5:82:1",
+      "position": 1,
+      "from_ms": 1867803,
+      "to_ms": 1869223
+    },
+    {
+      "key": "5:82:2",
+      "position": 2,
+      "from_ms": 1869223,
+      "to_ms": 1869973
+    },
+    {
+      "key": "5:82:3",
+      "position": 3,
+      "from_ms": 1869973,
+      "to_ms": 1870953
+    },
+    {
+      "key": "5:82:4",
+      "position": 4,
+      "from_ms": 1870953,
+      "to_ms": 1871903
+    },
+    {
+      "key": "5:82:5",
+      "position": 5,
+      "from_ms": 1871903,
+      "to_ms": 1873093
+    },
+    {
+      "key": "5:82:6",
+      "position": 6,
+      "from_ms": 1873093,
+      "to_ms": 1873713
+    },
+    {
+      "key": "5:82:7",
+      "position": 7,
+      "from_ms": 1873713,
+      "to_ms": 1874623
+    },
+    {
+      "key": "5:82:8",
+      "position": 8,
+      "from_ms": 1874623,
+      "to_ms": 1875533
+    },
+    {
+      "key": "5:82:9",
+      "position": 9,
+      "from_ms": 1875533,
+      "to_ms": 1876533
+    },
+    {
+      "key": "5:82:10",
+      "position": 10,
+      "from_ms": 1877260,
+      "to_ms": 1878650
+    },
+    {
+      "key": "5:82:11",
+      "position": 11,
+      "from_ms": 1878650,
+      "to_ms": 1879980
+    },
+    {
+      "key": "5:82:12",
+      "position": 12,
+      "from_ms": 1879980,
+      "to_ms": 1880740
+    },
+    {
+      "key": "5:82:13",
+      "position": 13,
+      "from_ms": 1880740,
+      "to_ms": 1881880
+    },
+    {
+      "key": "5:82:14",
+      "position": 14,
+      "from_ms": 1881880,
+      "to_ms": 1882540
+    },
+    {
+      "key": "5:82:15",
+      "position": 15,
+      "from_ms": 1882540,
+      "to_ms": 1883380
+    },
+    {
+      "key": "5:82:16",
+      "position": 16,
+      "from_ms": 1883380,
+      "to_ms": 1884300
+    },
+    {
+      "key": "5:82:17",
+      "position": 17,
+      "from_ms": 1884300,
+      "to_ms": 1885120
+    },
+    {
+      "key": "5:82:18",
+      "position": 18,
+      "from_ms": 1885120,
+      "to_ms": 1886060
+    },
+    {
+      "key": "5:82:19",
+      "position": 19,
+      "from_ms": 1886627,
+      "to_ms": 1887477
+    },
+    {
+      "key": "5:82:20",
+      "position": 20,
+      "from_ms": 1887477,
+      "to_ms": 1888277
+    },
+    {
+      "key": "5:82:21",
+      "position": 21,
+      "from_ms": 1888277,
+      "to_ms": 1888887
+    },
+    {
+      "key": "5:82:22",
+      "position": 22,
+      "from_ms": 1888887,
+      "to_ms": 1890217
+    },
+    {
+      "key": "5:82:23",
+      "position": 23,
+      "from_ms": 1890217,
+      "to_ms": 1891647
+    },
+    {
+      "key": "5:82:23",
+      "position": 23,
+      "from_ms": 1892083,
+      "to_ms": 1893543
+    },
+    {
+      "key": "5:82:24",
+      "position": 24,
+      "from_ms": 1893543,
+      "to_ms": 1894693
+    },
+    {
+      "key": "5:82:25",
+      "position": 25,
+      "from_ms": 1894693,
+      "to_ms": 1895133
+    },
+    {
+      "key": "5:82:26",
+      "position": 26,
+      "from_ms": 1895133,
+      "to_ms": 1897033
+    }
+  ],
+  "cuts": [
+    {
+      "after_word": 7,
+      "left_end_ms": 1874623,
+      "right_start_ms": 1874623,
+      "model_gap_ms": 0,
+      "midpoint_ms": 1874623,
+      "minimum_20ms_energy": {
+        "at_ms": 1874703,
+        "rms": 0.46828
+      },
+      "status": "candidate-needs-two-sided-audition"
+    },
+    {
+      "after_word": 9,
+      "left_end_ms": 1876533,
+      "right_start_ms": 1877260,
+      "model_gap_ms": 727,
+      "midpoint_ms": 1876897,
+      "minimum_20ms_energy": {
+        "at_ms": 1877013,
+        "rms": 0.07782
+      },
+      "status": "candidate-needs-two-sided-audition"
+    },
+    {
+      "after_word": 14,
+      "left_end_ms": 1882540,
+      "right_start_ms": 1882540,
+      "model_gap_ms": 0,
+      "midpoint_ms": 1882540,
+      "minimum_20ms_energy": {
+        "at_ms": 1882560,
+        "rms": 0.33405
+      },
+      "status": "candidate-needs-two-sided-audition"
+    },
+    {
+      "after_word": 18,
+      "left_end_ms": 1886060,
+      "right_start_ms": 1886627,
+      "model_gap_ms": 567,
+      "midpoint_ms": 1886344,
+      "minimum_20ms_energy": {
+        "at_ms": 1886500,
+        "rms": 0.10819
+      },
+      "status": "candidate-needs-two-sided-audition"
+    },
+    {
+      "after_word": 20,
+      "left_end_ms": 1888277,
+      "right_start_ms": 1888277,
+      "model_gap_ms": 0,
+      "midpoint_ms": 1888277,
+      "minimum_20ms_energy": {
+        "at_ms": 1888257,
+        "rms": 0.29409
+      },
+      "status": "candidate-needs-two-sided-audition"
+    },
+    {
+      "after_word": 23,
+      "left_end_ms": 1891647,
+      "right_start_ms": 1892083,
+      "model_gap_ms": 436,
+      "midpoint_ms": 1891865,
+      "minimum_20ms_energy": {
+        "at_ms": 1891807,
+        "rms": 0.0974
+      },
+      "status": "candidate-needs-two-sided-audition"
+    }
+  ],
+  "blockers": [
+    "Every proposed cut needs two-sided human listening for phoneme completion and no leakage.",
+    "The repeated 23rd word must be confirmed by listening; both ASR models share an alignment family.",
+    "The full verse end and next verse start must be listened to before any normal/repeat playback change.",
+    "Chapter-wide QDC timing is still quarantined."
+  ]
+}

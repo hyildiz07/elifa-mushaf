@@ -1,0 +1,212 @@
+{
+  "de": {
+    "Hesap": "Konto",
+    "Giriş yap": "Anmelden",
+    "Kayıt ol": "Registrieren",
+    "Hesabımı sil": "Mein Konto löschen",
+    "Çıkış yap": "Abmelden",
+    "Şifre": "Passwort",
+    "E-posta": "E-Mail",
+    "Şifremi unuttum": "Passwort vergessen",
+    "Hesabın, eşitlenen kayıtların ve bulut yedeklerin silinir. Bu cihazdaki kayıtlar ve Birlikte katılımların korunur. İşlem geri alınamaz.": "Dein Konto, deine synchronisierten Einträge und deine Cloud-Backups werden gelöscht. Die Einträge auf diesem Gerät und deine Teilnahme an Birlikte bleiben erhalten. Dieser Vorgang kann nicht rückgängig gemacht werden.",
+    "Hesabın ve bütün bulut yedeklerin kalıcı olarak silinecek. Cihaz kayıtların ve Birlikte katılımların kalır. Emin misin?": "Dein Konto und alle deine Cloud-Backups werden dauerhaft gelöscht. Die Einträge auf diesem Gerät und deine Teilnahme an Birlikte bleiben erhalten. Bist du sicher?",
+    "Okuma ve dinleme için hesap gerekmiyor.": "Zum Lesen und Hören ist kein Konto erforderlich."
+  },
+  "ru": {
+    "Hesap": "Аккаунт",
+    "Giriş yap": "Войти",
+    "Kayıt ol": "Зарегистрироваться",
+    "Hesabımı sil": "Удалить аккаунт",
+    "Çıkış yap": "Выйти",
+    "Şifre": "Пароль",
+    "E-posta": "Электронная почта",
+    "Şifremi unuttum": "Забыли пароль?"
+  },
+  "ar": {
+    "Hesap": "الحساب",
+    "Giriş yap": "تسجيل الدخول",
+    "Kayıt ol": "إنشاء حساب",
+    "Hesabımı sil": "حذف حسابي",
+    "Çıkış yap": "تسجيل الخروج",
+    "Şifre": "كلمة المرور",
+    "E-posta": "البريد الإلكتروني",
+    "Şifremi unuttum": "نسيت كلمة المرور"
+  },
+  "fr": {
+    "Hesap": "Compte",
+    "Giriş yap": "Se connecter",
+    "Kayıt ol": "S’inscrire",
+    "Hesabımı sil": "Supprimer mon compte",
+    "Çıkış yap": "Se déconnecter",
+    "Şifre": "Mot de passe",
+    "E-posta": "E-mail",
+    "Şifremi unuttum": "Mot de passe oublié",
+    "Hesabın, eşitlenen kayıtların ve bulut yedeklerin silinir. Bu cihazdaki kayıtlar ve Birlikte katılımların korunur. İşlem geri alınamaz.": "Votre compte, vos données synchronisées et vos sauvegardes dans le cloud seront supprimés. Les données enregistrées sur cet appareil et votre participation à Birlikte seront conservées. Cette action est irréversible.",
+    "Hesabın ve bütün bulut yedeklerin kalıcı olarak silinecek. Cihaz kayıtların ve Birlikte katılımların kalır. Emin misin?": "Votre compte et toutes vos sauvegardes dans le cloud seront définitivement supprimés. Les données sur cet appareil et votre participation à Birlikte seront conservées. Êtes-vous sûr ?",
+    "Okuma ve dinleme için hesap gerekmiyor.": "Aucun compte n’est nécessaire pour lire ou écouter."
+  },
+  "es": {
+    "Hesap": "Cuenta",
+    "Giriş yap": "Iniciar sesión",
+    "Kayıt ol": "Registrarse",
+    "Hesabımı sil": "Eliminar mi cuenta",
+    "Çıkış yap": "Cerrar sesión",
+    "Şifre": "Contraseña",
+    "E-posta": "Correo electrónico",
+    "Şifremi unuttum": "Olvidé mi contraseña",
+    "Hesabın, eşitlenen kayıtların ve bulut yedeklerin silinir. Bu cihazdaki kayıtlar ve Birlikte katılımların korunur. İşlem geri alınamaz.": "Se eliminarán tu cuenta, tus registros sincronizados y tus copias de seguridad en la nube. Se conservarán los registros de este dispositivo y tu participación en Birlikte. Esta acción no se puede deshacer.",
+    "Hesabın ve bütün bulut yedeklerin kalıcı olarak silinecek. Cihaz kayıtların ve Birlikte katılımların kalır. Emin misin?": "Tu cuenta y todas tus copias de seguridad en la nube se eliminarán de forma permanente. Se conservarán los registros del dispositivo y tu participación en Birlikte. ¿Estás seguro?",
+    "Okuma ve dinleme için hesap gerekmiyor.": "No necesitas una cuenta para leer o escuchar."
+  },
+  "el": {
+    "Hesap": "Λογαριασμός",
+    "Giriş yap": "Σύνδεση",
+    "Kayıt ol": "Εγγραφή",
+    "Hesabımı sil": "Διαγραφή λογαριασμού",
+    "Çıkış yap": "Αποσύνδεση",
+    "Şifre": "Κωδικός πρόσβασης",
+    "E-posta": "Email",
+    "Şifremi unuttum": "Ξέχασα τον κωδικό μου"
+  },
+  "zh": {
+    "Hesap": "账户",
+    "Giriş yap": "登录",
+    "Kayıt ol": "注册",
+    "Hesabımı sil": "删除我的账户",
+    "Çıkış yap": "退出登录",
+    "Şifre": "密码",
+    "E-posta": "电子邮箱",
+    "Şifremi unuttum": "忘记密码"
+  },
+  "ja": {
+    "Hesap": "アカウント",
+    "Giriş yap": "ログイン",
+    "Kayıt ol": "新規登録",
+    "Hesabımı sil": "アカウントを削除",
+    "Çıkış yap": "ログアウト",
+    "Şifre": "パスワード",
+    "E-posta": "メールアドレス",
+    "Şifremi unuttum": "パスワードを忘れた",
+    "Hesabın ve bütün bulut yedeklerin kalıcı olarak silinecek. Cihaz kayıtların ve Birlikte katılımların kalır. Emin misin?": "アカウントとすべてのクラウドバックアップは完全に削除されます。この端末上の記録とBirlikteへの参加は残ります。削除してもよろしいですか？"
+  },
+  "ko": {
+    "Hesap": "계정",
+    "Giriş yap": "로그인",
+    "Kayıt ol": "가입",
+    "Hesabımı sil": "계정 삭제",
+    "Çıkış yap": "로그아웃",
+    "Şifre": "비밀번호",
+    "E-posta": "이메일",
+    "Şifremi unuttum": "비밀번호를 잊으셨나요?"
+  },
+  "hi": {
+    "Hesap": "खाता",
+    "Giriş yap": "साइन इन",
+    "Kayıt ol": "पंजीकरण",
+    "Hesabımı sil": "मेरा खाता हटाएँ",
+    "Çıkış yap": "साइन आउट",
+    "Şifre": "पासवर्ड",
+    "E-posta": "ईमेल",
+    "Şifremi unuttum": "पासवर्ड भूल गए",
+    "Hesabın, eşitlenen kayıtların ve bulut yedeklerin silinir. Bu cihazdaki kayıtlar ve Birlikte katılımların korunur. İşlem geri alınamaz.": "आपका खाता, सिंक किए गए रिकॉर्ड और क्लाउड बैकअप हटा दिए जाएंगे। इस डिवाइस के रिकॉर्ड और Birlikte में आपकी भागीदारी बनी रहेगी। इस कार्रवाई को वापस नहीं लिया जा सकता।"
+  },
+  "ur": {
+    "Hesap": "اکاؤنٹ",
+    "Giriş yap": "سائن اِن",
+    "Kayıt ol": "رجسٹر کریں",
+    "Hesabımı sil": "میرا اکاؤنٹ حذف کریں",
+    "Çıkış yap": "سائن آؤٹ",
+    "Şifre": "پاس ورڈ",
+    "E-posta": "ای میل",
+    "Şifremi unuttum": "پاس ورڈ بھول گئے"
+  },
+  "it": {
+    "Hesap": "Account",
+    "Giriş yap": "Accedi",
+    "Kayıt ol": "Registrati",
+    "Hesabımı sil": "Elimina il mio account",
+    "Çıkış yap": "Esci",
+    "Şifre": "Password",
+    "E-posta": "E-mail",
+    "Şifremi unuttum": "Password dimenticata",
+    "Hesabın, eşitlenen kayıtların ve bulut yedeklerin silinir. Bu cihazdaki kayıtlar ve Birlikte katılımların korunur. İşlem geri alınamaz.": "Il tuo account, i dati sincronizzati e i backup nel cloud verranno eliminati. I dati su questo dispositivo e la tua partecipazione a Birlikte rimarranno. Questa operazione non può essere annullata.",
+    "Hesabın ve bütün bulut yedeklerin kalıcı olarak silinecek. Cihaz kayıtların ve Birlikte katılımların kalır. Emin misin?": "Il tuo account e tutti i backup nel cloud verranno eliminati definitivamente. I dati sul dispositivo e la tua partecipazione a Birlikte rimarranno. Sei sicuro?",
+    "Okuma ve dinleme için hesap gerekmiyor.": "Non serve un account per leggere o ascoltare."
+  },
+  "id": {
+    "Hesap": "Akun",
+    "Giriş yap": "Masuk",
+    "Kayıt ol": "Daftar",
+    "Hesabımı sil": "Hapus akun saya",
+    "Çıkış yap": "Keluar",
+    "Şifre": "Kata sandi",
+    "E-posta": "Email",
+    "Şifremi unuttum": "Lupa kata sandi",
+    "Hesabın, eşitlenen kayıtların ve bulut yedeklerin silinir. Bu cihazdaki kayıtlar ve Birlikte katılımların korunur. İşlem geri alınamaz.": "Akun, catatan yang disinkronkan, dan cadangan cloud Anda akan dihapus. Catatan di perangkat ini dan partisipasi Anda dalam Birlikte akan tetap ada. Tindakan ini tidak dapat dibatalkan.",
+    "Hesabın ve bütün bulut yedeklerin kalıcı olarak silinecek. Cihaz kayıtların ve Birlikte katılımların kalır. Emin misin?": "Akun dan semua cadangan cloud Anda akan dihapus secara permanen. Catatan di perangkat dan partisipasi Anda dalam Birlikte akan tetap ada. Anda yakin?",
+    "Okuma ve dinleme için hesap gerekmiyor.": "Anda tidak memerlukan akun untuk membaca atau mendengarkan."
+  },
+  "nl": {
+    "Hesap": "Account",
+    "Giriş yap": "Inloggen",
+    "Kayıt ol": "Registreren",
+    "Hesabımı sil": "Mijn account verwijderen",
+    "Çıkış yap": "Uitloggen",
+    "Şifre": "Wachtwoord",
+    "E-posta": "E-mail",
+    "Şifremi unuttum": "Wachtwoord vergeten",
+    "Hesabın, eşitlenen kayıtların ve bulut yedeklerin silinir. Bu cihazdaki kayıtlar ve Birlikte katılımların korunur. İşlem geri alınamaz.": "Je account, gesynchroniseerde gegevens en cloudback-ups worden verwijderd. Gegevens op dit apparaat en je deelname aan Birlikte blijven bewaard. Deze actie kan niet ongedaan worden gemaakt.",
+    "Hesabın ve bütün bulut yedeklerin kalıcı olarak silinecek. Cihaz kayıtların ve Birlikte katılımların kalır. Emin misin?": "Je account en al je cloudback-ups worden permanent verwijderd. Gegevens op dit apparaat en je deelname aan Birlikte blijven bewaard. Weet je het zeker?",
+    "Okuma ve dinleme için hesap gerekmiyor.": "Je hebt geen account nodig om te lezen of te luisteren."
+  },
+  "pt": {
+    "Hesap": "Conta",
+    "Giriş yap": "Iniciar sessão",
+    "Kayıt ol": "Registar-se",
+    "Hesabımı sil": "Eliminar a minha conta",
+    "Çıkış yap": "Terminar sessão",
+    "Şifre": "Palavra-passe",
+    "E-posta": "E-mail",
+    "Şifremi unuttum": "Esqueci-me da palavra-passe"
+  },
+  "fa": {
+    "Hesap": "حساب کاربری",
+    "Giriş yap": "ورود",
+    "Kayıt ol": "ثبت‌نام",
+    "Hesabımı sil": "حذف حساب من",
+    "Çıkış yap": "خروج",
+    "Şifre": "گذرواژه",
+    "E-posta": "ایمیل",
+    "Şifremi unuttum": "گذرواژه‌ام را فراموش کرده‌ام"
+  },
+  "bn": {
+    "Hesap": "অ্যাকাউন্ট",
+    "Giriş yap": "সাইন ইন",
+    "Kayıt ol": "নিবন্ধন করুন",
+    "Hesabımı sil": "আমার অ্যাকাউন্ট মুছুন",
+    "Çıkış yap": "সাইন আউট",
+    "Şifre": "পাসওয়ার্ড",
+    "E-posta": "ইমেইল",
+    "Şifremi unuttum": "পাসওয়ার্ড ভুলে গেছি"
+  },
+  "ms": {
+    "Hesap": "Akaun",
+    "Giriş yap": "Log masuk",
+    "Kayıt ol": "Daftar",
+    "Hesabımı sil": "Padam akaun saya",
+    "Çıkış yap": "Log keluar",
+    "Şifre": "Kata laluan",
+    "E-posta": "E-mel",
+    "Şifremi unuttum": "Lupa kata laluan"
+  },
+  "sw": {
+    "Hesap": "Akaunti",
+    "Giriş yap": "Ingia",
+    "Kayıt ol": "Jisajili",
+    "Hesabımı sil": "Futa akaunti yangu",
+    "Çıkış yap": "Toka",
+    "Şifre": "Nenosiri",
+    "E-posta": "Barua pepe",
+    "Şifremi unuttum": "Umesahau nenosiri?"
+  }
+}

@@ -1,0 +1,1737 @@
+{
+  "checkedAt": "2026-09-30T10:29:05.411Z",
+  "mode": "sample",
+  "method": "HEAD on every URL; bytes=0-0 Range on sample and HEAD anomalies; four concurrent requests; 150 ms minimum spacing; 12 s timeout; no full MP3 downloads",
+  "summary": {
+    "1": {
+      "total": 5,
+      "active": 5,
+      "classes": {
+        "available": 5
+      }
+    },
+    "2": {
+      "total": 5,
+      "active": 5,
+      "classes": {
+        "available": 5
+      }
+    },
+    "3": {
+      "total": 5,
+      "active": 5,
+      "classes": {
+        "available": 5
+      }
+    },
+    "4": {
+      "total": 5,
+      "active": 5,
+      "classes": {
+        "available": 5
+      }
+    },
+    "5": {
+      "total": 5,
+      "active": 5,
+      "classes": {
+        "available": 5
+      }
+    },
+    "6": {
+      "total": 5,
+      "active": 5,
+      "classes": {
+        "available": 5
+      }
+    },
+    "7": {
+      "total": 5,
+      "active": 5,
+      "classes": {
+        "available": 5
+      }
+    },
+    "9": {
+      "total": 5,
+      "active": 5,
+      "classes": {
+        "available": 5
+      }
+    },
+    "10": {
+      "total": 5,
+      "active": 5,
+      "classes": {
+        "available": 5
+      }
+    },
+    "12": {
+      "total": 5,
+      "active": 5,
+      "classes": {
+        "available": 5
+      }
+    },
+    "97": {
+      "total": 5,
+      "active": 5,
+      "classes": {
+        "available": 5
+      }
+    }
+  },
+  "identityRisks": [],
+  "rows": [
+    {
+      "reciter": 7,
+      "chapter": 1,
+      "active": true,
+      "url": "https://download.quranicaudio.com/quran/mishaari_california/001.mp3",
+      "source": "bundled",
+      "recording": "mishary_rashid_al_afasy_2008_qdc",
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/quran/mishaari_california/001.mp3",
+        "type": "audio/mpeg",
+        "length": "761984",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 04:00:07 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/quran/mishaari_california/001.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/761984",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 04:00:07 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 7,
+      "chapter": 2,
+      "active": true,
+      "url": "https://download.quranicaudio.com/quran/mishaari_california/002.mp3",
+      "source": "bundled",
+      "recording": "mishary_rashid_al_afasy_2008_qdc",
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/quran/mishaari_california/002.mp3",
+        "type": "audio/mpeg",
+        "length": "124993664",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Sun, 22 Jun 2025 23:45:49 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/quran/mishaari_california/002.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/124993664",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Sun, 22 Jun 2025 23:45:49 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 7,
+      "chapter": 57,
+      "active": true,
+      "url": "https://download.quranicaudio.com/quran/mishaari_california/057.mp3",
+      "source": "bundled",
+      "recording": "mishary_rashid_al_afasy_2008_qdc",
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/quran/mishaari_california/057.mp3",
+        "type": "audio/mpeg",
+        "length": "13133952",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 04:01:31 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/quran/mishaari_california/057.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/13133952",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 04:01:31 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 7,
+      "chapter": 113,
+      "active": true,
+      "url": "https://download.quranicaudio.com/quran/mishaari_california/113.mp3",
+      "source": "bundled",
+      "recording": "mishary_rashid_al_afasy_2008_qdc",
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/quran/mishaari_california/113.mp3",
+        "type": "audio/mpeg",
+        "length": "495744",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Wed, 15 Jul 2026 04:39:57 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/quran/mishaari_california/113.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/495744",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Wed, 15 Jul 2026 04:39:57 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 7,
+      "chapter": 114,
+      "active": true,
+      "url": "https://download.quranicaudio.com/quran/mishaari_california/114.mp3",
+      "source": "bundled",
+      "recording": "mishary_rashid_al_afasy_2008_qdc",
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/quran/mishaari_california/114.mp3",
+        "type": "audio/mpeg",
+        "length": "684160",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 04:00:23 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/quran/mishaari_california/114.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/684160",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 04:00:23 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 6,
+      "chapter": 1,
+      "active": true,
+      "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/001.mp3",
+      "source": "bundled",
+      "recording": "mahmoud_khalil_al_husary_qdc_128k",
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/001.mp3",
+        "type": "audio/mpeg",
+        "length": "558266",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 07:17:09 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/001.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/558266",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 07:17:09 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 6,
+      "chapter": 2,
+      "active": true,
+      "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/002.mp3",
+      "source": "bundled",
+      "recording": "mahmoud_khalil_al_husary_qdc_128k",
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/002.mp3",
+        "type": "audio/mpeg",
+        "length": "115965992",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 07:18:48 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/002.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/115965992",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 07:18:48 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 6,
+      "chapter": 57,
+      "active": true,
+      "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/057.mp3",
+      "source": "bundled",
+      "recording": "mahmoud_khalil_al_husary_qdc_128k",
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/057.mp3",
+        "type": "audio/mpeg",
+        "length": "13933379",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Mon, 04 Aug 2025 00:49:35 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/057.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/13933379",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Mon, 04 Aug 2025 00:49:35 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 6,
+      "chapter": 113,
+      "active": true,
+      "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/113.mp3",
+      "source": "bundled",
+      "recording": "mahmoud_khalil_al_husary_qdc_128k",
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/113.mp3",
+        "type": "audio/mpeg",
+        "length": "574569",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 07:17:12 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/113.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/574569",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 07:17:12 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 6,
+      "chapter": 114,
+      "active": true,
+      "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/114.mp3",
+      "source": "bundled",
+      "recording": "mahmoud_khalil_al_husary_qdc_128k",
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/114.mp3",
+        "type": "audio/mpeg",
+        "length": "629738",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 07:17:17 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/quran/mahmood_khaleel_al-husaree_iza3a/114.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/629738",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 07:17:17 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 12,
+      "chapter": 1,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/1.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/1.mp3",
+        "type": "audio/mpeg",
+        "length": "1036872",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 01:05:29 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/1.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/1036872",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 01:05:29 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 12,
+      "chapter": 2,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/2.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/2.mp3",
+        "type": "audio/mpeg",
+        "length": "223790754",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Mon, 23 Dec 2024 19:39:34 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/2.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/223790754",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Mon, 23 Dec 2024 19:39:34 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 12,
+      "chapter": 57,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/57.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/57.mp3",
+        "type": "audio/mpeg",
+        "length": "17733937",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 01:03:11 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/57.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/17733937",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 01:03:11 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 12,
+      "chapter": 113,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/113.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/113.mp3",
+        "type": "audio/mpeg",
+        "length": "603089",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Mon, 23 Jun 2025 07:23:55 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/113.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/603089",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Mon, 23 Jun 2025 07:23:55 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 12,
+      "chapter": 114,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/114.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/114.mp3",
+        "type": "audio/mpeg",
+        "length": "748609",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Tue, 31 Dec 2024 19:57:35 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/khalil_al_husary/muallim/114.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/748609",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Tue, 31 Dec 2024 19:57:35 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 9,
+      "chapter": 1,
+      "active": true,
+      "url": "https://server10.mp3quran.net/minsh/001.mp3",
+      "source": "bundled",
+      "recording": "mohammed_siddiq_al_minshawi_mp3quran",
+      "head": {
+        "status": 200,
+        "url": "https://server10.mp3quran.net/minsh/001.mp3",
+        "type": "audio/mpeg",
+        "length": "840426",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"5e879664-cd2ea\"",
+        "lastModified": "Fri, 03 Apr 2020 20:02:44 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://server10.mp3quran.net/minsh/001.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/840426",
+        "acceptsRanges": null,
+        "etag": "\"5e879664-cd2ea\"",
+        "lastModified": "Fri, 03 Apr 2020 20:02:44 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 9,
+      "chapter": 2,
+      "active": true,
+      "url": "https://server10.mp3quran.net/minsh/002.mp3",
+      "source": "bundled",
+      "recording": "mohammed_siddiq_al_minshawi_mp3quran",
+      "head": {
+        "status": 200,
+        "url": "https://server10.mp3quran.net/minsh/002.mp3",
+        "type": "audio/mpeg",
+        "length": "131473974",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"5e879665-7d62236\"",
+        "lastModified": "Fri, 03 Apr 2020 20:02:45 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://server10.mp3quran.net/minsh/002.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/131473974",
+        "acceptsRanges": null,
+        "etag": "\"5e879665-7d62236\"",
+        "lastModified": "Fri, 03 Apr 2020 20:02:45 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 9,
+      "chapter": 57,
+      "active": true,
+      "url": "https://server10.mp3quran.net/minsh/057.mp3",
+      "source": "bundled",
+      "recording": "mohammed_siddiq_al_minshawi_mp3quran",
+      "head": {
+        "status": 200,
+        "url": "https://server10.mp3quran.net/minsh/057.mp3",
+        "type": "audio/mpeg",
+        "length": "13671757",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"5e879668-d09d4d\"",
+        "lastModified": "Fri, 03 Apr 2020 20:02:48 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://server10.mp3quran.net/minsh/057.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/13671757",
+        "acceptsRanges": null,
+        "etag": "\"5e879668-d09d4d\"",
+        "lastModified": "Fri, 03 Apr 2020 20:02:48 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 9,
+      "chapter": 113,
+      "active": true,
+      "url": "https://server10.mp3quran.net/minsh/113.mp3",
+      "source": "bundled",
+      "recording": "mohammed_siddiq_al_minshawi_mp3quran",
+      "head": {
+        "status": 200,
+        "url": "https://server10.mp3quran.net/minsh/113.mp3",
+        "type": "audio/mpeg",
+        "length": "488500",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"5e879669-77434\"",
+        "lastModified": "Fri, 03 Apr 2020 20:02:49 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://server10.mp3quran.net/minsh/113.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/488500",
+        "acceptsRanges": null,
+        "etag": "\"5e879669-77434\"",
+        "lastModified": "Fri, 03 Apr 2020 20:02:49 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 9,
+      "chapter": 114,
+      "active": true,
+      "url": "https://server10.mp3quran.net/minsh/114.mp3",
+      "source": "bundled",
+      "recording": "mohammed_siddiq_al_minshawi_mp3quran",
+      "head": {
+        "status": 200,
+        "url": "https://server10.mp3quran.net/minsh/114.mp3",
+        "type": "audio/mpeg",
+        "length": "624333",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"5e879665-986cd\"",
+        "lastModified": "Fri, 03 Apr 2020 20:02:45 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://server10.mp3quran.net/minsh/114.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/624333",
+        "acceptsRanges": null,
+        "etag": "\"5e879665-986cd\"",
+        "lastModified": "Fri, 03 Apr 2020 20:02:45 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 2,
+      "chapter": 1,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/001.mp3",
+      "source": "bundled",
+      "recording": "abdulbasit_abdulsamad_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/001.mp3",
+        "type": "audio/mpeg",
+        "length": "669781",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"6a7c88e9ac51a3776b1471baff57e850\"",
+        "lastModified": "Sun, 29 Mar 2026 18:44:51 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/001.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/669781",
+        "acceptsRanges": null,
+        "etag": "\"6a7c88e9ac51a3776b1471baff57e850\"",
+        "lastModified": "Sun, 29 Mar 2026 18:44:51 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 2,
+      "chapter": 2,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/002.mp3",
+      "source": "bundled",
+      "recording": "abdulbasit_abdulsamad_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/002.mp3",
+        "type": "audio/mpeg",
+        "length": "154959414",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"46c5270c58197509663401f0c3d597e6-19\"",
+        "lastModified": "Sun, 29 Mar 2026 18:44:54 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/002.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/154959414",
+        "acceptsRanges": null,
+        "etag": "\"46c5270c58197509663401f0c3d597e6-19\"",
+        "lastModified": "Sun, 29 Mar 2026 18:44:54 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 2,
+      "chapter": 57,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/057.mp3",
+      "source": "bundled",
+      "recording": "abdulbasit_abdulsamad_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/057.mp3",
+        "type": "audio/mpeg",
+        "length": "12778058",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"fe7de6f434e6d8801e8b6e8bff819d99-2\"",
+        "lastModified": "Sun, 29 Mar 2026 18:49:51 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/057.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/12778058",
+        "acceptsRanges": null,
+        "etag": "\"fe7de6f434e6d8801e8b6e8bff819d99-2\"",
+        "lastModified": "Sun, 29 Mar 2026 18:49:51 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 2,
+      "chapter": 113,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/113.mp3",
+      "source": "bundled",
+      "recording": "abdulbasit_abdulsamad_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/113.mp3",
+        "type": "audio/mpeg",
+        "length": "392674",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"bba7dcdd38d165d1fb44bed914c130ea\"",
+        "lastModified": "Sun, 29 Mar 2026 18:53:31 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/113.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/392674",
+        "acceptsRanges": null,
+        "etag": "\"bba7dcdd38d165d1fb44bed914c130ea\"",
+        "lastModified": "Sun, 29 Mar 2026 18:53:31 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 2,
+      "chapter": 114,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/114.mp3",
+      "source": "bundled",
+      "recording": "abdulbasit_abdulsamad_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/114.mp3",
+        "type": "audio/mpeg",
+        "length": "479190",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"58abc9e32ae06138d4d272ab80d4de27\"",
+        "lastModified": "Sun, 29 Mar 2026 18:53:34 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/murattal/mp3/114.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/479190",
+        "acceptsRanges": null,
+        "etag": "\"58abc9e32ae06138d4d272ab80d4de27\"",
+        "lastModified": "Sun, 29 Mar 2026 18:53:34 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 1,
+      "chapter": 1,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/001.mp3",
+      "source": "bundled",
+      "recording": "abdulbasit_abdulsamad_mujawwad_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/001.mp3",
+        "type": "audio/mpeg",
+        "length": "1254924",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"7e164f31815c75cf6a45b619a4a792e3\"",
+        "lastModified": "Sun, 29 Mar 2026 18:45:46 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/001.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/1254924",
+        "acceptsRanges": null,
+        "etag": "\"7e164f31815c75cf6a45b619a4a792e3\"",
+        "lastModified": "Sun, 29 Mar 2026 18:45:46 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 1,
+      "chapter": 2,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/002.mp3",
+      "source": "bundled",
+      "recording": "abdulbasit_abdulsamad_mujawwad_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/002.mp3",
+        "type": "audio/mpeg",
+        "length": "251148958",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"ae9101dab08e8584f9eadca6f8b5c424-30\"",
+        "lastModified": "Sun, 29 Mar 2026 18:45:50 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/002.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/251148958",
+        "acceptsRanges": null,
+        "etag": "\"ae9101dab08e8584f9eadca6f8b5c424-30\"",
+        "lastModified": "Sun, 29 Mar 2026 18:45:50 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 1,
+      "chapter": 57,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/057.mp3",
+      "source": "bundled",
+      "recording": "abdulbasit_abdulsamad_mujawwad_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/057.mp3",
+        "type": "audio/mpeg",
+        "length": "25810025",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"1e2afbc46cf27f57e8e5cc83b19bc1f6-4\"",
+        "lastModified": "Sun, 29 Mar 2026 18:51:24 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/057.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/25810025",
+        "acceptsRanges": null,
+        "etag": "\"1e2afbc46cf27f57e8e5cc83b19bc1f6-4\"",
+        "lastModified": "Sun, 29 Mar 2026 18:51:24 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 1,
+      "chapter": 113,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/113.mp3",
+      "source": "bundled",
+      "recording": "abdulbasit_abdulsamad_mujawwad_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/113.mp3",
+        "type": "audio/mpeg",
+        "length": "792243",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"e98ab698046f83607bf687760a5b7042\"",
+        "lastModified": "Sun, 29 Mar 2026 18:55:18 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/113.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/792243",
+        "acceptsRanges": null,
+        "etag": "\"e98ab698046f83607bf687760a5b7042\"",
+        "lastModified": "Sun, 29 Mar 2026 18:55:18 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 1,
+      "chapter": 114,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/114.mp3",
+      "source": "bundled",
+      "recording": "abdulbasit_abdulsamad_mujawwad_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/114.mp3",
+        "type": "audio/mpeg",
+        "length": "997459",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"6b984a68a189c6e900cfd7bed2a08d9e\"",
+        "lastModified": "Sun, 29 Mar 2026 18:55:21 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abdulBasit/mujawwad/mp3/114.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/997459",
+        "acceptsRanges": null,
+        "etag": "\"6b984a68a189c6e900cfd7bed2a08d9e\"",
+        "lastModified": "Sun, 29 Mar 2026 18:55:21 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 3,
+      "chapter": 1,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/1.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/1.mp3",
+        "type": "audio/mpeg",
+        "length": "838888",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Tue, 01 Jul 2025 11:08:37 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/1.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/838888",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Tue, 01 Jul 2025 11:08:37 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 3,
+      "chapter": 2,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/2.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/2.mp3",
+        "type": "audio/mpeg",
+        "length": "142852432",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:52:06 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/2.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/142852432",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:52:06 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 3,
+      "chapter": 57,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/57.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/57.mp3",
+        "type": "audio/mpeg",
+        "length": "12578943",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:50:03 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/57.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/12578943",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:50:03 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 3,
+      "chapter": 113,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/113.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/113.mp3",
+        "type": "audio/mpeg",
+        "length": "514760",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:50:24 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/113.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/514760",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:50:24 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 3,
+      "chapter": 114,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/114.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/114.mp3",
+        "type": "audio/mpeg",
+        "length": "628864",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Mon, 15 Sep 2025 23:00:42 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/114.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/628864",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Mon, 15 Sep 2025 23:00:42 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 10,
+      "chapter": 1,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/saud_ash-shuraym/murattal/001.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/saud_ash-shuraym/murattal/001.mp3",
+        "type": "audio/mpeg",
+        "length": "554466",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:48:17 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/saud_ash-shuraym/murattal/001.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/554466",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:48:17 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 10,
+      "chapter": 2,
+      "active": true,
+      "url": "https://server7.mp3quran.net/shur/002.mp3",
+      "source": "bundled",
+      "recording": "saud_al_shuraim_mp3quran",
+      "head": {
+        "status": 200,
+        "url": "https://server7.mp3quran.net/shur/002.mp3",
+        "type": "audio/mpeg",
+        "length": "83561594",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"549ab8ea-4fb0c7a\"",
+        "lastModified": "Wed, 24 Dec 2014 13:00:26 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://server7.mp3quran.net/shur/002.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/83561594",
+        "acceptsRanges": null,
+        "etag": "\"549ab8ea-4fb0c7a\"",
+        "lastModified": "Wed, 24 Dec 2014 13:00:26 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 10,
+      "chapter": 57,
+      "active": true,
+      "url": "https://server7.mp3quran.net/shur/057.mp3",
+      "source": "bundled",
+      "recording": "saud_al_shuraim_mp3quran",
+      "head": {
+        "status": 200,
+        "url": "https://server7.mp3quran.net/shur/057.mp3",
+        "type": "audio/mpeg",
+        "length": "7717462",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"549ab91b-75c256\"",
+        "lastModified": "Wed, 24 Dec 2014 13:01:15 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://server7.mp3quran.net/shur/057.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/7717462",
+        "acceptsRanges": null,
+        "etag": "\"549ab91b-75c256\"",
+        "lastModified": "Wed, 24 Dec 2014 13:01:15 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 10,
+      "chapter": 113,
+      "active": true,
+      "url": "https://server7.mp3quran.net/shur/113.mp3",
+      "source": "bundled",
+      "recording": "saud_al_shuraim_mp3quran",
+      "head": {
+        "status": 200,
+        "url": "https://server7.mp3quran.net/shur/113.mp3",
+        "type": "audio/mpeg",
+        "length": "306210",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"549ab927-4ac22\"",
+        "lastModified": "Wed, 24 Dec 2014 13:01:27 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://server7.mp3quran.net/shur/113.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/306210",
+        "acceptsRanges": null,
+        "etag": "\"549ab927-4ac22\"",
+        "lastModified": "Wed, 24 Dec 2014 13:01:27 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 10,
+      "chapter": 114,
+      "active": true,
+      "url": "https://server7.mp3quran.net/shur/114.mp3",
+      "source": "bundled",
+      "recording": "saud_al_shuraim_mp3quran",
+      "head": {
+        "status": 200,
+        "url": "https://server7.mp3quran.net/shur/114.mp3",
+        "type": "audio/mpeg",
+        "length": "387708",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"549ab928-5ea7c\"",
+        "lastModified": "Wed, 24 Dec 2014 13:01:28 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://server7.mp3quran.net/shur/114.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/387708",
+        "acceptsRanges": null,
+        "etag": "\"549ab928-5ea7c\"",
+        "lastModified": "Wed, 24 Dec 2014 13:01:28 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 4,
+      "chapter": 1,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/001.mp3",
+      "source": "bundled",
+      "recording": "abu_bakr_al_shatri_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/001.mp3",
+        "type": "audio/mpeg",
+        "length": "850753",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"cc89e9b6f4e8dbcba7abde744f67d3fa\"",
+        "lastModified": "Sun, 29 Mar 2026 18:20:55 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/001.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/850753",
+        "acceptsRanges": null,
+        "etag": "\"cc89e9b6f4e8dbcba7abde744f67d3fa\"",
+        "lastModified": "Sun, 29 Mar 2026 18:20:55 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 4,
+      "chapter": 2,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/002.mp3",
+      "source": "bundled",
+      "recording": "abu_bakr_al_shatri_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/002.mp3",
+        "type": "audio/mpeg",
+        "length": "113206540",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"448de406165edda6edd8247cbccc32f6-14\"",
+        "lastModified": "Sun, 29 Mar 2026 18:20:58 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/002.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/113206540",
+        "acceptsRanges": null,
+        "etag": "\"448de406165edda6edd8247cbccc32f6-14\"",
+        "lastModified": "Sun, 29 Mar 2026 18:20:58 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 4,
+      "chapter": 57,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/057.mp3",
+      "source": "bundled",
+      "recording": "abu_bakr_al_shatri_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/057.mp3",
+        "type": "audio/mpeg",
+        "length": "9945543",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"91e20c8c075295587a577b1bcfdaa51f-2\"",
+        "lastModified": "Sun, 29 Mar 2026 18:25:18 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/057.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/9945543",
+        "acceptsRanges": null,
+        "etag": "\"91e20c8c075295587a577b1bcfdaa51f-2\"",
+        "lastModified": "Sun, 29 Mar 2026 18:25:18 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 4,
+      "chapter": 113,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/113.mp3",
+      "source": "bundled",
+      "recording": "abu_bakr_al_shatri_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/113.mp3",
+        "type": "audio/mpeg",
+        "length": "319944",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"b3d8e738005e409cd59bd29255cca681\"",
+        "lastModified": "Sun, 29 Mar 2026 18:28:20 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/113.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/319944",
+        "acceptsRanges": null,
+        "etag": "\"b3d8e738005e409cd59bd29255cca681\"",
+        "lastModified": "Sun, 29 Mar 2026 18:28:20 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 4,
+      "chapter": 114,
+      "active": true,
+      "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/114.mp3",
+      "source": "bundled",
+      "recording": "abu_bakr_al_shatri_tarteel",
+      "head": {
+        "status": 200,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/114.mp3",
+        "type": "audio/mpeg",
+        "length": "383890",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"ded6cde679d8dbde0a8dcb5d5f8fd56c\"",
+        "lastModified": "Sun, 29 Mar 2026 18:28:24 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://audio-cdn.tarteel.ai/quran/surah/abuBakrAlShatri/murattal/mp3/114.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/383890",
+        "acceptsRanges": null,
+        "etag": "\"ded6cde679d8dbde0a8dcb5d5f8fd56c\"",
+        "lastModified": "Sun, 29 Mar 2026 18:28:24 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 5,
+      "chapter": 1,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/1.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/1.mp3",
+        "type": "audio/mpeg",
+        "length": "608383",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:47:18 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/1.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/608383",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:47:18 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 5,
+      "chapter": 2,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/2.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/2.mp3",
+        "type": "audio/mpeg",
+        "length": "114163714",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:47:40 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/2.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/114163714",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:47:40 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 5,
+      "chapter": 57,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/57.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/57.mp3",
+        "type": "audio/mpeg",
+        "length": "10776912",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:45:53 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/57.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/10776912",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:45:53 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 5,
+      "chapter": 113,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/113.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/113.mp3",
+        "type": "audio/mpeg",
+        "length": "360533",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:46:11 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/113.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/360533",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:46:11 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 5,
+      "chapter": 114,
+      "active": true,
+      "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/114.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/114.mp3",
+        "type": "audio/mpeg",
+        "length": "478398",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:46:18 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/114.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/478398",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 00:46:18 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 97,
+      "chapter": 1,
+      "active": true,
+      "url": "https://download.quranicaudio.com/quran/yasser_ad-dussary//001.mp3",
+      "source": "QuranCDN API",
+      "recording": null,
+      "head": {
+        "status": 200,
+        "url": "https://download.quranicaudio.com/quran/yasser_ad-dussary//001.mp3",
+        "type": "audio/mpeg",
+        "length": "776665",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 07:08:35 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://download.quranicaudio.com/quran/yasser_ad-dussary//001.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/776665",
+        "acceptsRanges": null,
+        "etag": null,
+        "lastModified": "Fri, 06 Jan 2023 07:08:35 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 97,
+      "chapter": 2,
+      "active": true,
+      "url": "https://archive.org/download/Yasser_Aldosari_MP3_Quran/002.mp3",
+      "source": "bundled",
+      "recording": "yasser_al_dosari_archive",
+      "head": {
+        "status": 200,
+        "url": "https://dn710809.ca.archive.org/0/items/Yasser_Aldosari_MP3_Quran/002.mp3",
+        "type": "audio/mpeg",
+        "length": "115967052",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"552fbf47-6e9844c\"",
+        "lastModified": "Thu, 16 Apr 2015 13:55:19 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://dn710809.ca.archive.org/0/items/Yasser_Aldosari_MP3_Quran/002.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/115967052",
+        "acceptsRanges": null,
+        "etag": "\"552fbf47-6e9844c\"",
+        "lastModified": "Thu, 16 Apr 2015 13:55:19 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 97,
+      "chapter": 57,
+      "active": true,
+      "url": "https://archive.org/download/Yasser_Aldosari_MP3_Quran/057.mp3",
+      "source": "bundled",
+      "recording": "yasser_al_dosari_archive",
+      "head": {
+        "status": 200,
+        "url": "https://dn710809.ca.archive.org/0/items/Yasser_Aldosari_MP3_Quran/057.mp3",
+        "type": "audio/mpeg",
+        "length": "11568789",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"552ff0b4-b08695\"",
+        "lastModified": "Thu, 16 Apr 2015 17:26:12 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://dn710809.ca.archive.org/0/items/Yasser_Aldosari_MP3_Quran/057.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/11568789",
+        "acceptsRanges": null,
+        "etag": "\"552ff0b4-b08695\"",
+        "lastModified": "Thu, 16 Apr 2015 17:26:12 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 97,
+      "chapter": 113,
+      "active": true,
+      "url": "https://archive.org/download/Yasser_Aldosari_MP3_Quran/113.mp3",
+      "source": "bundled",
+      "recording": "yasser_al_dosari_archive",
+      "head": {
+        "status": 200,
+        "url": "https://dn710809.ca.archive.org/0/items/Yasser_Aldosari_MP3_Quran/113.mp3",
+        "type": "audio/mpeg",
+        "length": "340734",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"552ff3bc-532fe\"",
+        "lastModified": "Thu, 16 Apr 2015 17:39:08 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://dn710809.ca.archive.org/0/items/Yasser_Aldosari_MP3_Quran/113.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/340734",
+        "acceptsRanges": null,
+        "etag": "\"552ff3bc-532fe\"",
+        "lastModified": "Thu, 16 Apr 2015 17:39:08 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    },
+    {
+      "reciter": 97,
+      "chapter": 114,
+      "active": true,
+      "url": "https://archive.org/download/Yasser_Aldosari_MP3_Quran/114.mp3",
+      "source": "bundled",
+      "recording": "yasser_al_dosari_archive",
+      "head": {
+        "status": 200,
+        "url": "https://dn710809.ca.archive.org/0/items/Yasser_Aldosari_MP3_Quran/114.mp3",
+        "type": "audio/mpeg",
+        "length": "580224",
+        "range": null,
+        "acceptsRanges": "bytes",
+        "etag": "\"552ff3c6-8da80\"",
+        "lastModified": "Thu, 16 Apr 2015 17:39:18 GMT"
+      },
+      "tinyRange": {
+        "status": 206,
+        "url": "https://dn710809.ca.archive.org/0/items/Yasser_Aldosari_MP3_Quran/114.mp3",
+        "type": "audio/mpeg",
+        "length": "1",
+        "range": "bytes 0-0/580224",
+        "acceptsRanges": null,
+        "etag": "\"552ff3c6-8da80\"",
+        "lastModified": "Thu, 16 Apr 2015 17:39:18 GMT",
+        "rangeHonored": true
+      },
+      "class": "available"
+    }
+  ]
+}

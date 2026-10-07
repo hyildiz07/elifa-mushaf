@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hânî ses sınırı dinleme incelemesi</title>
+<style>
+:root{color-scheme:light;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:#162335;background:#f5f7f8}
+*{box-sizing:border-box}body{margin:0}.shell{max-width:1100px;margin:auto;padding:24px 18px 60px}
+h1{font-size:1.6rem;line-height:1.2;margin:0 0 10px}h2{font-size:1.15rem;margin:0 0 14px}p{line-height:1.55}
+.lead{max-width:75ch;color:#4d5b66;margin:0 0 20px}.panel{background:#fff;border:1px solid #dce4e7;border-radius:14px;padding:18px;margin:18px 0;box-shadow:0 2px 12px #17314a0b}
+.casebar,.controls,.windowgrid{display:flex;gap:8px;flex-wrap:wrap}.casebar button,.windowgrid button,.controls button,.export{border:1px solid #a5b9bd;border-radius:9px;background:#fff;color:#17343b;padding:9px 12px;cursor:pointer;font:inherit}
+button:hover{background:#edf5f3}button:focus-visible,a:focus-visible,textarea:focus-visible{outline:3px solid #177868;outline-offset:2px}
+.casebar button[aria-pressed=true],.windowgrid button[aria-pressed=true]{background:#126354;border-color:#126354;color:#fff}
+.status{min-height:1.5em;color:#236653;font-weight:600}.notice{border-left:4px solid #cc8b22;background:#fff8e7;padding:10px 14px;color:#60420c}
+.source{overflow-wrap:anywhere;font-size:.9rem}.source a{color:#135d62}.windowgrid button{text-align:left;max-width:100%}.windowgrid small{display:block;opacity:.8;margin-top:3px;font-size:.77rem}
+audio{width:100%;margin:8px 0 14px}.controls label{display:flex;align-items:center;gap:6px}.controls select{padding:8px;border:1px solid #a5b9bd;border-radius:8px}
+.scroll{overflow:auto}table{border-collapse:collapse;width:100%;min-width:570px}th,td{padding:8px 10px;border-bottom:1px solid #e1e9eb;text-align:left;vertical-align:top}th{font-size:.84rem;color:#485b66}td.ar{font-family:"Amiri Quran","Amiri",serif;font-size:1.3rem;direction:rtl;text-align:right;white-space:nowrap}tr.focus{background:#edf6ee}.meta{color:#536371;font-size:.84rem}
+.prompt{display:block;margin:12px 0}.prompt strong{display:block;margin-bottom:5px}.prompt textarea{width:100%;min-height:62px;resize:vertical;border:1px solid #adbdc2;border-radius:8px;padding:9px;font:inherit}
+.loader{display:none}.loader.show{display:block}.sr{position:absolute;clip:rect(0,0,0,0);white-space:nowrap;width:1px;height:1px;overflow:hidden}
+</style>
+</head>
+<body>
+<main class="shell">
+  <h1>Hânî er-Rifâî ses sınırı incelemesi</h1>
+  <p class="lead">İki karar için kısa ses kesitlerini sırayla dinleyin: 6:139'un son kelimesi ve 17–18. kelime geçişi; 34:46 sonrasındaki ek sesin kimliği ve hangi âyete ait olduğu. Önce "Karar" düğmelerini, gerekirse alttaki ayrıntılı kesitleri açın. Buradaki zamanlar <strong>uygulamaya uygulanmış değildir</strong>.</p>
+  <div id="manifestLoader" class="panel loader"><p>Manifest otomatik açılamadı. Bu dosya doğrudan açıldıysa yanındaki <strong>hani-audio-review.json</strong> dosyasını seçin.</p><input id="manifestFile" type="file" accept="application/json,.json"></div>
+  <nav id="casebar" class="casebar" aria-label="İnceleme âyetleri"></nav>
+  <section id="caseIntro" class="panel" hidden><h2 id="caseTitle"></h2><p id="caseQuestion" class="notice"></p><div id="sources" class="source"></div></section>
+  <section id="playerPanel" class="panel" hidden>
+    <h2>Kaynağı ve kesiti dinle</h2>
+    <p class="meta">Bölüm düğmeleri kaynak MP3’ün belirtilen zamanına atlar. Kesitin başını veya sonunu dinlerken komşu âyet düğmesiyle karşılaştırın. Tarayıcı seek çözünürlüğü milisaniye düzeyinde garanti edilmez.</p>
+    <audio id="audio" controls preload="metadata" crossorigin="anonymous"></audio>
+    <div class="controls"><button id="stop" type="button">Durdur</button><label>Hız <select id="speed"><option value="1">1×</option><option value="0.8">0,8×</option><option value="0.65">0,65×</option></select></label><label><input id="loop" type="checkbox"> Kesiti tekrarla</label></div>
+    <p id="status" class="status" role="status"></p>
+    <div id="windows" class="windowgrid"></div>
+  </section>
+  <section id="evidence" class="panel" hidden><h2>Kelime ve sınır kanıtı</h2><div id="boundaries" class="scroll"></div><h3>Kelime zamanları</h3><div id="words" class="scroll"></div></section>
+  <section id="notes" class="panel" hidden><h2>Dinleme notları</h2><div id="prompts"></div><label class="prompt"><strong>Ek not</strong><textarea id="extraNote" placeholder="Duyduğunuz kelime ve yaklaşık zaman…"></textarea></label><button id="export" class="export" type="button">Bu âyetin notlarını JSON olarak dışa aktar</button><p class="meta">Dışa aktarma yalnız tarayıcınızda bir not dosyası oluşturur; siteye, Firebase’e veya uygulamaya veri göndermez.</p></section>
+</main>
+<script>
+(()=>{'use strict';
+  const $=id=>document.getElementById(id),audio=$('audio');
+  let manifest=null,current=null,windowNow=null,playToken=0,raf=0,audioContext=null,gate=null;
+  const fmt=ms=>{const total=Math.floor(ms/1000),min=Math.floor(total/60),sec=total%60,milli=Math.round(ms%1000);return `${min}:${String(sec).padStart(2,'0')}.${String(milli).padStart(3,'0')}`};
+  const el=(tag,className,text)=>{const node=document.createElement(tag);if(className)node.className=className;if(text!=null)node.textContent=String(text);return node};
+  function setStatus(message){$('status').textContent=message}
+  function mute(){if(gate){gate.gain.cancelScheduledValues(audioContext.currentTime);gate.gain.setValueAtTime(0,audioContext.currentTime)}}
+  function ensureGate(){if(!audioContext){audioContext=new AudioContext();const media=audioContext.createMediaElementSource(audio);gate=audioContext.createGain();gate.gain.value=0;media.connect(gate).connect(audioContext.destination)}}
+  function scheduleGate(win){const now=audioContext.currentTime,seconds=Math.max(0,(win.toMs/1000-audio.currentTime)/audio.playbackRate);gate.gain.cancelScheduledValues(now);gate.gain.setValueAtTime(1,now);gate.gain.setValueAtTime(0,now+seconds)}
+  function stop(){playToken++;windowNow=null;cancelAnimationFrame(raf);mute();audio.pause();document.querySelectorAll('#windows button').forEach(button=>button.setAttribute('aria-pressed','false'))}
+  function sourceUrl(source){return ({chapter:current.chapterAudio,verse:current.verseAudio,next:current.nextVerseAudio,verse192:current.verseAudio192,next192:current.nextVerseAudio192,comparison:current.comparisonAudio})[source]}
+  function sourceName(source){return ({chapter:'Sûre MP3',verse:`${current.id} ayrı âyet klibi 64 kbps`,next:'Komşu âyet klibi 64 kbps',verse192:`${current.id} ayrı âyet klibi 192 kbps`,next192:'Komşu âyet klibi 192 kbps',comparison:'Aynı hocanın 100. sûre kaydı'})[source]||source}
+  function waitFor(event,token){return new Promise((resolve,reject)=>{if(token!==playToken)return reject(Error('Eski oynatma isteği'));const timer=setTimeout(()=>{cleanup();reject(Error('Ses kaynağı zamanında hazır olmadı'))},30000);const done=()=>{cleanup();resolve()};const failed=()=>{cleanup();reject(Error('Ses kaynağı yüklenemedi'))};function cleanup(){clearTimeout(timer);audio.removeEventListener(event,done);audio.removeEventListener('error',failed)}audio.addEventListener(event,done,{once:true});audio.addEventListener('error',failed,{once:true})})}
+  async function playWindow(win,button){stop();const token=playToken,url=sourceUrl(win.source);windowNow=win;button.setAttribute('aria-pressed','true');setStatus(`${sourceName(win.source)} hazırlanıyor: ${fmt(win.fromMs)}–${fmt(win.toMs)}`);
+    try{if(audio.dataset.source!==url){audio.dataset.source=url;audio.src=url;audio.load();if(audio.readyState<1)await waitFor('loadedmetadata',token)}
+      if(token!==playToken)return;audio.playbackRate=Number($('speed').value);const seconds=win.fromMs/1000;
+      if(Math.abs(audio.currentTime-seconds)>.025){audio.currentTime=seconds;if(audio.seeking)await waitFor('seeked',token)}
+      if(token!==playToken)return;ensureGate();await audioContext.resume();await audio.play();scheduleGate(win);setStatus(`${win.label} oynuyor (${fmt(win.fromMs)}–${fmt(win.toMs)})`);tick(token)
+    }catch(error){if(token===playToken){stop();setStatus(`Oynatılamadı: ${error.message}. Kaynak bağlantısını açıp erişimi kontrol edin.`)}}}
+  async function repeatWindow(token){if(token!==playToken||!windowNow)return;const win=windowNow;mute();audio.pause();audio.currentTime=win.fromMs/1000;
+    try{if(audio.seeking)await waitFor('seeked',token);if(token!==playToken)return;await audio.play();scheduleGate(win);tick(token)}catch(error){if(token===playToken){stop();setStatus(`Tekrar başlatılamadı: ${error.message}`)}}}
+  function tick(token){if(token!==playToken||!windowNow)return;
+    if(!audio.seeking&&audio.currentTime*1000>=windowNow.toMs-18){if($('loop').checked){repeatWindow(token);return}else{mute();audio.pause();setStatus(`Kesit tamamlandı: ${windowNow.label}`);windowNow=null;return}}
+    raf=requestAnimationFrame(()=>tick(token))}
+  function renderTable(parent,headers,rows){const table=el('table'),thead=el('thead'),head=el('tr');for(const title of headers)head.append(el('th','',title));thead.append(head);table.append(thead);const body=el('tbody');for(const cells of rows){const tr=el('tr',cells.focus?'focus':'');for(const cell of cells.values)tr.append(el('td',cell.arabic?'ar':'',cell.text));body.append(tr)}table.append(body);parent.replaceChildren(table)}
+  function link(label,url){const a=el('a','',label);a.href=url;a.target='_blank';a.rel='noopener noreferrer';return a}
+  function renderCase(item){stop();current=item;$('caseTitle').textContent=item.title;$('caseQuestion').textContent=manifest.question;
+    const sources=$('sources');sources.replaceChildren();for(const [label,url] of [['Sûre MP3',item.chapterAudio],[`${item.id} ayrı klip 64 kbps`,item.verseAudio],['Komşu âyet ayrı klibi 64 kbps',item.nextVerseAudio],[`${item.id} ayrı klip 192 kbps`,item.verseAudio192],['Komşu âyet ayrı klibi 192 kbps',item.nextVerseAudio192],['Aynı hocanın 100. sûre kaydı',item.comparisonAudio]]){if(!url)continue;const p=el('p');p.append(el('strong','',`${label}: `),link(url,url));sources.append(p)}
+    const bar=$('casebar');for(const button of bar.children)button.setAttribute('aria-pressed',String(button.dataset.case===item.id));
+    const windows=$('windows');windows.replaceChildren();for(const win of item.windows){const button=el('button','',win.label);button.type='button';button.setAttribute('aria-pressed','false');button.append(el('small','',`${sourceName(win.source)} · ${fmt(win.fromMs)}–${fmt(win.toMs)}`));button.addEventListener('click',()=>playWindow(win,button));windows.append(button)}
+    renderTable($('boundaries'),['Sınır','Sûre zamanında','Kanıt / belirsizlik'],item.boundaries.map(b=>({values:[{text:b.name},{text:fmt(b.ms)},{text:b.basis}]})));
+    renderTable($('words'),['Konum','Arapça','Aday başlangıç','Aday bitiş','Kaynak'],item.wordContext.map(w=>({focus:item.focusPositions?.includes(w.position)||[17,18,22,'34:47/1','ek ses'].includes(w.position),values:[{text:w.position},{text:w.arabic,arabic:true},{text:fmt(w.candidateMs[0])},{text:w.candidateMs[1]==null?'—':fmt(w.candidateMs[1])},{text:w.basis||'İnceleme aralığı'}]})));
+    const prompts=$('prompts');prompts.replaceChildren();item.reviewPrompts.forEach((question,index)=>{const label=el('label','prompt'),strong=el('strong','',`${index+1}. ${question}`),textarea=el('textarea');textarea.dataset.question=question;textarea.placeholder='Dinleyerek gördüğünüz kanıt ve zaman…';label.append(strong,textarea);prompts.append(label)});$('extraNote').value='';
+    for(const id of ['caseIntro','playerPanel','evidence','notes'])$(id).hidden=false;setStatus('Dinlemek için bir kesit seçin.')}
+  function load(data){if(!data||data.status!=='local-human-listening-review-only'||!Array.isArray(data.cases)||data.cases.length!==2)throw Error('Beklenen inceleme manifesti değil');manifest=data;$('manifestLoader').classList.remove('show');const bar=$('casebar');bar.replaceChildren();for(const item of data.cases){const button=el('button','',item.title);button.type='button';button.dataset.case=item.id;button.addEventListener('click',()=>renderCase(item));bar.append(button)}renderCase(data.cases[0])}
+  $('stop').addEventListener('click',()=>{stop();setStatus('Oynatma durduruldu.')});$('speed').addEventListener('change',()=>audio.playbackRate=Number($('speed').value));
+  $('export').addEventListener('click',()=>{if(!current)return;const notes={review:'Hânî yerel ses incelemesi',caseId:current.id,createdAt:new Date().toISOString(),answers:[...$('prompts').querySelectorAll('textarea')].map(t=>({question:t.dataset.question,answer:t.value.trim()})),extraNote:$('extraNote').value.trim(),candidateAppliedToApp:false};const url=URL.createObjectURL(new Blob([JSON.stringify(notes,null,2)+'\n'],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`hani-${current.id.replace(':','-')}-dinleme-notlari.json`;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);setStatus('İnceleme notları JSON dosyası olarak hazırlandı.')});
+  $('manifestFile').addEventListener('change',async event=>{try{load(JSON.parse(await event.target.files[0].text()))}catch(error){$('manifestLoader').classList.add('show');$('manifestLoader').querySelector('p').textContent=`Manifest açılamadı: ${error.message}`}});
+  fetch('./hani-audio-review.json').then(response=>{if(!response.ok)throw Error(`HTTP ${response.status}`);return response.json()}).then(load).catch(()=>{$('manifestLoader').classList.add('show')});
+})();
+</script>
+</body>
+</html>

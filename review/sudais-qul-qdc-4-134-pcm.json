@@ -1,0 +1,44 @@
+{
+  "status": "review-only-not-for-production",
+  "key": "4:134",
+  "method": "Both full MP3 streams decoded from byte zero; three independent 1-second PCM windows, 1ms offset search",
+  "qdc_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/4.mp3",
+  "qul_url": "https://audio-cdn.tarteel.ai/quran/surah/abdulrahmanAlSudais/murattal/mp3/004.mp3",
+  "qul_verse_range_ms": [
+    2780415,
+    2796519
+  ],
+  "qul_word_positions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "windows": [
+    {
+      "qul_start_ms": 2782681,
+      "offset_ms": 0,
+      "correlation": 0.999831412526014
+    },
+    {
+      "qul_start_ms": 2787212,
+      "offset_ms": 0,
+      "correlation": 0.9998200691068937
+    },
+    {
+      "qul_start_ms": 2791743,
+      "offset_ms": 0,
+      "correlation": 0.9998551400493663
+    }
+  ]
+}

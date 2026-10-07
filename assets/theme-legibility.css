@@ -1,0 +1,141 @@
+/* Keep each theme's palette and layout; darken only light accent surfaces
+   that carry white labels. The JS theme variables handle ordinary buttons. */
+body:is(
+  [data-theme="elifaimza"],
+  [data-theme="seherturuncu"],
+  [data-theme="mercanesinti"],
+  [data-theme="seftalikum"],
+  [data-theme="sedefmavi"],
+  [data-theme="lavantasukun"],
+  [data-theme="mintferah"],
+  [data-theme="okyanisturkuaz"],
+  [data-theme="zeytinada"],
+  [data-theme="kumbeji"],
+  [data-theme="gulsehri"]
+){--theme-tab-muted:#fff;}
+
+body:is(
+  [data-theme="elifaimza"],
+  [data-theme="seherturuncu"],
+  [data-theme="mercanesinti"],
+  [data-theme="seftalikum"],
+  [data-theme="sedefmavi"],
+  [data-theme="lavantasukun"],
+  [data-theme="mintferah"],
+  [data-theme="okyanisturkuaz"],
+  [data-theme="zeytinada"],
+  [data-theme="kumbeji"],
+  [data-theme="gulsehri"]
+) .togetherHero{
+  background-image:linear-gradient(rgba(0,0,0,.42),rgba(0,0,0,.42)),var(--theme-hero)!important;
+}
+
+body:is(
+  [data-theme="elifaimza"],
+  [data-theme="seherturuncu"],
+  [data-theme="mercanesinti"],
+  [data-theme="seftalikum"],
+  [data-theme="sedefmavi"],
+  [data-theme="lavantasukun"],
+  [data-theme="mintferah"],
+  [data-theme="okyanisturkuaz"],
+  [data-theme="zeytinada"],
+  [data-theme="kumbeji"],
+  [data-theme="gulsehri"]
+) .tabbar{
+  background-image:linear-gradient(rgba(0,0,0,.42),rgba(0,0,0,.42)),var(--theme-tab)!important;
+}
+
+body[data-theme="nahlyildizlari"][data-family="modern"] .tabbar .tabbtn{
+  color:#F4F7FF!important;
+}
+
+/* In the dark Saray theme, the reading light must darken the word itself. */
+body[data-theme="saraygece"] #reader .flow .w.active{
+  background:#F4D273!important;
+  color:#0B1320!important;
+  -webkit-text-fill-color:#0B1320!important;
+  text-shadow:none!important;
+  box-shadow:0 0 0 2px #C99A35,0 0 0 5px rgba(244,210,115,.18)!important;
+  animation:none!important;
+}
+body[data-theme="saraygece"] #reader .flow .w.active *{
+  color:#0B1320!important;
+  -webkit-text-fill-color:#0B1320!important;
+  text-shadow:none!important;
+  opacity:1!important;
+}
+
+/* The selection tools need an opaque dark surface behind their light labels. */
+body[data-theme="saraygece"] #selbar.seltop{
+  background:linear-gradient(180deg,#20314A,#111D30)!important;
+  color:#F8E6A6!important;
+  border-bottom:1px solid #C99A35!important;
+}
+body[data-theme="saraygece"] #selbar .selinfo,
+body[data-theme="saraygece"] #selbar .selinfo b,
+body[data-theme="saraygece"] #selbar .selinfo .sub{
+  color:#F8E6A6!important;
+  -webkit-text-fill-color:#F8E6A6!important;
+}
+body[data-theme="saraygece"] #selbar .ss .ico{
+  background:#2A3F5B!important;
+  color:#FFF1C5!important;
+}
+body[data-theme="saraygece"] #selbar .ss .lbl{
+  color:#FFF1C5!important;
+  -webkit-text-fill-color:#FFF1C5!important;
+}
+body[data-theme="saraygece"] #selbar .ss:disabled{opacity:1!important;}
+body[data-theme="saraygece"] #selbar .ss:disabled .ico{
+  background:#1C2B40!important;
+  color:#AEBBD0!important;
+}
+body[data-theme="saraygece"] #selbar .ss:disabled .lbl{
+  color:#AEBBD0!important;
+  -webkit-text-fill-color:#AEBBD0!important;
+}
+
+/* Nahl Yıldızları has the same light-on-light reading and selection conflict. */
+body[data-theme="nahlyildizlari"] #reader .flow .w.active{
+  background:#DCE7FF!important;
+  color:#101A32!important;
+  -webkit-text-fill-color:#101A32!important;
+  text-shadow:none!important;
+  box-shadow:0 0 0 2px #6387E0,0 0 0 5px rgba(99,135,224,.2)!important;
+  animation:none!important;
+}
+body[data-theme="nahlyildizlari"] #reader .flow .w.active *{
+  color:#101A32!important;
+  -webkit-text-fill-color:#101A32!important;
+  text-shadow:none!important;
+  opacity:1!important;
+}
+body[data-theme="nahlyildizlari"] #selbar.seltop{
+  background:linear-gradient(180deg,#1D2D54,#0B152E)!important;
+  color:#F8FAFF!important;
+  border-bottom:1px solid #6387E0!important;
+}
+body[data-theme="nahlyildizlari"] #selbar .selinfo,
+body[data-theme="nahlyildizlari"] #selbar .selinfo b,
+body[data-theme="nahlyildizlari"] #selbar .selinfo .sub{
+  color:#F8FAFF!important;
+  -webkit-text-fill-color:#F8FAFF!important;
+}
+body[data-theme="nahlyildizlari"] #selbar .ss .ico{
+  background:#2B447C!important;
+  color:#F8FAFF!important;
+}
+body[data-theme="nahlyildizlari"] #selbar .ss .lbl{
+  color:#F8FAFF!important;
+  -webkit-text-fill-color:#F8FAFF!important;
+}
+body[data-theme="nahlyildizlari"] #selbar .ss:disabled{opacity:1!important;}
+body[data-theme="nahlyildizlari"] #selbar .ss:disabled .ico{
+  background:#1A2A50!important;
+  color:#B9C9EC!important;
+}
+body[data-theme="nahlyildizlari"] #selbar .ss:disabled .lbl{
+  color:#B9C9EC!important;
+  -webkit-text-fill-color:#B9C9EC!important;
+}

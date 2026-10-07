@@ -1,0 +1,27 @@
+{
+  "source": "test-results/sudais-qdc-3.mp3",
+  "sourceBytes": 58539904,
+  "sourceSha256": "7a52d1efb56e31d8c84436aec39cbeebde8498dfa43acaf2c082c7c145153614",
+  "windows": [
+    "3:10",
+    "3:30",
+    "3:50",
+    "3:70",
+    "3:90",
+    "3:110",
+    "3:130",
+    "3:150",
+    "3:170",
+    "3:190"
+  ],
+  "method": "sequential decode from MP3 byte zero; separate passes versus one batch pass",
+  "baselineMs": 25795,
+  "batchMs": 4813,
+  "speedup": 5.36,
+  "batchDecodedBytes": 54919168,
+  "batchDecodeCalls": 1676,
+  "sampleRate": 44100,
+  "channels": 2,
+  "comparedSamples": 882018,
+  "maxAbsoluteError": 0
+}

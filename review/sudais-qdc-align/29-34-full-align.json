@@ -1,0 +1,124 @@
+{
+  "status": "machine-review-only",
+  "source_url": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/29.mp3",
+  "source_file_size": 12885359,
+  "source_sha256": "525bcfbaaa6fbeece6c93e0e25d7d36393aaddd406366284ded5bd141107af67",
+  "excerpt_file": "test-results/sudais-qdc-align/29-34.wav",
+  "excerpt_sha256": "f30011b9d982c2855f1bf6573a48c7d348df4f7711eac46effce568a3e354ddd",
+  "excerpt_from_ms": 441810,
+  "excerpt_to_ms": 451890,
+  "provider_segments": [
+    [
+      1,
+      441810,
+      442790
+    ],
+    [
+      2,
+      442790,
+      443950
+    ],
+    [
+      3,
+      443950,
+      444440
+    ],
+    [
+      4,
+      444440,
+      444980
+    ],
+    [
+      5,
+      444980,
+      445600
+    ],
+    [
+      6,
+      445600,
+      446510
+    ],
+    [
+      7,
+      446510,
+      447110
+    ],
+    [
+      8,
+      447110,
+      447780
+    ],
+    [
+      9,
+      447780,
+      449230
+    ],
+    [
+      10,
+      449230,
+      449750
+    ],
+    [
+      11,
+      449750,
+      450490
+    ],
+    [
+      12,
+      450490,
+      451645
+    ]
+  ],
+  "aligner": {
+    "audio_id": "b2a40fb14282476ca57d1233f23feeb5",
+    "segments": [
+      {
+        "segment": 1,
+        "time_from": 0,
+        "time_to": 5.107,
+        "ref_from": "29:33:5",
+        "ref_to": "29:33:10",
+        "matched_text": "لُوطًا سِىٓءَ بِهِمْ وَضَاقَ بِهِمْ ذَرْعًا",
+        "confidence": 0.867,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      },
+      {
+        "segment": 2,
+        "time_from": 5.137,
+        "time_to": 10.08,
+        "ref_from": "29:33:11",
+        "ref_to": "29:33:17",
+        "matched_text": "وَقَالُوا۟ لَا تَخَفْ وَلَا تَحْزَنْ إِنَّا مُنَجُّوكَ",
+        "confidence": 0.933,
+        "has_missing_words": true,
+        "has_repeated_words": false,
+        "kind": "quran",
+        "special_type": null,
+        "error": null
+      }
+    ],
+    "device": "CPU",
+    "warning": "GPU quota was exhausted, so this ran on the CPU instead.",
+    "_meta": {
+      "schema_version": 2,
+      "reference_id": "qul-text-qpc-hafs-312",
+      "reference_riwayah": "hafs",
+      "recitation_riwayah": "hafs",
+      "output_edition_id": "qul-text-qpc-hafs-312",
+      "output_riwayah": "hafs",
+      "projection_id": null,
+      "projection_sha256": null,
+      "requested_model": "Base",
+      "effective_model": "Base",
+      "runtime": {
+        "processing_seconds": 0.5166044235229492,
+        "queue_seconds": 0.04063044098438695,
+        "total_seconds": 0.5572348645073362
+      }
+    }
+  }
+}

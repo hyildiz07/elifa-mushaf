@@ -1,0 +1,149 @@
+{
+  "verse": "24:35",
+  "source": "https://download.quranicaudio.com/qdc/abdurrahmaan_as_sudais/murattal/24.mp3",
+  "range": [
+    618000,
+    675030
+  ],
+  "pcmWindow": [
+    615500,
+    677530
+  ],
+  "sampleRate": 44100,
+  "results": [
+    {
+      "position": 4,
+      "proposalMs": 621784,
+      "measuredCutMs": 621895,
+      "nextStartMs": 621895,
+      "insideGap": true,
+      "bufferCoversCut": true
+    },
+    {
+      "position": 9,
+      "proposalMs": 626765,
+      "measuredCutMs": 626900,
+      "nextStartMs": 626900,
+      "insideGap": true,
+      "bufferCoversCut": true
+    },
+    {
+      "position": 16,
+      "proposalMs": 634477,
+      "insideGap": false,
+      "bufferCoversCut": false
+    },
+    {
+      "position": 20,
+      "proposalMs": 639768,
+      "insideGap": false,
+      "bufferCoversCut": false
+    },
+    {
+      "position": 25,
+      "proposalMs": 645010,
+      "measuredCutMs": 645055.75,
+      "nextStartMs": 645055.75,
+      "insideGap": true,
+      "bufferCoversCut": true
+    },
+    {
+      "position": 32,
+      "proposalMs": 654052,
+      "measuredCutMs": 654091.75,
+      "nextStartMs": 654091.75,
+      "insideGap": true,
+      "bufferCoversCut": true
+    },
+    {
+      "position": 35,
+      "proposalMs": 658423,
+      "measuredCutMs": 658495,
+      "nextStartMs": 658495,
+      "insideGap": true,
+      "bufferCoversCut": true
+    },
+    {
+      "position": 40,
+      "proposalMs": 664045,
+      "insideGap": false,
+      "bufferCoversCut": false
+    },
+    {
+      "position": 44,
+      "proposalMs": 669306,
+      "measuredCutMs": 669348.75,
+      "nextStartMs": 669348.75,
+      "insideGap": true,
+      "bufferCoversCut": true
+    }
+  ],
+  "allAcousticCuts": [
+    {
+      "afterWord": 2,
+      "cutMs": 619685,
+      "leftEndMs": 619473,
+      "rightStartMs": 619593
+    },
+    {
+      "afterWord": 4,
+      "cutMs": 621895,
+      "leftEndMs": 621553,
+      "rightStartMs": 622014
+    },
+    {
+      "afterWord": 7,
+      "cutMs": 624875,
+      "leftEndMs": 624294,
+      "rightStartMs": 624914
+    },
+    {
+      "afterWord": 9,
+      "cutMs": 626900,
+      "leftEndMs": 626495,
+      "rightStartMs": 627035
+    },
+    {
+      "afterWord": 14,
+      "cutMs": 632180,
+      "leftEndMs": 631976,
+      "rightStartMs": 632216
+    },
+    {
+      "afterWord": 19,
+      "cutMs": 638350,
+      "leftEndMs": 637918,
+      "rightStartMs": 638518
+    },
+    {
+      "afterWord": 25,
+      "cutMs": 645055.75,
+      "leftEndMs": 644760,
+      "rightStartMs": 645260
+    },
+    {
+      "afterWord": 32,
+      "cutMs": 654091.75,
+      "leftEndMs": 653742,
+      "rightStartMs": 654362
+    },
+    {
+      "afterWord": 35,
+      "cutMs": 658495,
+      "leftEndMs": 658203,
+      "rightStartMs": 658643
+    },
+    {
+      "afterWord": 44,
+      "cutMs": 669348.75,
+      "leftEndMs": 669106,
+      "rightStartMs": 669506
+    },
+    {
+      "afterWord": 46,
+      "cutMs": 671400,
+      "leftEndMs": 670947,
+      "rightStartMs": 671427
+    }
+  ]
+}

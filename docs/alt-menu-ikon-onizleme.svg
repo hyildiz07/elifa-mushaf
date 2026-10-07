@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="330" viewBox="0 0 720 330">
+  <defs>
+    <linearGradient id="navy" x2="0" y2="1">
+      <stop stop-color="#0b3158"/>
+      <stop offset="1" stop-color="#061b36"/>
+    </linearGradient>
+    <symbol id="brain" viewBox="0 0 24 24">
+      <g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5.5c0-1.8-1.1-3-2.8-3a3 3 0 0 0-3 3.1A3.7 3.7 0 0 0 3.7 11a3.6 3.6 0 0 0 1.4 5.8A3.4 3.4 0 0 0 8.4 21c2 0 3.6-1.5 3.6-3.6V5.5Z"/>
+        <path d="M12 5.5c0-1.8 1.1-3 2.8-3a3 3 0 0 1 3 3.1 3.7 3.7 0 0 1 2.5 5.4 3.6 3.6 0 0 1-1.4 5.8 3.4 3.4 0 0 1-3.3 4.2c-2 0-3.6-1.5-3.6-3.6V5.5Z"/>
+        <path d="M6.4 8.5c1.3-.2 2.2.5 2.5 1.5M4.7 13.1c1.1-.6 2.3-.4 3.2.5M8.4 16.4c-.9.3-1.4 1-1.5 1.8"/>
+        <path d="M17.6 8.5c-1.3-.2-2.2.5-2.5 1.5m4.2 3.1c-1.1-.6-2.3-.4-3.2.5m-.5 2.8c.9.3 1.4 1 1.5 1.8"/>
+      </g>
+    </symbol>
+    <symbol id="dua" viewBox="0 0 64 56">
+      <g fill="none" stroke="currentColor" stroke-width="3.9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M17 44C10 42 6 36 6 28V15c0-3 4-4 5-1l3 12V8c0-4 5-4 5 0v15V6c0-4 5-4 5 0v17V9c0-4 5-4 5 0v19"/>
+        <path d="M47 44c7-2 11-8 11-16V15c0-3-4-4-5-1l-3 12V8c0-4-5-4-5 0v15V6c0-4-5-4-5 0v17V9c0-4-5-4-5 0v19"/>
+        <path d="M17 48h12m6 0h12"/>
+      </g>
+    </symbol>
+  </defs>
+  <rect width="720" height="330" fill="#f8f3e7"/>
+  <text x="40" y="44" fill="#092b50" font-family="Arial,sans-serif" font-size="22" font-weight="700">Alt menü için ikon önizlemesi</text>
+  <text x="40" y="70" fill="#5c6875" font-family="Arial,sans-serif" font-size="14">Mevcut altın çizgi ve lacivert zeminle örnek</text>
+  <rect x="40" y="94" width="640" height="124" rx="18" fill="url(#navy)"/>
+  <rect x="40" y="94" width="640" height="2" fill="#c99a35"/>
+  <g color="#f3d273" fill="#f3d273" font-family="Arial,sans-serif" text-anchor="middle" font-weight="700">
+    <use href="#brain" x="177" y="112" width="62" height="62"/>
+    <text x="208" y="198" font-size="19">Ezber</text>
+    <use href="#dua" x="481" y="112" width="62" height="62"/>
+    <text x="512" y="198" font-size="19">Dua</text>
+  </g>
+  <text x="40" y="254" fill="#5c6875" font-family="Arial,sans-serif" font-size="14">Telefondaki yaklaşık gerçek boyut</text>
+  <rect x="40" y="267" width="640" height="54" rx="10" fill="url(#navy)"/>
+  <g color="#f3d273" fill="#f3d273" font-family="Arial,sans-serif" text-anchor="middle" font-weight="700">
+    <use href="#brain" x="196" y="271" width="24" height="24"/>
+    <text x="208" y="312" font-size="11">Ezber</text>
+    <use href="#dua" x="500" y="271" width="24" height="24"/>
+    <text x="512" y="312" font-size="11">Dua</text>
+  </g>
+</svg>

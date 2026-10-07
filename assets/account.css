@@ -1,0 +1,54 @@
+.homebar .account-home{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;min-height:36px;margin:0;padding:0 12px;border:1px solid var(--line,#ddd);border-radius:12px;background:var(--surface,#fffdf5);color:var(--navy,#12293f);font:600 12px/1.2 Inter,system-ui,sans-serif;white-space:nowrap;cursor:pointer}
+.homebar .account-home svg{width:17px;height:17px;flex:none}
+.homebar .account-home:focus-visible{outline:3px solid var(--gold,#b88b29);outline-offset:2px}
+.homebar .account-home:active{transform:translateY(1px)}
+.account-settings-row{width:100%;border:0;background:transparent;text-align:left;font:inherit}
+.account-settings-row:focus-visible{outline:3px solid var(--gold,#b88b29);outline-offset:-3px}
+@media(min-width:768px){#ayarlar .ayarlarbody .account-settings-section{grid-column:1/-1}}
+.homebar #accountHomeCompact{display:none}
+@media(max-width:700px){
+ .homebar{gap:6px;padding-left:10px!important;padding-right:10px!important}
+ body[data-layout="saray"] .homebar{padding-left:max(10px,env(safe-area-inset-left))!important;padding-right:max(10px,env(safe-area-inset-right))!important}
+ .homebar .iconbtn,body[data-layout="saray"] .homebar .iconbtn{width:34px;height:34px;min-width:34px;border-radius:10px}
+ .homebar .iconbtn svg,body[data-layout="saray"] .homebar .iconbtn svg{width:18px;height:18px}
+ .homebar .topLogo,body[data-layout="saray"] .homebar .topLogo{width:34px;height:34px}
+ .homebar .account-home{min-height:34px;padding:0 8px;font-size:11px}
+ .homebar #accountHomeLabel{display:none}
+ .homebar #accountHomeCompact{display:inline}
+}
+#accountDialog{width:min(560px,calc(100% - 24px));max-height:calc(100dvh - 28px);padding:0;border:1px solid #d9cfb7;border-radius:20px;background:#fffdf7;color:#17324a;box-shadow:0 18px 70px #0005;z-index:2147483646;font:16px/1.55 system-ui,sans-serif}
+#accountDialog::backdrop{background:#0a1f38aa;backdrop-filter:blur(3px)}
+#accountDialog *{box-sizing:border-box}#accountDialog [hidden]{display:none!important}
+.account-head{display:flex;justify-content:space-between;align-items:center;padding:17px 22px;border-bottom:1px solid #e9e0ce;position:sticky;top:0;background:#fffdf7;z-index:1}.account-head h2{font-size:20px;margin:0}
+.account-body{padding:20px 24px 25px}#accountDialog h3{font-size:22px;margin:2px 0 8px}#accountDialog p{margin:8px 0 16px}.account-muted{font-size:14px;color:#596776}
+#accountDialog button{min-height:44px;border:1px solid #d6c9ac;border-radius:10px;padding:9px 14px;background:#fff;color:#17324a;font:600 14px system-ui;cursor:pointer}#accountDialog button:disabled{opacity:.5;cursor:not-allowed}#accountDialog button:focus-visible,#accountDialog input:focus-visible{outline:3px solid #b88b29;outline-offset:3px}
+#accountDialog button.account-primary{background:#17324a;color:#fff;border-color:#17324a;width:100%;margin-top:12px}#accountDialog button.account-link{border:0;background:transparent;text-decoration:underline}#accountDialog .danger{color:#a33328}
+.account-tabs{display:flex;gap:8px;margin:0 0 22px}.account-tabs button{flex:1}.account-tabs button[aria-pressed=true]{background:#eee6d5!important;border-color:#b49554!important}
+#accountDialog label{display:block;font-size:14px;font-weight:600;margin:14px 0 5px}#accountDialog input:not([type=checkbox]):not([type=radio]){width:100%;height:46px;border:1px solid #c4cbd1;border-radius:9px;background:#fff;color:#17324a;padding:10px;font-size:16px}#accountDialog .account-check{display:flex;align-items:flex-start;gap:10px;font-weight:400}#accountDialog input[type=checkbox]{flex:0 0 auto;width:19px;height:19px;margin:2px 0}
+#accountStatus{padding:12px 16px;margin:0 24px 18px;border-radius:10px;background:#edf3ed;font-size:14px;overflow-wrap:anywhere}#accountStatus:empty{display:none}#accountStatus.error{background:#fff0ec;color:#922e24}
+.account-card{padding:16px;border:1px solid #e4dccb;border-radius:12px;margin:15px 0;background:#faf6ed}#accountBackupList{padding:0;list-style:none}#accountBackupList li{display:flex;flex-wrap:wrap;gap:7px;align-items:center;padding:12px 0;border-bottom:1px solid #e4dccb}#accountBackupList li span{width:100%;font-size:14px}
+#accountDialog details{margin-top:22px;border-top:1px solid #e4dccb;padding-top:16px}#accountDialog summary{cursor:pointer}#accountDialog a{color:#174f76}
+#storageFailure{position:fixed;top:0;left:0;right:0;z-index:2147483647;background:#fff0cf;color:#4e3504;padding:12px 18px;text-align:center;font:14px/1.4 system-ui}#storageFailure button{margin-left:12px;padding:7px 12px;border:1px solid #8b650a;border-radius:6px;background:white;color:#4e3504}
+@media(max-width:430px){.account-body{padding:16px}.account-head{padding:14px 16px}#accountStatus{margin-left:16px;margin-right:16px}}
+
+#accountGoogle{width:100%;margin:10px 0;font-weight:700;background:#fff;color:#17324a;border:1px solid #b9c4c9}
+#accountDialog #accountApple{width:100%;margin:10px 0;font-weight:700;background:#111;color:#fff;border:1px solid #111}
+#accountApple[hidden]{display:none}
+#accountProfileForm{margin:16px 0}#accountVerification button{margin:4px}
+#accountConflict{margin-top:14px;padding:12px;border:1px solid #b88b29;border-radius:10px;background:#fffdf7}#accountConflictList>div{padding:10px 0;border-bottom:1px solid #e4dccb}#accountConflictList span{display:block;font-weight:600;overflow-wrap:anywhere}#accountConflictList label{display:inline-flex;align-items:center;gap:6px;margin:8px 20px 4px 0;font-weight:400;min-height:32px}#accountConflictList input[type=radio]{width:19px;height:19px;flex:none}#accountSyncStatus{overflow-wrap:anywhere}
+@media(min-width:700px){#accountDialog{width:min(640px,calc(100% - 40px))}}
+#accountDialog{background:var(--surface,#fffdf7);color:var(--ink,#17324a);border-color:var(--line,#d9cfb7)}
+#accountDialog .account-head{background:var(--surface,#fffdf7);border-color:var(--line,#e9e0ce)}
+#accountDialog .account-card,#accountConflict{background:var(--bg,#faf6ed);border-color:var(--line,#e4dccb)}
+#accountDialog button{background:var(--surface,#fff);color:var(--ink,#17324a);border-color:var(--line,#d6c9ac)}
+#accountDialog button.account-primary,#accountDialog .account-tabs button[aria-pressed=true]{background:var(--theme-tab,var(--navy,#17324a))!important;color:var(--theme-on-accent,#fff)!important;border-color:var(--navy,#17324a)!important}
+#accountDialog input:not([type=checkbox]):not([type=radio]){background:var(--surface,#fff);color:var(--ink,#17324a);border-color:var(--line,#c4cbd1)}
+#accountDialog .account-muted{color:var(--muted,#596776)}
+body[data-theme="nahlyildizlari"] #accountDialog{background:#11182a;color:#f4f7ff;border-color:#35508a}
+body[data-theme="nahlyildizlari"] #accountDialog .account-head,body[data-theme="nahlyildizlari"] #accountDialog .account-card,body[data-theme="nahlyildizlari"] #accountConflict{background:#17223d;color:#f4f7ff;border-color:#35508a}
+body[data-theme="nahlyildizlari"] #accountDialog button{background:#223456;color:#f4f7ff;border-color:#4a6190}
+body[data-theme="nahlyildizlari"] #accountDialog input:not([type=checkbox]):not([type=radio]){background:#11182a;color:#f4f7ff;border-color:#4a6190}
+body[data-theme="nahlyildizlari"] #accountDialog .account-muted{color:#c7d6ff}
+body[data-theme="nahlyildizlari"] #accountStatus{background:#223456;color:#f4f7ff}
+body[data-theme="nahlyildizlari"] #accountStatus.error{background:#4b2531;color:#ffe1e1}
+body[data-theme="nahlyildizlari"] .homebar .account-home{background:#17223d;color:#f4f7ff;border-color:#4a6190}

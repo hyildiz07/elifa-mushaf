@@ -1,0 +1,570 @@
+{
+  "sources": {
+    "chapter6": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/6.mp3",
+    "verse139": "https://everyayah.com/data/Hani_Rifai_64kbps/006139.mp3",
+    "verse140": "https://everyayah.com/data/Hani_Rifai_64kbps/006140.mp3",
+    "chapter34": "https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/34.mp3",
+    "verse46": "https://everyayah.com/data/Hani_Rifai_64kbps/034046.mp3",
+    "verse47": "https://everyayah.com/data/Hani_Rifai_64kbps/034047.mp3",
+    "verse139hi": "https://everyayah.com/data/Hani_Rifai_192kbps/006139.mp3",
+    "verse46hi": "https://everyayah.com/data/Hani_Rifai_192kbps/034046.mp3",
+    "verse140hi": "https://everyayah.com/data/Hani_Rifai_192kbps/006140.mp3",
+    "verse47hi": "https://everyayah.com/data/Hani_Rifai_192kbps/034047.mp3"
+  },
+  "matches": {
+    "start139": {
+      "startMs": 2835112,
+      "correlation": 0.935888
+    },
+    "start140": {
+      "startMs": 2862103,
+      "correlation": 0.798159
+    },
+    "start46": {
+      "startMs": 844852,
+      "correlation": 0.929967
+    },
+    "start47": {
+      "startMs": 872721,
+      "correlation": 0.770491
+    },
+    "start139hi": {
+      "startMs": 2835105,
+      "correlation": 0.911697
+    },
+    "start46hi": {
+      "startMs": 844826,
+      "correlation": 0.927418
+    },
+    "start140hi": {
+      "startMs": 2862080,
+      "correlation": 0.999959
+    },
+    "start47hi": {
+      "startMs": 872691,
+      "correlation": 0.472904
+    }
+  },
+  "durationsMs": {
+    "verse139": 26905.759637188206,
+    "verse46": 27793.92290249433,
+    "verse47": 15307.392290249434,
+    "verse139hi": 26984.48979591837,
+    "verse46hi": 27872.65306122449
+  },
+  "case139": {
+    "alignedClipEndMs": 2862017.759637188,
+    "nextClipStartMs": 2862103,
+    "hiClipEndMs": 2862089.4897959186,
+    "hiNextClipStartMs": 2862080,
+    "hiGapToNextClipMs": -9.48979591857642,
+    "clipLastWindows": [
+      {
+        "ms": 10,
+        "rms": 0.0035,
+        "peak": 0.008771
+      },
+      {
+        "ms": 25,
+        "rms": 0.004041,
+        "peak": 0.01055
+      },
+      {
+        "ms": 50,
+        "rms": 0.003753,
+        "peak": 0.01055
+      },
+      {
+        "ms": 100,
+        "rms": 0.006145,
+        "peak": 0.019271
+      },
+      {
+        "ms": 250,
+        "rms": 0.010088,
+        "peak": 0.026216
+      }
+    ],
+    "hiClipLastWindows": [
+      {
+        "ms": 10,
+        "rms": 0.006742,
+        "peak": 0.013325
+      },
+      {
+        "ms": 25,
+        "rms": 0.006503,
+        "peak": 0.013325
+      },
+      {
+        "ms": 50,
+        "rms": 0.005447,
+        "peak": 0.013325
+      },
+      {
+        "ms": 100,
+        "rms": 0.004772,
+        "peak": 0.013325
+      },
+      {
+        "ms": 250,
+        "rms": 0.00876,
+        "peak": 0.027468
+      }
+    ],
+    "chapterAtAndAfterEnd": [
+      {
+        "offsetMs": [
+          -100,
+          0
+        ],
+        "rms": 0.006652,
+        "peak": 0.020551
+      },
+      {
+        "offsetMs": [
+          0,
+          25
+        ],
+        "rms": 0.00337,
+        "peak": 0.009412
+      },
+      {
+        "offsetMs": [
+          25,
+          50
+        ],
+        "rms": 0.005179,
+        "peak": 0.011452
+      },
+      {
+        "offsetMs": [
+          50,
+          75
+        ],
+        "rms": 0.004563,
+        "peak": 0.012679
+      },
+      {
+        "offsetMs": [
+          75,
+          100
+        ],
+        "rms": 0.000544,
+        "peak": 0.00282
+      },
+      {
+        "offsetMs": [
+          100,
+          150
+        ],
+        "rms": 0.005622,
+        "peak": 0.012557
+      },
+      {
+        "offsetMs": [
+          150,
+          200
+        ],
+        "rms": 0.004588,
+        "peak": 0.01675
+      }
+    ],
+    "chapterAtAndAfterHiEnd": [
+      {
+        "offsetMs": [
+          -50,
+          0
+        ],
+        "rms": 0.004968,
+        "peak": 0.012679
+      },
+      {
+        "offsetMs": [
+          0,
+          10
+        ],
+        "rms": 0.000035,
+        "peak": 0.000169
+      },
+      {
+        "offsetMs": [
+          10,
+          20
+        ],
+        "rms": 0.000003,
+        "peak": 0.000012
+      },
+      {
+        "offsetMs": [
+          20,
+          40
+        ],
+        "rms": 0.003654,
+        "peak": 0.009636
+      },
+      {
+        "offsetMs": [
+          40,
+          80
+        ],
+        "rms": 0.005942,
+        "peak": 0.012557
+      }
+    ],
+    "hiNextClipFirstWindows": [
+      {
+        "ms": [
+          0,
+          10
+        ],
+        "rms": 0,
+        "peak": 0
+      },
+      {
+        "ms": [
+          10,
+          20
+        ],
+        "rms": 0,
+        "peak": 0
+      },
+      {
+        "ms": [
+          20,
+          40
+        ],
+        "rms": 0.000781,
+        "peak": 0.00295
+      },
+      {
+        "ms": [
+          40,
+          80
+        ],
+        "rms": 0.006158,
+        "peak": 0.0132
+      },
+      {
+        "ms": [
+          80,
+          160
+        ],
+        "rms": 0.007695,
+        "peak": 0.070583
+      }
+    ],
+    "continuationCorrelations": [
+      {
+        "endBeforeClipMs": 500,
+        "corr": 0.9075482951304252
+      },
+      {
+        "endBeforeClipMs": 100,
+        "corr": 0.924047389188242
+      },
+      {
+        "endBeforeClipMs": 25,
+        "corr": 0.8541232689687924
+      }
+    ]
+  },
+  "case46": {
+    "alignedClipEndMs": 872645.9229024943,
+    "nextClipStartMs": 872721,
+    "hiClipEndMs": 872698.6530612245,
+    "hiNextClipStartMs": 872691,
+    "hiGapToNextClipMs": -7.653061224496923,
+    "chapterExtraWindows": [
+      {
+        "ms": [
+          871900,
+          872100
+        ],
+        "rms": 0.000932,
+        "peak": 0.001889
+      },
+      {
+        "ms": [
+          872100,
+          872300
+        ],
+        "rms": 0.012616,
+        "peak": 0.052904
+      },
+      {
+        "ms": [
+          872300,
+          872500
+        ],
+        "rms": 0.007404,
+        "peak": 0.025166
+      },
+      {
+        "ms": [
+          872500,
+          872700
+        ],
+        "rms": 0.00744,
+        "peak": 0.032202
+      },
+      {
+        "ms": [
+          872700,
+          872900
+        ],
+        "rms": 0.002964,
+        "peak": 0.012403
+      },
+      {
+        "ms": [
+          872900,
+          873100
+        ],
+        "rms": 0.001926,
+        "peak": 0.006141
+      },
+      {
+        "ms": [
+          873100,
+          873500
+        ],
+        "rms": 0.000952,
+        "peak": 0.004343
+      },
+      {
+        "ms": [
+          873500,
+          874000
+        ],
+        "rms": 0.00036,
+        "peak": 0.001351
+      },
+      {
+        "ms": [
+          874000,
+          874300
+        ],
+        "rms": 0.000618,
+        "peak": 0.006655
+      }
+    ],
+    "clip46LastWindows": [
+      {
+        "ms": 100,
+        "rms": 0.005774,
+        "peak": 0.022137
+      },
+      {
+        "ms": 250,
+        "rms": 0.00736,
+        "peak": 0.031787
+      },
+      {
+        "ms": 500,
+        "rms": 0.009397,
+        "peak": 0.05697
+      },
+      {
+        "ms": 1000,
+        "rms": 0.007208,
+        "peak": 0.05697
+      }
+    ],
+    "hiClip46LastWindows": [
+      {
+        "ms": 10,
+        "rms": 0.00489,
+        "peak": 0.011565
+      },
+      {
+        "ms": 25,
+        "rms": 0.00615,
+        "peak": 0.016443
+      },
+      {
+        "ms": 100,
+        "rms": 0.005247,
+        "peak": 0.017259
+      },
+      {
+        "ms": 250,
+        "rms": 0.007355,
+        "peak": 0.034079
+      },
+      {
+        "ms": 500,
+        "rms": 0.008444,
+        "peak": 0.04029
+      },
+      {
+        "ms": 1000,
+        "rms": 0.007748,
+        "peak": 0.05624
+      }
+    ],
+    "chapterAtAndAfterHiEnd": [
+      {
+        "offsetMs": [
+          -50,
+          0
+        ],
+        "rms": 0.005297,
+        "peak": 0.016235
+      },
+      {
+        "offsetMs": [
+          0,
+          10
+        ],
+        "rms": 0.000703,
+        "peak": 0.006855
+      },
+      {
+        "offsetMs": [
+          10,
+          20
+        ],
+        "rms": 0.000041,
+        "peak": 0.000186
+      },
+      {
+        "offsetMs": [
+          20,
+          40
+        ],
+        "rms": 0.001177,
+        "peak": 0.005929
+      },
+      {
+        "offsetMs": [
+          40,
+          80
+        ],
+        "rms": 0.003938,
+        "peak": 0.012403
+      }
+    ],
+    "hiNextClipFirstWindows": [
+      {
+        "ms": [
+          0,
+          10
+        ],
+        "rms": 0,
+        "peak": 0
+      },
+      {
+        "ms": [
+          10,
+          20
+        ],
+        "rms": 0,
+        "peak": 0
+      },
+      {
+        "ms": [
+          20,
+          40
+        ],
+        "rms": 0.001243,
+        "peak": 0.006216
+      },
+      {
+        "ms": [
+          40,
+          80
+        ],
+        "rms": 0.004147,
+        "peak": 0.013052
+      },
+      {
+        "ms": [
+          80,
+          160
+        ],
+        "rms": 0.003394,
+        "peak": 0.010591
+      }
+    ],
+    "clip47FirstWindows": [
+      {
+        "ms": [
+          0,
+          250
+        ],
+        "rms": 0.00288,
+        "peak": 0.012022
+      },
+      {
+        "ms": [
+          250,
+          500
+        ],
+        "rms": 0.001508,
+        "peak": 0.006259
+      },
+      {
+        "ms": [
+          500,
+          1000
+        ],
+        "rms": 0.000743,
+        "peak": 0.004427
+      },
+      {
+        "ms": [
+          1000,
+          1500
+        ],
+        "rms": 0.000276,
+        "peak": 0.001096
+      },
+      {
+        "ms": [
+          1500,
+          2000
+        ],
+        "rms": 0.017895,
+        "peak": 0.102074
+      }
+    ],
+    "extraCorrelations": [
+      {
+        "chapterAtMs": 872100,
+        "inVerse46": 0.45612337965410643,
+        "inVerse47": null
+      },
+      {
+        "chapterAtMs": 872250,
+        "inVerse46": 0.44533627044733604,
+        "inVerse47": null
+      },
+      {
+        "chapterAtMs": 872400,
+        "inVerse46": null,
+        "inVerse47": null
+      },
+      {
+        "chapterAtMs": 872550,
+        "inVerse46": null,
+        "inVerse47": null
+      },
+      {
+        "chapterAtMs": 872750,
+        "inVerse46": null,
+        "inVerse47": 0.44522598015236087
+      },
+      {
+        "chapterAtMs": 872800,
+        "inVerse46": null,
+        "inVerse47": 0.462687542991146
+      },
+      {
+        "chapterAtMs": 872900,
+        "inVerse46": null,
+        "inVerse47": 0.39921828616719696
+      }
+    ]
+  }
+}
