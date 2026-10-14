@@ -3,6 +3,59 @@
 export const MP3QURAN_READS = Object.freeze({
   223: {read:123, slug:'mishary-alafasy', name:'Mişârî el-Afâsî · MP3Quran Murattal'}
 });
+const AFASY_WORD_SOURCE='mishary_rashid_al_afasy_mp3quran';
+let afasyWordPackPromise;
+
+export async function fetchAfasyWordPack({fetcher=fetch}={}){
+  if(fetcher!==fetch){
+    const response=await fetcher('./assets/afasy-mp3quran-word-timings.json?v=324');
+    if(!response.ok)throw Error('Afasy word timing unavailable');
+    return response.json();
+  }
+  afasyWordPackPromise??=fetcher('./assets/afasy-mp3quran-word-timings.json?v=324')
+    .then(response=>{
+      if(!response.ok)throw Error('Afasy word timing unavailable');
+      return response.json();
+    }).catch(error=>{afasyWordPackPromise=null;throw error;});
+  return afasyWordPackPromise;
+}
+
+export function afasyWordAudioMeta(chapter,pack,wordCounts){
+  const source=MP3QURAN_READS[223],rows=pack?.rows?.[chapter];
+  if(pack?.source_recording!==AFASY_WORD_SOURCE||pack?.release!=='v3.2.0'||
+    pack?.audio_alias!=='https://cdn.mp3quran.net/audio/mishary-alafasy/r1/'||
+    !Array.isArray(rows)||rows.length!==wordCounts?.length)
+    throw Error('Afasy word timing source mismatch');
+  let previousEnd=0;
+  const verse_timings=rows.map(([start,end,segments],index)=>{
+    const count=wordCounts[index],positions=new Set();
+    if(!Number.isFinite(start)||!Number.isFinite(end)||start<previousEnd||end<=start||
+      !Number.isInteger(count)||count<1||!Array.isArray(segments))
+      throw Error(`Afasy verse timing invalid ${chapter}:${index+1}`);
+    for(const [pos,from,to] of segments){
+      if(!Number.isInteger(pos)||pos<1||pos>count||!Number.isFinite(from)||
+        !Number.isFinite(to)||from<start||to>end||to<=from)
+        throw Error(`Afasy word timing invalid ${chapter}:${index+1}:${pos}`);
+      positions.add(pos);
+    }
+    if(positions.size!==count)throw Error(`Afasy word timing incomplete ${chapter}:${index+1}`);
+    previousEnd=end;
+    return {verse_key:`${chapter}:${index+1}`,timestamp_from:start,
+      timestamp_to:end,segments};
+  });
+  return {id:`qua-v3.2.0:${AFASY_WORD_SOURCE}:${chapter}`,
+    audio_url:mp3quranChapterUrl(223,chapter),recording_source:`mp3quran-read-${source.read}`,
+    verified_word_source:`qua-v3.2.0:${AFASY_WORD_SOURCE}`,verse_timings};
+}
+
+export function upgradeAfasyCachedMeta(oldMeta,chapter,pack,wordCounts){
+  if(oldMeta?.audio_url!==mp3quranChapterUrl(223,chapter)||
+    oldMeta?.recording_source!=='mp3quran-read-123')
+    throw Error('Cached Afasy audio does not match the word timing source');
+  return {...afasyWordAudioMeta(chapter,pack,wordCounts),
+    offline_cache_id:oldMeta.offline_cache_id,
+    offline_cache_version:oldMeta.offline_cache_version};
+}
 
 export function mp3quranChapterUrl(reciterId, chapter){
   const source=MP3QURAN_READS[reciterId];

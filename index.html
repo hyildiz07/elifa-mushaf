@@ -6188,7 +6188,7 @@ body:not(.stacked) .flow{
     <div class="abrow"><b data-i18n="ab_kiraat">Kıraat (ses)</b><span data-i18n="ab_kiraat_s">QUL / Tarteel · Mişârî Râşid el-Afâsî ve diğerleri</span></div>
     <div class="abrow"><b data-i18n="ab_latin">Latin okunuş</b><span data-i18n="ab_latin_s">alquran.cloud · hemze ve ayn işaretleri Elifa tarafından onarıldı</span></div>
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
-    <div class="abrow"><b>Ek kayıt ve zamanlama</b><span><a href="https://github.com/QUD-Technologies/quranic-universal-audio" target="_blank" rel="noopener">Qur'anic Universal Audio</a> · zamanlama CC BY 4.0; ses hakları özgün kaynaklarda</span></div>
+    <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
     <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v294</span></div>
   </div>
@@ -7186,8 +7186,15 @@ async function fetchAudioMeta(rid,sid){
   // These read IDs have their own MP3Quran clock. Never pass their audio
   // through another reciter's QuranCDN word timings.
   if(rid===223){
-    const {fetchMp3quranAudioMeta}=await import('./assets/mp3quran-reciter.js?v=1');
-    return fetchMp3quranAudioMeta(rid,sid,SURAHS[sid-1].n);
+    const module=await import('./assets/mp3quran-reciter.js?v=2');
+    try{
+      const pack=await module.fetchAfasyWordPack();
+      const counts=QTEXT[sid].map(v=>v[2].filter(w=>w[1]===0).length);
+      return module.afasyWordAudioMeta(sid,pack,counts);
+    }catch(error){
+      console.warn('Mişârî kelime zamanları yüklenemedi; tam âyet zamanı kullanılıyor:',error);
+      return module.fetchMp3quranAudioMeta(rid,sid,SURAHS[sid-1].n);
+    }
   }
   if(verifiedAudioChapter(rid,sid)){
     try{
@@ -7574,6 +7581,17 @@ async function loadAudio(rid,sid,generation=audioCacheGeneration[rid+':'+sid]||0
       if(!af)throw error;
     }
   }
+  // Already downloaded MP3Quran chapters keep their original audio blob.
+  // Add the newly verified word clock only when its recording URL matches.
+  if(rid===223&&!af.verified_word_source){
+    try{
+      const module=await import('./assets/mp3quran-reciter.js?v=2');
+      const pack=await module.fetchAfasyWordPack();
+      const counts=QTEXT[sid].map(v=>v[2].filter(w=>w[1]===0).length);
+      af=module.upgradeAfasyCachedMeta(af,sid,pack,counts);
+      if(offlineBlob)await OFF.metaSet(OFF.metaKey(rid,sid,'legacy'),af);
+    }catch(error){console.warn('Mişârî çevrimdışı kelime zamanları hazırlanamadı:',error);}
+  }
   af=await applyVerifiedTimings(af,rid,sid);
   const ay={},ws={},verseEnds={},verseRanges={},verseSegments={};let end=0;
   const allSegs=[];
@@ -7629,7 +7647,7 @@ async function loadAudio(rid,sid,generation=audioCacheGeneration[rid+':'+sid]||0
   const audio=new Audio(blobUrl||srcUrl);audio.preload='auto';pp(audio);
   const o={audio,sourceUrl:blobUrl||srcUrl,recordingUrl:af.audio_url,reciterId:rid,
     offlineBlob,offlineCacheId:af.offline_cache_id||null,fileId:af.id,fileSize:offlineBlob?.size||af.file_size,
-    verifiedCbr:!!af.source_recording,buffer:null,ay,ws,verseEnds,verseRanges,verseSegments,
+    verifiedCbr:!!(af.source_recording||af.verified_word_source),buffer:null,ay,ws,verseEnds,verseRanges,verseSegments,
     trustedNext:af.trustedNext||{},allowedSplitCuts:af.trustedCuts||{},
     repeatWholeVerse:af.repeatWholeVerse||{},end,segs:allSegs,decoding:false};
   if(generation===(audioCacheGeneration[key]||0))audioCache[key]=o;
@@ -12330,7 +12348,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v323-afasy-murattal';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v324-afasy-word-split';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
