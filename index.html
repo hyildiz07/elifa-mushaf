@@ -6190,7 +6190,7 @@ body:not(.stacked) .flow{
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v294</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v325</span></div>
   </div>
 
   <div class="tesekkur">
@@ -9020,7 +9020,7 @@ function pausePlayback(){
   // The plan may already be marked playing while a verified verse is still
   // loading, or while HTMLAudio has not started after play(). A second tap
   // cancels that request instead of leaving it free to start later.
-  if(!srcNode && (!htmlPlaybackWatch||AD_?.audio?.paused)){
+  if(!srcNode && !clipAudio && (!htmlPlaybackWatch||AD_?.audio?.paused)){
     stopPlan(false);toast('Ses hazırlanırken oynatma durduruldu.');return;
   }
   clearHTMLPlaybackWatch();
@@ -9296,6 +9296,8 @@ async function goStep(){
 /* ===== ÇALMA DURUMU (hibrit) ===== */
 let srcNode=null;        // Web Audio: aktif AudioBufferSourceNode
 let gainNode=null;
+let clipAudio=null,clipUrl=null,clipStartMs=0;
+let pitchPlayer=null,clipCache=null,clipWatchTimer=null;
 let playStartAC=0;
 let playOffsetMs=0;
 let playEndMs=0;
@@ -9321,12 +9323,85 @@ function clearHTMLPlaybackWatch(){
 }
 
 function stopSrc(){
+  if(clipWatchTimer){clearTimeout(clipWatchTimer);clipWatchTimer=null;}
+  if(clipAudio){
+    const a=clipAudio;clipAudio=null;
+    a.onended=null;a.onerror=null;
+    try{a.pause();a.removeAttribute('src');a.load();}catch(e){}
+  }
+  if(clipUrl){URL.revokeObjectURL(clipUrl);clipUrl=null;}
   if(srcNode){
     try{srcNode.onended=null;srcNode.stop();}catch(e){}
     try{srcNode.disconnect();}catch(e){}
     srcNode=null;
   }
   if(gainNode){try{gainNode.disconnect();}catch(e){}gainNode=null;}
+}
+
+// HTMLMediaElement preserves the voice's pitch when playbackRate changes,
+// while AudioBufferSourceNode does not. Encode only the exact decoded step as
+// PCM/WAV, so faster/slower split playback cannot spill into the next word.
+function boundedPitchClip(buffer,fromSec,durationSec,fadeMs){
+  const rate=buffer.sampleRate,channels=buffer.numberOfChannels;
+  const first=Math.max(0,Math.round(fromSec*rate));
+  const last=Math.min(buffer.length,Math.round((fromSec+durationSec)*rate));
+  const frames=last-first,bytes=44+frames*channels*2;
+  if(frames<=0||bytes>16*1024*1024)return null;
+  const raw=new ArrayBuffer(bytes),view=new DataView(raw);
+  const str=(off,s)=>{for(let i=0;i<s.length;i++)view.setUint8(off+i,s.charCodeAt(i));};
+  str(0,'RIFF');view.setUint32(4,bytes-8,true);str(8,'WAVE');
+  str(12,'fmt ');view.setUint32(16,16,true);view.setUint16(20,1,true);
+  view.setUint16(22,channels,true);view.setUint32(24,rate,true);
+  view.setUint32(28,rate*channels*2,true);view.setUint16(32,channels*2,true);
+  view.setUint16(34,16,true);str(36,'data');view.setUint32(40,bytes-44,true);
+  const data=Array.from({length:channels},(_,ch)=>buffer.getChannelData(ch));
+  const fadeIn=Math.min(frames,Math.max(1,Math.round(rate*.003)));
+  const fadeOut=Math.min(frames,Math.max(1,Math.round(rate*fadeMs/1000)));
+  let off=44;
+  for(let i=0;i<frames;i++){
+    const fade=Math.min(1,(i+1)/fadeIn,(frames-i)/fadeOut);
+    for(let ch=0;ch<channels;ch++){
+      const sample=Math.max(-1,Math.min(1,data[ch][first+i]*fade));
+      view.setInt16(off,Math.round(sample<0?sample*32768:sample*32767),true);
+      off+=2;
+    }
+  }
+  return new Blob([raw],{type:'audio/wav'});
+}
+
+function seekPlayPitchClip(buffer,ms,endMs,offSec,durSec,rate){
+  const fadeMs=(plan[pi]&&plan[pi].preserveTail)?5:30;
+  // Repeat reuses the encoded samples; only the disposable object URL changes.
+  const cached=clipCache;
+  const blob=cached&&cached.buffer===buffer&&cached.offSec===offSec&&cached.durSec===durSec&&cached.fadeMs===fadeMs
+    ?cached.blob:boundedPitchClip(buffer,offSec,durSec,fadeMs);
+  if(!blob){
+    if(plan[pi]?.preserveTail){stopPlan(false);toast('Bu uzun parçanın kesin ses sınırı korunamadı. Daha kısa bir bölüm seç.');return;}
+    useWA=false;seekPlayHTML(ms,endMs);return;
+  }
+  clipCache={buffer,offSec,durSec,fadeMs,blob};
+  clipUrl=URL.createObjectURL(blob);
+  // Reuse one unlocked media element across automatic repeat and 1+2 steps on iOS.
+  const a=pitchPlayer||(pitchPlayer=new Audio());
+  a.src=clipUrl;pp(a);a.playbackRate=rate;a.volume=1;
+  clipAudio=a;clipStartMs=ms;
+  playOffsetMs=ms;playEndMs=endMs;stepEnded=false;pausedAtMs=null;
+  segIdx=lowerBound(splitTimingMs(ms));
+  const url=clipUrl;
+  a.onended=()=>{if(a!==clipAudio||url!==clipUrl||!playing)return;stepEnded=true;onStepEnd();};
+  a.onerror=()=>{if(a!==clipAudio||url!==clipUrl)return;stopPlan(false);toast('Ses parçası açılamadı. Yeniden dene.');};
+  a.play().catch(()=>{if(a!==clipAudio||url!==clipUrl||!a.paused)return;stopPlan(false);toast('Ses başlatılamadı. Oynat düğmesine yeniden dokun.');});
+  // A pending play() or a stalled decoder can otherwise leave the plan running forever.
+  let last=a.currentTime,deadline=Date.now()+10000;
+  const watch=()=>{
+    clipWatchTimer=null;
+    if(a!==clipAudio||url!==clipUrl||!playing||pausedAtMs!=null)return;
+    if(a.currentTime>last+.03){last=a.currentTime;deadline=Date.now()+10000;}
+    else if(Date.now()>=deadline){stopPlan(false);toast('Ses parçası durdu. Oynat düğmesine yeniden dokun.');return;}
+    clipWatchTimer=setTimeout(watch,2500);
+  };
+  clipWatchTimer=setTimeout(watch,2500);
+  if(raf)cancelAnimationFrame(raf);raf=requestAnimationFrame(tick);
 }
 
 let activeBuf=null, activeOff=0;   // seçim-buffer (uzun sûre): aktif buffer + chapter→buffer offset
@@ -9362,19 +9437,19 @@ function seekPlayWA(ms,endMs){
   const c=ac();
   if(c.state==='suspended')c.resume();
   const rate=SET.speed||1;
-  const src=c.createBufferSource();
-  src.buffer=BUF;
-  src.playbackRate.value=rate;
-  const g=c.createGain();
-  g.gain.value=1;
-  src.connect(g);g.connect(c.destination);
-  srcNode=src;gainNode=g;
-
   const offSec=Math.max(0,(ms-activeOff)/1000);   // buffer-göreli konum (selBuf'ta offset çıkarılır)
   let durMs=Math.max(20,endMs-ms);
   const bufMs=BUF.duration*1000;
   if((ms-activeOff)+durMs>bufMs)durMs=Math.max(20,bufMs-(ms-activeOff));
   const durSec=durMs/1000;
+
+  if(Math.abs(rate-1)>0.001){seekPlayPitchClip(BUF,ms,endMs,offSec,durSec,rate);return;}
+  const src=c.createBufferSource();
+  src.buffer=BUF;
+  const g=c.createGain();
+  g.gain.value=1;
+  src.connect(g);g.connect(c.destination);
+  srcNode=src;gainNode=g;
 
   playOffsetMs=ms;playEndMs=endMs;                 // chapter-mutlak kalır (highlight için)
   playStartAC=c.currentTime;
@@ -9382,7 +9457,7 @@ function seekPlayWA(ms,endMs){
   segIdx=lowerBound(splitTimingMs(ms));
 
   const FADE=(plan[pi]&&plan[pi].preserveTail)?0.005:0.030;
-  const endAt=c.currentTime + durSec/rate;
+  const endAt=c.currentTime + durSec;
   try{
     g.gain.setValueAtTime(1, Math.max(c.currentTime, endAt-FADE));
     g.gain.linearRampToValueAtTime(0.0001, endAt);
@@ -9487,6 +9562,7 @@ function onStepEnd(){
 /* Şu anki ses konumu (ms) */
 function curMs(){
   if(pausedAtMs!=null)return pausedAtMs;
+  if(clipAudio)return Math.min(playEndMs,clipStartMs+clipAudio.currentTime*1000);
   if(useWA){
     if(!srcNode)return playOffsetMs;
     const rate=SET.speed||1;
@@ -9513,7 +9589,7 @@ function seekTo(ms){
 /* Hız değişince mevcut konumdan yeni hızla devam (hibrit) */
 function applyLiveSpeed(){
   if(!playing||waiting||pausedAtMs!=null)return;
-  if(useWA&&!srcNode)return;
+  if(useWA&&!srcNode&&!clipAudio)return;
   const b=stepBounds(plan[pi]);
   if(!Number.isFinite(b.t))return;
   const from=Math.max(b.f,Math.min(curMs(),b.t-20));
@@ -9634,6 +9710,7 @@ function stopPlan(silent,keepLoading=false){
   if(waiting){clearTimeout(waiting);waiting=null;pendingFn=null;}
   if(htmlBtimer){clearTimeout(htmlBtimer);htmlBtimer=null;}
   cancelHTMLFade();cancelFade();stopSrc();
+  clipCache=null;
   if(AD_&&AD_.audio){try{AD_.audio.pause();AD_.audio.volume=1;}catch(e){}}
   if(normalChapterAudio){AD_=normalChapterAudio;normalChapterAudio=null;rewireTimings();}
   pausedAtMs=null;
@@ -12348,7 +12425,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v324-afasy-word-split';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v325-pitch-preserve';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
