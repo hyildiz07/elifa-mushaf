@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   ELIFA MUSHAF — SERVICE WORKER  (v323)
+   ELIFA MUSHAF — SERVICE WORKER  (v324)
    App-shell'i önbelleğe alır, offline açılır; dış API'lere
    (Kur'an metni/ses/tefsir) DOKUNMAZ. Güncellemede VERSION'u artır.
 
@@ -11,7 +11,7 @@
    · version.json / duyuru.json / manual-*.json → her zaman ağ öncelikli.
    · Yönlendirilmiş (redirected) navigasyon yanıtı önbelleğe yazılmaz.
    ═══════════════════════════════════════════════════════════════ */
-const VERSION = 'elifa-mushaf-v323-afasy-murattal';
+const VERSION = 'elifa-mushaf-v324-afasy-word-split';
 const CACHE   = VERSION;
 
 /* Fontlar index.html içinde base64 gömülü → ayrıca cache'lenmez. */
@@ -23,7 +23,8 @@ const CORE = [
   './assets/locale.js?v=2', './assets/reader-help.js?v=2', './assets/reader-help-drafts.js?v=1', './assets/reader-help.css?v=1',
   './assets/ui-extra-drafts.js?v=2', './assets/ui-extra.js?v=1',
   './assets/split-audio.js?v=294', './assets/split-cache.js?v=291',
-  './assets/mp3quran-reciter.js?v=1',
+  './assets/mp3quran-reciter.js?v=2',
+  './assets/afasy-mp3quran-word-timings.json?v=324',
   './assets/sudais-vbr-index.json?v=263',
   './assets/audio-timing-overrides-v3.json',
   './assets/audio-timing-overrides-r3-r5.json?v=289',
