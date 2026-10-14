@@ -6364,7 +6364,7 @@ const QFONTS=[
      Bu yüzden turkOnly: seçilince imlâ otomatik Türk'e geçer.          */
   {id:'utn',   n:'Uthman Taha Nesih',       d:'Türk mushafı hattı · Diyanet imlâsı',   ff:'"Uthman Taha Naskh"', lh:2.52, turkOnly:true, rec:true},
 ];
-let SET=Object.assign({reciter:7,speed:1,rep:5,repOn:false,wait:0,fs:1,qfont:'utn',mushaf:'turk',folder:'Ezber',ayRep:5,cumu:false,cumuRep:5,auto:true,theme:'elifasaray',custom:null,selMulti:false,startPad:0,endPad:-60,latin:false,stacked:false},store.get('set',{}));
+let SET=Object.assign({reciter:223,speed:1,rep:5,repOn:false,wait:0,fs:1,qfont:'utn',mushaf:'turk',folder:'Ezber',ayRep:5,cumu:false,cumuRep:5,auto:true,theme:'elifasaray',custom:null,selMulti:false,startPad:0,endPad:-60,latin:false,stacked:false},store.get('set',{}));
 // Repeat and cumulative playback are choices for this visit, not startup defaults.
 // Keep the chosen count so the 5× control can enable it with one tap.
 SET.repOn=false;
@@ -10161,7 +10161,7 @@ function commitInputs(){
 /* reciter sheet */
 function updateRecStrip(){
   const r=RECITERS.find(x=>x.id===SET.reciter);if(!r)return;
-  const shortNames={1:'Abdülbâsıt M.',2:'Abdülbâsıt',3:'Südeys',4:'Şâtırî',5:'Hânî',6:'Husarî',7:'Mişârî',9:'Minşâvî',10:'Şureym',12:'Husarî Muallim',97:'Devserî'};
+  const shortNames={1:'Abdülbâsıt M.',2:'Abdülbâsıt',3:'Südeys',4:'Şâtırî',5:'Hânî',6:'Husarî',7:'Mişârî',223:'Mişârî Murattal',9:'Minşâvî',10:'Şureym',12:'Husarî Muallim',97:'Devserî'};
   const n=$('recName');if(n)n.textContent=r.n;
   const s=$('recStyle');if(s)s.textContent=elifaRecStyle(r.s);
   const header=$('readerReciter');
@@ -12330,7 +12330,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v322-account-repeat';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v323-afasy-murattal';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){

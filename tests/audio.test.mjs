@@ -478,6 +478,17 @@ test('text/audio word-count mismatch uses the complete verse',()=>{
   assert.equal(c.splitParts.length,1);assert.equal(c.splitParts[0].timingFallback,true);
   assert.equal(c.stepBounds(c.buildPartsPlan(0)[0]).t,c.AD_.verseRanges[12][1]);
 });
+test('MP3Quran ayah-only timing keeps a split request on the complete verse',()=>{
+  const source=fixture(4,4);
+  const verse=source.verse_timings[11];
+  const c=context({...source,verse_timings:[{...verse,segments:[]}]});
+  c.SET.reciter=223;
+  loadVerse(c,12);
+  assert.equal(c.splitParts.length,1);
+  assert.equal(c.splitParts[0].timingFallback,true);
+  assert.equal(c.splitParts[0].f,verse.timestamp_from);
+  assert.equal(c.splitParts[0].t,verse.timestamp_to);
+});
 test('a missing provider word timestamp does not collapse unrelated safe pauses',()=>{
   const c=context(fixture(4,4));loadVerse(c,12);
   c.AD_.verseSegments[12]=c.AD_.verseSegments[12].filter(s=>s[0]!==20&&s[0]!==88);
