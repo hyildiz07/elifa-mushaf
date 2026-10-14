@@ -16,13 +16,20 @@ SHA-256 özeti alır, bütün âyetler tamamlanana kadar sûreyi “indirildi”
 işaretlemez. Çevrimdışı oynatma, kayıtlı dosyayı özetiyle yeniden doğrular.
 Dosyalar uygulama dağıtımına gömülmez; indirme kullanıcı isteğiyle yapılacak.
 
-Bu modül **henüz hoca listesine bağlanmadı**. Mevcut oynatıcı sûre başına tek
-MP3 ve tek zaman ekseni bekliyor. Diyanet kaynağı ise ayet başına ayrı MP3
-veriyor. Âyet seçimi, sırayla çalma ve tekrar için ayrı âyet oynatma yolu
-gerekli; bilinmeyen sürelerden yapay sûre saatleri çıkarıp eski oynatıcıya
-vermek yanlış âyeti çalabilir. Kelime bazlı âyet bölme için de bu kayıtla
-eşleşen kelime zamanları yok. O seçenek ancak doğrulanmış hizalama sonrası
-açılmalı.
+Bu kaynak **henüz herkese açık hoca listesine bağlanmadı**. Mevcut oynatıcı
+sûre başına tek MP3 ve tek zaman ekseni bekliyor. Diyanet kaynağı ise ayet
+başına ayrı MP3 veriyor. Bu nedenle `assets/diyanet-ayah-player.js` seçilen
+âyet aralığını ayrı dosyalarla çalar; tekrar, ayet geçişi ve hız ayarı bu
+akışta uygulanır. Eski oynatıcının sûre saati bu kayda yapay olarak
+uyarlanmaz. Kelime bazlı ayet bölme için bu kayıtla eşleşen güvenilir kelime
+zamanları yok. O seçenek ancak doğrulanmış hizalama sonrası açılmalı.
+
+Yerel kalite kontrol için `?ishak-pilot=1` adresi gizli bir deneme paneli
+açar. Panel seçilen sûre ve ayet aralığını çevrimiçi veya indirilmiş MP3'lerle
+oynatır; sûre indirme/silme, tekrar, hız, önceki/sonraki ayet kontrolleri
+bulunur. Normal hoca seçimi değişmez. Bu pilotun varlığı kayıtların kamuya
+sunulmasına onay anlamına gelmez; yayın dalına ancak aşağıdaki kapılar
+tamamlanınca alınmalıdır.
 
 Kullanıcı Diyanet'ten ücretsiz uygulamada kullanıma ilişkin özel mesajla izin
 aldığını bildiriyor. Mesajın hangi kayıtları, akışla çalmayı, çevrimdışı
@@ -47,8 +54,10 @@ eklenmemeli. Sadece indirilebilir olması yeniden kullanım izni vermez.
    çevrimdışı indirme kapsamını doğrula.
 2. İshak için 114 sûrenin tüm dosyalarını ve âyet sayılarını küçük
    kümelerle denetle; birkaç tam kayıt dinleyerek ses kimliğini kontrol et.
-3. Ayrı âyet oynatma yolunu uygulamaya bağla, çevrimiçi/çevrimdışı
-   Fâtiha, Bakara, Kehf ve Fetih seçimi, tekrar, hız ve kesinti testlerini yap.
+3. Deneme oynatıcısında Fâtiha, Bakara, Kehf ve Fetih için tam çevrimiçi ve
+   çevrimdışı kabul testi, gerçek cihazda özellikle iOS/Safari medya
+   davranışı ve ağ kesintisi testi yap. Ardından izin kapsamına göre normal
+   hoca seçimine bağla.
 4. Fatih için doğru kayıt serisi ve eşleşen ayet zamanları/kesitleri bulunursa
    aynı kabul testlerini yap.
 
