@@ -127,7 +127,7 @@ test('second Play tap cancels a verified verse still loading before playback sta
   const loading=new Promise(resolve=>{complete=resolve;});
   const step={sourceRanges:[{verseSource:286,fullVerse:true,f:0,t:1000}]};
   const c=vm.createContext({SET:{reciter:12},curS:2,plan:[step],pi:0,pieceCursor:0,
-    playing:true,audioRequestId:0,stepRequestId:0,pausedAtMs:null,srcNode:null,
+    playing:true,audioRequestId:0,stepRequestId:0,pausedAtMs:null,srcNode:null,clipAudio:null,
     htmlPlaybackWatch:null,AD_:{audio:{paused:true}},useWA:false,
     unsafeSudaisNormalStep:()=>false,unsafeHaniNormalStep:()=>false,
     getVerifiedVerseAudio:()=>loading,toast(){},seekPlay(){c.started=true;},
@@ -145,7 +145,7 @@ test('second Play tap cancels a pending HTMLAudio play but pauses active HTMLAud
   for(const paused of [true,false]){
     const audio={paused,currentTime:0.735,volume:1,pause(){this.paused=true;}};
     const c=vm.createContext({plan:[{f:100,t:2000}],pi:0,pieceCursor:0,
-      pausedAtMs:null,srcNode:null,htmlPlaybackWatch:{audio},AD_:{audio},useWA:false,
+      pausedAtMs:null,srcNode:null,clipAudio:null,htmlPlaybackWatch:{audio},AD_:{audio},useWA:false,
       raf:null,htmlBtimer:null,stopPlan(){c.stopped=true;},stopSrc(){c.sourceStopped=true;},
       curMs:()=>735,cancelHTMLFade(){},clearHTMLPlaybackWatch(){},setIco(){},toast(){}});
     vm.runInContext(fn('pausePlayback'),c);
