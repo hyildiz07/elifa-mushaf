@@ -51,6 +51,24 @@ test('a new recording keeps its audio and timing cache separate from the old rec
   assert.equal(await OFF.isDownloaded(4,2),true);
 });
 
+test('MP3Quran Afasy saves its chapter and ayah clock for offline playback',async()=>{
+  const saved=new Map(),blobs=new Map();
+  const cache={match:async key=>blobs.get(key),put:async(key,response)=>{blobs.set(key,response);},
+    delete:async key=>blobs.delete(key)};
+  const {c,OFF}=appContext({caches:{open:async()=>cache},fetch:async()=>new Response(new Uint8Array([1,2,3]),
+    {status:200,headers:{'Content-Length':'3'}})});
+  OFF.metaGet=async key=>saved.get(key)||null;
+  OFF.metaSet=async(key,value)=>{saved.set(key,value);return true;};
+  c.testMeta={audio_url:'https://cdn.mp3quran.net/audio/mishary-alafasy/r1/048.mp3',
+    recording_source:'mp3quran-read-123',verse_timings:[
+      {verse_key:'48:1',timestamp_from:0,timestamp_to:1200,segments:[]}]};
+  vm.runInContext('fetchAudioMeta=async()=>testMeta',c);
+  await OFF.download(223,48);
+  assert.equal(await OFF.isDownloaded(223,48),true);
+  assert.equal((await OFF.getBlob(223,48)).size,3);
+  assert.equal((await OFF.getMeta(223,48)).verse_timings[0].verse_key,'48:1');
+});
+
 test('failed audio download cannot leave a false downloaded timing entry',async()=>{
   const saved=new Map();
   const {c,OFF}=appContext({fetch:async()=>{throw Error('network failed');}});
