@@ -1,7 +1,6 @@
 // MP3Quran's read IDs identify the recording and its matching ayah clock.
 // Keep these distinct from QuranCDN IDs and from the existing Afasy recording.
 export const MP3QURAN_READS = Object.freeze({
-  220: {read:20, slug:'khalid-jalil', name:'Şeyh Halid el-Celil'},
   223: {read:123, slug:'mishary-alafasy', name:'Mişârî el-Afâsî · MP3Quran Murattal'}
 });
 

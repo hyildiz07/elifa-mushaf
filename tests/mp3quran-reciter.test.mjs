@@ -11,7 +11,7 @@ test('each MP3Quran read keeps its own recording and ayah clock', async()=>{
       {ayah:2,start_time:1200,end_time:2600}
     ]};
   };
-  for(const [reciter,read,slug] of [[220,20,'khalid-jalil'],[223,123,'mishary-alafasy']]){
+  for(const [reciter,read,slug] of [[223,123,'mishary-alafasy']]){
     const meta=await fetchMp3quranAudioMeta(reciter,48,2,{fetcher});
     assert.equal(meta.audio_url,`https://cdn.mp3quran.net/audio/${slug}/r1/048.mp3`);
     assert.equal(meta.recording_source,`mp3quran-read-${read}`);
@@ -19,7 +19,6 @@ test('each MP3Quran read keeps its own recording and ayah clock', async()=>{
     assert.deepEqual(meta.verse_timings.map(row=>row.segments),[[],[]]);
   }
   assert.deepEqual(requests,[
-    'https://mp3quran.net/api/v3/ayat_timing?surah=48&read=20',
     'https://mp3quran.net/api/v3/ayat_timing?surah=48&read=123'
   ]);
 });
@@ -30,4 +29,5 @@ test('rejects incomplete or inconsistent ayah clocks instead of guessing word cu
   assert.throws(()=>mp3quranAudioMeta(223,2,[good[0],{...good[1],ayah:3}],2),/invalid/);
   assert.throws(()=>mp3quranAudioMeta(223,2,[good[0],{...good[1],start_time:900}],2),/invalid/);
   assert.throws(()=>mp3quranChapterUrl(123,48),/Unknown/);
+  assert.throws(()=>mp3quranChapterUrl(220,48),/Unknown/);
 });

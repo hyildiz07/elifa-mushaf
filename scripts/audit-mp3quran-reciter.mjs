@@ -4,7 +4,7 @@ import {fetchMp3quranAudioMeta} from '../assets/mp3quran-reciter.js';
 const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
 const chapters=JSON.parse(html.match(/^const SURAHS=(\[.*\]);$/m)?.[1]||'null');
 if(chapters?.length!==114)throw Error('Chapter reference missing');
-const jobs=[220,223].flatMap(reciter=>chapters.map(chapter=>({reciter,chapter})));
+const jobs=[223].flatMap(reciter=>chapters.map(chapter=>({reciter,chapter})));
 const failures=[];
 let cursor=0;
 await Promise.all(Array.from({length:8},async()=>{
