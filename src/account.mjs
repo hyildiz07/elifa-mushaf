@@ -129,7 +129,7 @@ function scheduleSync(delay=1200){clearTimeout(syncTimer);if(!user?.emailVerifie
 function showConflicts(conflicts){
  pendingConflict=conflicts;const box=$('accountConflict'),list=$('accountConflictList');list.replaceChildren();box.hidden=false;
  for(const c of conflicts){const row=document.createElement('div'),label=document.createElement('span'),local=document.createElement('label'),remote=document.createElement('label'),name='sync-'+c.id.replace(/[^a-z0-9]/gi,'-');
-  label.textContent=(c.key==='notes'?'Not':c.key==='set'?'Ayar':c.key==='prog'?'Okuma konumu':c.key)+' '+(c.path||'');
+  label.textContent=(c.key==='notes'?'Not':c.key==='set'?'Ayar':c.key==='prog'?'Okuma konumu':c.key==='studySessions'?(window.tr?.('study_title')||'Study'):c.key)+' '+(c.path||'');
   for(const [container,value,title] of [[local,'local','Bu cihaz'],[remote,'remote','Bulut']]){const input=document.createElement('input');input.type='radio';input.name=name;input.value=value;input.dataset.conflict=c.id;container.append(input,document.createTextNode(title));}
   row.append(label,local,remote);list.append(row);
  }
@@ -222,6 +222,11 @@ $('accountUndo').onclick=()=>action(async()=>{
  const previous=localStorage.getItem(PREVIOUS_KEY);if(!previous)throw Error('Bu cihazda geri alınabilecek aktarım yok.');
  if(!confirm(accountText('Son aktarım öncesindeki cihaz kayıtlarına dönülecek. Devam edilsin mi?'))){message('Geri alma iptal edildi.');return;}
  const raw=JSON.parse(previous),veri={};for(const k of BACKUP_KEYS)if(raw[k]!==null&&raw[k]!==undefined)veri[k]=raw[k];
+ // A pre-Study-Desk recovery copy never captured this newer key. Keep the
+ // studies created after that older copy instead of erasing them on undo.
+ if(!Object.hasOwn(raw,'studySessions')){
+  const current=localStorage.getItem('studySessions');if(current!==null)veri.studySessions=current;
+ }
  restoreBackup(localStorage,{elifa:'yedek',v:1,veri});location.reload();
 });
 window.elifaAccount={open};
