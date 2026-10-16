@@ -1,0 +1,87 @@
+/* Hafif CSS katmanlarıyla metal hissi; fotoğraf veya yeni font yüklenmez. */
+body[data-layout="saray"] #home #qStudy{
+  border:2px solid #d7b866!important;
+  background:linear-gradient(155deg,#234b71 0%,#0a2a4e 32%,#03172d 73%,#09284a 100%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,250,224,.52),inset 0 -4px 10px rgba(0,0,0,.28),0 3px 0 #8b651f,0 9px 20px rgba(28,28,22,.24)!important;
+  color:#f7dc97!important;
+}
+body[data-layout="saray"] #home #qStudy .bkhome-tx b,
+body[data-layout="saray"] #home #qStudy .bkhome-tx::before{color:#f7dc97!important;text-shadow:0 1px 0 #603c12,0 2px 5px rgba(0,0,0,.4)!important;}
+body[data-layout="saray"] #home #qStudy .bkhome-ic{color:#f7dc97!important;}
+body[data-layout="saray"] #home #continueBtn,
+body[data-layout="saray"] #home .quick button,
+body[data-layout="saray"] #home .search,
+body[data-layout="saray"] #home .card{
+  border-color:#c9aa69!important;
+  background:linear-gradient(165deg,color-mix(in srgb,var(--surface) 94%,white),var(--surface) 58%,color-mix(in srgb,var(--surface) 91%,#b7965d))!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,white 80%,transparent),0 3px 0 rgba(150,112,47,.12),0 7px 15px rgba(41,37,31,.12)!important;
+}
+body[data-layout="saray"] #home #continueBtn .bkhome-ic{
+  border:2px solid #dbbd75!important;
+  background:radial-gradient(circle at 32% 20%,#315579,#092748 67%,#03172d)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.36),0 3px 7px rgba(8,23,38,.25)!important;
+  color:#f7dc97!important;
+}
+body[data-layout="saray"] #home .quick button svg{color:#a67727!important;filter:drop-shadow(0 1px 0 rgba(255,255,255,.75));}
+body[data-layout="saray"] #home .card .num{
+  border-radius:12px!important;
+  background:linear-gradient(145deg,#19436c,#041b36 75%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 3px 6px rgba(8,27,46,.22)!important;
+}
+body[data-layout="saray"] #home .card .num::before,
+body[data-layout="saray"] #home .card .num::after{display:none!important;}
+body[data-layout="saray"] #home .card{border-radius:15px!important;margin-bottom:5px!important;border-width:1px!important;}
+body[data-layout="saray"] #home .card:first-child,
+body[data-layout="saray"] #home .card:last-child{border-radius:15px!important;}
+body[data-layout="saray"] #home .surahExpand{
+  border:1px solid #c9aa69!important;
+  background:linear-gradient(160deg,#1d4369,#061d38)!important;
+  color:#f7dc97!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25),0 4px 10px rgba(8,25,43,.2)!important;
+}
+#studySetup .studyHero{min-height:0;margin:0;padding:18px 12px 25px;overflow:visible;border-radius:0;background:transparent;}
+#studySetup .studyHero::after,#studySetup .studyHero img{display:none;}
+#studySetup .studyHero .studyLead{max-width:none;margin:0;}
+#studySetup .studyMain{width:min(100%,1000px);}
+#studySetup .studyTop{box-shadow:0 1px 0 color-mix(in srgb,var(--gold) 30%,transparent);}
+#studySetup .studyBack{width:auto;min-width:74px;display:flex;align-items:center;justify-content:center;gap:5px;padding:0 11px;font:700 13px 'Inter',sans-serif;}
+#studySetup .studyBack,
+#studySetup .studyCard,
+#studySetup .studySaveCard,
+#studySetup .studySaved{
+  border-color:color-mix(in srgb,var(--gold) 38%,var(--line));
+  background:linear-gradient(150deg,color-mix(in srgb,var(--surface) 96%,white),var(--surface) 65%,color-mix(in srgb,var(--surface) 95%,var(--gold)));
+  box-shadow:inset 0 1px 0 color-mix(in srgb,white 75%,transparent),0 8px 24px rgba(15,29,43,.09);
+}
+#studySetup .studySurahToggle,
+#studySetup .studyField input,
+#studySetup .studySurahSearchWrap input{
+  border-color:color-mix(in srgb,var(--gold) 45%,var(--line));
+  background:linear-gradient(155deg,color-mix(in srgb,var(--card) 93%,white),var(--card));
+  box-shadow:inset 0 1px 1px rgba(0,0,0,.04),0 2px 5px rgba(31,34,35,.06);
+}
+#studySetup .studySurahToggle{border-color:var(--gold);}
+#studySetup .studySummary{border:1px solid color-mix(in srgb,var(--gold) 20%,var(--line));border-left:4px solid var(--gold);}
+#studySetup .studyOpen{
+  border:1px solid #d5b574;
+  background:linear-gradient(180deg,#c8a660 0%,#a7732e 48%,#80511c 100%);
+  color:#fff;
+  text-shadow:0 1px 1px rgba(53,33,10,.55);
+  box-shadow:inset 0 1px 0 rgba(255,251,229,.65),inset 0 -2px 5px rgba(65,37,10,.25),0 4px 0 rgba(112,74,23,.33),0 9px 18px rgba(89,65,31,.18);
+}
+#studySetup .studyOpen:disabled{opacity:.5;box-shadow:none;cursor:not-allowed;}
+#studySetup .studyOpen::before{content:'▶';display:inline-block;margin-inline-end:11px;font-size:16px;}
+#studySetup .studySaveRow button{
+  border:1px solid var(--gold);
+  background:linear-gradient(160deg,color-mix(in srgb,var(--surface) 93%,white),color-mix(in srgb,var(--surface) 93%,var(--gold)));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 3px 8px rgba(62,49,28,.11);
+}
+#studySetup .studySaveRow button::before{content:'▣';display:inline-block;margin-inline-end:9px;color:var(--gold);font-size:18px;vertical-align:-1px;}
+#studySetup .studyOpen:active,#studySetup .studySaveRow button:active,
+body[data-layout="saray"] #home #qStudy:active,
+body[data-layout="saray"] #home .quick button:active{transform:translateY(2px);box-shadow:inset 0 2px 6px rgba(0,0,0,.12)!important;}
+#studySetup .studySurahToggle:focus-visible,
+#studySetup .studySurahSearchWrap input:focus-visible,
+#studySetup .studySurahList button:focus-visible,
+body[data-layout="saray"] #home #qStudy:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+@media(max-width:600px){#studySetup .studyHero{padding:16px 10px 22px;}#studySetup .studyCardHeader{margin-bottom:18px;}}

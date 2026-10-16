@@ -5199,28 +5199,53 @@ body:not(.stacked) .flow{
   .quick button,body[data-layout="saray"] .quick button{min-height:42px!important;}
 }
 #studySetup{background:var(--bg);color:var(--ink);}
-.studyTop{display:flex;align-items:center;gap:12px;min-height:62px;padding:calc(env(safe-area-inset-top) + 9px) 16px 9px;background:var(--surface);border-bottom:1px solid var(--line);}
+.studyTop{display:flex;align-items:center;gap:12px;min-height:62px;padding:calc(env(safe-area-inset-top) + 9px) max(18px,calc((100vw - 980px)/2)) 9px;background:var(--surface);border-bottom:1px solid var(--line);}
 .studyBack{width:40px;height:40px;display:grid;place-items:center;flex:none;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);cursor:pointer;}
 .studyBack svg{width:19px;height:19px;}
 .studyTopLabel{font-size:15px;font-weight:750;color:var(--ink);}
-.studyMain{width:min(100%,680px);margin:0 auto;padding:clamp(24px,5vw,48px) 18px 96px;}
+.studyMain{width:min(100%,1020px);margin:0 auto;padding:24px 18px 96px;}
+.studyHero{position:relative;isolation:isolate;min-height:clamp(210px,30vw,315px);display:flex;flex-direction:column;justify-content:center;margin:0 0 -38px;padding:28px clamp(22px,5vw,52px) 70px;overflow:hidden;border-radius:24px;background:var(--surface);}
+.studyHero .studyLead{max-width:550px;}
 .studyEyebrow{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
-.studyMain h1{margin:9px 0 12px;font-family:'Lora',serif;font-size:clamp(30px,6vw,42px);line-height:1.15;color:var(--ink);}
+.studyMain h1{margin:9px 0 12px;font-family:'Lora',serif;font-size:clamp(32px,6vw,54px);line-height:1.15;color:var(--ink);}
 .studyLead{margin:0 0 26px;color:var(--muted);font-size:15px;line-height:1.55;}
-.studyCard{padding:22px;border:1px solid var(--line);border-radius:22px;background:var(--surface);box-shadow:0 10px 32px rgba(12,35,66,.07);}
+.studyCard,.studySaveCard,.studySaved{position:relative;padding:clamp(20px,3vw,34px);border:1px solid var(--line);border-radius:22px;background:var(--surface);box-shadow:0 10px 32px rgba(12,35,66,.07);}
+.studyCard{z-index:1;}
+.studyCardHeader{display:flex;align-items:center;gap:17px;margin-bottom:22px;}
+.studyCardIcon{width:56px;height:56px;display:grid;place-items:center;flex:none;border-radius:17px;background:color-mix(in srgb,var(--gold) 17%,var(--surface));color:var(--gold);font-size:29px;}
+.studyCardHeaderText{min-width:0;}
 .studyCard h2{margin:0 0 20px;color:var(--ink);font-size:17px;}
+.studyCardHeader h2{margin:0 0 4px;font-family:'Lora',serif;font-size:clamp(22px,4vw,29px);}
+.studyCardHeader p{margin:0;color:var(--muted);font-size:14px;line-height:1.4;}
 .studyFields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:15px;}
 .studyField{display:flex;flex-direction:column;gap:8px;min-width:0;color:var(--muted);font-size:12px;font-weight:750;letter-spacing:.03em;}
 .studyField select,.studyField input{width:100%;height:50px;padding:0 14px;border:1px solid var(--line);border-radius:13px;background:var(--card);color:var(--ink);font:700 16px 'Inter',sans-serif;outline:none;}
+.studyField select.studyNativeSelect{position:absolute;width:1px;height:1px;padding:0;border:0;opacity:0;pointer-events:none;}
+.studySurahToggle{width:100%;min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border:1px solid var(--line);border-radius:13px;background:var(--card);color:var(--ink);font:750 17px 'Inter',sans-serif;text-align:start;cursor:pointer;}
+.studySurahToggle svg{width:19px;height:19px;flex:none;transition:transform .2s;}
+.studySurahToggle[aria-expanded="true"]{border-color:var(--gold);border-radius:13px 13px 0 0;}
+.studySurahToggle[aria-expanded="true"] svg{transform:rotate(180deg);}
+.studySurahMenu{border:1px solid var(--gold);border-top:0;border-radius:0 0 15px 15px;background:var(--surface);box-shadow:0 14px 24px rgba(12,35,66,.12);}
+.studySurahMenu[hidden]{display:none;}
+.studySurahSearchWrap{padding:12px;border-bottom:1px solid var(--line);}
+.studySurahSearchWrap input{width:100%;height:44px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:600 14px 'Inter',sans-serif;}
+.studySurahList{max-height:340px;overflow:auto;margin:0;padding:5px;list-style:none;overscroll-behavior:contain;}
+.studySurahList li{margin:0;}
+.studySurahList button{width:100%;min-height:48px;display:flex;align-items:center;gap:11px;padding:8px 12px;border:0;border-radius:9px;background:transparent;color:var(--ink);font:650 14px 'Inter',sans-serif;text-align:start;cursor:pointer;}
+.studySurahList button:hover,.studySurahList button:focus-visible,.studySurahList button[aria-current="true"]{background:color-mix(in srgb,var(--gold) 16%,var(--surface));}
+.studySurahNumber{width:30px;flex:none;color:var(--gold);font-weight:800;}
+.studySurahArabic{margin-inline-start:auto;color:var(--muted);font-size:17px;}
+.studySurahEmpty{padding:18px;color:var(--muted);text-align:center;}
 .studyField select:focus-visible,.studyField input:focus-visible,.studyBack:focus-visible,.studyOpen:focus-visible,.studyBanner button:focus-visible,.selStudyAction:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
-.studySummary{margin:18px 0 20px;padding:15px 17px;border-left:4px solid var(--gold);border-radius:0 12px 12px 0;background:var(--surface);color:var(--ink);font-size:14px;line-height:1.5;}
-.studyOpen{width:100%;min-height:54px;border:1px solid var(--gold);border-radius:15px;background:var(--gold);color:var(--navy);font:800 16px 'Inter',sans-serif;cursor:pointer;}
+.studySummary{margin:19px 0;padding:15px 17px;border-left:4px solid var(--gold);border-radius:10px;background:color-mix(in srgb,var(--gold) 9%,var(--card));color:var(--ink);font-size:14px;line-height:1.5;}
+.studyOpen{width:100%;min-height:58px;border:1px solid var(--gold);border-radius:15px;background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 80%,#50301a),var(--gold));color:var(--navy);font:800 16px 'Inter',sans-serif;cursor:pointer;box-shadow:0 7px 16px color-mix(in srgb,var(--gold) 22%,transparent);}
 .studyFootnote{margin:13px 5px 0;color:var(--muted);font-size:12px;line-height:1.5;text-align:center;}
-.studySaveRow{display:grid;gap:10px;margin-top:18px;}
+.studySaveCard{margin-top:14px;}
+.studySaveRow{display:grid;gap:10px;}
 .studySaveRow .studyField{font-size:13px;letter-spacing:0;}
 .studySaveRow button{min-height:48px;padding:9px 15px;border:1px solid var(--gold);border-radius:13px;background:var(--surface);color:var(--ink);font:750 14px 'Inter',sans-serif;cursor:pointer;}
 .studySaveRow button:disabled{opacity:.5;cursor:not-allowed;}
-.studySaved{margin-top:26px;}
+.studySaved{margin-top:14px;}
 .studySaved h2{margin:0 0 13px;color:var(--ink);font-size:18px;}
 .studySaved p{margin:0;color:var(--muted);font-size:14px;line-height:1.5;}
 .studySavedList{display:grid;gap:10px;margin:0;padding:0;list-style:none;}
@@ -5249,7 +5274,8 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 .studyBannerActions::-webkit-scrollbar{display:none;}
 .studyBannerActions button{flex:none;min-height:34px;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:700 11px 'Inter',sans-serif;white-space:nowrap;cursor:pointer;}
 .studyBannerActions .studyBannerPrimary{background:var(--gold);border-color:var(--gold);color:var(--navy);}
-@media(max-width:380px){.studyCard{padding:18px 14px;}.studyBannerActions button{padding:6px 8px;}}
+@media(max-width:600px){.studyMain{padding:12px 12px 80px;}.studyHero{min-height:0;margin-bottom:0;padding:26px 22px 20px;border-radius:18px;}.studyHero .studyLead{max-width:none;font-size:13px;}.studyCardHeader{gap:12px;}.studyCardIcon{width:46px;height:46px;font-size:24px;}.studySurahList{max-height:270px;}}
+@media(max-width:380px){.studyCard,.studySaveCard,.studySaved{padding:18px 14px;}.studyBannerActions button{padding:6px 8px;}}
 /* Çalışma Masası bölümleme alanı okuyucunun mevcut denetimleri arasında kalır. */
 #rscroll[hidden],#studySplitPanel[hidden]{display:none!important;}
 #studySplitPanel{flex:1;min-height:0;overflow-y:auto;background:var(--bg);color:var(--ink);padding:18px 14px 120px;-webkit-overflow-scrolling:touch;}
@@ -5409,6 +5435,7 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 <link rel="stylesheet" href="/assets/gear-sheet.css?v=1">
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
+<link rel="stylesheet" href="/assets/home-study-polish.css?v=330">
 </head>
 <body>
 <div id="tabletBootError" style="display:none;position:fixed;z-index:99999;left:14px;right:14px;top:14px;background:#fff8e8;color:#0e2c55;border:2px solid #c99a35;border-radius:14px;padding:14px 16px;box-shadow:0 12px 34px rgba(0,0,0,.22);font-family:Arial,sans-serif">
@@ -5476,28 +5503,29 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 <!-- ÇALIŞMA MASASI: aralık hazırlığı; oynatma mevcut okuyucuda yapılır. -->
 <div class="screen" id="studySetup">
   <header class="studyTop">
-    <button id="studyBack" class="studyBack" type="button" data-i18n-aria="study_back" aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <button id="studyBack" class="studyBack" type="button" data-i18n-aria="study_back" aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span data-i18n="study_back">Geri</span></button>
     <span class="studyTopLabel" data-i18n="study_title">Çalışma Masası</span>
   </header>
   <main class="studyMain">
-    <div class="studyEyebrow" data-i18n="study_focus">Seçtiğin bölüme odaklan</div>
-    <h1 data-i18n="study_title">Çalışma Masası</h1>
-    <p class="studyLead" data-i18n="study_intro">Bir sûre ve âyet aralığı seç. Hazır olduğunda yalnız bu bölümü çalış.</p>
+    <div class="studyHero">
+      <div class="studyEyebrow" data-i18n="study_focus">Seçtiğin bölüme odaklan</div>
+      <h1 data-i18n="study_title">Çalışma Masası</h1>
+      <p class="studyLead" data-i18n="study_intro">Bir sûre ve âyet aralığı seç. Hazır olduğunda yalnız bu bölümü çalış.</p>
+    </div>
     <section class="studyCard" aria-labelledby="studyRangeHeading">
-      <h2 id="studyRangeHeading" data-i18n="study_range">Çalışılacak aralık</h2>
-      <label class="studyField" for="studySurah"><span data-i18n="study_surah">Sûre</span><select id="studySurah" aria-label="Sûre" data-i18n-aria="study_surah"></select></label>
+      <div class="studyCardHeader"><span class="studyCardIcon" aria-hidden="true"><svg width="31" height="31" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 26c-4-3-8-4-13-3V6c5-1 9 0 13 3 4-3 8-4 13-3v17c-5-1-9 0-13 3Z"/><path d="M16 9v17M6 10c3-.3 5 .2 7 1.5M19 11.5c2-1.3 4-1.8 7-1.5"/></svg></span><div class="studyCardHeaderText"><h2 id="studyRangeHeading" data-i18n="study_range">Çalışılacak aralık</h2></div></div>
+      <div class="studyField studySurahField"><span id="studySurahLabel" data-i18n="study_surah">Sûre</span><select id="studySurah" class="studyNativeSelect" tabindex="-1" aria-hidden="true"></select><button id="studySurahToggle" class="studySurahToggle" type="button" aria-expanded="false" aria-controls="studySurahMenu" aria-labelledby="studySurahLabel studySurahChoice"><span id="studySurahChoice">1. Fâtiha</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div id="studySurahMenu" class="studySurahMenu" hidden><div class="studySurahSearchWrap"><input id="studySurahSearch" type="search" data-i18n-ph="home_search" placeholder="Sûre ara — isim veya numara" autocomplete="off" data-i18n-aria="home_search" aria-label="Sûre ara"></div><ul id="studySurahList" class="studySurahList"></ul><div id="studySurahEmpty" class="studySurahEmpty" hidden data-i18n="study_search_empty">Eşleşen sûre bulunamadı.</div></div></div>
       <div class="studyFields">
         <label class="studyField" for="studyFrom"><span data-i18n="s_start_ayah">Başlangıç âyet</span><input id="studyFrom" type="number" min="1" value="1" inputmode="numeric" data-i18n-aria="s_start_ayah" aria-label="Başlangıç âyet"></label>
         <label class="studyField" for="studyTo"><span data-i18n="s_end_ayah">Bitiş âyet</span><input id="studyTo" type="number" min="1" value="1" inputmode="numeric" data-i18n-aria="s_end_ayah" aria-label="Bitiş âyet"></label>
       </div>
+      <div id="studySummary" class="studySummary" role="status" aria-live="polite" data-i18n="study_summary_empty">Çalışacağın aralığı seç.</div>
+      <button id="studyOpen" class="studyOpen" type="button" data-i18n="study_open">Aralığı aç</button>
     </section>
-    <div id="studySummary" class="studySummary" role="status" aria-live="polite" data-i18n="study_summary_empty">Çalışacağın aralığı seç.</div>
-    <button id="studyOpen" class="studyOpen" type="button" data-i18n="study_open">Aralığı aç</button>
-    <div class="studySaveRow">
-      <label class="studyField" for="studySessionTitle"><span data-study-i18n="study_save_name">Çalışmaya ad ver (isteğe bağlı)</span><input id="studySessionTitle" type="text" maxlength="80" autocomplete="off" data-study-i18n-ph="study_save_name_hint" placeholder="Örn. Kehf 1–10"></label>
-      <button id="studySessionSave" type="button" data-study-i18n="study_save">Bu çalışmayı kaydet</button>
-    </div>
-    <p class="studyFootnote" data-i18n="study_start_hint">Bölüm açıldığında ses başlamaz; ne zaman çalışacağını sen seçersin.</p>
+    <section class="studySaveCard"><div class="studySaveRow">
+        <label class="studyField" for="studySessionTitle"><span data-study-i18n="study_save_name">Çalışmaya ad ver (isteğe bağlı)</span><input id="studySessionTitle" type="text" maxlength="80" autocomplete="off" data-study-i18n-ph="study_save_name_hint" placeholder="Örn. Kehf 1–10"></label>
+        <button id="studySessionSave" type="button" data-study-i18n="study_save">Bu çalışmayı kaydet</button>
+      </div><p class="studyFootnote" data-i18n="study_start_hint">Bölüm açıldığında ses başlamaz; ne zaman çalışacağını sen seçersin.</p></section>
     <section class="studySaved" aria-labelledby="studySavedHeading">
       <h2 id="studySavedHeading" tabindex="-1" data-study-i18n="study_saved">Kaydedilen çalışmalar</h2>
       <p id="studySavedEmpty" data-study-i18n="study_saved_empty">Henüz kayıtlı çalışma yok.</p>
@@ -6408,7 +6436,7 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v329</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v330</span></div>
   </div>
 
   <div class="tesekkur">
@@ -8223,6 +8251,7 @@ function readStudyDraft(){
 }
 function updateStudySetup(){
   const {sid,from,to}=readStudyDraft(),meta=SURAHS[sid-1],valid=validStudyRange(sid,from,to);
+  window.elifaStudySurahPicker?.sync();
   $('studyFrom').max=meta?.n||1;$('studyTo').max=meta?.n||1;
   $('studyOpen').disabled=!valid;
   $('studySummary').textContent=valid?meta.tr+' · '+from+'–'+to+'. '+(window.tr?tr('study_verses'):'âyet'):
@@ -13202,7 +13231,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v329-study-verse-parts';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v330-study-desk-design';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -14445,6 +14474,7 @@ html body #reader .am::before, html body #reader .am::after{
     study_intro:["Bir sûre ve âyet aralığı seç. Hazır olduğunda yalnız bu bölümü çalış.","Wähle eine Sure und einen Versbereich. Übe dann nur diesen Abschnitt.","Choose a surah and verse range. Practice only this part when ready.","Выберите суру и диапазон аятов. Затем занимайтесь только этим отрывком.","اختر سورة ونطاق آيات. تدرب على هذا الجزء فقط عندما تكون مستعدًا.","Choisissez une sourate et une plage de versets. Étudiez seulement ce passage.","Elige una sura y un intervalo de aleyas. Practica solo esta parte.","Επίλεξε σούρα και εύρος εδαφίων. Μελέτησε μόνο αυτό το μέρος.","选择章节和经文范围，准备好后只练习这一部分。","スーラと節の範囲を選び、準備ができたらその部分だけ練習します。","수라와 구절 범위를 선택하세요. 준비되면 이 부분만 연습합니다.","सूरह और आयतों की सीमा चुनें। तैयार होने पर केवल इसी भाग का अभ्यास करें।","سورہ اور آیات کی حد منتخب کریں۔ تیار ہونے پر صرف اسی حصے کی مشق کریں۔","Scegli una sura e un intervallo di versetti. Esercitati solo su questa parte.","Pilih surah dan rentang ayat. Latih hanya bagian ini saat siap.","Kies een soera en versbereik. Oefen alleen dit deel wanneer je klaar bent.","Escolha uma sura e um intervalo de versículos. Pratique só esta parte.","یک سوره و بازه آیات انتخاب کن. وقتی آماده بودی فقط همین بخش را تمرین کن.","একটি সূরা ও আয়াতের পরিসর বেছে নিন। প্রস্তুত হলে শুধু এই অংশটি অনুশীলন করুন।","Pilih surah dan julat ayat. Berlatih bahagian ini sahaja apabila sedia.","Chagua sura na masafa ya aya. Ukiwa tayari, fanyia mazoezi sehemu hii pekee."],
     study_range:["Çalışılacak aralık","Übungsbereich","Practice range","Диапазон для занятий","نطاق المراجعة","Passage à étudier","Intervalo de práctica","Εύρος μελέτης","练习范围","練習する範囲","연습 범위","अभ्यास की सीमा","مشق کی حد","Intervallo di studio","Rentang latihan","Oefenbereik","Intervalo de estudo","بازه تمرین","অনুশীলনের পরিসর","Julat latihan","Masafa ya mazoezi"],
     study_surah:["Sûre","Sure","Surah","Сура","السورة","Sourate","Sura","Σούρα","章节","スーラ","수라","सूरह","سورہ","Sura","Surah","Soera","Sura","سوره","সূরা","Surah","Sura"],
+    study_search_empty:["Eşleşen sûre bulunamadı.","Keine passende Sure gefunden.","No matching surah found.","Подходящая сура не найдена.","لم يتم العثور على سورة مطابقة.","Aucune sourate correspondante.","No se encontró ninguna sura.","Δεν βρέθηκε αντίστοιχη σούρα.","未找到匹配的章节。","一致するスーラが見つかりません。","일치하는 수라가 없습니다.","मिलती हुई सूरह नहीं मिली।","کوئی مماثل سورت نہیں ملی۔","Nessuna sura corrispondente.","Surah yang cocok tidak ditemukan.","Geen overeenkomende soera gevonden.","Nenhuma sura correspondente.","سوره‌ای مطابق پیدا نشد.","মিল থাকা কোনো সূরা পাওয়া যায়নি।","Tiada surah yang sepadan.","Hakuna sura inayolingana."],
     study_summary_empty:["Çalışacağın aralığı seç.","Wähle deinen Übungsbereich.","Choose the range to practice.","Выберите диапазон для занятий.","اختر نطاق المراجعة.","Choisissez le passage à étudier.","Elige el intervalo que practicarás.","Επίλεξε το εύρος που θα μελετήσεις.","请选择练习范围。","練習する範囲を選んでください。","연습할 범위를 선택하세요.","अभ्यास के लिए सीमा चुनें।","مشق کے لیے حد منتخب کریں۔","Scegli l’intervallo da studiare.","Pilih rentang untuk latihan.","Kies het bereik om te oefenen.","Escolha o intervalo para praticar.","بازه تمرین را انتخاب کن.","অনুশীলনের পরিসর বেছে নিন।","Pilih julat untuk latihan.","Chagua masafa ya kufanya mazoezi."],
     study_open:["Aralığı aç","Bereich öffnen","Open range","Открыть диапазон","افتح النطاق","Ouvrir le passage","Abrir intervalo","Άνοιγμα εύρους","打开范围","範囲を開く","범위 열기","सीमा खोलें","حد کھولیں","Apri intervallo","Buka rentang","Bereik openen","Abrir intervalo","باز کردن بازه","পরিসর খুলুন","Buka julat","Fungua masafa"],
     study_start_hint:["Bölüm açıldığında ses başlamaz; ne zaman çalışacağını sen seçersin.","Beim Öffnen beginnt kein Audio; du startest die Übung selbst.","Audio does not start when you open the range; start when you are ready.","При открытии отрывка звук не включится; начните, когда будете готовы.","لن يبدأ الصوت عند فتح النطاق؛ ابدأ حين تكون مستعدًا.","L’audio ne démarre pas à l’ouverture; lancez-le quand vous êtes prêt.","El audio no empieza al abrirlo; inícialo cuando quieras.","Ο ήχος δεν ξεκινά με το άνοιγμα· ξεκίνα όταν είσαι έτοιμος.","打开范围后不会自动播放；准备好再开始。","範囲を開いても音声は始まりません。準備ができたら開始してください。","범위를 열어도 자동 재생되지 않습니다. 준비되면 시작하세요.","सीमा खोलने पर ऑडियो नहीं चलेगा; तैयार होने पर शुरू करें।","حد کھولنے پر آواز شروع نہیں ہوگی؛ تیار ہوں تو شروع کریں۔","L’audio non parte all’apertura; avvialo quando sei pronto.","Audio tidak langsung diputar; mulai saat Anda siap.","Audio start niet vanzelf; begin wanneer je klaar bent.","O áudio não começa ao abrir; inicie quando estiver pronto.","با باز کردن بازه، صدا خودکار پخش نمی‌شود؛ هر وقت آماده بودی شروع کن.","পরিসর খুললেই অডিও চলবে না; প্রস্তুত হলে শুরু করুন।","Audio tidak bermula sendiri; mulakan apabila anda sedia.","Sauti haianzi unapofungua; anza ukiwa tayari."],
@@ -16580,6 +16610,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/ui-extra.js?v=1"></script>
 <script src="/assets/study-split.js?v=329"></script>
 <script src="/assets/study-sessions.js?v=329"></script>
+<script src="/assets/study-surah-picker.js?v=330"></script>
 </body>
 </html>
 
