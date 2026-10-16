@@ -157,7 +157,7 @@ test('guarded repeat range survives a reciter switch and waits for a new start',
   const c=vm.createContext({
     SET:{reciter:3},curS:3,gearCtx:'ayah',splitParts:[],curAy:1,visAy:1,
     SURAHS:[{n:7},{n:286},{n:200}],guardedRangeDraft:null,
-    $:id=>elements[id],saveSet(){},syncCumu(){},syncCumu2(){},
+    $:id=>elements[id],saveSet(){},commitInputs(){},syncCumu(){},syncCumu2(){},
     clampAy:value=>Math.max(1,Math.min(200,value||1)),
     audioTimingUnverified:(reciter,sid)=>reciter===3&&sid===3,
     toast:message=>messages.push(message),closeSheets:()=>closed++,openReciterSheet:()=>opened++,

@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   ELIFA MUSHAF — SERVICE WORKER  (v326)
+   ELIFA MUSHAF — SERVICE WORKER  (v327)
    App-shell'i önbelleğe alır, offline açılır; dış API'lere
    (Kur'an metni/ses/tefsir) DOKUNMAZ. Güncellemede VERSION'u artır.
 
@@ -11,7 +11,7 @@
    · version.json / duyuru.json / manual-*.json → her zaman ağ öncelikli.
    · Yönlendirilmiş (redirected) navigasyon yanıtı önbelleğe yazılmaz.
    ═══════════════════════════════════════════════════════════════ */
-const VERSION = 'elifa-mushaf-v326-ayah-repeat';
+const VERSION = 'elifa-mushaf-v327-range-selection';
 const CACHE   = VERSION;
 
 /* Fontlar index.html içinde base64 gömülü → ayrıca cache'lenmez. */
