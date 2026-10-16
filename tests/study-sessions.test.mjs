@@ -21,7 +21,7 @@ test('saved Study Desk ranges can be reopened, edited, and deleted with manual c
   const storage=new Map(),messages=[],opened=[];
   let range={sid:18,from:1,to:5},remembered=null;
   const window={T:{},tr:key=>key,addEventListener(){},
-    elifaStudySplitPrefs:()=>({mode:'manual',cutsByAy:{1:[2]}}),
+    elifaStudySplitPrefs:()=>({mode:'manual',cutsByAy:{1:[2]},selectedAy:1}),
     elifaRememberStudySplitPrefs:(entry,prefs)=>{remembered={entry,prefs};}};
   const context=vm.createContext({window,document:{getElementById:get,
     createElement:()=>new Element(),querySelectorAll:()=>[]},
@@ -37,9 +37,10 @@ test('saved Study Desk ranges can be reopened, edited, and deleted with manual c
   get('studySessionTitle').value='Kehf ezberi';get('studySessionSave').click();
   assert.equal(storage.get('studySessions').length,1);
   assert.deepEqual(storage.get('studySessions')[0].manualCuts,{1:[2]});
+  assert.equal(storage.get('studySessions')[0].selectedAy,1);
   const row=get('studySavedList').children[0],actions=row.children[1];
   actions.children[0].click();assert.deepEqual(opened,[{sid:18,from:1,to:5}]);
-  assert.deepEqual(JSON.parse(JSON.stringify(remembered.prefs)),{mode:'manual',cutsByAy:{1:[2]}});
+  assert.deepEqual(JSON.parse(JSON.stringify(remembered.prefs)),{mode:'manual',cutsByAy:{1:[2]},selectedAy:1});
   window.elifaStudySessions.onOpen({fromReader:true});
   assert.equal(get('studySessionTitle').value,'Kehf ezberi');
   actions.children[1].click();

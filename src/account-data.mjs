@@ -35,7 +35,7 @@ export function validateBackup(payload){
       if(!Array.isArray(value)||value.length>100)throw Error('Geçersiz çalışma listesi.');
       const ids=new Set();
       for(const item of value){
-        if(!object(item)||Object.keys(item).some(k=>!['id','title','sid','from','to','createdAt','updatedAt','splitMode','manualCuts'].includes(k))||
+        if(!object(item)||Object.keys(item).some(k=>!['id','title','sid','from','to','createdAt','updatedAt','splitMode','manualCuts','selectedAy'].includes(k))||
           typeof item.id!=='string'||!STUDY_ID.test(item.id)||ids.has(item.id)||
           typeof item.title!=='string'||!item.title.trim()||item.title.length>80||
           !Number.isInteger(item.sid)||item.sid<1||item.sid>114||
@@ -44,6 +44,8 @@ export function validateBackup(payload){
           typeof item.createdAt!=='string'||!Number.isFinite(Date.parse(item.createdAt))||
           typeof item.updatedAt!=='string'||!Number.isFinite(Date.parse(item.updatedAt)))throw Error('Geçersiz çalışma kaydı.');
         if(item.splitMode!==undefined&&!['auto','manual'].includes(item.splitMode))throw Error('Geçersiz bölme modu.');
+        if(item.selectedAy!==undefined&&(!Number.isInteger(item.selectedAy)||item.selectedAy<item.from||item.selectedAy>item.to))
+          throw Error('Geçersiz bölünecek âyet.');
         if(item.manualCuts!==undefined){
           if(!object(item.manualCuts)||Object.keys(item.manualCuts).length>item.to-item.from+1)throw Error('Geçersiz bölme noktaları.');
           let totalCuts=0;

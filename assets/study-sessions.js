@@ -30,6 +30,7 @@
       typeof item.id==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(item.id)&&
       typeof item.title==='string'&&!!item.title.trim()&&item.title.length<=80&&
       validStudyRange(item.sid,item.from,item.to)&&
+      (item.selectedAy===undefined||(Number.isInteger(item.selectedAy)&&item.selectedAy>=item.from&&item.selectedAy<=item.to))&&
       typeof item.createdAt==='string'&&Number.isFinite(Date.parse(item.createdAt))&&
       typeof item.updatedAt==='string'&&Number.isFinite(Date.parse(item.updatedAt))&&
       (item.splitMode===undefined||['auto','manual'].includes(item.splitMode))&&
@@ -109,7 +110,7 @@
       const open=button('study_open_saved',()=>{
           applyRange(item);
           activeId=item.id;
-          if(item.splitMode)window.elifaRememberStudySplitPrefs?.(item,{mode:item.splitMode,cutsByAy:item.manualCuts||{}});
+          if(item.splitMode)window.elifaRememberStudySplitPrefs?.(item,{mode:item.splitMode,cutsByAy:item.manualCuts||{},selectedAy:item.selectedAy??null});
           byId('studyOpen').click();
         });
       const edit=button('study_edit_saved',()=>{
@@ -136,8 +137,9 @@
     const old=index>=0?items[index]:null;
     const item={id:old?.id||uuid(),title,sid,from,to,createdAt:old?.createdAt||now,updatedAt:now};
     const sameOld=old&&old.sid===sid&&old.from===from&&old.to===to;
-    const prefs=window.elifaStudySplitPrefs?.(item)||(sameOld&&old.splitMode?{mode:old.splitMode,cutsByAy:old.manualCuts||{}}:null);
-    if(prefs){item.splitMode=prefs.mode;item.manualCuts=prefs.cutsByAy;}
+    const prefs=window.elifaStudySplitPrefs?.(item)||(sameOld&&old.splitMode?{mode:old.splitMode,cutsByAy:old.manualCuts||{},selectedAy:old.selectedAy??null}:null);
+    if(prefs){item.splitMode=prefs.mode;item.manualCuts=prefs.cutsByAy;
+      if(Number.isInteger(prefs.selectedAy)&&prefs.selectedAy>=from&&prefs.selectedAy<=to)item.selectedAy=prefs.selectedAy;}
     if(index>=0)items[index]=item;else items.push(item);
     if(!store.set(key,items)){toast(message('study_save_failed'));return;}
     editingId=item.id;activeId=item.id;byId('studySessionTitle').value=title;render();toast(message('study_saved_ok'));

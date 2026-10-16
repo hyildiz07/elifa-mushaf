@@ -12,7 +12,8 @@ function source(name){
     lineEnd:html.indexOf('\n}',start)+2);
 }
 const names=['buildStudySplitParts','studyValidateManualCut','playStudySplitRange',
-  'playStudySplitPart','stepBounds'];
+  'playStudySplitPart','activeStudySplitSelection','studySplitRecipeCurrent',
+  'playActiveStudySplit','stepBounds'];
 function audio(){
   const rows={
     1:[[1,100,250],[2,250,450],[3,450,870]],
@@ -31,7 +32,7 @@ function context(loaded=true){
     words.push({gi:words.length,ay,pos,txt:`${ay}:${pos}`,s:from,e:to,
       audioAligned:true,joinNext:false});
   }
-  const c=vm.createContext({curS:1,SURAHS:[{n:2}],SET:{reciter:223,startPad:300,endPad:300},
+  const c=vm.createContext({curS:1,SURAHS:[{n:2}],SET:{reciter:223,startPad:300,endPad:300,repOn:false,cumu:false},
     wordArr:words,ayGi:{1:[0,2],2:[3,5]},AD_:loaded?recording:{sourceUrl:null},
     normalChapterAudio:null,studyRange:{sid:1,from:1,to:2},
     audioTimingUnverified:()=>false,
@@ -40,10 +41,13 @@ function context(loaded=true){
     getAudio:async()=>recording,rewireTimings(){},ensureSelAudio:async()=>{
       recording.selBuf={lo:0,hi:1800,off:0,buffer:{duration:1.8}};
     },normalVersePlanReady:()=>true,runPlan:p=>{c.playing=true;c.started=p},
-    toast:m=>{c.message=m}
+    toast:m=>{c.message=m},window:{elifaStudySplitSelection:()=>c.selection}
   });
   for(const name of names)vm.runInContext(source(name),c);
   return {c,recording};
+}
+function select(c,result,ay=1,mode='manual',cutsByAy={}){
+  c.selection={sid:1,ay,parts:result.parts,selectedIndex:0,mode,cutsByAy};
 }
 
 test('automatic word parts preserve the verse tail and never overlap the next word',()=>{
@@ -99,29 +103,48 @@ test('a repeated Afasy verse falls back to one complete verse without blocking s
   assert.equal(result.parts[3].fallbackVerse,true);
   assert.equal(c.buildStudySplitParts(1,2,'manual',{2:[2]}).error!==null,true,
     'manual cuts inside a repeated passage remain disallowed');
-  assert.equal(await c.playStudySplitPart(result.parts[3]),true);
+  const selected=c.buildStudySplitParts(2,2,'auto');
+  select(c,selected,2,'auto');
+  assert.equal(await c.playStudySplitPart(selected.parts[0]),true);
   assert.equal(c.started[0].t,1800);
 });
 
 test('text cards appear before audio; playback loads and revalidates that same source',async()=>{
   const {c}=context(false);
-  const pending=c.buildStudySplitParts(1,2,'auto');
+  const pending=c.buildStudySplitParts(1,1,'auto');
   assert.equal(pending.error,null);
   assert.equal(pending.pendingAudio,true);
-  assert.equal(pending.parts.length,6);
+  assert.equal(pending.parts.length,3);
   assert.ok(pending.parts.every(p=>!p.canPlay&&p.pendingAudio&&Number.isInteger(p.index)));
   assert.deepEqual({...c.studyValidateManualCut(1,2)},
     {ok:true,pendingAudio:true,message:'Ses yüklenince kesim yeniden doğrulanacak.'});
-  assert.equal((await c.playStudySplitRange(pending.parts,1,3)),true);
+  select(c,pending,1,'auto');
+  assert.equal((await c.playStudySplitRange(pending.parts,0,2)),true);
   assert.equal(c.started.length,3);
   assert.ok(c.started.every(step=>step.studyExact&&step.dyn));
   assert.deepEqual(Array.from(c.started,step=>[step.f,step.t]),
-    [[250,450],[450,900],[920,1100]]);
+    [[100,250],[250,450],[450,900]]);
+});
+
+test('manual three-part verse uses only that verse for repeat and cumulative study',async()=>{
+  const {c}=context();
+  c.SET.repOn=true;c.SET.rep=5;c.SET.cumu=true;
+  const parts=c.buildStudySplitParts(2,2,'manual',{2:[1,2]});
+  select(c,parts,2,'manual',{2:[1,2]});
+  assert.equal(await c.playActiveStudySplit(),true);
+  assert.deepEqual(Array.from(c.started,step=>[step.f,step.t]),
+    [[920,1100],[1100,1400],[920,1400],[1400,1800],[920,1800]]);
+  assert.ok(c.started.every(step=>step.studyExact&&step.dyn));
+  assert.ok(c.started.every(step=>step.f>=901&&step.t<=1800));
+  c.SET.cumu=false;
+  assert.equal(await c.playStudySplitRange(parts.parts,1,2),true);
+  assert.deepEqual(Array.from(c.started,step=>[step.f,step.t]),[[1100,1400],[1400,1800]]);
 });
 
 test('an obsolete study selection cannot start after asynchronous audio loading',async()=>{
   const {c,recording}=context(false);
-  const pending=c.buildStudySplitParts(1,2,'auto');
+  const pending=c.buildStudySplitParts(1,1,'auto');
+  select(c,pending,1,'auto');
   let resolve;
   c.getAudio=()=>new Promise(r=>{resolve=r});
   const playback=c.playStudySplitPart(pending.parts[0]);
@@ -133,9 +156,10 @@ test('an obsolete study selection cannot start after asynchronous audio loading'
 
 test('a pending word never silently becomes a whole verse after audio loads',async()=>{
   const {c,recording}=context(false);
-  const pending=c.buildStudySplitParts(1,2,'auto');
+  const pending=c.buildStudySplitParts(2,2,'auto');
+  select(c,pending,2,'auto');
   recording.verseSegments[2]=[[1,920,1100],[2,1100,1250],[2,1250,1400],[3,1400,1770]];
-  assert.equal(await c.playStudySplitPart(pending.parts[3]),false);
+  assert.equal(await c.playStudySplitPart(pending.parts[0]),false);
   assert.match(c.message,/tam âyet kartını seç/);
   assert.equal(c.started,undefined);
 });
@@ -155,8 +179,9 @@ test('selected buffer passes the first exact study cut through the real schedule
     setIco(){},updateStat(){},wake(){},seekPlay:(from,to)=>{c.startedAt=[from,to]}});
   vm.runInContext(source('goStep'),c);
   vm.runInContext(source('runPlan'),c);
-  const parts=c.buildStudySplitParts(1,2,'auto').parts;
-  assert.equal(await c.playStudySplitRange(parts,1,2),true);
+  const parts=c.buildStudySplitParts(1,1,'auto');
+  select(c,parts,1,'auto');
+  assert.equal(await c.playStudySplitRange(parts.parts,1,2),true);
   await Promise.resolve();
   assert.deepEqual(Array.from(c.startedAt),[250,450]);
   assert.equal(c.plan[0].studyExact,true);

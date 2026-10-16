@@ -5265,6 +5265,17 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 .studySplitStatus{margin:0 0 14px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font-size:13px;line-height:1.5;}
 .studySplitStatus[data-error="true"]{border-color:var(--gold);}
 .studySplitWizard,.studySplitResults{padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--surface);}
+.studySplitVersePicker{padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--surface);}
+.studySplitVersePicker[hidden]{display:none!important;}
+.studySplitVersePicker h3{margin:0 0 6px;color:var(--ink);font-size:18px;}
+.studySplitVersePicker p{margin:0 0 14px;color:var(--muted);font-size:13px;line-height:1.5;}
+.studySplitVerseList{display:grid;gap:8px;max-height:min(55vh,520px);overflow-y:auto;}
+.studySplitVerseList button{display:flex;align-items:center;gap:12px;width:100%;min-height:54px;padding:10px 14px;text-align:start;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);cursor:pointer;}
+.studySplitVerseList button:hover,.studySplitVerseList button:focus-visible{border-color:var(--gold);outline:2px solid transparent;background:var(--surface);}
+.studySplitVerseList strong{flex:none;color:var(--gold);font-size:13px;}
+.studySplitVerseList span{min-width:0;direction:rtl;text-align:right;font:20px var(--qf),serif;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.studySplitChangeVerse{min-height:44px;margin:0 0 12px;padding:8px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-weight:700;cursor:pointer;}
+.studySplitChangeVerse[hidden]{display:none!important;}
 .studySplitWizard[hidden],.studySplitResults[hidden]{display:none!important;}
 .studySplitProgress{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.04em;}
 .studySplitWizard h3{margin:8px 0;color:var(--ink);font-size:17px;}
@@ -5292,11 +5303,15 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 .studySplitParts{display:grid;gap:8px;margin-top:13px;}
 .studySplitPart{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--card);}
 .studySplitPart span{min-width:0;color:var(--ink);font:21px var(--qf),serif;direction:rtl;overflow-wrap:anywhere;}
+.studySplitPartSelected{border-color:var(--gold)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 22%,transparent);}
 .studySplitPart button{flex:none;padding:7px 10px;border:1px solid var(--gold);border-radius:9px;background:var(--surface);color:var(--ink);font-weight:750;cursor:pointer;}
 .studySplitPart button:disabled{opacity:.45;cursor:not-allowed;}
 .studySplitResultsHead{display:flex;align-items:center;justify-content:space-between;gap:8px;}
 @media(max-width:380px){.studySplitResultsHead{align-items:stretch;flex-direction:column}.studySplitResultsTools{justify-content:stretch}.studySplitResultsTools button{flex:1}}
 .studySplitResultsHead h3{margin:0;color:var(--ink);font-size:16px;}
+.studySplitLiveStatus{margin:12px 0 10px;padding:10px 12px;border-radius:10px;background:var(--bg);color:var(--ink);font-size:12px;font-weight:750;line-height:1.5;}
+.studySplitSave{width:100%;min-height:46px;margin:0 0 5px;padding:10px 14px;border:1px solid var(--gold);border-radius:11px;background:var(--gold);color:var(--navy);font-size:13px;font-weight:800;cursor:pointer;}
+.studySplitSave:hover,.studySplitSave:focus-visible{filter:brightness(.96);outline:2px solid var(--gold);outline-offset:2px;}
 .studySplitResultsTools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
 .studySplitResultsTools button{min-height:36px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font-weight:750;cursor:pointer;}
 .studySplitResultsTools .studySplitPlayAll{background:var(--gold);border-color:var(--gold);color:var(--navy);}
@@ -5566,6 +5581,12 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
         <button id="studySplitManual" type="button" aria-pressed="false" data-i18n="study_split_manual">Elle böl</button>
       </div>
       <div id="studySplitStatus" class="studySplitStatus" role="status" aria-live="polite" data-i18n="study_split_ready">Bölümleri hazırla, sonra istediğin parçayı çalış.</div>
+      <div id="studySplitVersePicker" class="studySplitVersePicker" hidden>
+        <h3 id="studySplitVersePickerTitle" tabindex="-1">Bölünecek âyeti seç</h3>
+        <p id="studySplitVersePickerHint">Çalışma aralığından bir âyet seç. Yalnızca seçtiğin âyeti istediğin yerlerden böleceksin.</p>
+        <div id="studySplitVerseList" class="studySplitVerseList" role="group" aria-labelledby="studySplitVersePickerTitle"></div>
+      </div>
+      <button id="studySplitChangeVerse" class="studySplitChangeVerse" type="button" hidden>← Başka âyet seç</button>
       <div id="studySplitWizard" class="studySplitWizard" hidden>
         <div id="studySplitProgress" class="studySplitProgress" aria-live="polite"></div>
         <h3 id="studySplitWizardTitle"></h3>
@@ -5577,6 +5598,8 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
       </div>
       <div id="studySplitResults" class="studySplitResults" hidden>
         <div class="studySplitResultsHead"><h3 id="studySplitResultsTitle" tabindex="-1" data-i18n="study_split_parts">Çalışma parçaları</h3><div class="studySplitResultsTools"><button id="studySplitRevise" type="button" data-i18n="study_split_revise" hidden>Düzenle</button><button id="studySplitPlayAll" class="studySplitPlayAll" type="button" data-i18n="study_split_play_all">▶ Tüm parçaları çalış</button></div></div>
+        <p id="studySplitLiveStatus" class="studySplitLiveStatus" role="status" aria-live="polite"></p>
+        <button id="studySplitSave" class="studySplitSave" type="button">Çalışmayı kaydet / adlandır</button>
         <div id="studySplitParts" class="studySplitParts"></div><button id="studySplitMore" class="studySplitMore" type="button" data-i18n="study_split_more" hidden>Daha fazla göster</button>
       </div>
       <button id="studySplitRetry" class="studySplitRetry" type="button" data-i18n="study_split_retry" hidden>Ses hazırsa yeniden dene</button>
@@ -6385,7 +6408,7 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v328</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v329</span></div>
   </div>
 
   <div class="tesekkur">
@@ -8271,14 +8294,19 @@ $('studyOpen').onclick=()=>{
   studyDraft={sid,from,to};studyRange={sid,from,to};readerReturn='studySetup';
   openSurah(sid,from,{study:true});
 };
-$('studyPlay').onclick=playStudyRange;
+$('studyPlay').onclick=()=>{
+  if(activeStudySplitSelection())playActiveStudySplit();
+  else playStudyRange();
+};
 $('studySplit').onclick=()=>{
   if(!studyRange)return;
   window.elifaOpenStudySplit?.();
 };
 $('studyGear').onclick=()=>{
   if(!studyRange)return;
-  gearCtx='ayah';rangeSelectionDraft={...studyRange};fillGearSheet();openSheet('gearSheet');
+  gearCtx=activeStudySplitSelection()?'studyParts':'ayah';
+  if(gearCtx==='ayah')rangeSelectionDraft={...studyRange};
+  fillGearSheet();openSheet('gearSheet');
 };
 $('studyEdit').onclick=()=>openStudySetup(false,true);
 $('studyExit').onclick=()=>{
@@ -8848,17 +8876,44 @@ function studyValidateManualCut(ay,pos){
   return {ok:true,pendingAudio:!!result.pendingAudio,
     message:result.pendingAudio?'Ses yüklenince kesim yeniden doğrulanacak.':''};
 }
+function activeStudySplitSelection(){
+  return window.elifaStudySplitSelection?.()||null;
+}
+function syncStudySplitControlLabels(){
+  const parts=!!activeStudySplitSelection();
+  $('prevAy').setAttribute('aria-label',parts?'Önceki parça':'Önceki âyet');
+  $('nextAy').setAttribute('aria-label',parts?'Sonraki parça':'Sonraki âyet');
+  $('npPrev').setAttribute('title',parts?'Önceki parça':'Önceki âyet');
+  $('npNext').setAttribute('title',parts?'Sonraki parça':'Sonraki âyet');
+  $('studyPlay').textContent=parts?(window.tr?tr('study_split_play_all'):'▶ Tüm parçaları çalış'):
+    (window.tr?tr('study_play'):'▶ Aralığı çalış');
+  const label=$('optProgram')?.querySelector('.o1');
+  if(label)label.textContent=parts?'Parça ezber programı':(window.tr?tr('s_ayah_prog'):'Âyet ezber programı');
+}
+function studySplitRecipeCurrent(recipe){
+  if(!recipe||curS!==recipe.sid||studyRange?.sid!==recipe.sid||
+    recipe.fromAy<studyRange.from||recipe.toAy>studyRange.to)return false;
+  const current=activeStudySplitSelection();
+  return !!current&&current.sid===recipe.sid&&current.ay===recipe.fromAy&&
+    recipe.fromAy===recipe.toAy&&current.mode===recipe.mode&&
+    JSON.stringify(current.cutsByAy)===JSON.stringify(recipe.cutsByAy);
+}
+function playActiveStudySplit(firstIndex=0,lastIndex=null){
+  const current=activeStudySplitSelection();
+  if(!current)return false;
+  return playStudySplitRange(current.parts,firstIndex,lastIndex??current.parts.length-1);
+}
 async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1){
   if(!Array.isArray(parts)||!parts.length||!Number.isInteger(firstIndex)||
     !Number.isInteger(lastIndex)||firstIndex<0||lastIndex<firstIndex||lastIndex>=parts.length)
     return false;
   // A whole chapter can contain thousands of word steps. Keep the audio
   // scheduler bounded; the user can play another batch after this one.
-  if(lastIndex-firstIndex+1>200){toast('Bir seferde en fazla 200 parça çalınabilir. Daha kısa bir aralık seç.');return false;}
+  if((lastIndex-firstIndex+1)*(SET.cumu?2:1)-(SET.cumu?1:0)>200){
+    toast('Bu çalışma için en fazla 200 ses adımı hazırlanabilir. Daha kısa bir parça aralığı seç.');return false;
+  }
   const chosen=parts.slice(firstIndex,lastIndex+1),recipe=chosen[0]?.recipe;
-  if(!recipe||chosen.some(p=>p.recipe!==recipe)||curS!==recipe.sid||
-    studyRange?.sid!==recipe.sid||studyRange.from!==recipe.fromAy||
-    studyRange.to!==recipe.toAy)return false;
+  if(!recipe||chosen.some(p=>p.recipe!==recipe)||!studySplitRecipeCurrent(recipe))return false;
   stopPlan(false);
   const request=audioRequestId,visit=surahRequestId,reciter=SET.reciter;
   const context=ac();if(context.state==='suspended')context.resume().catch(()=>{});
@@ -8866,9 +8921,8 @@ async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1)
   if(!audio?.sourceUrl){
     try{audio=await getAudio(reciter,recipe.sid);}
     catch(e){if(request===audioRequestId)toast('Sûre sesi yüklenemedi; bağlantını kontrol et.');return false;}
-    if(request!==audioRequestId||visit!==surahRequestId||curS!==recipe.sid||
-      SET.reciter!==reciter||studyRange?.sid!==recipe.sid||
-      studyRange.from!==recipe.fromAy||studyRange.to!==recipe.toAy)return false;
+    if(request!==audioRequestId||visit!==surahRequestId||
+      SET.reciter!==reciter||!studySplitRecipeCurrent(recipe))return false;
     AD_=audio;rewireTimings();
   }
   const sourceId=audio.recordingUrl||audio.sourceUrl;
@@ -8889,16 +8943,22 @@ async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1)
     if(!audio.buffer)await ensureSelAudio(from.ay,to.ay,[from.f,to.t]);
   }catch(e){if(request===audioRequestId)toast('Parça sesi hazırlanamadı. Yeniden dene.');return false;}
   if(request!==audioRequestId||visit!==surahRequestId||AD_!==audio||
-    SET.reciter!==reciter||studyRange?.sid!==recipe.sid||
-    studyRange.from!==recipe.fromAy||studyRange.to!==recipe.toAy)return false;
+    SET.reciter!==reciter||!studySplitRecipeCurrent(recipe))return false;
   if(audio.buffer?to.t>audio.buffer.duration*1000+1:
     !audio.selBuf||audio.selBuf.lo>from.f+1||audio.selBuf.hi<to.t-1){
     toast('Parça sesinin tamamı hazırlanamadı.');return false;
   }
-  const plan=fresh.map((p,i)=>({f:p.f,t:p.t,x:1,dyn:true,studyExact:true,
-    ayEnd:p.toPos===ayGi[p.ay][1]-ayGi[p.ay][0]+1?p.ay:null,
-    l:p.ay+'. âyet · '+(p.fromPos===p.toPos?p.fromPos+'. kelime':p.fromPos+'–'+p.toPos+'. kelimeler'),
-    studyPart:i}));
+  const plan=[];
+  for(let i=0;i<fresh.length;i++){
+    const p=fresh[i],number=firstIndex+i+1;
+    plan.push({f:p.f,t:p.t,x:1,dyn:true,studyExact:true,
+      ayEnd:p.toPos===ayGi[p.ay][1]-ayGi[p.ay][0]+1?p.ay:null,
+      l:p.ay+'. âyet · '+number+'. parça',studyPart:firstIndex+i});
+    if(SET.cumu&&i>0){
+      plan.push({f:fresh[0].f,t:p.t,x:1,dyn:true,studyExact:true,
+        l:(firstIndex+1)+'–'+number+'. parçalar birleşik',studyPart:firstIndex+i});
+    }
+  }
   if(!normalVersePlanReady(plan))return false;
   runPlan(plan);
   return playing;
@@ -10511,6 +10571,10 @@ $('playBtn').onclick=()=>{
     openReciterSheet();
     return;
   }
+  if(activeStudySplitSelection()){
+    if(playing){togglePause();return;}
+    playActiveStudySplit();return;
+  }
   if(!AD_)return;
   if(playing){togglePause();return;}
   // A full selected ayah is the anchor of the 1+2 program. The toggle also
@@ -10658,8 +10722,16 @@ async function playSelection(){
   }
   runPlan([step]);
 }
-$('prevAy').onclick=()=>{const a=Math.max(studyRange?.sid===curS?studyRange.from:1,(curAy||visAy||2)-1);playAyahProgram(a);};
-$('nextAy').onclick=()=>{const a=Math.min(studyRange?.sid===curS?studyRange.to:SURAHS[curS-1].n,(curAy||visAy||0)+1);playAyahProgram(a);};
+$('prevAy').onclick=()=>{
+  const split=activeStudySplitSelection();
+  if(split){const i=Math.max(0,split.selectedIndex-1);window.elifaStudySplitSetIndex?.(i);playActiveStudySplit(i,i);return;}
+  const a=Math.max(studyRange?.sid===curS?studyRange.from:1,(curAy||visAy||2)-1);playAyahProgram(a);
+};
+$('nextAy').onclick=()=>{
+  const split=activeStudySplitSelection();
+  if(split){const i=Math.min(split.parts.length-1,split.selectedIndex+1);window.elifaStudySplitSetIndex?.(i);playActiveStudySplit(i,i);return;}
+  const a=Math.min(studyRange?.sid===curS?studyRange.to:SURAHS[curS-1].n,(curAy||visAy||0)+1);playAyahProgram(a);
+};
 
 /* repeat control */
 let repLongFired=false;
@@ -10671,6 +10743,11 @@ $('repTog').onclick=()=>{
   if(repLongFired){repLongFired=false;return;}
   SET.repOn=!SET.repOn;saveSet();
   document.querySelector('.repctl').classList.toggle('on',SET.repOn);
+  if(activeStudySplitSelection()){
+    if(SET.repOn)playActiveStudySplit();else stopPlan(false);
+    toast(SET.repOn?'Parça tekrarı açık · '+SET.rep+'×':'Parça tekrarı kapalı');
+    return;
+  }
   if(SET.repOn){
     // AÇILDI: o an okunan/görünen âyeti otomatik seç + tekrar çalmaya başla (play gerekmez)
     const a=curAy||visAy||1;
@@ -10689,7 +10766,7 @@ $('repPlus').onclick=()=>{SET.rep=Math.min(99,SET.rep+1);SET.repOn=true;saveSet(
 $('repMinus').onclick=()=>{SET.rep=Math.max(1,SET.rep-1);saveSet();syncRep();};
 /* uzun bas → ayarlar */
 (function(){const b=$('repTog');if(!b)return;let t=null;
-  b.addEventListener('pointerdown',()=>{repLongFired=false;t=setTimeout(()=>{t=null;repLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx='ayah';fillGearSheet();openSheet('gearSheet');},480);});
+  b.addEventListener('pointerdown',()=>{repLongFired=false;t=setTimeout(()=>{t=null;repLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');},480);});
   const c=()=>{if(t){clearTimeout(t);t=null;}};
   b.addEventListener('pointerup',c);b.addEventListener('pointerleave',c);b.addEventListener('pointercancel',c);
 })();
@@ -10699,6 +10776,12 @@ $('reciterBtn').onclick=()=>openReciterSheet();
 $('cumuTog').onclick=()=>{
   if(cumuLongFired){cumuLongFired=false;return;}   // uzun basış oldu → toggle etme
   SET.cumu=!SET.cumu;saveSet();syncCumu();if(typeof syncCumu2==='function')syncCumu2();if(typeof liveRebuildParts==='function')liveRebuildParts();
+  if(activeStudySplitSelection()){
+    if(SET.cumu){SET.repOn=true;saveSet();syncRep();playActiveStudySplit();}
+    else stopPlan(false);
+    toast(SET.cumu?'Parçalar birleşik çalışılıyor':'Parça birleştirme kapalı');
+    return;
+  }
   if(SET.cumu){
     // AÇILDI: birleşik okuma tekrar ile anlamlı → tekrarı da aç, o âyeti seç + çalmaya başla
     SET.repOn=true;saveSet();
@@ -10718,7 +10801,7 @@ let cumuLongFired=false;
 function syncCumu(){const b=$('cumuTog');if(b)b.classList.toggle('on',SET.cumu);}
 /* 1+2 ikonuna UZUN BAS → âyet aralığı programı paneli (tekrar ikonundaki gibi) */
 (function(){const b=$('cumuTog');if(!b)return;let t=null;
-  b.addEventListener('pointerdown',()=>{t=setTimeout(()=>{t=null;cumuLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx='ayah';fillGearSheet();openSheet('gearSheet');},480);});
+  b.addEventListener('pointerdown',()=>{t=setTimeout(()=>{t=null;cumuLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');},480);});
   const c=()=>{if(t){clearTimeout(t);t=null;}};
   b.addEventListener('pointerup',c);b.addEventListener('pointerleave',c);b.addEventListener('pointercancel',c);
 })();
@@ -10798,6 +10881,18 @@ function rememberRangeSelection(){
 }
 function applyRangeProgram(offerReciter=false){
   commitInputs();syncCumu();if(typeof syncCumu2==='function')syncCumu2();
+  if(gearCtx==='studyParts'){
+    const split=activeStudySplitSelection();
+    if(!split){toast('Önce bölünecek âyeti ve parçaları seç.');return false;}
+    const from=+$('fromInp').value,to=+$('toInp').value;
+    if(!Number.isInteger(from)||!Number.isInteger(to)||from<1||to<from||to>split.parts.length){
+      toast('Geçerli bir başlangıç ve bitiş parçası seç.');return false;
+    }
+    SET.repOn=true;saveSet();syncRep();syncRep2();
+    window.elifaStudySplitSetIndex?.(from-1);
+    playStudySplitRange(split.parts,from-1,to-1);
+    return true;
+  }
   if(gearCtx==='parts'&&splitParts.length){
     let from=Math.min(Math.max(1,+$('fromInp').value||1),splitParts.length);
     let to=Math.min(Math.max(1,+$('toInp').value||1),splitParts.length);
@@ -10870,7 +10965,13 @@ function fillGearSheet(){
   $('startPadInp').value=SET.startPad;$('endPadInp').value=SET.endPad;
   {const _cc=$('cumuChk');if(_cc)_cc.checked=SET.cumu;}
   const e1=$('repEcho'),e2=$('repEcho2');if(e1)e1.textContent=SET.rep;if(e2)e2.textContent=SET.rep;
-  if(gearCtx==='parts'&&splitParts.length){
+  const studySplit=gearCtx==='studyParts'?activeStudySplitSelection():null;
+  if(studySplit){
+    $('progTitle').textContent=studySplit.ay+'. âyet · parça ezber programı';
+    $('fromLbl').textContent='Başlangıç parça';$('toLbl').textContent='Bitiş parça';
+    $('fromInp').max=studySplit.parts.length;$('toInp').max=studySplit.parts.length;
+    $('fromInp').value=studySplit.selectedIndex+1;$('toInp').value=studySplit.parts.length;
+  }else if(gearCtx==='parts'&&splitParts.length){
     $('progTitle').textContent='Parça ezber programı (bölünmüş âyet)';
     $('fromLbl').textContent='Başlangıç parça';$('toLbl').textContent='Bitiş parça';
     $('fromInp').max=splitParts.length;$('toInp').max=splitParts.length;
@@ -10887,11 +10988,14 @@ function fillGearSheet(){
       (gearCtx==='ayah'&&rangeSelectionDraft?.sid===curS?rangeSelectionDraft:null);
     $('fromInp').value=draft?.from??cur;$('toInp').value=draft?.to??Math.min(maxAy,cur+2);
   }
-  {const tb=$('testModeBtn');if(tb)tb.style.display=(gearCtx==='parts'&&splitParts.length)?'none':'flex';}
+  {const tb=$('testModeBtn');if(tb)tb.style.display=(studySplit||gearCtx==='parts'&&splitParts.length)?'none':'flex';}
   syncTestBtn();
 }
-const _gb=$('gearBtn');if(_gb)_gb.onclick=()=>{fillGearSheet();openSheet('gearSheet');};
-$('optProgram').onclick=()=>{gearCtx='ayah';closeSheets();fillGearSheet();openSheet('gearSheet');};
+const _gb=$('gearBtn');if(_gb)_gb.onclick=()=>{
+  gearCtx=activeStudySplitSelection()?'studyParts':gearCtx==='studyParts'?'ayah':gearCtx;
+  fillGearSheet();openSheet('gearSheet');
+};
+$('optProgram').onclick=()=>{gearCtx=activeStudySplitSelection()?'studyParts':'ayah';closeSheets();fillGearSheet();openSheet('gearSheet');};
 
 document.querySelectorAll('.stepper button').forEach(b=>{
   b.onclick=()=>{
@@ -11887,7 +11991,9 @@ $('dlReciterBtn').onclick=()=>{
 };
 
 /* init */
-{const b=$('cfgBtnTop');if(b)b.onclick=()=>{gearCtx='ayah';fillGearSheet();openSheet('gearSheet');};}
+{const b=$('cfgBtnTop');if(b)b.onclick=()=>{
+  gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');
+};}
 {const b=$('testModeBtn');if(b)b.onclick=()=>{const willOn=!testing;setTest(willOn);closeSheets();if(willOn)toast('👁 Test modu açık · kelimeye dokun → göster');else toast('Test modu kapalı');};}
 {const b=$('testModeTop');if(b)b.onclick=()=>{const willOn=!testing;setTest(willOn);if(willOn)toast('Test modu açık · kelimeye dokun → göster');else toast('Test modu kapalı');};}
 
@@ -13096,7 +13202,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v328-study-split';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v329-study-verse-parts';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16472,8 +16578,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
-<script src="/assets/study-split.js?v=1"></script>
-<script src="/assets/study-sessions.js?v=1"></script>
+<script src="/assets/study-split.js?v=329"></script>
+<script src="/assets/study-sessions.js?v=329"></script>
 </body>
 </html>
 

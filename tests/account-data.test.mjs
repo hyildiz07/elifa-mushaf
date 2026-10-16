@@ -51,6 +51,10 @@ test('saved studies are validated, backed up, restored, and merged by stable id'
     createdAt:'2026-10-16T00:00:00.000Z',updatedAt:'2026-10-16T00:00:00.000Z'};
   const wrap=items=>({elifa:'yedek',v:1,veri:{studySessions:JSON.stringify(items)}});
   assert.deepEqual(JSON.parse(validateBackup(wrap([item])).veri.studySessions),[item]);
+  const selected={...item,splitMode:'manual',manualCuts:{2:[3,7]},selectedAy:2};
+  assert.deepEqual(JSON.parse(validateBackup(wrap([selected])).veri.studySessions),[selected]);
+  assert.throws(()=>validateBackup(wrap([{...selected,selectedAy:6}])));
+  assert.throws(()=>validateBackup(wrap([{...selected,selectedAy:1.5}])));
   assert.doesNotThrow(()=>validateBackup(wrap([{...item,sid:1,from:1,to:7}])));
   for(const bad of [{...item,title:'<img src=x onerror=alert(1)>',extra:'x'},
     {...item,to:0},{...item,sid:115},{...item,id:'x'},
