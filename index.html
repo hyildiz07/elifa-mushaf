@@ -15739,6 +15739,14 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
+<script>
+// QA-only, opt-in ayah-source pilot. No public reciter registration.
+if(new URLSearchParams(location.search).get('ishak-pilot')==='1'){
+  window.elifaPilotChapters=SURAHS.map(({id,tr,n})=>({id,tr,n}));
+  window.elifaStopNormalAudio=()=>{if(typeof stopPlan==='function')stopPlan(false);};
+  import('/assets/diyanet-ayah-pilot.js?v=1').catch(error=>console.error('İshak ses denemesi açılamadı:',error));
+}
+</script>
 </body>
 </html>
 
