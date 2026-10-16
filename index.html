@@ -9234,17 +9234,13 @@ function stepBounds(st){
     // Ölçülmüş kapanış varsa oraya kes (sonraki harf çalınmaz); yoksa kanıtlanmış −35.
     t = (cm!=null) ? cm : (st.t-35);
   }
-  // AYET SONU güvenliği: âyet biten adımlarda sonraki âyet başına <130ms kalmışsa,
-  // sonraki âyet başından en az 110ms önce kes (tekrar başa sarınca ilk harf girmesin).
-  if(st.ayEnd!=null && AD_.ay[st.ayEnd+1]){
-    const nextStart=AD_.ay[st.ayEnd+1][0];
-    const gap=nextStart - st.t;
-    if(gap<130){
-      const safeT=nextStart-110;
-      if(safeT<t)t=safeT;
-    }
-  }
   if(t<f+120)t=f+120;
+  // Bitiş payı büyük olsa da önceki âyetin sesi sonraki âyetin ilk kelimesine
+  // taşmamalı. Bu sınır yalnız dar boşluklarda değil her âyet geçişinde geçerli.
+  if(st.ayEnd!=null && AD_?.ay?.[st.ayEnd+1]){
+    const nextStart=AD_.ay[st.ayEnd+1][0];
+    if(Number.isFinite(nextStart))t=Math.min(t,nextStart-110);
+  }
   return{f,t};
 }
 /* dyn işaretli adımlar tekrar sayısını CANLI okur → çalarken ± yapınca anında uygulanır */
