@@ -35,17 +35,35 @@ test('a verse tap inside Study Desk cannot continue into the rest of the surah',
   assert.equal(played[1].at(-1).to,10);
 });
 
-test('Study Desk play uses the whole selected range and refuses incomplete audio',()=>{
+test('Study Desk play uses the whole selected range and refuses incomplete audio',async()=>{
   const played=[],messages=[];
   const context=vm.createContext({studyRange:{sid:18,from:1,to:10},curS:18,curAy:5,
+    studyPlayRequestId:0,surahRequestId:1,AD_:{ay:{1:[0,1],10:[9,10]}},
     SET:{reciter:7,repOn:false},audioTimingUnverified:()=>false,
     buildLadder:()=>[],normalVersePlanReady:()=>true,
     runPlan:p=>played.push(p),toast:m=>messages.push(m),window:{tr:null}});
   vm.runInContext(source('playStudyRange'),context);
-  context.playStudyRange();assert.equal(played.length,0);assert.equal(messages.length,1);
-  context.buildLadder=(from,to)=>[{from,to}];context.playStudyRange();
+  await context.playStudyRange();assert.equal(played.length,0);assert.equal(messages.length,1);
+  context.buildLadder=(from,to)=>[{from,to}];await context.playStudyRange();
   assert.deepEqual([played[0][0].from,played[0][0].to],[1,10]);
   assert.equal(context.SET.repOn,false);
+});
+
+test('Study Desk waits for chapter audio on the first Play tap',async()=>{
+  let finishLoad;const played=[];
+  const audio={ay:{1:[0,1],2:[1,2]}};
+  const context=vm.createContext({studyRange:{sid:18,from:1,to:2},curS:18,
+    studyPlayRequestId:0,surahRequestId:1,AD_:{ay:{}},SET:{reciter:223},
+    audioTimingUnverified:()=>false,getAudio:()=>new Promise(resolve=>{finishLoad=resolve;}),
+    $:()=>({classList:{contains:()=>true}}),rewireTimings(){},
+    buildLadder:()=>[{from:1,to:2}],normalVersePlanReady:()=>true,
+    runPlan:p=>played.push(p),toast(){},window:{tr:null}});
+  vm.runInContext(source('playStudyRange'),context);
+  const pending=context.playStudyRange();
+  assert.equal(played.length,0);
+  finishLoad(audio);await pending;
+  assert.equal(context.AD_,audio);
+  assert.equal(played.length,1);
 });
 
 test('opening a Study Desk range does not autoplay and normal reading clears its limit',async()=>{

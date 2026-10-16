@@ -7965,6 +7965,7 @@ let surahRequestId=0;
 let studyRange=null;
 let studyDraft=null;
 let studySetupReturn='home';
+let studyPlayRequestId=0;
 async function openSurah(sid,jumpAy,options={}){
   const request=++surahRequestId;
   if(!options.study && typeof studyRange!=='undefined')studyRange=null;
@@ -8121,10 +8122,23 @@ function syncStudyBanner(){
   band.hidden=!active;
   if(active)$('studyBannerRange').textContent=SURAHS[curS-1].tr+' · '+studyRange.from+'–'+studyRange.to;
 }
-function playStudyRange(){
+async function playStudyRange(){
   const range=studyRange;if(!range||range.sid!==curS)return;
+  const request=++studyPlayRequestId,visit=surahRequestId,sid=curS,reciter=SET.reciter;
   if(audioTimingUnverified(SET.reciter,curS)){
     toast(window.tr?tr('study_audio_unverified'):'Bu hocanın âyet ses sınırları doğrulanmadı.');return;
+  }
+  if(!AD_?.ay?.[range.from]||!AD_?.ay?.[range.to]){
+    try{
+      const audio=await getAudio(reciter,sid);
+      if(request!==studyPlayRequestId||visit!==surahRequestId||studyRange!==range||
+        curS!==sid||SET.reciter!==reciter||!$('reader').classList.contains('on'))return;
+      AD_=audio;rewireTimings();
+    }catch(e){
+      if(request===studyPlayRequestId&&visit===surahRequestId)
+        toast(window.tr?tr('study_audio_missing'):'Aralıktaki ses kayıtları yüklenemedi.');
+      return;
+    }
   }
   const steps=buildLadder(range.from,range.to);
   if(!steps.length){toast(window.tr?tr('study_audio_missing'):'Aralıktaki ses kayıtları tamamlanmadı.');return;}
