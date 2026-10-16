@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+const afasyWordPack=JSON.parse(fs.readFileSync(new URL('../assets/afasy-mp3quran-word-timings.json',import.meta.url),'utf8'));
 function fn(name){
   const start=html.search(new RegExp('(?:async )?function '+name+'\\('));
   assert.ok(start>=0,name+' exists');
@@ -556,6 +557,36 @@ test('automatic bounds never cross supplied next-word metadata despite positive 
   const c=context(fixture(4,4));loadVerse(c,12);c.SET.endPad=300;
   for(const st of c.buildPartsPlan(0)){
     if(Number.isFinite(st.nextStart))assert.ok(c.stepBounds(st).t<=st.nextStart);
+  }
+});
+test('Kehf repeated ayahs and other Afasy chapters never replay the next verse opening',()=>{
+  const c=vm.createContext({SET:{reciter:223,startPad:0,endPad:300,cumu:false,repOn:true,rep:5},
+    AD_:{ay:{}},normalChapterAudio:null,curS:18,verifiedNormalRanges:()=>null});
+  vm.runInContext(fn('stepBounds'),c);
+  vm.runInContext(fn('normalVerseStep'),c);
+  vm.runInContext(fn('buildLadder'),c);
+  vm.runInContext(fn('stepReps'),c);
+  const kehf=afasyWordPack.rows[18];
+  c.AD_.ay=Object.fromEntries(kehf.map((row,i)=>[i+1,[row[2][0][1],row[2].at(-1)[2]]]));
+  for(const cumulative of [false,true]){
+    c.SET.cumu=cumulative;
+    const plan=c.buildLadder(1,10);
+    assert.equal(plan.length,cumulative?19:10);
+    for(const st of plan){
+      assert.equal(c.stepReps(st),5);
+      assert.ok(c.stepBounds(st).t<=c.AD_.ay[st.ayEnd+1][0]-110,`Kehf ${st.l} replays next opening`);
+    }
+  }
+  const chapters=['18',...Object.keys(afasyWordPack.rows).filter(sid=>sid!=='18')];
+  for(const sid of chapters){
+    const rows=afasyWordPack.rows[sid];
+    c.AD_.ay=Object.fromEntries(rows.map((row,i)=>[i+1,[row[2][0][1],row[2].at(-1)[2]]]));
+    for(let ay=1;ay<rows.length;ay++){
+      const st={f:c.AD_.ay[ay][0],t:c.AD_.ay[ay][1],ayEnd:ay};
+      const end=c.stepBounds(st).t;
+      assert.ok(end<=c.AD_.ay[ay+1][0]-110,`${sid}:${ay} reaches the next opening`);
+      assert.ok(end>st.f,`${sid}:${ay} has an audible duration`);
+    }
   }
 });
 test('reciter changes refresh the parts, including their stored end times',()=>{
