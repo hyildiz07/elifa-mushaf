@@ -38,6 +38,53 @@ test('unfinished restore after a crash recovers the old complete state',()=>{
   const s=memory({[JOURNAL_KEY]:JSON.stringify(old),notes:'{"1:1":"partial"}',marks:'[]'});
   assert.equal(recoverPendingRestore(s),true);assert.equal(s.getItem('notes'),old.notes);assert.equal(s.getItem('marks'),null);
 });
+test('a journal from before saved studies preserves newer studies during recovery',()=>{
+  const legacy=Object.fromEntries(BACKUP_KEYS.filter(k=>k!=='studySessions').map(k=>[k,k==='notes'?'{"1:1":"old"}':null]));
+  const study='[{"id":"12345678-1234-4234-8234-123456789abc","title":"Kehf 1–5","sid":18,"from":1,"to":5,"createdAt":"2026-10-16T00:00:00.000Z","updatedAt":"2026-10-16T00:00:00.000Z"}]';
+  const s=memory({[JOURNAL_KEY]:JSON.stringify(legacy),notes:'{"1:1":"partial"}',studySessions:study});
+  assert.equal(recoverPendingRestore(s),true);
+  assert.equal(s.getItem('notes'),legacy.notes);
+  assert.equal(s.getItem('studySessions'),study);
+});
+test('saved studies are validated, backed up, restored, and merged by stable id',()=>{
+  const item={id:'12345678-1234-4234-8234-123456789abc',title:'Kehf 1–5',sid:18,from:1,to:5,
+    createdAt:'2026-10-16T00:00:00.000Z',updatedAt:'2026-10-16T00:00:00.000Z'};
+  const wrap=items=>({elifa:'yedek',v:1,veri:{studySessions:JSON.stringify(items)}});
+  assert.deepEqual(JSON.parse(validateBackup(wrap([item])).veri.studySessions),[item]);
+  const selected={...item,splitMode:'manual',manualCuts:{2:[3,7]},selectedAy:2};
+  assert.deepEqual(JSON.parse(validateBackup(wrap([selected])).veri.studySessions),[selected]);
+  assert.throws(()=>validateBackup(wrap([{...selected,selectedAy:6}])));
+  assert.throws(()=>validateBackup(wrap([{...selected,selectedAy:1.5}])));
+  assert.doesNotThrow(()=>validateBackup(wrap([{...item,sid:1,from:1,to:7}])));
+  for(const bad of [{...item,title:'<img src=x onerror=alert(1)>',extra:'x'},
+    {...item,to:0},{...item,sid:115},{...item,id:'x'},
+    {...item,sid:1,from:1,to:8},{...item,sid:114,from:1,to:7},
+    {...item,id:'12345678-1234-5234-8234-123456789abc'},
+    {...item,id:'12345678-1234-4234-7234-123456789abc'},
+    {...item,id:'------------------------------------'},
+    {...item,title:' '.repeat(5)}])assert.throws(()=>validateBackup(wrap([bad])));
+  assert.throws(()=>validateBackup(wrap([item,item])));
+  const s=memory();restoreBackup(s,wrap([item]));
+  assert.deepEqual(JSON.parse(s.getItem('studySessions')),[item]);
+  const other={...item,id:'abcdefab-abcd-4bcd-8bcd-abcdefabcdef',title:'Fetih',sid:48};
+  const combined=mergeBackups(null,wrap([item]),wrap([other]));
+  assert.deepEqual(JSON.parse(combined.payload.veri.studySessions).map(x=>x.id),[item.id,other.id]);
+  const deleted=mergeBackups(wrap([item]),wrap([]),wrap([item]));
+  assert.deepEqual(JSON.parse(deleted.payload.veri.studySessions),[]);
+});
+test('concurrent edits to one saved study require a choice instead of mixing incompatible ranges',()=>{
+  const item={id:'12345678-1234-4234-8234-123456789abc',title:'Kehf',sid:18,from:1,to:5,
+    createdAt:'2026-10-16T00:00:00.000Z',updatedAt:'2026-10-16T00:00:00.000Z'};
+  const wrap=items=>({elifa:'yedek',v:1,veri:{studySessions:JSON.stringify(items)}});
+  const local={...item,from:7,to:7,updatedAt:'2026-10-16T01:00:00.000Z'};
+  const remote={...item,to:3,updatedAt:'2026-10-16T02:00:00.000Z'};
+  const merged=mergeBackups(wrap([item]),wrap([local]),wrap([remote]));
+  assert.deepEqual(merged.conflicts.map(c=>c.id),[`studySessions/${item.id}`]);
+  assert.deepEqual(JSON.parse(merged.payload.veri.studySessions),[local]);
+  const resolved=mergeBackups(wrap([item]),wrap([local]),wrap([remote]),{[`studySessions/${item.id}`]:'remote'});
+  assert.deepEqual(resolved.conflicts,[]);
+  assert.deepEqual(JSON.parse(resolved.payload.veri.studySessions),[remote]);
+});
 test('three-way sync merges independent edits without dropping existing notes',()=>{
  const base=backup({'1:1':'old'}),local=backup({'1:1':'old','1:2':'device'}),remote=backup({'1:1':'old','1:3':'cloud'});
  const result=mergeBackups(base,local,remote);

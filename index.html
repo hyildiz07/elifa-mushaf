@@ -415,7 +415,18 @@ body.bmplacing #rbody{outline:2px dashed var(--gold);outline-offset:-6px;border-
 /* ---------- Reader ---------- */
 #reader.on{height:100vh;height:100dvh;flex-direction:column;}
 .rscroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;background:var(--bg);padding-bottom:180px;}
-.rscroll.selecting{touch-action:none;}
+.rscroll.selecting{overscroll-behavior:contain;}
+.selectionLoupe{position:fixed;z-index:54;max-width:min(260px,70vw);padding:7px 13px;border:1px solid var(--gold);border-radius:14px;background:var(--bg);color:var(--ink);box-shadow:0 6px 24px #0005;font-size:1.25rem;line-height:1.5;text-align:center;pointer-events:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.selectionLoupe[hidden]{display:none!important;}
+.selectionHandle{position:fixed;z-index:55;width:44px;height:44px;border:0;border-radius:50%;background:transparent;touch-action:none;cursor:grab;}
+.selectionHandle::before{content:"";position:absolute;inset:10px;border:2px solid var(--bg);border-radius:50%;background:var(--gold);box-shadow:0 2px 8px #0008;}
+#selectionStartHandle::after,#selectionEndHandle::after{content:"";position:absolute;left:20px;width:4px;height:10px;border-radius:4px;background:var(--gold);box-shadow:0 1px 2px #0007;}
+#selectionStartHandle::after{top:3px;}#selectionEndHandle::after{bottom:3px;}
+.selectionHandle:active{cursor:grabbing;transform:scale(1.08);}
+.selectionHandle[hidden]{display:none!important;}
+.selinfo .selListen,.selinfo .selConfirm{margin-inline-start:8px;padding:2px 9px;border:1px solid currentColor;border-radius:999px;background:transparent;color:inherit;font:inherit;font-weight:700;cursor:pointer;}
+.selinfo .selConfirm{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+body:not(.rd) .selectionHandle,body:not(.rd) .selectionLoupe,body:has(#sheetback.show) .selectionHandle,body:has(#sheetback.show) .selectionLoupe{display:none!important;}
 .paperwrap{background:var(--paper);max-width:720px;margin:0 auto;min-height:100%;overflow-x:hidden;}
 body[data-frame="1"] .paperwrap{max-width:640px;margin:12px auto 18px;border:1.5px solid var(--framec);border-radius:10px;box-shadow:0 10px 26px var(--shadow);padding-bottom:10px;}
 body[data-frame="1"] .rscroll{padding-left:8px;padding-right:8px;}
@@ -2997,7 +3008,7 @@ body[data-theme="elifaimza"] .bmrib{--bm1:#8FA6C0;--bm2:#536E8D;--bm3:#293B52;}
 
 
 /* ===== ELIFA V109 — KOYU TEMA KONTRASTI + GERÇEK ELİF/LOGO + YATAY YER İMİ ===== */
-/* Bütün Birlikte kutularında ana işaret Elif'tir. */
+/* Ana ekranın büyük Çalışma Masası kartında Elif işareti korunur. */
 body:not([data-theme="elifaimza"]) .togetherHero .bkhome-tx::before{
   content:'ا'!important;display:block!important;width:auto!important;height:auto!important;
   margin:0 auto 5px!important;background:none!important;-webkit-mask:none!important;mask:none!important;
@@ -4890,7 +4901,7 @@ body.drawer-closing .homeLibrary,
    Daha fazla sûre göstermenin tek yolu üstten yer açmaktır.
 
    Toplananlar : besmele+motto (.hero)  ·  hızlı düğmeler (.quick)
-   Kalanlar    : Birlikte  ·  KALDIĞIN YER  ·  arama  ·  liste
+   Kalanlar    : Çalışma Masası  ·  KALDIĞIN YER  ·  arama  ·  liste
    Toplam kazanç: ~170 px  ≈  4-5 sûre.  Hepsi kayarak, yaylanma yok.      */
 
 @media (max-width:767px){
@@ -4921,7 +4932,7 @@ body.drawer-closing .homeLibrary,
     margin-top:0!important; margin-bottom:0!important;
     border:0!important; pointer-events:none;
   }
-  /* Birlikte ve Kaldığın Yer ASLA toplanmaz — açıkça koruma */
+  /* Çalışma Masası ve Kaldığın Yer açık kalır. */
   body.surah-expanded .togetherHero,
   body.surah-expanded #continueBtn{max-height:none!important;opacity:1!important;}
 }
@@ -5179,6 +5190,163 @@ body:not(.stacked) .flow{
 #meal .mealTitle{flex:1;text-align:center;font-weight:700;font-size:18px;color:var(--ink)}
 #meal .mealBody{flex:1;overflow-y:auto;padding:20px 16px;-webkit-overflow-scrolling:touch}
 #meal .mealPlaceholder{text-align:center;color:var(--gold);padding:50px 20px;font-size:16px;font-weight:600}
+
+/* Çalışma Masası mevcut tema renklerini ve okuyucu denetimlerini kullanır. */
+#qStudy{width:100%;cursor:pointer;font:inherit;}
+.quick,body[data-layout="saray"] .quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));}
+@media(max-width:767px){
+  .quick,body[data-layout="saray"] .quick{grid-template-columns:repeat(3,minmax(0,1fr))!important;}
+  .quick button,body[data-layout="saray"] .quick button{min-height:42px!important;}
+}
+#studySetup{background:var(--bg);color:var(--ink);}
+.studyTop{display:flex;align-items:center;gap:12px;min-height:62px;padding:calc(env(safe-area-inset-top) + 9px) max(18px,calc((100vw - 980px)/2)) 9px;background:var(--surface);border-bottom:1px solid var(--line);}
+.studyBack{width:40px;height:40px;display:grid;place-items:center;flex:none;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);cursor:pointer;}
+.studyBack svg{width:19px;height:19px;}
+.studyTopLabel{font-size:15px;font-weight:750;color:var(--ink);}
+.studyMain{width:min(100%,1020px);margin:0 auto;padding:24px 18px 96px;}
+.studyHero{position:relative;isolation:isolate;min-height:clamp(210px,30vw,315px);display:flex;flex-direction:column;justify-content:center;margin:0 0 -38px;padding:28px clamp(22px,5vw,52px) 70px;overflow:hidden;border-radius:24px;background:var(--surface);}
+.studyHero .studyLead{max-width:550px;}
+.studyEyebrow{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;}
+.studyMain h1{margin:9px 0 12px;font-family:'Lora',serif;font-size:clamp(32px,6vw,54px);line-height:1.15;color:var(--ink);}
+.studyLead{margin:0 0 26px;color:var(--muted);font-size:15px;line-height:1.55;}
+.studyCard,.studySaveCard,.studySaved{position:relative;padding:clamp(20px,3vw,34px);border:1px solid var(--line);border-radius:22px;background:var(--surface);box-shadow:0 10px 32px rgba(12,35,66,.07);}
+.studyCard{z-index:1;}
+.studyCardHeader{display:flex;align-items:center;gap:17px;margin-bottom:22px;}
+.studyCardIcon{width:56px;height:56px;display:grid;place-items:center;flex:none;border-radius:17px;background:color-mix(in srgb,var(--gold) 17%,var(--surface));color:var(--gold);font-size:29px;}
+.studyCardHeaderText{min-width:0;}
+.studyCard h2{margin:0 0 20px;color:var(--ink);font-size:17px;}
+.studyCardHeader h2{margin:0 0 4px;font-family:'Lora',serif;font-size:clamp(22px,4vw,29px);}
+.studyCardHeader p{margin:0;color:var(--muted);font-size:14px;line-height:1.4;}
+.studyFields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:15px;}
+.studyField{display:flex;flex-direction:column;gap:8px;min-width:0;color:var(--muted);font-size:12px;font-weight:750;letter-spacing:.03em;}
+.studyField select,.studyField input{width:100%;height:50px;padding:0 14px;border:1px solid var(--line);border-radius:13px;background:var(--card);color:var(--ink);font:700 16px 'Inter',sans-serif;outline:none;}
+.studyField select.studyNativeSelect{position:absolute;width:1px;height:1px;padding:0;border:0;opacity:0;pointer-events:none;}
+.studySurahToggle{width:100%;min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border:1px solid var(--line);border-radius:13px;background:var(--card);color:var(--ink);font:750 17px 'Inter',sans-serif;text-align:start;cursor:pointer;}
+.studySurahToggle svg{width:19px;height:19px;flex:none;transition:transform .2s;}
+.studySurahToggle[aria-expanded="true"]{border-color:var(--gold);border-radius:13px 13px 0 0;}
+.studySurahToggle[aria-expanded="true"] svg{transform:rotate(180deg);}
+.studySurahMenu{border:1px solid var(--gold);border-top:0;border-radius:0 0 15px 15px;background:var(--surface);box-shadow:0 14px 24px rgba(12,35,66,.12);}
+.studySurahMenu[hidden]{display:none;}
+.studySurahSearchWrap{padding:12px;border-bottom:1px solid var(--line);}
+.studySurahSearchWrap input{width:100%;height:44px;padding:0 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:600 14px 'Inter',sans-serif;}
+.studySurahList{max-height:340px;overflow:auto;margin:0;padding:5px;list-style:none;overscroll-behavior:contain;}
+.studySurahList li{margin:0;}
+.studySurahList button{width:100%;min-height:48px;display:flex;align-items:center;gap:11px;padding:8px 12px;border:0;border-radius:9px;background:transparent;color:var(--ink);font:650 14px 'Inter',sans-serif;text-align:start;cursor:pointer;}
+.studySurahList button:hover,.studySurahList button:focus-visible,.studySurahList button[aria-current="true"]{background:color-mix(in srgb,var(--gold) 16%,var(--surface));}
+.studySurahNumber{width:30px;flex:none;color:var(--gold);font-weight:800;}
+.studySurahArabic{margin-inline-start:auto;color:var(--muted);font-size:17px;}
+.studySurahEmpty{padding:18px;color:var(--muted);text-align:center;}
+.studyField select:focus-visible,.studyField input:focus-visible,.studyBack:focus-visible,.studyOpen:focus-visible,.studyBanner button:focus-visible,.selStudyAction:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+.studySummary{margin:19px 0;padding:15px 17px;border-left:4px solid var(--gold);border-radius:10px;background:color-mix(in srgb,var(--gold) 9%,var(--card));color:var(--ink);font-size:14px;line-height:1.5;}
+.studyOpen{width:100%;min-height:58px;border:1px solid var(--gold);border-radius:15px;background:linear-gradient(135deg,color-mix(in srgb,var(--gold) 80%,#50301a),var(--gold));color:var(--navy);font:800 16px 'Inter',sans-serif;cursor:pointer;box-shadow:0 7px 16px color-mix(in srgb,var(--gold) 22%,transparent);}
+.studyFootnote{margin:13px 5px 0;color:var(--muted);font-size:12px;line-height:1.5;text-align:center;}
+.studySaveCard{margin-top:14px;}
+.studySaveRow{display:grid;gap:10px;}
+.studySaveRow .studyField{font-size:13px;letter-spacing:0;}
+.studySaveRow button{min-height:48px;padding:9px 15px;border:1px solid var(--gold);border-radius:13px;background:var(--surface);color:var(--ink);font:750 14px 'Inter',sans-serif;cursor:pointer;}
+.studySaveRow button:disabled{opacity:.5;cursor:not-allowed;}
+.studySaved{margin-top:14px;}
+.studySaved h2{margin:0 0 13px;color:var(--ink);font-size:18px;}
+.studySaved p{margin:0;color:var(--muted);font-size:14px;line-height:1.5;}
+.studySavedList{display:grid;gap:10px;margin:0;padding:0;list-style:none;}
+.studySavedItem{display:grid;gap:11px;padding:14px 16px;border:1px solid var(--line);border-radius:15px;background:var(--surface);}
+.studySavedItem strong{display:block;color:var(--ink);font-size:15px;overflow-wrap:anywhere;}
+.studySavedItem small{display:block;margin-top:4px;color:var(--muted);font-size:12px;}
+.studySavedActions{display:flex;gap:7px;flex-wrap:wrap;}
+.studySavedActions button{min-height:40px;padding:7px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:750 12px 'Inter',sans-serif;cursor:pointer;}
+.studySavedActions button:first-child{border-color:var(--gold);background:var(--gold);color:var(--navy);}
+.studySavedActions .studyDelete{margin-left:auto;color:var(--ink);}
+.studyDeleteConfirm{padding:12px;border:1px solid var(--gold);border-radius:12px;background:var(--card);}
+.studyDeleteConfirm p{margin:0 0 10px;color:var(--ink);font-size:13px;font-weight:650;line-height:1.5;overflow-wrap:anywhere;}
+.studyDeleteConfirmActions{display:flex;gap:8px;flex-wrap:wrap;}
+.studyDeleteConfirmActions button{min-height:44px;padding:8px 13px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font:750 13px 'Inter',sans-serif;cursor:pointer;}
+.studyDeleteConfirmActions .studyDeleteConfirmAction{border-color:#a34135;background:#a34135;color:#fff;}
+.studySaveRow button:focus-visible,.studySavedActions button:focus-visible,.studyDeleteConfirmActions button:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
+.selStudyAction[hidden],.studyBanner[hidden]{display:none!important;}
+.selStudyAction{display:flex;align-items:center;justify-content:center;width:calc(100% - 24px);min-height:38px;margin:0 12px 9px;padding:6px 14px;border:1px solid var(--gold);border-radius:11px;background:var(--gold);color:var(--navy);font:800 12px 'Inter',sans-serif;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.13);}
+#selbar.show:has(.selStudyAction:not([hidden])){max-height:220px;}
+body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-height:220px!important;}
+.studyBanner{flex:none;display:flex;flex-direction:column;gap:7px;padding:9px 12px;border-bottom:1px solid var(--line);background:var(--surface);color:var(--ink);}
+.studyBannerHead{display:flex;align-items:baseline;justify-content:space-between;gap:8px;min-width:0;padding-right:clamp(78px,11vw,120px);}
+.studyBannerTitle{font-size:11px;font-weight:800;color:var(--gold);white-space:nowrap;}
+.studyBannerHead strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px;color:var(--ink);}
+.studyBannerActions{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.studyBannerActions::-webkit-scrollbar{display:none;}
+.studyBannerActions button{flex:none;min-height:34px;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:700 11px 'Inter',sans-serif;white-space:nowrap;cursor:pointer;}
+.studyBannerActions .studyBannerPrimary{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+@media(max-width:600px){.studyMain{padding:12px 12px 80px;}.studyHero{min-height:0;margin-bottom:0;padding:26px 22px 20px;border-radius:18px;}.studyHero .studyLead{max-width:none;font-size:13px;}.studyCardHeader{gap:12px;}.studyCardIcon{width:46px;height:46px;font-size:24px;}.studySurahList{max-height:270px;}}
+@media(max-width:380px){.studyCard,.studySaveCard,.studySaved{padding:18px 14px;}.studyBannerActions button{padding:6px 8px;}}
+/* Çalışma Masası bölümleme alanı okuyucunun mevcut denetimleri arasında kalır. */
+#rscroll[hidden],#studySplitPanel[hidden]{display:none!important;}
+#studySplitPanel{flex:1;min-height:0;overflow-y:auto;background:var(--bg);color:var(--ink);padding:18px 14px 120px;-webkit-overflow-scrolling:touch;}
+.studySplitInner{width:min(100%,760px);margin:auto;}
+.studySplitHeader{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:16px;}
+.studySplitHeader h2{margin:0 0 5px;color:var(--ink);font:750 21px 'Lora',serif;}
+.studySplitHeader p{margin:0;color:var(--muted);font-size:12px;line-height:1.45;}
+.studySplitClose{flex:none;padding:8px 11px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-weight:700;cursor:pointer;}
+.studySplitModes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:14px;}
+.studySplitModes[hidden]{display:none!important;}
+.studySplitModes button{min-height:47px;padding:9px 10px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:750 13px 'Inter',sans-serif;cursor:pointer;}
+.studySplitModes button[aria-pressed="true"]{border-color:var(--gold);background:var(--gold);color:var(--navy);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 25%,transparent);}
+.studySplitStatus{margin:0 0 14px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font-size:13px;line-height:1.5;}
+.studySplitStatus[data-error="true"]{border-color:var(--gold);}
+.studySplitWizard,.studySplitResults{padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--surface);}
+.studySplitVersePicker{padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--surface);}
+.studySplitVersePicker[hidden]{display:none!important;}
+.studySplitVersePicker h3{margin:0 0 6px;color:var(--ink);font-size:18px;}
+.studySplitVersePicker p{margin:0 0 14px;color:var(--muted);font-size:13px;line-height:1.5;}
+.studySplitVerseList{display:grid;gap:8px;max-height:min(55vh,520px);overflow-y:auto;}
+.studySplitVerseList button{display:flex;align-items:center;gap:12px;width:100%;min-height:54px;padding:10px 14px;text-align:start;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);cursor:pointer;}
+.studySplitVerseList button:hover,.studySplitVerseList button:focus-visible{border-color:var(--gold);outline:2px solid transparent;background:var(--surface);}
+.studySplitVerseList strong{flex:none;color:var(--gold);font-size:13px;}
+.studySplitVerseList span{min-width:0;direction:rtl;text-align:right;font:20px var(--qf),serif;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+.studySplitChangeVerse{min-height:44px;margin:0 0 12px;padding:8px 13px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font-weight:700;cursor:pointer;}
+.studySplitChangeVerse[hidden]{display:none!important;}
+.studySplitWizard[hidden],.studySplitResults[hidden]{display:none!important;}
+.studySplitProgress{color:var(--gold);font-size:12px;font-weight:800;letter-spacing:.04em;}
+.studySplitWizard h3{margin:8px 0;color:var(--ink);font-size:17px;}
+.studySplitInstruction{margin:0 0 12px;color:var(--muted);font-size:13px;line-height:1.5;}
+.studySplitWords{display:flex;flex-wrap:wrap;gap:8px;direction:rtl;padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--card);}
+.studySplitWords{touch-action:none;user-select:none;-webkit-user-select:none;}
+.studySplitWords button{min-height:42px;padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-family:var(--qf),serif;font-size:22px;line-height:1.3;cursor:pointer;}
+.studySplitWords button{touch-action:none;}
+.studySplitWords button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.studySplitWords button.studySplitUsed{background:var(--card);border-color:var(--line);color:var(--muted);opacity:.46;text-decoration:none;}
+.studySplitWords button.studySplitIncluded:not(:disabled){background:color-mix(in srgb,var(--gold) 55%,var(--surface));border-color:var(--gold);color:var(--ink);}
+.studySplitWords button.studySplitEndpoint:not(:disabled){background:var(--gold);border-color:var(--gold);color:var(--navy);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 25%,transparent);}
+.studySplitWords button:disabled{opacity:.42;cursor:not-allowed;text-decoration:line-through;}
+.studySplitWords button.studySplitUsed:disabled{opacity:.46;text-decoration:none;}
+.studySplitDraftParts{display:grid;gap:6px;margin:0 0 12px;}
+.studySplitDraftParts:empty{display:none;}
+.studySplitDraftPart{padding:8px 10px;border-left:3px solid var(--gold);border-radius:7px;background:var(--card);color:var(--muted);font-size:12px;line-height:1.45;}
+.studySplitDraftPart strong{color:var(--ink);margin-right:6px;}
+.studySplitDraftPart span{font:20px var(--qf),serif;direction:rtl;color:var(--muted);}
+.studySplitReason{min-height:20px;margin:9px 0 0;color:var(--muted);font-size:12px;line-height:1.45;}
+.studySplitWizardActions{display:flex;gap:8px;margin-top:15px;}
+.studySplitWizardActions button,.studySplitPlayAll,.studySplitRetry{min-height:41px;padding:8px 13px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:750 13px 'Inter',sans-serif;cursor:pointer;}
+.studySplitWizardActions .studySplitConfirm,.studySplitPlayAll{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.studySplitWizardActions button:disabled,.studySplitPlayAll:disabled{opacity:.45;cursor:not-allowed;}
+.studySplitParts{display:grid;gap:8px;margin-top:13px;}
+.studySplitPart{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--card);}
+.studySplitPart span{min-width:0;color:var(--ink);font:21px var(--qf),serif;direction:rtl;overflow-wrap:anywhere;}
+.studySplitPartSelected{border-color:var(--gold)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 22%,transparent);}
+.studySplitPart button{flex:none;padding:7px 10px;border:1px solid var(--gold);border-radius:9px;background:var(--surface);color:var(--ink);font-weight:750;cursor:pointer;}
+.studySplitPart button:disabled{opacity:.45;cursor:not-allowed;}
+.studySplitResultsHead{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+@media(max-width:380px){.studySplitResultsHead{align-items:stretch;flex-direction:column}.studySplitResultsTools{justify-content:stretch}.studySplitResultsTools button{flex:1}}
+.studySplitResultsHead h3{margin:0;color:var(--ink);font-size:16px;}
+.studySplitLiveStatus{margin:12px 0 10px;padding:10px 12px;border-radius:10px;background:var(--bg);color:var(--ink);font-size:12px;font-weight:750;line-height:1.5;}
+.studySplitSave{width:100%;min-height:46px;margin:0 0 5px;padding:10px 14px;border:1px solid var(--gold);border-radius:11px;background:var(--gold);color:var(--navy);font-size:13px;font-weight:800;cursor:pointer;}
+.studySplitSave:hover,.studySplitSave:focus-visible{filter:brightness(.96);outline:2px solid var(--gold);outline-offset:2px;}
+.studySplitResultsTools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
+.studySplitResultsTools button{min-height:36px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font-weight:750;cursor:pointer;}
+.studySplitResultsTools .studySplitPlayAll{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.studySplitResultsTools button[hidden]{display:none!important;}
+.studySplitRetry[hidden]{display:none!important;}
+.studySplitMore{display:block;margin:14px auto 0;min-height:40px;padding:8px 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-weight:750;cursor:pointer;}
+.studySplitMore[hidden]{display:none!important;}
+.studySplitClose,.studySplitWords button,.studySplitWizardActions button,.studySplitPart button,.studySplitResultsTools button,.studySplitMore,.studySplitRetry{min-height:44px;}
+.studySplitHeader button:focus-visible,.studySplitModes button:focus-visible,.studySplitWords button:focus-visible,.studySplitWizardActions button:focus-visible,.studySplitResults button:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
 </style>
 <!-- Google Fonts kaldırıldı: fontlar gömülü -->
 <script src="/assets/locale.js?v=2"></script>
@@ -5267,6 +5435,7 @@ body:not(.stacked) .flow{
 <link rel="stylesheet" href="/assets/gear-sheet.css?v=1">
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
+<link rel="stylesheet" href="/assets/home-study-polish.css?v=330">
 </head>
 <body>
 <div id="tabletBootError" style="display:none;position:fixed;z-index:99999;left:14px;right:14px;top:14px;background:#fff8e8;color:#0e2c55;border:2px solid #c99a35;border-radius:14px;padding:14px 16px;box-shadow:0 12px 34px rgba(0,0,0,.22);font-family:Arial,sans-serif">
@@ -5299,18 +5468,18 @@ body:not(.stacked) .flow{
         <div class="heroLine" id="heroLine"></div>
         <div class="rule" aria-hidden="true"></div>
       </div>
-      <a class="bkhome togetherHero" href="#" onclick="openTogetherScreen();return false;">
+      <button class="bkhome togetherHero" id="qStudy" type="button" data-i18n-title="study_title" data-i18n-aria="study_title" title="Çalışma Masası" aria-label="Çalışma Masası">
         <span class="bkhome-ic" aria-hidden="true"><svg viewBox="0 0 64 56" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M17 44c-7-2-11-8-11-16V15c0-3 4-4 5-1l3 12V8c0-4 5-4 5 0v15V6c0-4 5-4 5 0v17V9c0-4 5-4 5 0v19"/><path d="M47 44c7-2 11-8 11-16V15c0-3-4-4-5-1l-3 12V8c0-4-5-4-5 0v15V6c0-4-5-4-5 0v17V9c0-4-5-4-5 0v19"/><path d="M32 21c-5-6-11-8-17-6v20c7-2 12 0 17 5 5-5 10-7 17-5V15c-6-2-12 0-17 6z"/></svg></span>
-        <span class="bkhome-tx"><b data-i18n="together">Birlikte</b><small data-i18n="birlikte_sub">Hatim &amp; cüz paylaşımı · toplu zikir</small></span>
+        <span class="bkhome-tx"><b data-i18n="study_title">Çalışma Masası</b></span>
         <span class="bkhome-ar" aria-hidden="true"></span>
-      </a>
+      </button>
       <button class="bkhome continue" id="continueBtn">
         <span class="bkhome-ic"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
         <span class="bkhome-tx"><b data-i18n="home_resume">Kaldığın Yer</b><small id="continueTxt"></small></span>
         <span class="bkhome-ar"></span>
       </button>
       <div class="quick">
-        <button id="qSaved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 012-2h10l4 4v12a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M9 3v6M8 13h8M8 16h5"/></svg><span data-i18n="nav_records">Kayıtlar</span></button>
+        <button id="qTogether" type="button" data-i18n-title="together" data-i18n-aria="together" title="Birlikte" aria-label="Birlikte"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 19a4 4 0 0 1-4-4V9a2 2 0 0 1 4 0v4"/><path d="M16 19a4 4 0 0 0 4-4V9a2 2 0 0 0-4 0v4"/><path d="M8 8h8v8l-4 3-4-3z"/></svg><span data-i18n="together">Birlikte</span></button>
         <button id="qMeal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5a2 2 0 012-2h9a2 2 0 012 2v14l-6-3-6 3z"/><path d="M8 7h6M8 10h6"/></svg><span data-i18n="meal_btn">Meal</span></button>
         <button id="qRepeat" title="Test, tekrar planı ve ezber takibi" data-i18n-title="nav_memorize" aria-label="Ezber Takibi" data-i18n-aria="nav_memorize"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 012-2h12a1 1 0 011 1v15a1 1 0 01-1 1H6a2 2 0 01-2-2z"/><path d="M9 3v18"/><path d="M13 8h4M13 12h4"/><path d="M13 16l1.5 1.5L18 14"/></svg><span data-i18n="sinav_btn">Sınav</span></button>
       </div>
@@ -5329,6 +5498,40 @@ body:not(.stacked) .flow{
     </section>
   </main>
     <div class="foot">Metin &amp; hat: Tanzil / Medine Mushaf Hattı · Ses: QUL / Tarteel<br><span class="ver">Elifa Mushaf</span></div>
+</div>
+
+<!-- ÇALIŞMA MASASI: aralık hazırlığı; oynatma mevcut okuyucuda yapılır. -->
+<div class="screen" id="studySetup">
+  <header class="studyTop">
+    <button id="studyBack" class="studyBack" type="button" data-i18n-aria="study_back" aria-label="Geri"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><span data-i18n="study_back">Geri</span></button>
+    <span class="studyTopLabel" data-i18n="study_title">Çalışma Masası</span>
+  </header>
+  <main class="studyMain">
+    <div class="studyHero">
+      <div class="studyEyebrow" data-i18n="study_focus">Seçtiğin bölüme odaklan</div>
+      <h1 data-i18n="study_title">Çalışma Masası</h1>
+      <p class="studyLead" data-i18n="study_intro">Bir sûre ve âyet aralığı seç. Hazır olduğunda yalnız bu bölümü çalış.</p>
+    </div>
+    <section class="studyCard" aria-labelledby="studyRangeHeading">
+      <div class="studyCardHeader"><span class="studyCardIcon" aria-hidden="true"><svg width="31" height="31" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 26c-4-3-8-4-13-3V6c5-1 9 0 13 3 4-3 8-4 13-3v17c-5-1-9 0-13 3Z"/><path d="M16 9v17M6 10c3-.3 5 .2 7 1.5M19 11.5c2-1.3 4-1.8 7-1.5"/></svg></span><div class="studyCardHeaderText"><h2 id="studyRangeHeading" data-i18n="study_range">Çalışılacak aralık</h2></div></div>
+      <div class="studyField studySurahField"><span id="studySurahLabel" data-i18n="study_surah">Sûre</span><select id="studySurah" class="studyNativeSelect" tabindex="-1" aria-hidden="true"></select><button id="studySurahToggle" class="studySurahToggle" type="button" aria-expanded="false" aria-controls="studySurahMenu" aria-labelledby="studySurahLabel studySurahChoice"><span id="studySurahChoice">1. Fâtiha</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div id="studySurahMenu" class="studySurahMenu" hidden><div class="studySurahSearchWrap"><input id="studySurahSearch" type="search" data-i18n-ph="home_search" placeholder="Sûre ara — isim veya numara" autocomplete="off" data-i18n-aria="home_search" aria-label="Sûre ara"></div><ul id="studySurahList" class="studySurahList"></ul><div id="studySurahEmpty" class="studySurahEmpty" hidden data-i18n="study_search_empty">Eşleşen sûre bulunamadı.</div></div></div>
+      <div class="studyFields">
+        <label class="studyField" for="studyFrom"><span data-i18n="s_start_ayah">Başlangıç âyet</span><input id="studyFrom" type="number" min="1" value="1" inputmode="numeric" data-i18n-aria="s_start_ayah" aria-label="Başlangıç âyet"></label>
+        <label class="studyField" for="studyTo"><span data-i18n="s_end_ayah">Bitiş âyet</span><input id="studyTo" type="number" min="1" value="1" inputmode="numeric" data-i18n-aria="s_end_ayah" aria-label="Bitiş âyet"></label>
+      </div>
+      <div id="studySummary" class="studySummary" role="status" aria-live="polite" data-i18n="study_summary_empty">Çalışacağın aralığı seç.</div>
+      <button id="studyOpen" class="studyOpen" type="button" data-i18n="study_open">Aralığı aç</button>
+    </section>
+    <section class="studySaveCard"><div class="studySaveRow">
+        <label class="studyField" for="studySessionTitle"><span data-study-i18n="study_save_name">Çalışmaya ad ver (isteğe bağlı)</span><input id="studySessionTitle" type="text" maxlength="80" autocomplete="off" data-study-i18n-ph="study_save_name_hint" placeholder="Örn. Kehf 1–10"></label>
+        <button id="studySessionSave" type="button" data-study-i18n="study_save">Bu çalışmayı kaydet</button>
+      </div><p class="studyFootnote" data-i18n="study_start_hint">Bölüm açıldığında ses başlamaz; ne zaman çalışacağını sen seçersin.</p></section>
+    <section class="studySaved" aria-labelledby="studySavedHeading">
+      <h2 id="studySavedHeading" tabindex="-1" data-study-i18n="study_saved">Kaydedilen çalışmalar</h2>
+      <p id="studySavedEmpty" data-study-i18n="study_saved_empty">Henüz kayıtlı çalışma yok.</p>
+      <ul id="studySavedList" class="studySavedList"></ul>
+    </section>
+  </main>
 </div>
 
 <!-- READER -->
@@ -5375,7 +5578,18 @@ body:not(.stacked) .flow{
       <button class="ss" id="selErr"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 9v4M12 17v.5"/><path d="M10.3 4.3L3 17a2 2 0 001.7 3h14.6a2 2 0 001.7-3L13.7 4.3a2 2 0 00-3.4 0z"/></svg></span><span class="lbl" data-i18n="tb_hard">Zorlandığım</span></button>
       <button class="ss x" id="selClear" title="Kapat"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="lbl" data-i18n="close">Kapat</span></button>
     </div>
+    <button id="selStudy" class="selStudyAction" type="button" data-i18n="study_move" hidden>Çalışma Masasına Taşı</button>
   </div>
+  <aside id="studyBanner" class="studyBanner" aria-label="Çalışma Masası" data-i18n-aria="study_title" hidden>
+    <div class="studyBannerHead"><span class="studyBannerTitle" data-i18n="study_title">Çalışma Masası</span><strong id="studyBannerRange"></strong></div>
+    <div class="studyBannerActions">
+      <button id="studyPlay" class="studyBannerPrimary" type="button" data-i18n="study_play">▶ Aralığı çalış</button>
+      <button id="studySplit" type="button" data-i18n="tb_split">Âyeti böl</button>
+      <button id="studyGear" type="button" data-i18n="set_hifz">Hıfz ayarları</button>
+      <button id="studyEdit" type="button" data-i18n="study_edit">Aralığı değiştir</button>
+      <button id="studyExit" type="button" data-i18n="study_exit">Masadan çık</button>
+    </div>
+  </aside>
   <div class="testbar" id="testbar">
     <div class="testrow">
       <div class="tinfo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><path d="M4 4l16 16"/></svg><span data-i18n="test_tab_hint">Test · dokun → göster &amp; işaretle</span></div>
@@ -5387,6 +5601,38 @@ body:not(.stacked) .flow{
   <div class="rscroll" id="rscroll">
     <div id="rbody"><div class="loading"><div class="spin"></div><div data-i18n="loading">Yükleniyor…</div></div></div>
   </div>
+  <section id="studySplitPanel" aria-label="Çalışma Masası bölümleme" data-i18n-aria="study_split_title" hidden>
+    <div class="studySplitInner">
+      <div class="studySplitHeader"><div><h2 data-i18n="study_split_title">Çalışma bölümleme</h2><p id="studySplitRange"></p></div><button id="studySplitClose" class="studySplitClose" type="button" data-i18n="study_split_done">Bölmeyi bitir</button></div>
+      <div class="studySplitModes" role="group" aria-label="Bölme yöntemi" data-i18n-aria="study_split_method" hidden>
+        <button id="studySplitAuto" type="button" aria-pressed="true" data-i18n="study_split_auto">Kelime kelime otomatik</button>
+        <button id="studySplitManual" type="button" aria-pressed="false" data-i18n="study_split_manual">Elle böl</button>
+      </div>
+      <div id="studySplitStatus" class="studySplitStatus" role="status" aria-live="polite" data-i18n="study_split_ready">Bölümleri hazırla, sonra istediğin parçayı çalış.</div>
+      <div id="studySplitVersePicker" class="studySplitVersePicker" hidden>
+        <h3 id="studySplitVersePickerTitle" tabindex="-1">Bölünecek âyeti seç</h3>
+        <p id="studySplitVersePickerHint">Çalışma aralığından bir âyet seç. Yalnızca seçtiğin âyeti istediğin yerlerden böleceksin.</p>
+        <div id="studySplitVerseList" class="studySplitVerseList" role="group" aria-labelledby="studySplitVersePickerTitle"></div>
+      </div>
+      <button id="studySplitChangeVerse" class="studySplitChangeVerse" type="button" hidden>← Başka âyet seç</button>
+      <div id="studySplitWizard" class="studySplitWizard" hidden>
+        <div id="studySplitProgress" class="studySplitProgress" aria-live="polite"></div>
+        <h3 id="studySplitWizardTitle"></h3>
+        <p class="studySplitInstruction" data-i18n="study_split_mark_hint">Parçanın kelimelerini dokunarak veya sürükleyerek işaretle, sonra Böl’e bas.</p>
+        <div id="studySplitDraftParts" class="studySplitDraftParts" aria-live="polite"></div>
+        <div id="studySplitWords" class="studySplitWords" role="group" aria-label="Parçanın son kelimesi" data-i18n-aria="study_split_end_word"></div>
+        <p id="studySplitReason" class="studySplitReason" role="status" aria-live="polite" data-i18n="study_split_unsafe_hint">Soluk görünen kelimelerde güvenilir ses sınırı bulunmuyor.</p>
+        <div class="studySplitWizardActions"><button id="studySplitUndo" type="button" data-i18n="study_split_undo_action">Geri al</button><button id="studySplitConfirm" class="studySplitConfirm" type="button" data-i18n="study_split_cut" disabled>Böl</button></div>
+      </div>
+      <div id="studySplitResults" class="studySplitResults" hidden>
+        <div class="studySplitResultsHead"><h3 id="studySplitResultsTitle" tabindex="-1" data-i18n="study_split_parts">Çalışma parçaları</h3><div class="studySplitResultsTools"><button id="studySplitRevise" type="button" data-i18n="study_split_revise" hidden>Düzenle</button><button id="studySplitPlayAll" class="studySplitPlayAll" type="button" data-i18n="study_split_play_all">▶ Tüm parçaları çalış</button></div></div>
+        <p id="studySplitLiveStatus" class="studySplitLiveStatus" role="status" aria-live="polite"></p>
+        <button id="studySplitSave" class="studySplitSave" type="button">Çalışmayı kaydet / adlandır</button>
+        <div id="studySplitParts" class="studySplitParts"></div><button id="studySplitMore" class="studySplitMore" type="button" data-i18n="study_split_more" hidden>Daha fazla göster</button>
+      </div>
+      <button id="studySplitRetry" class="studySplitRetry" type="button" data-i18n="study_split_retry" hidden>Ses hazırsa yeniden dene</button>
+    </div>
+  </section>
 
   <!-- Ezber tekrar oturumu barı (sadece oturumda) -->
   <div class="ezreviewbar" id="ezreviewbar">
@@ -5983,9 +6229,9 @@ body:not(.stacked) .flow{
         <div class="stepper"><button data-t="to" data-d="-1" aria-label="Bitişi azalt">−</button><input type="number" id="toInp" min="1" value="1" inputmode="numeric" aria-label="Bitiş âyeti veya parçası"><button data-t="to" data-d="1" aria-label="Bitişi artır">+</button></div>
       </div>
     </div>
-    <p class="progHint" id="progHint" data-i18n="s_prog_hint">Değişiklikler anında uygulanır. Bir âyete dokun → oradan başlar.</p>
+    <p class="progHint" id="progHint" data-i18n="s_prog_hint_start">Aralığı ve tekrar sayısını ayarla, ardından Başlat’a bas.</p>
   </section>
-  <button class="gobtn navy" id="rangeStart" type="button">▶ Aralığı başlat ve menüyü kapat</button>
+  <button class="gobtn navy" id="rangeStart" type="button" data-i18n="s_range_start">▶ Aralığı başlat</button>
 
   <button class="testmodebtn" id="testModeBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><path d="M4 4l16 16"/></svg><span id="testModeLbl">Test modu — gizle, ezberden oku</span></button>
 
@@ -6190,7 +6436,7 @@ body:not(.stacked) .flow{
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v326</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v330</span></div>
   </div>
 
   <div class="tesekkur">
@@ -6339,7 +6585,7 @@ window.applySurahLang=applySurahLang;window.activeLatin=activeLatin;
 const mem={};
 const store={
   get(k,d){if(Object.prototype.hasOwnProperty.call(mem,k))return mem[k];try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v);}catch(e){return d;}},
-  set(k,v){try{const raw=JSON.stringify(v);localStorage.setItem(k,raw);if(localStorage.getItem(k)!==raw)throw Error('Kayıt doğrulanamadı');delete mem[k];if(['bookmarks','errs','ezdays','ezlog','hifz','marks','notes','prog','set','surahFavorites'].includes(k))window.dispatchEvent(new Event('elifa-data-changed'));return true;}catch(e){mem[k]=v;window.elifaStorageFailed=true;window.dispatchEvent(new Event('elifa-storage-error'));return false;}}
+  set(k,v){try{const raw=JSON.stringify(v);localStorage.setItem(k,raw);if(localStorage.getItem(k)!==raw)throw Error('Kayıt doğrulanamadı');delete mem[k];if(['bookmarks','errs','ezdays','ezlog','hifz','marks','notes','prog','set','studySessions','surahFavorites'].includes(k))window.dispatchEvent(new Event('elifa-data-changed'));return true;}catch(e){mem[k]=v;window.elifaStorageFailed=true;window.dispatchEvent(new Event('elifa-storage-error'));return false;}}
 };
 window.elifaReadLocalValue=k=>Object.prototype.hasOwnProperty.call(mem,k)?JSON.stringify(mem[k]):localStorage.getItem(k);
 let surahFavorites=store.get('surahFavorites',[]);
@@ -6827,6 +7073,7 @@ let toastT;function toast(m){const t=$('toast');t.textContent=m;t.classList.add(
 
 /* ---------- screens ---------- */
 function show(id){
+  if(id!=='reader')window.elifaCloseStudySplit?.({restoreFocus:false});
   // A verified single-verse split recording has its own time axis. Restore
   // the chapter recording before leaving that screen for normal playback.
   if(id!=='split'&&splitChapterAudio)restoreVerifiedVerseAudio();
@@ -6851,7 +7098,7 @@ function show(id){
   document.body.classList.toggle('sp',id==='split');
   document.body.classList.toggle('home-active',id==='home');
   if(id!=='home'){document.body.classList.remove('surah-expanded');surahExpanded=false;}
-  if(id==='home'){window.scrollTo(0,0);}
+  if(id==='home'||id==='studySetup'){window.scrollTo(0,0);}
   // alt sekme çubuğu: ana sekmelerde göster, okuyucu/böl'de gizle
   const mainTabs=['home','ezber','saved','ayarlar','dua'];
   document.body.classList.toggle('showtabs',mainTabs.includes(id));
@@ -6864,7 +7111,7 @@ function show(id){
 /* ===== v120: deterministik uygulama geçmişi =====
    Birlikte → organizasyon/cüz → geri akışı Android ve iOS'ta ekran ekran ilerler. */
 function activeElifaRoute(){
-  const ids=['org','birlikte','reader','split','saved','ezber','ayarlar','dua','meal','home'];
+  const ids=['org','birlikte','reader','split','studySetup','saved','ezber','ayarlar','dua','meal','home'];
   for(const id of ids){const el=$(id);if(el&&el.classList.contains('on'))return id;}
   return 'home';
 }
@@ -6882,12 +7129,14 @@ function backFromTogether(){ if(typeof elifaBack==='function'){ elifaBack(); ret
 
 let readerReturn='home';
 $('backBtn').onclick=()=>{
+  if(!$('studySplitPanel').hidden){window.elifaCloseStudySplit?.();return;}
   // Seçim varsa: önce sadece seçimi temizle, okuyucudan ÇIKMA
   if(selA!=null){stopPlan(false);clearSel();return;}
   // Seçim yoksa: okuyucudan çık
   stopPlan(true);saveProgress();setTest(false);
   if(readerReturn==='saved'){readerReturn='home';show('saved');renderSaved();}
   else if(readerReturn==='dua'){readerReturn='home';show('dua');if(typeof renderDua==='function')renderDua();}
+  else if(readerReturn==='studySetup'&&studyRange){openStudySetup(false,true);}
   else{show('home');renderContinue();}
 };
 let savedFrom='home';
@@ -7016,7 +7265,7 @@ function renderContinue(){
   b.onclick=()=>{readerReturn='home';openSurah(s0,a0);};
 }
 renderContinue();
-$('qSaved').onclick=()=>{savedFrom='home';openSaved('marks');};
+$('qTogether').onclick=()=>openTogetherScreen();
 $('qMeal').onclick=()=>{ try{navigator.vibrate&&navigator.vibrate(15);}catch(e){} try{if(typeof openMeal==='function'){openMeal();return;}}catch(e){} try{toast&&toast(t('meal_soon')||'Meal yakında');}catch(e){alert('Meal yakında');} };
 
 /* v120: Arayüz ses efektleri tamamen kapalıdır. Paket içinde tıklama, sayfa, daktilo veya geçiş sesi yoktur.
@@ -7875,10 +8124,17 @@ function scheduleMushafLayout(flow){
 }
 
 let surahRequestId=0;
-async function openSurah(sid,jumpAy){
+let studyRange=null;
+let studyDraft=null;
+let studySetupReturn='home';
+let studyPlayRequestId=0;
+async function openSurah(sid,jumpAy,options={}){
+  window.elifaCloseStudySplit?.({restoreFocus:false});
   const request=++surahRequestId;
+  if(!options.study && typeof studyRange!=='undefined')studyRange=null;
   curS=sid;show('reader');setTest(false);try{if(window.elifaLog)elifaLog('surah_open',{surah:sid});}catch(e){}try{if(window.elifaStat)elifaStat('read');}catch(e){}
-  if(readerReturn!=='saved')readerReturn='home';
+  if(readerReturn!=='saved'&&readerReturn!=='studySetup')readerReturn='home';
+  if(typeof syncStudyBanner==='function')syncStudyBanner();
   const meta=SURAHS[sid-1];
   {const rt=$('rTitle');if(rt)rt.textContent=sid+'. '+meta.tr;}
   $('rbody').innerHTML='<div class="loading"><div class="spin"></div><div>Âyetler yükleniyor…</div></div>';
@@ -7907,8 +8163,9 @@ async function openSurah(sid,jumpAy){
 }
 function buildDOM(meta,jumpAy){
   const frag=document.createDocumentFragment();
+  const focused=typeof studyRange!=='undefined'&&studyRange?.sid===meta.id?studyRange:null;
   // Kesintisiz okuma: önceki sûreye geçiş — EN ÜSTTE (başlık ve besmelenin üstünde)
-  if(meta.id>1){
+  if(meta.id>1&&!focused){
     const pv=SURAHS[meta.id-2];const nav=document.createElement('div');nav.className='surnav top';
     nav.innerHTML='<button type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>'+(window.elifaT?window.elifaT('sura_prev'):'Önceki:')+' '+pv.id+'. '+pv.tr+' <span class="ar">'+pv.ar+'</span></button>';
     nav.querySelector('button').onclick=()=>{readerReturn='home';openSurah(pv.id);};
@@ -7921,6 +8178,7 @@ function buildDOM(meta,jumpAy){
   const flow=document.createElement('div');flow.className='flow';flow.id='flow';
   wordArr=[];ayGi={};segFlat=[];lastPage=0;let gi=0;
   verses.forEach(v=>{
+    if(focused&&(v.n<focused.from||v.n>focused.to))return;
     if(v.pg&&v.pg!==lastPage){
       if(lastPage!==0){const d=document.createElement('div');d.className='pgdiv';d.dataset.pg=v.pg;
         d.innerHTML='<span class="ln"></span><span class="pc">'+v.pg+'</span><span class="ln"></span>';flow.appendChild(d);}
@@ -7958,7 +8216,7 @@ function buildDOM(meta,jumpAy){
     }
   });
   // Kesintisiz okuma: sonraki sûreye geçiş (en altta)
-  if(meta.id<114){
+  if(meta.id<114&&!focused){
     const nx=SURAHS[meta.id];const nav=document.createElement('div');nav.className='surnav';nav.style.marginTop='6px';
     nav.innerHTML='<button type="button">'+(window.elifaT?window.elifaT('sura_next'):'Sonraki:')+' '+nx.id+'. '+nx.tr+' <span class="ar">'+nx.ar+'</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>';
     nav.querySelector('button').onclick=()=>{readerReturn='home';openSurah(nx.id);};
@@ -7971,15 +8229,122 @@ function buildDOM(meta,jumpAy){
   body.appendChild(wrap);
   fitPage();
   scheduleMushafLayout(flow);
-  $('pageChip').textContent=(window.tr?tr('page'):'Sayfa')+' '+(verses[0]?verses[0].pg:'—');
+  const firstVisible=focused?verses.find(v=>v.n===focused.from):verses[0];
+  $('pageChip').textContent=(window.tr?tr('page'):'Sayfa')+' '+(firstVisible?firstVisible.pg:'—');
   applyMarks();
   if(typeof renderBookmarks==='function')renderBookmarks();
   wirePointer(flow);
   wirePageObserver();
-  curAy=jumpAy||1;
+  curAy=jumpAy||(focused?.from||1);
   if(jumpAy){requestAnimationFrame(()=>{const el=$('ay-'+jumpAy);if(el)el.scrollIntoView({block:'start'});$('rscroll').scrollTop-=70;});}
   else $('rscroll').scrollTop=0;
 }
+
+/* Çalışma Masası aynı okuyucuyu ve aynı sûre kaydını kullanır. */
+function validStudyRange(sid,from,to){
+  const meta=SURAHS[sid-1];
+  return !!meta&&Number.isInteger(sid)&&Number.isInteger(from)&&Number.isInteger(to)&&
+    from>=1&&to>=from&&to<=meta.n;
+}
+function readStudyDraft(){
+  return {sid:Number($('studySurah').value),from:Number($('studyFrom').value),to:Number($('studyTo').value)};
+}
+function updateStudySetup(){
+  const {sid,from,to}=readStudyDraft(),meta=SURAHS[sid-1],valid=validStudyRange(sid,from,to);
+  window.elifaStudySurahPicker?.sync();
+  $('studyFrom').max=meta?.n||1;$('studyTo').max=meta?.n||1;
+  $('studyOpen').disabled=!valid;
+  $('studySummary').textContent=valid?meta.tr+' · '+from+'–'+to+'. '+(window.tr?tr('study_verses'):'âyet'):
+    (window.tr?tr('study_invalid'):'Geçerli bir âyet aralığı seç.');
+  if(valid)studyDraft={sid,from,to};
+}
+function openStudySetup(fromSelection=false,fromReader=false){
+  if(fromSelection){
+    const range=selRange(),first=range&&wordArr[range[0]],last=range&&wordArr[range[1]];
+    if(!first||!last){toast(window.tr?tr('study_select_first'):'Önce bir bölüm seç.');return;}
+    studyDraft={sid:curS,from:Math.min(first.ay,last.ay),to:Math.max(first.ay,last.ay)};
+    studySetupReturn='reader';
+  }else if(fromReader){
+    studyDraft=studyRange?{...studyRange}:studyDraft;
+    studySetupReturn='reader';
+  }else{
+    studySetupReturn='home';
+    studyDraft=studyDraft||studyRange||{sid:curS||1,from:1,to:Math.min(5,SURAHS[(curS||1)-1].n)};
+  }
+  const select=$('studySurah');
+  if(!select.options.length){
+    SURAHS.forEach(meta=>{const option=document.createElement('option');option.value=meta.id;
+      option.textContent=meta.id+'. '+meta.tr;select.appendChild(option);});
+  }
+  select.value=studyDraft.sid;
+  $('studyFrom').value=studyDraft.from;$('studyTo').value=studyDraft.to;
+  updateStudySetup();stopPlan(false);show('studySetup');
+  window.elifaStudySessions?.onOpen({fromReader,fromSelection});
+}
+function syncStudyBanner(){
+  const band=$('studyBanner');if(!band)return;
+  const active=!!studyRange&&studyRange.sid===curS;
+  band.hidden=!active;
+  if(active)$('studyBannerRange').textContent=SURAHS[curS-1].tr+' · '+studyRange.from+'–'+studyRange.to;
+}
+async function playStudyRange(){
+  const range=studyRange;if(!range||range.sid!==curS)return;
+  const request=++studyPlayRequestId,visit=surahRequestId,sid=curS,reciter=SET.reciter;
+  if(audioTimingUnverified(SET.reciter,curS)){
+    toast(window.tr?tr('study_audio_unverified'):'Bu hocanın âyet ses sınırları doğrulanmadı.');return;
+  }
+  if(!AD_?.ay?.[range.from]||!AD_?.ay?.[range.to]){
+    try{
+      const audio=await getAudio(reciter,sid);
+      if(request!==studyPlayRequestId||visit!==surahRequestId||studyRange!==range||
+        curS!==sid||SET.reciter!==reciter||!$('reader').classList.contains('on'))return;
+      AD_=audio;rewireTimings();
+    }catch(e){
+      if(request===studyPlayRequestId&&visit===surahRequestId)
+        toast(window.tr?tr('study_audio_missing'):'Aralıktaki ses kayıtları yüklenemedi.');
+      return;
+    }
+  }
+  const steps=buildLadder(range.from,range.to);
+  if(!steps.length){toast(window.tr?tr('study_audio_missing'):'Aralıktaki ses kayıtları tamamlanmadı.');return;}
+  if(!normalVersePlanReady(steps))return;
+  curAy=range.from;runPlan(steps);
+}
+$('qStudy').onclick=()=>openStudySetup();
+$('selStudy').onclick=()=>openStudySetup(true);
+['studySurah','studyFrom','studyTo'].forEach(id=>$(id).addEventListener('input',updateStudySetup));
+$('studyBack').onclick=()=>{
+  if(studySetupReturn==='reader'){show('reader');syncStudyBanner();}
+  else{show('home');renderContinue();}
+};
+$('studyOpen').onclick=()=>{
+  const {sid,from,to}=readStudyDraft();
+  if(!validStudyRange(sid,from,to)){updateStudySetup();return;}
+  studyDraft={sid,from,to};studyRange={sid,from,to};readerReturn='studySetup';
+  openSurah(sid,from,{study:true});
+};
+$('studyPlay').onclick=()=>{
+  if(activeStudySplitSelection())playActiveStudySplit();
+  else playStudyRange();
+};
+$('studySplit').onclick=()=>{
+  if(!studyRange)return;
+  window.elifaOpenStudySplit?.();
+};
+$('studyGear').onclick=()=>{
+  if(!studyRange)return;
+  gearCtx=activeStudySplitSelection()?'studyParts':'ayah';
+  if(gearCtx==='ayah')rangeSelectionDraft={...studyRange};
+  fillGearSheet();openSheet('gearSheet');
+};
+$('studyEdit').onclick=()=>openStudySetup(false,true);
+$('studyExit').onclick=()=>{
+  if(!studyRange)return;
+  window.elifaStudySessions?.clearActive();
+  const sid=studyRange.sid,ayah=Math.max(studyRange.from,Math.min(studyRange.to,curAy||studyRange.from));
+  studyDraft={...studyRange};studyRange=null;readerReturn='home';
+  openSurah(sid,ayah);
+};
 
 /* rewire timings after reciter change (positions stable) */
 function rewireTimings(){
@@ -8064,24 +8429,135 @@ setInterval(()=>{if($('reader').classList.contains('on'))saveProgress();},5000);
 /* ---------- pointer: tap / long-press select / drag extend ---------- */
 function wirePointer(flow){
   let timer=null,sx=0,sy=0,moved=false,selecting=false,startTarget=null,anchorGi=null;
+  let dragMoved=false,lastX=0,lastY=0,lastTargetGi=null,scrollFrame=null,pointerId=null;
+  const root=$('rscroll');
+  const loupe=document.getElementById('selectionLoupe')||document.body.appendChild(Object.assign(document.createElement('div'),{id:'selectionLoupe',className:'selectionLoupe',hidden:true}));
   const cancel=()=>{if(timer){clearTimeout(timer);timer=null;}};
-  window._cancelLongPress=()=>{cancel();if(selecting){selecting=false;$('rscroll').classList.remove('selecting');}};
+  const stopDrag=()=>{if(scrollFrame!=null){cancelAnimationFrame(scrollFrame);scrollFrame=null;}loupe.hidden=true;root.classList.remove('selecting');selecting=false;dragMoved=false;};
+  window._cancelLongPress=()=>{cancel();stopDrag();};
+  const wordAt=(x,y,nearGi=lastTargetGi??anchorGi??0)=>{
+    const box=root.getBoundingClientRect();
+    x=Math.max(box.left+2,Math.min(box.right-2,x));y=Math.max(box.top+2,Math.min(box.bottom-2,y));
+    const hit=document.elementFromPoint(x,y)?.closest?.('.w');
+    if(hit&&root.contains(hit))return hit;
+    // Satır boşluğunda veya kenarda parmak varsa en yakın görünür kelimeyi seç.
+    let nearest=null,best=Infinity;
+    const center=nearGi;
+    for(let i=Math.max(0,center-48);i<Math.min(wordArr.length,center+49);i++){
+      const el=wordArr[i]?.el;if(!el)continue;
+      const r=el.getBoundingClientRect();if(r.bottom<box.top||r.top>box.bottom)continue;
+      const dx=Math.max(r.left-x,0,x-r.right),dy=Math.max(r.top-y,0,y-r.bottom);
+      const score=dx*dx+dy*dy;if(score<best){best=score;nearest=el;}
+    }
+    if(nearest)return nearest;
+    // Hızlı sürüklemede görünür satır yakın pencerenin dışına çıkabilir.
+    for(let i=Math.max(0,center-200);i<Math.min(wordArr.length,center+201);i++){
+      const el=wordArr[i]?.el;if(!el)continue;
+      const r=el.getBoundingClientRect();if(r.bottom<box.top||r.top>box.bottom)continue;
+      const dx=Math.max(r.left-x,0,x-r.right),dy=Math.max(r.top-y,0,y-r.bottom);
+      const score=dx*dx+dy*dy;if(score<best){best=score;nearest=el;}
+    }
+    return nearest;
+  };
+  const updateDrag=(x,y)=>{
+    const w=wordAt(x,y);if(!w)return;
+    const g=+w.dataset.gi;if(!Number.isInteger(g)||!wordArr[g])return;
+    lastTargetGi=g;
+    const a=Math.min(anchorGi,g),b=Math.max(anchorGi,g);
+    if(selA!==a||selB!==b){selA=a;selB=b;renderSel();}
+    loupe.textContent=wordArr[g].txt||w.textContent;
+    loupe.style.left=Math.max(8,Math.min(window.innerWidth-270,x-90))+'px';
+    loupe.style.top=Math.max(8,Math.min(window.innerHeight-70,y-83))+'px';
+  };
+  const edgeSpeed=y=>{
+    const box=root.getBoundingClientRect(),edge=Math.min(72,box.height*.22);
+    if(y<box.top+edge)return -(2+22*Math.min(1,(box.top+edge-y)/edge)**2);
+    if(y>box.bottom-edge)return 2+22*Math.min(1,(y-box.bottom+edge)/edge)**2;
+    return 0;
+  };
+  for(const [which,handle] of Object.entries(ensureSelectionHandles())){
+    handle.onpointerdown=e=>{
+      if(selA==null)return;
+      e.preventDefault();e.stopPropagation();
+      try{handle.setPointerCapture(e.pointerId);}catch(_){}
+      let x=e.clientX,y=e.clientY,frame=null,dragging=true;
+      root.classList.add('selecting');loupe.hidden=false;
+      const adjust=()=>{
+        const near=which==='start'?selA:selB;
+        const w=wordAt(x,y,near);if(!w)return;
+        const g=+w.dataset.gi;if(!Number.isInteger(g)||!wordArr[g])return;
+        const beforeA=selA,beforeB=selB;
+        if(which==='start')selA=Math.min(g,selB);else selB=Math.max(g,selA);
+        if(selA!==beforeA||selB!==beforeB)renderSel();
+        loupe.textContent=wordArr[g].txt||w.textContent;
+        loupe.style.left=Math.max(8,Math.min(window.innerWidth-270,x-90))+'px';
+        loupe.style.top=Math.max(8,Math.min(window.innerHeight-70,y-83))+'px';
+      };
+      const tick=()=>{
+        frame=null;if(!dragging)return;
+        const speed=edgeSpeed(y);if(!speed)return;
+        const before=root.scrollTop;root.scrollTop+=speed;
+        if(root.scrollTop===before)return;
+        adjust();frame=requestAnimationFrame(tick);
+      };
+      handle.onpointermove=ev=>{
+        if(!dragging)return;
+        x=ev.clientX;y=ev.clientY;adjust();
+        if(edgeSpeed(y)&&frame==null)frame=requestAnimationFrame(tick);
+        if(!edgeSpeed(y)&&frame!=null){cancelAnimationFrame(frame);frame=null;}
+      };
+      const finish=()=>{
+        dragging=false;if(frame!=null)cancelAnimationFrame(frame);
+        frame=null;root.classList.remove('selecting');loupe.hidden=true;
+        handle.onpointermove=null;handle.onpointerup=null;handle.onpointercancel=null;
+        updateSelectionHandles();
+      };
+      handle.onpointerup=finish;handle.onpointercancel=finish;
+    };
+  }
+  const scrollSelection=()=>{
+    scrollFrame=null;if(!selecting||!dragMoved)return;
+    const speed=edgeSpeed(lastY);if(!speed)return;
+    const before=root.scrollTop;root.scrollTop+=speed;
+    if(root.scrollTop===before)return;
+    updateDrag(lastX,lastY);
+    scrollFrame=requestAnimationFrame(scrollSelection);
+  };
   flow.addEventListener('contextmenu',e=>e.preventDefault());
-  flow.addEventListener('touchmove',e=>{if(selecting)e.preventDefault();},{passive:false});
+  // Android native pan can cancel Pointer Events even after a long press.
+  // Touch Events continue, so retain the selection until the finger lifts.
+  flow.addEventListener('touchmove',e=>{
+    if(e.touches.length>1){gestureWasMulti=true;cancel();stopDrag();return;}
+    if(!selecting)return;
+    if(e.cancelable)e.preventDefault();
+    const touch=e.touches[0];if(!touch)return;
+    lastX=touch.clientX;lastY=touch.clientY;
+    if(Math.hypot(lastX-sx,lastY-sy)>6)dragMoved=true;
+    updateDrag(lastX,lastY);
+    if(dragMoved&&edgeSpeed(lastY)&&scrollFrame==null)scrollFrame=requestAnimationFrame(scrollSelection);
+    if(!edgeSpeed(lastY)&&scrollFrame!=null){cancelAnimationFrame(scrollFrame);scrollFrame=null;}
+  },{passive:false});
+  flow.addEventListener('touchend',e=>{
+    if(e.touches.length||!selecting)return;
+    if(gestureWasMulti){stopDrag();return;}
+    up({clientY:lastY});
+  });
   // Aktif parmak sayısı — birden fazla parmak = zoom (pinch), seçim OLMAMALI
-  let activePointers=0;
+  let activePointers=0,gestureWasMulti=false;
   flow.addEventListener('pointerdown',e=>{
     activePointers++;
+    if(activePointers===1)gestureWasMulti=false;
     // İKİNCİ parmak değdi → bu bir zoom hareketi. Başlamış uzun-basışı ve seçimi iptal et.
     if(activePointers>1){
+      gestureWasMulti=true;
       cancel();
-      if(selecting){selecting=false;$('rscroll').classList.remove('selecting');}
+      if(selecting)stopDrag();
       // henüz seçim yapılmadıysa seçimi tamamen sıfırla (yanlış seçim kalmasın)
       if(selMode==='word'&&selA===selB){clearSel();}
       return;
     }
     const t=e.target.closest('.w,.am,.notedot');startTarget=t;moved=false;selecting=false;anchorGi=null;
-    sx=e.clientX;sy=e.clientY;
+    sx=e.clientX;sy=e.clientY;lastX=sx;lastY=sy;pointerId=e.pointerId;
     if(!t)return;
     // sadece KELİME üzerinde uzun-basış → kelime seçim modu başlar
     if(t.classList.contains('w')){
@@ -8091,11 +8567,13 @@ function wirePointer(flow){
       if(bmPlacing)return; // yer imi yerleştirme modunda seçim yok
       timer=setTimeout(()=>{
         timer=null;
-        if(activePointers>1)return;   // bu arada ikinci parmak değdiyse başlatma
+        if(activePointers>1||gestureWasMulti)return;   // bu arada ikinci parmak değdiyse başlatma
         if(navigator.vibrate)navigator.vibrate(35);
-        selecting=true;$('rscroll').classList.add('selecting');
+        selecting=true;root.classList.add('selecting');lastTargetGi=anchorGi;
+        try{flow.setPointerCapture(pointerId);}catch(_){}
         stopPlan(false);
         try{if(selA==null&&typeof elifaEnter==='function')elifaEnter();}catch(e){}selMode='word';selA=selB=anchorGi;renderSel();
+        loupe.hidden=false;updateDrag(lastX,lastY);
       },420);
     }
   });
@@ -8103,18 +8581,18 @@ function wirePointer(flow){
     const far=Math.hypot(e.clientX-sx,e.clientY-sy)>10;
     if(far&&!selecting){moved=true;cancel();}          // seçim başlamadıysa kaydırma → normal scroll, uzun-basışı iptal et
     if(selecting){
-      const el=document.elementFromPoint(e.clientX,e.clientY);
-      const w=el&&el.closest?el.closest('.w'):null;
-      if(w){const g=+w.dataset.gi;
-        // çapadan itibaren aralığı güncelle (iki yöne de genişleyebilir)
-        selA=Math.min(anchorGi,g);selB=Math.max(anchorGi,g);renderSel();}
+      lastX=e.clientX;lastY=e.clientY;
+      if(Math.hypot(lastX-sx,lastY-sy)>6)dragMoved=true;
+      updateDrag(lastX,lastY);
+      if(dragMoved&&edgeSpeed(lastY)&&scrollFrame==null)scrollFrame=requestAnimationFrame(scrollSelection);
+      if(!edgeSpeed(lastY)&&scrollFrame!=null){cancelAnimationFrame(scrollFrame);scrollFrame=null;}
     }
   });
   const up=e=>{
-    cancel();$('rscroll').classList.remove('selecting');
+    cancel();const wasSelecting=selecting;stopDrag();
     // Yer imi yerleştirme modu: dokunulan hizaya yer imi koy
     if(bmPlacing){selecting=false;if(!moved)placeBookmarkAt(e.clientY);else exitBmPlace();if(selectionPickMode==='bookmark'){selectionPickMode=null;setSelectionToolsOpen(true);}return;}
-    if(selecting){selecting=false;renderSel();if(['note','hard','hifz'].includes(selectionPickMode))applyPickedSelection();else playSelection();return;}
+    if(wasSelecting){renderSel();return;} // Tutamaçlarla düzelt; seçilen işlemi ayrıca onayla.
     if(moved)return;                                      // kaydırma yapıldıysa hiçbir şey yapma
     // Action-first picker never starts audio. A long press can select a word range.
     if(selectionPickMode&&selectionPickMode!=='bookmark'){
@@ -8166,20 +8644,58 @@ function wirePointer(flow){
     }
   };
   const upWrap=e=>{
+    const skip=gestureWasMulti;
     activePointers=Math.max(0,activePointers-1);
-    // Bu dokunuş bir zoom (çok parmak) hareketinin parçasıysa, tıklama-seçim yapma
-    if(e.__wasMulti){return;}
+    if(!activePointers)gestureWasMulti=false;
+    // Pinch'in hangi parmağı önce kalkarsa kalksın tap/oynatma üretme.
+    if(skip)return;
     up(e);
   };
-  flow.addEventListener('pointerup',e=>{
-    // pointerup anında hâlâ başka parmak varsa bu bir pinch idi
-    if(activePointers>1)e.__wasMulti=true;
-    upWrap(e);
+  flow.addEventListener('pointerup',upWrap);
+  flow.addEventListener('pointercancel',e=>{
+    activePointers=Math.max(0,activePointers-1);cancel();
+    if(e.pointerType==='touch'&&selecting&&!gestureWasMulti)return;
+    stopDrag();
   });
-  flow.addEventListener('pointercancel',()=>{activePointers=Math.max(0,activePointers-1);cancel();selecting=false;$('rscroll').classList.remove('selecting');});
 }
 
 function selRange(){if(selA==null)return null;const a=Math.min(selA,selB),b=Math.max(selA,selB);return [a,b];}
+let selectionHandles=null;
+function ensureSelectionHandles(){
+  if(selectionHandles)return selectionHandles;
+  const make=(id,label)=>{
+    const button=document.createElement('button');button.type='button';button.id=id;
+    button.className='selectionHandle';button.setAttribute('aria-label',label);button.hidden=true;
+    document.body.appendChild(button);return button;
+  };
+  selectionHandles={start:make('selectionStartHandle','Seçim başlangıcını sürükle'),end:make('selectionEndHandle','Seçim bitişini sürükle')};
+  $('rscroll').addEventListener('scroll',updateSelectionHandles,{passive:true});
+  window.addEventListener('resize',updateSelectionHandles,{passive:true});
+  if(typeof MutationObserver!=='undefined')new MutationObserver(updateSelectionHandles)
+    .observe($('sheetback'),{attributes:true,attributeFilter:['class']});
+  return selectionHandles;
+}
+function updateSelectionHandles(){
+  if(!selectionHandles)return;
+  const range=selRange(),root=$('rscroll');
+  if(!range||!root||!$('reader').classList.contains('on')||document.querySelector('.sheet.show')){
+    selectionHandles.start.hidden=true;selectionHandles.end.hidden=true;return;
+  }
+  const viewport=root.getBoundingClientRect();
+  if(!viewport.height){selectionHandles.start.hidden=true;selectionHandles.end.hidden=true;return;}
+  const player=$('pbar');
+  const visibleBottom=player&&getComputedStyle(player).display!=='none'
+    ?Math.min(viewport.bottom,player.getBoundingClientRect().top):viewport.bottom;
+  for(const [which,g] of [['start',range[0]],['end',range[1]]]){
+    const handle=selectionHandles[which],word=wordArr[g]?.el;
+    if(!word){handle.hidden=true;continue;}
+    const rect=word.getBoundingClientRect();
+    handle.hidden=rect.bottom<viewport.top||rect.top>visibleBottom;
+    if(handle.hidden)continue;
+    handle.style.left=Math.max(viewport.left,Math.min(viewport.right-44,(which==='start'?rect.right:rect.left)-22))+'px';
+    handle.style.top=Math.max(viewport.top,Math.min(visibleBottom-44,(which==='start'?rect.top:rect.bottom)-22))+'px';
+  }
+}
 let selectionToolsOpen=false,selectionToolsKey='',selectionPickMode=null;
 const selectionPickHints={split:'Bölmek istediğin âyete dokun',bookmark:'Yer imi için âyete dokun',note:'Not için kelimeye/âyete dokun · aralık: sürükle',hifz:'Ezberlediğin âyete dokun',hard:'Zorlandığın yeri seç · aralık: sürükle'};
 const selectionPickHintsEN={split:'Tap the verse you want to split',bookmark:'Tap a verse to place a bookmark',note:'Tap a word or verse to add a note · drag for a range',hifz:'Tap the verse you memorized',hard:'Select the difficult place · drag for a range'};
@@ -8212,26 +8728,42 @@ $('zenTab').onclick=()=>setSelectionToolsOpen(!selectionToolsOpen);
   window.addEventListener('resize',placeHandle,{passive:true});
   placeHandle();
 }
+let prevSelMulti=null;
 function renderSel(){
-  prevSel.forEach((i,j)=>{const w=wordArr[i];if(w){w.el.classList.remove('sel');w.el.style.background=prevSelBg[j]||'';}});
-  prevSel=[];prevSelBg=[];
   const r=selRange();
-  if(!r){selectionToolsKey='';setSelectionToolsOpen(false);const ct=$('cumuTog');if(ct)ct.classList.remove('dim');return;}
+  const studyAction=$('selStudy');if(studyAction)studyAction.hidden=!r;
+  const oldBg=new Map(prevSel.map((i,j)=>[i,prevSelBg[j]]));
+  for(const [i,bg] of oldBg){
+    if(r&&i>=r[0]&&i<=r[1])continue;
+    const w=wordArr[i];if(w){w.el.classList.remove('sel');w.el.style.background=bg||'';}
+  }
+  prevSel=[];prevSelBg=[];
+  if(!r){selectionToolsKey='';setSelectionToolsOpen(false);const ct=$('cumuTog');if(ct)ct.classList.remove('dim');updateSelectionHandles();return;}
   for(let i=r[0];i<=r[1];i++){
     const el=wordArr[i].el;
-    prevSel.push(i);prevSelBg.push(el.style.background);
-    el.classList.add('sel');
-    el.style.background=SET.selMulti?MULTI[(i-r[0])%MULTI.length]:'var(--selbase)';
+    const wasSelected=oldBg.has(i);
+    prevSel.push(i);prevSelBg.push(wasSelected?oldBg.get(i):el.style.background);
+    if(!wasSelected)el.classList.add('sel');
+    if(!wasSelected||prevSelMulti!==SET.selMulti||SET.selMulti)
+      el.style.background=SET.selMulti?MULTI[(i-r[0])%MULTI.length]:'var(--selbase)';
   }
+  prevSelMulti=SET.selMulti;
   const wa=wordArr[r[0]],wb=wordArr[r[1]],cnt=r[1]-r[0]+1;
-  const t=selTimes();
   var _selectedVerse=window.elifaT?window.elifaT('verse_word'):'verse';
-  $('selInfo').innerHTML='<b>'+(elifaCurLang()==='tr'?'Âyet '+wa.ay:_selectedVerse+' '+wa.ay)+(wa.ay===wb.ay?'':'–'+wb.ay)+'</b> · '+cnt+(elifaCurLang()==='tr'?' kelime':' words');
+  const listenLabel=window.tr?tr('pb_play'):(elifaCurLang()==='tr'?'Dinle':'Play');
+  const confirmId={note:'selNote',hard:'selErr',hifz:'selHifz'}[selectionPickMode];
+  const confirmLabel=confirmId?$(confirmId).querySelector('.lbl')?.textContent:'';
+  $('selInfo').innerHTML='<b>'+(elifaCurLang()==='tr'?'Âyet '+wa.ay:_selectedVerse+' '+wa.ay)+(wa.ay===wb.ay?'':'–'+wb.ay)+'</b> · '+cnt+(elifaCurLang()==='tr'?' kelime':' words')+(confirmLabel?' <button class="selConfirm" id="selConfirm" type="button">✓ '+confirmLabel+'</button>':'')+' <button class="selListen" id="selListen" type="button">▶ '+listenLabel+'</button>';
   if(typeof syncRep==="function")syncRep();
   const key=r[0]+':'+r[1];
   if(key!==selectionToolsKey){selectionToolsKey=key;setSelectionToolsOpen(true);}
   const ct=$('cumuTog');if(ct)ct.classList.add('dim');
+  updateSelectionHandles();
 }
+  $('selInfo').addEventListener('click',e=>{
+    if(e.target.closest('#selConfirm'))applyPickedSelection();
+    else if(e.target.closest('#selListen'))playSelection();
+  });
 function selTimes(){
   const r=selRange();if(!r)return null;
   // Seçim TAM seçilen aralığı verir — uzatma YOK. "Kelime seçince sadece o kelime okunur."
@@ -8262,6 +8794,205 @@ function selTimes(){
   }
   return s==null||e<=s?null:[s,e];
 }
+/* Çalışma Masası parçaları aynı sûre kaydının kelime ekseninde kalır.
+   Metin ses yüklenmeden çizilebilir; oynatma her seferinde yeniden doğrulanır. */
+function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
+  const parts=[],warningAys=[],sid=curS,recipe={sid,fromAy,toAy,mode,cutsByAy};
+  if(!Number.isInteger(fromAy)||!Number.isInteger(toAy)||fromAy<1||
+    toAy<fromAy||toAy>SURAHS[sid-1]?.n||!['auto','manual'].includes(mode))
+    return {parts,error:'Geçerli bir âyet aralığı seç.'};
+  for(let ay=fromAy;ay<=toAy;ay++){
+    const gi=ayGi[ay];
+    if(!gi||gi[1]<gi[0])return {parts,error:ay+'. âyetin metni hazır değil.'};
+    const words=wordArr.slice(gi[0],gi[1]+1),n=words.length;
+    if(words.some((w,i)=>!w||w.ay!==ay||w.pos!==i+1))
+      return {parts,error:ay+'. âyetin kelime sırası doğrulanamadı.'};
+    // Turkish Mushaf can print two timed audio words as one joined word.
+    // Keep their verified timestamps together in one automatic card.
+    const cuts=mode==='auto'?Array.from({length:n-1},(_,i)=>i+1)
+      .filter(pos=>!words[pos-1].joinNext):
+      (cutsByAy?.[ay]||[]);
+    if(!Array.isArray(cuts)||cuts.some((p,i)=>!Number.isInteger(p)||p<1||p>=n||
+      (i>0&&p<=cuts[i-1])))
+      return {parts,error:ay+'. âyetin bölme noktaları sıralı ve tekil olmalı.'};
+    let start=1;
+    for(const end of [...cuts,n]){
+      const selected=words.slice(start-1,end);
+      parts.push({sid,ay,fromPos:start,toPos:end,fromGi:selected[0].gi,
+        toGi:selected.at(-1).gi,words:selected,canPlay:false,pendingAudio:true,sourceId:null,
+        scopeFrom:fromAy,scopeTo:toAy,recipe});
+      start=end+1;
+    }
+  }
+  parts.forEach((p,i)=>p.index=i);
+  const audio=AD_;
+  if(!audio?.sourceUrl||!audio.verseSegments||!audio.ws)
+    return {parts,error:null,pendingAudio:true,warningAys};
+  if(audioTimingUnverified(SET.reciter,sid)||audio.reciterId!==SET.reciter||
+    (normalChapterAudio&&audio!==normalChapterAudio))
+    return {parts,error:'Bu hocanın bu sûre kaydında kelime sesi doğrulanmadı.'};
+  const sourceId=audio.recordingUrl||audio.sourceUrl;
+  for(let ay=fromAy;ay<=toAy;ay++){
+    const gi=ayGi[ay],words=wordArr.slice(gi[0],gi[1]+1),n=words.length;
+    const canonical=typeof QTEXT==='undefined'?null:
+      QTEXT?.[sid]?.[ay-1]?.[2]?.filter(w=>w[1]===0).length;
+    const raw=audio.verseSegments[ay],verse=audio.verseRanges?.[ay];
+    if(canonical!=null&&canonical!==n||!Array.isArray(raw)||
+      !Array.isArray(verse)||!Number.isFinite(verse[0])||!Number.isFinite(verse[1])||verse[1]<=verse[0])
+      return {parts,error:ay+'. âyetin ses/kelime eşleşmesi doğrulanmadı.'};
+    const next=Number.isFinite(audio.trustedNext?.[ay])?audio.trustedNext[ay]:
+      (audio.verseRanges?.[ay+1]?.[0]??audio.ay?.[ay+1]?.[0]);
+    const ayEnd=Number.isFinite(next)?Math.min(verse[1],next-1):verse[1];
+    const ayParts=parts.filter(p=>p.ay===ay);
+    // A verified Afasy verse may recite some words twice. Its individual
+    // word labels then move backwards on the recording clock. Preserve the
+    // complete verse instead of inventing a one-to-one word cut.
+    if(raw.length>n&&audio.reciterId===223&&
+      (mode==='auto'||ayParts.length===1)&&ayEnd>verse[0]&&
+      raw[0]?.[0]===1&&raw.at(-1)?.[0]===n&&
+      raw.every((row,i)=>Array.isArray(row)&&Number.isInteger(row[0])&&row[0]>=1&&row[0]<=n&&
+        Number.isFinite(row[1])&&Number.isFinite(row[2])&&row[2]>row[1]&&
+        row[1]>=verse[0]&&row[2]<=ayEnd+1&&
+        (i===0||row[1]>=raw[i-1][2]))&&
+      new Set(raw.map(row=>row[0])).size===n){
+      const first=ayParts[0],last=ayParts.at(-1),at=parts.indexOf(first);
+      parts.splice(at,ayParts.length,{...first,toPos:n,toGi:last.toGi,
+        words:wordArr.slice(gi[0],gi[1]+1),f:verse[0],t:ayEnd,
+        fallbackVerse:true,sourceId,reciterId:audio.reciterId,
+        canPlay:true,pendingAudio:false});
+      warningAys.push(ay);
+      continue;
+    }
+    if(raw.length!==n)
+      return {parts,error:ay+'. âyette tekrar edilen kelimeler ayrı ayrı güvenle kesilemiyor.'};
+    for(let i=0;i<n;i++){
+      const row=raw[i],w=words[i],ws=audio.ws[ay+':'+(i+1)];
+      if(!Array.isArray(row)||row[0]!==i+1||!Array.isArray(ws)||
+        !Number.isFinite(row[1])||!Number.isFinite(row[2])||row[2]<=row[1]||
+        Math.abs(row[1]-ws[0])>1||Math.abs(row[2]-ws[1])>1||
+        w.audioAligned===false||!Number.isFinite(w.s)||!Number.isFinite(w.e)||
+        Math.abs(w.s-row[1])>1||Math.abs(w.e-row[2])>1||
+        row[1]<verse[0]-1||row[2]>verse[1]+1)
+        return {parts,error:ay+'. âyetin kelime zamanları aynı kayıtla eşleşmiyor.'};
+    }
+    if(ayEnd<raw[n-1][2]-1)
+      return {parts,error:ay+'. âyetin son sesi sonraki âyetle çakışıyor.'};
+    for(const p of ayParts){
+      if(p.toPos<n){
+        const left=raw[p.toPos-1],right=raw[p.toPos];
+        if(words[p.toPos-1].joinNext||
+          audio.allowedSplitCuts?.[ay]&&!audio.allowedSplitCuts[ay].includes(p.toPos)||
+          right[1]<left[2])
+          return {parts,error:ay+'. âyette '+p.toPos+'. kelimeden sonra güvenilir ses sınırı yok.'};
+      }
+      p.f=raw[p.fromPos-1][1];
+      p.t=p.toPos===n?ayEnd:Math.min(raw[p.toPos-1][2],raw[p.toPos][1]);
+      if(!(p.t>p.f))return {parts,error:ay+'. âyetin parça süresi doğrulanmadı.'};
+      p.sourceId=sourceId;p.reciterId=audio.reciterId;p.canPlay=true;p.pendingAudio=false;
+    }
+  }
+  parts.forEach((p,i)=>p.index=i);
+  return {parts,error:null,pendingAudio:false,warningAys};
+}
+function studyValidateManualCut(ay,pos){
+  const gi=ayGi[ay],n=gi?gi[1]-gi[0]+1:0;
+  if(!Number.isInteger(pos)||pos<1||pos>n)return {ok:false,message:'Önce geçerli bir kelime seç.'};
+  if(pos===n)return {ok:true,endOfAyah:true};
+  if(wordArr[gi[0]+pos-1]?.joinNext)
+    return {ok:false,message:'Yazıda birleşik görünen kelimenin içinden kesim yapılamaz.'};
+  const result=buildStudySplitParts(ay,ay,'manual',{[ay]:[pos]});
+  if(result.error)return {ok:false,message:result.error};
+  return {ok:true,pendingAudio:!!result.pendingAudio,
+    message:result.pendingAudio?'Ses yüklenince kesim yeniden doğrulanacak.':''};
+}
+function activeStudySplitSelection(){
+  return window.elifaStudySplitSelection?.()||null;
+}
+function syncStudySplitControlLabels(){
+  const parts=!!activeStudySplitSelection();
+  $('prevAy').setAttribute('aria-label',parts?'Önceki parça':'Önceki âyet');
+  $('nextAy').setAttribute('aria-label',parts?'Sonraki parça':'Sonraki âyet');
+  $('npPrev').setAttribute('title',parts?'Önceki parça':'Önceki âyet');
+  $('npNext').setAttribute('title',parts?'Sonraki parça':'Sonraki âyet');
+  $('studyPlay').textContent=parts?(window.tr?tr('study_split_play_all'):'▶ Tüm parçaları çalış'):
+    (window.tr?tr('study_play'):'▶ Aralığı çalış');
+  const label=$('optProgram')?.querySelector('.o1');
+  if(label)label.textContent=parts?'Parça ezber programı':(window.tr?tr('s_ayah_prog'):'Âyet ezber programı');
+}
+function studySplitRecipeCurrent(recipe){
+  if(!recipe||curS!==recipe.sid||studyRange?.sid!==recipe.sid||
+    recipe.fromAy<studyRange.from||recipe.toAy>studyRange.to)return false;
+  const current=activeStudySplitSelection();
+  return !!current&&current.sid===recipe.sid&&current.ay===recipe.fromAy&&
+    recipe.fromAy===recipe.toAy&&current.mode===recipe.mode&&
+    JSON.stringify(current.cutsByAy)===JSON.stringify(recipe.cutsByAy);
+}
+function playActiveStudySplit(firstIndex=0,lastIndex=null){
+  const current=activeStudySplitSelection();
+  if(!current)return false;
+  return playStudySplitRange(current.parts,firstIndex,lastIndex??current.parts.length-1);
+}
+async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1){
+  if(!Array.isArray(parts)||!parts.length||!Number.isInteger(firstIndex)||
+    !Number.isInteger(lastIndex)||firstIndex<0||lastIndex<firstIndex||lastIndex>=parts.length)
+    return false;
+  // A whole chapter can contain thousands of word steps. Keep the audio
+  // scheduler bounded; the user can play another batch after this one.
+  if((lastIndex-firstIndex+1)*(SET.cumu?2:1)-(SET.cumu?1:0)>200){
+    toast('Bu çalışma için en fazla 200 ses adımı hazırlanabilir. Daha kısa bir parça aralığı seç.');return false;
+  }
+  const chosen=parts.slice(firstIndex,lastIndex+1),recipe=chosen[0]?.recipe;
+  if(!recipe||chosen.some(p=>p.recipe!==recipe)||!studySplitRecipeCurrent(recipe))return false;
+  stopPlan(false);
+  const request=audioRequestId,visit=surahRequestId,reciter=SET.reciter;
+  const context=ac();if(context.state==='suspended')context.resume().catch(()=>{});
+  let audio=AD_;
+  if(!audio?.sourceUrl){
+    try{audio=await getAudio(reciter,recipe.sid);}
+    catch(e){if(request===audioRequestId)toast('Sûre sesi yüklenemedi; bağlantını kontrol et.');return false;}
+    if(request!==audioRequestId||visit!==surahRequestId||
+      SET.reciter!==reciter||!studySplitRecipeCurrent(recipe))return false;
+    AD_=audio;rewireTimings();
+  }
+  const sourceId=audio.recordingUrl||audio.sourceUrl;
+  if(chosen.some(p=>p.sourceId&&p.sourceId!==sourceId||
+    p.reciterId!=null&&p.reciterId!==reciter)){
+    toast('Hoca kaydı değişti; parçaları yeniden hazırla.');return false;
+  }
+  const rebuilt=buildStudySplitParts(recipe.fromAy,recipe.toAy,recipe.mode,recipe.cutsByAy);
+  if(rebuilt.error||rebuilt.pendingAudio){toast(rebuilt.error||'Ses henüz hazır değil.');return false;}
+  const fresh=chosen.map(p=>rebuilt.parts.find(next=>next.ay===p.ay&&
+    next.fromPos===p.fromPos&&next.toPos===p.toPos));
+  if(fresh.some(p=>!p||!p.canPlay)){
+    toast('Bu âyette tekrar edilen kelimeler var; bölümleri yeniden açıp tam âyet kartını seç.');
+    return false;
+  }
+  const from=fresh[0],to=fresh.at(-1);
+  try{
+    if(!audio.buffer)await ensureSelAudio(from.ay,to.ay,[from.f,to.t]);
+  }catch(e){if(request===audioRequestId)toast('Parça sesi hazırlanamadı. Yeniden dene.');return false;}
+  if(request!==audioRequestId||visit!==surahRequestId||AD_!==audio||
+    SET.reciter!==reciter||!studySplitRecipeCurrent(recipe))return false;
+  if(audio.buffer?to.t>audio.buffer.duration*1000+1:
+    !audio.selBuf||audio.selBuf.lo>from.f+1||audio.selBuf.hi<to.t-1){
+    toast('Parça sesinin tamamı hazırlanamadı.');return false;
+  }
+  const plan=[];
+  for(let i=0;i<fresh.length;i++){
+    const p=fresh[i],number=firstIndex+i+1;
+    plan.push({f:p.f,t:p.t,x:1,dyn:true,studyExact:true,
+      ayEnd:p.toPos===ayGi[p.ay][1]-ayGi[p.ay][0]+1?p.ay:null,
+      l:p.ay+'. âyet · '+number+'. parça',studyPart:firstIndex+i});
+    if(SET.cumu&&i>0){
+      plan.push({f:fresh[0].f,t:p.t,x:1,dyn:true,studyExact:true,
+        l:(firstIndex+1)+'–'+number+'. parçalar birleşik',studyPart:firstIndex+i});
+    }
+  }
+  if(!normalVersePlanReady(plan))return false;
+  runPlan(plan);
+  return playing;
+}
+function playStudySplitPart(part){return playStudySplitRange([part]);}
 function clearSel(){selA=selB=null;selMode='ayah';renderSel();}
 $('selClear').onclick=()=>{if(selA!=null){stopPlan(false);clearSel();}else setSelectionToolsOpen(false);};
 $('selSplit').onclick=()=>{
@@ -8278,7 +9009,7 @@ function applyPickedSelection(){
   const r=selRange(),mode=selectionPickMode;
   if(!r||!mode)return;
   selectionPickMode=null;
-  setSelectionToolsOpen(true);
+  renderSel();setSelectionToolsOpen(true);
   if(mode==='note'){openNote(wordArr[r[0]].ay);return;}
   if(mode==='hifz'){$('selHifz').click();return;}
   if(mode==='hard'){$('selErr').click();return;}
@@ -9219,6 +9950,9 @@ function stepBounds(st){
     const range=st.sourceRanges[pieceCursor];
     return {f:range.f,t:range.t};
   }
+  // Çalışma Masası kesimleri aynı kaydın doğrulanmış kelime sınırıdır;
+  // kullanıcı padding'i son harfi kesmemeli veya sonraki kelimeye taşmamalı.
+  if(st.studyExact)return {f:st.f,t:st.t};
   if(st.physicalEnd)return {f:Math.max(0,st.f),t:st.t};
   if(st.preserveTail)return splitBounds(st);
   const f=Math.max(0,st.f+(SET.startPad||0));
@@ -9302,7 +10036,7 @@ let pausedAtMs=null;
 let useWA=false;         // bu adım Web Audio mı kullanıyor
 let htmlBtimer=null;     // HTMLAudio yolu için sınır zamanlayıcı
 const HTML_FADE=45;      // ms — HTMLAudio kesiminde volume fade penceresi (Web Audio'daki fade'in karşılığı)
-function currentFadeMs(){return plan[pi]&&plan[pi].preserveTail?5:HTML_FADE;}
+function currentFadeMs(){return plan[pi]&&(plan[pi].preserveTail||plan[pi].studyExact)?5:HTML_FADE;}
 let htmlFade=null;       // HTMLAudio fade-out sürücüsü (interval)
 function cancelHTMLFade(){if(htmlFade){clearInterval(htmlFade);htmlFade=null;}}
 let htmlPlaybackSeq=0,htmlPlaybackWatch=null;
@@ -9366,7 +10100,7 @@ function boundedPitchClip(buffer,fromSec,durationSec,fadeMs){
 }
 
 function seekPlayPitchClip(buffer,ms,endMs,offSec,durSec,rate){
-  const fadeMs=(plan[pi]&&plan[pi].preserveTail)?5:30;
+  const fadeMs=(plan[pi]&&(plan[pi].preserveTail||plan[pi].studyExact))?5:30;
   // Repeat reuses the encoded samples; only the disposable object URL changes.
   const cached=clipCache;
   const blob=cached&&cached.buffer===buffer&&cached.offSec===offSec&&cached.durSec===durSec&&cached.fadeMs===fadeMs
@@ -9452,7 +10186,7 @@ function seekPlayWA(ms,endMs){
   stepEnded=false;pausedAtMs=null;
   segIdx=lowerBound(splitTimingMs(ms));
 
-  const FADE=(plan[pi]&&plan[pi].preserveTail)?0.005:0.030;
+  const FADE=(plan[pi]&&(plan[pi].preserveTail||plan[pi].studyExact))?0.005:0.030;
   const endAt=c.currentTime + durSec;
   try{
     g.gain.setValueAtTime(1, Math.max(c.currentTime, endAt-FADE));
@@ -9793,9 +10527,11 @@ function playAyahOnce(a){
   if(normalVersePlanReady(steps))runPlan(steps);
 }
 function playFromAyah(a){
-  const chapter=normalChapterAudio||AD_,last=SURAHS[curS-1].n;
+  const focused=studyRange?.sid===curS?studyRange:null;
+  if(focused)a=Math.max(focused.from,Math.min(focused.to,a));
+  const chapter=normalChapterAudio||AD_,last=focused?.to||SURAHS[curS-1].n;
   if(!chapter?.ay[a]||!chapter?.ay[last])return;curAy=a;
-  const steps=[normalVerseStep(chapter,a,last,{x:1,l:SURAHS[curS-1].tr,full:true})];
+  const steps=[normalVerseStep(chapter,a,last,{x:1,l:SURAHS[curS-1].tr,full:!focused})];
   if(normalVersePlanReady(steps))runPlan(steps);
 }
 function firstMs(){return AD_.ay[1]?AD_.ay[1][0]:0;}
@@ -9805,17 +10541,19 @@ function firstMs(){return AD_.ay[1]?AD_.ay[1][0]:0;}
    - repeat açık, birikimli kapalı → âyeti N kez
    - repeat açık, birikimli açık → âyet N kez + o âyete kadar birleşik N kez */
 function playAyahProgram(a){
+  const focused=typeof studyRange!=='undefined'&&studyRange?.sid===curS?studyRange:null;
+  if(focused)a=Math.max(focused.from,Math.min(focused.to,a));
   if(audioTimingUnverified(SET.reciter,curS)){
     toast('Bu hocanın bu sûre kaydında âyet sınırları güvenilir değil. Ses için başka bir hoca seç.');
     return;
   }
   const chapter=normalChapterAudio||AD_;
   if(!chapter||!chapter.ay[a])return;curAy=a;
-  const lastAy=SURAHS[curS-1].n;
+  const lastAy=focused?.to||SURAHS[curS-1].n;
 
   // SERBEST (tekrar kapalı, birikimli kapalı) → buradan sûre sonuna TEK KESİNTİSİZ AKIŞ
   if(!SET.repOn && !SET.cumu){
-    const steps=[normalVerseStep(chapter,a,lastAy,{x:1,dyn:true,l:a+'. âyet',full:true,fluent:true})];
+    const steps=[normalVerseStep(chapter,a,lastAy,{x:1,dyn:true,l:a+'. âyet',full:!focused,fluent:true})];
     if(normalVersePlanReady(steps))runPlan(steps);
     return;
   }
@@ -9824,6 +10562,12 @@ function playAyahProgram(a){
   //   âyet A (N×) → âyet A+1 (N×) → A..A+1 birleşik (N×) → âyet A+2 (N×) → A..A+2 birleşik (N×) ...
   // Not: ilk âyet tek başına, sonra her yeni âyet + o âyete kadar birleşik.
   if(SET.cumu){
+    if(focused&&Array.from({length:lastAy-a+1},(_,i)=>chapter.ay[a+i])
+      .some(range=>!Array.isArray(range)||!Number.isFinite(range[0])||
+        !Number.isFinite(range[1])||range[1]<=range[0])){
+      toast(window.tr?tr('study_audio_missing'):'Bu aralıktaki ses kayıtları eksik.');
+      return;
+    }
     const p=[];
     const start=a;
     let guardedTail=false;
@@ -9855,6 +10599,10 @@ $('playBtn').onclick=()=>{
     toast('Bu hocanın bu sûre kaydında âyet sınırları güvenilir değil. Ses için başka bir hoca seç.');
     openReciterSheet();
     return;
+  }
+  if(activeStudySplitSelection()){
+    if(playing){togglePause();return;}
+    playActiveStudySplit();return;
   }
   if(!AD_)return;
   if(playing){togglePause();return;}
@@ -10003,8 +10751,16 @@ async function playSelection(){
   }
   runPlan([step]);
 }
-$('prevAy').onclick=()=>{const a=Math.max(1,(curAy||visAy||2)-1);playAyahProgram(a);};
-$('nextAy').onclick=()=>{const a=Math.min(SURAHS[curS-1].n,(curAy||visAy||0)+1);playAyahProgram(a);};
+$('prevAy').onclick=()=>{
+  const split=activeStudySplitSelection();
+  if(split){const i=Math.max(0,split.selectedIndex-1);window.elifaStudySplitSetIndex?.(i);playActiveStudySplit(i,i);return;}
+  const a=Math.max(studyRange?.sid===curS?studyRange.from:1,(curAy||visAy||2)-1);playAyahProgram(a);
+};
+$('nextAy').onclick=()=>{
+  const split=activeStudySplitSelection();
+  if(split){const i=Math.min(split.parts.length-1,split.selectedIndex+1);window.elifaStudySplitSetIndex?.(i);playActiveStudySplit(i,i);return;}
+  const a=Math.min(studyRange?.sid===curS?studyRange.to:SURAHS[curS-1].n,(curAy||visAy||0)+1);playAyahProgram(a);
+};
 
 /* repeat control */
 let repLongFired=false;
@@ -10016,6 +10772,11 @@ $('repTog').onclick=()=>{
   if(repLongFired){repLongFired=false;return;}
   SET.repOn=!SET.repOn;saveSet();
   document.querySelector('.repctl').classList.toggle('on',SET.repOn);
+  if(activeStudySplitSelection()){
+    if(SET.repOn)playActiveStudySplit();else stopPlan(false);
+    toast(SET.repOn?'Parça tekrarı açık · '+SET.rep+'×':'Parça tekrarı kapalı');
+    return;
+  }
   if(SET.repOn){
     // AÇILDI: o an okunan/görünen âyeti otomatik seç + tekrar çalmaya başla (play gerekmez)
     const a=curAy||visAy||1;
@@ -10034,7 +10795,7 @@ $('repPlus').onclick=()=>{SET.rep=Math.min(99,SET.rep+1);SET.repOn=true;saveSet(
 $('repMinus').onclick=()=>{SET.rep=Math.max(1,SET.rep-1);saveSet();syncRep();};
 /* uzun bas → ayarlar */
 (function(){const b=$('repTog');if(!b)return;let t=null;
-  b.addEventListener('pointerdown',()=>{repLongFired=false;t=setTimeout(()=>{t=null;repLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx='ayah';fillGearSheet();openSheet('gearSheet');},480);});
+  b.addEventListener('pointerdown',()=>{repLongFired=false;t=setTimeout(()=>{t=null;repLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');},480);});
   const c=()=>{if(t){clearTimeout(t);t=null;}};
   b.addEventListener('pointerup',c);b.addEventListener('pointerleave',c);b.addEventListener('pointercancel',c);
 })();
@@ -10044,6 +10805,12 @@ $('reciterBtn').onclick=()=>openReciterSheet();
 $('cumuTog').onclick=()=>{
   if(cumuLongFired){cumuLongFired=false;return;}   // uzun basış oldu → toggle etme
   SET.cumu=!SET.cumu;saveSet();syncCumu();if(typeof syncCumu2==='function')syncCumu2();if(typeof liveRebuildParts==='function')liveRebuildParts();
+  if(activeStudySplitSelection()){
+    if(SET.cumu){SET.repOn=true;saveSet();syncRep();playActiveStudySplit();}
+    else stopPlan(false);
+    toast(SET.cumu?'Parçalar birleşik çalışılıyor':'Parça birleştirme kapalı');
+    return;
+  }
   if(SET.cumu){
     // AÇILDI: birleşik okuma tekrar ile anlamlı → tekrarı da aç, o âyeti seç + çalmaya başla
     SET.repOn=true;saveSet();
@@ -10063,7 +10830,7 @@ let cumuLongFired=false;
 function syncCumu(){const b=$('cumuTog');if(b)b.classList.toggle('on',SET.cumu);}
 /* 1+2 ikonuna UZUN BAS → âyet aralığı programı paneli (tekrar ikonundaki gibi) */
 (function(){const b=$('cumuTog');if(!b)return;let t=null;
-  b.addEventListener('pointerdown',()=>{t=setTimeout(()=>{t=null;cumuLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx='ayah';fillGearSheet();openSheet('gearSheet');},480);});
+  b.addEventListener('pointerdown',()=>{t=setTimeout(()=>{t=null;cumuLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');},480);});
   const c=()=>{if(t){clearTimeout(t);t=null;}};
   b.addEventListener('pointerup',c);b.addEventListener('pointerleave',c);b.addEventListener('pointercancel',c);
 })();
@@ -10121,7 +10888,10 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 function buildLadder(from,to){
   const p=[],chapter=normalChapterAudio||AD_;
   for(let k=from;k<=to;k++){
-    if(!chapter?.ay[k])continue;
+    // An incomplete interval must never silently skip a verse.
+    const range=chapter?.ay?.[k];
+    if(!Array.isArray(range)||!Number.isFinite(range[0])||
+      !Number.isFinite(range[1])||range[1]<=range[0])return [];
     p.push(normalVerseStep(chapter,k,k,{x:1,dyn:true,ayEnd:k,l:k+'. âyet'}));
     if(SET.cumu&&k>from&&chapter.ay[from]){
       p.push(normalVerseStep(chapter,from,k,
@@ -10130,19 +10900,43 @@ function buildLadder(from,to){
   }
   return p;
 }
-// Aralık alanları değişince oynatmayı uygula; korumalı kayıtta Başlat hoca seçimini açar.
+// Aralık ancak kullanıcı Başlat'a bastığında oynatılır; düzenleme sessiz kalır.
 let guardedRangeDraft=null;
+let rangeSelectionDraft=null;
+function rememberRangeSelection(){
+  if(gearCtx!=='ayah')return;
+  rangeSelectionDraft={sid:curS,from:+$('fromInp').value||1,to:+$('toInp').value||1};
+  guardedRangeDraft=null;
+}
 function applyRangeProgram(offerReciter=false){
-  saveSet();syncCumu();if(typeof syncCumu2==='function')syncCumu2();
+  commitInputs();syncCumu();if(typeof syncCumu2==='function')syncCumu2();
+  if(gearCtx==='studyParts'){
+    const split=activeStudySplitSelection();
+    if(!split){toast('Önce bölünecek âyeti ve parçaları seç.');return false;}
+    const from=+$('fromInp').value,to=+$('toInp').value;
+    if(!Number.isInteger(from)||!Number.isInteger(to)||from<1||to<from||to>split.parts.length){
+      toast('Geçerli bir başlangıç ve bitiş parçası seç.');return false;
+    }
+    SET.repOn=true;saveSet();syncRep();syncRep2();
+    window.elifaStudySplitSetIndex?.(from-1);
+    playStudySplitRange(split.parts,from-1,to-1);
+    return true;
+  }
   if(gearCtx==='parts'&&splitParts.length){
     let from=Math.min(Math.max(1,+$('fromInp').value||1),splitParts.length);
     let to=Math.min(Math.max(1,+$('toInp').value||1),splitParts.length);
-    if(to<from)return;
+    if(to<from){toast('Bitiş parçası başlangıçtan önce olamaz.');return false;}
+    if(!AD_||splitParts.some(p=>p.unsafeTiming)){toast('Parça sesi henüz hazır değil.');return false;}
+    SET.repOn=true;saveSet();syncRep();syncRep2();
     startPartsRange(from-1,to-1);
-    return;
+    return true;
   }
   const from=clampAy(+$('fromInp').value),to=clampAy(+$('toInp').value);
-  if(to<from)return;
+  rangeSelectionDraft={sid:curS,from,to};
+  if(to<from){toast('Bitiş âyeti başlangıçtan önce olamaz.');return false;}
+  if(typeof studyRange!=='undefined'&&studyRange?.sid===curS&&(from<studyRange.from||to>studyRange.to)){
+    toast(window.tr?tr('study_range_limit'):'Önce Çalışma Masası aralığını değiştir.');return false;
+  }
   if(audioTimingUnverified(SET.reciter,curS)){
     guardedRangeDraft={sid:curS,from,to};
     if(offerReciter){
@@ -10153,11 +10947,15 @@ function applyRangeProgram(offerReciter=false){
   }
   guardedRangeDraft=null;
   const p=buildLadder(from,to);
-  if(!p.length||!normalVersePlanReady(p))return;
+  if(!p.length){toast('Seçilen aralıktaki âyetlerden en az birinin ses sınırı eksik. Aralık çalınmadı.');return false;}
+  if(!normalVersePlanReady(p))return false;
+  if(!AD_?.buffer&&!AD_?.audio){toast('Sûre sesi henüz hazır değil.');return false;}
+  SET.repOn=true;saveSet();syncRep();syncRep2();
   const el=$('ay-'+from);if(el){el.scrollIntoView({block:'start'});$('rscroll').scrollTop-=70;}
   runPlan(p);
+  return true;
 }
-$('rangeStart').onclick=()=>{if(applyRangeProgram(true)!==false)closeSheets();};
+$('rangeStart').onclick=()=>{if(applyRangeProgram(true)===true)closeSheets();};
 function clampAy(v){return Math.min(Math.max(1,v||1),SURAHS[curS-1].n);}
 
 /* ==== OKUMA HIZI düğmesi (oynatma çubuğunda) — basınca döner, anında uygulanır ==== */
@@ -10196,7 +10994,13 @@ function fillGearSheet(){
   $('startPadInp').value=SET.startPad;$('endPadInp').value=SET.endPad;
   {const _cc=$('cumuChk');if(_cc)_cc.checked=SET.cumu;}
   const e1=$('repEcho'),e2=$('repEcho2');if(e1)e1.textContent=SET.rep;if(e2)e2.textContent=SET.rep;
-  if(gearCtx==='parts'&&splitParts.length){
+  const studySplit=gearCtx==='studyParts'?activeStudySplitSelection():null;
+  if(studySplit){
+    $('progTitle').textContent=studySplit.ay+'. âyet · parça ezber programı';
+    $('fromLbl').textContent='Başlangıç parça';$('toLbl').textContent='Bitiş parça';
+    $('fromInp').max=studySplit.parts.length;$('toInp').max=studySplit.parts.length;
+    $('fromInp').value=studySplit.selectedIndex+1;$('toInp').value=studySplit.parts.length;
+  }else if(gearCtx==='parts'&&splitParts.length){
     $('progTitle').textContent='Parça ezber programı (bölünmüş âyet)';
     $('fromLbl').textContent='Başlangıç parça';$('toLbl').textContent='Bitiş parça';
     $('fromInp').max=splitParts.length;$('toInp').max=splitParts.length;
@@ -10209,14 +11013,18 @@ function fillGearSheet(){
     const maxAy=Math.max(1,Number(surahMeta.n)||1);
     $('fromInp').max=maxAy;$('toInp').max=maxAy;
     const cur=Math.max(1,Math.min(maxAy,Number(curAy)||Number(visAy)||1));
-    const draft=gearCtx==='ayah'&&guardedRangeDraft?.sid===curS?guardedRangeDraft:null;
+    const draft=gearCtx==='ayah'&&guardedRangeDraft?.sid===curS?guardedRangeDraft:
+      (gearCtx==='ayah'&&rangeSelectionDraft?.sid===curS?rangeSelectionDraft:null);
     $('fromInp').value=draft?.from??cur;$('toInp').value=draft?.to??Math.min(maxAy,cur+2);
   }
-  {const tb=$('testModeBtn');if(tb)tb.style.display=(gearCtx==='parts'&&splitParts.length)?'none':'flex';}
+  {const tb=$('testModeBtn');if(tb)tb.style.display=(studySplit||gearCtx==='parts'&&splitParts.length)?'none':'flex';}
   syncTestBtn();
 }
-const _gb=$('gearBtn');if(_gb)_gb.onclick=()=>{fillGearSheet();openSheet('gearSheet');};
-$('optProgram').onclick=()=>{gearCtx='ayah';closeSheets();fillGearSheet();openSheet('gearSheet');};
+const _gb=$('gearBtn');if(_gb)_gb.onclick=()=>{
+  gearCtx=activeStudySplitSelection()?'studyParts':gearCtx==='studyParts'?'ayah':gearCtx;
+  fillGearSheet();openSheet('gearSheet');
+};
+$('optProgram').onclick=()=>{gearCtx=activeStudySplitSelection()?'studyParts':'ayah';closeSheets();fillGearSheet();openSheet('gearSheet');};
 
 document.querySelectorAll('.stepper button').forEach(b=>{
   b.onclick=()=>{
@@ -10230,12 +11038,11 @@ document.querySelectorAll('.stepper button').forEach(b=>{
     let v=(+inp.value||0)+step*(+b.dataset.d);
     v=Math.max(+inp.min||-999,Math.min(+inp.max||999,+v.toFixed(2)));
     inp.value=v;inSheet?commitInputs2():commitInputs();
-    // from/to (aralık) değişince programı ANINDA yeniden başlat
-    if(b.dataset.t==='from'||b.dataset.t==='to')applyRangeProgram();
+    if(b.dataset.t==='from'||b.dataset.t==='to')rememberRangeSelection();
   };
 });
 ['repInp','waitInp','spdInp','startPadInp','endPadInp'].forEach(id=>$(id).onchange=commitInputs);
-['fromInp','toInp'].forEach(id=>{const e=$(id);if(e)e.onchange=applyRangeProgram;});
+['fromInp','toInp'].forEach(id=>$(id).addEventListener('input',rememberRangeSelection));
 function commitInputs(){
   SET.rep=Math.max(1,+$('repInp').value||5);
   SET.wait=Math.max(0,+$('waitInp').value||0);
@@ -10835,9 +11642,9 @@ const GUIDE={
     {sel:'.homebar .brand',t:'Elifa Mushaf',x:'Ana ekranın burasıdır. Logonun altında web adresimiz, ortada besmele ve her açılışta değişen bir hikmet yer alır.'},
     {sel:'#q',t:'Sûre ara',x:'Sûrenin adını (örn. “Yasin”) ya da numarasını yazarak hızlıca bul.'},
     {sel:'.list .card',t:'Sûre listesi',x:'Bir sûreye <b>dokununca</b> okuma ekranı açılır.',pos:'bottom'},
-    {sel:'.togetherHero',t:'Birlikte',x:'<b>Hatim/cüz paylaşımı</b> ve <b>toplu zikir</b> burada. 30 cüzü <b>tek linkle</b> paylaşırsın — üyelik yok, kimse uygulama kurmak zorunda değil. Herkes linke basar, cüzünü seçer, okuyunca işaretler.'},
+    {sel:'.togetherHero',t:'Çalışma Masası',x:'Çalışmak istediğin sûre ve âyet aralığını seç. Yalnızca o âyetleri okuyabilir, bölebilir ve tekrar edebilirsin.'},
   {sel:'#continueBtn',t:'Kaldığın yer',x:'En son kaldığın âyete tek dokunuşla geri dönersin.'},
-    {sel:'#qSaved',t:'Kayıtlar',x:'Koleksiyon, notlar, yer imleri ve zorlandığın yerler burada toplanır.'},
+    {sel:'#qTogether',t:'Birlikte',x:'<b>Hatim/cüz paylaşımı</b> ve <b>toplu zikir</b> burada. 30 cüzü <b>tek linkle</b> paylaşırsın — üyelik yok, kimse uygulama kurmak zorunda değil.'},
     {sel:'#qRepeat',t:'Ezber Takibi',x:'Test modu, günlük tekrar planı ve ezber ilerlemen burada.'},
     {sel:'#tbEzber',t:'Ezber',x:'Ezber takibin ve günlük tekrar planın.'},
     {sel:'#themeBtnH',t:'Tema',x:'Uygulamanın rengini ve görünümünü buradan değiştir.'},
@@ -11035,6 +11842,7 @@ function restoreElifaRoute(route){
   if(route==='birlikte'){openTogetherScreen({fromHistory:true});return;}
   if(route==='reader'){show('reader');return;}
   if(route==='split'){show('split');return;}
+  if(route==='studySetup'){show('studySetup');updateStudySetup();return;}
   if(route==='saved'){show('saved');if(typeof renderSaved==='function')renderSaved();return;}
   if(route==='ezber'){show('ezber');if(typeof renderEzber==='function')renderEzber();return;}
   if(route==='ayarlar'){show('ayarlar');return;}
@@ -11050,7 +11858,7 @@ function elifaGoAnchor(){ show('home'); if(typeof renderContinue==='function')re
   window.show=show=function(id){
     _origShow(id);
     if(elifaRestoring) return;   // geri işlemi sırasında iz/geçmişe dokunma
-    var PR=['home','reader','ezber','saved','ayarlar','split','org','birlikte','dua'];
+    var PR=['home','studySetup','reader','ezber','saved','ayarlar','split','org','birlikte','dua'];
     if(PR.indexOf(id)<0) return;
     if(id==='home'){ elifaTrail=['home']; return; }     // ana ekran → iz kökü (fazla sentinel çıkışta elenir)
     var top=elifaTrail[elifaTrail.length-1];
@@ -11212,7 +12020,9 @@ $('dlReciterBtn').onclick=()=>{
 };
 
 /* init */
-{const b=$('cfgBtnTop');if(b)b.onclick=()=>{gearCtx='ayah';fillGearSheet();openSheet('gearSheet');};}
+{const b=$('cfgBtnTop');if(b)b.onclick=()=>{
+  gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');
+};}
 {const b=$('testModeBtn');if(b)b.onclick=()=>{const willOn=!testing;setTest(willOn);closeSheets();if(willOn)toast('👁 Test modu açık · kelimeye dokun → göster');else toast('Test modu kapalı');};}
 {const b=$('testModeTop');if(b)b.onclick=()=>{const willOn=!testing;setTest(willOn);if(willOn)toast('Test modu açık · kelimeye dokun → göster');else toast('Test modu kapalı');};}
 
@@ -12421,7 +13231,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v326-ayah-repeat';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v330-study-desk-design';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -13622,6 +14432,65 @@ html body #reader .am::before, html body #reader .am::after{
     {c:'ms',n:'Bahasa Melayu',f:'🇲🇾'},{c:'sw',n:'Kiswahili',f:'🇸🇼'}
   ];
   var T={
+    study_split_cut:["Böl","Teilen","Split","Разделить","تقسيم","Découper","Dividir","Διαχωρισμός","分段","分割","나누기","विभाजित करें","تقسیم","Dividi","Bagi","Delen","Dividir","بخش کن","ভাগ করুন","Bahagi","Gawa"],
+    study_split_undo_action:["Geri al","Rückgängig","Undo","Отменить","تراجع","Annuler","Deshacer","Αναίρεση","撤销","元に戻す","실행 취소","पूर्ववत करें","واپس کریں","Annulla","Urungkan","Ongedaan maken","Desfazer","واگرد","পূর্বাবস্থায় নিন","Buat asal","Tengua"],
+    study_split_mark_hint:["Parçanın kelimelerini dokunarak veya sürükleyerek işaretle, sonra Böl’e bas.","Markiere die Wörter durch Tippen oder Ziehen und tippe auf Teilen.","Tap or drag to highlight the words, then press Split.","Нажмите или проведите, чтобы выделить слова, затем нажмите «Разделить».","المس الكلمات أو اسحب لتحديدها، ثم اضغط تقسيم.","Touchez ou faites glisser pour marquer les mots, puis appuyez sur Découper.","Toca o arrastra para marcar las palabras y pulsa Dividir.","Άγγιξε ή σύρε για να επισημάνεις λέξεις και πάτησε Διαχωρισμός.","点按或拖动标记词语，然后按“分段”。","タップかドラッグで単語を選び、「分割」を押します。","탭하거나 끌어서 단어를 표시한 뒤 나누기를 누르세요.","शब्दों को छूकर या खींचकर चुनें, फिर विभाजित करें दबाएँ।","الفاظ چھو کر یا گھسیٹ کر منتخب کریں، پھر تقسیم دبائیں۔","Tocca o trascina per evidenziare le parole, poi premi Dividi.","Ketuk atau seret untuk menandai kata, lalu tekan Bagi.","Tik of sleep om woorden te markeren en druk op Delen.","Toque ou arraste para marcar as palavras e prima Dividir.","واژه‌ها را با لمس یا کشیدن علامت بزن، سپس «بخش کن» را بزن.","স্পর্শ বা টেনে শব্দ চিহ্নিত করুন, তারপর ভাগ করুন চাপুন।","Sentuh atau seret untuk menanda perkataan, kemudian tekan Bahagi.","Gusa au buruta kuangazia maneno, kisha bonyeza Gawa."],
+    study_split_mark_step:["{n}. parça için kelimeleri işaretle","Markiere die Wörter für Teil {n}","Highlight words for part {n}","Выделите слова для части {n}","حدد كلمات الجزء {n}","Marquez les mots du segment {n}","Marca las palabras de la parte {n}","Επισήμανε λέξεις για το τμήμα {n}","标记第 {n} 段的词语","パート {n} の単語を選択","{n}번째 부분의 단어 표시","भाग {n} के शब्द चुनें","حصہ {n} کے الفاظ منتخب کریں","Evidenzia le parole della parte {n}","Tandai kata untuk bagian {n}","Markeer woorden voor deel {n}","Marque as palavras da parte {n}","واژه‌های بخش {n} را علامت بزن","{n} নম্বর অংশের শব্দ চিহ্নিত করুন","Tanda perkataan bagi bahagian {n}","Angazia maneno ya sehemu {n}"],
+    study_split_mark_selected:["İşaretli kelimeler Böl’e basınca yeni parça olur.","Die markierten Wörter werden beim Tippen auf Teilen zum neuen Teil.","The highlighted words become a new part when you press Split.","Выделенные слова станут новой частью после нажатия «Разделить».","تصبح الكلمات المحددة جزءًا جديدًا عند الضغط على تقسيم.","Les mots marqués deviennent un segment en appuyant sur Découper.","Las palabras marcadas forman una parte al pulsar Dividir.","Οι επισημασμένες λέξεις γίνονται νέο τμήμα με το Διαχωρισμός.","按“分段”后，标记的词语成为新片段。","「分割」を押すと、選んだ単語が新しい部分になります。","나누기를 누르면 표시된 단어가 새 부분이 됩니다.","विभाजित करें दबाने पर चुने शब्द नया भाग बनेंगे।","تقسیم دبانے پر منتخب الفاظ نیا حصہ بنیں گے۔","Le parole evidenziate diventano una parte premendo Dividi.","Kata bertanda menjadi bagian baru saat menekan Bagi.","Gemarkeerde woorden worden een nieuw deel na Delen.","As palavras marcadas tornam-se uma parte ao premir Dividir.","واژه‌های علامت‌خورده با زدن «بخش کن» بخش تازه می‌شوند.","ভাগ করুন চাপলে চিহ্নিত শব্দ নতুন অংশ হবে।","Perkataan bertanda menjadi bahagian baharu apabila Bahagi ditekan.","Maneno yaliyoangaziwa yatakuwa sehemu mpya ukibonyeza Gawa."],
+    study_split_used:["Önceki parçada","Im vorherigen Teil","In previous part","В предыдущей части","في الجزء السابق","Dans le segment précédent","En la parte anterior","Στο προηγούμενο τμήμα","已在上一段","前の部分に含まれる","이전 부분에 포함됨","पिछले भाग में","پچھلے حصے میں","Nella parte precedente","Di bagian sebelumnya","In vorig deel","Na parte anterior","در بخش قبلی","আগের অংশে","Dalam bahagian sebelumnya","Katika sehemu iliyotangulia"],
+    study_split_word:["Kelime","Wort","Word","Слово","كلمة","Mot","Palabra","Λέξη","词","単語","단어","शब्द","لفظ","Parola","Kata","Woord","Palavra","واژه","শব্দ","Perkataan","Neno"],
+    study_split_fallback:["Bu âyetler kelime kelime bölünemedi; tam âyet olarak çalışılır: {a}.","Diese Verse werden als ganze Verse geübt: {a}.","These verses cannot be split word by word; practice them as whole verses: {a}.","Эти аяты изучаются целиком: {a}.","تُراجع هذه الآيات كاملة بدل تقسيمها كلمة كلمة: {a}.","Ces versets seront étudiés entiers : {a}.","Estas aleyas se practican completas: {a}.","Αυτά τα εδάφια μελετώνται ολόκληρα: {a}.","这些经文将按整节练习：{a}。","これらの節は一節全体で練習します：{a}。","이 구절들은 전체 구절로 연습합니다: {a}.","इन आयतों का पूरा अभ्यास होगा: {a}।","یہ آیات مکمل آیت کے طور پر مشق ہوں گی: {a}۔","Questi versetti saranno studiati interi: {a}.","Ayat ini dilatih sebagai ayat utuh: {a}.","Deze verzen worden als geheel geoefend: {a}.","Estes versículos serão praticados por inteiro: {a}.","این آیه‌ها به‌صورت کامل تمرین می‌شوند: {a}.","এই আয়াতগুলি সম্পূর্ণ আয়াত হিসেবে অনুশীলন হবে: {a}।","Ayat ini dilatih sebagai ayat penuh: {a}.","Aya hizi zitafanyiwa mazoezi zikiwa nzima: {a}."],
+    study_split_whole_verse:["Tam âyet","Ganzer Vers","Whole verse","Аят целиком","آية كاملة","Verset entier","Aleya completa","Ολόκληρο εδάφιο","整节","節全体","전체 구절","पूरी आयत","مکمل آیت","Versetto intero","Ayat utuh","Heel vers","Versículo inteiro","آیه کامل","সম্পূর্ণ আয়াত","Ayat penuh","Aya nzima"],
+    study_split_try_manual:["Bu âyette kelime sınırları güvenilir değil. Elle bölmeyi veya daha kısa bir aralığı dene.","Wortgrenzen dieses Verses sind ungeprüft. Versuche manuell zu teilen oder wähle einen kürzeren Bereich.","Word boundaries in this verse are unverified. Try manual splitting or a shorter range.","Границы слов этого аята не проверены. Попробуйте разделить вручную или сократить диапазон.","حدود الكلمات في هذه الآية غير موثّقة. جرّب التقسيم اليدوي أو نطاقًا أقصر.","Les limites des mots de ce verset ne sont pas vérifiées. Essayez le découpage manuel ou un passage plus court.","Los límites de palabras de esta aleya no están verificados. Prueba la división manual o un intervalo más corto.","Τα όρια λέξεων αυτού του εδαφίου δεν έχουν επαληθευτεί. Δοκίμασε χειροκίνητα ή μικρότερο εύρος.","这节经文的词语边界未验证。请尝试手动分段或缩短范围。","この節の単語境界は未確認です。手動分割か短い範囲を試してください。","이 구절의 단어 경계가 검증되지 않았습니다. 직접 나누거나 범위를 줄여 보세요.","इस आयत की शब्द सीमाएँ सत्यापित नहीं हैं। हाथ से विभाजित करें या छोटी सीमा चुनें।","اس آیت کی لفظی حدیں تصدیق شدہ نہیں۔ خود تقسیم کریں یا مختصر حد چنیں۔","I confini delle parole non sono verificati. Prova a dividere manualmente o scegli un intervallo più breve.","Batas kata ayat ini belum terverifikasi. Coba bagi manual atau pilih rentang lebih pendek.","De woordgrenzen van dit vers zijn niet geverifieerd. Deel handmatig of kies een korter bereik.","Os limites das palavras deste versículo não foram verificados. Divida manualmente ou escolha um intervalo menor.","مرز واژه‌های این آیه تأیید نشده است. دستی بخش‌بندی کن یا بازه کوتاه‌تری برگزین.","এই আয়াতের শব্দসীমা যাচাই হয়নি। নিজে ভাগ করুন বা ছোট পরিসর নিন।","Sempadan perkataan ayat ini belum disahkan. Bahagi secara manual atau pilih julat lebih pendek.","Mipaka ya maneno ya aya hii haijathibitishwa. Gawa mwenyewe au chagua masafa mafupi."],
+    study_split_limit:["Tüm parçaları tek seferde çalışmak için aralığı kısalt (en fazla 200 parça).","Für alle Teile auf einmal Bereich verkürzen (höchstens 200 Teile).","Shorten the range to practice all parts at once (up to 200 parts).","Сократите диапазон для одновременной практики (до 200 частей).","قصّر النطاق لتدرب كل الأجزاء مرة واحدة (حتى ٢٠٠ جزء).","Réduisez le passage pour étudier tous les segments (200 au maximum).","Acorta el intervalo para practicar todas las partes (máximo 200).","Μείωσε το εύρος για μελέτη όλων των τμημάτων (έως 200).","要一次练习所有片段，请缩短范围（最多 200 段）。","全体を一度に練習するには範囲を短くしてください（最大200部分）。","모든 부분을 한 번에 연습하려면 범위를 줄이세요(최대 200개).","सभी भाग एक साथ अभ्यास करने के लिए सीमा घटाएँ (अधिकतम 200)।","تمام حصوں کی ایک ساتھ مشق کے لیے حد کم کریں (زیادہ سے زیادہ 200)۔","Riduci l'intervallo per esercitarti su tutte le parti (massimo 200).","Perpendek rentang untuk melatih semua bagian sekaligus (maksimal 200).","Verkort het bereik om alle delen tegelijk te oefenen (maximaal 200).","Encurte o intervalo para praticar todas as partes (até 200).","برای تمرین همزمان همه بخش‌ها بازه را کوتاه کن (حداکثر ۲۰۰ بخش).","সব অংশ একসঙ্গে অনুশীলনের জন্য পরিসর ছোট করুন (সর্বোচ্চ ২০০ অংশ)।","Pendekkan julat untuk semua bahagian serentak (maksimum 200).","Punguza masafa ili ufanye mazoezi ya sehemu zote pamoja (hadi 200)."],
+    study_split_play_all:["▶ Tüm parçaları çalış","▶ Alle Teile üben","▶ Practice all parts","▶ Повторять все части","▶ مراجعة كل الأجزاء","▶ Étudier tous les segments","▶ Practicar todas las partes","▶ Μελέτη όλων των τμημάτων","▶ 练习所有片段","▶ すべて練習","▶ 모든 부분 연습","▶ सभी भागों का अभ्यास","▶ تمام حصوں کی مشق","▶ Studia tutte le parti","▶ Latih semua bagian","▶ Alle delen oefenen","▶ Praticar todas as partes","▶ تمرین همه بخش‌ها","▶ সব অংশ অনুশীলন","▶ Latih semua bahagian","▶ Fanyia mazoezi sehemu zote"],
+    study_split_retry:["Ses hazırsa yeniden dene","Bei bereitem Audio erneut versuchen","Retry when audio is ready","Повторить после загрузки звука","أعد المحاولة بعد جاهزية الصوت","Réessayer quand l'audio est prêt","Reintentar cuando el audio esté listo","Δοκίμασε ξανά όταν ετοιμαστεί ο ήχος","音频就绪后重试","音声の準備後に再試行","오디오 준비 후 다시 시도","ऑडियो तैयार होने पर पुनः प्रयास करें","آڈیو تیار ہونے پر دوبارہ کوشش کریں","Riprova quando l'audio è pronto","Coba lagi saat audio siap","Opnieuw proberen zodra audio klaar is","Tentar de novo quando o áudio estiver pronto","پس از آماده شدن صدا دوباره تلاش کن","অডিও প্রস্তুত হলে আবার চেষ্টা করুন","Cuba lagi apabila audio sedia","Jaribu tena sauti ikiwa tayari"],
+    study_split_listen:["Dinle","Anhören","Listen","Слушать","استمع","Écouter","Escuchar","Άκου","收听","聴く","듣기","सुनें","سنیں","Ascolta","Dengarkan","Luisteren","Ouvir","گوش بده","শুনুন","Dengar","Sikiliza"],
+    study_split_source_changed:["Hoca değişti. Parçaları yeniden hazırla.","Rezitation geändert. Teile neu vorbereiten.","Reciter changed. Prepare the parts again.","Чтец изменён. Подготовьте части заново.","تغيّر القارئ. حضّر الأجزاء مجددًا.","Le récitateur a changé. Préparez à nouveau les segments.","Cambió el recitador. Prepara las partes de nuevo.","Άλλαξε ο αναγνώστης. Ετοίμασε ξανά τα τμήματα.","朗诵者已更改，请重新准备片段。","朗誦者が変わりました。部分を作り直してください。","낭송자가 바뀌었습니다. 부분을 다시 준비하세요.","क़ारी बदला है। भाग फिर से तैयार करें।","قاری بدل گیا۔ حصے دوبارہ تیار کریں۔","Il recitatore è cambiato. Prepara di nuovo le parti.","Qari berubah. Siapkan lagi bagian.","Recitator gewijzigd. Bereid delen opnieuw voor.","O recitador mudou. Prepare as partes novamente.","قاری عوض شد. بخش‌ها را دوباره آماده کن.","কারি বদলেছেন। অংশগুলি আবার তৈরি করুন।","Qari berubah. Sediakan semula bahagian.","Msomaji amebadilika. Andaa sehemu tena."],
+    study_split_unavailable:["Güvenilir ses sınırı bulunamadı. Başka hoca seç veya yeniden dene.","Keine verlässliche Audiogrenze. Anderen Rezitator wählen oder erneut versuchen.","No reliable audio boundary. Choose another reciter or retry.","Нет надёжной границы звука. Выберите другого чтеца или повторите.","لا توجد حدود صوتية موثوقة. اختر قارئًا آخر أو أعد المحاولة.","Aucune limite audio fiable. Choisissez un autre récitateur ou réessayez.","No hay límite de audio fiable. Elige otro recitador o reintenta.","Δεν βρέθηκε αξιόπιστο όριο ήχου. Επίλεξε άλλον αναγνώστη ή ξαναδοκίμασε.","未找到可靠的音频边界。请更换朗诵者或重试。","信頼できる音声境界がありません。朗誦者を変えるか再試行してください。","신뢰할 수 있는 오디오 경계가 없습니다. 다른 낭송자를 선택하거나 다시 시도하세요.","विश्वसनीय ऑडियो सीमा नहीं मिली। दूसरा क़ारी चुनें या पुनः प्रयास करें।","قابل اعتماد آڈیو حد نہیں ملی۔ دوسرا قاری چنیں یا دوبارہ کوشش کریں۔","Nessun confine audio affidabile. Scegli un altro recitatore o riprova.","Batas audio andal tidak ditemukan. Pilih qari lain atau coba lagi.","Geen betrouwbare audiogrens. Kies een andere recitator of probeer opnieuw.","Não há limite de áudio fiável. Escolha outro recitador ou tente novamente.","مرز صوتی مطمئن یافت نشد. قاری دیگری انتخاب کن یا دوباره تلاش کن.","নির্ভরযোগ্য অডিও সীমানা পাওয়া যায়নি। অন্য কারি বেছে নিন বা আবার চেষ্টা করুন।","Tiada sempadan audio yang boleh dipercayai. Pilih qari lain atau cuba lagi.","Hakuna mpaka wa sauti unaoaminika. Chagua msomaji mwingine au ujaribu tena."],
+    study_split_complete:["Parçalar hazır. Dinlemek istediğini seç.","Teile bereit. Wähle einen Teil zum Anhören.","Parts are ready. Choose one to listen to.","Части готовы. Выберите для прослушивания.","الأجزاء جاهزة. اختر ما تريد سماعه.","Segments prêts. Choisissez celui à écouter.","Partes listas. Elige una para escuchar.","Τα τμήματα είναι έτοιμα. Διάλεξε τι θα ακούσεις.","片段已就绪，请选择收听。","部分の準備ができました。聴く部分を選んでください。","부분이 준비되었습니다. 듣고 싶은 부분을 고르세요.","भाग तैयार हैं। सुनने के लिए एक चुनें।","حصے تیار ہیں۔ سننے کے لیے منتخب کریں۔","Parti pronte. Scegline una da ascoltare.","Bagian siap. Pilih yang ingin didengar.","Delen klaar. Kies wat je wilt beluisteren.","Partes prontas. Escolha uma para ouvir.","بخش‌ها آماده‌اند. یکی را برای شنیدن انتخاب کن.","অংশগুলি প্রস্তুত। শুনতে একটি বেছে নিন।","Bahagian sedia. Pilih untuk didengar.","Sehemu ziko tayari. Chagua ya kusikiliza."],
+    study_split_finished_steps:["Tüm parça sınırları seçildi.","Alle Teilgrenzen gewählt.","All part boundaries selected.","Все границы частей выбраны.","تم اختيار حدود كل الأجزاء.","Toutes les limites sont choisies.","Se eligieron todos los límites.","Επιλέχθηκαν όλα τα όρια.","所有片段边界已选。","すべての境界を選択しました。","모든 부분 경계를 선택했습니다.","सभी भाग सीमाएँ चुनी गईं।","تمام حصوں کی حدیں منتخب ہو گئیں۔","Tutti i confini sono stati scelti.","Semua batas bagian dipilih.","Alle deelgrenzen gekozen.","Todos os limites foram escolhidos.","همه مرزهای بخش‌ها انتخاب شد.","সব অংশের সীমানা বেছে নেওয়া হয়েছে।","Semua sempadan bahagian dipilih.","Mipaka yote ya sehemu imechaguliwa."],
+    study_split_check:["Parçalar denetleniyor","Teile werden geprüft","Checking parts","Проверка частей","التحقق من الأجزاء","Vérification des segments","Comprobando partes","Έλεγχος τμημάτων","正在检查片段","部分を確認中","부분 확인 중","भाग जाँचे जा रहे हैं","حصوں کی جانچ ہو رہی ہے","Controllo delle parti","Memeriksa bagian","Delen controleren","A verificar partes","در حال بررسی بخش‌ها","অংশ যাচাই হচ্ছে","Menyemak bahagian","Kukagua sehemu"],
+    study_split_verse:["Âyet","Vers","Verse","Аят","آية","Verset","Aleya","Εδάφιο","经文","節","구절","आयत","آیت","Versetto","Ayat","Vers","Versículo","آیه","আয়াত","Ayat","Aya"],
+    study_split_part:["Parça","Teil","Part","Часть","جزء","Segment","Parte","Τμήμα","片段","部分","부분","भाग","حصہ","Parte","Bagian","Deel","Parte","بخش","অংশ","Bahagian","Sehemu"],
+    study_split_selected:["Son kelime seçildi. Onaylayabilirsin.","Letztes Wort gewählt. Jetzt bestätigen.","Last word selected. You can confirm.","Последнее слово выбрано. Подтвердите.","اختيرت الكلمة الأخيرة. يمكنك التأكيد.","Dernier mot choisi. Vous pouvez confirmer.","Última palabra elegida. Puedes confirmar.","Επιλέχθηκε η τελευταία λέξη. Επιβεβαίωσε.","已选最后一个词，可以确认。","最後の単語を選択しました。確定できます。","마지막 단어를 선택했습니다. 확인하세요.","अंतिम शब्द चुना गया। पुष्टि करें।","آخری لفظ منتخب ہے۔ تصدیق کریں۔","Ultima parola scelta. Puoi confermare.","Kata terakhir dipilih. Silakan konfirmasi.","Laatste woord gekozen. Je kunt bevestigen.","Última palavra escolhida. Pode confirmar.","آخرین واژه انتخاب شد. می‌توانی تأیید کنی.","শেষ শব্দ বেছে নেওয়া হয়েছে। নিশ্চিত করুন।","Perkataan terakhir dipilih. Anda boleh sahkan.","Neno la mwisho limechaguliwa. Unaweza kuthibitisha."],
+    study_split_step_prompt:["{n}. parçanın son kelimesini seç","Wähle das letzte Wort von Teil {n}","Choose the last word of part {n}","Выберите последнее слово части {n}","اختر الكلمة الأخيرة للجزء {n}","Choisissez le dernier mot du segment {n}","Elige la última palabra de la parte {n}","Επίλεξε την τελευταία λέξη του τμήματος {n}","选择第 {n} 段的最后一个词","パート {n} の最後の単語を選択","{n}번째 부분의 마지막 단어 선택","भाग {n} का अंतिम शब्द चुनें","حصہ {n} کا آخری لفظ چنیں","Scegli l'ultima parola della parte {n}","Pilih kata terakhir bagian {n}","Kies het laatste woord van deel {n}","Escolha a última palavra da parte {n}","آخرین واژه بخش {n} را انتخاب کن","{n} নম্বর অংশের শেষ শব্দ বেছে নিন","Pilih perkataan terakhir bahagian {n}","Chagua neno la mwisho la sehemu {n}"],
+    study_split_more:["Daha fazla göster","Mehr anzeigen","Show more","Показать ещё","عرض المزيد","Afficher plus","Mostrar más","Περισσότερα","显示更多","さらに表示","더 보기","और दिखाएँ","مزید دکھائیں","Mostra altro","Tampilkan lagi","Meer tonen","Mostrar mais","نمایش بیشتر","আরও দেখুন","Lihat lagi","Onyesha zaidi"],
+    study_split_title:["Bölerek çalışma","Üben in Teilen","Split practice","Практика по частям","التدريب بالأجزاء","Travail par segments","Práctica por partes","Μελέτη σε τμήματα","分段练习","分割練習","구간별 연습","भागों में अभ्यास","حصوں میں مشق","Studio a parti","Latihan per bagian","Oefenen in delen","Prática por partes","تمرین بخش‌بندی","অংশে অনুশীলন","Latihan mengikut bahagian","Mazoezi kwa sehemu"],
+    study_split_done:["Bölmeyi bitir","Teilung beenden","Finish splitting","Завершить деление","إنهاء التقسيم","Terminer le découpage","Terminar división","Τέλος διαχωρισμού","结束分段","分割を終了","나누기 종료","विभाजन समाप्त करें","تقسیم ختم کریں","Termina divisione","Selesai membagi","Delen afronden","Terminar divisão","پایان بخش‌بندی","বিভাগ শেষ করুন","Tamat membahagi","Maliza kugawa"],
+    study_split_method:["Bölme yöntemi","Teilungsmethode","Split method","Способ деления","طريقة التقسيم","Méthode de découpage","Método de división","Τρόπος διαχωρισμού","分段方式","分割方法","나누기 방법","विभाजन विधि","تقسیم کا طریقہ","Metodo di divisione","Cara membagi","Deelmethode","Método de divisão","روش بخش‌بندی","বিভাগের পদ্ধতি","Kaedah membahagi","Njia ya kugawa"],
+    study_split_auto:["Kelime kelime otomatik","Automatisch Wort für Wort","Automatic word by word","Автоматически по словам","تلقائيًا كلمة بكلمة","Automatique mot à mot","Automático palabra por palabra","Αυτόματα λέξη προς λέξη","自动逐词","単語ごとに自動","단어별 자동","शब्द-दर-शब्द स्वचालित","لفظ بہ لفظ خودکار","Automatico parola per parola","Otomatis per kata","Automatisch woord voor woord","Automático palavra por palavra","خودکار واژه‌به‌واژه","শব্দে শব্দে স্বয়ংক্রিয়","Automatik perkataan demi perkataan","Kiotomatiki neno kwa neno"],
+    study_split_manual:["Elle böl","Manuell teilen","Split manually","Разделить вручную","تقسيم يدوي","Découper manuellement","Dividir manualmente","Χειροκίνητος διαχωρισμός","手动分段","手動で分割","직접 나누기","हाथ से विभाजित करें","خود تقسیم کریں","Dividi manualmente","Bagi manual","Handmatig delen","Dividir manualmente","بخش‌بندی دستی","নিজে ভাগ করুন","Bahagi secara manual","Gawa mwenyewe"],
+    study_split_ready:["Parçaları hazırla, sonra çalış.","Teile vorbereiten, dann üben.","Prepare parts, then practice.","Подготовьте части и занимайтесь.","حضّر الأجزاء ثم تدرب.","Préparez les segments, puis étudiez.","Prepara las partes y practica.","Ετοίμασε τα τμήματα και μελέτησε.","准备片段后练习。","部分を準備して練習します。","부분을 준비한 뒤 연습하세요.","भाग तैयार कर अभ्यास करें।","حصے تیار کر کے مشق کریں۔","Prepara le parti, poi esercitati.","Siapkan bagian, lalu berlatih.","Bereid delen voor en oefen.","Prepare as partes e pratique.","بخش‌ها را آماده و تمرین کن.","অংশ তৈরি করে অনুশীলন করুন।","Sediakan bahagian, kemudian berlatih.","Andaa sehemu, kisha ujifunze."],
+    study_split_instruction:["Son kelimeyi seçip onayla, sonra devam et.","Letztes Wort wählen, bestätigen und fortfahren.","Choose the last word, confirm, then continue.","Выберите последнее слово, подтвердите и продолжайте.","اختر الكلمة الأخيرة وأكّد ثم تابع.","Choisissez le dernier mot, confirmez et continuez.","Elige la última palabra, confirma y sigue.","Επίλεξε την τελευταία λέξη, επιβεβαίωσε και συνέχισε.","选择最后一个词，确认后继续。","最後の単語を選び、確定して続けます。","마지막 단어를 선택하고 확인한 뒤 계속하세요.","अंतिम शब्द चुनकर पुष्टि करें, फिर आगे बढ़ें।","آخری لفظ چن کر تصدیق کریں، پھر آگے بڑھیں۔","Scegli l'ultima parola, conferma e continua.","Pilih kata terakhir, konfirmasi, lalu lanjut.","Kies het laatste woord, bevestig en ga verder.","Escolha a última palavra, confirme e prossiga.","آخرین واژه را انتخاب و تأیید کن، سپس ادامه بده.","শেষ শব্দ বেছে নিশ্চিত করে এগোন।","Pilih perkataan terakhir, sahkan dan teruskan.","Chagua neno la mwisho, thibitisha na uendelee."],
+    study_split_end_word:["Parçanın son kelimesi","Letztes Wort des Teils","Last word of part","Последнее слово части","الكلمة الأخيرة في الجزء","Dernier mot du segment","Última palabra de la parte","Τελευταία λέξη τμήματος","本段最后一个词","部分の最後の単語","부분의 마지막 단어","भाग का अंतिम शब्द","حصے کا آخری لفظ","Ultima parola della parte","Kata terakhir bagian","Laatste woord van deel","Última palavra da parte","آخرین واژه بخش","অংশের শেষ শব্দ","Perkataan terakhir bahagian","Neno la mwisho la sehemu"],
+    study_split_unsafe_hint:["Soluk kelimelerin ses sınırı doğrulanmadı.","Für blasse Wörter ist die Audiogrenze ungeprüft.","Faded words have unverified audio boundaries.","У бледных слов границы звука не проверены.","حدود صوت الكلمات الباهتة غير موثّقة.","Les limites audio des mots pâles ne sont pas vérifiées.","Los límites de audio de las palabras tenues no están verificados.","Τα αχνά λόγια δεν έχουν επαληθευμένο ηχητικό όριο.","淡色词的音频边界未验证。","薄い単語の音声境界は未確認です。","옅은 단어의 오디오 경계가 검증되지 않았습니다.","फीके शब्दों की ऑडियो सीमा सत्यापित नहीं है।","مدھم الفاظ کی آڈیو حد تصدیق شدہ نہیں۔","I confini audio delle parole sbiadite non sono verificati.","Batas audio kata pudar belum diverifikasi.","Vage woorden hebben geen geverifieerde audiogrens.","Palavras esbatidas não têm limite de áudio verificado.","مرز صوتی واژه‌های کم‌رنگ تأیید نشده است.","ফিকে শব্দগুলির অডিও সীমানা যাচাই হয়নি।","Sempadan audio perkataan pudar belum disahkan.","Maneno yaliyofifia hayana mpaka wa sauti uliothibitishwa."],
+    study_split_undo:["Önceki adım","Vorheriger Schritt","Previous step","Предыдущий шаг","الخطوة السابقة","Étape précédente","Paso anterior","Προηγούμενο βήμα","上一步","前のステップ","이전 단계","पिछला चरण","پچھلا مرحلہ","Passo precedente","Langkah sebelumnya","Vorige stap","Passo anterior","گام پیشین","আগের ধাপ","Langkah sebelumnya","Hatua iliyotangulia"],
+    study_split_confirm:["Parçayı onayla","Teil bestätigen","Confirm part","Подтвердить часть","تأكيد الجزء","Confirmer le segment","Confirmar parte","Επιβεβαίωση τμήματος","确认片段","部分を確定","부분 확인","भाग की पुष्टि करें","حصے کی تصدیق","Conferma parte","Konfirmasi bagian","Deel bevestigen","Confirmar parte","تأیید بخش","অংশ নিশ্চিত করুন","Sahkan bahagian","Thibitisha sehemu"],
+    study_split_parts:["Çalışma parçaları","Übungsteile","Practice parts","Части для занятий","أجزاء المراجعة","Segments à étudier","Partes de práctica","Τμήματα μελέτης","练习片段","練習部分","연습 부분","अभ्यास के भाग","مشق کے حصے","Parti da studiare","Bagian latihan","Oefendelen","Partes de prática","بخش‌های تمرین","অনুশীলনের অংশ","Bahagian latihan","Sehemu za mazoezi"],
+    study_split_revise:["Düzenle","Bearbeiten","Edit","Изменить","تعديل","Modifier","Editar","Επεξεργασία","编辑","編集","수정","संपादित करें","ترمیم","Modifica","Ubah","Bewerken","Editar","ویرایش","সম্পাদনা","Ubah","Hariri"],
+    study_title:["Çalışma Masası","Lernbereich","Study Desk","Стол для занятий","مساحة المراجعة","Espace d’étude","Mesa de estudio","Χώρος μελέτης","学习区","学習スペース","학습 공간","अध्ययन कक्ष","مطالعے کی جگہ","Area di studio","Ruang belajar","Studieplek","Área de estudo","میز مطالعه","অধ্যয়ন স্থান","Ruang belajar","Sehemu ya kujifunza"],
+    study_focus:["Seçtiğin bölüme odaklan","Konzentriere dich auf deine Auswahl","Focus on your selection","Сосредоточьтесь на выбранном","ركّز على ما اخترته","Concentrez-vous sur votre sélection","Concéntrate en lo que elegiste","Εστίασε στην επιλογή σου","专注于所选经文","選んだ箇所に集中","선택한 구절에 집중","चुने हुए भाग पर ध्यान दें","منتخب حصے پر توجہ دیں","Concentrati sulla selezione","Fokus pada pilihanmu","Focus op je selectie","Concentre-se na sua seleção","بر بخش انتخابی تمرکز کن","নির্বাচিত অংশে মন দিন","Fokus pada pilihan anda","Zingatia sehemu uliyochagua"],
+    study_intro:["Bir sûre ve âyet aralığı seç. Hazır olduğunda yalnız bu bölümü çalış.","Wähle eine Sure und einen Versbereich. Übe dann nur diesen Abschnitt.","Choose a surah and verse range. Practice only this part when ready.","Выберите суру и диапазон аятов. Затем занимайтесь только этим отрывком.","اختر سورة ونطاق آيات. تدرب على هذا الجزء فقط عندما تكون مستعدًا.","Choisissez une sourate et une plage de versets. Étudiez seulement ce passage.","Elige una sura y un intervalo de aleyas. Practica solo esta parte.","Επίλεξε σούρα και εύρος εδαφίων. Μελέτησε μόνο αυτό το μέρος.","选择章节和经文范围，准备好后只练习这一部分。","スーラと節の範囲を選び、準備ができたらその部分だけ練習します。","수라와 구절 범위를 선택하세요. 준비되면 이 부분만 연습합니다.","सूरह और आयतों की सीमा चुनें। तैयार होने पर केवल इसी भाग का अभ्यास करें।","سورہ اور آیات کی حد منتخب کریں۔ تیار ہونے پر صرف اسی حصے کی مشق کریں۔","Scegli una sura e un intervallo di versetti. Esercitati solo su questa parte.","Pilih surah dan rentang ayat. Latih hanya bagian ini saat siap.","Kies een soera en versbereik. Oefen alleen dit deel wanneer je klaar bent.","Escolha uma sura e um intervalo de versículos. Pratique só esta parte.","یک سوره و بازه آیات انتخاب کن. وقتی آماده بودی فقط همین بخش را تمرین کن.","একটি সূরা ও আয়াতের পরিসর বেছে নিন। প্রস্তুত হলে শুধু এই অংশটি অনুশীলন করুন।","Pilih surah dan julat ayat. Berlatih bahagian ini sahaja apabila sedia.","Chagua sura na masafa ya aya. Ukiwa tayari, fanyia mazoezi sehemu hii pekee."],
+    study_range:["Çalışılacak aralık","Übungsbereich","Practice range","Диапазон для занятий","نطاق المراجعة","Passage à étudier","Intervalo de práctica","Εύρος μελέτης","练习范围","練習する範囲","연습 범위","अभ्यास की सीमा","مشق کی حد","Intervallo di studio","Rentang latihan","Oefenbereik","Intervalo de estudo","بازه تمرین","অনুশীলনের পরিসর","Julat latihan","Masafa ya mazoezi"],
+    study_surah:["Sûre","Sure","Surah","Сура","السورة","Sourate","Sura","Σούρα","章节","スーラ","수라","सूरह","سورہ","Sura","Surah","Soera","Sura","سوره","সূরা","Surah","Sura"],
+    study_search_empty:["Eşleşen sûre bulunamadı.","Keine passende Sure gefunden.","No matching surah found.","Подходящая сура не найдена.","لم يتم العثور على سورة مطابقة.","Aucune sourate correspondante.","No se encontró ninguna sura.","Δεν βρέθηκε αντίστοιχη σούρα.","未找到匹配的章节。","一致するスーラが見つかりません。","일치하는 수라가 없습니다.","मिलती हुई सूरह नहीं मिली।","کوئی مماثل سورت نہیں ملی۔","Nessuna sura corrispondente.","Surah yang cocok tidak ditemukan.","Geen overeenkomende soera gevonden.","Nenhuma sura correspondente.","سوره‌ای مطابق پیدا نشد.","মিল থাকা কোনো সূরা পাওয়া যায়নি।","Tiada surah yang sepadan.","Hakuna sura inayolingana."],
+    study_summary_empty:["Çalışacağın aralığı seç.","Wähle deinen Übungsbereich.","Choose the range to practice.","Выберите диапазон для занятий.","اختر نطاق المراجعة.","Choisissez le passage à étudier.","Elige el intervalo que practicarás.","Επίλεξε το εύρος που θα μελετήσεις.","请选择练习范围。","練習する範囲を選んでください。","연습할 범위를 선택하세요.","अभ्यास के लिए सीमा चुनें।","مشق کے لیے حد منتخب کریں۔","Scegli l’intervallo da studiare.","Pilih rentang untuk latihan.","Kies het bereik om te oefenen.","Escolha o intervalo para praticar.","بازه تمرین را انتخاب کن.","অনুশীলনের পরিসর বেছে নিন।","Pilih julat untuk latihan.","Chagua masafa ya kufanya mazoezi."],
+    study_open:["Aralığı aç","Bereich öffnen","Open range","Открыть диапазон","افتح النطاق","Ouvrir le passage","Abrir intervalo","Άνοιγμα εύρους","打开范围","範囲を開く","범위 열기","सीमा खोलें","حد کھولیں","Apri intervallo","Buka rentang","Bereik openen","Abrir intervalo","باز کردن بازه","পরিসর খুলুন","Buka julat","Fungua masafa"],
+    study_start_hint:["Bölüm açıldığında ses başlamaz; ne zaman çalışacağını sen seçersin.","Beim Öffnen beginnt kein Audio; du startest die Übung selbst.","Audio does not start when you open the range; start when you are ready.","При открытии отрывка звук не включится; начните, когда будете готовы.","لن يبدأ الصوت عند فتح النطاق؛ ابدأ حين تكون مستعدًا.","L’audio ne démarre pas à l’ouverture; lancez-le quand vous êtes prêt.","El audio no empieza al abrirlo; inícialo cuando quieras.","Ο ήχος δεν ξεκινά με το άνοιγμα· ξεκίνα όταν είσαι έτοιμος.","打开范围后不会自动播放；准备好再开始。","範囲を開いても音声は始まりません。準備ができたら開始してください。","범위를 열어도 자동 재생되지 않습니다. 준비되면 시작하세요.","सीमा खोलने पर ऑडियो नहीं चलेगा; तैयार होने पर शुरू करें।","حد کھولنے پر آواز شروع نہیں ہوگی؛ تیار ہوں تو شروع کریں۔","L’audio non parte all’apertura; avvialo quando sei pronto.","Audio tidak langsung diputar; mulai saat Anda siap.","Audio start niet vanzelf; begin wanneer je klaar bent.","O áudio não começa ao abrir; inicie quando estiver pronto.","با باز کردن بازه، صدا خودکار پخش نمی‌شود؛ هر وقت آماده بودی شروع کن.","পরিসর খুললেই অডিও চলবে না; প্রস্তুত হলে শুরু করুন।","Audio tidak bermula sendiri; mulakan apabila anda sedia.","Sauti haianzi unapofungua; anza ukiwa tayari."],
+    study_move:["Çalışma Masasına Taşı","Zum Lernbereich übernehmen","Move to Study Desk","Перенести в стол для занятий","انقل إلى مساحة المراجعة","Envoyer vers l’espace d’étude","Llevar a la mesa de estudio","Μεταφορά στον χώρο μελέτης","移到学习区","学習スペースに移す","학습 공간으로 옮기기","अध्ययन कक्ष में ले जाएँ","مطالعے کی جگہ منتقل کریں","Porta nell’area di studio","Pindahkan ke ruang belajar","Naar studieplek verplaatsen","Mover para a área de estudo","انتقال به میز مطالعه","অধ্যয়ন স্থানে নিন","Pindah ke ruang belajar","Hamishia sehemu ya kujifunza"],
+    study_play:["▶ Aralığı çalış","▶ Bereich üben","▶ Practice range","▶ Повторять диапазон","▶ راجع النطاق","▶ Étudier le passage","▶ Practicar intervalo","▶ Μελέτη εύρους","▶ 练习范围","▶ 範囲を練習","▶ 범위 연습","▶ सीमा का अभ्यास","▶ حد کی مشق","▶ Studia intervallo","▶ Latih rentang","▶ Bereik oefenen","▶ Praticar intervalo","▶ تمرین بازه","▶ পরিসর অনুশীলন","▶ Latih julat","▶ Fanyia mazoezi masafa"],
+    study_edit:["Aralığı değiştir","Bereich ändern","Change range","Изменить диапазон","تغيير النطاق","Modifier le passage","Cambiar intervalo","Αλλαγή εύρους","更改范围","範囲を変更","범위 변경","सीमा बदलें","حد بدلیں","Cambia intervallo","Ubah rentang","Bereik wijzigen","Alterar intervalo","تغییر بازه","পরিসর বদলান","Ubah julat","Badili masafa"],
+    study_exit:["Masadan çık","Lernbereich verlassen","Leave Study Desk","Выйти из занятий","الخروج من مساحة المراجعة","Quitter l’espace d’étude","Salir de la mesa de estudio","Έξοδος από τον χώρο","退出学习区","学習を終了","학습 공간 나가기","अध्ययन कक्ष से बाहर","مطالعے کی جگہ سے نکلیں","Esci dall’area di studio","Keluar dari ruang belajar","Studieplek verlaten","Sair da área de estudo","خروج از میز مطالعه","অধ্যয়ন স্থান ছাড়ুন","Keluar dari ruang belajar","Ondoka sehemu ya kujifunza"],
+    study_back:["Geri","Zurück","Back","Назад","رجوع","Retour","Atrás","Πίσω","返回","戻る","뒤로","वापस","واپس","Indietro","Kembali","Terug","Voltar","بازگشت","ফিরে যান","Kembali","Rudi"],
+    study_verses:["âyet","Verse","verses","аяты","آيات","versets","aleyas","εδάφια","节经文","節","구절","आयतें","آیات","versetti","ayat","verzen","versículos","آیات","আয়াত","ayat","aya"],
+    study_invalid:["Geçerli bir âyet aralığı seç.","Wähle einen gültigen Versbereich.","Choose a valid verse range.","Выберите допустимый диапазон аятов.","اختر نطاق آيات صالحًا.","Choisissez une plage de versets valide.","Elige un intervalo de aleyas válido.","Επίλεξε έγκυρο εύρος εδαφίων.","请选择有效的经文范围。","有効な節の範囲を選択してください。","올바른 구절 범위를 선택하세요.","मान्य आयत सीमा चुनें।","درست آیات کی حد منتخب کریں۔","Scegli un intervallo di versetti valido.","Pilih rentang ayat yang valid.","Kies een geldig versbereik.","Escolha um intervalo de versículos válido.","یک بازه معتبر از آیات انتخاب کن.","একটি বৈধ আয়াতের পরিসর বেছে নিন।","Pilih julat ayat yang sah.","Chagua masafa halali ya aya."],
+    study_select_first:["Önce bir bölüm seç.","Wähle zuerst einen Abschnitt.","Select a passage first.","Сначала выберите отрывок.","اختر مقطعًا أولًا.","Sélectionnez d’abord un passage.","Selecciona primero un pasaje.","Επίλεξε πρώτα ένα απόσπασμα.","请先选择一段经文。","先に箇所を選択してください。","먼저 구간을 선택하세요.","पहले एक भाग चुनें।","پہلے ایک حصہ منتخب کریں۔","Seleziona prima un brano.","Pilih bagian terlebih dahulu.","Selecteer eerst een passage.","Selecione primeiro uma passagem.","ابتدا بخشی را انتخاب کن.","প্রথমে একটি অংশ নির্বাচন করুন।","Pilih petikan dahulu.","Chagua kifungu kwanza."],
+    study_audio_unverified:["Bu hocanın âyet ses sınırları doğrulanmadı.","Die Versgrenzen dieser Aufnahme sind nicht geprüft.","This reciter's verse audio boundaries are unverified.","Границы аудио аятов этого чтеца не проверены.","حدود صوت الآيات لهذا القارئ غير موثقة.","Les limites audio des versets de ce récitateur ne sont pas vérifiées.","Los límites de audio de las aleyas de este recitador no están verificados.","Τα ηχητικά όρια των εδαφίων δεν έχουν επαληθευτεί.","这位诵读者的经文音频边界尚未验证。","この朗誦者の節の音声境界は未確認です。","이 낭송자의 구절 오디오 경계가 확인되지 않았습니다.","इस क़ारी की आयतों की ऑडियो सीमाएँ सत्यापित नहीं हैं।","اس قاری کی آیات کی آڈیو حدیں تصدیق شدہ نہیں ہیں۔","I confini audio dei versetti non sono verificati.","Batas audio ayat qari ini belum diverifikasi.","De audiogrenzen van de verzen zijn niet geverifieerd.","Os limites de áudio dos versículos não foram verificados.","مرزهای صوتی آیات این قاری تأیید نشده است.","এই কারির আয়াতের অডিও সীমানা যাচাই হয়নি।","Sempadan audio ayat qari ini belum disahkan.","Mipaka ya sauti ya aya ya msomaji huyu haijathibitishwa."],
+    study_audio_missing:["Aralıktaki ses kayıtları tamamlanmadı.","Die Audiodaten für diesen Bereich sind unvollständig.","Audio for this range is incomplete.","Аудио для этого диапазона неполное.","الصوت لهذا النطاق غير مكتمل.","L’audio de ce passage est incomplet.","El audio de este intervalo está incompleto.","Ο ήχος αυτού του εύρους δεν είναι πλήρης.","此范围的音频不完整。","この範囲の音声は不完全です。","이 범위의 오디오가 완전하지 않습니다.","इस सीमा का ऑडियो अधूरा है।","اس حد کی آڈیو نامکمل ہے۔","L’audio di questo intervallo è incompleto.","Audio rentang ini belum lengkap.","De audio voor dit bereik is onvolledig.","O áudio deste intervalo está incompleto.","صدای این بازه کامل نیست.","এই পরিসরের অডিও অসম্পূর্ণ।","Audio julat ini tidak lengkap.","Sauti ya masafa haya haijakamilika."],
+    study_range_limit:["Önce Çalışma Masası aralığını değiştir.","Ändere zuerst den Bereich im Lernbereich.","Change the Study Desk range first.","Сначала измените диапазон занятий.","غيّر نطاق مساحة المراجعة أولًا.","Modifiez d’abord le passage de l’espace d’étude.","Cambia primero el intervalo de la mesa de estudio.","Άλλαξε πρώτα το εύρος μελέτης.","请先更改学习区范围。","先に学習範囲を変更してください。","먼저 학습 범위를 변경하세요.","पहले अध्ययन सीमा बदलें।","پہلے مطالعے کی حد بدلیں۔","Cambia prima l’intervallo di studio.","Ubah rentang belajar terlebih dahulu.","Wijzig eerst het studiebereik.","Altere primeiro o intervalo de estudo.","ابتدا بازه مطالعه را تغییر بده.","প্রথমে অধ্যয়নের পরিসর বদলান।","Ubah julat belajar dahulu.","Badili kwanza masafa ya kujifunza."],
+    s_prog_hint_start:["Aralığı ve tekrar sayısını ayarla, ardından Başlat’a bas.","Bereich und Wiederholungen einstellen, dann Start drücken.","Set the range and repeat count, then press Start.","Выберите диапазон и число повторов, затем нажмите «Начать».","حدّد النطاق وعدد التكرارات، ثم اضغط ابدأ.","Réglez la plage et les répétitions, puis appuyez sur Démarrer.","Elige el intervalo y las repeticiones; después pulsa Iniciar.","Ορίστε εύρος και επαναλήψεις και πατήστε Έναρξη.","设置范围和重复次数，然后按开始。","範囲と繰り返し回数を設定し、開始を押します。","범위와 반복 횟수를 정한 뒤 시작을 누르세요.","सीमा और दोहराव तय करें, फिर शुरू दबाएँ।","حد اور تکرار کی تعداد طے کریں، پھر شروع دبائیں۔","Imposta intervallo e ripetizioni, poi premi Avvia.","Atur rentang dan jumlah pengulangan, lalu tekan Mulai.","Stel bereik en herhalingen in en druk op Start.","Defina o intervalo e as repetições e prima Iniciar.","بازه و تعداد تکرار را تنظیم کنید، سپس شروع را بزنید.","পরিসর ও পুনরাবৃত্তির সংখ্যা ঠিক করে শুরু চাপুন।","Tetapkan julat dan bilangan ulangan, kemudian tekan Mula.","Weka masafa na idadi ya marudio, kisha bonyeza Anza."],
+    s_range_start:["▶ Aralığı başlat","▶ Bereich starten","▶ Start range","▶ Начать диапазон","▶ ابدأ النطاق","▶ Démarrer la plage","▶ Iniciar intervalo","▶ Έναρξη εύρους","▶ 开始所选范围","▶ 範囲を開始","▶ 범위 시작","▶ चुनी सीमा शुरू करें","▶ منتخب حد شروع کریں","▶ Avvia intervallo","▶ Mulai rentang","▶ Start bereik","▶ Iniciar intervalo","▶ شروع بازه","▶ পরিসর শুরু","▶ Mula julat","▶ Anza masafa"],
     err_detail:["Hata ayrıntısı hazırlanıyor…", "Fehlerdetails werden vorbereitet…", "Preparing error details…", "Подготовка сведений об ошибке…", "جارٍ تحضير تفاصيل الخطأ…", "Préparation des détails de l'erreur…", "Preparando detalles del error…", "Προετοιμασία λεπτομερειών σφάλματος…", "正在准备错误详情…", "エラー詳細を準備中…", "오류 세부 정보 준비 중…", "त्रुटि विवरण तैयार हो रहा…", "خرابی کی تفصیل تیار ہو رہی…", "Preparazione dettagli errore…", "Menyiapkan detail kesalahan…", "Foutdetails voorbereiden…", "Preparando detalhes do erro…", "در حال آماده‌سازی جزئیات خطا…", "ত্রুটির বিবরণ প্রস্তুত হচ্ছে…", "Menyediakan butiran ralat…", "Inaandaa maelezo ya hitilafu…"],
     disc_box_title:["Açık Hatimlere Katıl","An offenen Hatims teilnehmen","Join Open Hatims","Присоединиться к общим хатмам","انضم إلى الختمات المفتوحة","Rejoindre les khatms ouverts","Únete a los jatmes abiertos","Συμμετοχή σε ανοιχτά χατμ","加入公开的诵读","公開中のハトムに参加","공개된 하틈에 참여","खुले हतम में शामिल हों","کھلی ختموں میں شامل ہوں","Partecipa ai khatm aperti","Ikuti Khataman Terbuka","Doe mee aan open hatims","Junte-se aos hatms abertos","به ختم‌های باز بپیوندید","খোলা খতমে যোগ দিন","Sertai Khatam Terbuka","Jiunge na Hitima Zilizo Wazi"],
     disc_box_sub:["Şu an devam eden hatim ve zikirler · cüz al, birlikte tamamla","Laufende Hatims und Dhikr · übernimm einen Teil, gemeinsam vollenden","Ongoing hatims and dhikr · take a part, complete together","Текущие хатмы и зикры · возьмите часть, завершите вместе","ختمات وأذكار جارية · خذ نصيبك وأكملوا معًا","Khatms et dhikr en cours · prends une part, terminez ensemble","Jatmes y dikr en curso · toma una parte, completad juntos","Τρέχοντα χατμ και ζικρ · πάρε ένα μέρος, ολοκληρώστε μαζί","进行中的诵读与齐克尔 · 认领一份，共同完成","進行中のハトムとズィクル · 一部を担当し、共に完成","진행 중인 하틈과 디크르 · 한 부분 맡아 함께 완성","चालू हतम और ज़िक्र · एक हिस्सा लें, साथ पूरा करें","جاری ختمیں اور اذکار · حصہ لیں، مل کر مکمل کریں","Khatm e dhikr in corso · prendi una parte, completate insieme","Khataman & zikir berlangsung · ambil bagian, selesaikan bersama","Lopende hatims en dhikr · neem een deel, samen voltooien","Hatms e dhikr em curso · escolha uma parte, concluam juntos","ختم‌ها و اذکار در جریان · سهمی بردار، با هم کامل کنید","চলমান খতম ও যিকর · একটি অংশ নিন, একসাথে সম্পূর্ণ করুন","Khatam & zikir berlangsung · ambil bahagian, lengkapkan bersama","Hitima na dhikri zinazoendelea · chukua sehemu, kamilisheni pamoja"],
@@ -15739,6 +16608,9 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
+<script src="/assets/study-split.js?v=329"></script>
+<script src="/assets/study-sessions.js?v=329"></script>
+<script src="/assets/study-surah-picker.js?v=330"></script>
 </body>
 </html>
 

@@ -103,13 +103,25 @@ test('Play honors 1+2 for its selected whole ayah without redirecting word selec
   const button={};const calls=[];
   const c=vm.createContext({SET:{reciter:5,cumu:true},curS:65,AD_:{},playing:false,
     selMode:'ayah',selA:0,selB:2,wordArr:[{ay:12},{ay:12},{ay:12}],ayGi:{12:[0,2]},
-    audioTimingUnverified:()=>false,$:()=>button,
+    audioTimingUnverified:()=>false,activeStudySplitSelection:()=>null,$:()=>button,
     playAyahProgram:a=>calls.push(['program',a]),playSelection:()=>calls.push(['selection'])});
   const handler=html.match(/^\$\('playBtn'\)\.onclick=\(\)=>\{[\s\S]*?^\};/m)?.[0];
   assert.ok(handler,'reader Play handler exists');vm.runInContext(handler,c);
   button.onclick();assert.deepEqual(calls,[['program',12]]);
   c.selMode='word';button.onclick();assert.deepEqual(calls.at(-1),['selection']);
   c.selMode='ayah';c.SET.cumu=false;button.onclick();assert.deepEqual(calls.at(-1),['selection']);
+});
+test('reader Play keeps a selected Study Desk verse inside its custom parts',()=>{
+  const button={};const calls=[];
+  const c=vm.createContext({SET:{reciter:223},curS:18,AD_:{},playing:false,
+    audioTimingUnverified:()=>false,$:()=>button,
+    activeStudySplitSelection:()=>({sid:18,ay:2,parts:[1,2,3]}),
+    playActiveStudySplit:()=>calls.push('parts'),
+    playAyahProgram:()=>calls.push('ayah'),togglePause:()=>calls.push('pause')});
+  const handler=html.match(/^\$\('playBtn'\)\.onclick=\(\)=>\{[\s\S]*?^\};/m)?.[0];
+  assert.ok(handler);vm.runInContext(handler,c);
+  button.onclick();assert.deepEqual(calls,['parts']);
+  c.playing=true;button.onclick();assert.deepEqual(calls,['parts','pause']);
 });
 test('pause keeps a normal selected passage at its current position',()=>{
   const c=vm.createContext({plan:[{f:100,t:2000}],pi:0,pieceCursor:0,
