@@ -64,7 +64,7 @@ body[data-layout="saray"] #home .surahExpand{
 #studySetup .studySummary{border:1px solid color-mix(in srgb,var(--gold) 20%,var(--line));border-left:4px solid var(--gold);}
 #studySetup .studyOpen{
   border:1px solid #d5b574;
-  background:linear-gradient(180deg,#c8a660 0%,#a7732e 48%,#80511c 100%);
+  background:linear-gradient(180deg,#956d2b 0%,#8b601f 48%,#684414 100%);
   color:#fff;
   text-shadow:0 1px 1px rgba(53,33,10,.55);
   box-shadow:inset 0 1px 0 rgba(255,251,229,.65),inset 0 -2px 5px rgba(65,37,10,.25),0 4px 0 rgba(112,74,23,.33),0 9px 18px rgba(89,65,31,.18);
@@ -85,3 +85,17 @@ body[data-layout="saray"] #home .quick button:active{transform:translateY(2px);b
 #studySetup .studySurahList button:focus-visible,
 body[data-layout="saray"] #home #qStudy:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
 @media(max-width:600px){#studySetup .studyHero{padding:16px 10px 22px;}#studySetup .studyCardHeader{margin-bottom:18px;}}
+
+/* Dark surfaces keep the metal edge without a white halo or dim bronze icons. */
+body[data-dark="1"][data-layout="saray"] #home .quick button svg{color:var(--saray-gold-light)!important;filter:none;}
+body[data-dark="1"][data-layout="saray"] #home #continueBtn,
+body[data-dark="1"][data-layout="saray"] #home .quick button,
+body[data-dark="1"][data-layout="saray"] #home .search,
+body[data-dark="1"][data-layout="saray"] #home .card{
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 3px 0 rgba(0,0,0,.16),0 7px 15px rgba(0,0,0,.22)!important;
+}
+body[data-dark="1"] #studySetup .studyBack,
+body[data-dark="1"] #studySetup .studyCard,
+body[data-dark="1"] #studySetup .studySaveCard,
+body[data-dark="1"] #studySetup .studySaved{box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 24px rgba(0,0,0,.22);}
+body[data-dark="1"] #studySetup .studySaveRow button{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 3px 8px rgba(0,0,0,.22);}

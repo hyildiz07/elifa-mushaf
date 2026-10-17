@@ -22,7 +22,7 @@
   Object.assign(window.T||{},labels);
   const key='studySessions';
   const byId=id=>document.getElementById(id);
-  let editingId=null,activeId=null,confirmation=null;
+  let editingId=null,activeId=null,confirmation=null,editingFromReader=false;
   function message(label){return window.tr?window.tr(label):label;}
   function rangeOf(item){return SURAHS[item.sid-1].tr+' · '+item.from+'–'+item.to+' '+message('study_verses');}
   function isValid(item){
@@ -106,21 +106,33 @@
       const row=document.createElement('li');row.className='studySavedItem';
       const detail=document.createElement('div'),title=document.createElement('strong'),range=document.createElement('small');
       title.textContent=item.title;range.textContent=rangeOf(item)+(item.splitMode==='manual'?' · '+message('study_split_manual'):'');detail.append(title,range);
+      if(item.progress?.completed)range.textContent+=' · '+message('practice_completed');
       const actions=document.createElement('div');actions.className='studySavedActions';
       const open=button('study_open_saved',()=>{
+          window.elifaCloseStudySplit?.({restoreFocus:false});
           applyRange(item);
-          activeId=item.id;
-          if(item.splitMode)window.elifaRememberStudySplitPrefs?.(item,{mode:item.splitMode,cutsByAy:item.manualCuts||{},selectedAy:item.selectedAy??null});
+          activeId=item.id;editingId=item.id;
+          window.elifaRememberStudySplitPrefs?.(item,item.splitMode?{mode:item.splitMode,cutsByAy:item.manualCuts||{},selectedAy:item.selectedAy??null}:null);
+          window.elifaStudySettings?.load(item);
           byId('studyOpen').click();
         });
       const edit=button('study_edit_saved',()=>{
+          editingFromReader=false;
           editingId=item.id;applyRange(item);byId('studySessionTitle').value=item.title;
+          window.elifaStudySettings?.load(item);
           updateSaveState();byId('studySessionTitle').focus();
         });
       const remove=button('study_delete',()=>askDelete(item,row,remove),'studyDelete');
       remove.setAttribute('aria-expanded','false');
       for(const control of [open,edit,remove])control.setAttribute('aria-label',item.title+' · '+control.textContent);
       actions.append(open,edit,remove);
+      if(item.progress&&!item.progress.completed){
+        const resume=button('study_resume',()=>{
+          window.elifaCloseStudySplit?.({restoreFocus:false});applyRange(item);activeId=item.id;editingId=item.id;
+          window.elifaRememberStudySplitPrefs?.(item,item.splitMode?{mode:item.splitMode,cutsByAy:item.manualCuts||{},selectedAy:item.progress.ay}:null);
+          window.elifaStudySettings?.load(item,{resume:true});byId('studyOpen').click();
+        });actions.append(resume);
+      }
       row.append(detail,actions);list.appendChild(row);
     }
     updateSaveState();
@@ -137,9 +149,16 @@
     const old=index>=0?items[index]:null;
     const item={id:old?.id||uuid(),title,sid,from,to,createdAt:old?.createdAt||now,updatedAt:now};
     const sameOld=old&&old.sid===sid&&old.from===from&&old.to===to;
-    const prefs=window.elifaStudySplitPrefs?.(item)||(sameOld&&old.splitMode?{mode:old.splitMode,cutsByAy:old.manualCuts||{},selectedAy:old.selectedAy??null}:null);
+    // A title edit belongs to this saved record, never to another study's
+    // remembered cuts merely because both records cover the same verses.
+    const livePrefs=(!old||(editingFromReader&&activeId===old.id))?window.elifaStudySplitPrefs?.(item):null;
+    const prefs=livePrefs||(sameOld&&old.splitMode?{mode:old.splitMode,cutsByAy:old.manualCuts||{},selectedAy:old.selectedAy??null}:null);
     if(prefs){item.splitMode=prefs.mode;item.manualCuts=prefs.cutsByAy;
       if(Number.isInteger(prefs.selectedAy)&&prefs.selectedAy>=from&&prefs.selectedAy<=to)item.selectedAy=prefs.selectedAy;}
+    const settings=window.elifaStudySettings?.capture();
+    if(window.elifaStudySettings&&!settings){toast(message('study_invalid'));return;}
+    if(settings)item.settings=settings;else if(old?.settings)item.settings=old.settings;
+    if(sameOld&&old.progress)item.progress=old.progress;
     if(index>=0)items[index]=item;else items.push(item);
     if(!store.set(key,items)){toast(message('study_save_failed'));return;}
     editingId=item.id;activeId=item.id;byId('studySessionTitle').value=title;render();toast(message('study_saved_ok'));
@@ -158,6 +177,8 @@
   }
   window.elifaStudySessions={
     onOpen({fromReader=false}={}){
+      editingFromReader=fromReader;
+      window.elifaStudySettings?.onSetup(fromReader);
       const current=fromReader&&activeId?read().find(item=>item.id===activeId):null;
       const draft=readStudyDraft();
       if(current&&current.sid===draft.sid&&current.from===draft.from&&current.to===draft.to){
@@ -165,7 +186,22 @@
       }else{activeId=null;resetEdit();}
       render();
     },
-    clearActive(){activeId=null;resetEdit();},render
+    clearActive(){activeId=null;editingFromReader=false;resetEdit();},
+    activateDraft(){
+      const item=read().find(entry=>entry.id===editingId),range=readStudyDraft();
+      activeId=item&&item.sid===range.sid&&item.from===range.from&&item.to===range.to?item.id:null;
+    },
+    active(){return activeId?read().find(item=>item.id===activeId):null;},
+    rememberProgress(progress){
+      if(!activeId)return;
+      const items=read(),item=items.find(entry=>entry.id===activeId);
+      if(!item||progress.ay<item.from||progress.ay>item.to)return;
+      if(window.elifaStudySettings&&!window.elifaStudySettings.validProgress(progress,item.from,item.to))return;
+      if(typeof studyRange!=='undefined'&&(!studyRange||item.sid!==studyRange.sid||item.from!==studyRange.from||item.to!==studyRange.to))return;
+      if(JSON.stringify(item.progress)===JSON.stringify(progress))return;
+      const settings=window.elifaStudySettings?.capture();if(settings)item.settings=settings;
+      item.progress=progress;item.updatedAt=new Date().toISOString();store.set(key,items);
+    },render
   };
   window.addEventListener('elifa:language-changed',translateStatic);
   translateStatic();

@@ -16,6 +16,23 @@ class Element {
   click(){this.handlers.click?.();}
   focus(){Element.focused=this;}
 }
+test('renaming B after opening A keeps B cuts and its saved settings for the same verse range',()=>{
+ const ids=new Map(),get=id=>{if(!ids.has(id))ids.set(id,new Element());return ids.get(id);};
+ const base={sid:18,from:1,to:5,createdAt:'2026-10-17T00:00:00Z',updatedAt:'2026-10-17T00:00:00Z',splitMode:'manual'};
+ const a={...base,id:'12345678-1234-4234-8234-123456789abc',title:'A',manualCuts:{1:[2]},settings:{reciter:223,rep:3}};
+ const b={...base,id:'abcdefab-abcd-4bcd-8bcd-abcdefabcdef',title:'B',manualCuts:{1:[4,7]},settings:{reciter:7,rep:5}};
+ let items=[a,b],loaded=null;
+ const window={T:{},tr:k=>k,addEventListener(){},elifaStudySplitPrefs:()=>({mode:'manual',cutsByAy:a.manualCuts}),
+  elifaRememberStudySplitPrefs(){},elifaStudySettings:{load:item=>{loaded=item.settings;},capture:()=>loaded}};
+ const c=vm.createContext({window,document:{getElementById:get,createElement:()=>new Element(),querySelectorAll:()=>[]},
+  SURAHS:Array.from({length:114},()=>({tr:'Kehf'})),store:{get:()=>items,set:(_k,v)=>{items=JSON.parse(JSON.stringify(v));return true;}},
+  validStudyRange:()=>true,readStudyDraft:()=>({sid:18,from:1,to:5}),updateStudySetup(){},toast(){}});
+ vm.runInContext(fs.readFileSync('assets/study-sessions.js','utf8'),c);
+ get('studySavedList').children[0].children[1].children[0].click();
+ get('studySavedList').children[1].children[1].children[1].click();
+ get('studySessionTitle').value='B renamed';get('studySessionSave').click();
+ const result=items.find(x=>x.id===b.id);assert.equal(result.title,'B renamed');assert.deepEqual(result.manualCuts,{1:[4,7]});assert.deepEqual(result.settings,b.settings);
+});
 test('saved Study Desk ranges can be reopened, edited, and deleted with manual cuts',()=>{
   const ids=new Map(),get=id=>{if(!ids.has(id))ids.set(id,new Element());return ids.get(id);};
   const storage=new Map(),messages=[],opened=[];
