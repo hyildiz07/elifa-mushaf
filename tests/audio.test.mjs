@@ -1113,3 +1113,19 @@ for(const rid of [7,4])test(`Bakara 277 reciter ${rid} uses short clauses despit
   assert.deepEqual(Array.from(parts,p=>p.words.at(-1).pos),[5,9,13,19]);
   for(let i=0;i<parts.length-1;i++)assert.equal(parts[i+1].f,parts[i].t);
 });
+
+
+test('Afasy automatic and cumulative cuts reject a breath inside the following word',()=>{
+  const rows=afasyWordPack.rows[2];
+  const c=context({sid:2,verse_timings:rows.map((r,i)=>({verse_key:'2:'+(i+1),timestamp_from:r[0],timestamp_to:r[1],segments:r[2]}))});
+  c.SET.reciter=223;loadVerse(c,3);
+  const raw=c.AD_.verseSegments[3],cuts={},starts={};
+  for(let i=0;i<raw.length-1;i++){cuts[i+1]=raw[i+1][1]+100;starts[i+1]=raw[i+1][1]+500;}
+  c.AD_.splitBuf={ay:3,shift:0,lo:rows[2][0],hi:rows[2][1],cuts,starts};
+  c.splitParts=c.computeParts(3);
+  assert.ok(c.splitParts.length>1);
+  for(const part of c.splitParts){const pos=part.words.at(-1).pos;if(pos<raw.length)assert.ok(part.t<=raw[pos][1],'never include the next word while searching for a breath');}
+  c.SET.cumu=true;const plan=c.buildPartsPlan(0);
+  assert.ok(plan.some(p=>p.combo));
+  for(const step of plan){const part=c.splitParts[step.part],pos=part.words.at(-1).pos;if(pos<raw.length)assert.ok(c.stepBounds(step).t<=raw[pos][1]);}
+});
