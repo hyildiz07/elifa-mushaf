@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   ELIFA MUSHAF — SERVICE WORKER  (v348)
+   ELIFA MUSHAF — SERVICE WORKER  (v349)
    App-shell'i önbelleğe alır, offline açılır; dış API'lere
    (Kur'an metni/ses/tefsir) DOKUNMAZ. Güncellemede VERSION'u artır.
 
@@ -11,7 +11,7 @@
    · version.json / duyuru.json / manual-*.json → her zaman ağ öncelikli.
    · Yönlendirilmiş (redirected) navigasyon yanıtı önbelleğe yazılmaz.
    ═══════════════════════════════════════════════════════════════ */
-const VERSION = 'elifa-mushaf-v348-focused-duas';
+const VERSION = 'elifa-mushaf-v349-focused-duas';
 const CACHE   = VERSION;
 
 /* Fontlar index.html içinde base64 gömülü → ayrıca cache'lenmez. */
@@ -22,8 +22,8 @@ const CORE = [
   './top_logo_hilal.svg', './assets/account.js?v=337', './assets/account.css?v=336',
   './assets/locale.js?v=2', './assets/reader-help.js?v=2', './assets/reader-help-drafts.js?v=1', './assets/reader-help.css?v=1',
   './assets/ui-extra-drafts.js?v=2', './assets/ui-extra.js?v=1',
-  './assets/dua-practice.js?v=348', './assets/dua-practice.css?v=348',
-  './assets/workflow-i18n.js?v=348', './assets/study-workflow.js?v=348', './assets/study-workflow.css?v=337',
+  './assets/dua-practice.js?v=349', './assets/dua-practice.css?v=349',
+  './assets/workflow-i18n.js?v=349', './assets/study-workflow.js?v=349', './assets/study-workflow.css?v=337',
   './assets/study-split.js?v=335', './assets/study-sessions.js?v=335',
   './assets/study-surah-picker.js?v=330', './assets/home-study-polish.css?v=336',
   './assets/split-audio.js?v=294', './assets/split-cache.js?v=291',
