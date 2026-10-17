@@ -1,6 +1,6 @@
 # Elifa Mushaf — Güvenilir çalışma akışı
 
-17 Ekim 2026 · v337 · Önizleme için hazırlandı; üretim yayını bu değişikliğe dahil değil.
+17 Ekim 2026 · v338 · Önizleme için hazırlandı; üretim yayını bu değişikliğe dahil değil.
 
 ## Tamamlanan işler
 
@@ -22,7 +22,7 @@
 - Elifa Saray Koyu Gece dil listesinde beyaz zemin/açık yazı sorunu giderildi. Ortak kart zemini ve seçili/odak renkleri tema değişkenlerine bağlandı. Altın düğmeler, koyu tema metal kenarları ve hesap durum/bağlantı renkleri de düzeltildi.
 
 - Birleştirme ve tüm çalışma sayacı 0 değerini kaydetme, yeniden açma ve yedeklemede koruyor. Birleştirme 0 ise birleşik okuma adımları atlanıyor; tüm çalışma 0 ise tek tur sonunda duruyor. Pozitif sayaçların önceki toplam okuma sayısı anlamı korundu.
-- Sayaç sırası âyet/parça → birleştirme → tüm çalışma olarak düzenlendi. “Aralığın tekrar sayısı” adı “Tüm çalışmanın tekrar sayısı” oldu; üç alanın altında 21 dilde kısa açıklama var.
+- Tüm çalışma sayacı en üstteki geniş alana, âyet/parça sayacı onun önceki yerine alındı. “Aralığın tekrar sayısı” adı “Tüm çalışmanın tekrar sayısı” oldu; üç alanın altında 21 dilde kısa açıklama var.
 
 ## Doğrulananlar
 

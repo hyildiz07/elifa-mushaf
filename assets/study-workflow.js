@@ -60,7 +60,7 @@
     reciter.append(o);
   }
   grid.append(field("rec_title", reciter));
-  var fields = { rep: ["repeat_ayah_count", 1, 99, 1], combineRep: ["repeat_combine_count", 0, 99, 1], rangeRep: ["repeat_range_count", 0, 99, 1], speed: ["s_speed", 0.5, 2, 0.05], wait: ["workflow_wait", 0, 60, 1] };
+  var fields = { rangeRep: ["repeat_range_count", 0, 99, 1], combineRep: ["repeat_combine_count", 0, 99, 1], rep: ["repeat_ayah_count", 1, 99, 1], speed: ["s_speed", 0.5, 2, 0.05], wait: ["workflow_wait", 0, 60, 1] };
   for (const [key, [label, min, max, step]] of Object.entries(fields)) {
     const input = document.createElement("input");
     input.id = "studySetting_" + key;
