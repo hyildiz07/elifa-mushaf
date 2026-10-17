@@ -1,6 +1,6 @@
 # Elifa Mushaf — Güvenilir çalışma akışı
 
-17 Ekim 2026 · v335 · Önizleme için hazırlandı; üretim yayını bu değişikliğe dahil değil.
+17 Ekim 2026 · v336 · Önizleme için hazırlandı; üretim yayını bu değişikliğe dahil değil.
 
 ## Tamamlanan işler
 
@@ -19,13 +19,18 @@
 - Âyet/parça, birleşik bölüm ve tüm çalışma aralığı için üç ayrı tekrar sayısı eklendi. Örnek: âyet 2, birleşik 1, aralık 2 → her âyet iki kez, her birleşik bölüm bir kez; bütün program iki tur. Tek parça Dinle düğmesi yalnız parça sayısını kullanıyor.
 - 1+2 aç/kapa artık markajı silmiyor veya otomatik oynatma başlatmıyor. Çalarken değişiklik mevcut kesit bitince uygulanıyor; bütün aralık kesiti çalıyorsa aralık sonu bekleniyor. Tam âyet markajı sûre sonuna genişlemiyor.
 
+- Elifa Saray Koyu Gece dil listesinde beyaz zemin/açık yazı sorunu giderildi. Ortak kart zemini ve seçili/odak renkleri tema değişkenlerine bağlandı. Altın düğmeler, koyu tema metal kenarları ve hesap durum/bağlantı renkleri de düzeltildi.
+
 ## Doğrulananlar
 
 - `npm run build`: 336 test; 334 başarılı, 0 başarısız, 2 ortam nedeniyle atlanan. Dağıtım paketi üretildi.
 - Dil denetimi: 21 dil; eksik anahtar, eksik çeviri satırı, eksik hesap/destek/gizlilik/kılavuz dosyası yok. Bu ölçüm profesyonel dil/hukuk incelemesi yerine geçmez; mevcut inceleme işaretleri değiştirilmedi.
 - Tarayıcıda Fâtiha 1–5 aralığı, Mişârî 223, üç tekrar ve 1,25 hızla tamamlandı. Bölünmüş ikinci âyette iki parça ve 1+2 akışı tamamlandı.
+- Fâtiha 1–3 birleştirme programı âyet 2 / birleşik bölüm 1 / tüm aralık 2 sayılarıyla tarayıcıda tamamlandı.
 - Kaydedilmiş manuel kesimler ve ayarlar yeniden açıldı. İkinci parça sırasında çıkılıp “Kaldığım yerden devam et” seçildiğinde ikinci parça seçili geldi; ses kendiliğinden başlamadı.
 - Hollandaca ana ekran ve çalışma ekranındaki dinamik metinler kontrol edildi. Hata raporunun içeriği gösterildi; e-posta gönderilmedi.
+- 16 temanın renk değerleriyle dil satırı seçili yüzeyi en az 6,34:1, altın düğme metni 4,88:1, metal ana düğme 4,67:1 kontrast verdi. Bunlar renk hesaplarıdır.
+- Tarayıcıda Saray Koyu Gece ve Açık Fildişi dil listeleri, Nahl koyu temasındaki Çalışma Masası ve hesap paneli görsel olarak kontrol edildi. Güncel hesap stilinde bağlantı ve giriş düğmesinin metin/zemin renkleri de doğrulandı.
 - Tüm indirmelerin başarısız olması, kısmi başarı/yeniden deneme, iptal, depolama hatası, eksik güncelleme, sahte HTML dönen JS dosyası ve eşitleme yarışları kontrollü testlerde doğrulandı.
 - Ses hazırlamada ilk denemede geçici hata görüldü; uyarı/ölçüm yolu eklendi. Sonraki gerçek tarayıcı denemeleri tamamlandı. Bu, her ağ koşulunda kesintisizlik garantisi olarak değerlendirilmemeli.
 

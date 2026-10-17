@@ -41,7 +41,7 @@
 #accountDialog .account-head{background:var(--surface,#fffdf7);border-color:var(--line,#e9e0ce)}
 #accountDialog .account-card,#accountConflict{background:var(--bg,#faf6ed);border-color:var(--line,#e4dccb)}
 #accountDialog button{background:var(--surface,#fff);color:var(--ink,#17324a);border-color:var(--line,#d6c9ac)}
-#accountDialog button.account-primary,#accountDialog .account-tabs button[aria-pressed=true]{background:var(--theme-tab,var(--navy,#17324a))!important;color:var(--theme-on-accent,#fff)!important;border-color:var(--navy,#17324a)!important}
+#accountDialog button.account-primary,#accountDialog .account-tabs button[aria-pressed=true]{background:var(--ink,#17324a)!important;color:var(--surface,#fffdf7)!important;border-color:var(--ink,#17324a)!important}
 #accountDialog input:not([type=checkbox]):not([type=radio]){background:var(--surface,#fff);color:var(--ink,#17324a);border-color:var(--line,#c4cbd1)}
 #accountDialog .account-muted{color:var(--muted,#596776)}
 body[data-theme="nahlyildizlari"] #accountDialog{background:#11182a;color:#f4f7ff;border-color:#35508a}
@@ -52,3 +52,10 @@ body[data-theme="nahlyildizlari"] #accountDialog .account-muted{color:#c7d6ff}
 body[data-theme="nahlyildizlari"] #accountStatus{background:#223456;color:#f4f7ff}
 body[data-theme="nahlyildizlari"] #accountStatus.error{background:#4b2531;color:#ffe1e1}
 body[data-theme="nahlyildizlari"] .homebar .account-home{background:#17223d;color:#f4f7ff;border-color:#4a6190}
+
+/* Keep account feedback readable on every dark palette, not only Nahl. */
+#accountDialog a{color:var(--ink,#17324a);text-decoration:underline;text-underline-offset:3px}
+#accountDialog .danger{color:var(--danger,#a33328)}
+body[data-dark="1"] #accountStatus{background:var(--bg);color:var(--ink);border:1px solid var(--line)}
+body[data-dark="1"] #accountStatus.error{background:#4b2531;color:#ffe1e1;border-color:#b77c8a}
+body[data-dark="1"] #accountDialog .danger{color:#ffb8b1}

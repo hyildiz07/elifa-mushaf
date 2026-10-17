@@ -45,6 +45,9 @@
   --shadow-soft:0 8px 22px var(--shadow);
   --radius-sm:12px; --radius-md:16px; --radius-lg:22px; --radius-xl:28px;
 }
+/* Card surfaces follow the active body theme; accent labels keep their own contrast. */
+body{--card:var(--surface);--on-gold:#0E213A;color-scheme:light;}
+body[data-dark="1"]{color-scheme:dark;}
 /* === Elifa İmza / Ayışığı Mushafı — imza dokunuşları (additive; sadece bu tema, mevcut sınıflara) === */
 body[data-theme="elifaimza"] .bkhome,
 body[data-theme="elifaimza"] .continue{
@@ -423,7 +426,7 @@ body.bmplacing #rbody{outline:2px dashed var(--gold);outline-offset:-6px;border-
 .selectionHandle:active{cursor:grabbing;transform:scale(1.08);}
 .selectionHandle[hidden]{display:none!important;}
 .selinfo .selListen,.selinfo .selConfirm{margin-inline-start:8px;padding:2px 9px;border:1px solid currentColor;border-radius:999px;background:transparent;color:inherit;font:inherit;font-weight:700;cursor:pointer;}
-.selinfo .selConfirm{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.selinfo .selConfirm{background:var(--gold);border-color:var(--gold);color:var(--on-gold);}
 body:not(.rd) .selectionHandle,body:not(.rd) .selectionLoupe,body:has(#sheetback.show) .selectionHandle,body:has(#sheetback.show) .selectionLoupe{display:none!important;}
 .paperwrap{background:var(--paper);max-width:720px;margin:0 auto;min-height:100%;overflow-x:hidden;}
 body[data-frame="1"] .paperwrap{max-width:640px;margin:12px auto 18px;border:1.5px solid var(--framec);border-radius:10px;box-shadow:0 10px 26px var(--shadow);padding-bottom:10px;}
@@ -5252,7 +5255,7 @@ body:not(.stacked) .flow{
 .studySavedItem small{display:block;margin-top:4px;color:var(--muted);font-size:12px;}
 .studySavedActions{display:flex;gap:7px;flex-wrap:wrap;}
 .studySavedActions button{min-height:40px;padding:7px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:750 12px 'Inter',sans-serif;cursor:pointer;}
-.studySavedActions button:first-child{border-color:var(--gold);background:var(--gold);color:var(--navy);}
+.studySavedActions button:first-child{border-color:var(--gold);background:var(--gold);color:var(--on-gold);}
 .studySavedActions .studyDelete{margin-left:auto;color:var(--ink);}
 .studyDeleteConfirm{padding:12px;border:1px solid var(--gold);border-radius:12px;background:var(--card);}
 .studyDeleteConfirm p{margin:0 0 10px;color:var(--ink);font-size:13px;font-weight:650;line-height:1.5;overflow-wrap:anywhere;}
@@ -5261,7 +5264,7 @@ body:not(.stacked) .flow{
 .studyDeleteConfirmActions .studyDeleteConfirmAction{border-color:#a34135;background:#a34135;color:#fff;}
 .studySaveRow button:focus-visible,.studySavedActions button:focus-visible,.studyDeleteConfirmActions button:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
 .selStudyAction[hidden],.studyBanner[hidden]{display:none!important;}
-.selStudyAction{display:flex;align-items:center;justify-content:center;width:calc(100% - 24px);min-height:38px;margin:0 12px 9px;padding:6px 14px;border:1px solid var(--gold);border-radius:11px;background:var(--gold);color:var(--navy);font:800 12px 'Inter',sans-serif;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.13);}
+.selStudyAction{display:flex;align-items:center;justify-content:center;width:calc(100% - 24px);min-height:38px;margin:0 12px 9px;padding:6px 14px;border:1px solid var(--gold);border-radius:11px;background:var(--gold);color:var(--on-gold);font:800 12px 'Inter',sans-serif;cursor:pointer;box-shadow:0 3px 12px rgba(0,0,0,.13);}
 #selbar.show:has(.selStudyAction:not([hidden])){max-height:220px;}
 body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-height:220px!important;}
 .studyBanner{flex:none;display:flex;flex-direction:column;gap:7px;padding:9px 12px;border-bottom:1px solid var(--line);background:var(--surface);color:var(--ink);}
@@ -5271,7 +5274,7 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 .studyBannerActions{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
 .studyBannerActions::-webkit-scrollbar{display:none;}
 .studyBannerActions button{flex:none;min-height:34px;padding:6px 10px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:700 11px 'Inter',sans-serif;white-space:nowrap;cursor:pointer;}
-.studyBannerActions .studyBannerPrimary{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.studyBannerActions .studyBannerPrimary{background:var(--gold);border-color:var(--gold);color:var(--on-gold);}
 @media(max-width:600px){.studyMain{padding:12px 12px 80px;}.studyHero{min-height:0;margin-bottom:0;padding:26px 22px 20px;border-radius:18px;}.studyHero .studyLead{max-width:none;font-size:13px;}.studyCardHeader{gap:12px;}.studyCardIcon{width:46px;height:46px;font-size:24px;}.studySurahList{max-height:270px;}}
 @media(max-width:380px){.studyCard,.studySaveCard,.studySaved{padding:18px 14px;}.studyBannerActions button{padding:6px 8px;}}
 /* Çalışma Masası bölümleme alanı okuyucunun mevcut denetimleri arasında kalır. */
@@ -5285,7 +5288,7 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 .studySplitModes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:14px;}
 .studySplitModes[hidden]{display:none!important;}
 .studySplitModes button{min-height:47px;padding:9px 10px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font:750 13px 'Inter',sans-serif;cursor:pointer;}
-.studySplitModes button[aria-pressed="true"]{border-color:var(--gold);background:var(--gold);color:var(--navy);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 25%,transparent);}
+.studySplitModes button[aria-pressed="true"]{border-color:var(--gold);background:var(--gold);color:var(--on-gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 25%,transparent);}
 .studySplitStatus{margin:0 0 14px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:var(--ink);font-size:13px;line-height:1.5;}
 .studySplitStatus[data-error="true"]{border-color:var(--gold);}
 .studySplitWizard,.studySplitResults{padding:16px;border:1px solid var(--line);border-radius:16px;background:var(--surface);}
@@ -5308,10 +5311,10 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 .studySplitWords{touch-action:none;user-select:none;-webkit-user-select:none;}
 .studySplitWords button{min-height:42px;padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-family:var(--qf),serif;font-size:22px;line-height:1.3;cursor:pointer;}
 .studySplitWords button{touch-action:none;}
-.studySplitWords button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.studySplitWords button[aria-pressed="true"]{background:var(--gold);border-color:var(--gold);color:var(--on-gold);}
 .studySplitWords button.studySplitUsed{background:var(--card);border-color:var(--line);color:var(--muted);opacity:.46;text-decoration:none;}
 .studySplitWords button.studySplitIncluded:not(:disabled){background:color-mix(in srgb,var(--gold) 55%,var(--surface));border-color:var(--gold);color:var(--ink);}
-.studySplitWords button.studySplitEndpoint:not(:disabled){background:var(--gold);border-color:var(--gold);color:var(--navy);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 25%,transparent);}
+.studySplitWords button.studySplitEndpoint:not(:disabled){background:var(--gold);border-color:var(--gold);color:var(--on-gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 25%,transparent);}
 .studySplitWords button:disabled{opacity:.42;cursor:not-allowed;text-decoration:line-through;}
 .studySplitWords button.studySplitUsed:disabled{opacity:.46;text-decoration:none;}
 .studySplitDraftParts{display:grid;gap:6px;margin:0 0 12px;}
@@ -5322,7 +5325,7 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 .studySplitReason{min-height:20px;margin:9px 0 0;color:var(--muted);font-size:12px;line-height:1.45;}
 .studySplitWizardActions{display:flex;gap:8px;margin-top:15px;}
 .studySplitWizardActions button,.studySplitPlayAll,.studySplitRetry{min-height:41px;padding:8px 13px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:750 13px 'Inter',sans-serif;cursor:pointer;}
-.studySplitWizardActions .studySplitConfirm,.studySplitPlayAll{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.studySplitWizardActions .studySplitConfirm,.studySplitPlayAll{background:var(--gold);border-color:var(--gold);color:var(--on-gold);}
 .studySplitWizardActions button:disabled,.studySplitPlayAll:disabled{opacity:.45;cursor:not-allowed;}
 .studySplitParts{display:grid;gap:8px;margin-top:13px;}
 .studySplitPart{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--card);}
@@ -5336,13 +5339,13 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 .studySplitLiveStatus{margin:12px 0 10px;padding:10px 12px;border-radius:10px;background:var(--bg);color:var(--ink);font-size:12px;font-weight:750;line-height:1.5;}
 .studySplitPlaybackControls{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;}
 .studySplitPlaybackControls button{min-height:44px;padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:750 13px 'Inter',sans-serif;cursor:pointer;}
-.studySplitPlaybackControls button[aria-pressed="true"]{border-color:var(--gold);background:var(--gold);color:var(--navy);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 22%,transparent);}
+.studySplitPlaybackControls button[aria-pressed="true"]{border-color:var(--gold);background:var(--gold);color:var(--on-gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 22%,transparent);}
 .studySplitPlaybackControls button:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
-.studySplitSave{width:100%;min-height:46px;margin:0 0 5px;padding:10px 14px;border:1px solid var(--gold);border-radius:11px;background:var(--gold);color:var(--navy);font-size:13px;font-weight:800;cursor:pointer;}
+.studySplitSave{width:100%;min-height:46px;margin:0 0 5px;padding:10px 14px;border:1px solid var(--gold);border-radius:11px;background:var(--gold);color:var(--on-gold);font-size:13px;font-weight:800;cursor:pointer;}
 .studySplitSave:hover,.studySplitSave:focus-visible{filter:brightness(.96);outline:2px solid var(--gold);outline-offset:2px;}
 .studySplitResultsTools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
 .studySplitResultsTools button{min-height:36px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--ink);font-weight:750;cursor:pointer;}
-.studySplitResultsTools .studySplitPlayAll{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.studySplitResultsTools .studySplitPlayAll{background:var(--gold);border-color:var(--gold);color:var(--on-gold);}
 .studySplitResultsTools button[hidden]{display:none!important;}
 .studySplitRetry[hidden]{display:none!important;}
 .studySplitMore{display:block;margin:14px auto 0;min-height:40px;padding:8px 16px;border:1px solid var(--line);border-radius:10px;background:var(--surface);color:var(--ink);font-weight:750;cursor:pointer;}
@@ -5437,15 +5440,15 @@ window.elifaLog=function(event,params){
   });
 })();
 </script>
-<link rel="stylesheet" href="/assets/account.css?v=295">
+<link rel="stylesheet" href="/assets/account.css?v=336">
 <link rel="stylesheet" href="/assets/theme-legibility.css?v=305">
 <link rel="stylesheet" href="/assets/reader-toolbar.css?v=326">
 <link rel="stylesheet" href="/assets/split-toolbar.css?v=1">
 <link rel="stylesheet" href="/assets/gear-sheet.css?v=1">
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
-<link rel="stylesheet" href="/assets/home-study-polish.css?v=330">
-<link rel="stylesheet" href="/assets/study-workflow.css?v=335">
+<link rel="stylesheet" href="/assets/home-study-polish.css?v=336">
+<link rel="stylesheet" href="/assets/study-workflow.css?v=336">
 </head>
 <body>
 <div id="tabletBootError" style="display:none;position:fixed;z-index:99999;left:14px;right:14px;top:14px;background:#fff8e8;color:#0e2c55;border:2px solid #c99a35;border-radius:14px;padding:14px 16px;box-shadow:0 12px 34px rgba(0,0,0,.22);font-family:Arial,sans-serif">
@@ -6455,7 +6458,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v335</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v336</span></div>
   </div>
 
   <div class="tesekkur">
@@ -13383,7 +13386,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v335-independent-study-repeats';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v336-theme-contrast';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -14541,7 +14544,9 @@ html body #reader .am::before, html body #reader .am::after{
 </script>
 <style>
 #langSheet .langgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:6px;max-height:62vh;overflow-y:auto;overflow-x:hidden;padding-bottom:8px}
-#langSheet .langbtn{display:flex;align-items:center;gap:8px;padding:9px 10px;border:1.5px solid var(--line,#dde4ef);border-radius:12px;background:var(--card,#fff);color:var(--ink,#16181d);font:600 13.5px 'Lora',Georgia,serif;cursor:pointer;text-align:left;transition:.12s;min-width:0;overflow:hidden;box-sizing:border-box}
+#langSheet .langbtn{display:flex;align-items:center;gap:8px;padding:9px 10px;border:1.5px solid var(--line,#dde4ef);border-radius:12px;background:var(--card,var(--surface,#fff));color:var(--ink,#16181d);font:600 13.5px 'Lora',Georgia,serif;cursor:pointer;text-align:left;transition:.12s;min-width:0;overflow:hidden;box-sizing:border-box}
+#langSheet .langbtn:hover,#langSheet .langbtn.on{background:color-mix(in srgb,var(--navy) 8%,var(--surface));}
+#langSheet .langbtn:focus-visible{outline:2px solid var(--navy);outline-offset:2px;}
 #langSheet .langbtn:active{transform:translateY(1px)}
 #langSheet .langbtn.on{border-color:var(--navy,#1f3a68);box-shadow:0 0 0 2px var(--navy,#1f3a68) inset}
 #langSheet .langbtn .lflag{font-size:17px;line-height:1;flex:none}
