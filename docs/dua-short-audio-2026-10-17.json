@@ -1,0 +1,225 @@
+{
+  "checkedAt": "2026-10-17",
+  "scope": "Adult voice research for five remaining short prayers; no catalog, manifest or UI changes.",
+  "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+  "attachmentDiscovery": "Official page links -> public /ar/api/attach_template/ request observed in official app.js -> all134 chapter links. No guessed chapter or filename identity.",
+  "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+  "readyRecordings": [
+    {
+      "id": "uyanma",
+      "path": "/assets/dua-audio/remaining-uyanma.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_003_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "sourceNumber": 3,
+      "sourceBytes": 2922563,
+      "sourceSha256": "a2e8558d7143e94345444c031e93f30e0c5e455fbe5b3856ad432c2e02aa9bdc",
+      "bytes": 112034,
+      "sha256": "bd9a76306a49f3049a9c94b9cf6c721d9257e97fa93b45e63a079f4143a125fe",
+      "durationSeconds": 6.9,
+      "sampleRate": 44100,
+      "channels": 2,
+      "decodeErrors": [],
+      "reader": "Suleiman al-Shuwaihi",
+      "readerArabic": "سليمان بن محمد الشويهي",
+      "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+      "kind": "complete-supplication-excerpt",
+      "excerpt": {
+        "start": 3.03,
+        "end": 9.93
+      },
+      "permissionBasis": "Official IslamHouse FAQ section 2 permits reuse and redistribution with attribution without changing scientific content. Section 12 separately restricts commercial use of third-party productions. Intended use: free, non-monetized Elifa Mushaf, with source and reader attribution.",
+      "fullVerbatimHumanCheck": false,
+      "matching": "Same Arabic wording as existing uyanma item. Complete waking supplication isolated; chapter heading before it and separate dhikr after it are excluded.",
+      "cutEvidence": {
+        "startSilence": [
+          2.778073,
+          3.280567
+        ],
+        "endSilence": [
+          9.668005,
+          10.192426
+        ],
+        "cutStart": 3.03,
+        "cutEnd": 9.93,
+        "method": "Cuts placed inside independent ffmpeg silencedetect separator gaps (noise=-25dB,d=0.15), after coarse ASR identified the complete supplication. Final excerpt ASR identity rechecked. No word timestamps inferred or imported.",
+        "asr": "test-results/remaining-dua-final-asr.json",
+        "silence": "test-results/remaining-waking-silence.log"
+      },
+      "validationLimit": "Independent Whisper-tiny identity probe is approximate and has transcription errors; it is not authoritative spelling, word timing, or a human full-verbatim approval. Text is independently checked against primary Hisn al-Muslim, not generated from ASR.",
+      "sourceName": "IslamHouse · Müslümanın Kalesi",
+      "encoding": "128kbps MP3; original44100Hz stereo; complete prayer excerpt, no speed/pitch changes",
+      "note": "adult_prayer_excerpt"
+    },
+    {
+      "id": "uyku-alternatif",
+      "path": "/assets/dua-audio/remaining-uyku-alternatif.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_030_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "sourceNumber": 30,
+      "sourceBytes": 5634292,
+      "sourceSha256": "333bf07da5a9b3c12a6d943b5d5c6e772f5834e8678dd3e87490b6de02ef2c4c",
+      "bytes": 76065,
+      "sha256": "53599e66a3944fd84e0c4f0b242914d7be91384151de35c98fe3eb3c5514ef86",
+      "durationSeconds": 4.650861678004535,
+      "sampleRate": 44100,
+      "channels": 2,
+      "decodeErrors": [],
+      "reader": "Suleiman al-Shuwaihi",
+      "readerArabic": "سليمان بن محمد الشويهي",
+      "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+      "kind": "complete-supplication-excerpt",
+      "excerpt": {
+        "start": 215.5,
+        "end": 220.15
+      },
+      "permissionBasis": "Official IslamHouse FAQ section 2 permits reuse and redistribution with attribution without changing scientific content. Section 12 separately restricts commercial use of third-party productions. Intended use: free, non-monetized Elifa Mushaf, with source and reader attribution.",
+      "fullVerbatimHumanCheck": false,
+      "matching": "A different authentic bedtime wording, NOT the current uyku text. Must use a separate alternate-wording card. No silent substitution.",
+      "cutEvidence": {
+        "startSilence": [
+          214.974376,
+          215.938073
+        ],
+        "endSilence": [
+          220.034762,
+          220.278889
+        ],
+        "cutStart": 215.5,
+        "cutEnd": 220.15,
+        "method": "Source window starts at208s. Absolute separator times calculated from ffmpeg silencedetect offsets (noise=-22dB,d=0.12). Complete prayer between independent separator gaps; neighboring qala and tasbih not included. Final excerpt ASR identity rechecked.",
+        "asr": "test-results/remaining-dua-final-asr.json",
+        "silence": "test-results/remaining-sleep-silence.log"
+      },
+      "validationLimit": "Independent Whisper-tiny identity probe is approximate and has transcription errors; it is not authoritative spelling, word timing, or a human full-verbatim approval. Text is independently checked against primary Hisn al-Muslim, not generated from ASR.",
+      "sourceName": "IslamHouse · Müslümanın Kalesi",
+      "encoding": "128kbps MP3; original44100Hz stereo; complete prayer excerpt, no speed/pitch changes",
+      "note": "adult_prayer_excerpt"
+    },
+    {
+      "id": "iftar-alternatif",
+      "path": "/assets/dua-audio/remaining-iftar-alternatif.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_069_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "sourceNumber": 69,
+      "sourceBytes": 377207,
+      "sourceSha256": "0475f0e01e71604c99982c727c335d3a6efcae49b1593757770e427d4c9ba328",
+      "bytes": 377207,
+      "sha256": "0475f0e01e71604c99982c727c335d3a6efcae49b1593757770e427d4c9ba328",
+      "durationSeconds": 20.610612244897958,
+      "sampleRate": 44100,
+      "channels": 2,
+      "decodeErrors": [],
+      "reader": "Suleiman al-Shuwaihi",
+      "readerArabic": "سليمان بن محمد الشويهي",
+      "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+      "kind": "complete-audiobook-chapter",
+      "excerpt": null,
+      "permissionBasis": "Official IslamHouse FAQ section 2 permits reuse and redistribution with attribution without changing scientific content. Section 12 separately restricts commercial use of third-party productions. Intended use: free, non-monetized Elifa Mushaf, with source and reader attribution.",
+      "fullVerbatimHumanCheck": false,
+      "matching": "Contains heading, yaqul, dhahaba-z-zama supplication, and a second Allahumma inni asaluka birahmatika... supplication. Not the existing leke sumtu wording. Original chapter retained byte for byte, not cut.",
+      "evidence": "test-results/remaining-iftar-asr.json",
+      "validationLimit": "Independent Whisper-tiny identity probe is approximate and has transcription errors; it is not authoritative spelling, word timing, or a human full-verbatim approval. Text is independently checked against primary Hisn al-Muslim, not generated from ASR.",
+      "sourceName": "IslamHouse · Müslümanın Kalesi",
+      "encoding": "Byte-for-byte original source MP3; no cuts, transformations, speed or pitch changes",
+      "note": "audio_chapter"
+    },
+    {
+      "id": "yolculuk-alternatif",
+      "path": "/assets/dua-audio/remaining-yolculuk-alternatif.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_096_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "sourceNumber": 96,
+      "sourceBytes": 643423,
+      "sourceSha256": "cc0169e71788b2a6cbe61920a8afc3de454f0e32bc264e88e441d947212c1c9d",
+      "bytes": 643423,
+      "sha256": "cc0169e71788b2a6cbe61920a8afc3de454f0e32bc264e88e441d947212c1c9d",
+      "durationSeconds": 37.25061224489796,
+      "sampleRate": 44100,
+      "channels": 2,
+      "decodeErrors": [],
+      "reader": "Suleiman al-Shuwaihi",
+      "readerArabic": "سليمان بن محمد الشويهي",
+      "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+      "kind": "complete-audiobook-chapter",
+      "excerpt": null,
+      "permissionBasis": "Official IslamHouse FAQ section 2 permits reuse and redistribution with attribution without changing scientific content. Section 12 separately restricts commercial use of third-party productions. Intended use: free, non-monetized Elifa Mushaf, with source and reader attribution.",
+      "fullVerbatimHumanCheck": false,
+      "matching": "Full mounting prayer, including bismillah, hamd, Quran43:13-14, three hamds, three takbirs, and final confession/forgiveness prayer. Spoken heading and instruction preserved. Not just the current two-sentence yolculuk text.",
+      "evidence": "test-results/remaining-dua-asr.json",
+      "validationLimit": "Independent Whisper-tiny identity probe is approximate and has transcription errors; it is not authoritative spelling, word timing, or a human full-verbatim approval. Text is independently checked against primary Hisn al-Muslim, not generated from ASR.",
+      "sourceName": "IslamHouse · Müslümanın Kalesi",
+      "encoding": "Byte-for-byte original source MP3; no cuts, transformations, speed or pitch changes",
+      "note": "audio_chapter"
+    }
+  ],
+  "proposedNewCards": [
+    {
+      "id": "uyku-alternatif",
+      "title": "Uyumadan önce · alternatif okunuş",
+      "source": "https://islamhouse.com/ar/audios/2799103/",
+      "textSource": "https://islamhouse.com/ar/books/2522",
+      "ar": "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا.",
+      "ok": "Bismike Allâhümme emûtü ve ahyâ.",
+      "meal": {
+        "tr": "Allah’ım! Senin adınla ölür, senin adınla yaşarım.",
+        "en": "In Your name, O Allah, I die and I live."
+      },
+      "audioNoteTR": "Süleyman eş-Şuveyhi’nin Müslümanın Kalesi okumasından tam dua bölümüdür. “Allahümme bismike ahyâ ve bismike emût” biçimindeki diğer rivayetle aynı lafız değildir; ayrı bir alternatif olarak gösterilir.",
+      "audioNoteEN": "A complete supplication excerpt from Sulayman al-Shuwayhi’s Fortress of the Muslim reading. Its wording differs from the other bedtime variant and is shown separately.",
+      "sourceName": "IslamHouse · Müslümanın Kalesi",
+      "note": "adult_prayer_excerpt"
+    },
+    {
+      "id": "iftar-alternatif",
+      "title": "İftar · iki alternatif dua",
+      "source": "https://islamhouse.com/ar/audios/2799103/",
+      "textSource": "https://islamhouse.com/ar/books/2522",
+      "ar": "ذَهَبَ الظَّمَأُ وَابْتَلَّتِ الْعُرُوقُ وَثَبَتَ الْأَجْرُ إِنْ شَاءَ اللَّهُ.\n\nاللَّهُمَّ إِنِّي أَسْأَلُكَ بِرَحْمَتِكَ الَّتِي وَسِعَتْ كُلَّ شَيْءٍ أَنْ تَغْفِرَ لِي.",
+      "ok": "Zehebez-zamaü vebtelletil-urûku ve sebetel-ecru in şâallâh.\n\nAllâhümme innî es’elüke bi-rahmetikelletî vesiat külle şey’in en tağfira lî.",
+      "meal": {
+        "tr": "Susuzluk gitti, damarlar suya kavuştu; Allah dilerse ecir kesinleşti.\n\nAllah’ım! Her şeyi kuşatan rahmetinle beni bağışlamanı dilerim.",
+        "en": "Thirst has gone, the veins are moistened, and the reward is assured, if Allah wills.\n\nO Allah, I ask You by Your mercy which encompasses everything to forgive me."
+      },
+      "audioNoteTR": "Bölüm başlığı ve “der” açıklamalarıyla iki dua okunur. Bu, “Allahümme leke sumtü…” duasının seslendirmesi değildir. İlk dua Ebû Dâvûd 2357’de; ikinci dua Hisn kitabında Abdullah b. Amr’ın duası olarak aktarılır. İkisi aynı rivayet derecesindeymiş gibi sunulmaz.",
+      "audioNoteEN": "The chapter reads two prayers with its heading and “he says” instructions. It is not a recording of “Allahumma laka sumtu”. The first is reported in Abu Dawud2357; Hisn attributes the second to Abdullah ibn Amr’s own supplication. Their provenance is distinguished.",
+      "sourceName": "IslamHouse · Müslümanın Kalesi",
+      "note": "audio_chapter"
+    },
+    {
+      "id": "yolculuk-alternatif",
+      "title": "Binite binerken · tam dua",
+      "source": "https://islamhouse.com/ar/audios/2799103/",
+      "textSource": "https://hadislerleislam.diyanet.gov.tr/sayfa.php?CILT=1&SAYFA=180",
+      "ar": "بِسْمِ اللَّهِ. الْحَمْدُ لِلَّهِ. سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ. وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ. الْحَمْدُ لِلَّهِ، الْحَمْدُ لِلَّهِ، الْحَمْدُ لِلَّهِ. اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ، اللَّهُ أَكْبَرُ. سُبْحَانَكَ اللَّهُمَّ إِنِّي ظَلَمْتُ نَفْسِي فَاغْفِرْ لِي، فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.",
+      "ok": "Bismillâh. Elhamdü lillâh. Sübhânellezî sehhara lenâ hâzâ ve mâ künnâ lehû mukrinîn. Ve innâ ilâ Rabbinâ le-münkalibûn. Elhamdü lillâh, Elhamdü lillâh, Elhamdü lillâh. Allâhü ekber, Allâhü ekber, Allâhü ekber. Sübhânekellâhümme innî zalemtü nefsî fağfir lî, fe-innehû lâ yağfiruz-zünûbe illâ ente.",
+      "meal": {
+        "tr": "Allah’ın adıyla. Allah’a hamdolsun. Bunu hizmetimize veren Allah’ı her eksiklikten uzak tutarız; yoksa bizim buna gücümüz yetmezdi. Rabbimize döneceğiz. Allah’a hamdolsun (üç kez). Allah en büyüktür (üç kez). Allah’ım! Seni her eksiklikten uzak tutarım. Kendime haksızlık ettim; beni bağışla. Günahları ancak sen bağışlarsın.",
+        "en": "In Allah’s name. Praise belongs to Allah. Glory be to Him who placed this at our service; we could not have mastered it ourselves. We will return to our Lord. Praise belongs to Allah (three times). Allah is the greatest (three times). O Allah, You are free of imperfection. I have wronged myself; forgive me, for only You forgive sins."
+      },
+      "audioNoteTR": "Bu tam biniş duası kaydında bölüm başlığı, besmele, hamd, iki âyet, üç hamd, üç tekbir ve bağışlanma duası yer alır. Yalnız iki âyetlik kısa kartla aynı kapsamda değildir; ayrı bir seçenek olarak gösterilir.",
+      "audioNoteEN": "This complete mounting-prayer chapter includes the heading, basmalah, praise, two Quranic verses, three praises, three takbirs and forgiveness prayer. It is broader than the existing short two-verse card and must be offered separately.",
+      "sourceName": "IslamHouse · Müslümanın Kalesi",
+      "note": "audio_chapter"
+    }
+  ],
+  "stillWithoutExactAudio": [
+    {
+      "id": "uyku",
+      "status": "Exact existing phrase order not found; valid different wording offered separately as uyku-alternatif."
+    },
+    {
+      "id": "iftar",
+      "status": "Exact existing Allahumma laka sumtu wording not found in validated adult sources; two other reported prayers offered separately as iftar-alternatif."
+    },
+    {
+      "id": "yolculuk",
+      "status": "Existing short Quran43:13-14 isolated range in chapter97 did not produce a sufficiently unambiguous final acoustic boundary; no guessed clip prepared. Full source chapter96 offered with full matching text separately."
+    },
+    {
+      "id": "ilim",
+      "status": "No matching licensed adult standalone Rabbi zidni ilma recording verified in the audited Hisn/Diyanet sources. Existing text retained; do not attach another knowledge prayer."
+    }
+  ],
+  "noAutomaticHifzTiming": "No text-derived or imported word timing created. Personal hifz split points remain manually selected on each exact recording. Only complete isolated supplications were cut, with independent acoustic separator evidence.",
+  "finalValidation": "All four prepared MP3s decoded fully at44100Hz stereo with zero decoder errors. Source and final hashes and byte lengths recorded."
+}

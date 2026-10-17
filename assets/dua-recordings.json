@@ -86,5 +86,57 @@
     "sourceName": "IslamHouse",
     "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
     "mime": "audio/mpeg"
+  },
+  {
+    "id": "uyanma",
+    "path": "/assets/dua-audio/remaining-uyanma.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_003_Hisn_Almuslim_Alshwehi.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+    "bytes": 112034,
+    "sha256": "bd9a76306a49f3049a9c94b9cf6c721d9257e97fa93b45e63a079f4143a125fe",
+    "kind": "complete-supplication-excerpt",
+    "reader": "Süleyman b. Muhammed eş-Şuveyhî · Müslümanın Kalesi",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "uyku-alternatif",
+    "path": "/assets/dua-audio/remaining-uyku-alternatif.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_030_Hisn_Almuslim_Alshwehi.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+    "bytes": 76065,
+    "sha256": "53599e66a3944fd84e0c4f0b242914d7be91384151de35c98fe3eb3c5514ef86",
+    "kind": "complete-supplication-excerpt",
+    "reader": "Süleyman b. Muhammed eş-Şuveyhî · Müslümanın Kalesi",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "iftar-alternatif",
+    "path": "/assets/dua-audio/remaining-iftar-alternatif.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_069_Hisn_Almuslim_Alshwehi.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+    "bytes": 377207,
+    "sha256": "0475f0e01e71604c99982c727c335d3a6efcae49b1593757770e427d4c9ba328",
+    "kind": "complete-audiobook-chapter",
+    "reader": "Süleyman b. Muhammed eş-Şuveyhî · Müslümanın Kalesi",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "yolculuk-alternatif",
+    "path": "/assets/dua-audio/remaining-yolculuk-alternatif.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_096_Hisn_Almuslim_Alshwehi.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+    "bytes": 643423,
+    "sha256": "cc0169e71788b2a6cbe61920a8afc3de454f0e32bc264e88e441d947212c1c9d",
+    "kind": "complete-audiobook-chapter",
+    "reader": "Süleyman b. Muhammed eş-Şuveyhî · Müslümanın Kalesi",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
   }
 ]

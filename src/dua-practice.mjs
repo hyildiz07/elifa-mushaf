@@ -3,6 +3,7 @@ import {prayerCopy} from './dua-copy.mjs';
 import {loadPrayerBytes,verifyPrayerResponse} from './prayer-audio-cache.mjs';
 import {PrayerPlayer,pcmExcerptWav,pcmRangesWav,restorePrayerState,validPrayerPreferences} from './dua-practice-core.mjs';
 import {mountPrayerStudy} from './dua-study-ui.mjs';
+import {bindPrayerMediaSession,createPrayerDecoder} from './dua-media-session.mjs';
 const ui=window.elifaPrayerUI;
 if(!ui)throw Error('Prayer screen anchors unavailable');
 const language=()=>window.ElifaLocale?.current?.()||'en';
@@ -47,6 +48,7 @@ function open(item){
   const chapter=record.kind==='complete-audiobook-chapter',lesson=record.kind==='teaching-recording',fullCaption=chapter?local('Dua ve açıklaması','Prayer and explanation'):lesson?local('Dua öğretim kaydı','Prayer teaching recording'):t('full');
   if(chapter){const note=document.createElement('p');note.className='prayerHelp';note.textContent=lang==='tr'?item.audioNoteTR||'Bu sesli kitap bölümü, duayla birlikte başlık ve rivayet açıklamalarını da içerir.':item.audioNoteEN||'This audiobook chapter includes the prayer together with headings and narration explanations.';box.append(note);}
   if(lesson){const note=document.createElement('p');note.className='prayerHelp';note.textContent=local('Öğretim kaydının tamamıdır; duadan önce kısa bir giriş bulunur. Parça sınırlarını kaydı dinleyerek seçebilirsin.','The complete teaching recording includes a short introduction before the prayer. Choose phrase boundaries while listening.');box.append(note);}
+  if(!chapter&&!lesson&&item.audioNoteTR){const note=document.createElement('p');note.className='prayerHelp';note.textContent=lang==='tr'?item.audioNoteTR:item.audioNoteEN;box.append(note);}
   const controls=document.createElement('div');controls.className='prayerGrid';
   const fields={};
   for(const [key,label,min,max,step]of [['repeat',globalText('pb_repeat'),1,99,1],['speed',globalText('pb_speed'),0.5,2,0.05],['wait',globalText('workflow_wait'),0,60,0.5]]){
@@ -63,34 +65,45 @@ function open(item){
   const offline=document.createElement('div');offline.className='prayerTransport';offline.append(download,removeDownload);
   box.append(controls,transport,selectionLabel,seek,time,status,offline);
   const audio=new Audio();audio.preload='none';
-  let closed=false,bytes=null,decoded=null,context=null,objectUrl=null,duration=0,range=null,activeRanges=null,abort=new AbortController();
+  let closed=false,bytes=null,decoded=null,objectUrl=null,duration=0,range=null,activeRanges=null,mediaSession=null,abort=new AbortController();
   const format=n=>Math.floor(n/60)+':'+String(Math.floor(n%60)).padStart(2,'0');
   const read=()=>({repeat:Number(fields.repeat.value),speed:Number(fields.speed.value),wait:Number(fields.wait.value)});
   const remember=()=>{const p=read();if(!validPrayerPreferences(p))return false;const ok=persist(item.id,{hash,...p,...(studyUI?.getState()||{clips:preferences.clips})});if(!ok)status.textContent=local('Bu cihazda kaydedilemedi.','Could not save on this device.');return ok;};
-  async function prepareRanges(ranges,isCurrent){bytes??=await verifiedBytes(record,abort.signal);if(closed||!isCurrent())throw Error('Closed');if(!decoded){const AudioContext=window.AudioContext||window.webkitAudioContext;if(!AudioContext)throw Error('No audio decoder');context=new AudioContext();decoded=await context.decodeAudioData(bytes.slice(0));duration=decoded.duration;}if(closed||!isCurrent())throw Error('Closed');const blob=new Blob([pcmRangesWav(decoded,ranges)],{type:'audio/wav'});activeRanges=ranges;range=ranges[0];if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=URL.createObjectURL(blob);return objectUrl;}
+  const decoder=createPrayerDecoder({createContext:()=>{const AudioContext=window.AudioContext||window.webkitAudioContext;if(!AudioContext)throw Error('No audio decoder');return new AudioContext();},onDecoded:result=>{decoded=result;duration=result.duration;}});
+  const ensureDecoded=()=>decoder.decode(bytes);
+  async function prepareRanges(ranges,isCurrent){bytes??=await verifiedBytes(record,abort.signal);if(closed||!isCurrent())throw Error('Closed');await ensureDecoded();if(closed||!isCurrent())throw Error('Closed');const blob=new Blob([pcmRangesWav(decoded,ranges)],{type:'audio/wav'});activeRanges=ranges;range=ranges[0];if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=URL.createObjectURL(blob);return objectUrl;}
   const player=new PrayerPlayer({audio,prepare:async (selected,isCurrent)=>{
     bytes??=await verifiedBytes(record,abort.signal);if(closed||!isCurrent())throw Error('Closed');
     let blob;
     if(selected){
-      if(!decoded){const AudioContext=window.AudioContext||window.webkitAudioContext;if(!AudioContext)throw Error('No audio decoder');context=new AudioContext();decoded=await context.decodeAudioData(bytes.slice(0));duration=decoded.duration;seek.max=duration;seek.disabled=false;}
+      await ensureDecoded();seek.max=duration;seek.disabled=false;
       if(closed||!isCurrent())throw Error('Closed');
       blob=new Blob([pcmExcerptWav(decoded,selected)],{type:'audio/wav'});
     }else blob=new Blob([bytes],{type:record.mime||'audio/mpeg'});
     if(closed||!isCurrent())throw Error('Closed');range=selected;activeRanges=selected?[selected]:null;if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=URL.createObjectURL(blob);return objectUrl;
   },preparePlan:prepareRanges,onState:(state,progress)=>{
     if(closed)return;
+    mediaSession?.update(state);
     full.classList.toggle('playing',state==='playing'&&progress?.phase==='full');
-    status.textContent=state==='complete'?t('complete'):state==='error'?t('error'):progress?(state==='waiting'?t('waiting')+' · ':'')+progress.current+' / '+progress.total:state==='loading'?'…':'';
+    status.textContent=state==='interrupted'?local('Oynatma duraklatıldı. Devam etmek için yeniden Başlat’a bas; seçili program baştan başlar.','Playback was paused. Press Play again to restart the selected program.'):state==='complete'?t('complete'):state==='error'?t('error'):progress?(state==='waiting'?t('waiting')+' · ':'')+progress.current+' / '+progress.total:state==='loading'?'…':'';
     status.dataset.state=state;
     if(progress?.ranges?.length)studyUI?.onProgress(progress);
   }});
-  function cleanup(){if(closed)return;closed=true;studyUI?.close();player.stop();abort.abort();audio.removeAttribute('src');audio.load();if(objectUrl)URL.revokeObjectURL(objectUrl);context?.close().catch(()=>{});if(activeClose===cleanup)activeClose=null;}
+  function launch(request){
+    if(closed)return;
+    mediaSession?.remember(request);
+    const pending=request.kind==='plan'?player.playPlan(request.ranges,request.preferences):player.play(request.range,request.preferences);
+    pending.catch(()=>{if(!closed){mediaSession?.update('error');status.textContent=t('error');status.dataset.state='error';}});
+  }
+  mediaSession=bindPrayerMediaSession({gateway:window.elifaMediaSession,title:item.title,reader:record.reader,play:launch,interrupt:()=>player.interrupt(),stop:()=>player.stop()});
+  const leavePage=()=>player.interrupt();window.addEventListener('pagehide',leavePage);
+  function cleanup(){if(closed)return;closed=true;studyUI?.close();player.stop();window.removeEventListener('pagehide',leavePage);mediaSession?.close();abort.abort();audio.removeAttribute('src');audio.load();if(objectUrl)URL.revokeObjectURL(objectUrl);decoder.close();if(activeClose===cleanup)activeClose=null;}
   activeClose=cleanup;back.addEventListener('elifa:dua-close',cleanup,{once:true});
   audio.onloadedmetadata=()=>{const label=activeRanges?.length>1?local('Birleştirme','Combined parts'):range?.name||fullCaption;selectionLabel.textContent=label+' · '+format(audio.duration);seek.setAttribute('aria-label',label);seek.min=0;seek.max=audio.duration;seek.disabled=!Number.isFinite(audio.duration);if(!range)duration=audio.duration;updateTime();};
   function updateTime(){if(closed)return;seek.value=audio.currentTime;time.textContent=format(audio.currentTime)+' / '+format(Number.isFinite(audio.duration)?audio.duration:0);}
   audio.ontimeupdate=updateTime;
   seek.oninput=()=>{audio.currentTime=Math.min(audio.duration||0,Math.max(0,Number(seek.value)));updateTime();};
-  full.onclick=()=>{const p=read();if(!validPrayerPreferences(p)){status.textContent=t('error');return;}remember();player.play(null,p);};
+  full.onclick=()=>{const p=read();if(!validPrayerPreferences(p)){status.textContent=t('error');return;}remember();launch({kind:'single',range:null,preferences:p});};
   stop.onclick=()=>player.stop();
   Object.values(fields).forEach(input=>input.onchange=()=>{player.stop();remember();});
   async function offlineState(){try{const cache=await caches.open(cacheName);let cached=await cache.match(record.path);if(cached){try{await verifyPrayerResponse(cached.clone(),record);}catch{await cache.delete(record.path);cached=null;}}if(closed)return;download.textContent=cached?t('ready'):t('download');download.disabled=!!cached;removeDownload.hidden=!cached;}catch{download.disabled=true;}}
@@ -104,8 +117,8 @@ function open(item){
     position(){let left=audio.currentTime;for(const r of activeRanges||[]){const length=r.end-r.start;if(left<=length)return r.start+left;left-=length;}return activeRanges?.at(-1)?.end??audio.currentTime;},
     duration:()=>duration,
     stop:()=>player.stop(),
-    playOne:clip=>{if(!validPrayerPreferences(read())){status.textContent=t('error');return;}remember();player.play(clip,read()).catch(()=>{status.textContent=t('error');});},
-    playPlan:(ranges,prefs)=>{if(!validPrayerPreferences(read())){status.textContent=t('error');return;}remember();player.playPlan(ranges,{...prefs,speed:read().speed,wait:read().wait}).catch(()=>{status.textContent=t('error');});}
+    playOne:clip=>{if(!validPrayerPreferences(read())){status.textContent=t('error');return;}remember();launch({kind:'single',range:{...clip},preferences:read()});},
+    playPlan:(ranges,prefs)=>{if(!validPrayerPreferences(read())){status.textContent=t('error');return;}remember();launch({kind:'plan',ranges:ranges.map(r=>({...r})),preferences:{...prefs,speed:read().speed,wait:read().wait}});}
   }});
   return true;
 }

@@ -56,7 +56,8 @@ export function buildPrayerStudyPlan(ranges,preferences){
 
 export class PrayerPlayer{
   constructor({audio,prepare,preparePlan,schedule=(fn,delay)=>globalThis.setTimeout(fn,delay),unschedule=id=>globalThis.clearTimeout(id),onState=()=>{}}){Object.assign(this,{audio,prepare,preparePlan,schedule,unschedule,onState});this.token=0;this.timer=null;this.active=false;this.from=0;}
-  stop(){this.token++;this.active=false;if(this.timer!==null)this.unschedule(this.timer);this.timer=null;this.audio.onended=null;this.audio.onerror=null;this.audio.pause();this.onState('stopped');}
+  stop(){this.token++;this.active=false;if(this.timer!==null)this.unschedule(this.timer);this.timer=null;this.audio.onended=null;this.audio.onerror=null;this.audio.onpause=null;this.audio.pause();this.onState('stopped');}
+  interrupt(){if(!this.active)return;this.stop();this.onState('interrupted');}
   async play(range,preferences){
     if(!validPrayerPreferences(preferences)){this.stop();throw Error('Invalid prayer settings');}
     const steps=(function*(){for(let current=1;current<=preferences.repeat;current++)yield {ranges:range?[range]:[],phase:range?'part':'full',partIndex:0,current,total:preferences.repeat,tour:1,tours:1};})();
@@ -73,7 +74,7 @@ export class PrayerPlayer{
     const run=async()=>{
       if(token!==this.token)return;
       const next=pending||steps.next();pending=null;
-      if(next.done){this.active=false;this.audio.onended=null;this.audio.onerror=null;this.onState('complete');return;}
+      if(next.done){this.active=false;this.audio.onended=null;this.audio.onerror=null;this.audio.onpause=null;this.onState('complete');return;}
       const step=next.value,number=++stepNumber,key=JSON.stringify(step.ranges.map(r=>[r.start,r.end]));
       const isCurrent=()=>token===this.token&&number===stepNumber;
       this.onState('loading',step);
@@ -82,18 +83,19 @@ export class PrayerPlayer{
       this.from=step.ranges[0]?.start||0;
       this.audio.currentTime=0;this.audio.playbackRate=preferences.speed;
       this.audio.preservesPitch=true;this.audio.webkitPreservesPitch=true;this.audio.mozPreservesPitch=true;
-      let ended=false;
+      let ended=false,started=false;
+      this.audio.onpause=()=>{if(isCurrent()&&started&&!ended&&this.audio.paused&&!this.audio.ended)this.interrupt();};
       this.audio.onerror=()=>{if(isCurrent())fail();};
       this.audio.onended=()=>{
         if(!isCurrent()||ended)return;ended=true;this.audio.onended=null;
         // Pulling a single lookahead avoids a spurious waiting state at completion.
         const following=steps.next();
-        if(following.done){this.active=false;this.audio.onerror=null;this.onState('complete',step);return;}
+        if(following.done){this.active=false;this.audio.onerror=null;this.audio.onpause=null;this.onState('complete',step);return;}
         pending=following;
         this.onState('waiting',step);
         this.timer=this.schedule(()=>{this.timer=null;return run().catch(fail);},preferences.wait*1000);
       };
-      await this.audio.play();if(isCurrent()&&!ended)this.onState('playing',step);
+      await this.audio.play();started=true;if(isCurrent()&&!ended)this.onState('playing',step);
     };
     try{
       await run();

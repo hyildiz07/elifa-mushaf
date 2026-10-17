@@ -54,7 +54,8 @@ test('important daily supplications have distinct ids, sources, Arabic, pronunci
     const item=prayer(id);assert.ok(item);
     assert.equal(new URL(item.source).protocol,'https:');assert.match(new URL(item.source).hostname,/(^|\.)diyanet\.gov\.tr$/u);
     for(const text of [item.ar,item.ok,item.meal.tr,item.meal.en])assert.ok(text.trim());
-    assert.equal(item.recording,undefined,'voice availability is not inferred from text');
+    if(id==='uyanma')assert.equal(item.recording.id,'uyanma');
+    else assert.equal(item.recording,undefined,'voice availability is not inferred from text');
   }
   assert.equal(prayer('ilim').quran.surah,20);assert.equal(prayer('ilim').quran.ayah,114);
 });
@@ -63,4 +64,21 @@ test('ordinary Subhaneke no longer mixes a funeral-only optional phrase into its
   assert.ok(!prayer('subhaneke').ok.includes('(ve celle senâük)'));
   assert.ok(prayer('subhaneke').guide.tr[0].includes('Cenaze namazında'));
   assert.ok(original[0].ok.includes('(ve celle senâük)'),'the source data is not mutated');
+});
+
+test('recorded alternatives remain separate from the previous wording and disclose full audiobook scope',()=>{
+  for(const id of ['uyku','iftar','yolculuk']){
+    const original=prayer(id),alternative=prayer(id+'-alternatif');
+    assert.ok(alternative);assert.notEqual(alternative.ar,original.ar);
+    assert.equal(original.recording,undefined,'a different reading cannot be silently attached to the original');
+    assert.equal(alternative.recording.id,id+'-alternatif');
+    assert.ok(alternative.recording.reader);assert.ok(alternative.audioNoteTR);assert.ok(alternative.audioNoteEN);
+    assert.ok(alternative.guideSource);
+    for(const value of [alternative.ar,alternative.ok,alternative.meal.tr,alternative.meal.en])assert.ok(value&&!value.includes('\\n'),'paragraphs must be real line breaks, not escaped display text');
+    if(id!=='uyku')assert.equal(alternative.recording.kind,'complete-audiobook-chapter');
+  }
+  const boarding=plain(prayer('yolculuk-alternatif').ar);
+  assert.ok(boarding.includes(plain(prayer('yolculuk').ar)),'the short passage is included in the full mounting prayer');
+  assert.match(boarding,/فاغفر لي/u);
+  assert.equal(prayer('uyanma').recording.kind,'complete-supplication-excerpt');
 });

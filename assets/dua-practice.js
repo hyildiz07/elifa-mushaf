@@ -88,6 +88,58 @@
       sourceName: "IslamHouse",
       permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
       mime: "audio/mpeg"
+    },
+    {
+      id: "uyanma",
+      path: "/assets/dua-audio/remaining-uyanma.mp3",
+      source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_003_Hisn_Almuslim_Alshwehi.mp3",
+      sourcePage: "https://islamhouse.com/ar/audios/2799103/",
+      bytes: 112034,
+      sha256: "bd9a76306a49f3049a9c94b9cf6c721d9257e97fa93b45e63a079f4143a125fe",
+      kind: "complete-supplication-excerpt",
+      reader: "S\xFCleyman b. Muhammed e\u015F-\u015Euveyh\xEE \xB7 M\xFCsl\xFCman\u0131n Kalesi",
+      sourceName: "IslamHouse",
+      permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
+      mime: "audio/mpeg"
+    },
+    {
+      id: "uyku-alternatif",
+      path: "/assets/dua-audio/remaining-uyku-alternatif.mp3",
+      source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_030_Hisn_Almuslim_Alshwehi.mp3",
+      sourcePage: "https://islamhouse.com/ar/audios/2799103/",
+      bytes: 76065,
+      sha256: "53599e66a3944fd84e0c4f0b242914d7be91384151de35c98fe3eb3c5514ef86",
+      kind: "complete-supplication-excerpt",
+      reader: "S\xFCleyman b. Muhammed e\u015F-\u015Euveyh\xEE \xB7 M\xFCsl\xFCman\u0131n Kalesi",
+      sourceName: "IslamHouse",
+      permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
+      mime: "audio/mpeg"
+    },
+    {
+      id: "iftar-alternatif",
+      path: "/assets/dua-audio/remaining-iftar-alternatif.mp3",
+      source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_069_Hisn_Almuslim_Alshwehi.mp3",
+      sourcePage: "https://islamhouse.com/ar/audios/2799103/",
+      bytes: 377207,
+      sha256: "0475f0e01e71604c99982c727c335d3a6efcae49b1593757770e427d4c9ba328",
+      kind: "complete-audiobook-chapter",
+      reader: "S\xFCleyman b. Muhammed e\u015F-\u015Euveyh\xEE \xB7 M\xFCsl\xFCman\u0131n Kalesi",
+      sourceName: "IslamHouse",
+      permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
+      mime: "audio/mpeg"
+    },
+    {
+      id: "yolculuk-alternatif",
+      path: "/assets/dua-audio/remaining-yolculuk-alternatif.mp3",
+      source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_096_Hisn_Almuslim_Alshwehi.mp3",
+      sourcePage: "https://islamhouse.com/ar/audios/2799103/",
+      bytes: 643423,
+      sha256: "cc0169e71788b2a6cbe61920a8afc3de454f0e32bc264e88e441d947212c1c9d",
+      kind: "complete-audiobook-chapter",
+      reader: "S\xFCleyman b. Muhammed e\u015F-\u015Euveyh\xEE \xB7 M\xFCsl\xFCman\u0131n Kalesi",
+      sourceName: "IslamHouse",
+      permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
+      mime: "audio/mpeg"
     }
   ];
 
@@ -182,6 +234,58 @@
     meal: { tr: "Rabbim! \u0130lmimi art\u0131r.", en: "My Lord, increase me in knowledge." }
   }];
 
+  // src/dua-recorded-alternatives.mjs
+  var recordedAlternatives = [
+    {
+      "id": "uyku-alternatif",
+      "title": "Uyumadan \xF6nce \xB7 alternatif okunu\u015F",
+      "source": "https://islamhouse.com/ar/audios/2799103/",
+      "ar": "\u0628\u0650\u0627\u0633\u0652\u0645\u0650\u0643\u064E \u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0623\u064E\u0645\u064F\u0648\u062A\u064F \u0648\u064E\u0623\u064E\u062D\u0652\u064A\u064E\u0627.",
+      "ok": "Bismike All\xE2h\xFCmme em\xFBt\xFC ve ahy\xE2.",
+      "meal": {
+        "tr": "Allah\u2019\u0131m! Senin ad\u0131nla \xF6l\xFCr, senin ad\u0131nla ya\u015Far\u0131m.",
+        "en": "In Your name, O Allah, I die and I live."
+      },
+      "audioNoteTR": "S\xFCleyman e\u015F-\u015Euveyhi\u2019nin M\xFCsl\xFCman\u0131n Kalesi okumas\u0131ndan tam dua b\xF6l\xFCm\xFCd\xFCr. \u201CAllah\xFCmme bismike ahy\xE2 ve bismike em\xFBt\u201D bi\xE7imindeki di\u011Fer rivayetle ayn\u0131 laf\u0131z de\u011Fildir; ayr\u0131 bir alternatif olarak g\xF6sterilir.",
+      "audioNoteEN": "A complete supplication excerpt from Sulayman al-Shuwayhi\u2019s Fortress of the Muslim reading. Its wording differs from the other bedtime variant and is shown separately.",
+      "sourceName": "IslamHouse \xB7 M\xFCsl\xFCman\u0131n Kalesi",
+      "note": "adult_prayer_excerpt",
+      "guideSource": "https://islamhouse.com/ar/books/2522"
+    },
+    {
+      "id": "iftar-alternatif",
+      "title": "\u0130ftar \xB7 iki alternatif dua",
+      "source": "https://islamhouse.com/ar/audios/2799103/",
+      "ar": "\u0630\u064E\u0647\u064E\u0628\u064E \u0627\u0644\u0638\u064E\u0651\u0645\u064E\u0623\u064F \u0648\u064E\u0627\u0628\u0652\u062A\u064E\u0644\u064E\u0651\u062A\u0650 \u0627\u0644\u0652\u0639\u064F\u0631\u064F\u0648\u0642\u064F \u0648\u064E\u062B\u064E\u0628\u064E\u062A\u064E \u0627\u0644\u0652\u0623\u064E\u062C\u0652\u0631\u064F \u0625\u0650\u0646\u0652 \u0634\u064E\u0627\u0621\u064E \u0627\u0644\u0644\u064E\u0651\u0647\u064F.\n\n\u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0625\u0650\u0646\u0650\u0651\u064A \u0623\u064E\u0633\u0652\u0623\u064E\u0644\u064F\u0643\u064E \u0628\u0650\u0631\u064E\u062D\u0652\u0645\u064E\u062A\u0650\u0643\u064E \u0627\u0644\u064E\u0651\u062A\u0650\u064A \u0648\u064E\u0633\u0650\u0639\u064E\u062A\u0652 \u0643\u064F\u0644\u064E\u0651 \u0634\u064E\u064A\u0652\u0621\u064D \u0623\u064E\u0646\u0652 \u062A\u064E\u063A\u0652\u0641\u0650\u0631\u064E \u0644\u0650\u064A.",
+      "ok": "Zehebez-zama\xFC vebtelletil-ur\xFBku ve sebetel-ecru in \u015F\xE2all\xE2h.\n\nAll\xE2h\xFCmme inn\xEE es\u2019el\xFCke bi-rahmetikellet\xEE vesiat k\xFClle \u015Fey\u2019in en ta\u011Ffira l\xEE.",
+      "meal": {
+        "tr": "Susuzluk gitti, damarlar suya kavu\u015Ftu; Allah dilerse ecir kesinle\u015Fti.\n\nAllah\u2019\u0131m! Her \u015Feyi ku\u015Fatan rahmetinle beni ba\u011F\u0131\u015Flaman\u0131 dilerim.",
+        "en": "Thirst has gone, the veins are moistened, and the reward is assured, if Allah wills.\n\nO Allah, I ask You by Your mercy which encompasses everything to forgive me."
+      },
+      "audioNoteTR": "B\xF6l\xFCm ba\u015Fl\u0131\u011F\u0131 ve \u201Cder\u201D a\xE7\u0131klamalar\u0131yla iki dua okunur. Bu, \u201CAllah\xFCmme leke sumt\xFC\u2026\u201D duas\u0131n\u0131n seslendirmesi de\u011Fildir. \u0130lk dua Eb\xFB D\xE2v\xFBd 2357\u2019de; ikinci dua Hisn kitab\u0131nda Abdullah b. Amr\u2019\u0131n duas\u0131 olarak aktar\u0131l\u0131r. \u0130kisi ayn\u0131 rivayet derecesindeymi\u015F gibi sunulmaz.",
+      "audioNoteEN": "The chapter reads two prayers with its heading and \u201Che says\u201D instructions. It is not a recording of \u201CAllahumma laka sumtu\u201D. The first is reported in Abu Dawud2357; Hisn attributes the second to Abdullah ibn Amr\u2019s own supplication. Their provenance is distinguished.",
+      "sourceName": "IslamHouse \xB7 M\xFCsl\xFCman\u0131n Kalesi",
+      "note": "audio_chapter",
+      "guideSource": "https://islamhouse.com/ar/books/2522"
+    },
+    {
+      "id": "yolculuk-alternatif",
+      "title": "Binite binerken \xB7 tam dua",
+      "source": "https://islamhouse.com/ar/audios/2799103/",
+      "ar": "\u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u064E\u0651\u0647\u0650. \u0627\u0644\u0652\u062D\u064E\u0645\u0652\u062F\u064F \u0644\u0650\u0644\u064E\u0651\u0647\u0650. \u0633\u064F\u0628\u0652\u062D\u064E\u0627\u0646\u064E \u0627\u0644\u064E\u0651\u0630\u0650\u064A \u0633\u064E\u062E\u064E\u0651\u0631\u064E \u0644\u064E\u0646\u064E\u0627 \u0647\u064E\u0630\u064E\u0627 \u0648\u064E\u0645\u064E\u0627 \u0643\u064F\u0646\u064E\u0651\u0627 \u0644\u064E\u0647\u064F \u0645\u064F\u0642\u0652\u0631\u0650\u0646\u0650\u064A\u0646\u064E. \u0648\u064E\u0625\u0650\u0646\u064E\u0651\u0627 \u0625\u0650\u0644\u064E\u0649 \u0631\u064E\u0628\u0650\u0651\u0646\u064E\u0627 \u0644\u064E\u0645\u064F\u0646\u0652\u0642\u064E\u0644\u0650\u0628\u064F\u0648\u0646\u064E. \u0627\u0644\u0652\u062D\u064E\u0645\u0652\u062F\u064F \u0644\u0650\u0644\u064E\u0651\u0647\u0650\u060C \u0627\u0644\u0652\u062D\u064E\u0645\u0652\u062F\u064F \u0644\u0650\u0644\u064E\u0651\u0647\u0650\u060C \u0627\u0644\u0652\u062D\u064E\u0645\u0652\u062F\u064F \u0644\u0650\u0644\u064E\u0651\u0647\u0650. \u0627\u0644\u0644\u064E\u0651\u0647\u064F \u0623\u064E\u0643\u0652\u0628\u064E\u0631\u064F\u060C \u0627\u0644\u0644\u064E\u0651\u0647\u064F \u0623\u064E\u0643\u0652\u0628\u064E\u0631\u064F\u060C \u0627\u0644\u0644\u064E\u0651\u0647\u064F \u0623\u064E\u0643\u0652\u0628\u064E\u0631\u064F. \u0633\u064F\u0628\u0652\u062D\u064E\u0627\u0646\u064E\u0643\u064E \u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0625\u0650\u0646\u0650\u0651\u064A \u0638\u064E\u0644\u064E\u0645\u0652\u062A\u064F \u0646\u064E\u0641\u0652\u0633\u0650\u064A \u0641\u064E\u0627\u063A\u0652\u0641\u0650\u0631\u0652 \u0644\u0650\u064A\u060C \u0641\u064E\u0625\u0650\u0646\u064E\u0651\u0647\u064F \u0644\u064E\u0627 \u064A\u064E\u063A\u0652\u0641\u0650\u0631\u064F \u0627\u0644\u0630\u064F\u0651\u0646\u064F\u0648\u0628\u064E \u0625\u0650\u0644\u064E\u0651\u0627 \u0623\u064E\u0646\u0652\u062A\u064E.",
+      "ok": "Bismill\xE2h. Elhamd\xFC lill\xE2h. S\xFCbh\xE2nellez\xEE sehhara len\xE2 h\xE2z\xE2 ve m\xE2 k\xFCnn\xE2 leh\xFB mukrin\xEEn. Ve inn\xE2 il\xE2 Rabbin\xE2 le-m\xFCnkalib\xFBn. Elhamd\xFC lill\xE2h, Elhamd\xFC lill\xE2h, Elhamd\xFC lill\xE2h. All\xE2h\xFC ekber, All\xE2h\xFC ekber, All\xE2h\xFC ekber. S\xFCbh\xE2nekell\xE2h\xFCmme inn\xEE zalemt\xFC nefs\xEE fa\u011Ffir l\xEE, fe-inneh\xFB l\xE2 ya\u011Ffiruz-z\xFCn\xFBbe ill\xE2 ente.",
+      "meal": {
+        "tr": "Allah\u2019\u0131n ad\u0131yla. Allah\u2019a hamdolsun. Bunu hizmetimize veren Allah\u2019\u0131 her eksiklikten uzak tutar\u0131z; yoksa bizim buna g\xFCc\xFCm\xFCz yetmezdi. Rabbimize d\xF6nece\u011Fiz. Allah\u2019a hamdolsun (\xFC\xE7 kez). Allah en b\xFCy\xFCkt\xFCr (\xFC\xE7 kez). Allah\u2019\u0131m! Seni her eksiklikten uzak tutar\u0131m. Kendime haks\u0131zl\u0131k ettim; beni ba\u011F\u0131\u015Fla. G\xFCnahlar\u0131 ancak sen ba\u011F\u0131\u015Flars\u0131n.",
+        "en": "In Allah\u2019s name. Praise belongs to Allah. Glory be to Him who placed this at our service; we could not have mastered it ourselves. We will return to our Lord. Praise belongs to Allah (three times). Allah is the greatest (three times). O Allah, You are free of imperfection. I have wronged myself; forgive me, for only You forgive sins."
+      },
+      "audioNoteTR": "Bu tam bini\u015F duas\u0131 kayd\u0131nda b\xF6l\xFCm ba\u015Fl\u0131\u011F\u0131, besmele, hamd, iki \xE2yet, \xFC\xE7 hamd, \xFC\xE7 tekbir ve ba\u011F\u0131\u015Flanma duas\u0131 yer al\u0131r. Yaln\u0131z iki \xE2yetlik k\u0131sa kartla ayn\u0131 kapsamda de\u011Fildir; ayr\u0131 bir se\xE7enek olarak g\xF6sterilir.",
+      "audioNoteEN": "This complete mounting-prayer chapter includes the heading, basmalah, praise, two Quranic verses, three praises, three takbirs and forgiveness prayer. It is broader than the existing short two-verse card and must be offered separately.",
+      "sourceName": "IslamHouse \xB7 M\xFCsl\xFCman\u0131n Kalesi",
+      "note": "audio_chapter",
+      "guideSource": "https://hadislerleislam.diyanet.gov.tr/sayfa.php?CILT=1&SAYFA=180"
+    }
+  ];
+
   // src/dua-catalog.mjs
   var portal = "https://namaz.diyanet.gov.tr/namaz/#sureler-dualar.html";
   var book2 = "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf";
@@ -238,7 +342,8 @@
       meal: { tr: "Allah\u2019\u0131m! Kur\u2019an\u2019\u0131 hak ile indirdin. Ona ilgimi art\u0131r; onu g\xF6z\xFCme nur, g\xF6nl\xFCme \u015Fifa k\u0131l. Dilimi onunla s\xFCsle, y\xFCz\xFCm\xFC g\xFCzelle\u015Ftir, bedenimi g\xFC\xE7lendir. Gece ve g\xFCnd\xFCz sana itaat ederek onu okumay\u0131 nasip et; beni Peygamberimiz ve onun se\xE7kin yak\u0131nlar\u0131yla ha\u015Fret. Senin r\u0131zan, iman ehlinin kabirlerinin ayd\u0131nlanmas\u0131 ve Peygamberimizin ruhu i\xE7in; \u015Feytandan uzakla\u015Fmak, g\xFCnahlar\u0131n ba\u011F\u0131\u015Flanmas\u0131, t\xF6vbenin kabul\xFC, derecelerin y\xFCkselmesi, cehennemden kurtulu\u015F, iman\u0131n devam\u0131 ve sana kavu\u015Fmak niyetiyle okuyorum. Rahmetinle kabul et. Hamd \xE2lemlerin Rabbi Allah\u2019ad\u0131r.", en: "O Allah, You sent the Quran down in truth. Increase my desire for it; make it light for my sight and healing for my heart. Adorn my speech and strengthen me through it. Grant me its recitation in obedience to You by night and day, and gather me with the Prophet and his righteous family. I intend this recitation for Your pleasure, for light in the believers\u2019 graves, and for the Prophet; for protection from Satan, forgiveness, acceptance of repentance, higher rank, deliverance from the Fire, lasting faith and meeting You. Accept it through Your mercy. Praise belongs to Allah, Lord of all worlds." },
       note: "traditional_prayer"
     }, ...extraPrayers];
-    return entries.map((entry) => ({ ...entry, recording: entry.recording || record(entry.id) }));
+    const withAlternatives = entries.flatMap((entry) => [entry, ...recordedAlternatives.filter((a) => a.id === entry.id + "-alternatif")]);
+    return withAlternatives.map((entry) => ({ ...entry, recording: entry.recording || record(entry.id) }));
   }
 
   // src/dua-copy.mjs
@@ -374,8 +479,14 @@
       this.timer = null;
       this.audio.onended = null;
       this.audio.onerror = null;
+      this.audio.onpause = null;
       this.audio.pause();
       this.onState("stopped");
+    }
+    interrupt() {
+      if (!this.active) return;
+      this.stop();
+      this.onState("interrupted");
     }
     async play(range, preferences) {
       if (!validPrayerPreferences(preferences)) {
@@ -417,6 +528,7 @@
           this.active = false;
           this.audio.onended = null;
           this.audio.onerror = null;
+          this.audio.onpause = null;
           this.onState("complete");
           return;
         }
@@ -436,7 +548,10 @@
         this.audio.preservesPitch = true;
         this.audio.webkitPreservesPitch = true;
         this.audio.mozPreservesPitch = true;
-        let ended = false;
+        let ended = false, started = false;
+        this.audio.onpause = () => {
+          if (isCurrent() && started && !ended && this.audio.paused && !this.audio.ended) this.interrupt();
+        };
         this.audio.onerror = () => {
           if (isCurrent()) fail();
         };
@@ -448,6 +563,7 @@
           if (following.done) {
             this.active = false;
             this.audio.onerror = null;
+            this.audio.onpause = null;
             this.onState("complete", step);
             return;
           }
@@ -459,6 +575,7 @@
           }, preferences.wait * 1e3);
         };
         await this.audio.play();
+        started = true;
         if (isCurrent() && !ended) this.onState("playing", step);
       };
       try {
@@ -650,6 +767,35 @@
       markers.append(field);
     }
     markers.hidden = !audio;
+    for (const key of ["start", "end"]) {
+      const nudge = document.createElement("div");
+      nudge.className = "prayerFineTune";
+      for (const delta of [-0.1, 0.1]) {
+        const b = button(delta < 0 ? local2("\u2212 0,1 sn", "\u2212 0.1 s") : local2("+ 0,1 sn", "+ 0.1 s"), () => {
+          const current = Number(bounds[key].value);
+          bounds[key].value = Math.min(audio?.duration() || Infinity, Math.max(0, (Number.isFinite(current) ? current : 0) + delta)).toFixed(2);
+        });
+        b.setAttribute("aria-label", local2(key === "start" ? "Ba\u015Flang\u0131\xE7" : "Biti\u015F", key === "start" ? "Start" : "End") + " " + (delta < 0 ? "\u2212" : "+") + " 0.1 " + local2("saniye", "seconds"));
+        nudge.append(b);
+      }
+      bounds[key].after(nudge);
+    }
+    const audition = button(local2("\u25B6 Se\xE7ti\u011Fim ses aral\u0131\u011F\u0131n\u0131 dene", "\u25B6 Preview selected audio"), () => {
+      const p = { start: Number(bounds.start.value), end: Number(bounds.end.value), name: local2("Par\xE7a \xF6nizleme", "Part preview") };
+      if (audio && validExcerpt(p, audio.duration())) audio.playOne(p);
+      else feedback.textContent = local2("\xD6nce duay\u0131 dinle ve en az 0,2 saniyelik bir ba\u015Flang\u0131\xE7\u2013biti\u015F se\xE7.", "Listen to the recording first and choose a start and end at least 0.2 seconds apart.");
+    });
+    audition.hidden = !audio;
+    editor.append(audition);
+    const carry = button(local2("Son par\xE7an\u0131n bitti\u011Fi yerden devam et", "Continue from the last part\u2019s end"), () => {
+      const last = parts.at(-1);
+      if (Number.isFinite(last?.end)) {
+        bounds.start.value = last.end.toFixed(2);
+        bounds.end.value = last.end.toFixed(2);
+      } else feedback.textContent = local2("\xD6nce son par\xE7an\u0131n ses biti\u015Fini ayarla.", "Set the last part\u2019s audio end first.");
+    });
+    carry.hidden = !audio;
+    editor.append(carry);
     const title = document.createElement("input");
     title.maxLength = 80;
     title.placeholder = local2("Par\xE7a ad\u0131 (iste\u011Fe ba\u011Fl\u0131)", "Part name (optional)");
@@ -926,6 +1072,78 @@
     } };
   }
 
+  // src/dua-media-session.mjs
+  function bindPrayerMediaSession({ gateway, title, reader, play, interrupt, stop }) {
+    let closed = false, restart = null;
+    const owner = gateway?.claim?.({
+      metadata: { title, artist: reader || "Elifa Mushaf", album: "Elifa Mushaf \xB7 Dua" },
+      handlers: { play: () => {
+        if (!closed && restart) play(restart);
+      }, pause: () => {
+        if (!closed) interrupt();
+      }, stop: () => {
+        if (!closed) stop();
+      } }
+    });
+    return {
+      remember(request) {
+        restart = request;
+      },
+      update(state) {
+        if (!closed) owner?.update?.(state === "playing" ? "playing" : state === "stopped" || state === "complete" || state === "error" ? "none" : "paused");
+      },
+      close() {
+        if (closed) return;
+        closed = true;
+        restart = null;
+        owner?.release?.();
+      }
+    };
+  }
+  function createPrayerDecoder({ createContext, onDecoded = () => {
+  } }) {
+    let closed = false, decoded = null, pending = null, context = null;
+    return {
+      async decode(bytes) {
+        if (closed) throw Error("Closed prayer decoder");
+        if (decoded) return decoded;
+        if (!pending) pending = (async () => {
+          const decoder = createContext();
+          context = decoder;
+          try {
+            const result = await decoder.decodeAudioData(bytes.slice(0));
+            if (closed) throw Error("Closed prayer decoder");
+            decoded = result;
+            onDecoded(result);
+            return result;
+          } finally {
+            if (context === decoder) {
+              context = null;
+              try {
+                await decoder.close();
+              } catch {
+              }
+            }
+          }
+        })().finally(() => {
+          pending = null;
+        });
+        return pending;
+      },
+      close() {
+        closed = true;
+        decoded = null;
+        const decoder = context;
+        context = null;
+        if (decoder) try {
+          Promise.resolve(decoder.close()).catch(() => {
+          });
+        } catch {
+        }
+      }
+    };
+  }
+
   // src/dua-practice.mjs
   var ui = window.elifaPrayerUI;
   if (!ui) throw Error("Prayer screen anchors unavailable");
@@ -1066,6 +1284,12 @@
       note.textContent = local("\xD6\u011Fretim kayd\u0131n\u0131n tamam\u0131d\u0131r; duadan \xF6nce k\u0131sa bir giri\u015F bulunur. Par\xE7a s\u0131n\u0131rlar\u0131n\u0131 kayd\u0131 dinleyerek se\xE7ebilirsin.", "The complete teaching recording includes a short introduction before the prayer. Choose phrase boundaries while listening.");
       box.append(note);
     }
+    if (!chapter && !lesson && item.audioNoteTR) {
+      const note = document.createElement("p");
+      note.className = "prayerHelp";
+      note.textContent = lang === "tr" ? item.audioNoteTR : item.audioNoteEN;
+      box.append(note);
+    }
     const controls = document.createElement("div");
     controls.className = "prayerGrid";
     const fields = {};
@@ -1128,7 +1352,7 @@
     box.append(controls, transport, selectionLabel, seek, time, status, offline);
     const audio = new Audio();
     audio.preload = "none";
-    let closed = false, bytes = null, decoded = null, context = null, objectUrl = null, duration = 0, range = null, activeRanges = null, abort = new AbortController();
+    let closed = false, bytes = null, decoded = null, objectUrl = null, duration = 0, range = null, activeRanges = null, mediaSession = null, abort = new AbortController();
     const format = (n) => Math.floor(n / 60) + ":" + String(Math.floor(n % 60)).padStart(2, "0");
     const read = () => ({ repeat: Number(fields.repeat.value), speed: Number(fields.speed.value), wait: Number(fields.wait.value) });
     const remember = () => {
@@ -1138,16 +1362,19 @@
       if (!ok) status.textContent = local("Bu cihazda kaydedilemedi.", "Could not save on this device.");
       return ok;
     };
+    const decoder = createPrayerDecoder({ createContext: () => {
+      const AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContext) throw Error("No audio decoder");
+      return new AudioContext();
+    }, onDecoded: (result) => {
+      decoded = result;
+      duration = result.duration;
+    } });
+    const ensureDecoded = () => decoder.decode(bytes);
     async function prepareRanges(ranges, isCurrent) {
       bytes ?? (bytes = await verifiedBytes(record2, abort.signal));
       if (closed || !isCurrent()) throw Error("Closed");
-      if (!decoded) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContext) throw Error("No audio decoder");
-        context = new AudioContext();
-        decoded = await context.decodeAudioData(bytes.slice(0));
-        duration = decoded.duration;
-      }
+      await ensureDecoded();
       if (closed || !isCurrent()) throw Error("Closed");
       const blob = new Blob([pcmRangesWav(decoded, ranges)], { type: "audio/wav" });
       activeRanges = ranges;
@@ -1161,15 +1388,9 @@
       if (closed || !isCurrent()) throw Error("Closed");
       let blob;
       if (selected) {
-        if (!decoded) {
-          const AudioContext = window.AudioContext || window.webkitAudioContext;
-          if (!AudioContext) throw Error("No audio decoder");
-          context = new AudioContext();
-          decoded = await context.decodeAudioData(bytes.slice(0));
-          duration = decoded.duration;
-          seek.max = duration;
-          seek.disabled = false;
-        }
+        await ensureDecoded();
+        seek.max = duration;
+        seek.disabled = false;
         if (closed || !isCurrent()) throw Error("Closed");
         blob = new Blob([pcmExcerptWav(decoded, selected)], { type: "audio/wav" });
       } else blob = new Blob([bytes], { type: record2.mime || "audio/mpeg" });
@@ -1181,22 +1402,39 @@
       return objectUrl;
     }, preparePlan: prepareRanges, onState: (state, progress) => {
       if (closed) return;
+      mediaSession?.update(state);
       full.classList.toggle("playing", state === "playing" && progress?.phase === "full");
-      status.textContent = state === "complete" ? t("complete") : state === "error" ? t("error") : progress ? (state === "waiting" ? t("waiting") + " \xB7 " : "") + progress.current + " / " + progress.total : state === "loading" ? "\u2026" : "";
+      status.textContent = state === "interrupted" ? local("Oynatma duraklat\u0131ld\u0131. Devam etmek i\xE7in yeniden Ba\u015Flat\u2019a bas; se\xE7ili program ba\u015Ftan ba\u015Flar.", "Playback was paused. Press Play again to restart the selected program.") : state === "complete" ? t("complete") : state === "error" ? t("error") : progress ? (state === "waiting" ? t("waiting") + " \xB7 " : "") + progress.current + " / " + progress.total : state === "loading" ? "\u2026" : "";
       status.dataset.state = state;
       if (progress?.ranges?.length) studyUI?.onProgress(progress);
     } });
+    function launch(request) {
+      if (closed) return;
+      mediaSession?.remember(request);
+      const pending = request.kind === "plan" ? player.playPlan(request.ranges, request.preferences) : player.play(request.range, request.preferences);
+      pending.catch(() => {
+        if (!closed) {
+          mediaSession?.update("error");
+          status.textContent = t("error");
+          status.dataset.state = "error";
+        }
+      });
+    }
+    mediaSession = bindPrayerMediaSession({ gateway: window.elifaMediaSession, title: item.title, reader: record2.reader, play: launch, interrupt: () => player.interrupt(), stop: () => player.stop() });
+    const leavePage = () => player.interrupt();
+    window.addEventListener("pagehide", leavePage);
     function cleanup() {
       if (closed) return;
       closed = true;
       studyUI?.close();
       player.stop();
+      window.removeEventListener("pagehide", leavePage);
+      mediaSession?.close();
       abort.abort();
       audio.removeAttribute("src");
       audio.load();
       if (objectUrl) URL.revokeObjectURL(objectUrl);
-      context?.close().catch(() => {
-      });
+      decoder.close();
       if (activeClose === cleanup) activeClose = null;
     }
     activeClose = cleanup;
@@ -1228,7 +1466,7 @@
         return;
       }
       remember();
-      player.play(null, p);
+      launch({ kind: "single", range: null, preferences: p });
     };
     stop.onclick = () => player.stop();
     Object.values(fields).forEach((input) => input.onchange = () => {
@@ -1300,9 +1538,7 @@
           return;
         }
         remember();
-        player.play(clip, read()).catch(() => {
-          status.textContent = t("error");
-        });
+        launch({ kind: "single", range: { ...clip }, preferences: read() });
       },
       playPlan: (ranges, prefs) => {
         if (!validPrayerPreferences(read())) {
@@ -1310,9 +1546,7 @@
           return;
         }
         remember();
-        player.playPlan(ranges, { ...prefs, speed: read().speed, wait: read().wait }).catch(() => {
-          status.textContent = t("error");
-        });
+        launch({ kind: "plan", ranges: ranges.map((r) => ({ ...r })), preferences: { ...prefs, speed: read().speed, wait: read().wait } });
       }
     } });
     return true;

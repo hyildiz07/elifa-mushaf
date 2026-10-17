@@ -5449,7 +5449,7 @@ window.elifaLog=function(event,params){
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
 <link rel="stylesheet" href="/assets/home-study-polish.css?v=336">
 <link rel="stylesheet" href="/assets/study-workflow.css?v=337">
-<link rel="stylesheet" href="/assets/dua-practice.css?v=343">
+<link rel="stylesheet" href="/assets/dua-practice.css?v=344">
 </head>
 <body>
 <div id="tabletBootError" style="display:none;position:fixed;z-index:99999;left:14px;right:14px;top:14px;background:#fff8e8;color:#0e2c55;border:2px solid #c99a35;border-radius:14px;padding:14px 16px;box-shadow:0 12px 34px rgba(0,0,0,.22);font-family:Arial,sans-serif">
@@ -6459,7 +6459,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v343</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v344</span></div>
   </div>
 
   <div class="tesekkur">
@@ -13410,7 +13410,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v343-dua-hifz';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v344-dua-audio';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -14502,6 +14502,18 @@ html body #reader .am::before, html body #reader .am::after{
 (function(){
   if(!('mediaSession' in navigator)) return;
   var ms = navigator.mediaSession;
+  var sessionOwner = null;
+  window.elifaMediaSession = {
+    claim: function(owner){
+      sessionOwner = owner;
+      bilgiYaz();
+      try{ ms.playbackState = 'none'; }catch(e){}
+      return {
+        update: function(state){if(sessionOwner===owner)try{ms.playbackState=state;}catch(e){}},
+        release: function(){if(sessionOwner!==owner)return;sessionOwner=null;bilgiYaz();durum(false);}
+      };
+    }
+  };
 
   function sureAd(){
     try{ return (SURAHS && curS && SURAHS[curS-1]) ? SURAHS[curS-1].tr : 'Kur\'ân-ı Kerîm'; }
@@ -14521,9 +14533,9 @@ html body #reader .am::before, html body #reader .am::after{
   function bilgiYaz(){
     try{
       ms.metadata = new MediaMetadata({
-        title:  baslik(),
-        artist: kariAd(),
-        album:  'Elifa Mushaf',
+        title:  sessionOwner ? sessionOwner.metadata.title : baslik(),
+        artist: sessionOwner ? sessionOwner.metadata.artist : kariAd(),
+        album:  sessionOwner ? sessionOwner.metadata.album : 'Elifa Mushaf',
         artwork: [
           { src:'pwa_icon-192.png', sizes:'192x192', type:'image/png' },
           { src:'pwa_icon-512.png', sizes:'512x512', type:'image/png' }
@@ -14533,17 +14545,19 @@ html body #reader .am::before, html body #reader .am::after{
   }
 
   function durum(calisiyor){
+    if(sessionOwner)return;
     try{ ms.playbackState = calisiyor ? 'playing' : 'paused'; }catch(e){}
   }
 
   /* ── düğmeler: bildirim/kilit ekranından uygulamanın kendi düğmelerine ── */
   function bas(id){ var b=document.getElementById(id); if(b) b.click(); }
+  function action(name,fallback){return function(){if(sessionOwner){var fn=sessionOwner.handlers&&sessionOwner.handlers[name];if(typeof fn==='function')fn();return;}fallback();};}
 
-  try{ ms.setActionHandler('play',          function(){ bas('playBtn2'); }); }catch(e){}
-  try{ ms.setActionHandler('pause',         function(){ bas('playBtn2'); }); }catch(e){}
-  try{ ms.setActionHandler('previoustrack', function(){ bas('prevAy');   }); }catch(e){}
-  try{ ms.setActionHandler('nexttrack',     function(){ bas('nextAy');   }); }catch(e){}
-  try{ ms.setActionHandler('stop',          function(){ bas('playBtn2'); durum(false); }); }catch(e){}
+  try{ ms.setActionHandler('play',          action('play',function(){ bas('playBtn2'); })); }catch(e){}
+  try{ ms.setActionHandler('pause',         action('pause',function(){ bas('playBtn2'); })); }catch(e){}
+  try{ ms.setActionHandler('previoustrack', action('previoustrack',function(){ bas('prevAy');   })); }catch(e){}
+  try{ ms.setActionHandler('nexttrack',     action('nexttrack',function(){ bas('nextAy');   })); }catch(e){}
+  try{ ms.setActionHandler('stop',          action('stop',function(){ bas('playBtn2'); durum(false); })); }catch(e){}
 
   /* ── durumu takip et: setIco(p) çalma/durma ikonunu değiştiriyor,
         onu sarmalayıp medya oturumunu da güncelliyoruz ── */
@@ -16775,9 +16789,9 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
-<script src="/assets/workflow-i18n.js?v=343"></script>
-<script src="/assets/dua-practice.js?v=343"></script>
-<script src="/assets/study-workflow.js?v=343"></script>
+<script src="/assets/workflow-i18n.js?v=344"></script>
+<script src="/assets/dua-practice.js?v=344"></script>
+<script src="/assets/study-workflow.js?v=344"></script>
 <script src="/assets/study-split.js?v=335"></script>
 <script src="/assets/study-sessions.js?v=335"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>
