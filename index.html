@@ -5686,7 +5686,7 @@ window.elifaLog=function(event,params){
           <button class="rptog" id="repTog" title="Tekrar aç/kapa (uzun bas: ayarlar)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg><b id="repN">5</b>×</button>
           <button class="rpm" id="repPlus" title="Artır">+</button>
         </div>
-        <span class="pbl" data-i18n="pb_repeat">Tekrar</span>
+        <span class="pbl" id="readerRepeatScope" data-i18n="repeat_scope_work">Tüm çalışma</span>
       </div>
       <div class="pbcell">
         <button class="pbi spdbtn" id="spdBtn" title="Okuma hızı">1.0×</button>
@@ -5735,7 +5735,7 @@ window.elifaLog=function(event,params){
             <button class="rptog" id="repTog2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg><b id="repN2">5</b>×</button>
             <button class="rpm" id="repPlus2">+</button>
           </div>
-          <span data-i18n="pb_repeat">Tekrar</span>
+          <span id="splitRepeatScope" data-i18n="repeat_scope_unit">Âyet / parça</span>
         </div>
         <div class="splitPlayerItem"><button class="pbi cumu" id="cumuTog2" title="Birleşik parça (1+2, 1+2+3…)"><span>1+2</span></button><span data-i18n="pb_combine">Birleştir</span></div>
         <div class="splitPlayerItem"><button class="pbi" id="cfgBtn2" title="Ayarlar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h3m4 0h9M4 17h9m4 0h3"/><circle cx="9" cy="7" r="2"/><circle cx="15" cy="17" r="2"/></svg></button><span data-i18n="tb_settings">Ayarlar</span></div>
@@ -6458,7 +6458,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v338</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v339</span></div>
   </div>
 
   <div class="tesekkur">
@@ -9865,9 +9865,9 @@ $('cumuTog2').onclick=()=>{SET.cumu=!SET.cumu;saveSet();syncCumu2();syncCumu();q
   b.addEventListener('pointerdown',()=>{repLongFired2=false;t=setTimeout(()=>{t=null;repLongFired2=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx='parts';fillGearSheet();openSheet('gearSheet');},480);});
   const c=()=>{if(t){clearTimeout(t);t=null;}};b.addEventListener('pointerup',c);b.addEventListener('pointerleave',c);b.addEventListener('pointercancel',c);})();
 function syncRep2(){
+  syncRepeatScope('splitRepeatScope','repTog2','rep');
   const rn=$('repN2');if(rn)rn.textContent=SET.rep;
   const rc=$('repctl2');if(rc)rc.classList.toggle('on',SET.repOn);
-  const b=$('repTog2');if(b)b.setAttribute('aria-label',SET.repOn?'Tekrar açık, '+SET.rep+' kez; kapatmak için dokun':'Tekrar kapalı; açmak için dokun');
   if(playing&&plan[pi]?.part!==undefined)updateStat();
   if(splitAy!=null&&$('split').classList.contains('on'))updateSplitIntro();
 }
@@ -10947,8 +10947,17 @@ $('nextAy').onclick=()=>{
 /* repeat control */
 let repLongFired=false;
 function syncRep(){
-  const rn=$('repN');if(rn)rn.textContent=SET[readerRepeatKey()];
+  const key=readerRepeatKey();
+  syncRepeatScope('readerRepeatScope','repTog',key);
+  const rn=$('repN');if(rn)rn.textContent=SET[key];
   const rc=document.querySelector('.repctl');if(rc)rc.classList.toggle('on',SET.repOn);
+}
+function syncRepeatScope(labelId,buttonId,key){
+  const token=key==='rangeRep'?'repeat_scope_work':'repeat_scope_unit';
+  const translated=window.elifaT?.(token);
+  const text=translated&&translated!==token?translated:(key==='rangeRep'?'Tüm çalışma':'Âyet / parça');
+  const label=$(labelId);if(label){label.dataset.i18n=token;label.textContent=text;}
+  const button=$(buttonId);if(button){button.setAttribute('aria-label',text+' · '+SET[key]+'×');button.setAttribute('aria-pressed',String(!!SET.repOn));}
 }
 function readerRepeatKey(){
   if(activeStudySplitSelection())return 'rep';
@@ -13400,7 +13409,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v338-repeat-layout';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v339-repeat-scope';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16760,8 +16769,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
-<script src="/assets/workflow-i18n.js?v=337"></script>
-<script src="/assets/study-workflow.js?v=338"></script>
+<script src="/assets/workflow-i18n.js?v=339"></script>
+<script src="/assets/study-workflow.js?v=339"></script>
 <script src="/assets/study-split.js?v=335"></script>
 <script src="/assets/study-sessions.js?v=335"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>

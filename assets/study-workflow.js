@@ -284,6 +284,8 @@
   reason.onchange = reportText;
   function refreshLanguage() {
     window.elifaApplyI18n?.();
+    syncRep();
+    syncRep2();
     render();
     renderContinue();
     renderHomeHeroLine();

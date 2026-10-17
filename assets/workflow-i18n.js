@@ -1,5 +1,7 @@
 // Locale order matches the main translation table.
 Object.assign(window.T,{
+  "repeat_scope_work": ["Tüm çalışma","Ganze Übung","Whole study","Всё занятие","التدريب كاملًا","Exercice entier","Todo el estudio","Όλη η μελέτη","整个练习","練習全体","전체 학습","पूरा अभ्यास","مکمل مشق","Intero esercizio","Seluruh latihan","Hele oefening","Estudo completo","کل تمرین","পুরো অনুশীলন","Seluruh latihan","Zoezi lote"],
+  "repeat_scope_unit": ["Âyet / parça","Vers / Abschnitt","Verse / part","Аят / часть","الآية / الجزء","Verset / partie","Versículo / parte","Στίχος / τμήμα","经节 / 片段","節 / 区間","구절 / 부분","आयत / भाग","آیت / حصہ","Versetto / parte","Ayat / bagian","Vers / deel","Versículo / parte","آیه / بخش","আয়াত / অংশ","Ayat / bahagian","Aya / sehemu"],
 
   "repeat_ayah_count": [
     "Âyet / parça tekrar sayısı",
