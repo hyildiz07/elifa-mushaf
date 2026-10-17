@@ -119,7 +119,7 @@ test('Study Desk asks for a verse before splitting and builds only three chosen 
     {txt:'أَوَّلٌ',ay:1,pos:1},{txt:'ثَانٍ',ay:1,pos:2},{txt:'ثَالِثٌ',ay:1,pos:3},
     {txt:'رَابِعٌ',ay:2,pos:1},{txt:'خَامِسٌ',ay:2,pos:2},{txt:'سَادِسٌ',ay:2,pos:3}
   ];
-  let built=null,setupCalls=0,playCalls=0,settingsOpened=0;
+  let built=null,setupCalls=0,playCalls=0,settingsOpened=0;const transitions=[];
   const context={window:{T:{}},document:{getElementById:get,createElement:element,
     createDocumentFragment:()=>element('fragment'),elementFromPoint:()=>null},
     MutationObserver:class{observe(){}},requestAnimationFrame:()=>1,cancelAnimationFrame(){},
@@ -127,6 +127,7 @@ test('Study Desk asks for a verse before splitting and builds only three chosen 
     SET:{reciter:'test',rep:5,repOn:false,cumu:false},AD_:null,SURAHS:[{tr:'Fâtiha',n:7}],stopPlan(){},
     saveSet(){},syncRep(){},syncRep2(){},syncCumu(){},syncCumu2(){},
     playActiveStudySplit(){playCalls++;return true;},
+    queuePracticeModeChange(value){transitions.push(value);},
     fillGearSheet(){assert.equal(context.gearCtx,'studyParts');},
     openSheet(id){assert.equal(id,'gearSheet');settingsOpened++;},
     openStudySetup(fromSelection,fromReader){assert.equal(fromSelection,false);assert.equal(fromReader,true);setupCalls++;},
@@ -161,7 +162,8 @@ test('Study Desk asks for a verse before splitting and builds only three chosen 
   get('studySplitCombine').fire('click');
   assert.equal(context.SET.cumu,true);
   assert.equal(get('studySplitCombine')['aria-pressed'],'true');
-  assert.equal(playCalls,2,'in-panel controls start the selected split method');
+  assert.equal(playCalls,0,'mode/repeat controls do not start playback or rewind the parts');
+  assert.deepEqual(transitions,[true]);
   get('studySplitSettings').fire('click');
   assert.equal(settingsOpened,1,'part-specific hifz settings remain accessible while split panel is open');
   assert.match(get('studySplitLiveStatus').textContent,/3\/3.*5× tekrar.*1\+2 açık/);

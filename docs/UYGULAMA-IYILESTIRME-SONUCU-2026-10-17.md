@@ -1,6 +1,6 @@
 # Elifa Mushaf — Güvenilir çalışma akışı
 
-17 Ekim 2026 · v334 · Önizleme için hazırlandı; üretim yayını bu değişikliğe dahil değil.
+17 Ekim 2026 · v335 · Önizleme için hazırlandı; üretim yayını bu değişikliğe dahil değil.
 
 ## Tamamlanan işler
 
@@ -16,9 +16,12 @@
 - “Ses sorunu bildir” panelinde taşma, erken kesilme ve tekrar sorunları seçilebiliyor. Gönderilecek teknik bilgiler önce gösteriliyor; e-posta kullanıcı tarafından gönderiliyor.
 - Okuyucu, bölme veya Çalışma Masası açıkken eşitleme erteleniyor. Ağ isteği sürerken çalışma açılmışsa dönüşte de kontrol edilerek kayıt geri yükleme/sayfa yenileme engelleniyor.
 
+- Âyet/parça, birleşik bölüm ve tüm çalışma aralığı için üç ayrı tekrar sayısı eklendi. Örnek: âyet 2, birleşik 1, aralık 2 → her âyet iki kez, her birleşik bölüm bir kez; bütün program iki tur. Tek parça Dinle düğmesi yalnız parça sayısını kullanıyor.
+- 1+2 aç/kapa artık markajı silmiyor veya otomatik oynatma başlatmıyor. Çalarken değişiklik mevcut kesit bitince uygulanıyor; bütün aralık kesiti çalıyorsa aralık sonu bekleniyor. Tam âyet markajı sûre sonuna genişlemiyor.
+
 ## Doğrulananlar
 
-- `npm run build`: 316 test; 314 başarılı, 0 başarısız, 2 ortam nedeniyle atlanan. Dağıtım paketi üretildi.
+- `npm run build`: 336 test; 334 başarılı, 0 başarısız, 2 ortam nedeniyle atlanan. Dağıtım paketi üretildi.
 - Dil denetimi: 21 dil; eksik anahtar, eksik çeviri satırı, eksik hesap/destek/gizlilik/kılavuz dosyası yok. Bu ölçüm profesyonel dil/hukuk incelemesi yerine geçmez; mevcut inceleme işaretleri değiştirilmedi.
 - Tarayıcıda Fâtiha 1–5 aralığı, Mişârî 223, üç tekrar ve 1,25 hızla tamamlandı. Bölünmüş ikinci âyette iki parça ve 1+2 akışı tamamlandı.
 - Kaydedilmiş manuel kesimler ve ayarlar yeniden açıldı. İkinci parça sırasında çıkılıp “Kaldığım yerden devam et” seçildiğinde ikinci parça seçili geldi; ses kendiliğinden başlamadı.

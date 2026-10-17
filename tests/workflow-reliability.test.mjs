@@ -7,14 +7,14 @@ import {validateBackup,restoreBackup} from '../src/account-data.mjs';
 import {cleanUsageEvent} from '../src/usage-analytics.mjs';
 const html=fs.readFileSync('index.html','utf8');
 const source=name=>{const a=html.search(new RegExp('(?:async )?function '+name+'\\('));assert.ok(a>=0);return html.slice(a,html.indexOf('\n}',a)+2);};
-const settings={reciter:223,speed:1.25,rep:3,repOn:true,wait:2,mode:'range',splitCombine:true};
+const settings={reciter:223,speed:1.25,rep:3,combineRep:2,rangeRep:4,repOn:true,wait:2,mode:'range',splitCombine:true};
 
 test('study preferences and resume position survive backup, while invalid state is rejected',()=>{
  const item={id:'12345678-1234-4234-8234-123456789abc',sid:18,from:1,to:5,title:'Kehf',createdAt:'2026-10-17T00:00:00Z',updatedAt:'2026-10-17T00:00:00Z',settings,progress:{ay:2,part:1,completed:false}};
  const wrap=v=>({elifa:'yedek',v:1,veri:{studySessions:JSON.stringify([v])}});
  const map=new Map(),storage={getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,v),removeItem:k=>map.delete(k)};
  restoreBackup(storage,validateBackup(wrap(item)));assert.deepEqual(JSON.parse(map.get('studySessions')),[item]);
- for(const invalid of [{...settings,speed:0},{...settings,rep:1.5},{...settings,rep:100},{...settings,mode:'unknown'},{...settings,privateText:'secret'}]){
+ for(const invalid of [{...settings,speed:0},{...settings,rep:1.5},{...settings,rep:100},{...settings,combineRep:0},{...settings,rangeRep:100},{...settings,mode:'unknown'},{...settings,privateText:'secret'}]){
   assert.equal(validStudySettings(invalid),false);assert.throws(()=>validateBackup(wrap({...item,settings:invalid})));
  }
  for(const invalid of [{ay:6,completed:false},{ay:2,part:-1,completed:false},{ay:2,completed:'yes'},{ay:2,completed:false,notes:'secret'}]){

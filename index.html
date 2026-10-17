@@ -5445,7 +5445,7 @@ window.elifaLog=function(event,params){
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
 <link rel="stylesheet" href="/assets/home-study-polish.css?v=330">
-<link rel="stylesheet" href="/assets/study-workflow.css?v=334">
+<link rel="stylesheet" href="/assets/study-workflow.css?v=335">
 </head>
 <body>
 <div id="tabletBootError" style="display:none;position:fixed;z-index:99999;left:14px;right:14px;top:14px;background:#fff8e8;color:#0e2c55;border:2px solid #c99a35;border-radius:14px;padding:14px 16px;box-shadow:0 12px 34px rgba(0,0,0,.22);font-family:Arial,sans-serif">
@@ -6217,12 +6217,16 @@ window.elifaLog=function(event,params){
 
   <section class="gearCard">
     <div class="gearRepeatRow">
-      <div class="flbl" data-i18n="s_reps">Tekrar sayısı</div>
+      <div class="flbl" data-i18n="repeat_ayah_count">Âyet / parça tekrar sayısı</div>
       <div class="stepper"><button data-t="rep" data-d="-1" aria-label="Tekrar sayısını azalt">−</button><input type="number" id="repInp" min="1" max="99" value="5" inputmode="numeric" aria-label="Tekrar sayısı"><button data-t="rep" data-d="1" aria-label="Tekrar sayısını artır">+</button></div>
     </div>
     <div class="two gearPair">
+      <div><div class="flbl" data-i18n="repeat_combine_count">Birleştirme tekrar sayısı</div><div class="stepper"><button data-t="combineRep" data-d="-1" aria-label="Birleştirme tekrarını azalt">−</button><input type="number" id="combineRepInp" min="1" max="99" value="5" inputmode="numeric" aria-label="Birleştirme tekrar sayısı"><button data-t="combineRep" data-d="1" aria-label="Birleştirme tekrarını artır">+</button></div></div>
+      <div><div class="flbl" data-i18n="repeat_range_count">Aralığın tekrar sayısı</div><div class="stepper"><button data-t="rangeRep" data-d="-1" aria-label="Aralık tekrarını azalt">−</button><input type="number" id="rangeRepInp" min="1" max="99" value="5" inputmode="numeric" aria-label="Aralığın tekrar sayısı"><button data-t="rangeRep" data-d="1" aria-label="Aralık tekrarını artır">+</button></div></div>
+    </div>
+    <div class="two gearPair">
       <div>
-        <div class="flbl">Ara bekleme (sn)</div>
+        <div class="flbl" data-i18n="workflow_wait">Ara bekleme (sn)</div>
         <div class="stepper"><button data-t="wait" data-d="-1" aria-label="Ara beklemeyi azalt">−</button><input type="number" id="waitInp" min="0" max="30" value="0" inputmode="numeric" aria-label="Ara bekleme, saniye"><button data-t="wait" data-d="1" aria-label="Ara beklemeyi artır">+</button></div>
       </div>
       <div>
@@ -6451,7 +6455,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v334</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v335</span></div>
   </div>
 
   <div class="tesekkur">
@@ -6629,6 +6633,9 @@ const QFONTS=[
   {id:'utn',   n:'Uthman Taha Nesih',       d:'Türk mushafı hattı · Diyanet imlâsı',   ff:'"Uthman Taha Naskh"', lh:2.52, turkOnly:true, rec:true},
 ];
 let SET=Object.assign({reciter:223,speed:1,rep:5,repOn:false,wait:0,fs:1,qfont:'utn',mushaf:'turk',folder:'Ezber',ayRep:5,cumu:false,cumuRep:5,auto:true,theme:'elifasaray',custom:null,selMulti:false,startPad:0,endPad:-60,latin:false,stacked:false},store.get('set',{}));
+// Preserve the old count once, then keep the three repeat scopes independent.
+SET.rep=Math.min(99,Math.max(1,Math.round(Number(SET.rep)||5)));
+for(const key of ['combineRep','rangeRep'])SET[key]=Math.min(99,Math.max(1,Math.round(Number(SET[key])||SET.rep)));
 // Repeat and cumulative playback are choices for this visit, not startup defaults.
 // Keep the chosen count so the 5× control can enable it with one tap.
 SET.repOn=false;
@@ -8339,7 +8346,8 @@ async function playStudyRange(){
   // (for example Bakara 3–10 five times). Cumulative mode keeps its 1+2
   // ladder, while the verse timing and reciter guards stay in force.
   const steps=mode!=='range'?verses:[normalVerseStep(normalChapterAudio||AD_,range.from,range.to,
-    {x:1,dyn:true,ayEnd:range.to,l:range.from+'–'+range.to+' âyet',full:false})];
+    {x:1,dyn:true,repeatKind:'range',ayEnd:range.to,l:range.from+'–'+range.to+' âyet',full:false})];
+  steps.practice={kind:'ayah',from:range.from,to:range.to,mode};steps.rangeCycles=mode!=='range';
   if(!normalVersePlanReady(steps))return;
   curAy=range.from;runPlan(steps);
   if(typeof playing==='boolean'&&playing){
@@ -8973,9 +8981,9 @@ function studySplitRecipeCurrent(recipe){
 function playActiveStudySplit(firstIndex=0,lastIndex=null){
   const current=activeStudySplitSelection();
   if(!current)return false;
-  return playStudySplitRange(current.parts,firstIndex,lastIndex??current.parts.length-1);
+  return playStudySplitRange(current.parts,firstIndex,lastIndex??current.parts.length-1,{cycle:lastIndex==null||firstIndex!==lastIndex});
 }
-async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1){
+async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1,{cycle=true}={}){
   if(!Array.isArray(parts)||!parts.length||!Number.isInteger(firstIndex)||
     !Number.isInteger(lastIndex)||firstIndex<0||lastIndex<firstIndex||lastIndex>=parts.length)
     return false;
@@ -9025,12 +9033,13 @@ async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1)
     const p=fresh[i],number=firstIndex+i+1;
     plan.push({f:p.f,t:p.t,x:1,dyn:true,studyExact:true,
       ayEnd:p.toPos===ayGi[p.ay][1]-ayGi[p.ay][0]+1?p.ay:null,
-      l:p.ay+'. âyet · '+number+'. parça',studyPart:firstIndex+i});
+      l:p.ay+'. âyet · '+number+'. parça',studyPart:firstIndex+i,repeatKind:'ayah'});
     if(SET.cumu&&i>0){
       plan.push({f:fresh[0].f,t:p.t,x:1,dyn:true,studyExact:true,
-        l:(firstIndex+1)+'–'+number+'. parçalar birleşik',studyPart:firstIndex+i,combinedFrom:firstIndex});
+        l:(firstIndex+1)+'–'+number+'. parçalar birleşik',studyPart:firstIndex+i,combinedFrom:firstIndex,repeatKind:'combine'});
     }
   }
+  plan.practice={kind:'studyParts',units:plan.filter(st=>st.repeatKind!=='combine'),mode:SET.cumu?'cumulative':'verse',cycle};plan.rangeCycles=cycle;
   if(!normalVersePlanReady(plan))return false;
   runPlan(plan);
   if(playing){
@@ -9040,7 +9049,7 @@ async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1)
 }
 function playStudySplitPart(part){
   const current=activeStudySplitSelection(),index=current?.parts.indexOf(part)??-1;
-  return index<0?false:playStudySplitRange(current.parts,index,index);
+  return index<0?false:playStudySplitRange(current.parts,index,index,{cycle:false});
 }
 function clearSel(){selA=selB=null;selMode='ayah';renderSel();}
 $('selClear').onclick=()=>{if(selA!=null){stopPlan(false);clearSel();}else setSelectionToolsOpen(false);};
@@ -9618,20 +9627,21 @@ function renderSplit(){
   });
 }
 /* Seçili parçadan sona kadar program: her parça ×N (canlı), 1+2 açıksa birleşikler */
-function buildPartsPlan(start,end=splitParts.length-1,base=0){
+function buildPartsPlan(start,end=splitParts.length-1,base=0,combine=SET.cumu){
   const plan=[];
   for(let k=start;k<=end;k++){
     const p=splitParts[k];
     // A memorisation plan must include every requested part. Skipping one
     // with unavailable timing would silently recite an incomplete selection.
     if(!p||!Number.isFinite(p.f)||!Number.isFinite(p.t)||p.t<=p.f)return [];
-    plan.push({...partStep(p,k,p.f,'Parça '+(k+1),false),rangeFrom:base,rangeTo:end});
-    if(SET.cumu&&k>base){
+    plan.push({...partStep(p,k,p.f,'Parça '+(k+1),false),repeatKind:'ayah',rangeFrom:base,rangeTo:end});
+    if(combine&&k>base){
       const f0=splitParts[base];
       if(!f0||!Number.isFinite(f0.f)||!Number.isFinite(f0.t)||f0.t<=f0.f)return [];
-      plan.push({...partStep(p,k,f0.f,(base+1)+'–'+(k+1)+' birleşik',true,f0.words[0].pos),rangeFrom:base,rangeTo:end});
+      plan.push({...partStep(p,k,f0.f,(base+1)+'–'+(k+1)+' birleşik',true,f0.words[0].pos),repeatKind:'combine',rangeFrom:base,rangeTo:end});
     }
   }
+  plan.practice={kind:'parts',units:plan.filter(st=>!st.combo),mode:combine?'cumulative':'verse'};plan.rangeCycles=true;
   return plan;
 }
 async function ensureSplitAudio(audio,ay){
@@ -9847,7 +9857,7 @@ let repLongFired2=false;
 $('repTog2').onclick=()=>{if(repLongFired2){repLongFired2=false;return;}SET.repOn=!SET.repOn;saveSet();syncRep2();syncRep();toast(SET.repOn?'Tekrar açık · '+SET.rep+'×':'Tekrar kapalı');};
 $('repPlus2').onclick=()=>{SET.rep=Math.min(99,SET.rep+1);SET.repOn=true;saveSet();syncRep2();syncRep();};
 $('repMinus2').onclick=()=>{SET.rep=Math.max(1,SET.rep-1);saveSet();syncRep2();syncRep();};
-$('cumuTog2').onclick=()=>{SET.cumu=!SET.cumu;saveSet();syncCumu2();syncCumu();liveRebuildParts();toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');};
+$('cumuTog2').onclick=()=>{SET.cumu=!SET.cumu;saveSet();syncCumu2();syncCumu();queuePracticeModeChange(SET.cumu);toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');};
 (function(){const b=$('repTog2');if(!b)return;let t=null;
   b.addEventListener('pointerdown',()=>{repLongFired2=false;t=setTimeout(()=>{t=null;repLongFired2=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx='parts';fillGearSheet();openSheet('gearSheet');},480);});
   const c=()=>{if(t){clearTimeout(t);t=null;}};b.addEventListener('pointerup',c);b.addEventListener('pointerleave',c);b.addEventListener('pointercancel',c);})();
@@ -9940,6 +9950,7 @@ $('noteSave').onclick=()=>{
 
 /* ---------- playback engine ---------- */
 let plan=[],pi=0,pr=0,pieceCursor=0,raf=null,btimer=null,waiting=null,pendingFn=null,hiEl=null,playing=false;
+let planCycle=0,planCycleTemplate=null,pendingPracticeTransition=null;
 let audioRequestId=0,stepRequestId=0;
 function terminalMuallimTailEnd(st,t){
   const a=AD_,ay=st?.ayEnd;
@@ -10028,7 +10039,80 @@ function stepBounds(st){
   return{f,t};
 }
 /* dyn işaretli adımlar tekrar sayısını CANLI okur → çalarken ± yapınca anında uygulanır */
-function stepReps(st){return st.dyn?(SET.repOn?SET.rep:1):(st.x||1);}
+function stepReps(st){return st.dyn?(SET.repOn?Math.min(99,Math.max(1,Math.round(Number(SET[st.repeatKind==='combine'?'combineRep':st.repeatKind==='range'?'rangeRep':'rep']??SET.rep)||1))):1):(st.x||1);}
+function planCycleReps(){return plan.rangeCycles&&SET.repOn?Math.min(99,Math.max(1,Math.round(Number(SET.rangeRep)||1))):1;}
+function practiceUnit(st){return st.studyPart??st.part??st.selectionUnit??st.ayEnd;}
+function practicePlan(context,mode){
+  let p=[];
+  if(context.kind==='parts'){
+    const first=context.units?.[0],last=context.units?.at(-1);
+    if(!first||!last)return [];
+    p=buildPartsPlan(first.part,last.part,first.rangeFrom??first.part,mode==='cumulative');
+  }else if(context.kind==='ayah'){
+    const chapter=normalChapterAudio||AD_;
+    p=mode==='range'?[normalVerseStep(chapter,context.from,context.to,
+      {x:1,dyn:false,ayEnd:context.to,l:context.from+'–'+context.to+' âyet',full:false})]:buildLadder(context.from,context.to,mode==='cumulative');
+  }else{
+    const units=context.units||[];
+    if(mode==='range'&&units.length){
+      const first=units[0],last=units.at(-1);
+      p=[{...last,f:first.f,x:1,dyn:false,l:'Seçili aralık'}];
+    }else for(let i=0;i<units.length;i++){
+      const unit=units[i];p.push({...unit,repeatKind:'ayah'});
+      if(mode==='cumulative'&&i>0)p.push({...unit,f:units[0].f,combo:true,repeatKind:'combine',
+        combinedFrom:practiceUnit(units[0]),l:(practiceUnit(units[0])+1)+'–'+(practiceUnit(unit)+1)+' birleşik'});
+    }
+  }
+  p.practice={...context,mode};p.rangeCycles=context.cycle!==false;
+  return p;
+}
+// Apply a mode switch only at the current audio boundary. No marked words,
+// range bounds or cycle counter are lost, and toggling while idle stays silent.
+function queuePracticeModeChange(value){
+  if(!playing||!plan[pi]||!plan.practice)return false;
+  const parts=plan.practice.kind==='parts'||plan.practice.kind==='studyParts';
+  const mode=typeof value==='string'?value:value?'cumulative':parts?'verse':'range';
+  if(!['range','verse','cumulative'].includes(mode))return false;
+  if(parts&&plan.practice.units?.length===1){pendingPracticeTransition=null;return false;}
+  if(mode===plan.practice.mode){pendingPracticeTransition=null;return false;}
+  pendingPracticeTransition=mode;
+  if(waiting&&pendingFn)pendingFn=()=>{if(!applyPendingPracticeTransition())goStep();};
+  return true;
+}
+function applyPendingPracticeTransition(){
+  if(!pendingPracticeTransition||!plan.practice||!plan[pi])return false;
+  const mode=pendingPracticeTransition;pendingPracticeTransition=null;
+  const context=plan.practice,current=plan[pi],finished=practiceUnit(current);
+  if(current.guardedTail)return false;
+  if(!Number.isInteger(finished))return false;
+  const next=practicePlan(context,mode);
+  if(!next.length||!normalVersePlanReady(next))return false;
+  // The old full-range step stores completed tours in pr, whereas ladders
+  // store them in planCycle. Convert once without multiplying the counts.
+  if(!plan.rangeCycles&&current.repeatKind==='range')planCycle=pr;
+  let remaining=next.filter(st=>practiceUnit(st)>finished);
+  if(mode==='range'&&remaining.length){
+    if(context.kind==='ayah')remaining=[normalVerseStep(normalChapterAudio||AD_,finished+1,context.to,
+      {x:1,dyn:false,ayEnd:context.to,l:(finished+1)+'–'+context.to+' âyet',full:false})];
+    else{
+      const first=context.units.find(st=>practiceUnit(st)>finished);
+      remaining=first?[{...next[0],f:first.f}]:[];
+    }
+  }
+  remaining.practice=next.practice;remaining.rangeCycles=next.rangeCycles;planCycleTemplate=next;
+  plan=remaining;pi=0;pr=0;pieceCursor=0;lastLbl='';
+  if(!remaining.length){
+    plan=next;planCycle++;
+    if(planCycle>=planCycleReps()){finishPlan();return true;}
+  }
+  updateStat();pauseThen(goStep);return true;
+}
+function advancePracticeCycle(){
+  if(!plan.rangeCycles||plan.at(-1)?.guardedTail)return false;
+  if(planCycle+1>=planCycleReps())return false;
+  planCycle++;plan=planCycleTemplate||plan;pi=0;pr=0;pieceCursor=0;lastLbl='';
+  updateStat();pauseThen(goStep);return true;
+}
 async function goStep(){
   const st=plan[pi];if(!st)return;
   try{globalThis.window?.elifaPlaybackEvent?.('progress');}catch(e){}
@@ -10392,12 +10476,13 @@ function handleBoundary(){
     return;
   }
   pieceCursor=0;
+  if(typeof applyPendingPracticeTransition==='function'&&applyPendingPracticeTransition())return;
   pr++;
   const st=plan[pi];
   if(pr<stepReps(st)){updateStat();pauseThen(goStep);}
   else{pi++;pr=0;
     if(pi<plan.length){updateStat();pauseThen(()=>{updateStat();goStep();});}
-    else finishPlan();}
+    else if(typeof advancePracticeCycle!=='function'||!advancePracticeCycle())finishPlan();}
 }
 function setIco(p){const a=$('playIco');if(a)a.innerHTML=p?'<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>':'<path d="M8 5v14l11-7z"/>';const a2=$('playIco2');if(a2)a2.innerHTML=p?'<path d="M6 5h4v14H6zM14 5h4v14h-4z"/>':'<path d="M8 5v14l11-7z"/>';if(typeof setNpIco==='function')setNpIco();}
 function updateStat(txt2){
@@ -10425,6 +10510,7 @@ function runPlan(p){
   stopPlan(false);
   if(p.some(st=>st.sourceRanges))normalChapterAudio=AD_;
   plan=p;pi=0;pr=0;pieceCursor=0;playing=true;
+  planCycle=0;planCycleTemplate=p;pendingPracticeTransition=null;
   try{globalThis.window?.elifaPlaybackEvent?.('start');}catch(e){}
   goStep();setIco(true);updateStat();
   wake(true);
@@ -10490,6 +10576,7 @@ function stopPlan(silent,keepLoading=false){
   if(!keepLoading&&AD_&&AD_.splitAbort)AD_.splitAbort.abort();
   if(!keepLoading&&AD_&&AD_.selAbort)AD_.selAbort.abort();
   playing=false;plan=[];pi=0;pr=0;pieceCursor=0;
+  planCycle=0;planCycleTemplate=null;pendingPracticeTransition=null;
   if(raf){cancelAnimationFrame(raf);raf=null;}
   if(waiting){clearTimeout(waiting);waiting=null;pendingFn=null;}
   if(htmlBtimer){clearTimeout(htmlBtimer);htmlBtimer=null;}
@@ -10594,7 +10681,7 @@ function firstMs(){return AD_.ay[1]?AD_.ay[1][0]:0;}
    - repeat kapalı → âyeti bir kez (tek tek)
    - repeat açık, birikimli kapalı → âyeti N kez
    - repeat açık, birikimli açık → âyet N kez + o âyete kadar birleşik N kez */
-function playAyahProgram(a){
+function playAyahProgram(a,endAy=null){
   const combine=typeof window!=='undefined'&&window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu;
   const focused=typeof studyRange!=='undefined'&&studyRange?.sid===curS?studyRange:null;
   if(focused)a=Math.max(focused.from,Math.min(focused.to,a));
@@ -10604,11 +10691,13 @@ function playAyahProgram(a){
   }
   const chapter=normalChapterAudio||AD_;
   if(!chapter||!chapter.ay[a])return;curAy=a;
-  const lastAy=focused?.to||SURAHS[curS-1].n;
+  const lastAy=Number.isInteger(endAy)?Math.max(a,Math.min(focused?.to||SURAHS[curS-1].n,endAy)):
+    (focused?.to||SURAHS[curS-1].n);
 
   // SERBEST (tekrar kapalı, birikimli kapalı) → buradan sûre sonuna TEK KESİNTİSİZ AKIŞ
   if(!SET.repOn && !combine){
-    const steps=[normalVerseStep(chapter,a,lastAy,{x:1,dyn:true,l:a+'. âyet',full:!focused,fluent:true})];
+    const steps=[normalVerseStep(chapter,a,lastAy,{x:1,dyn:true,repeatKind:'range',ayEnd:lastAy,l:a+'. âyet',full:!focused&&endAy==null,fluent:true})];
+    steps.practice={kind:'ayah',from:a,to:lastAy,mode:'range',cycle:endAy==null};
     if(normalVersePlanReady(steps))runPlan(steps);
     return;
   }
@@ -10628,24 +10717,26 @@ function playAyahProgram(a){
     let guardedTail=false;
     for(let k=start;k<=lastAy;k++){
       if(!chapter.ay[k])continue;
-      const verse=normalVerseStep(chapter,k,k,{x:1,dyn:true,ayEnd:k,l:k+'. âyet'});
+      const verse=normalVerseStep(chapter,k,k,{x:1,dyn:true,repeatKind:'ayah',ayEnd:k,l:k+'. âyet'});
       if(unsafeNormalVerseStep(verse)){guardedTail=true;break;}
       p.push(verse);
       if(k>start&&chapter.ay[start]){
         const combined=normalVerseStep(chapter,start,k,
-          {x:1,dyn:true,ayEnd:k,l:start+'–'+k+' birleşik'});
+          {x:1,dyn:true,repeatKind:'combine',ayEnd:k,l:start+'–'+k+' birleşik'});
         if(unsafeNormalVerseStep(combined)){guardedTail=true;break;}
         p.push(combined);
       }
     }
     if(guardedTail&&p.length)p[p.length-1].guardedTail=true;
     const steps=p.length?p:[normalVerseStep(chapter,a,a,{x:1,dyn:true,ayEnd:a,l:a+'. âyet'})];
+    steps.practice={kind:'ayah',from:start,to:lastAy,mode:'cumulative',cycle:endAy==null};steps.rangeCycles=endAy==null;
     if(normalVersePlanReady(steps))runPlan(steps);
     return;
   }
 
   // TEKRAR açık, birikimli kapalı → sadece bu âyeti N× (kendi sınırında, ayet-sonu güvenlikli)
-  const steps=[normalVerseStep(chapter,a,a,{x:1,dyn:true,ayEnd:a,l:a+'. âyet'})];
+  const steps=[normalVerseStep(chapter,a,a,{x:1,dyn:true,repeatKind:'ayah',ayEnd:a,l:a+'. âyet'})];
+  steps.practice={kind:'ayah',from:a,to:a,mode:'verse',cycle:false};
   if(normalVersePlanReady(steps))runPlan(steps);
 }
 
@@ -10661,13 +10752,13 @@ $('playBtn').onclick=()=>{
   }
   if(!AD_)return;
   if(playing){togglePause();return;}
-  // A full selected ayah is the anchor of the 1+2 program. The toggle also
-  // selects that ayah, so Play must not bypass the program's safety preflight.
+  // A complete marked verse still uses the verse safety preflight, but its
+  // bounds remain the marker's bounds even when 1+2 is enabled.
   if(selA!=null){
     const a=wordArr[Math.min(selA,selB)]?.ay;
     if(SET.cumu&&selMode==='ayah'&&a!=null&&
       Math.min(selA,selB)===ayGi[a]?.[0]&&Math.max(selA,selB)===ayGi[a]?.[1]){
-      playAyahProgram(a);return;
+      playAyahProgram(a,a);return;
     }
     playSelection();return;
   }
@@ -10798,14 +10889,32 @@ async function playSelection(){
   const sameAy=wa&&wb&&wa.ay===wb.ay;
   const ayR=sameAy?ayGi[wa.ay]:null;
   const isFullAyah=ayR && Math.min(selA,selB)===ayR[0] && Math.max(selA,selB)===ayR[1];
-  const step={f:t[0],t:physicalEnd?AD_.selBuf.hi:t[1],x:1,dyn:true,l:'Seçili parça'};
+  const step={f:t[0],t:physicalEnd?AD_.selBuf.hi:t[1],x:1,dyn:true,repeatKind:'range',l:'Seçili parça'};
   if(physicalEnd)step.physicalEnd=true;
   if(isFullAyah){step.ayEnd=wa.ay;step.l=wa.ay+'. âyet';}
   else if(!physicalEnd){
     step.wordCut=true;
     if(wb){step.cutKey=wb.ay+':'+wb.pos; if(AD_&&AD_.wcut){const rc=AD_.wcut[step.cutKey]; if(rc!=null)step.cutMs=rc;}}
   }
-  runPlan([step]);
+  const selectedPlan=typeof selectionPracticePlan==='function'?selectionPracticePlan(step):[step];
+  runPlan(selectedPlan);
+}
+function selectionPracticePlan(step){
+  const r=selRange(),units=[];
+  if(!r)return [step];
+  for(let i=r[0];i<=r[1];){
+    const first=wordArr[i];let end=i;
+    while(end+1<=r[1]&&wordArr[end+1]?.ay===first.ay)end++;
+    const last=wordArr[end],key=last.ay+':'+last.pos;
+    const unit=end===r[1]?{...step}:{f:first.s,t:last.e,x:1,dyn:true,wordCut:true,cutKey:key};
+    unit.f=first.s;unit.selectionUnit=last.ay;unit.repeatKind='ayah';unit.l=last.ay+'. âyet';
+    if(end!==r[1]&&AD_?.wcut?.[key]!=null)unit.cutMs=AD_.wcut[key];
+    units.push(unit);i=end+1;
+  }
+  const mode=window.elifaPracticeMode?.()||'range';
+  const context={kind:'selection',units,mode};
+  if(mode!=='range')return practicePlan(context,mode);
+  const p=[{...step,selectionUnit:units.at(-1).selectionUnit}];p.practice=context;return p;
 }
 $('prevAy').onclick=()=>{
   const split=activeStudySplitSelection();
@@ -10821,34 +10930,22 @@ $('nextAy').onclick=()=>{
 /* repeat control */
 let repLongFired=false;
 function syncRep(){
-  const rn=$('repN');if(rn)rn.textContent=SET.rep;
+  const rn=$('repN');if(rn)rn.textContent=SET[readerRepeatKey()];
   const rc=document.querySelector('.repctl');if(rc)rc.classList.toggle('on',SET.repOn);
+}
+function readerRepeatKey(){
+  if(activeStudySplitSelection())return 'rep';
+  return window.elifaPracticeMode?.()==='range'?'rangeRep':'rep';
 }
 $('repTog').onclick=()=>{
   if(repLongFired){repLongFired=false;return;}
   SET.repOn=!SET.repOn;saveSet();
   document.querySelector('.repctl').classList.toggle('on',SET.repOn);
-  if(activeStudySplitSelection()){
-    if(SET.repOn)playActiveStudySplit();else stopPlan(false);
-    toast(SET.repOn?'Parça tekrarı açık · '+SET.rep+'×':'Parça tekrarı kapalı');
-    return;
-  }
-  if(SET.repOn){
-    // AÇILDI: o an okunan/görünen âyeti otomatik seç + tekrar çalmaya başla (play gerekmez)
-    const a=curAy||visAy||1;
-    const r=ayGi[a];
-    if(r){selMode='ayah';selA=r[0];selB=r[1];renderSel();}
-    curAy=a;
-    playAyahProgram(a);
-    toast('Tekrar açık · '+SET.rep+'×'+(SET.cumu?' + birleşik':''));
-  }else{
-    // KAPANDI: seçim kalksın, dursun, normal akışa dön
-    stopPlan(false);clearSel();
-    toast('Tekrar kapalı');
-  }
+  syncRep();syncRep2();
+  toast(SET.repOn?'Tekrar açık · '+SET[readerRepeatKey()]+'×':'Tekrar kapalı');
 };
-$('repPlus').onclick=()=>{SET.rep=Math.min(99,SET.rep+1);SET.repOn=true;saveSet();syncRep();};
-$('repMinus').onclick=()=>{SET.rep=Math.max(1,SET.rep-1);saveSet();syncRep();};
+$('repPlus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.min(99,SET[key]+1);SET.repOn=true;saveSet();syncRep();};
+$('repMinus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.max(1,SET[key]-1);saveSet();syncRep();};
 /* uzun bas → ayarlar */
 (function(){const b=$('repTog');if(!b)return;let t=null;
   b.addEventListener('pointerdown',()=>{repLongFired=false;t=setTimeout(()=>{t=null;repLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');},480);});
@@ -10859,31 +10956,12 @@ $('reciterBtn').onclick=()=>openReciterSheet();
 {const b=$('readerReciter');if(b)b.onclick=()=>openReciterSheet();}
 {const c=$('reciterChip');if(c)c.onclick=()=>openReciterSheet();}
 $('cumuTog').onclick=()=>{
-  if(cumuLongFired){cumuLongFired=false;return;}   // uzun basış oldu → toggle etme
+  if(cumuLongFired){cumuLongFired=false;return;}
   const partsActive=!!activeStudySplitSelection();
   SET.cumu=partsActive?!SET.cumu:!(window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu);
   if(!partsActive)window.elifaSetPracticeMode?.(SET.cumu?'cumulative':'range');
-  saveSet();syncCumu();if(typeof syncCumu2==='function')syncCumu2();if(typeof liveRebuildParts==='function')liveRebuildParts();
-  if(activeStudySplitSelection()){
-    if(SET.cumu){SET.repOn=true;saveSet();syncRep();playActiveStudySplit();}
-    else stopPlan(false);
-    toast(SET.cumu?'Parçalar birleşik çalışılıyor':'Parça birleştirme kapalı');
-    return;
-  }
-  if(SET.cumu){
-    // AÇILDI: birleşik okuma tekrar ile anlamlı → tekrarı da aç, o âyeti seç + çalmaya başla
-    SET.repOn=true;saveSet();
-    const rc=document.querySelector('.repctl');if(rc)rc.classList.add('on');
-    if(typeof syncRep==='function')syncRep();
-    const a=curAy||visAy||1;const r=ayGi[a];
-    if(r){selMode='ayah';selA=r[0];selB=r[1];renderSel();}
-    curAy=a;playAyahProgram(a);
-    toast('Birleşik âyet açık · 1+2, 1+2+3…');
-  }else{
-    // KAPANDI: seçim kalksın, dursun
-    stopPlan(false);clearSel();
-    toast('Birleşik âyet kapalı');
-  }
+  saveSet();syncCumu();syncRep();syncCumu2();queuePracticeModeChange(SET.cumu);
+  toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');
 };
 let cumuLongFired=false;
 function syncCumu(){const b=$('cumuTog');const on=activeStudySplitSelection()?SET.cumu:(window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu);if(b)b.classList.toggle('on',on);}
@@ -10951,10 +11029,10 @@ function buildLadder(from,to,combine=SET.cumu){
     const range=chapter?.ay?.[k];
     if(!Array.isArray(range)||!Number.isFinite(range[0])||
       !Number.isFinite(range[1])||range[1]<=range[0])return [];
-    p.push(normalVerseStep(chapter,k,k,{x:1,dyn:true,ayEnd:k,l:k+'. âyet'}));
+    p.push(normalVerseStep(chapter,k,k,{x:1,dyn:true,repeatKind:'ayah',ayEnd:k,l:k+'. âyet'}));
     if(combine&&k>from&&chapter.ay[from]){
       p.push(normalVerseStep(chapter,from,k,
-        {x:1,dyn:true,ayEnd:k,l:from+'–'+k+' birleşik'}));
+        {x:1,dyn:true,repeatKind:'combine',ayEnd:k,l:from+'–'+k+' birleşik'}));
     }
   }
   return p;
@@ -11011,7 +11089,8 @@ function applyRangeProgram(offerReciter=false){
   if(!normalVersePlanReady(verses))return false;
   // Repeat the complete interval; preserve explicit 1+2 practice and verse guards.
   const p=mode!=='range'?verses:[normalVerseStep(normalChapterAudio||AD_,from,to,
-    {x:1,dyn:true,ayEnd:to,l:from+'–'+to+' âyet',full:false})];
+    {x:1,dyn:true,repeatKind:'range',ayEnd:to,l:from+'–'+to+' âyet',full:false})];
+  p.practice={kind:'ayah',from,to,mode};p.rangeCycles=mode!=='range';
   if(!normalVersePlanReady(p))return false;
   if(!AD_?.buffer&&!AD_?.audio){toast('Sûre sesi henüz hazır değil.');return false;}
   SET.repOn=true;saveSet();syncRep();syncRep2();
@@ -11054,7 +11133,9 @@ document.querySelectorAll('.sheet').forEach(sheet=>{
 });
 let gearCtx='ayah';
 function fillGearSheet(){
-  $('repInp').value=SET.rep;$('waitInp').value=SET.wait;$('spdInp').value=SET.speed;
+  $('repInp').value=SET.rep;
+  for(const key of ['combineRep','rangeRep']){const input=$(key+'Inp');if(input)input.value=SET[key];}
+  $('waitInp').value=SET.wait;$('spdInp').value=SET.speed;
   $('startPadInp').value=SET.startPad;$('endPadInp').value=SET.endPad;
   {const _cc=$('cumuChk');if(_cc)_cc.checked=SET.cumu;}
   const e1=$('repEcho'),e2=$('repEcho2');if(e1)e1.textContent=SET.rep;if(e2)e2.textContent=SET.rep;
@@ -11092,7 +11173,7 @@ $('optProgram').onclick=()=>{gearCtx=activeStudySplitSelection()?'studyParts':'a
 
 document.querySelectorAll('.stepper button').forEach(b=>{
   b.onclick=()=>{
-    const map={rep:'repInp',wait:'waitInp',spd:'spdInp',from:'fromInp',to:'toInp',sp:'startPadInp',ep:'endPadInp',pg:'pgInp'};
+    const map={rep:'repInp',combineRep:'combineRepInp',rangeRep:'rangeRepInp',wait:'waitInp',spd:'spdInp',from:'fromInp',to:'toInp',sp:'startPadInp',ep:'endPadInp',pg:'pgInp'};
     // player-sheet steppers share rep/wait via *2 ids
     const inSheet=b.closest('#playerSheet');
     let id=map[b.dataset.t];
@@ -11105,10 +11186,12 @@ document.querySelectorAll('.stepper button').forEach(b=>{
     if(b.dataset.t==='from'||b.dataset.t==='to')rememberRangeSelection();
   };
 });
-['repInp','waitInp','spdInp','startPadInp','endPadInp'].forEach(id=>$(id).onchange=commitInputs);
+['repInp','combineRepInp','rangeRepInp','waitInp','spdInp','startPadInp','endPadInp'].forEach(id=>$(id).onchange=commitInputs);
 ['fromInp','toInp'].forEach(id=>$(id).addEventListener('input',rememberRangeSelection));
 function commitInputs(){
-  SET.rep=Math.max(1,+$('repInp').value||5);
+  SET.rep=Math.min(99,Math.max(1,Math.round(+$('repInp').value||5)));
+  SET.combineRep=Math.min(99,Math.max(1,Math.round(+$('combineRepInp').value||1)));
+  SET.rangeRep=Math.min(99,Math.max(1,Math.round(+$('rangeRepInp').value||1)));
   SET.wait=Math.max(0,+$('waitInp').value||0);
   SET.speed=Math.min(2,Math.max(0.5,+$('spdInp').value||1));
   SET.startPad=Math.max(-300,Math.min(300,+$('startPadInp').value||0));
@@ -13300,7 +13383,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v334-reliability-study-workflow';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v335-independent-study-repeats';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16653,15 +16736,15 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     <button type="button" id="accountRetry" class="account-link">Bağlantıyı yeniden dene</button>
   </div><p id="accountStatus" role="status" aria-live="polite"></p>
 </dialog>
-<script type="module" src="/assets/account.js?v=334"></script>
+<script type="module" src="/assets/account.js?v=335"></script>
 <script src="/assets/reader-help-drafts.js?v=1"></script>
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
-<script src="/assets/workflow-i18n.js?v=334"></script>
-<script src="/assets/study-workflow.js?v=334"></script>
-<script src="/assets/study-split.js?v=334"></script>
-<script src="/assets/study-sessions.js?v=334"></script>
+<script src="/assets/workflow-i18n.js?v=335"></script>
+<script src="/assets/study-workflow.js?v=335"></script>
+<script src="/assets/study-split.js?v=335"></script>
+<script src="/assets/study-sessions.js?v=335"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>
 </body>
 </html>

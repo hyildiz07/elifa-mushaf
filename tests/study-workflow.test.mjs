@@ -23,7 +23,7 @@ function harness(){
 }
 test('workflow mounts against real page anchors and restores saved settings independently of global combine',()=>{
  const {c,nodes}=harness();const settings={reciter:7,speed:1.25,rep:3,repOn:true,wait:2,mode:'verse',splitCombine:false};
- c.window.elifaStudySettings.load({settings});assert.deepEqual(JSON.parse(JSON.stringify(c.window.elifaStudySettings.capture())),settings);
+ c.window.elifaStudySettings.load({settings});assert.deepEqual(JSON.parse(JSON.stringify(c.window.elifaStudySettings.capture())),{...settings,combineRep:3,rangeRep:3});
  c.window.elifaStudySettings.beforeOpen();assert.equal(c.SET.cumu,false);assert.equal(c.SET.reciter,7);assert.equal(c.window.elifaPracticeMode(),'verse');
  nodes.get('studySetting_rep').value=100;assert.equal(c.window.elifaStudySettings.beforeOpen(),false);assert.equal(c.SET.rep,3);
 });
@@ -34,6 +34,22 @@ test('study progress is bounded and completion emits once without a false stop',
  c.pr=2;c.window.elifaPlaybackEvent('progress');assert.match(nodes.get('practiceProgress').textContent,/practice_progress/);
  c.window.elifaPlaybackEvent('complete');c.window.elifaPlaybackEvent('stop');
  assert.deepEqual(events.map(x=>x.event),['playback_start','playback_complete']);assert.equal(progress.at(-1).completed,true);
+});
+
+test('three repeat counts save independently and display the outer study round',()=>{
+ const {c,nodes}=harness();const settings={reciter:223,speed:1,rep:2,combineRep:3,rangeRep:4,repOn:true,wait:0,mode:'cumulative',splitCombine:true};
+ c.window.elifaStudySettings.load({settings});assert.deepEqual(JSON.parse(JSON.stringify(c.window.elifaStudySettings.capture())),settings);
+ c.window.elifaStudySettings.beforeOpen();assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,3,4]);
+ nodes.get('studySetup').classes.delete('on');c.plan=[{ayEnd:2,repeatKind:'combine'}];c.planCycle=1;c.planCycleReps=()=>4;
+ c.window.elifaPlaybackEvent('start');c.window.elifaPlaybackEvent('progress');
+ assert.match(nodes.get('practiceProgress').textContent,/practice_cycle/);
+});
+
+test('live mode selection queues the requested mode while setup selection remains silent',()=>{
+ const {c,nodes}=harness(),queued=[];c.queuePracticeModeChange=mode=>queued.push(mode);
+ nodes.get('studyMode').value='verse';nodes.get('studyMode').handlers.change();assert.deepEqual(queued,[]);
+ nodes.get('practiceMode').value='verse';nodes.get('practiceMode').handlers.change();assert.deepEqual(queued,['verse']);assert.equal(c.SET.cumu,false);
+ nodes.get('practiceMode').value='cumulative';nodes.get('practiceMode').handlers.change();assert.deepEqual(queued,['verse','cumulative']);assert.equal(c.SET.cumu,true);
 });
 test('split resume focuses the saved verse and part without starting playback',()=>{
  const {c}=harness();const restored=[];c.window.elifaResumeStudySplit=(a,p)=>restored.push([a,p]);
