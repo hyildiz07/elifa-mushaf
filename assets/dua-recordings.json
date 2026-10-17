@@ -1,0 +1,51 @@
+[
+  {
+    "id": "subhaneke",
+    "path": "/assets/dua-audio/subhaneke.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/3_SUBHANEKE.mp3",
+    "sha256": "64c76f36d86811ed9494a383f46af9af6cce06f8fb8020a9ba114aad186aebf0",
+    "bytes": 554364
+  },
+  {
+    "id": "tahiyyat",
+    "path": "/assets/dua-audio/tahiyyat.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/7_HANEFI_ETTEHIYATU.mp3",
+    "sha256": "57566de437b059577f257eaf7a982ba6f3ab0ceb99db198f4fc78a6c539bba30",
+    "bytes": 1318572
+  },
+  {
+    "id": "salli",
+    "path": "/assets/dua-audio/salli.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/8_ALLAHUMMESALLI.mp3",
+    "sha256": "a4f07c49f208be6ceb523ff495704f7d9be6e14366797c607f3e9a4dd5aac2eb",
+    "bytes": 796572
+  },
+  {
+    "id": "barik",
+    "path": "/assets/dua-audio/barik.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/9_ALLAHUMMEBARIK.mp3",
+    "sha256": "7fc098ccc6e3a5ad641b138c9193cf77024b0fd41d4409b4e7ba4ecc942d1bec",
+    "bytes": 804924
+  },
+  {
+    "id": "kunut",
+    "path": "/assets/dua-audio/kunut.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/6_KUNUT_DUALARI.mp3",
+    "sha256": "e46311b60ae8f42c62366a95c9c44c0cd95c2cbc513892070054286e418a73b1",
+    "bytes": 2012832
+  },
+  {
+    "id": "rabbena",
+    "path": "/assets/dua-audio/rabbena.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/10_RABBENA_DUALARI.mp3",
+    "sha256": "c27698a556be1cc6dafcc4637bc28b8256274a2c011f2e98d2c5dae2324c80a1",
+    "bytes": 879048
+  },
+  {
+    "id": "ezan",
+    "path": "/assets/dua-audio/ezan.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/EZAN_DUASI.mp3",
+    "sha256": "31d2f0ab5369249904f6ec918b236735bceae960c987b469d43d36ac3090cd2d",
+    "bytes": 1145268
+  }
+]

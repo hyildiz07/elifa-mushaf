@@ -11,15 +11,17 @@ function field(key,control){const label=document.createElement('label');label.cl
 const details=document.createElement('details');details.className='workflowSettings';
 const summary=document.createElement('summary');summary.dataset.i18n='study_options';details.append(summary);
 const grid=document.createElement('div');grid.className='workflowGrid';details.append(grid);
-const choice=modeControl('studyMode',value=>{mode=value;syncModes();});grid.append(field('study_options',choice));
+const choice=modeControl('studyMode',value=>{mode=value;repeat.checked=true;syncModes();});
+const choiceField=field('study_method',choice);choiceField.classList.add('workflowMethod');
+const methodHelp=document.createElement('small');methodHelp.className='repeatHelp';choiceField.append(methodHelp);
 const reciter=document.createElement('select');reciter.id='studyReciter';
 for(const r of RECITERS){const o=document.createElement('option');o.value=r.id;o.textContent=r.n;reciter.append(o);}grid.append(field('rec_title',reciter));
 const fields={rangeRep:['repeat_range_count',0,99,1],combineRep:['repeat_combine_count',0,99,1],rep:['repeat_ayah_count',1,99,1],speed:['s_speed',0.5,2,0.05],wait:['workflow_wait',0,60,1]};
-for(const [key,[label,min,max,step]] of Object.entries(fields)){const input=document.createElement('input');input.id='studySetting_'+key;input.type='number';input.min=min;input.max=max;input.step=step;input.inputMode='decimal';const wrapper=field(label,input);const helpKey={rep:'repeat_ayah_help',combineRep:'repeat_combine_help',rangeRep:'repeat_range_help'}[key];if(helpKey){const help=document.createElement('small');help.className='repeatHelp';help.id=input.id+'Help';help.dataset.i18n=helpKey;input.setAttribute('aria-describedby',help.id);wrapper.append(help);}grid.append(wrapper);}
+for(const [key,[label,min,max,step]] of Object.entries(fields)){const input=document.createElement('input');input.id='studySetting_'+key;input.type='number';input.min=min;input.max=max;input.step=step;input.inputMode='decimal';const wrapper=field(label,input);const helpKey={rep:'repeat_ayah_help',combineRep:'repeat_combine_help',rangeRep:'repeat_range_help'}[key];if(helpKey){const help=document.createElement('small');help.className='repeatHelp';help.id=input.id+'Help';help.dataset.i18n=helpKey;input.setAttribute('aria-describedby',help.id);wrapper.append(help);}grid.append(wrapper);if(['rep','combineRep','rangeRep'].includes(key))input.addEventListener('input',()=>{repeat.checked=true;});}
 const repeat=document.createElement('input');repeat.type='checkbox';repeat.id='studyRepeatEnabled';grid.append(field('pb_repeat',repeat));
-$('studyOpen').before(details);
+$('studyOpen').before(choiceField,details);
 const gearMode=modeControl('practiceMode',value=>{mode=value;SET.cumu=value==='cumulative';saveSet();syncModes();if(typeof queuePracticeModeChange==='function')queuePracticeModeChange(value);});
-const gearField=field('study_options',gearMode);gearField.classList.add('workflowMode');$('rangeStart').before(gearField);
+const gearField=field('study_method',gearMode);gearField.classList.add('workflowMode');$('rangeStart').before(gearField);
 const status=document.createElement('p');status.id='practiceProgress';status.className='workflowProgress';status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.hidden=true;$('studyBanner').append(status);
 const readerStatus=document.createElement('p');readerStatus.id='readerPracticeProgress';readerStatus.className='workflowProgress';readerStatus.setAttribute('role','status');readerStatus.setAttribute('aria-live','polite');readerStatus.hidden=true;$('studyBanner').after(readerStatus);
 function current(){return {reciter:SET.reciter,speed:SET.speed,rep:Math.min(99,Math.max(1,Math.round(SET.rep))),combineRep:SET.combineRep??SET.rep,rangeRep:SET.rangeRep??SET.rep,repOn:!!SET.repOn,wait:Math.min(60,Math.max(0,SET.wait)),mode,splitCombine:!!SET.cumu};}
@@ -27,8 +29,9 @@ function fill(v){draftCombine=v.splitCombine;choice.value=v.mode;reciter.value=S
 function read(){const v={...current(),splitCombine:draftCombine,reciter:Number(reciter.value),mode:choice.value,repOn:repeat.checked};for(const key of Object.keys(fields))v[key]=Number($('studySetting_'+key).value);return validStudySettings(v)&&RECITERS.some(r=>r.id===v.reciter)?v:null;}
 function syncModes(){choice.value=mode;gearMode.value=mode;syncCumu();syncRep();render();}
 function render(){
+  methodHelp.textContent=t('mode_'+mode+'_help');choice.setAttribute('aria-label',t('study_method'));
   gearField.hidden=typeof gearCtx!=='undefined'&&gearCtx!=='ayah';
-  gearMode.setAttribute('aria-label',t('study_options'));
+  gearMode.setAttribute('aria-label',t('study_method'));
   if(!lastProgress){status.hidden=true;readerStatus.hidden=true;return;}
   const p=lastProgress;if(p.sid!==curS){status.hidden=true;readerStatus.hidden=true;return;}
   const partLabel=Number.isInteger(p.combinedFrom)?Array.from({length:p.part-p.combinedFrom+1},(_,i)=>p.combinedFrom+i+1).join('+'):p.part+1;
@@ -49,7 +52,7 @@ window.elifaStudySettings={
   afterOpen(){if(pendingResume?.sid===curS&&pendingResume.part!==undefined)window.elifaResumeStudySplit?.(pendingResume.ay,pendingResume.part);pendingResume=null;},
   resume:()=>pendingResume,
 };
-window.elifaActivityBusy=()=>!!(playing||$('reader')?.classList.contains('on')||$('split')?.classList.contains('on')||$('studySetup')?.classList.contains('on'));
+window.elifaActivityBusy=()=>!!(playing||$('reader')?.classList.contains('on')||$('split')?.classList.contains('on')||$('studySetup')?.classList.contains('on')||document.getElementById('duaDetBack')?.classList.contains('show'));
 window.elifaPlaybackEvent=(event)=>{
   const st=plan[pi]||plan.at(-1);const split=window.elifaStudySplitSelection?.();
   if(event==='start'){attempt={mode:split?'split':mode==='cumulative'?'hifz':mode,started:Date.now()};lastProgress=null;window.elifaLog?.('playback_start',{mode:attempt.mode});}
@@ -82,7 +85,7 @@ report.onclick=()=>{context=diagnostic();reportText();dialog.showModal();window.
 function refreshLanguage(){window.elifaApplyI18n?.();syncRep();syncRep2();render();renderContinue();renderHomeHeroLine();$('q').dispatchEvent(new Event('input'));
   for(const [id,key] of Object.entries({langBtnH:'language',guideBtnH:'guide',themeBtnH:'theme'}))$(id)?.setAttribute('aria-label',t(key));
   for(const [id,key] of Object.entries({repInp:'repeat_ayah_count',combineRepInp:'repeat_combine_count',rangeRepInp:'repeat_range_count'}))$(id)?.setAttribute('aria-label',t(key));
-  choice.setAttribute('aria-label',t('study_options'));reason.setAttribute('aria-label',t('report_issue'));
+  choice.setAttribute('aria-label',t('study_method'));reason.setAttribute('aria-label',t('report_issue'));
 }
 window.addEventListener('elifa:language-changed',refreshLanguage);
 new MutationObserver(()=>{gearField.hidden=gearCtx!=='ayah';gearMode.value=mode;}).observe($('gearSheet'),{attributes:true,attributeFilter:['class']});

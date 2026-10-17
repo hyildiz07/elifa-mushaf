@@ -5449,6 +5449,7 @@ window.elifaLog=function(event,params){
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
 <link rel="stylesheet" href="/assets/home-study-polish.css?v=336">
 <link rel="stylesheet" href="/assets/study-workflow.css?v=337">
+<link rel="stylesheet" href="/assets/dua-practice.css?v=340">
 </head>
 <body>
 <div id="tabletBootError" style="display:none;position:fixed;z-index:99999;left:14px;right:14px;top:14px;background:#fff8e8;color:#0e2c55;border:2px solid #c99a35;border-radius:14px;padding:14px 16px;box-shadow:0 12px 34px rgba(0,0,0,.22);font-family:Arial,sans-serif">
@@ -6458,7 +6459,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v339</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v340</span></div>
   </div>
 
   <div class="tesekkur">
@@ -13409,7 +13410,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v339-repeat-scope';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v340-dua-practice';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16537,8 +16538,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     return it.ok||it.tn; }
   window.renderDua=function(){
     var scr=document.getElementById('dua'); if(!scr) return;
-    var subs=[['sure',dt('dua_sure')],['namaz',dt('dua_namaz')],['gunluk',dt('dua_gunluk')],['fav',dt('dua_fav')]];
-    scr.innerHTML='<div class="dua-head"><h2 class="dua-h">'+esc(dt('dua_tab'))+' <span style="font-size:10px;opacity:.5;font-weight:600">dua14</span></h2></div>'+
+    var subs=[['sure',dt('dua_sure')],['namaz',dt('dua_namaz')],['ezber',window.elifaDuaPractice?window.elifaDuaPractice.label():dt('dua_tab')],['gunluk',dt('dua_gunluk')],['fav',dt('dua_fav')]];
+    scr.innerHTML='<div class="dua-head"><h2 class="dua-h">'+esc(dt('dua_tab'))+'</h2></div>'+
       '<div class="dua-subbar">'+subs.map(function(x){return '<button class="dua-sub'+(subTab===x[0]?' on':'')+'" data-sub="'+x[0]+'">'+esc(x[1])+'</button>';}).join('')+'</div>'+
       (subTab==='gunluk'?'<div class="dua-catbar" id="duaCatBar"></div>':'')+'<div class="dua-list" id="duaList"></div>';
     scr.querySelectorAll('.dua-sub').forEach(function(b){ b.onclick=function(){ subTab=b.dataset.sub; window.renderDua(); }; });
@@ -16552,6 +16553,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     } else if(subTab==='namaz'){
       NAMAZ.forEach(function(it,i){ var sub=it.s?(suraName(it.s)+' \u00b7 '+it.a+'. '+dt('dua_ayet')):dt('dua_namaz');
         L.appendChild(card(it.t,sub,'n'+i,function(){ if(it.s)window.openFromDua(it.s,it.a,null,it.t); else showDuaDetail(i); })); });
+    } else if(subTab==='ezber'){
+      if(window.elifaDuaPractice)window.elifaDuaPractice.renderList(L);
     } else if(subTab==='gunluk'){
       var bar=scr.querySelector('#duaCatBar');
       var curL=gCat==='all'?dt('dua_hepsi'):dt(gCat);
@@ -16584,7 +16587,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     back.innerHTML='<div class="dua-det"><div class="dd-top"><button class="dd-x" aria-label="Kapat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>'+titleHtml+'</div><div class="dd-scroll">'+bodyHtml+'</div>'+(barHtml||'')+'</div>';
     document.body.appendChild(back);
     var pushed=false; try{ if(typeof elifaEnter==='function'){ elifaEnter(); pushed=true; } }catch(e){}
-    function doClose(){ stopDuaAudio(); back.classList.remove('show'); setTimeout(function(){ if(back.parentNode)back.parentNode.removeChild(back); },220); }
+    function doClose(){ back.dispatchEvent(new Event('elifa:dua-close'));stopDuaAudio(); back.classList.remove('show'); setTimeout(function(){ if(back.parentNode)back.parentNode.removeChild(back); },220); }
     function close(){ if(pushed){ pushed=false; try{ history.back(); return; }catch(e){} } doClose(); }
     back.__close=doClose; back.addEventListener('click',function(e){ if(e.target===back) close(); });
     back.querySelector('.dd-x').onclick=close; requestAnimationFrame(function(){ back.classList.add('show'); });
@@ -16707,6 +16710,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 
   // ---- namaz duası (statik, sessiz) ----
   function showDuaDetail(i){
+    if(window.elifaDuaPractice&&window.elifaDuaPractice.openNamaz(i))return;
     var it=NAMAZ[i]; if(!it) return; var lang=curLang();
     var meal=(it.meal&&(it.meal[lang]||it.meal.en||it.meal.tr))||'';
     var titleHtml='<div class="dd-title">'+esc(it.t)+'</div><div class="dd-toggles"><button class="dd-tg on" data-tg="ok">'+esc(dt('dua_okunus'))+'</button><button class="dd-tg on" data-tg="meal">'+esc(dt('dua_meal'))+'</button></div>';
@@ -16715,6 +16719,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     back.querySelectorAll('.dd-tg').forEach(function(b){ b.onclick=function(){ b.classList.toggle('on');
       var e=det.querySelector(b.dataset.tg==='ok'?'.dd-ok':'.dd-meal'); if(e)e.style.display=e.style.display==='none'?'':'none'; }; });
   }
+
+  window.elifaPrayerUI={texts:NAMAZ,overlay:overlayShell,translate:dt,storage:store};
 
   // ---- Kayıtlar→Favoriler kategorili ----
   function appendDuaFavsToSaved(){
@@ -16769,8 +16775,9 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
-<script src="/assets/workflow-i18n.js?v=339"></script>
-<script src="/assets/study-workflow.js?v=339"></script>
+<script src="/assets/workflow-i18n.js?v=340"></script>
+<script src="/assets/dua-practice.js?v=340"></script>
+<script src="/assets/study-workflow.js?v=340"></script>
 <script src="/assets/study-split.js?v=335"></script>
 <script src="/assets/study-sessions.js?v=335"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>
