@@ -19,3 +19,5 @@
 .prayerClipRow{display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:7px;align-items:center;margin-top:10px;}
 .prayerCard:focus-visible,.prayerAction:focus-visible,.prayerPractice input:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
 @media(max-width:420px){.prayerGrid{gap:8px}.prayerGrid label{font-size:.8rem}.prayerClipRow{grid-template-columns:minmax(0,1fr) auto}.prayerClipRow>input{grid-column:1/-1}.prayerClipRow>.prayerAction{font-size:.85rem}.prayerText,.prayerPractice{padding-inline:12px;}}
+
+.prayerSelection{font-size:.85rem;font-weight:750;text-align:center;color:var(--ink);margin:8px 0;}.prayerBoundary{display:flex;flex-direction:column;gap:8px;min-width:0;}

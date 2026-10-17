@@ -387,6 +387,9 @@
     seek.value = 0;
     seek.disabled = true;
     seek.setAttribute("aria-label", t("full"));
+    const selectionLabel = document.createElement("p");
+    selectionLabel.className = "prayerSelection";
+    selectionLabel.textContent = t("full");
     const time = document.createElement("output");
     time.className = "prayerTime";
     time.textContent = "0:00 / 0:00";
@@ -404,7 +407,7 @@
     const offline = document.createElement("div");
     offline.className = "prayerTransport";
     offline.append(download, removeDownload);
-    box.append(controls, transport, seek, time, status, offline);
+    box.append(controls, transport, selectionLabel, seek, time, status, offline);
     const audio = new Audio();
     audio.preload = "none";
     let closed = false, bytes = null, decoded = null, context = null, objectUrl = null, duration = 0, range = null, abort = new AbortController();
@@ -460,6 +463,7 @@
     activeClose = cleanup;
     back.addEventListener("elifa:dua-close", cleanup, { once: true });
     audio.onloadedmetadata = () => {
+      selectionLabel.textContent = (range ? range.name : t("full")) + " \xB7 " + format(audio.duration);
       if (!range) {
         duration = audio.duration;
         seek.max = duration;
@@ -554,7 +558,8 @@
     marks.className = "prayerGrid";
     const boundaries = {};
     for (const [key, label] of [["start", t("start")], ["end", t("end")]]) {
-      const wrap = document.createElement("label");
+      const wrap = document.createElement("div");
+      wrap.className = "prayerBoundary";
       const mark = document.createElement("button");
       mark.type = "button";
       mark.className = "prayerAction";

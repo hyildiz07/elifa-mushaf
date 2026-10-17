@@ -46,11 +46,12 @@ function open(item){
   const stop=document.createElement('button');stop.type='button';stop.className='prayerAction';stop.textContent='■';stop.setAttribute('aria-label',globalText('pb_play'));stop.id='prayerStop';
   const transport=document.createElement('div');transport.className='prayerTransport';transport.append(full,stop);
   const seek=document.createElement('input');seek.type='range';seek.min=0;seek.max=0;seek.step=0.01;seek.value=0;seek.disabled=true;seek.setAttribute('aria-label',t('full'));
+  const selectionLabel=document.createElement('p');selectionLabel.className='prayerSelection';selectionLabel.textContent=t('full');
   const time=document.createElement('output');time.className='prayerTime';time.textContent='0:00 / 0:00';
   const download=document.createElement('button');download.type='button';download.className='prayerAction';download.textContent=t('download');download.id='prayerDownload';
   const removeDownload=document.createElement('button');removeDownload.type='button';removeDownload.className='prayerAction';removeDownload.textContent=t('remove');removeDownload.setAttribute('aria-label',t('ready')+' · '+t('remove'));removeDownload.hidden=true;
   const offline=document.createElement('div');offline.className='prayerTransport';offline.append(download,removeDownload);
-  box.append(controls,transport,seek,time,status,offline);
+  box.append(controls,transport,selectionLabel,seek,time,status,offline);
   const audio=new Audio();audio.preload='none';
   let closed=false,bytes=null,decoded=null,context=null,objectUrl=null,duration=0,range=null,abort=new AbortController();
   const format=n=>Math.floor(n/60)+':'+String(Math.floor(n%60)).padStart(2,'0');
@@ -73,7 +74,7 @@ function open(item){
   }});
   function cleanup(){if(closed)return;closed=true;player.stop();abort.abort();audio.removeAttribute('src');audio.load();if(objectUrl)URL.revokeObjectURL(objectUrl);context?.close().catch(()=>{});if(activeClose===cleanup)activeClose=null;}
   activeClose=cleanup;back.addEventListener('elifa:dua-close',cleanup,{once:true});
-  audio.onloadedmetadata=()=>{if(!range){duration=audio.duration;seek.max=duration;seek.disabled=!Number.isFinite(duration);}updateTime();};
+  audio.onloadedmetadata=()=>{selectionLabel.textContent=(range?range.name:t('full'))+' · '+format(audio.duration);if(!range){duration=audio.duration;seek.max=duration;seek.disabled=!Number.isFinite(duration);}updateTime();};
   function updateTime(){if(closed)return;const pos=audio.currentTime+(range?.start||0);seek.value=pos;time.textContent=format(pos)+' / '+format(duration);}
   audio.ontimeupdate=updateTime;
   seek.oninput=()=>{const start=range?.start||0,end=range?.end||duration;const pos=Math.min(end,Math.max(start,Number(seek.value)));audio.currentTime=pos-start;updateTime();};
@@ -93,7 +94,7 @@ function open(item){
   const summary=document.createElement('summary');summary.textContent=t('clip');detail.append(summary);
   const explanation=document.createElement('p');explanation.className='prayerHelp';explanation.textContent=local('Bütün duayı dinlerken cümlenin başını ve sonunu işaretle. İstersen saniyeleri düzelt, sonra kaydet. Cümlelerin bu cihazda kaydedilir. Otomatik kelime zamanlaması kullanılmaz.','While listening to the whole prayer, mark the phrase’s start and end. Adjust the seconds if needed, then save. Your phrases are saved on this device. No automatic word timing is assumed.');detail.append(explanation);
   const marks=document.createElement('div');marks.className='prayerGrid';
-  const boundaries={};for(const [key,label]of [['start',t('start')],['end',t('end')]]){const wrap=document.createElement('label');const mark=document.createElement('button');mark.type='button';mark.className='prayerAction';mark.textContent=label;mark.setAttribute('aria-label',label);const input=document.createElement('input');input.type='number';input.min=0;input.step=0.01;input.value=0;input.setAttribute('aria-label',label+' (s)');input.id='prayer_'+key;boundaries[key]=input;mark.onclick=()=>{input.value=(audio.currentTime+(range?.start||0)).toFixed(2);};wrap.append(mark,input);marks.append(wrap);}detail.append(marks);
+  const boundaries={};for(const [key,label]of [['start',t('start')],['end',t('end')]]){const wrap=document.createElement('div');wrap.className='prayerBoundary';const mark=document.createElement('button');mark.type='button';mark.className='prayerAction';mark.textContent=label;mark.setAttribute('aria-label',label);const input=document.createElement('input');input.type='number';input.min=0;input.step=0.01;input.value=0;input.setAttribute('aria-label',label+' (s)');input.id='prayer_'+key;boundaries[key]=input;mark.onclick=()=>{input.value=(audio.currentTime+(range?.start||0)).toFixed(2);};wrap.append(mark,input);marks.append(wrap);}detail.append(marks);
   const name=document.createElement('input');name.maxLength=80;name.placeholder=t('clip');name.setAttribute('aria-label',t('clip'));name.id='prayerClipName';
   const save=document.createElement('button');save.type='button';save.className='prayerAction';save.textContent=t('save');save.id='prayerClipSave';
   const undoButton=document.createElement('button');undoButton.type='button';undoButton.className='prayerAction';undoButton.textContent=t('undo');undoButton.hidden=true;
