@@ -14,7 +14,8 @@ test('study preferences and resume position survive backup, while invalid state 
  const wrap=v=>({elifa:'yedek',v:1,veri:{studySessions:JSON.stringify([v])}});
  const map=new Map(),storage={getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,v),removeItem:k=>map.delete(k)};
  restoreBackup(storage,validateBackup(wrap(item)));assert.deepEqual(JSON.parse(map.get('studySessions')),[item]);
- for(const invalid of [{...settings,speed:0},{...settings,rep:1.5},{...settings,rep:100},{...settings,combineRep:0},{...settings,rangeRep:100},{...settings,mode:'unknown'},{...settings,privateText:'secret'}]){
+ const zeroItem={...item,settings:{...settings,combineRep:0,rangeRep:0}};restoreBackup(storage,validateBackup(wrap(zeroItem)));assert.deepEqual(JSON.parse(map.get('studySessions')),[zeroItem]);
+ for(const invalid of [{...settings,speed:0},{...settings,rep:1.5},{...settings,rep:100},{...settings,combineRep:-1},{...settings,rangeRep:100},{...settings,mode:'unknown'},{...settings,privateText:'secret'}]){
   assert.equal(validStudySettings(invalid),false);assert.throws(()=>validateBackup(wrap({...item,settings:invalid})));
  }
  for(const invalid of [{ay:6,completed:false},{ay:2,part:-1,completed:false},{ay:2,completed:'yes'},{ay:2,completed:false,notes:'secret'}]){

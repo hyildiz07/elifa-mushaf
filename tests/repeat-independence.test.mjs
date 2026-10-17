@@ -12,9 +12,9 @@ function harness(){
     playing:true,waiting:null,lastLbl:'',htmlBtimer:null,useWA:false,
     clearHTMLPlaybackWatch(){},cancelFade(){},stopSrc(){},cancelHTMLFade(){},updateStat(){},
     pauseThen:f=>f(),clearTimeout(){},finished:false,selA:5,selB:9,
-    goStep(){heard.push(c.plan[c.pi].from===undefined?[c.plan[c.pi].f,c.plan[c.pi].t]:[c.plan[c.pi].from,c.plan[c.pi].to]);},
+    goStep(){if(c.skipDisabledPracticeStep())return;heard.push(c.plan[c.pi].from===undefined?[c.plan[c.pi].f,c.plan[c.pi].t]:[c.plan[c.pi].from,c.plan[c.pi].to]);},
     finishPlan(){c.finished=true;},heard});
-  for(const n of ['buildLadder','stepReps','planCycleReps','practiceUnit','practicePlan','queuePracticeModeChange','applyPendingPracticeTransition','advancePracticeCycle','handleBoundary'])vm.runInContext(fn(n),c);
+  for(const n of ['buildLadder','stepReps','planCycleReps','practiceUnit','practicePlan','queuePracticeModeChange','applyPendingPracticeTransition','advancePracticeCycle','handleBoundary','skipDisabledPracticeStep'])vm.runInContext(fn(n),c);
   return c;
 }
 function start(c,p){c.plan=p;c.planCycleTemplate=p;c.goStep();}
@@ -133,4 +133,42 @@ test('a fully marked ayah never expands into the rest of the surah when 1+2 is o
   c.playAyahProgram=(...a)=>args.push(a);c.playSelection=()=>args.push('selection');
   const handler=html.match(/^\$\('playBtn'\)\.onclick=\(\)=>\{[\s\S]*?^\};/m)?.[0];vm.runInContext(handler,c);button.onclick();
   assert.deepEqual(args,[[2,2]]);
+});
+
+
+test('zero combine skips cumulative passages and zero whole-study count never restarts',()=>{
+  const c=harness();c.SET.rep=1;c.SET.combineRep=0;c.SET.rangeRep=0;
+  start(c,c.practicePlan({kind:'ayah',from:1,to:3},'cumulative'));
+  assert.deepEqual(finish(c),[[1,1],[2,2],[3,3]]);
+  assert.equal(c.planCycle,0);
+});
+test('zero combine keeps individual repeats and a positive independent whole-study count',()=>{
+  const c=harness();c.SET.combineRep=0;c.SET.rangeRep=2;
+  start(c,c.practicePlan({kind:'ayah',from:1,to:3},'cumulative'));
+  const one=[[1,1],[1,1],[2,2],[2,2],[3,3],[3,3]];
+  assert.deepEqual(finish(c),[...one,...one]);
+});
+test('zero disables combined steps even with the master repeat switch off',()=>{
+  const c=harness();c.SET.combineRep=0;c.SET.repOn=false;
+  start(c,c.practicePlan({kind:'ayah',from:1,to:3},'cumulative'));
+  assert.deepEqual(finish(c),[[1,1],[2,2],[3,3]]);
+});
+test('zero whole-study count still reads the fluent range once, not zero times',()=>{
+  const c=harness();c.SET.rangeRep=0;
+  start(c,c.practicePlan({kind:'ayah',from:1,to:3},'range'));
+  assert.deepEqual(finish(c),[[1,3]]);
+});
+test('zero preferences survive startup migration and settings commit',()=>{
+  const start=html.indexOf('// Preserve the old count once'),end=html.indexOf('// Repeat and cumulative playback',start);
+  const code=html.slice(start,end),c=vm.createContext({SET:{rep:2,combineRep:0,rangeRep:0}});vm.runInContext(code,c);
+  assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,0,0]);
+  const values={repInp:2,combineRepInp:0,rangeRepInp:0,waitInp:0,spdInp:1,startPadInp:0,endPadInp:0};
+  c.$=id=>id in values?{value:values[id]}:null;c.saveSet=()=>{};c.applyLiveSpeed=()=>{};c.syncRep=()=>{};c.syncSpeedBtn=()=>{};
+  vm.runInContext(fn('commitInputs'),c);c.commitInputs();assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,0,0]);
+});
+test('zero-count split practice plays only the chosen three parts once',()=>{
+  const c=harness();c.SET.rep=1;c.SET.combineRep=0;c.SET.rangeRep=0;
+  const units=[0,1,2].map(i=>({f:i*1000,t:(i+1)*1000,x:1,dyn:true,studyExact:true,studyPart:i}));
+  start(c,c.practicePlan({kind:'studyParts',units},'cumulative'));
+  assert.deepEqual(finish(c),[[0,1000],[1000,2000],[2000,3000]]);
 });

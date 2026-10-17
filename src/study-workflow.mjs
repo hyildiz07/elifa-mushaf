@@ -14,8 +14,8 @@ const grid=document.createElement('div');grid.className='workflowGrid';details.a
 const choice=modeControl('studyMode',value=>{mode=value;syncModes();});grid.append(field('study_options',choice));
 const reciter=document.createElement('select');reciter.id='studyReciter';
 for(const r of RECITERS){const o=document.createElement('option');o.value=r.id;o.textContent=r.n;reciter.append(o);}grid.append(field('rec_title',reciter));
-const fields={rangeRep:['repeat_range_count',1,99,1],rep:['repeat_ayah_count',1,99,1],combineRep:['repeat_combine_count',1,99,1],speed:['s_speed',0.5,2,0.05],wait:['workflow_wait',0,60,1]};
-for(const [key,[label,min,max,step]] of Object.entries(fields)){const input=document.createElement('input');input.id='studySetting_'+key;input.type='number';input.min=min;input.max=max;input.step=step;input.inputMode='decimal';grid.append(field(label,input));}
+const fields={rep:['repeat_ayah_count',1,99,1],combineRep:['repeat_combine_count',0,99,1],rangeRep:['repeat_range_count',0,99,1],speed:['s_speed',0.5,2,0.05],wait:['workflow_wait',0,60,1]};
+for(const [key,[label,min,max,step]] of Object.entries(fields)){const input=document.createElement('input');input.id='studySetting_'+key;input.type='number';input.min=min;input.max=max;input.step=step;input.inputMode='decimal';const wrapper=field(label,input);const helpKey={rep:'repeat_ayah_help',combineRep:'repeat_combine_help',rangeRep:'repeat_range_help'}[key];if(helpKey){const help=document.createElement('small');help.className='repeatHelp';help.id=input.id+'Help';help.dataset.i18n=helpKey;input.setAttribute('aria-describedby',help.id);wrapper.append(help);}grid.append(wrapper);}
 const repeat=document.createElement('input');repeat.type='checkbox';repeat.id='studyRepeatEnabled';grid.append(field('pb_repeat',repeat));
 $('studyOpen').before(details);
 const gearMode=modeControl('practiceMode',value=>{mode=value;SET.cumu=value==='cumulative';saveSet();syncModes();if(typeof queuePracticeModeChange==='function')queuePracticeModeChange(value);});

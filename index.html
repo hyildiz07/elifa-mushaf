@@ -5448,7 +5448,7 @@ window.elifaLog=function(event,params){
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
 <link rel="stylesheet" href="/assets/home-study-polish.css?v=336">
-<link rel="stylesheet" href="/assets/study-workflow.css?v=336">
+<link rel="stylesheet" href="/assets/study-workflow.css?v=337">
 </head>
 <body>
 <div id="tabletBootError" style="display:none;position:fixed;z-index:99999;left:14px;right:14px;top:14px;background:#fff8e8;color:#0e2c55;border:2px solid #c99a35;border-radius:14px;padding:14px 16px;box-shadow:0 12px 34px rgba(0,0,0,.22);font-family:Arial,sans-serif">
@@ -6221,11 +6221,11 @@ window.elifaLog=function(event,params){
   <section class="gearCard">
     <div class="gearRepeatRow">
       <div class="flbl" data-i18n="repeat_ayah_count">Âyet / parça tekrar sayısı</div>
-      <div class="stepper"><button data-t="rep" data-d="-1" aria-label="Tekrar sayısını azalt">−</button><input type="number" id="repInp" min="1" max="99" value="5" inputmode="numeric" aria-label="Tekrar sayısı"><button data-t="rep" data-d="1" aria-label="Tekrar sayısını artır">+</button></div>
+      <div class="stepper"><button data-t="rep" data-d="-1" aria-label="Tekrar sayısını azalt">−</button><input type="number" id="repInp" min="1" max="99" value="5" inputmode="numeric" aria-label="Tekrar sayısı" aria-describedby="repInpHelp"><button data-t="rep" data-d="1" aria-label="Tekrar sayısını artır">+</button></div><small class="repeatHelp" id="repInpHelp" data-i18n="repeat_ayah_help"></small>
     </div>
     <div class="two gearPair">
-      <div><div class="flbl" data-i18n="repeat_combine_count">Birleştirme tekrar sayısı</div><div class="stepper"><button data-t="combineRep" data-d="-1" aria-label="Birleştirme tekrarını azalt">−</button><input type="number" id="combineRepInp" min="1" max="99" value="5" inputmode="numeric" aria-label="Birleştirme tekrar sayısı"><button data-t="combineRep" data-d="1" aria-label="Birleştirme tekrarını artır">+</button></div></div>
-      <div><div class="flbl" data-i18n="repeat_range_count">Aralığın tekrar sayısı</div><div class="stepper"><button data-t="rangeRep" data-d="-1" aria-label="Aralık tekrarını azalt">−</button><input type="number" id="rangeRepInp" min="1" max="99" value="5" inputmode="numeric" aria-label="Aralığın tekrar sayısı"><button data-t="rangeRep" data-d="1" aria-label="Aralık tekrarını artır">+</button></div></div>
+      <div><div class="flbl" data-i18n="repeat_combine_count">Birleştirme tekrar sayısı</div><div class="stepper"><button data-t="combineRep" data-d="-1" aria-label="Birleştirme tekrarını azalt">−</button><input type="number" id="combineRepInp" min="0" max="99" value="5" inputmode="numeric" aria-label="Birleştirme tekrar sayısı" aria-describedby="combineRepInpHelp"><button data-t="combineRep" data-d="1" aria-label="Birleştirme tekrarını artır">+</button></div><small class="repeatHelp" id="combineRepInpHelp" data-i18n="repeat_combine_help"></small></div>
+      <div><div class="flbl" data-i18n="repeat_range_count">Tüm çalışmanın tekrar sayısı</div><div class="stepper"><button data-t="rangeRep" data-d="-1" aria-label="Aralık tekrarını azalt">−</button><input type="number" id="rangeRepInp" min="0" max="99" value="5" inputmode="numeric" aria-label="Tüm çalışmanın tekrar sayısı" aria-describedby="rangeRepInpHelp"><button data-t="rangeRep" data-d="1" aria-label="Aralık tekrarını artır">+</button></div><small class="repeatHelp" id="rangeRepInpHelp" data-i18n="repeat_range_help"></small></div>
     </div>
     <div class="two gearPair">
       <div>
@@ -6458,7 +6458,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v336</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v337</span></div>
   </div>
 
   <div class="tesekkur">
@@ -6638,7 +6638,7 @@ const QFONTS=[
 let SET=Object.assign({reciter:223,speed:1,rep:5,repOn:false,wait:0,fs:1,qfont:'utn',mushaf:'turk',folder:'Ezber',ayRep:5,cumu:false,cumuRep:5,auto:true,theme:'elifasaray',custom:null,selMulti:false,startPad:0,endPad:-60,latin:false,stacked:false},store.get('set',{}));
 // Preserve the old count once, then keep the three repeat scopes independent.
 SET.rep=Math.min(99,Math.max(1,Math.round(Number(SET.rep)||5)));
-for(const key of ['combineRep','rangeRep'])SET[key]=Math.min(99,Math.max(1,Math.round(Number(SET[key])||SET.rep)));
+for(const key of ['combineRep','rangeRep'])SET[key]=Math.min(99,Math.max(0,Math.round(Number(SET[key]??SET.rep)||0)));
 // Repeat and cumulative playback are choices for this visit, not startup defaults.
 // Keep the chosen count so the 5× control can enable it with one tap.
 SET.repOn=false;
@@ -10042,7 +10042,13 @@ function stepBounds(st){
   return{f,t};
 }
 /* dyn işaretli adımlar tekrar sayısını CANLI okur → çalarken ± yapınca anında uygulanır */
-function stepReps(st){return st.dyn?(SET.repOn?Math.min(99,Math.max(1,Math.round(Number(SET[st.repeatKind==='combine'?'combineRep':st.repeatKind==='range'?'rangeRep':'rep']??SET.rep)||1))):1):(st.x||1);}
+function stepReps(st){
+  if(!st.dyn)return st.x||1;
+  const key=st.repeatKind==='combine'?'combineRep':st.repeatKind==='range'?'rangeRep':'rep';
+  const count=Number(SET[key]??SET.rep);
+  if(key==='combineRep'&&count===0)return 0;
+  return SET.repOn?Math.min(99,Math.max(1,Math.round(count)||1)):1;
+}
 function planCycleReps(){return plan.rangeCycles&&SET.repOn?Math.min(99,Math.max(1,Math.round(Number(SET.rangeRep)||1))):1;}
 function practiceUnit(st){return st.studyPart??st.part??st.selectionUnit??st.ayEnd;}
 function practicePlan(context,mode){
@@ -10116,8 +10122,16 @@ function advancePracticeCycle(){
   planCycle++;plan=planCycleTemplate||plan;pi=0;pr=0;pieceCursor=0;lastLbl='';
   updateStat();pauseThen(goStep);return true;
 }
+function skipDisabledPracticeStep(){
+  if(!plan[pi]||stepReps(plan[pi])!==0)return false;
+  pi++;pr=0;pieceCursor=0;
+  if(pi<plan.length)goStep();
+  else if(!advancePracticeCycle())finishPlan();
+  return true;
+}
 async function goStep(){
   const st=plan[pi];if(!st)return;
+  if(st.dyn&&st.repeatKind==='combine'&&Number(SET.combineRep??SET.rep)===0&&skipDisabledPracticeStep())return;
   try{globalThis.window?.elifaPlaybackEvent?.('progress');}catch(e){}
   if(typeof SET!=='undefined'&&
     ((SET.reciter===3&&unsafeSudaisNormalStep(st))||(SET.reciter===5&&unsafeHaniNormalStep(st)))){
@@ -10948,7 +10962,7 @@ $('repTog').onclick=()=>{
   toast(SET.repOn?'Tekrar açık · '+SET[readerRepeatKey()]+'×':'Tekrar kapalı');
 };
 $('repPlus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.min(99,SET[key]+1);SET.repOn=true;saveSet();syncRep();};
-$('repMinus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.max(1,SET[key]-1);saveSet();syncRep();};
+$('repMinus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.max(key==='rangeRep'?0:1,SET[key]-1);saveSet();syncRep();};
 /* uzun bas → ayarlar */
 (function(){const b=$('repTog');if(!b)return;let t=null;
   b.addEventListener('pointerdown',()=>{repLongFired=false;t=setTimeout(()=>{t=null;repLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');},480);});
@@ -11184,7 +11198,7 @@ document.querySelectorAll('.stepper button').forEach(b=>{
     if(inSheet&&b.dataset.t==='wait')id='waitInp2';
     const inp=$(id);const step=b.dataset.t==='spd'?0.05:(b.dataset.t==='sp'||b.dataset.t==='ep'?10:1);
     let v=(+inp.value||0)+step*(+b.dataset.d);
-    v=Math.max(+inp.min||-999,Math.min(+inp.max||999,+v.toFixed(2)));
+    v=Math.max(inp.min!==''?Number(inp.min):-999,Math.min(inp.max!==''?Number(inp.max):999,+v.toFixed(2)));
     inp.value=v;inSheet?commitInputs2():commitInputs();
     if(b.dataset.t==='from'||b.dataset.t==='to')rememberRangeSelection();
   };
@@ -11193,8 +11207,8 @@ document.querySelectorAll('.stepper button').forEach(b=>{
 ['fromInp','toInp'].forEach(id=>$(id).addEventListener('input',rememberRangeSelection));
 function commitInputs(){
   SET.rep=Math.min(99,Math.max(1,Math.round(+$('repInp').value||5)));
-  SET.combineRep=Math.min(99,Math.max(1,Math.round(+$('combineRepInp').value||1)));
-  SET.rangeRep=Math.min(99,Math.max(1,Math.round(+$('rangeRepInp').value||1)));
+  SET.combineRep=Math.min(99,Math.max(0,Math.round(+$('combineRepInp').value||0)));
+  SET.rangeRep=Math.min(99,Math.max(0,Math.round(+$('rangeRepInp').value||0)));
   SET.wait=Math.max(0,+$('waitInp').value||0);
   SET.speed=Math.min(2,Math.max(0.5,+$('spdInp').value||1));
   SET.startPad=Math.max(-300,Math.min(300,+$('startPadInp').value||0));
@@ -13386,7 +13400,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v336-theme-contrast';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v337-zero-repeat-help';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16741,13 +16755,13 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     <button type="button" id="accountRetry" class="account-link">Bağlantıyı yeniden dene</button>
   </div><p id="accountStatus" role="status" aria-live="polite"></p>
 </dialog>
-<script type="module" src="/assets/account.js?v=335"></script>
+<script type="module" src="/assets/account.js?v=337"></script>
 <script src="/assets/reader-help-drafts.js?v=1"></script>
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
-<script src="/assets/workflow-i18n.js?v=335"></script>
-<script src="/assets/study-workflow.js?v=335"></script>
+<script src="/assets/workflow-i18n.js?v=337"></script>
+<script src="/assets/study-workflow.js?v=337"></script>
 <script src="/assets/study-split.js?v=335"></script>
 <script src="/assets/study-sessions.js?v=335"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>

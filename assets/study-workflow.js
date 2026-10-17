@@ -2,7 +2,7 @@
   // src/study-settings.mjs
   var object = (v) => v !== null && typeof v === "object" && !Array.isArray(v);
   function validStudySettings(v) {
-    return object(v) && Object.keys(v).every((k) => ["reciter", "speed", "rep", "repOn", "wait", "mode", "splitCombine", "combineRep", "rangeRep"].includes(k)) && ["reciter", "speed", "rep", "repOn", "wait", "mode", "splitCombine"].every((k) => Object.hasOwn(v, k)) && Number.isInteger(v.reciter) && v.reciter > 0 && v.reciter <= 1e3 && Number.isFinite(v.speed) && v.speed >= 0.5 && v.speed <= 2 && Number.isInteger(v.rep) && v.rep >= 1 && v.rep <= 99 && typeof v.repOn === "boolean" && Number.isFinite(v.wait) && v.wait >= 0 && v.wait <= 60 && ["range", "verse", "cumulative"].includes(v.mode) && typeof v.splitCombine === "boolean" && ["combineRep", "rangeRep"].every((k) => v[k] === void 0 || Number.isInteger(v[k]) && v[k] >= 1 && v[k] <= 99);
+    return object(v) && Object.keys(v).every((k) => ["reciter", "speed", "rep", "repOn", "wait", "mode", "splitCombine", "combineRep", "rangeRep"].includes(k)) && ["reciter", "speed", "rep", "repOn", "wait", "mode", "splitCombine"].every((k) => Object.hasOwn(v, k)) && Number.isInteger(v.reciter) && v.reciter > 0 && v.reciter <= 1e3 && Number.isFinite(v.speed) && v.speed >= 0.5 && v.speed <= 2 && Number.isInteger(v.rep) && v.rep >= 1 && v.rep <= 99 && typeof v.repOn === "boolean" && Number.isFinite(v.wait) && v.wait >= 0 && v.wait <= 60 && ["range", "verse", "cumulative"].includes(v.mode) && typeof v.splitCombine === "boolean" && ["combineRep", "rangeRep"].every((k) => v[k] === void 0 || Number.isInteger(v[k]) && v[k] >= 0 && v[k] <= 99);
   }
   function validStudyProgress(v, from, to) {
     return object(v) && Object.keys(v).every((k) => ["ay", "part", "completed"].includes(k)) && Number.isInteger(v.ay) && v.ay >= from && v.ay <= to && typeof v.completed === "boolean" && (v.part === void 0 || Number.isInteger(v.part) && v.part >= 0 && v.part < 1e3);
@@ -60,7 +60,7 @@
     reciter.append(o);
   }
   grid.append(field("rec_title", reciter));
-  var fields = { rangeRep: ["repeat_range_count", 1, 99, 1], rep: ["repeat_ayah_count", 1, 99, 1], combineRep: ["repeat_combine_count", 1, 99, 1], speed: ["s_speed", 0.5, 2, 0.05], wait: ["workflow_wait", 0, 60, 1] };
+  var fields = { rep: ["repeat_ayah_count", 1, 99, 1], combineRep: ["repeat_combine_count", 0, 99, 1], rangeRep: ["repeat_range_count", 0, 99, 1], speed: ["s_speed", 0.5, 2, 0.05], wait: ["workflow_wait", 0, 60, 1] };
   for (const [key, [label, min, max, step]] of Object.entries(fields)) {
     const input = document.createElement("input");
     input.id = "studySetting_" + key;
@@ -69,7 +69,17 @@
     input.max = max;
     input.step = step;
     input.inputMode = "decimal";
-    grid.append(field(label, input));
+    const wrapper = field(label, input);
+    const helpKey = { rep: "repeat_ayah_help", combineRep: "repeat_combine_help", rangeRep: "repeat_range_help" }[key];
+    if (helpKey) {
+      const help = document.createElement("small");
+      help.className = "repeatHelp";
+      help.id = input.id + "Help";
+      help.dataset.i18n = helpKey;
+      input.setAttribute("aria-describedby", help.id);
+      wrapper.append(help);
+    }
+    grid.append(wrapper);
   }
   var repeat = document.createElement("input");
   repeat.type = "checkbox";

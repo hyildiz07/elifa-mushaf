@@ -1,6 +1,6 @@
 # Elifa Mushaf — Güvenilir çalışma akışı
 
-17 Ekim 2026 · v336 · Önizleme için hazırlandı; üretim yayını bu değişikliğe dahil değil.
+17 Ekim 2026 · v337 · Önizleme için hazırlandı; üretim yayını bu değişikliğe dahil değil.
 
 ## Tamamlanan işler
 
@@ -21,9 +21,12 @@
 
 - Elifa Saray Koyu Gece dil listesinde beyaz zemin/açık yazı sorunu giderildi. Ortak kart zemini ve seçili/odak renkleri tema değişkenlerine bağlandı. Altın düğmeler, koyu tema metal kenarları ve hesap durum/bağlantı renkleri de düzeltildi.
 
+- Birleştirme ve tüm çalışma sayacı 0 değerini kaydetme, yeniden açma ve yedeklemede koruyor. Birleştirme 0 ise birleşik okuma adımları atlanıyor; tüm çalışma 0 ise tek tur sonunda duruyor. Pozitif sayaçların önceki toplam okuma sayısı anlamı korundu.
+- Sayaç sırası âyet/parça → birleştirme → tüm çalışma olarak düzenlendi. “Aralığın tekrar sayısı” adı “Tüm çalışmanın tekrar sayısı” oldu; üç alanın altında 21 dilde kısa açıklama var.
+
 ## Doğrulananlar
 
-- `npm run build`: 336 test; 334 başarılı, 0 başarısız, 2 ortam nedeniyle atlanan. Dağıtım paketi üretildi.
+- `npm run build`: 343 test; 341 başarılı, 0 başarısız, 2 ortam nedeniyle atlanan. Dağıtım paketi üretildi.
 - Dil denetimi: 21 dil; eksik anahtar, eksik çeviri satırı, eksik hesap/destek/gizlilik/kılavuz dosyası yok. Bu ölçüm profesyonel dil/hukuk incelemesi yerine geçmez; mevcut inceleme işaretleri değiştirilmedi.
 - Tarayıcıda Fâtiha 1–5 aralığı, Mişârî 223, üç tekrar ve 1,25 hızla tamamlandı. Bölünmüş ikinci âyette iki parça ve 1+2 akışı tamamlandı.
 - Fâtiha 1–3 birleştirme programı âyet 2 / birleşik bölüm 1 / tüm aralık 2 sayılarıyla tarayıcıda tamamlandı.

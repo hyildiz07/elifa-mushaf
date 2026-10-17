@@ -57,3 +57,14 @@ test('split resume focuses the saved verse and part without starting playback',(
  c.window.elifaStudySettings.load(item,{resume:true});const target=c.window.elifaStudySettings.beforeOpen();assert.equal(target.ay,3);
  c.window.elifaStudySettings.afterOpen();assert.deepEqual(restored,[[3,2]]);assert.equal(c.playing,false);assert.equal(c.window.elifaStudySettings.resume(),null);
 });
+
+
+test('zero combine and tour preferences save and reopen without being replaced by one',()=>{
+ const {c,nodes}=harness();const settings={reciter:223,speed:1,rep:1,combineRep:0,rangeRep:0,repOn:true,wait:0,mode:'cumulative',splitCombine:true};
+ assert.equal(validStudySettings(settings),true);
+ for(const key of ['combineRep','rangeRep'])assert.equal(validStudySettings({...settings,[key]:-1}),false);
+ c.window.elifaStudySettings.load({settings});assert.equal(Number(nodes.get('studySetting_combineRep').value),0);
+ assert.equal(Number(nodes.get('studySetting_rangeRep').value),0);
+ c.window.elifaStudySettings.beforeOpen();assert.deepEqual([c.SET.combineRep,c.SET.rangeRep],[0,0]);
+ assert.deepEqual(JSON.parse(JSON.stringify(c.window.elifaStudySettings.capture())),settings);
+});
