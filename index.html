@@ -5445,6 +5445,7 @@ window.elifaLog=function(event,params){
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
 <link rel="stylesheet" href="/assets/home-study-polish.css?v=330">
+<link rel="stylesheet" href="/assets/study-workflow.css?v=334">
 </head>
 <body>
 <div id="tabletBootError" style="display:none;position:fixed;z-index:99999;left:14px;right:14px;top:14px;background:#fff8e8;color:#0e2c55;border:2px solid #c99a35;border-radius:14px;padding:14px 16px;box-shadow:0 12px 34px rgba(0,0,0,.22);font-family:Arial,sans-serif">
@@ -6450,7 +6451,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v333</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v334</span></div>
   </div>
 
   <div class="tesekkur">
@@ -6494,6 +6495,9 @@ window.elifaLog=function(event,params){
     <button class="dlclearbtn" id="dlClearBtn" data-i18n="dl_clear">İndirilenleri sil</button>
   </div>
   <div class="dlallprog" id="dlAllProg" style="display:none"><div class="dlbar"><i id="dlAllFill"></i></div><span id="dlAllTxt"></span></div>
+  <p id="dlResult" role="status" aria-live="polite"></p>
+  <button type="button" class="dlallbtn" id="dlRetry" hidden data-i18n="dl_retry_failed">Başarısız indirmeleri tekrar dene</button>
+  <button type="button" class="dlclearbtn" id="dlCancel" hidden data-i18n="dl_stop_after">Bu sûreden sonra durdur</button>
   <div class="dllist" id="dlList"></div>
 </div>
 
@@ -8324,7 +8328,8 @@ async function playStudyRange(){
   }
   // Validate every verse before starting: one missing middle verse must not
   // turn a requested range into a shorter, misleading playback.
-  const verses=buildLadder(range.from,range.to);
+  const mode=(typeof window!=='undefined'&&window.elifaPracticeMode?.())||'range';
+  const verses=buildLadder(range.from,range.to,mode==='cumulative');
   if(!verses.length){
     try{window.elifaLog?.('playback_error',{mode:'range',error_code:'verse_audio_missing'});}catch(e){}
     toast(window.tr?tr('study_audio_missing'):'Aralıktaki ses kayıtları tamamlanmadı.');return;
@@ -8333,7 +8338,7 @@ async function playStudyRange(){
   // With no marked words, ordinary repeat loops the entire selected passage
   // (for example Bakara 3–10 five times). Cumulative mode keeps its 1+2
   // ladder, while the verse timing and reciter guards stay in force.
-  const steps=SET.cumu?verses:[normalVerseStep(normalChapterAudio||AD_,range.from,range.to,
+  const steps=mode!=='range'?verses:[normalVerseStep(normalChapterAudio||AD_,range.from,range.to,
     {x:1,dyn:true,ayEnd:range.to,l:range.from+'–'+range.to+' âyet',full:false})];
   if(!normalVersePlanReady(steps))return;
   curAy=range.from;runPlan(steps);
@@ -8341,8 +8346,8 @@ async function playStudyRange(){
     const count=range.to-range.from+1;
     const range_bucket=count===1?'1':count<=5?'2_5':count<=10?'6_10':'11_plus';
     try{
-      window.elifaLog?.('study_start',{mode:SET.cumu?'hifz':'range',range_bucket});
-      if(SET.repOn&&!SET.cumu)window.elifaLog?.('range_repeat_start',{mode:'range',range_bucket});
+      window.elifaLog?.('study_start',{mode:mode==='cumulative'?'hifz':mode,range_bucket});
+      if(SET.repOn&&mode==='range')window.elifaLog?.('range_repeat_start',{mode:'range',range_bucket});
     }catch(e){}
   }
 }
@@ -8356,8 +8361,10 @@ $('studyBack').onclick=()=>{
 $('studyOpen').onclick=()=>{
   const {sid,from,to}=readStudyDraft();
   if(!validStudyRange(sid,from,to)){updateStudySetup();return;}
+  const resume=window.elifaStudySettings?.beforeOpen();if(resume===false)return;
+  window.elifaStudySessions?.activateDraft();
   studyDraft={sid,from,to};studyRange={sid,from,to};readerReturn='studySetup';
-  openSurah(sid,from,{study:true});
+  openSurah(sid,resume?.ay||from,{study:true}).then(()=>window.elifaStudySettings?.afterOpen());
 };
 $('studyPlay').onclick=()=>{
   if(activeStudySplitSelection())playActiveStudySplit();
@@ -8985,7 +8992,7 @@ async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1)
   let audio=AD_;
   if(!audio?.sourceUrl){
     try{audio=await getAudio(reciter,recipe.sid);}
-    catch(e){if(request===audioRequestId)toast('Sûre sesi yüklenemedi; bağlantını kontrol et.');return false;}
+    catch(e){if(request===audioRequestId){globalThis.window?.elifaAudioFailure?.('audio_load_failed');toast('Sûre sesi yüklenemedi; bağlantını kontrol et.');}return false;}
     if(request!==audioRequestId||visit!==surahRequestId||
       SET.reciter!==reciter||!studySplitRecipeCurrent(recipe))return false;
     AD_=audio;rewireTimings();
@@ -9006,7 +9013,7 @@ async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1)
   const from=fresh[0],to=fresh.at(-1);
   try{
     if(!audio.buffer)await ensureSelAudio(from.ay,to.ay,[from.f,to.t]);
-  }catch(e){if(request===audioRequestId)toast('Parça sesi hazırlanamadı. Yeniden dene.');return false;}
+  }catch(e){if(request===audioRequestId){console.warn('Study split preparation failed',e);globalThis.window?.elifaAudioFailure?.('split_prepare_failed');toast('Parça sesi hazırlanamadı. Yeniden dene.');}return false;}
   if(request!==audioRequestId||visit!==surahRequestId||AD_!==audio||
     SET.reciter!==reciter||!studySplitRecipeCurrent(recipe))return false;
   if(audio.buffer?to.t>audio.buffer.duration*1000+1:
@@ -9021,7 +9028,7 @@ async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1)
       l:p.ay+'. âyet · '+number+'. parça',studyPart:firstIndex+i});
     if(SET.cumu&&i>0){
       plan.push({f:fresh[0].f,t:p.t,x:1,dyn:true,studyExact:true,
-        l:(firstIndex+1)+'–'+number+'. parçalar birleşik',studyPart:firstIndex+i});
+        l:(firstIndex+1)+'–'+number+'. parçalar birleşik',studyPart:firstIndex+i,combinedFrom:firstIndex});
     }
   }
   if(!normalVersePlanReady(plan))return false;
@@ -9031,7 +9038,10 @@ async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1)
   }
   return playing;
 }
-function playStudySplitPart(part){return playStudySplitRange([part]);}
+function playStudySplitPart(part){
+  const current=activeStudySplitSelection(),index=current?.parts.indexOf(part)??-1;
+  return index<0?false:playStudySplitRange(current.parts,index,index);
+}
 function clearSel(){selA=selB=null;selMode='ayah';renderSel();}
 $('selClear').onclick=()=>{if(selA!=null){stopPlan(false);clearSel();}else setSelectionToolsOpen(false);};
 $('selSplit').onclick=()=>{
@@ -10021,6 +10031,7 @@ function stepBounds(st){
 function stepReps(st){return st.dyn?(SET.repOn?SET.rep:1):(st.x||1);}
 async function goStep(){
   const st=plan[pi];if(!st)return;
+  try{globalThis.window?.elifaPlaybackEvent?.('progress');}catch(e){}
   if(typeof SET!=='undefined'&&
     ((SET.reciter===3&&unsafeSudaisNormalStep(st))||(SET.reciter===5&&unsafeHaniNormalStep(st)))){
     stopPlan(false);
@@ -10059,7 +10070,7 @@ async function goStep(){
     seekPlay(b.f,b.t);
   }catch(e){
     console.warn('Tam âyet sesi başlatılamadı:',e);
-    if(request===audioRequestId&&stepRequest===stepRequestId&&playing){stopPlan(false);toast('Tam âyet sesi açılamadı. Eksik sûre kaydı çalınmadı; bağlantını kontrol et.');}
+    if(request===audioRequestId&&stepRequest===stepRequestId&&playing){globalThis.window?.elifaAudioFailure?.('audio_step_failed');stopPlan(false);toast('Tam âyet sesi açılamadı. Eksik sûre kaydı çalınmadı; bağlantını kontrol et.');}
   }
 }
 
@@ -10159,8 +10170,8 @@ function seekPlayPitchClip(buffer,ms,endMs,offSec,durSec,rate){
   segIdx=lowerBound(splitTimingMs(ms));
   const url=clipUrl;
   a.onended=()=>{if(a!==clipAudio||url!==clipUrl||!playing)return;stepEnded=true;onStepEnd();};
-  a.onerror=()=>{if(a!==clipAudio||url!==clipUrl)return;stopPlan(false);toast('Ses parçası açılamadı. Yeniden dene.');};
-  a.play().catch(()=>{if(a!==clipAudio||url!==clipUrl||!a.paused)return;stopPlan(false);toast('Ses başlatılamadı. Oynat düğmesine yeniden dokun.');});
+  a.onerror=()=>{if(a!==clipAudio||url!==clipUrl)return;globalThis.window?.elifaAudioFailure?.('clip_decode_failed');stopPlan(false);toast('Ses parçası açılamadı. Yeniden dene.');};
+  a.play().catch(()=>{if(a!==clipAudio||url!==clipUrl||!a.paused)return;globalThis.window?.elifaAudioFailure?.('play_rejected');stopPlan(false);toast('Ses başlatılamadı. Oynat düğmesine yeniden dokun.');});
   // A pending play() or a stalled decoder can otherwise leave the plan running forever.
   let last=a.currentTime,deadline=Date.now()+10000;
   const watch=()=>{
@@ -10253,7 +10264,7 @@ function seekPlayHTML(ms,endMs){
   const audio=AD_,request=audioRequestId,stepRequest=stepRequestId,playbackSeq=htmlPlaybackSeq;
   const current=()=>htmlPlaybackSeq===playbackSeq&&AD_===audio&&playing&&!useWA&&
     request===audioRequestId&&stepRequest===stepRequestId;
-  const fail=()=>{if(current()){stopPlan(false);toast('Ses akışı durdu. Bağlantını kontrol edip yeniden oynat.');}};
+  const fail=()=>{if(current()){globalThis.window?.elifaAudioFailure?.('stream_stalled');stopPlan(false);toast('Ses akışı durdu. Bağlantını kontrol edip yeniden oynat.');}};
   const watch={audio:a,timer:null,waiting:null,progress:null,error:fail};
   const arm=()=>{
     clearTimeout(watch.timer);
@@ -10283,7 +10294,7 @@ function seekPlayHTML(ms,endMs){
   playOffsetMs=ms;playEndMs=endMs;pausedAtMs=null;stepEnded=false;
   a.play().catch(()=>{
     if(!current()||!a.paused)return;
-    stopPlan(false);toast('Ses başlatılamadı. Oynat düğmesine yeniden dokun.');
+    globalThis.window?.elifaAudioFailure?.('play_rejected');stopPlan(false);toast('Ses başlatılamadı. Oynat düğmesine yeniden dokun.');
   });
   if(htmlBtimer){clearTimeout(htmlBtimer);htmlBtimer=null;}
   scheduleHTMLBoundary(endMs);
@@ -10414,6 +10425,7 @@ function runPlan(p){
   stopPlan(false);
   if(p.some(st=>st.sourceRanges))normalChapterAudio=AD_;
   plan=p;pi=0;pr=0;pieceCursor=0;playing=true;
+  try{globalThis.window?.elifaPlaybackEvent?.('start');}catch(e){}
   goStep();setIco(true);updateStat();
   wake(true);
 }
@@ -10458,6 +10470,7 @@ function pauseThen(fn){
 function finishPlan(){
   const wasFull=plan.length&&plan[plan.length-1].full;
   const guardedTail=!!(plan.length&&plan[plan.length-1].guardedTail);
+  try{if(guardedTail)globalThis.window?.elifaAudioFailure?.('timing_unverified');else globalThis.window?.elifaPlaybackEvent?.('complete');}catch(e){}
   const nextS=curS+1;
   stopPlan(false);
   if(guardedTail){
@@ -10468,6 +10481,7 @@ function finishPlan(){
   }else toast('✓ Tamamlandı');
 }
 function stopPlan(silent,keepLoading=false){
+  try{globalThis.window?.elifaPlaybackEvent?.('stop');}catch(e){}
   clearHTMLPlaybackWatch();
   pendingSplitPlay=null;
   splitPreparationRequest=null;
@@ -10581,6 +10595,7 @@ function firstMs(){return AD_.ay[1]?AD_.ay[1][0]:0;}
    - repeat açık, birikimli kapalı → âyeti N kez
    - repeat açık, birikimli açık → âyet N kez + o âyete kadar birleşik N kez */
 function playAyahProgram(a){
+  const combine=typeof window!=='undefined'&&window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu;
   const focused=typeof studyRange!=='undefined'&&studyRange?.sid===curS?studyRange:null;
   if(focused)a=Math.max(focused.from,Math.min(focused.to,a));
   if(audioTimingUnverified(SET.reciter,curS)){
@@ -10592,7 +10607,7 @@ function playAyahProgram(a){
   const lastAy=focused?.to||SURAHS[curS-1].n;
 
   // SERBEST (tekrar kapalı, birikimli kapalı) → buradan sûre sonuna TEK KESİNTİSİZ AKIŞ
-  if(!SET.repOn && !SET.cumu){
+  if(!SET.repOn && !combine){
     const steps=[normalVerseStep(chapter,a,lastAy,{x:1,dyn:true,l:a+'. âyet',full:!focused,fluent:true})];
     if(normalVersePlanReady(steps))runPlan(steps);
     return;
@@ -10601,7 +10616,7 @@ function playAyahProgram(a){
   // BİRİKİMLİ (1+2) → kademeli hıfz programı: bu âyetten sûre sonuna kadar
   //   âyet A (N×) → âyet A+1 (N×) → A..A+1 birleşik (N×) → âyet A+2 (N×) → A..A+2 birleşik (N×) ...
   // Not: ilk âyet tek başına, sonra her yeni âyet + o âyete kadar birleşik.
-  if(SET.cumu){
+  if(combine){
     if(focused&&Array.from({length:lastAy-a+1},(_,i)=>chapter.ay[a+i])
       .some(range=>!Array.isArray(range)||!Number.isFinite(range[0])||
         !Number.isFinite(range[1])||range[1]<=range[0])){
@@ -10845,7 +10860,10 @@ $('reciterBtn').onclick=()=>openReciterSheet();
 {const c=$('reciterChip');if(c)c.onclick=()=>openReciterSheet();}
 $('cumuTog').onclick=()=>{
   if(cumuLongFired){cumuLongFired=false;return;}   // uzun basış oldu → toggle etme
-  SET.cumu=!SET.cumu;saveSet();syncCumu();if(typeof syncCumu2==='function')syncCumu2();if(typeof liveRebuildParts==='function')liveRebuildParts();
+  const partsActive=!!activeStudySplitSelection();
+  SET.cumu=partsActive?!SET.cumu:!(window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu);
+  if(!partsActive)window.elifaSetPracticeMode?.(SET.cumu?'cumulative':'range');
+  saveSet();syncCumu();if(typeof syncCumu2==='function')syncCumu2();if(typeof liveRebuildParts==='function')liveRebuildParts();
   if(activeStudySplitSelection()){
     if(SET.cumu){SET.repOn=true;saveSet();syncRep();playActiveStudySplit();}
     else stopPlan(false);
@@ -10868,7 +10886,7 @@ $('cumuTog').onclick=()=>{
   }
 };
 let cumuLongFired=false;
-function syncCumu(){const b=$('cumuTog');if(b)b.classList.toggle('on',SET.cumu);}
+function syncCumu(){const b=$('cumuTog');const on=activeStudySplitSelection()?SET.cumu:(window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu);if(b)b.classList.toggle('on',on);}
 /* 1+2 ikonuna UZUN BAS → âyet aralığı programı paneli (tekrar ikonundaki gibi) */
 (function(){const b=$('cumuTog');if(!b)return;let t=null;
   b.addEventListener('pointerdown',()=>{t=setTimeout(()=>{t=null;cumuLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');},480);});
@@ -10926,7 +10944,7 @@ async function wake(on){try{if(on&&'wakeLock'in navigator){wl=await navigator.wa
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&playing)wake(true);});
 
 /* ---------- program (ayah ladder) — tek tekrar sayısı (SET.rep) ---------- */
-function buildLadder(from,to){
+function buildLadder(from,to,combine=SET.cumu){
   const p=[],chapter=normalChapterAudio||AD_;
   for(let k=from;k<=to;k++){
     // An incomplete interval must never silently skip a verse.
@@ -10934,7 +10952,7 @@ function buildLadder(from,to){
     if(!Array.isArray(range)||!Number.isFinite(range[0])||
       !Number.isFinite(range[1])||range[1]<=range[0])return [];
     p.push(normalVerseStep(chapter,k,k,{x:1,dyn:true,ayEnd:k,l:k+'. âyet'}));
-    if(SET.cumu&&k>from&&chapter.ay[from]){
+    if(combine&&k>from&&chapter.ay[from]){
       p.push(normalVerseStep(chapter,from,k,
         {x:1,dyn:true,ayEnd:k,l:from+'–'+k+' birleşik'}));
     }
@@ -10987,11 +11005,12 @@ function applyRangeProgram(offerReciter=false){
     return false;
   }
   guardedRangeDraft=null;
-  const verses=buildLadder(from,to);
+  const mode=(typeof window!=='undefined'&&window.elifaPracticeMode?.())||'range';
+  const verses=buildLadder(from,to,mode==='cumulative');
   if(!verses.length){toast('Seçilen aralıktaki âyetlerden en az birinin ses sınırı eksik. Aralık çalınmadı.');return false;}
   if(!normalVersePlanReady(verses))return false;
   // Repeat the complete interval; preserve explicit 1+2 practice and verse guards.
-  const p=SET.cumu?verses:[normalVerseStep(normalChapterAudio||AD_,from,to,
+  const p=mode!=='range'?verses:[normalVerseStep(normalChapterAudio||AD_,from,to,
     {x:1,dyn:true,ayEnd:to,l:from+'–'+to+' âyet',full:false})];
   if(!normalVersePlanReady(p))return false;
   if(!AD_?.buffer&&!AD_?.audio){toast('Sûre sesi henüz hazır değil.');return false;}
@@ -11958,6 +11977,7 @@ function elifaBack(){
 
 /* ==================== İNDİRME YÖNETİCİSİ (UI) ==================== */
 let dlReciter=null, dlBusy=false, dlCancelAll=false;
+const dlFailures=new Map(),dlResults=new Map();
 function openDlSheet(){
   dlReciter=SET.reciter;
   const rn=RECITERS.find(r=>r.id===dlReciter);
@@ -11968,10 +11988,16 @@ function openDlSheet(){
 async function renderDlList(){
   const list=$('dlList');list.innerHTML='<div class="dlstat">'+tr('loading')+'</div>';
   const rid=dlReciter;
-  const downloaded=await OFF.downloadedList(rid);
+  let downloaded;
+  try{downloaded=await OFF.downloadedList(rid);}catch(e){list.textContent=tr('dl_storage_error');return;}
+  if(rid!==dlReciter)return;
   const dset=new Set(downloaded);
   // istatistik
-  const mb=await OFF.usageMB();
+  const mb=await OFF.usageMB().catch(()=>null);
+  if(rid!==dlReciter)return;
+  $('dlResult').textContent=dlResults.get(rid)||'';
+  $('dlRetry').hidden=!(dlFailures.get(rid)?.size);$('dlRetry').disabled=dlBusy;
+  $('dlCancel').hidden=!dlBusy;
   $('dlStat').textContent=downloaded.length+' / 114 '+(window.elifaT?window.elifaT('dl_counter'):'sûre indirildi')+(mb!=null?(' · ~'+mb.toFixed(0)+' MB'):'');
   list.innerHTML='';
   SURAHS.forEach(s=>{
@@ -11980,7 +12006,7 @@ async function renderDlList(){
     const unverified=audioTimingUnverified(rid,s.id);
     row.innerHTML=
       '<span class="dlnum">'+s.id+'</span>'+
-      '<div class="dlname"><div class="n1">'+s.tr+'</div><div class="n2">'+s.n+' âyet · '+(s.m==='M'?'Mekkî':'Medenî')+'</div><div class="dlminibar" id="dlmini-'+s.id+'" style="display:none"><i></i></div></div>'+
+      '<div class="dlname"><div class="n1">'+s.tr+'</div><div class="n2">'+s.n+' '+tr('sura_ayet')+' · '+tr(s.m?'sura_medeni':'sura_mekki')+' · '+tr(has?'dl_ready':dlFailures.get(rid)?.has(s.id)?'dl_failed':'dl_missing')+'</div><div class="dlminibar" id="dlmini-'+s.id+'" style="display:none"><i></i></div></div>'+
       '<div class="dlact" id="dlact-'+s.id+'">'+
         (has?'<button class="dldel" title="Sil" data-del="'+s.id+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/></svg></button>'
              :unverified?'<span title="Ses zamanı doğrulanıyor">Ses doğrulanıyor</span>'
@@ -11992,72 +12018,70 @@ async function renderDlList(){
   list.querySelectorAll('[data-get]').forEach(b=>b.onclick=()=>dlOne(+b.dataset.get));
   list.querySelectorAll('[data-del]').forEach(b=>b.onclick=()=>dlDelOne(+b.dataset.del));
 }
+function logDownload(outcome){try{window.elifaLog?.('offline_download_result',{outcome});}catch(e){}}
+async function downloadVerified(rid,sid,onProgress){
+  await OFF.download(rid,sid,onProgress);
+  if(!await OFF.isDownloaded(rid,sid))throw Error('OFFLINE_PAIR_MISSING');
+  invalidateAudioCache(rid,sid);activateDownloadedChapterAudio(rid,sid);
+}
 async function dlOne(sid){
-  if(audioTimingUnverified(dlReciter,sid)){toast('Bu hocanın bu sûre kaydında âyet sınırları güvenilir değil.');return;}
-  if(dlBusy){toast('Bir indirme sürüyor, bekleyin');return;}
-  dlBusy=true;
-  const rid=dlReciter;
-  const act=$('dlact-'+sid);const mini=$('dlmini-'+sid);
-  const row=$('dlrow-'+sid);if(row)row.classList.add('busy');
-  if(act)act.innerHTML='<div class="dlspin"></div>';
-  if(mini)mini.style.display='block';
+  if(dlBusy){toast(tr('dl_busy'));return;}
+  if(audioTimingUnverified(dlReciter,sid)){toast(tr('study_audio_unverified'));return;}
+  dlBusy=true;const rid=dlReciter;
+  const failures=dlFailures.get(rid)||new Set();dlFailures.set(rid,failures);
+  const mini=$('dlmini-'+sid);if(mini)mini.style.display='block';
   try{
-    await OFF.download(rid,sid,(p)=>{if(mini)mini.querySelector('i').style.width=(p*100)+'%';});
-    // Future plays load the newly committed MP3/timing pair. An active play
-    // keeps its own object and is not interrupted by the download.
-    invalidateAudioCache(rid,sid);
-    activateDownloadedChapterAudio(rid,sid);
-    toast(SURAHS[sid-1].tr+' indirildi');
-  }catch(e){
-    toast('İndirme başarısız — internet?');
-  }
-  dlBusy=false;
-  renderDlList();
+    await downloadVerified(rid,sid,p=>{if(mini)mini.querySelector('i').style.width=(p*100)+'%';});
+    failures.delete(sid);logDownload('success');toast(tr('dl_ready'));
+  }catch(e){failures.add(sid);logDownload('failure');toast(tr('dl_failed'));}
+  finally{dlBusy=false;await renderDlList();}
 }
 async function dlDelOne(sid){
-  await OFF.remove(dlReciter,sid);
-  // bellekteki audioCache'i de temizle ki tekrar akıştan gelsin
-  invalidateAudioCache(dlReciter,sid);
-  toast(SURAHS[sid-1].tr+' silindi');
-  renderDlList();
+  if(dlBusy){toast(tr('dl_busy'));return;}
+  try{await OFF.remove(dlReciter,sid);invalidateAudioCache(dlReciter,sid);await renderDlList();}
+  catch(e){toast(tr('dl_storage_error'));}
 }
-// Tümünü indir
 let _dlRaf=false,_dlPend=0;
 function setDlFill(pct){_dlPend=pct;if(_dlRaf)return;_dlRaf=true;requestAnimationFrame(()=>{_dlRaf=false;const f=$('dlAllFill');if(f)f.style.width=_dlPend+'%';});}
-async function dlAll(){
-  if(dlBusy){toast('Bir indirme sürüyor');return;}
-  dlBusy=true;dlCancelAll=false;try{if(window.elifaStat)elifaStat('download');}catch(e){}
-  $('dlAllBtn').disabled=true;
+async function dlAll(onlyFailed=false){
+  if(dlBusy){toast(tr('dl_busy'));return;}
+  dlBusy=true;dlCancelAll=false;const rid=dlReciter;
+  const failures=dlFailures.get(rid)||new Set();dlFailures.set(rid,failures);
+  $('dlAllBtn').disabled=true;$('dlRetry').disabled=true;$('dlCancel').hidden=false;
   $('dlAllProg').style.display='block';
-  const rid=dlReciter;
-  const downloaded=new Set(await OFF.downloadedList(rid));
-  const todo=SURAHS.filter(s=>!downloaded.has(s.id)&&!audioTimingUnverified(rid,s.id));
-  let done=0;
-  for(const s of todo){
-    if(dlCancelAll)break;
-    $('dlAllTxt').textContent=s.tr+' indiriliyor… ('+(done+1)+'/'+todo.length+')';
-    try{await OFF.download(rid,s.id,(p)=>{
-      setDlFill(((done+p)/todo.length)*100);
-    });invalidateAudioCache(rid,s.id);activateDownloadedChapterAudio(rid,s.id);}catch(e){/* atla */}
-    done++;
-    setDlFill((done/todo.length)*100);
+  let success=0,failed=0,todo=[];
+  try{
+    const downloaded=new Set(await OFF.downloadedList(rid));
+    todo=SURAHS.filter(s=>!downloaded.has(s.id)&&!audioTimingUnverified(rid,s.id)&&(!onlyFailed||failures.has(s.id)));
+    for(const s of todo){
+      if(dlCancelAll)break;
+      $('dlAllTxt').textContent=s.tr+' · '+(success+failed+1)+'/'+todo.length;
+      try{
+        await downloadVerified(rid,s.id,p=>setDlFill((success+failed+p)/todo.length*100));
+        success++;failures.delete(s.id);logDownload('success');
+      }catch(e){failed++;failures.add(s.id);logDownload('failure');}
+      setDlFill((success+failed)/todo.length*100);
+    }
+    const remaining=todo.length-success-failed;
+    if(dlCancelAll)logDownload('cancelled');
+    const message=tr('dl_result').replace('{ok}',success).replace('{failed}',failed).replace('{remaining}',remaining);
+    dlResults.set(rid,message);toast(message);
+  }catch(e){dlResults.set(rid,tr('dl_storage_error'));toast(tr('dl_storage_error'));logDownload('failure');}
+  finally{
+    dlBusy=false;$('dlAllBtn').disabled=false;$('dlRetry').disabled=false;$('dlCancel').hidden=true;
+    $('dlAllProg').style.display='none';setDlFill(0);await renderDlList();
   }
-  dlBusy=false;
-  $('dlAllBtn').disabled=false;
-  $('dlAllProg').style.display='none';
-  $('dlAllFill').style.width='0';
-  toast(dlCancelAll?'İndirme durduruldu':'Doğrulanmış sûreler indirildi');
-  renderDlList();
 }
 async function dlClearAll(){
-  const rid=dlReciter;
-  const downloaded=await OFF.downloadedList(rid);
-  for(const id of downloaded){await OFF.remove(rid,id);invalidateAudioCache(rid,id);}
-  toast('İndirilenler silindi');
-  renderDlList();
+  if(dlBusy){toast(tr('dl_busy'));return;}
+  try{const rid=dlReciter;for(const id of await OFF.downloadedList(rid)){await OFF.remove(rid,id);invalidateAudioCache(rid,id);}
+    dlResults.delete(rid);await renderDlList();
+  }catch(e){toast(tr('dl_storage_error'));}
 }
 $('qRepeat').onclick=()=>{show('ezber');renderEzber();};
-$('dlAllBtn').onclick=dlAll;
+$('dlAllBtn').onclick=()=>dlAll();
+$('dlRetry').onclick=()=>dlAll(true);
+$('dlCancel').onclick=()=>{dlCancelAll=true;};
 $('dlClearBtn').onclick=dlClearAll;
 $('dlReciterBtn').onclick=()=>{
   // hoca seçtir (mevcut reciterSheet'i kullan ama dl bağlamında)
@@ -13276,37 +13300,18 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v333-afasy-split-handles';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v334-reliability-study-workflow';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
+    // Never unregister the working worker or delete its offline shell to force
+    // an update. Installation in sw.js validates the replacement atomically.
     return (async function(){
       try{
-        try{ if(localStorage.getItem(SW_FRESH_KEY)==='1') return false; }catch(e){ return false; }
-        if(!window.caches || !caches.keys) return false;
-        var keys = await caches.keys();
-        var hasNew = keys.indexOf(SW_CACHE_EXPECTED) >= 0;
-        var hasOld = keys.some(function(k){
-          return k.indexOf('elifa-mushaf-') === 0 && k !== SW_CACHE_EXPECTED;
-        });
-        if(hasNew || !hasOld) return false;      /* zaten güncel ya da ilk kurulum → dokunma */
-
-        /* İşareti ÖNCE yaz ve GERÇEKTEN yazıldığını doğrula.
-           Gizli mod / dolu depolamada localStorage yazılamaz; doğrulamazsak
-           bu blok her açılışta tekrar çalışıp yeni bir yenilenme döngüsü
-           başlatırdı. Yazılamıyorsa migrasyondan tamamen vazgeçiyoruz. */
-        try{
-          localStorage.setItem(SW_FRESH_KEY,'1');
-          if(localStorage.getItem(SW_FRESH_KEY) !== '1') return false;
-        }catch(e){ return false; }
-        var rs = await navigator.serviceWorker.getRegistrations();
-        for(var i=0;i<rs.length;i++){ try{ await rs[i].unregister(); }catch(e){} }
-        for(var j=0;j<keys.length;j++){
-          if(keys[j].indexOf('elifa-mushaf-')===0 && keys[j] !== SW_CACHE_EXPECTED){ try{ await caches.delete(keys[j]); }catch(e){} }
-        }
-        console.log('[ELIFA] eski service worker tazelendi (tek sefer)');
-        return true;
-      }catch(e){ return false; }
+        const registrations=await navigator.serviceWorker.getRegistrations();
+        await Promise.allSettled(registrations.map(reg=>reg.update()));
+      }catch(e){}
+      return false;
     })();
   }
 
@@ -16648,13 +16653,15 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     <button type="button" id="accountRetry" class="account-link">Bağlantıyı yeniden dene</button>
   </div><p id="accountStatus" role="status" aria-live="polite"></p>
 </dialog>
-<script type="module" src="/assets/account.js?v=333"></script>
+<script type="module" src="/assets/account.js?v=334"></script>
 <script src="/assets/reader-help-drafts.js?v=1"></script>
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
-<script src="/assets/study-split.js?v=333"></script>
-<script src="/assets/study-sessions.js?v=333"></script>
+<script src="/assets/workflow-i18n.js?v=334"></script>
+<script src="/assets/study-workflow.js?v=334"></script>
+<script src="/assets/study-split.js?v=334"></script>
+<script src="/assets/study-sessions.js?v=334"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>
 </body>
 </html>

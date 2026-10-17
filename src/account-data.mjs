@@ -1,3 +1,4 @@
+import {validStudySettings,validStudyProgress} from './study-settings.mjs';
 export const BACKUP_KEYS=['bookmarks','errs','ezdays','ezlog','hifz','marks','notes','prog','set','studySessions','surahFavorites'];
 export const MAX_BACKUP_BYTES=1024*1024;
 export const JOURNAL_KEY='elifa.restore.pending';
@@ -35,7 +36,7 @@ export function validateBackup(payload){
       if(!Array.isArray(value)||value.length>100)throw Error('Geçersiz çalışma listesi.');
       const ids=new Set();
       for(const item of value){
-        if(!object(item)||Object.keys(item).some(k=>!['id','title','sid','from','to','createdAt','updatedAt','splitMode','manualCuts','selectedAy'].includes(k))||
+        if(!object(item)||Object.keys(item).some(k=>!['id','title','sid','from','to','createdAt','updatedAt','splitMode','manualCuts','selectedAy','settings','progress'].includes(k))||
           typeof item.id!=='string'||!STUDY_ID.test(item.id)||ids.has(item.id)||
           typeof item.title!=='string'||!item.title.trim()||item.title.length>80||
           !Number.isInteger(item.sid)||item.sid<1||item.sid>114||
@@ -58,6 +59,8 @@ export function validateBackup(payload){
           }
           if(totalCuts>1000)throw Error('Çalışmada çok fazla bölme noktası var.');
         }
+        if(item.settings!==undefined&&!validStudySettings(item.settings))throw Error('Geçersiz çalışma ayarı.');
+        if(item.progress!==undefined&&!validStudyProgress(item.progress,item.from,item.to))throw Error('Geçersiz çalışma konumu.');
         ids.add(item.id);
       }
     }

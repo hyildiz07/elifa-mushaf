@@ -604,6 +604,16 @@
   new MutationObserver(() => {
     if (!ui.panel.hidden && (!studyRange || el('studyBanner').hidden)) close();
   }).observe(el('studyBanner'), { attributes: true, attributeFilter: ['hidden'] });
+  window.elifaResumeStudySplit = (ay,index) => {
+    if(ui.panel.hidden)open();
+    if(!contextMatches())return false;
+    const savedMode=session.initialSaved?.mode;
+    chooseVerse(ay);
+    if(savedMode==='auto')build('auto');else if(ui.results.hidden)build(session.mode);
+    if(!session.parts.length)return false;
+    setSelectedIndex(Math.min(Math.max(0,index),session.parts.length-1));
+    return true;
+  };
   window.elifaOpenStudySplit = open;
   window.elifaCloseStudySplit = close;
   window.elifaStudySplitSelection = () => {
@@ -615,6 +625,7 @@
   window.elifaStudySplitRefreshStatus = renderLiveStatus;
   window.elifaStudySplitPrefs = savedPrefs;
   window.elifaRememberStudySplitPrefs = (range,prefs) => {
+    if(prefs===null){remembered=null;return true;}
     const clean=copyPrefs(prefs);
     if(!range||!clean)return false;
     remembered={sid:range.sid,from:range.from,to:range.to,...clean};

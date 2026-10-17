@@ -52,7 +52,7 @@ test('Study Desk play uses the whole selected range and refuses incomplete audio
   assert.deepEqual([played[0][0].from,played[0][0].to],[1,10]);
   assert.equal(context.stepReps(played[0][0]),5);
   assert.equal(played[0][0].full,false,'finishing the range must not advance to another surah');
-  context.SET.cumu=true;await context.playStudyRange();
+  context.SET.cumu=true;context.window.elifaPracticeMode=()=>'cumulative';await context.playStudyRange();
   assert.equal(played[1].length,10,'cumulative study keeps its verse ladder');
 });
 

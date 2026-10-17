@@ -3,7 +3,8 @@
 const EVENTS=new Set([
   'app_open','screen_view','surah_open','language_change','read','download',
   'study_open','study_saved','study_start','range_repeat_start',
-  'split_created','split_combine_start','playback_error','offline_download_result'
+  'split_created','split_combine_start','playback_error','offline_download_result',
+  'playback_start','playback_complete','playback_stopped','audio_feedback_open'
 ]);
 const SCREEN=/^[a-z][a-z0-9_]{0,31}$/;
 const LANGUAGE=/^[a-z]{2,3}$/;

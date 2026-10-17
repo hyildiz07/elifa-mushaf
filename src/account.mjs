@@ -138,10 +138,12 @@ function showConflicts(conflicts){
 async function syncNow(resolutions={}){
  if(syncRunning||!user?.emailVerified||!$('accountSyncEnabled').checked)return;
  if(!navigator.onLine){$('accountSyncStatus').textContent='Çevrimdışı. Kayıtlar bu cihazda; bağlantı gelince yeniden denenecek.';return;}
+ if(window.elifaActivityBusy?.()){$('accountSyncStatus').textContent=window.tr?.('sync_deferred')||'Sync will continue after your study.';scheduleSync(5000);return;}
  const owner=user.uid,generation=epoch;syncRunning=true;availability();$('accountSyncStatus').textContent='Kayıtlar karşılaştırılıyor…';
  try{
   const before=localSnapshot(),remote=await api('syncGet'),stored=localStorage.getItem(SYNC_BASE_PREFIX+owner),previous=stored?JSON.parse(stored):null,base=remote.revision===0?null:previous;
   if(owner!==user?.uid||generation!==epoch)return;
+  if(window.elifaActivityBusy?.()){scheduleSync(5000);return;}
   const {payload,conflicts}=mergeBackups(base?.payload||null,before,remote.payload,resolutions);
   if(conflicts.length){showConflicts(conflicts);return;}
   if(!sameData(before,localSnapshot()))throw Error('Bu cihazdaki kayıtlar işlem sırasında değişti. Yeniden eşitle.');
@@ -152,6 +154,7 @@ async function syncNow(resolutions={}){
    catch(e){if(e.status===409){scheduleSync(500);$('accountSyncStatus').textContent='Başka cihazdaki değişiklikler alınıyor…';return;}throw e;}
   }
   if(owner!==user?.uid||generation!==epoch)return;
+  if(window.elifaActivityBusy?.()){scheduleSync(5000);return;}
   if(!sameData(before,localSnapshot()))throw Error('Bu cihazdaki kayıtlar işlem sırasında değişti. Yeniden eşitle.');
   if(!sameData(before,payload))restoreBackup(localStorage,payload);
   localStorage.setItem(SYNC_BASE_PREFIX+owner,JSON.stringify({revision,payload}));

@@ -3,27 +3,48 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 
-for(const worker of ['sw.js','service-worker.js'])test(`${worker}: update preserves downloaded audio`,async()=>{
-  const events={},deleted=[],version=JSON.parse(fs.readFileSync('version.json')).version;
-  const c=vm.createContext({self:{addEventListener:(name,fn)=>events[name]=fn,clients:{claim:async()=>{},matchAll:async()=>[]},registration:{unregister:async()=>{}},skipWaiting(){}},
-    caches:{keys:async()=>['elifa-audio-v1','elifa-mushaf-v224-loopfix',version,'another-app-cache'],delete:async k=>deleted.push(k)}});
-  vm.runInContext(fs.readFileSync(worker,'utf8'),c);let done;events.activate({waitUntil:p=>done=p});await done;
-  assert.ok(deleted.includes('elifa-mushaf-v224-loopfix'));
-  assert.ok(!deleted.includes('elifa-audio-v1'));assert.ok(!deleted.includes('another-app-cache'));
-  if(worker==='sw.js')assert.ok(!deleted.includes(version));
+function workerHarness(worker='sw.js',{fail=null,htmlFallback=null}={}){
+  const events={},deleted=[],stores=new Map([['elifa-audio-v1',new Map()],['elifa-mushaf-v224-loopfix',new Map()],['another-app-cache',new Map()]]);
+  let claimed=false;
+  const response=(url)=>({ok:true,status:200,type:'basic',redirected:false,headers:{get:()=>url===htmlFallback?'text/html':url.endsWith('.html')?'text/html':'application/javascript'}});
+  const c=vm.createContext({Request,URL,fetch:async req=>{if(fail&&req.url.includes(fail))throw Error('network');return response(req.url);},
+    self:{location:{href:'https://app.test/sw.js'},addEventListener:(name,fn)=>events[name]=fn,clients:{claim:async()=>{claimed=true;}}},
+    caches:{open:async name=>{if(!stores.has(name))stores.set(name,new Map());const m=stores.get(name),url=r=>r.url||new URL(r,'https://app.test/sw.js').href;return {put:async(r,v)=>m.set(url(r),v),match:async r=>m.get(url(r))};},keys:async()=>[...stores.keys()],delete:async key=>{deleted.push(key);return stores.delete(key);}}});
+  c.importScripts=()=>vm.runInContext(fs.readFileSync('sw.js','utf8'),c);
+  vm.runInContext(fs.readFileSync(worker,'utf8'),c);
+  c.self.location.origin='https://app.test';
+  return {c,deleted,stores,claimed:()=>claimed,run:async type=>{let p;events[type]({waitUntil:value=>p=value});return p;},fetch:async request=>{let p;events.fetch({request,respondWith:value=>p=value});return p;}};
+}
+test('online navigation cannot replace the installed offline shell before a complete update',async()=>{
+ const h=workerHarness();await h.run('install');await h.run('activate');
+ const cache=h.stores.get(JSON.parse(fs.readFileSync('version.json')).version),old=cache.get('https://app.test/index.html');
+ h.c.fetch=async()=>({ok:true,status:200,type:'basic',newRelease:true});
+ await h.fetch({method:'GET',mode:'navigate',url:'https://app.test/'});
+ assert.equal(cache.get('https://app.test/index.html'),old);
+ h.c.fetch=async()=>{throw Error('offline');};
+ assert.equal(await h.fetch({method:'GET',mode:'navigate',url:'https://app.test/'}),old);
 });
-test('HTML refresh migration preserves offline audio',async()=>{
-  const h=fs.readFileSync('index.html','utf8');
-  const start=h.indexOf('  function _forceSwRefresh()'),end=h.indexOf("  window.addEventListener('load'",start);
-  const deleted=[],data={};
-  const c=vm.createContext({window:{},SW_FRESH_KEY:'test',SW_CACHE_EXPECTED:'elifa-mushaf-v225-audio',_elifaBusy:()=>false,
-    localStorage:{getItem:k=>data[k],setItem:(k,v)=>data[k]=v},
-    navigator:{serviceWorker:{getRegistrations:async()=>[]}},console:{log(){}},
-    caches:{keys:async()=>['elifa-audio-v1','elifa-mushaf-v224-loopfix'],delete:async k=>deleted.push(k)}});
-  c.window.caches=c.caches;
-  vm.runInContext(h.slice(start,end),c);assert.equal(await c._forceSwRefresh(),true);
-  assert.deepEqual(deleted,['elifa-mushaf-v224-loopfix']);
+for(const worker of ['sw.js','service-worker.js'])test(worker+': only a complete replacement can delete the old shell',async()=>{
+  const h=workerHarness(worker);await h.run('install');await h.run('activate');
+  assert.deepEqual(h.deleted,['elifa-mushaf-v224-loopfix']);assert.ok(h.stores.has('elifa-audio-v1'));assert.ok(h.claimed());
 });
+test('a failed shell download preserves the old worker cache',async()=>{
+  const h=workerHarness('sw.js',{fail:'index.html'});await assert.rejects(h.run('install'),/incomplete/);
+  assert.ok(h.stores.has('elifa-mushaf-v224-loopfix'));assert.ok(h.stores.has('elifa-audio-v1'));assert.equal(h.claimed(),false);
+});
+test('a missing script served as HTML cannot become a valid offline update',async()=>{
+  const h=workerHarness('sw.js',{htmlFallback:'https://app.test/assets/locale.js?v=2'});
+  await assert.rejects(h.run('install'),/incomplete/);assert.ok(h.stores.has('elifa-mushaf-v224-loopfix'));
+});
+test('an optional help page failure does not invalidate a complete shell',async()=>{
+  const h=workerHarness('sw.js',{fail:'/destek/'});await h.run('install');await h.run('activate');assert.ok(h.claimed());
+});
+test('refresh requests an update without deleting caches, unregistering, or forcing reload',async()=>{
+  const h=fs.readFileSync('index.html','utf8'),start=h.indexOf('  function _forceSwRefresh()'),end=h.indexOf("  window.addEventListener('load'",start);let updates=0;
+  const c=vm.createContext({navigator:{serviceWorker:{getRegistrations:async()=>[{update:async()=>{updates++;},unregister:()=>assert.fail('must preserve active worker')}]}}});
+  vm.runInContext(h.slice(start,end),c);assert.equal(await c._forceSwRefresh(),false);assert.equal(updates,1);
+});
+
 test('app, worker and release manifest versions agree',()=>{
   const v=JSON.parse(fs.readFileSync('version.json')).version;
   assert.ok(fs.readFileSync('sw.js','utf8').includes(`const VERSION = '${v}'`));

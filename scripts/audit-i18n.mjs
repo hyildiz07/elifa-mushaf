@@ -7,6 +7,7 @@ const end=html.indexOf('\n  var idx={};',start);
 if(start<0||end<0)throw new Error('Translation table not found');
 const tableSource=html.slice(start,end).replace(/^  var T=/,'').replace(/;\s*$/,'');
 const T=vm.runInNewContext(`(${tableSource})`);
+if(fs.existsSync('assets/workflow-i18n.js'))vm.runInNewContext(fs.readFileSync('assets/workflow-i18n.js','utf8'),{window:{T}});
 const LANGS=['tr','de','en','ru','ar','fr','es','el','zh','ja','ko','hi','ur','it','id','nl','pt','fa','bn','ms','sw'];
 const keys=[...html.matchAll(/data-i18n(?:-ph|-title|-aria)?="([^"]+)"/g)].map(m=>m[1]);
 const missingKeys=[...new Set(keys)].filter(k=>!(k in T));

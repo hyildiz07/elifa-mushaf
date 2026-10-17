@@ -156,6 +156,16 @@ test('an obsolete study selection cannot start after asynchronous audio loading'
   assert.equal(c.started,undefined);
 });
 
+test('playing a single saved part preserves its actual number for progress and resume',async()=>{
+  const {c}=context();
+  const parts=c.buildStudySplitParts(2,2,'manual',{2:[1,2]});
+  select(c,parts,2,'manual',{2:[1,2]});
+  assert.equal(await c.playStudySplitPart(parts.parts[2]),true);
+  assert.equal(c.started.length,1);
+  assert.equal(c.started[0].studyPart,2);
+  assert.deepEqual([c.started[0].f,c.started[0].t],[1400,1800]);
+});
+
 test('a pending word never silently becomes a whole verse after audio loads',async()=>{
   const {c,recording}=context(false);
   const pending=c.buildStudySplitParts(2,2,'auto');
