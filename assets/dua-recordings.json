@@ -138,5 +138,50 @@
     "sourceName": "IslamHouse",
     "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
     "mime": "audio/mpeg"
+  },
+  {
+    "id": "mishary-uyanma",
+    "prayerId": "uyanma",
+    "readerId": "mishary-alafasy",
+    "path": "/assets/dua-audio/mishary-uyanma.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain/ar_Mashari_Athkar/ar_Mashari_Azkar01.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/171286/",
+    "bytes": 205911,
+    "sha256": "2ffd42ec69a6f5182ff973cad102bd7b260271b4a0e4c6f624ad68c167c7b14f",
+    "kind": "complete-supplication-excerpt",
+    "reader": "Mişârî Râşid el-Afâsî · Günlük zikirler",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "mishary-uyku-alternatif",
+    "prayerId": "uyku-alternatif",
+    "readerId": "mishary-alafasy",
+    "path": "/assets/dua-audio/mishary-uyku-alternatif.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain/ar_Mashari_Athkar/ar_Mashari_Azkar06.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/171291/",
+    "bytes": 98478,
+    "sha256": "89296f4b9d34eabf4e512fca085974e786b2e216d47ce59b19d62a11051d17a4",
+    "kind": "complete-supplication-excerpt",
+    "reader": "Mişârî Râşid el-Afâsî · Günlük zikirler",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "mishary-istigfar-1419",
+    "prayerId": "istigfar",
+    "readerId": "mishary-alafasy",
+    "path": "/assets/dua-audio/mishary-istigfar.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Mishari_Raashid/Azkar_AlSba7_w_AlMsa/ar_1419_Azkar_AlSba7.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/92368/",
+    "bytes": 576717,
+    "sha256": "8985f91950f6d8e7f8a690083cefcbfbe5ad996c6b3f130a9a03a7e41ee95021",
+    "kind": "verified-dua-excerpt",
+    "reader": "Mişârî Râşid el-Afâsî",
+    "sourceName": "IslamHouse · Mişârî el-Afâsî · Sabah zikirleri, 1419",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
   }
 ]

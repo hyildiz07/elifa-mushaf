@@ -1,0 +1,240 @@
+{
+  "checkedAt": "2026-10-17",
+  "sourceRecording": "mishary_rashid_al_afasy_mp3quran",
+  "reciterId": 223,
+  "read": 123,
+  "series": "r1",
+  "timing": {
+    "path": "assets/afasy-mp3quran-word-timings.json",
+    "sha256": "d437b7def5f5d6789d4610e34bbc06f712e189a499f692fe8b3440d2b50410b2",
+    "release": "v3.2.0",
+    "license": "CC-BY-4.0",
+    "licenseScope": "Timing data only, not an audio license",
+    "releaseUrl": "https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0"
+  },
+  "audioPermission": {
+    "url": "https://www.mp3quran.net/eng/privacy",
+    "quote": "copy any material or use any link",
+    "basis": "The source explicitly permits visitors and developers to copy its materials or use its links. Independently checked on 2026-10-17. This is separate from the timing CC-BY license."
+  },
+  "derivation": "Decode the exact source MP3; sample-time atrim using its released matching word/verse clock; preserve each verse tail through timestamp_to; remove only the 40ms between selected verses; concatenate selected PCM; encode libmp3lame q2 without speed/sample-rate/voice transformations. No guessed timing from another recording. MP3 encoding may add encoder padding, never samples from a later word.",
+  "sources": [
+    {
+      "chapter": 20,
+      "bytes": 26050700,
+      "sha256": "896fa8b8da5dd27d308e4c3e72a9aaed5a3c44fa4e99dae5e46a198519e9d2c6",
+      "etag": "9e2bbca512a3e35b0ef90a9597f533da",
+      "file": "test-results/mishary-r1-020.mp3",
+      "url": "https://cdn.mp3quran.net/audio/mishary-alafasy/r1/020.mp3"
+    },
+    {
+      "chapter": 43,
+      "bytes": 19659690,
+      "sha256": "5bf833a34ec9d2ded1f070a83b2b797dd7897ac2ad643b4479d1adec2304f640",
+      "etag": "30eca1a1a0b7e5a158bd1d8d92df3868",
+      "file": "test-results/mishary-r1-043.mp3",
+      "url": "https://cdn.mp3quran.net/audio/mishary-alafasy/r1/043.mp3"
+    }
+  ],
+  "cuts": [
+    {
+      "id": "ilim",
+      "chapter": 20,
+      "file": "test-results/mishary-unverified/mishary-ilim.mp3",
+      "expectedText": "رَبِّ زِدْنِي عِلْمًا",
+      "ranges": [
+        {
+          "verse": "20:114",
+          "wordFrom": 15,
+          "wordTo": 17,
+          "start": 1325.365,
+          "end": 1328.693,
+          "wordEnd": 1328.655
+        }
+      ],
+      "bytes": 69396,
+      "sha256": "cc743597d2d6d52a75d41889d4dffcc20a192b0d60aeecacc6ba3309126cc2ff",
+      "selectedDuration": 3.3279999999999745,
+      "decodedDuration": 3.3279818594104307,
+      "sampleRate": 44100,
+      "channels": 2,
+      "decodeErrors": [],
+      "independentAsr": {
+        "text": " بيزيدني علمان",
+        "chunks": [
+          {
+            "timestamp": [
+              0,
+              3
+            ],
+            "text": " بيزيدني علمان"
+          }
+        ]
+      },
+      "status": "quarantined_pending_acoustic_boundary_validation",
+      "publishable": false
+    },
+    {
+      "id": "yolculuk",
+      "chapter": 43,
+      "file": "test-results/mishary-unverified/mishary-yolculuk.mp3",
+      "expectedText": "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ",
+      "ranges": [
+        {
+          "verse": "43:13",
+          "wordFrom": 12,
+          "wordTo": 20,
+          "start": 151.136,
+          "end": 161.017,
+          "wordEnd": 160.986
+        },
+        {
+          "verse": "43:14",
+          "wordFrom": 1,
+          "wordTo": 4,
+          "start": 161.057,
+          "end": 170.566,
+          "wordEnd": 170.317
+        }
+      ],
+      "bytes": 406854,
+      "sha256": "3058c84d7ed660b996baabf589fe7d4c4e8b7d06ab6797692ee1eeacf2bce9ea",
+      "selectedDuration": 19.390000000000015,
+      "decodedDuration": 19.39,
+      "sampleRate": 44100,
+      "channels": 2,
+      "decodeErrors": [],
+      "independentAsr": {
+        "text": " 215. سبحان الذي سخر لنا هذا وما you're not the Lord of the worlds 215. وإن الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة",
+        "chunks": [
+          {
+            "timestamp": [
+              0,
+              9.84
+            ],
+            "text": " 215. سبحان الذي سخر لنا هذا وما you're not the Lord of the worlds"
+          },
+          {
+            "timestamp": [
+              9.84,
+              null
+            ],
+            "text": " 215. وإن الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة الامنة"
+          }
+        ]
+      },
+      "status": "quarantined_pending_acoustic_boundary_validation",
+      "publishable": false
+    }
+  ],
+  "validationStatus": "Quarantined: acoustic word-boundary integrity is not independently confirmed; not publishable",
+  "limitations": [
+    "Current source SHA256 hashes are newly verified; there was no existing local pinned source audio for these two chapters.",
+    "Whisper-tiny is an independent imperfect acoustic identity check, not a proof of every Arabic vowel or an exhaustive manual listening test.",
+    "These are Quran-derived supplications, not independent studio prayer recordings. Do not label the journey excerpt as the entire hadith journey dua."
+  ],
+  "publishable": false,
+  "boundaryDiagnostics": {
+    "asrModel": "Xenova/whisper-tiny q8 CPU; no larger-model download",
+    "results": [
+      {
+        "chapter": "020",
+        "start": 1324.555,
+        "end": 1328.693,
+        "text": " وقروا أن بيزيدني علمان",
+        "chunks": [
+          {
+            "timestamp": [
+              0,
+              4
+            ],
+            "text": " وقروا أن بيزيدني علمان"
+          }
+        ]
+      },
+      {
+        "chapter": "020",
+        "start": 1325.15,
+        "end": 1328.693,
+        "text": " وميزي دنيا ينمان",
+        "chunks": [
+          {
+            "timestamp": [
+              0,
+              3
+            ],
+            "text": " وميزي دنيا ينمان"
+          }
+        ]
+      },
+      {
+        "chapter": "020",
+        "start": 1325.25,
+        "end": 1328.693,
+        "text": " ومجب أن ينمان",
+        "chunks": [
+          {
+            "timestamp": [
+              0,
+              3
+            ],
+            "text": " ومجب أن ينمان"
+          }
+        ]
+      },
+      {
+        "chapter": "020",
+        "start": 1325.365,
+        "end": 1328.693,
+        "text": " بيزيدني علمان",
+        "chunks": [
+          {
+            "timestamp": [
+              0,
+              3
+            ],
+            "text": " بيزيدني علمان"
+          }
+        ]
+      },
+      {
+        "chapter": "043",
+        "start": 151.036,
+        "end": 155.446,
+        "text": " سبحاً الذي سخر لنا هذا",
+        "chunks": [
+          {
+            "timestamp": [
+              0,
+              4.44
+            ],
+            "text": " سبحاً الذي سخر لنا هذا"
+          }
+        ]
+      },
+      {
+        "chapter": "043",
+        "start": 151.136,
+        "end": 155.446,
+        "text": " سبحاً الذي سخفر الناهاد",
+        "chunks": [
+          {
+            "timestamp": [
+              0,
+              4.44
+            ],
+            "text": " سبحاً الذي سخفر الناهاد"
+          }
+        ]
+      }
+    ],
+    "energyWindows": [
+      "test-results/mishary-020-boundary-energy.json",
+      "test-results/mishary-043-boundary-energy.json"
+    ],
+    "assessment": {
+      "ilim": "20:114 word 14 ends and word 15 starts at 1325.365 seconds in the released timing data. Ten-ms source-energy windows around 1325.15–1325.37 contain continuous speech, not an independent silence gap. Starting at 1325.15, 1325.25 or 1325.365 does not produce reliable recognition of all three words. We cannot prove that the initial rabbi consonant is intact or that moving earlier excludes qul. Do not adjust the app clip by guesswork.",
+      "yolculuk": "43:13 word 11 has repeated source segments; its final segment ends exactly at 151.136, where word 12 begins. A lower-energy transition occurs approximately 151.11–151.23 but is not silence. Diagnostic starts 151.036 and 151.136 recognize the first phrase partially; this does not independently confirm all end consonants or the complete following verse. Candidate remains quarantined rather than claiming a boundary repair."
+    }
+  }
+}

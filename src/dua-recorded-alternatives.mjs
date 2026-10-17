@@ -10,8 +10,8 @@ export const recordedAlternatives=[
       "tr": "Allah’ım! Senin adınla ölür, senin adınla yaşarım.",
       "en": "In Your name, O Allah, I die and I live."
     },
-    "audioNoteTR": "Süleyman eş-Şuveyhi’nin Müslümanın Kalesi okumasından tam dua bölümüdür. “Allahümme bismike ahyâ ve bismike emût” biçimindeki diğer rivayetle aynı lafız değildir; ayrı bir alternatif olarak gösterilir.",
-    "audioNoteEN": "A complete supplication excerpt from Sulayman al-Shuwayhi’s Fortress of the Muslim reading. Its wording differs from the other bedtime variant and is shown separately.",
+    "audioNoteTR": "Kaynakta belirtilen uyku zikirleri kaydından tam dua bölümüdür. “Allahümme bismike ahyâ ve bismike emût” biçimindeki diğer rivayetle aynı lafız değildir; ayrı bir alternatif olarak gösterilir.",
+    "audioNoteEN": "A complete supplication excerpt from the credited bedtime-remembrance recording. Its wording differs from the other bedtime variant and is shown separately.",
     "sourceName": "IslamHouse · Müslümanın Kalesi",
     "note": "adult_prayer_excerpt",
     "guideSource": "https://islamhouse.com/ar/books/2522"

@@ -54,7 +54,7 @@ test('important daily supplications have distinct ids, sources, Arabic, pronunci
     const item=prayer(id);assert.ok(item);
     assert.equal(new URL(item.source).protocol,'https:');assert.match(new URL(item.source).hostname,/(^|\.)diyanet\.gov\.tr$/u);
     for(const text of [item.ar,item.ok,item.meal.tr,item.meal.en])assert.ok(text.trim());
-    if(id==='uyanma')assert.equal(item.recording.id,'uyanma');
+    if(id==='uyanma')assert.equal(item.recording.prayerId||item.recording.id,'uyanma');
     else assert.equal(item.recording,undefined,'voice availability is not inferred from text');
   }
   assert.equal(prayer('ilim').quran.surah,20);assert.equal(prayer('ilim').quran.ayah,114);
@@ -71,7 +71,7 @@ test('recorded alternatives remain separate from the previous wording and disclo
     const original=prayer(id),alternative=prayer(id+'-alternatif');
     assert.ok(alternative);assert.notEqual(alternative.ar,original.ar);
     assert.equal(original.recording,undefined,'a different reading cannot be silently attached to the original');
-    assert.equal(alternative.recording.id,id+'-alternatif');
+    assert.equal(alternative.recording.prayerId||alternative.recording.id,id+'-alternatif');
     assert.ok(alternative.recording.reader);assert.ok(alternative.audioNoteTR);assert.ok(alternative.audioNoteEN);
     assert.ok(alternative.guideSource);
     for(const value of [alternative.ar,alternative.ok,alternative.meal.tr,alternative.meal.en])assert.ok(value&&!value.includes('\\n'),'paragraphs must be real line breaks, not escaped display text');
@@ -81,4 +81,14 @@ test('recorded alternatives remain separate from the previous wording and disclo
   assert.ok(boarding.includes(plain(prayer('yolculuk').ar)),'the short passage is included in the full mounting prayer');
   assert.match(boarding,/فاغفر لي/u);
   assert.equal(prayer('uyanma').recording.kind,'complete-supplication-excerpt');
+});
+
+test('verified matching Mishary recordings take precedence while other prayer recordings remain available',()=>{
+  for(const id of ['istigfar','uyanma','uyku-alternatif']){
+    const r=prayer(id).recording;
+    assert.equal(r.readerId,'mishary-alafasy');assert.equal(r.prayerId,id);
+    assert.ok(r.path.startsWith('/assets/dua-audio/mishary-'));
+    assert.match(r.reader,/Mişârî/u);assert.equal(r.permissionUrl,'https://d1.islamhouse.com/html/faq.htm');
+  }
+  for(const id of ['subhaneke','tahiyyat','salli','barik','kunut','ezan'])assert.ok(prayer(id).recording,'an unavailable Mishary source does not remove the usable recording');
 });

@@ -140,6 +140,51 @@
       sourceName: "IslamHouse",
       permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
       mime: "audio/mpeg"
+    },
+    {
+      id: "mishary-uyanma",
+      prayerId: "uyanma",
+      readerId: "mishary-alafasy",
+      path: "/assets/dua-audio/mishary-uyanma.mp3",
+      source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain/ar_Mashari_Athkar/ar_Mashari_Azkar01.mp3",
+      sourcePage: "https://islamhouse.com/ar/audios/171286/",
+      bytes: 205911,
+      sha256: "2ffd42ec69a6f5182ff973cad102bd7b260271b4a0e4c6f624ad68c167c7b14f",
+      kind: "complete-supplication-excerpt",
+      reader: "Mi\u015F\xE2r\xEE R\xE2\u015Fid el-Af\xE2s\xEE \xB7 G\xFCnl\xFCk zikirler",
+      sourceName: "IslamHouse",
+      permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
+      mime: "audio/mpeg"
+    },
+    {
+      id: "mishary-uyku-alternatif",
+      prayerId: "uyku-alternatif",
+      readerId: "mishary-alafasy",
+      path: "/assets/dua-audio/mishary-uyku-alternatif.mp3",
+      source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain/ar_Mashari_Athkar/ar_Mashari_Azkar06.mp3",
+      sourcePage: "https://islamhouse.com/ar/audios/171291/",
+      bytes: 98478,
+      sha256: "89296f4b9d34eabf4e512fca085974e786b2e216d47ce59b19d62a11051d17a4",
+      kind: "complete-supplication-excerpt",
+      reader: "Mi\u015F\xE2r\xEE R\xE2\u015Fid el-Af\xE2s\xEE \xB7 G\xFCnl\xFCk zikirler",
+      sourceName: "IslamHouse",
+      permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
+      mime: "audio/mpeg"
+    },
+    {
+      id: "mishary-istigfar-1419",
+      prayerId: "istigfar",
+      readerId: "mishary-alafasy",
+      path: "/assets/dua-audio/mishary-istigfar.mp3",
+      source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Mishari_Raashid/Azkar_AlSba7_w_AlMsa/ar_1419_Azkar_AlSba7.mp3",
+      sourcePage: "https://islamhouse.com/ar/audios/92368/",
+      bytes: 576717,
+      sha256: "8985f91950f6d8e7f8a690083cefcbfbe5ad996c6b3f130a9a03a7e41ee95021",
+      kind: "verified-dua-excerpt",
+      reader: "Mi\u015F\xE2r\xEE R\xE2\u015Fid el-Af\xE2s\xEE",
+      sourceName: "IslamHouse \xB7 Mi\u015F\xE2r\xEE el-Af\xE2s\xEE \xB7 Sabah zikirleri, 1419",
+      permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
+      mime: "audio/mpeg"
     }
   ];
 
@@ -246,8 +291,8 @@
         "tr": "Allah\u2019\u0131m! Senin ad\u0131nla \xF6l\xFCr, senin ad\u0131nla ya\u015Far\u0131m.",
         "en": "In Your name, O Allah, I die and I live."
       },
-      "audioNoteTR": "S\xFCleyman e\u015F-\u015Euveyhi\u2019nin M\xFCsl\xFCman\u0131n Kalesi okumas\u0131ndan tam dua b\xF6l\xFCm\xFCd\xFCr. \u201CAllah\xFCmme bismike ahy\xE2 ve bismike em\xFBt\u201D bi\xE7imindeki di\u011Fer rivayetle ayn\u0131 laf\u0131z de\u011Fildir; ayr\u0131 bir alternatif olarak g\xF6sterilir.",
-      "audioNoteEN": "A complete supplication excerpt from Sulayman al-Shuwayhi\u2019s Fortress of the Muslim reading. Its wording differs from the other bedtime variant and is shown separately.",
+      "audioNoteTR": "Kaynakta belirtilen uyku zikirleri kayd\u0131ndan tam dua b\xF6l\xFCm\xFCd\xFCr. \u201CAllah\xFCmme bismike ahy\xE2 ve bismike em\xFBt\u201D bi\xE7imindeki di\u011Fer rivayetle ayn\u0131 laf\u0131z de\u011Fildir; ayr\u0131 bir alternatif olarak g\xF6sterilir.",
+      "audioNoteEN": "A complete supplication excerpt from the credited bedtime-remembrance recording. Its wording differs from the other bedtime variant and is shown separately.",
       "sourceName": "IslamHouse \xB7 M\xFCsl\xFCman\u0131n Kalesi",
       "note": "adult_prayer_excerpt",
       "guideSource": "https://islamhouse.com/ar/books/2522"
@@ -289,7 +334,7 @@
   // src/dua-catalog.mjs
   var portal = "https://namaz.diyanet.gov.tr/namaz/#sureler-dualar.html";
   var book2 = "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf";
-  var record = (id) => dua_recordings_default.find((r) => r.id === ({ "istigfar": "istigfar-adult", "istihare": "istihare-chapter", "yemek-sonrasi-alternatif": "yemek-chapter" }[id] || id));
+  var record = (id) => dua_recordings_default.find((r) => r.prayerId === id && r.readerId === "mishary-alafasy") || dua_recordings_default.find((r) => r.id === ({ "istigfar": "istigfar-adult", "istihare": "istihare-chapter", "yemek-sonrasi-alternatif": "yemek-chapter" }[id] || id));
   function prayerCatalog(texts) {
     const item = (id, indices, title) => {
       const rows = indices.map((i) => texts[i]), languages = new Set(rows.flatMap((r) => Object.keys(r.meal || {})));
@@ -1201,6 +1246,12 @@
     source.textContent = t("source") + " \xB7 " + (item.sourceName || "Diyanet");
     source.className = "prayerSource";
     box.append(source);
+    if (record2 && original.hash && original.hash !== hash && (original.textParts?.length || original.clips?.length)) {
+      const note = document.createElement("p");
+      note.className = "prayerHelp";
+      note.textContent = original.text === item.ar ? local("Bu duan\u0131n ses kayd\u0131 de\u011Fi\u015Fti. Metin par\xE7alar\u0131n korunur; eski kayda ait ses saniyelerini yeni okuyu\u015Fu dinleyerek yeniden ayarla.", "This prayer uses a different recording now. Your text parts are kept; listen to the new recording to set their audio boundaries again.") : local("Bu duan\u0131n metni veya ses kayd\u0131 de\u011Fi\u015Fti. \xD6nceki kayda ait par\xE7a s\u0131n\u0131rlar\u0131 yeni kayda uygulanmaz; bu okuyu\u015F i\xE7in par\xE7alar\u0131n\u0131 yeniden ayarla.", "This prayer has a different text or recording now. Earlier boundaries do not apply to the new version; set the parts again for this reading.");
+      box.append(note);
+    }
     if (item.note === "traditional_prayer" && item.id === "kuran-baslama") {
       const p = document.createElement("p");
       p.className = "prayerHelp";
@@ -1565,7 +1616,7 @@
         const title = document.createElement("strong");
         title.textContent = item.title;
         const sub = document.createElement("span");
-        sub.textContent = item.recording ? "\u25B6 " + t("tab") : t("missing");
+        sub.textContent = item.recording ? "\u25B6 " + t("tab") + (item.recording.readerId === "mishary-alafasy" ? " \xB7 Mi\u015F\xE2r\xEE R\xE2\u015Fid el-Af\xE2s\xEE" : "") : t("missing");
         b.append(title, sub);
         b.onclick = () => open(item);
         container.append(b);

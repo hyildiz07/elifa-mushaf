@@ -1,0 +1,410 @@
+{
+  "checkedAt": "2026-10-17",
+  "scope": "Mishary daily prayer research and same-recording Quran reuse. Catalog, manifest and UI are unchanged by this audit.",
+  "readyRecordings": [
+    {
+      "id": "uyanma",
+      "path": "/assets/dua-audio/mishary-uyanma.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain/ar_Mashari_Athkar/ar_Mashari_Azkar01.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/171286/",
+      "sourceId": 171286,
+      "sourceBytes": 1013867,
+      "sourceSha256": "da9b96bcbaed17a65566a3aa45de64044cdd09b1b329add32ef8b6b73198dd94",
+      "sourceDurationSeconds": 126.58938775510204,
+      "bytes": 205911,
+      "sha256": "2ffd42ec69a6f5182ff973cad102bd7b260271b4a0e4c6f624ad68c167c7b14f",
+      "durationSeconds": 12.76,
+      "sampleRate": 22050,
+      "channels": 2,
+      "decodeErrors": [],
+      "excerpt": [
+        68.28,
+        81.04
+      ],
+      "reader": "Mishary Rashid Alafasy",
+      "readerArabic": "مشاري بن راشد العفاسي",
+      "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+      "permissionBasis": "Official IslamHouse FAQ section2 permits reuse and redistribution with attribution without changing scientific content. Section12 distinguishes commercial reuse of third-party material. This is the independently identified2008 IslamHouse release, not a2024Alfan or2021Sharqi commercial recording.",
+      "sourceName": "IslamHouse · Mişârî el-Afâsî",
+      "kind": "complete-supplication-excerpt",
+      "fullVerbatimHumanCheck": false,
+      "validationLimit": "Exact source decoding, independently located acoustic separators and approximate Whisper-tiny content identity were checked. ASR is not authoritative spelling or word timing; no timings from another performance were used.",
+      "encoding": "MP3 re-encode at128kbps, original22050Hz stereo preserved; no time stretch, pitch change or words reordered.",
+      "note": "adult_prayer_excerpt",
+      "text": {
+        "ar": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ.",
+        "ok": "Elhamdü lillâhillezî ahyânâ ba‘de mâ emâtenâ ve ileyhin-nüşûr.",
+        "meal": {
+          "tr": "Bizi ölüm gibi uykudan sonra yeniden hayata kavuşturan Allah’a hamdolsun. Son dönüşümüz O’nadır.",
+          "en": "Praise belongs to Allah, who brought us back to life after sleep, and to Him is the resurrection."
+        }
+      },
+      "matching": "Same complete Arabic prayer as current uyanma card; unlike the full collection, this excerpt excludes neighboring supplications.",
+      "cutEvidence": {
+        "sourceWindowStart": 66,
+        "startSeparator": [
+          68.236463,
+          68.329524
+        ],
+        "endSeparator": [
+          80.826168,
+          81.259002
+        ],
+        "cut": [
+          68.28,
+          81.04
+        ],
+        "silenceLogs": [
+          "test-results/mishary-daily-wake66-edge-silence.log",
+          "test-results/mishary-daily-wake65-silence.log"
+        ],
+        "startThreshold": "-16dB,d=0.06",
+        "endThreshold": "-22dB,d=0.12",
+        "identityEvidence": [
+          "test-results/mishary-daily-wake-all-asr.json",
+          "test-results/mishary-daily-prayer-window-asr.json",
+          "test-results/mishary-daily-final-clips-asr.json"
+        ],
+        "caveat": "Wake excerpt ASR one pass produced a leading numeral token; no spelling or clip boundary is inferred from that token. Full human verbatim listening remains distinct from machine identity checks."
+      }
+    },
+    {
+      "id": "uyku-alternatif",
+      "path": "/assets/dua-audio/mishary-uyku-alternatif.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain/ar_Mashari_Athkar/ar_Mashari_Azkar06.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/171291/",
+      "sourceId": 171291,
+      "sourceBytes": 5031709,
+      "sourceSha256": "ca5e33412bad2a0dd55b49f0f65870f5c674632ebf24d23df304dfdb1c3e0b28",
+      "sourceDurationSeconds": 628.8195918367347,
+      "bytes": 98478,
+      "sha256": "89296f4b9d34eabf4e512fca085974e786b2e216d47ce59b19d62a11051d17a4",
+      "durationSeconds": 6.050022675736962,
+      "sampleRate": 22050,
+      "channels": 2,
+      "decodeErrors": [],
+      "excerpt": [
+        473.8,
+        479.85
+      ],
+      "reader": "Mishary Rashid Alafasy",
+      "readerArabic": "مشاري بن راشد العفاسي",
+      "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+      "permissionBasis": "Official IslamHouse FAQ section2 permits reuse and redistribution with attribution without changing scientific content. Section12 distinguishes commercial reuse of third-party material. This is the independently identified2008 IslamHouse release, not a2024Alfan or2021Sharqi commercial recording.",
+      "sourceName": "IslamHouse · Mişârî el-Afâsî",
+      "kind": "complete-supplication-excerpt",
+      "fullVerbatimHumanCheck": false,
+      "validationLimit": "Exact source decoding, independently located acoustic separators and approximate Whisper-tiny content identity were checked. ASR is not authoritative spelling or word timing; no timings from another performance were used.",
+      "encoding": "MP3 re-encode at128kbps, original22050Hz stereo preserved; no time stretch, pitch change or words reordered.",
+      "note": "adult_prayer_excerpt",
+      "text": {
+        "ar": "بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا.",
+        "ok": "Bismike Allâhümme emûtü ve ahyâ.",
+        "meal": {
+          "tr": "Allah’ım! Senin adınla ölür, senin adınla yaşarım.",
+          "en": "In Your name, O Allah, I die and I live."
+        }
+      },
+      "matching": "Different established wording from current uyku item (Allahumma bismika ahya wa bismika amut). Attach only to the separately labelled uyku-alternatif card; never silently replace the current Arabic wording.",
+      "cutEvidence": {
+        "sourceWindowStart": 460,
+        "startSeparator": [
+          473.492653,
+          474.219728
+        ],
+        "endSeparator": [
+          479.510204,
+          480.247937
+        ],
+        "cut": [
+          473.8,
+          479.85
+        ],
+        "silenceLog": "test-results/mishary-daily-sleep-silence.log",
+        "threshold": "-28dB,d=0.18",
+        "identityEvidence": [
+          "test-results/mishary-daily-asr.json",
+          "test-results/mishary-daily-prayer-window-asr.json",
+          "test-results/mishary-daily-final-clips-asr.json"
+        ]
+      }
+    }
+  ],
+  "sourceRecordings": [
+    {
+      "id": 171291,
+      "sourcePage": "https://islamhouse.com/ar/audios/171291/",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain/ar_Mashari_Athkar/ar_Mashari_Azkar06.mp3",
+      "file": "test-results/mishary-daily-171291.mp3",
+      "bytes": 5031709,
+      "sha256": "ca5e33412bad2a0dd55b49f0f65870f5c674632ebf24d23df304dfdb1c3e0b28",
+      "sampleRate": 22050,
+      "channels": 2,
+      "durationSeconds": 628.8195918367347,
+      "decodeErrors": []
+    },
+    {
+      "id": 171286,
+      "sourcePage": "https://islamhouse.com/ar/audios/171286/",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain/ar_Mashari_Athkar/ar_Mashari_Azkar01.mp3",
+      "file": "test-results/mishary-daily-171286.mp3",
+      "bytes": 1013867,
+      "sha256": "da9b96bcbaed17a65566a3aa45de64044cdd09b1b329add32ef8b6b73198dd94",
+      "sampleRate": 22050,
+      "channels": 2,
+      "durationSeconds": 126.58938775510204,
+      "decodeErrors": []
+    }
+  ],
+  "rights": {
+    "islamHouse": {
+      "source": "https://d1.islamhouse.com/html/faq.htm",
+      "basis": "Free, non-monetized distribution with source attribution and no change in scientific content is supported by the official FAQ. Only the specific independently published IslamHouse audio is covered by this basis, not any same-titled YouTube/commercial release."
+    },
+    "mp3Quran": {
+      "source": "https://www.mp3quran.net/eng/privacy",
+      "section": "Copyrights",
+      "basis": "The official site permits visitors/developers to copy its material and use its links. This is the existing application-approved standard Murattal recording."
+    },
+    "timings": {
+      "source": "https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0",
+      "license": "CC-BY-4.0",
+      "scope": "Timing metadata only; audio use basis is separately recorded."
+    },
+    "commercialVideo": {
+      "source": "https://www.alafasy.co/index?lang=EN",
+      "basis": "Official app page reserves rights and does not provide a third-party in-app redistribution/offline grant. No video/audio is downloaded from official YouTube releases merely because it is official."
+    }
+  },
+  "externalOnly": [
+    {
+      "id": "uyku-official-video",
+      "url": "https://www.youtube.com/watch?v=5HmvokzY3Jg",
+      "title": "Azkar For Sleep & Fright During Sleep",
+      "publisher": "Alafasy, verified official channel",
+      "published": "2022-11-16",
+      "kind": "Official published video of a wider dhikr collection",
+      "permission": "No native redistribution/offline grant verified for this video. Link only.",
+      "contentMatch": "Official title verified; full audio transcript not inspected or downloaded. Do not assume it is the exact IslamHouse2008 performance."
+    },
+    {
+      "id": "uyanma-official-video",
+      "url": "https://www.youtube.com/watch?v=cW4R5rPT_iY",
+      "title": "Doaa Waking Up From Sleep",
+      "publisher": "Alafasy, verified official channel",
+      "published": "2022-10-25",
+      "kind": "Official published video",
+      "permission": "No native redistribution/offline grant verified for this video. Link only.",
+      "contentMatch": "Official title verified; no exact recording identity claimed versus the2008 IslamHouse source."
+    },
+    {
+      "id": "iftar-official-video",
+      "url": "https://www.youtube.com/watch?v=YAmNRjAV21k",
+      "title": "دعاء الإفطار - مشاري راشد العفاسي",
+      "publisher": "Alafasy, verified official channel",
+      "published": "2021-07-10",
+      "kind": "Official prayer video",
+      "permission": "No native redistribution/offline grant verified. Not downloaded.",
+      "contentMatch": "Title does not establish whether the exact prayer is laka sumtu, dhahaba-z-zama, or a longer version. Full text/performance match remains unverified."
+    },
+    {
+      "id": "yolculuk-official-video",
+      "url": "https://www.youtube.com/watch?v=8BkpZ0GB2MU",
+      "title": "دعاء السفر على الخطوط الجوية الكويتية الشيخ مشاري راشد العفاسي",
+      "publisher": "Alafasy, verified official channel",
+      "published": "2024-02-28",
+      "kind": "Official Kuwait Airways travel-prayer performance",
+      "permission": "No third-party native redistribution/offline grant verified. Not downloaded.",
+      "contentMatch": "A travel prayer; not equated with the existing standard Murattal Quran43 performance."
+    }
+  ],
+  "quranReuse": {
+    "sourceFile": "assets/afasy-mp3quran-word-timings.json",
+    "sourceFileSha256": "d437b7def5f5d6789d4610e34bbc06f712e189a499f692fe8b3440d2b50410b2",
+    "recording": "mishary_rashid_al_afasy_mp3quran",
+    "release": "v3.2.0",
+    "origin": "https://server8.mp3quran.net/afs/",
+    "alias": "https://cdn.mp3quran.net/audio/mishary-alafasy/r1/",
+    "headersChecked": [
+      {
+        "sid": 20,
+        "url": "https://server8.mp3quran.net/afs/020.mp3",
+        "status": 200,
+        "etag": "\"9e2bbca512a3e35b0ef90a9597f533da\"",
+        "bytes": "26050700",
+        "type": "audio/mpeg",
+        "lastModified": "Sun, 27 Sep 2026 19:59:29 GMT"
+      },
+      {
+        "sid": 20,
+        "url": "https://cdn.mp3quran.net/audio/mishary-alafasy/r1/020.mp3",
+        "status": 200,
+        "etag": "\"9e2bbca512a3e35b0ef90a9597f533da\"",
+        "bytes": "26050700",
+        "type": "audio/mpeg",
+        "lastModified": "Sun, 27 Sep 2026 19:59:29 GMT"
+      },
+      {
+        "sid": 43,
+        "url": "https://server8.mp3quran.net/afs/043.mp3",
+        "status": 200,
+        "etag": "\"30eca1a1a0b7e5a158bd1d8d92df3868\"",
+        "bytes": "19659690",
+        "type": "audio/mpeg",
+        "lastModified": "Sun, 27 Sep 2026 19:59:54 GMT"
+      },
+      {
+        "sid": 43,
+        "url": "https://cdn.mp3quran.net/audio/mishary-alafasy/r1/043.mp3",
+        "status": 200,
+        "etag": "\"30eca1a1a0b7e5a158bd1d8d92df3868\"",
+        "bytes": "19659690",
+        "type": "audio/mpeg",
+        "lastModified": "Sun, 27 Sep 2026 19:59:54 GMT"
+      }
+    ],
+    "identity": "For both020.mp3 and043.mp3, source and application-CDN alias returned200 with matching ETag, Content-Length and audio/mpeg today. This is a header identity check, not a newly downloaded full-file SHA audit.",
+    "items": [
+      {
+        "id": "ilim",
+        "reference": "20:114",
+        "ar": "رَبِّ زِدْنِي عِلْمًا.",
+        "kind": "Quranic prayer excerpt, not a separate spoken dua recording",
+        "audio": "https://cdn.mp3quran.net/audio/mishary-alafasy/r1/020.mp3",
+        "sourceAudio": "https://server8.mp3quran.net/afs/020.mp3",
+        "words": [
+          15,
+          17
+        ],
+        "wordSegments": [
+          [
+            15,
+            1325365,
+            1325935
+          ],
+          [
+            16,
+            1325935,
+            1326995
+          ],
+          [
+            17,
+            1326995,
+            1328655
+          ]
+        ],
+        "sourceVerseBoundsMs": [
+          1310835,
+          1328693
+        ],
+        "candidateStartMs": 1325365,
+        "candidateEndMs": 1328693,
+        "status": "Existing exact-recording alignment supports reuse in the Quran playback engine. No new audio file or app binding created.",
+        "caveat": "Rabbi follows wa-qul with connected pronunciation. Newly exposed isolated onset/tail should be audibly checked before treating it as a clean standalone dua clip; no timing from another Quran release may be substituted."
+      },
+      {
+        "id": "yolculuk",
+        "reference": "43:13 (words12–20) +43:14",
+        "ar": "سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ. وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ.",
+        "kind": "Quranic dua passage in the existing standard Murattal recording",
+        "audio": "https://cdn.mp3quran.net/audio/mishary-alafasy/r1/043.mp3",
+        "sourceAudio": "https://server8.mp3quran.net/afs/043.mp3",
+        "wordSegments13": [
+          [
+            12,
+            151136,
+            152206
+          ],
+          [
+            13,
+            152206,
+            153066
+          ],
+          [
+            14,
+            153066,
+            153966
+          ],
+          [
+            15,
+            153966,
+            154616
+          ],
+          [
+            16,
+            154616,
+            155446
+          ],
+          [
+            17,
+            155446,
+            156086
+          ],
+          [
+            18,
+            156086,
+            157696
+          ],
+          [
+            19,
+            157696,
+            158296
+          ],
+          [
+            20,
+            158296,
+            160986
+          ]
+        ],
+        "wordSegments14": [
+          [
+            1,
+            161127,
+            164537
+          ],
+          [
+            2,
+            164537,
+            165147
+          ],
+          [
+            3,
+            165147,
+            166227
+          ],
+          [
+            4,
+            166227,
+            170317
+          ]
+        ],
+        "sourceVerseBoundsMs": [
+          [
+            138016,
+            161017
+          ],
+          [
+            161057,
+            170566
+          ]
+        ],
+        "candidateStartMs": 151136,
+        "candidateEndMs": 170566,
+        "nextVerseWordStartMs": 170666,
+        "status": "Existing exact-recording word alignment permits the same short text as the current yolculuk item, through the existing engine.",
+        "caveat": "This is the two-verse Quranic passage, not the full prophetic travel supplication with three takbirs and Allahumma inna nas-aluka... . Preserve the recitation tail and do an audible boundary check for the newly exposed passage."
+      }
+    ]
+  },
+  "unresolved": [
+    {
+      "id": "uyku",
+      "reason": "Exact current ahya wa bismika amut wording not identified in the audited Mishary audio; independently licensed different wording is prepared as uyku-alternatif."
+    },
+    {
+      "id": "iftar",
+      "reason": "Official Mishary video exists but native use permission and exact spoken version are not verified. No permissively published same-wording Mishary MP3 was found in the inspected IslamHouse Arabic author audio index. Do not reassign Sulayman audio as Mishary."
+    }
+  ],
+  "technicalBoundaries": "No cross-recording alignment, no synthetic voice, no automated text-derived hifz timings. Audio remains original sample rate/stereo. Chapter descriptions/other prayers excluded only for complete clearly identified supplication excerpts."
+}

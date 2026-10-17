@@ -3,7 +3,7 @@ import {extraPrayers} from './dua-extra-catalog.mjs';
 import {recordedAlternatives} from './dua-recorded-alternatives.mjs';
 const portal='https://namaz.diyanet.gov.tr/namaz/#sureler-dualar.html';
 const book='https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf';
-const record=id=>recordings.find(r=>r.id===({'istigfar':'istigfar-adult','istihare':'istihare-chapter','yemek-sonrasi-alternatif':'yemek-chapter'}[id]||id));
+const record=id=>recordings.find(r=>r.prayerId===id&&r.readerId==='mishary-alafasy')||recordings.find(r=>r.id===({'istigfar':'istigfar-adult','istihare':'istihare-chapter','yemek-sonrasi-alternatif':'yemek-chapter'}[id]||id));
 export function prayerCatalog(texts){
   const item=(id,indices,title)=>{
     const rows=indices.map(i=>texts[i]),languages=new Set(rows.flatMap(r=>Object.keys(r.meal||{})));
