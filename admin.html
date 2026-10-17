@@ -145,56 +145,54 @@ input:focus,textarea:focus,select:focus{border-color:var(--navy2);box-shadow:0 0
     </div>
   </div>
 
+  <div class="section">
+    <h2>Güncel ölçümler</h2>
+    <p class="desc">Kullanım, ekran ve özellik olayları için Firebase Analytics'i; Google Play yükleme, kaldırma, çökme ve ANR verileri için Play Console'u açın. Play Console kaldırma sayısını gösterir, kaldırma nedenini doğrudan göstermez. Nedeni anlamak için sürüm ve cihaz eğilimlerini kullanıcıların gönüllü geri bildirimiyle birlikte değerlendirin.</p>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a class="btn" href="https://console.firebase.google.com/project/elifa-mushaf/analytics" target="_blank" rel="noopener">Firebase Analytics</a>
+      <a class="btn ghost" href="https://play.google.com/console/" target="_blank" rel="noopener">Google Play Console</a>
+    </div>
+  </div>
+
   <!-- Overview -->
   <div class="section">
-    <h2>Genel bakış</h2>
-    <p class="desc">Anonim, toplam veriler — kimseyi tanımlamaz. Kişi‑bazlı derin analiz için Firebase Console.</p>
+    <h2>Tarihsel sayaçlar · eski sistem</h2>
+    <p class="desc">Aşağıdaki Firestore sayaçları artık güncellenmiyor. Geçmiş kayıt varsa gösterilir; güncel kullanıcı veya oturum sayısı olarak yorumlamayın.</p>
     <div class="cards" id="cards">
-      <div class="stat"><div class="k">Toplam açılış</div><div class="v" id="s_opens">—</div></div>
-      <div class="stat"><div class="k">Bugün</div><div class="v" id="s_today">—</div></div>
-      <div class="stat"><div class="k">Son 7 gün</div><div class="v" id="s_week">—</div></div>
-      <div class="stat"><div class="k">Cihaz (gün‑tekil top.)</div><div class="v" id="s_dev">—</div></div>
-      <div class="stat"><div class="k">Ort. oturum</div><div class="v" id="s_avg">—</div><div class="u">dakika</div></div>
-      <div class="stat"><div class="k">Toplam oturum</div><div class="v" id="s_sess">—</div></div>
+      <div class="stat"><div class="k">Eski toplam açılış</div><div class="v" id="s_opens">—</div></div>
+      <div class="stat"><div class="k">Eski cihaz sayacı</div><div class="v" id="s_dev">—</div></div>
+      <div class="stat"><div class="k">Eski ort. oturum</div><div class="v" id="s_avg">—</div><div class="u">dakika</div></div>
+      <div class="stat"><div class="k">Eski oturum sayacı</div><div class="v" id="s_sess">—</div></div>
     </div>
   </div>
 
   <!-- 30 day chart -->
   <div class="section">
-    <h2>Son 30 gün · açılışlar</h2>
-    <p class="desc">Günlük uygulama açılışları (altın çubuk: bugün).</p>
+    <h2>Eski günlük kayıtlar · son 30 gün</h2>
+    <p class="desc">Yalnızca eski sistemde kaydedilmiş günler gösterilir; boş günler ve yeni kullanım Firebase Analytics'te incelenir.</p>
     <div class="chart" id="chart"><div class="empty">Yükleniyor…</div></div>
   </div>
 
   <!-- Feature usage -->
   <div class="section">
-    <h2>Özellik kullanımı</h2>
-    <p class="desc">Hangi işlev ne kadar kullanılıyor (toplam sayaçlar).</p>
+    <h2>Eski özellik sayaçları</h2>
+    <p class="desc">Eski sistemin toplamları; güncel olaylar Firebase Analytics'te.</p>
     <div class="rows" id="feat"><div class="empty">Yükleniyor…</div></div>
   </div>
 
   <div class="two">
     <!-- Languages -->
     <div class="section">
-      <h2>Dil dağılımı</h2>
-      <p class="desc">Kullanıcıların seçtiği diller.</p>
+      <h2>Eski dil sayaçları</h2>
+      <p class="desc">Güncellenmeyen tarihsel dağılım.</p>
       <div class="rows" id="langs"><div class="empty">Yükleniyor…</div></div>
     </div>
     <!-- Screens -->
     <div class="section">
-      <h2>Ekran popülerliği</h2>
-      <p class="desc">En çok açılan ekranlar.</p>
+      <h2>Eski ekran sayaçları</h2>
+      <p class="desc">Güncellenmeyen tarihsel dağılım.</p>
       <div class="rows" id="screens"><div class="empty">Yükleniyor…</div></div>
     </div>
-  </div>
-
-  <!-- Deep analytics link -->
-  <div class="section" style="display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap">
-    <div>
-      <h2 style="margin-bottom:4px">Derin davranış analizi</h2>
-      <p class="desc" style="margin:0">Oturum süresi dağılımı, geri dönüş (retention), coğrafya, huniler — bunlar Google Analytics'te (bedava, sınırsız).</p>
-    </div>
-    <a class="btn" href="https://console.firebase.google.com/project/elifa-mushaf/analytics" target="_blank" rel="noopener">Firebase Console → Analytics</a>
   </div>
 
   <!-- Announcements manager -->
@@ -311,6 +309,13 @@ input:focus,textarea:focus,select:focus{border-color:var(--navy2);box-shadow:0 0
   /* ---------- load dashboard ---------- */
   function loadAll(){
     db.collection('stats').doc('summary').get().then(function(s){
+      if(!s.exists){
+        ['s_opens','s_dev','s_sess','s_avg'].forEach(function(id){ $(id).textContent='—'; });
+        bars($('feat'),[],FEAT_NAMES);
+        bars($('langs'),[],LANG_NAMES);
+        bars($('screens'),[],SCREEN_NAMES);
+        return;
+      }
       var d=s.exists?s.data():{};
       var opens=d.opens!=null?d.opens:(d.totalOpens||0);
       $('s_opens').textContent=nf(opens);
@@ -325,18 +330,16 @@ input:focus,textarea:focus,select:focus{border-color:var(--navy2);box-shadow:0 0
       bars($('screens'),pick(d,'scr_'),SCREEN_NAMES);
     }).catch(function(e){ $('feat').innerHTML='<div class="empty">Okunamadı: '+(e.code||e.message)+'</div>'; });
 
-    var minD=ds(daysAgo(29)), today=ds(new Date());
+    var minD=ds(daysAgo(29));
     db.collection('stats').where('date','>=',minD).orderBy('date','asc').get().then(function(qs){
-      var map={}; qs.forEach(function(doc){ var x=doc.data(); if(x.date) map[x.date]=x.opens||0; });
-      var series=[], sum7=0;
-      for(var i=29;i>=0;i--){ var dd=ds(daysAgo(i)); var v=map[dd]||0; series.push([dd,v]); if(i<7) sum7+=v; }
-      $('s_today').textContent=nf(map[today]||0);
-      $('s_week').textContent=nf(sum7);
+      var map={}; qs.forEach(function(doc){ var x=doc.data(); if(/^\d{4}-\d{2}-\d{2}$/.test(x.date||'')) map[x.date]=x.opens||0; });
+      var series=Object.keys(map).sort().map(function(date){return [date,map[date]];});
+      if(!series.length){ $('chart').innerHTML='<div class="empty">Son 30 günde eski sistemden kayıt yok. Güncel açılışlar Firebase Analytics’te.</div>'; return; }
       var max=1; series.forEach(function(p){ if(p[1]>max)max=p[1]; });
       var html='';
       series.forEach(function(p){
-        var h=Math.round(p[1]/max*130), isT=(p[0]===today);
-        html+='<div class="col"><div class="bar'+(isT?' today':'')+'" style="height:'+h+'px" title="'+p[0]+': '+p[1]+'"></div><div class="lbl">'+p[0].slice(5)+'</div></div>';
+        var h=Math.round(p[1]/max*130);
+        html+='<div class="col"><div class="bar" style="height:'+h+'px" title="'+p[0]+': '+p[1]+'"></div><div class="lbl">'+p[0].slice(5)+'</div></div>';
       });
       $('chart').innerHTML=html;
     }).catch(function(e){ $('chart').innerHTML='<div class="empty">Grafik okunamadı: '+(e.code||e.message)+'</div>'; });

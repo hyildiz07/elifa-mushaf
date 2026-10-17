@@ -5336,6 +5336,10 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 @media(max-width:380px){.studySplitResultsHead{align-items:stretch;flex-direction:column}.studySplitResultsTools{justify-content:stretch}.studySplitResultsTools button{flex:1}}
 .studySplitResultsHead h3{margin:0;color:var(--ink);font-size:16px;}
 .studySplitLiveStatus{margin:12px 0 10px;padding:10px 12px;border-radius:10px;background:var(--bg);color:var(--ink);font-size:12px;font-weight:750;line-height:1.5;}
+.studySplitPlaybackControls{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;}
+.studySplitPlaybackControls button{min-height:44px;padding:9px 14px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--ink);font:750 13px 'Inter',sans-serif;cursor:pointer;}
+.studySplitPlaybackControls button[aria-pressed="true"]{border-color:var(--gold);background:var(--gold);color:var(--navy);box-shadow:0 0 0 2px color-mix(in srgb,var(--gold) 22%,transparent);}
+.studySplitPlaybackControls button:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
 .studySplitSave{width:100%;min-height:46px;margin:0 0 5px;padding:10px 14px;border:1px solid var(--gold);border-radius:11px;background:var(--gold);color:var(--navy);font-size:13px;font-weight:800;cursor:pointer;}
 .studySplitSave:hover,.studySplitSave:focus-visible{filter:brightness(.96);outline:2px solid var(--gold);outline-offset:2px;}
 .studySplitResultsTools{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:flex-end;}
@@ -5349,6 +5353,13 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
 .studySplitHeader button:focus-visible,.studySplitModes button:focus-visible,.studySplitWords button:focus-visible,.studySplitWizardActions button:focus-visible,.studySplitResults button:focus-visible{outline:3px solid var(--gold);outline-offset:2px;}
 </style>
 <!-- Google Fonts kaldırıldı: fontlar gömülü -->
+<script>
+// Keep only a few early, non-identifying actions until the analytics bundle loads.
+window.__elifaEarlyUsage=[];
+window.elifaLog=function(event,params){
+  if(window.__elifaEarlyUsage.length<30)window.__elifaEarlyUsage.push([event,params]);
+};
+</script>
 <script src="/assets/locale.js?v=2"></script>
 <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <link rel="manifest" href="manifest.json">
@@ -5627,6 +5638,11 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
       <div id="studySplitResults" class="studySplitResults" hidden>
         <div class="studySplitResultsHead"><h3 id="studySplitResultsTitle" tabindex="-1" data-i18n="study_split_parts">Çalışma parçaları</h3><div class="studySplitResultsTools"><button id="studySplitRevise" type="button" data-i18n="study_split_revise" hidden>Düzenle</button><button id="studySplitPlayAll" class="studySplitPlayAll" type="button" data-i18n="study_split_play_all">▶ Tüm parçaları çalış</button></div></div>
         <p id="studySplitLiveStatus" class="studySplitLiveStatus" role="status" aria-live="polite"></p>
+        <div class="studySplitPlaybackControls">
+          <button id="studySplitRepeat" type="button" aria-pressed="false">Tekrar kapalı</button>
+          <button id="studySplitCombine" type="button" aria-pressed="false">1+2</button>
+          <button id="studySplitSettings" type="button" data-i18n="set_hifz">Hıfz ayarları</button>
+        </div>
         <button id="studySplitSave" class="studySplitSave" type="button">Çalışmayı kaydet / adlandır</button>
         <div id="studySplitParts" class="studySplitParts"></div><button id="studySplitMore" class="studySplitMore" type="button" data-i18n="study_split_more" hidden>Daha fazla göster</button>
       </div>
@@ -6436,7 +6452,7 @@ body[data-layout="saray"] #selbar.show:has(.selStudyAction:not([hidden])){max-he
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v330</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v331</span></div>
   </div>
 
   <div class="tesekkur">
@@ -8280,6 +8296,7 @@ function openStudySetup(fromSelection=false,fromReader=false){
   $('studyFrom').value=studyDraft.from;$('studyTo').value=studyDraft.to;
   updateStudySetup();stopPlan(false);show('studySetup');
   window.elifaStudySessions?.onOpen({fromReader,fromSelection});
+  try{window.elifaLog?.('study_open');}catch(e){}
 }
 function syncStudyBanner(){
   const band=$('studyBanner');if(!band)return;
@@ -8291,6 +8308,7 @@ async function playStudyRange(){
   const range=studyRange;if(!range||range.sid!==curS)return;
   const request=++studyPlayRequestId,visit=surahRequestId,sid=curS,reciter=SET.reciter;
   if(audioTimingUnverified(SET.reciter,curS)){
+    try{window.elifaLog?.('playback_error',{mode:'range',error_code:'timing_unverified'});}catch(e){}
     toast(window.tr?tr('study_audio_unverified'):'Bu hocanın âyet ses sınırları doğrulanmadı.');return;
   }
   if(!AD_?.ay?.[range.from]||!AD_?.ay?.[range.to]){
@@ -8302,13 +8320,33 @@ async function playStudyRange(){
     }catch(e){
       if(request===studyPlayRequestId&&visit===surahRequestId)
         toast(window.tr?tr('study_audio_missing'):'Aralıktaki ses kayıtları yüklenemedi.');
+      try{window.elifaLog?.('playback_error',{mode:'range',error_code:'audio_load_failed'});}catch(e){}
       return;
     }
   }
-  const steps=buildLadder(range.from,range.to);
-  if(!steps.length){toast(window.tr?tr('study_audio_missing'):'Aralıktaki ses kayıtları tamamlanmadı.');return;}
+  // Validate every verse before starting: one missing middle verse must not
+  // turn a requested range into a shorter, misleading playback.
+  const verses=buildLadder(range.from,range.to);
+  if(!verses.length){
+    try{window.elifaLog?.('playback_error',{mode:'range',error_code:'verse_audio_missing'});}catch(e){}
+    toast(window.tr?tr('study_audio_missing'):'Aralıktaki ses kayıtları tamamlanmadı.');return;
+  }
+  if(!normalVersePlanReady(verses))return;
+  // With no marked words, ordinary repeat loops the entire selected passage
+  // (for example Bakara 3–10 five times). Cumulative mode keeps its 1+2
+  // ladder, while the verse timing and reciter guards stay in force.
+  const steps=SET.cumu?verses:[normalVerseStep(normalChapterAudio||AD_,range.from,range.to,
+    {x:1,dyn:true,ayEnd:range.to,l:range.from+'–'+range.to+' âyet',full:false})];
   if(!normalVersePlanReady(steps))return;
   curAy=range.from;runPlan(steps);
+  if(typeof playing==='boolean'&&playing){
+    const count=range.to-range.from+1;
+    const range_bucket=count===1?'1':count<=5?'2_5':count<=10?'6_10':'11_plus';
+    try{
+      window.elifaLog?.('study_start',{mode:SET.cumu?'hifz':'range',range_bucket});
+      if(SET.repOn&&!SET.cumu)window.elifaLog?.('range_repeat_start',{mode:'range',range_bucket});
+    }catch(e){}
+  }
 }
 $('qStudy').onclick=()=>openStudySetup();
 $('selStudy').onclick=()=>openStudySetup(true);
@@ -8990,6 +9028,9 @@ async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1)
   }
   if(!normalVersePlanReady(plan))return false;
   runPlan(plan);
+  if(playing){
+    try{window.elifaLog?.(SET.cumu?'split_combine_start':'study_start',{mode:'split',range_bucket:'1'});}catch(e){}
+  }
   return playing;
 }
 function playStudySplitPart(part){return playStudySplitRange([part]);}
@@ -10616,6 +10657,7 @@ $('playBtn').onclick=()=>{
     }
     playSelection();return;
   }
+  if(studyRange?.sid===curS){playStudyRange();return;}
   playAyahProgram(curAy||visAy||1);
 };
 /* SEÇİMİ ÇAL: tam seçilen aralık, deterministik kesim korumalı.
@@ -13231,7 +13273,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v330-study-desk-design';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v331-study-loop-insights';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16603,13 +16645,13 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     <button type="button" id="accountRetry" class="account-link">Bağlantıyı yeniden dene</button>
   </div><p id="accountStatus" role="status" aria-live="polite"></p>
 </dialog>
-<script type="module" src="/assets/account.js?v=322"></script>
+<script type="module" src="/assets/account.js?v=331"></script>
 <script src="/assets/reader-help-drafts.js?v=1"></script>
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
-<script src="/assets/study-split.js?v=329"></script>
-<script src="/assets/study-sessions.js?v=329"></script>
+<script src="/assets/study-split.js?v=331"></script>
+<script src="/assets/study-sessions.js?v=331"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>
 </body>
 </html>

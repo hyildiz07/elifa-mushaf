@@ -601,6 +601,17 @@ test('Kehf repeated ayahs and other Afasy chapters never replay the next verse o
     }
   }
 });
+test('Bakara 3–10 forms one repeatable Study Desk passage without leaking into verse 11',()=>{
+  const rows=afasyWordPack.rows[2];
+  const c=vm.createContext({SET:{reciter:223,startPad:0,endPad:300,repOn:true,rep:5},
+    AD_:{ay:Object.fromEntries(rows.map((row,i)=>[i+1,[row[2][0][1],row[2].at(-1)[2]]]))},
+    curS:2,pieceCursor:0,verifiedNormalRanges:()=>null});
+  for(const name of ['normalVerseStep','stepBounds','stepReps'])vm.runInContext(fn(name),c);
+  const passage=c.normalVerseStep(c.AD_,3,10,{x:1,dyn:true,ayEnd:10,full:false});
+  assert.equal(c.stepReps(passage),5);
+  assert.equal(c.stepBounds(passage).f,c.AD_.ay[3][0]);
+  assert.ok(c.stepBounds(passage).t<=c.AD_.ay[11][0]-110);
+});
 test('reciter changes refresh the parts, including their stored end times',()=>{
   const c=context(fixture(4,112));loadVerse(c,4);const before=c.splitParts.at(-1).t;
   c.AD_=context(fixture(7,112)).AD_;c.rewireTimings();

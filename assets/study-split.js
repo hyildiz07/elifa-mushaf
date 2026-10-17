@@ -26,6 +26,7 @@
     progress: el('studySplitProgress'), title: el('studySplitWizardTitle'),
     confirm: el('studySplitConfirm'), undo: el('studySplitUndo'),
     parts: el('studySplitParts'), more: el('studySplitMore'), playAll: el('studySplitPlayAll'),
+    repeat: el('studySplitRepeat'), combine: el('studySplitCombine'), settings: el('studySplitSettings'),
     retry: el('studySplitRetry'), revise: el('studySplitRevise')
   };
   if (!ui.panel || !ui.scroll) return;
@@ -112,6 +113,10 @@
       .replace('{total}',String(session.parts.length))
       .replace('{repeat}',repeat)
       .replace('{combine}',SET.cumu?tr('study_split_on','açık'):tr('study_split_off','kapalı'));
+    ui.repeat.textContent=repeat;
+    ui.repeat.setAttribute('aria-pressed',String(!!SET.repOn));
+    ui.combine.setAttribute('aria-pressed',String(!!SET.cumu));
+    ui.combine.setAttribute('aria-label',`1+2 · ${SET.cumu?tr('study_split_on','açık'):tr('study_split_off','kapalı')}`);
     ui.save.textContent=tr('study_split_save_named','Çalışmayı kaydet / adlandır');
   }
 
@@ -499,6 +504,35 @@
     openStudySetup(false,true);
   });
   ui.more.addEventListener('click', appendParts);
+  ui.repeat.addEventListener('click', () => {
+    if (!contextMatches() || ui.results.hidden) return;
+    SET.repOn=!SET.repOn;
+    if(typeof saveSet==='function')saveSet();
+    if(typeof syncRep==='function')syncRep();
+    if(typeof syncRep2==='function')syncRep2();
+    renderLiveStatus();
+    if(SET.repOn)void playActiveStudySplit();
+    else if(typeof stopPlan==='function')stopPlan(false);
+  });
+  ui.combine.addEventListener('click', () => {
+    if (!contextMatches() || ui.results.hidden) return;
+    SET.cumu=!SET.cumu;
+    if(SET.cumu)SET.repOn=true;
+    if(typeof saveSet==='function')saveSet();
+    if(typeof syncRep==='function')syncRep();
+    if(typeof syncRep2==='function')syncRep2();
+    if(typeof syncCumu==='function')syncCumu();
+    if(typeof syncCumu2==='function')syncCumu2();
+    renderLiveStatus();
+    if(SET.cumu)void playActiveStudySplit();
+    else if(typeof stopPlan==='function')stopPlan(false);
+  });
+  ui.settings.addEventListener('click', () => {
+    if (!contextMatches() || ui.results.hidden || typeof fillGearSheet!=='function') return;
+    gearCtx='studyParts';
+    fillGearSheet();
+    openSheet('gearSheet');
+  });
   el('studySplitAuto').addEventListener('click', () => setMode('auto'));
   el('studySplitManual').addEventListener('click', () => setMode('manual'));
   ui.confirm.addEventListener('click', () => {
@@ -510,6 +544,7 @@
       return;
     }
     session.confirmed.push({ ay: word.ay, startGi: session.cursorGi, endGi });
+    try{window.elifaLog?.('split_created',{mode:'split',range_bucket:'1'});}catch(e){}
     session.cursorGi = endGi + 1;
     session.selectedGi = null;
     rebuildCuts();
