@@ -6,3 +6,5 @@ await build({entryPoints:['src/split-audio.mjs'],bundle:true,format:'esm',platfo
 copyFileSync('src/verified-verse-audio.mjs','assets/verified-verse-audio.js');
 
 await build({entryPoints:['src/study-workflow.mjs'],bundle:true,format:'iife',platform:'browser',target:['es2020'],outfile:'assets/study-workflow.js',legalComments:'none'});
+
+await build({entryPoints:['src/dua-practice.mjs'],bundle:true,format:'iife',platform:'browser',target:['es2020'],outfile:'assets/dua-practice.js',legalComments:'none'});

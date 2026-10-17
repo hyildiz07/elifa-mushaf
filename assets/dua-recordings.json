@@ -1,0 +1,187 @@
+[
+  {
+    "id": "subhaneke",
+    "path": "/assets/dua-audio/subhaneke.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/3_SUBHANEKE.mp3",
+    "sha256": "64c76f36d86811ed9494a383f46af9af6cce06f8fb8020a9ba114aad186aebf0",
+    "bytes": 554364
+  },
+  {
+    "id": "tahiyyat",
+    "path": "/assets/dua-audio/tahiyyat.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/7_HANEFI_ETTEHIYATU.mp3",
+    "sha256": "57566de437b059577f257eaf7a982ba6f3ab0ceb99db198f4fc78a6c539bba30",
+    "bytes": 1318572
+  },
+  {
+    "id": "salli",
+    "path": "/assets/dua-audio/salli.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/8_ALLAHUMMESALLI.mp3",
+    "sha256": "a4f07c49f208be6ceb523ff495704f7d9be6e14366797c607f3e9a4dd5aac2eb",
+    "bytes": 796572
+  },
+  {
+    "id": "barik",
+    "path": "/assets/dua-audio/barik.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/9_ALLAHUMMEBARIK.mp3",
+    "sha256": "7fc098ccc6e3a5ad641b138c9193cf77024b0fd41d4409b4e7ba4ecc942d1bec",
+    "bytes": 804924
+  },
+  {
+    "id": "kunut",
+    "path": "/assets/dua-audio/kunut.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/6_KUNUT_DUALARI.mp3",
+    "sha256": "e46311b60ae8f42c62366a95c9c44c0cd95c2cbc513892070054286e418a73b1",
+    "bytes": 2012832
+  },
+  {
+    "id": "rabbena",
+    "path": "/assets/dua-audio/rabbena.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/10_RABBENA_DUALARI.mp3",
+    "sha256": "c27698a556be1cc6dafcc4637bc28b8256274a2c011f2e98d2c5dae2324c80a1",
+    "bytes": 879048
+  },
+  {
+    "id": "ezan",
+    "path": "/assets/dua-audio/ezan.mp3",
+    "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/EZAN_DUASI.mp3",
+    "sha256": "31d2f0ab5369249904f6ec918b236735bceae960c987b469d43d36ac3090cd2d",
+    "bytes": 1145268
+  },
+  {
+    "id": "istihare-chapter",
+    "path": "/assets/dua-audio/istihare-chapter.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_028_Hisn_Almuslim_Alshwehi.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+    "bytes": 1612689,
+    "sha256": "1be9a28155054bdc28df1d74534bd27fb96ede28aa42a110e016f6c8b5ef7a3a",
+    "kind": "complete-audiobook-chapter",
+    "reader": "Süleyman b. Muhammed eş-Şuveyhî · Müslümanın Kalesi",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "yemek-chapter",
+    "path": "/assets/dua-audio/yemek-chapter.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_071_Hisn_Almuslim_Alshwehi.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+    "bytes": 491736,
+    "sha256": "87ab07afaabd79178945db1fe7f5cf5b7241e84d84934579c39c88feedb0299c",
+    "kind": "complete-audiobook-chapter",
+    "reader": "Süleyman b. Muhammed eş-Şuveyhî · Müslümanın Kalesi",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "istigfar-adult",
+    "path": "/assets/dua-audio/istigfar-adult.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_029_Hisn_Almuslim_Alshwehi.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+    "bytes": 448234,
+    "sha256": "5ffc96288162045bcfb53e72a868ddafde23652046c015d505d6dd84f3d6915c",
+    "kind": "verified-dua-excerpt",
+    "reader": "Süleyman b. Muhammed eş-Şuveyhî · Müslümanın Kalesi",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "uyanma",
+    "path": "/assets/dua-audio/remaining-uyanma.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_003_Hisn_Almuslim_Alshwehi.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+    "bytes": 112034,
+    "sha256": "bd9a76306a49f3049a9c94b9cf6c721d9257e97fa93b45e63a079f4143a125fe",
+    "kind": "complete-supplication-excerpt",
+    "reader": "Süleyman b. Muhammed eş-Şuveyhî · Müslümanın Kalesi",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "uyku-alternatif",
+    "path": "/assets/dua-audio/remaining-uyku-alternatif.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_030_Hisn_Almuslim_Alshwehi.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+    "bytes": 76065,
+    "sha256": "53599e66a3944fd84e0c4f0b242914d7be91384151de35c98fe3eb3c5514ef86",
+    "kind": "complete-supplication-excerpt",
+    "reader": "Süleyman b. Muhammed eş-Şuveyhî · Müslümanın Kalesi",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "iftar-alternatif",
+    "path": "/assets/dua-audio/remaining-iftar-alternatif.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_069_Hisn_Almuslim_Alshwehi.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+    "bytes": 377207,
+    "sha256": "0475f0e01e71604c99982c727c335d3a6efcae49b1593757770e427d4c9ba328",
+    "kind": "complete-audiobook-chapter",
+    "reader": "Süleyman b. Muhammed eş-Şuveyhî · Müslümanın Kalesi",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "yolculuk-alternatif",
+    "path": "/assets/dua-audio/remaining-yolculuk-alternatif.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_096_Hisn_Almuslim_Alshwehi.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+    "bytes": 643423,
+    "sha256": "cc0169e71788b2a6cbe61920a8afc3de454f0e32bc264e88e441d947212c1c9d",
+    "kind": "complete-audiobook-chapter",
+    "reader": "Süleyman b. Muhammed eş-Şuveyhî · Müslümanın Kalesi",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "mishary-uyanma",
+    "prayerId": "uyanma",
+    "readerId": "mishary-alafasy",
+    "path": "/assets/dua-audio/mishary-uyanma.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain/ar_Mashari_Athkar/ar_Mashari_Azkar01.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/171286/",
+    "bytes": 205911,
+    "sha256": "2ffd42ec69a6f5182ff973cad102bd7b260271b4a0e4c6f624ad68c167c7b14f",
+    "kind": "complete-supplication-excerpt",
+    "reader": "Mişârî Râşid el-Afâsî · Günlük zikirler",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "mishary-uyku-alternatif",
+    "prayerId": "uyku-alternatif",
+    "readerId": "mishary-alafasy",
+    "path": "/assets/dua-audio/mishary-uyku-alternatif.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain/ar_Mashari_Athkar/ar_Mashari_Azkar06.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/171291/",
+    "bytes": 98478,
+    "sha256": "89296f4b9d34eabf4e512fca085974e786b2e216d47ce59b19d62a11051d17a4",
+    "kind": "complete-supplication-excerpt",
+    "reader": "Mişârî Râşid el-Afâsî · Günlük zikirler",
+    "sourceName": "IslamHouse",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  },
+  {
+    "id": "mishary-istigfar-1419",
+    "prayerId": "istigfar",
+    "readerId": "mishary-alafasy",
+    "path": "/assets/dua-audio/mishary-istigfar.mp3",
+    "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Mishari_Raashid/Azkar_AlSba7_w_AlMsa/ar_1419_Azkar_AlSba7.mp3",
+    "sourcePage": "https://islamhouse.com/ar/audios/92368/",
+    "bytes": 576717,
+    "sha256": "8985f91950f6d8e7f8a690083cefcbfbe5ad996c6b3f130a9a03a7e41ee95021",
+    "kind": "verified-dua-excerpt",
+    "reader": "Mişârî Râşid el-Afâsî",
+    "sourceName": "IslamHouse · Mişârî el-Afâsî · Sabah zikirleri, 1419",
+    "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+    "mime": "audio/mpeg"
+  }
+]

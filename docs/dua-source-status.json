@@ -1,0 +1,115 @@
+{
+  "checkedAt": "2026-10-17",
+  "diyanet": {
+    "sourcePage": "https://namaz.diyanet.gov.tr/namaz/html/sureler-dualar.html",
+    "reader": "Not identified by the source; do not attribute to a named reciter.",
+    "permissionBasis": "User reports Diyanet permission for free, non-monetized use. This is not an independently obtained public license.",
+    "recordings": [
+      {
+        "id": "subhaneke",
+        "path": "/assets/dua-audio/subhaneke.mp3",
+        "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/3_SUBHANEKE.mp3",
+        "sha256": "64c76f36d86811ed9494a383f46af9af6cce06f8fb8020a9ba114aad186aebf0",
+        "bytes": 554364
+      },
+      {
+        "id": "tahiyyat",
+        "path": "/assets/dua-audio/tahiyyat.mp3",
+        "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/7_HANEFI_ETTEHIYATU.mp3",
+        "sha256": "57566de437b059577f257eaf7a982ba6f3ab0ceb99db198f4fc78a6c539bba30",
+        "bytes": 1318572
+      },
+      {
+        "id": "salli",
+        "path": "/assets/dua-audio/salli.mp3",
+        "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/8_ALLAHUMMESALLI.mp3",
+        "sha256": "a4f07c49f208be6ceb523ff495704f7d9be6e14366797c607f3e9a4dd5aac2eb",
+        "bytes": 796572
+      },
+      {
+        "id": "barik",
+        "path": "/assets/dua-audio/barik.mp3",
+        "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/9_ALLAHUMMEBARIK.mp3",
+        "sha256": "7fc098ccc6e3a5ad641b138c9193cf77024b0fd41d4409b4e7ba4ecc942d1bec",
+        "bytes": 804924
+      },
+      {
+        "id": "kunut",
+        "path": "/assets/dua-audio/kunut.mp3",
+        "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/6_KUNUT_DUALARI.mp3",
+        "sha256": "e46311b60ae8f42c62366a95c9c44c0cd95c2cbc513892070054286e418a73b1",
+        "bytes": 2012832
+      },
+      {
+        "id": "rabbena",
+        "path": "/assets/dua-audio/rabbena.mp3",
+        "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/10_RABBENA_DUALARI.mp3",
+        "sha256": "c27698a556be1cc6dafcc4637bc28b8256274a2c011f2e98d2c5dae2324c80a1",
+        "bytes": 879048
+      },
+      {
+        "id": "ezan",
+        "path": "/assets/dua-audio/ezan.mp3",
+        "source": "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/EZAN_DUASI.mp3",
+        "sha256": "31d2f0ab5369249904f6ec918b236735bceae960c987b469d43d36ac3090cd2d",
+        "bytes": 1145268
+      }
+    ]
+  },
+  "textOnly": [
+    {
+      "id": "kuran-baslama",
+      "source": "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf#page=70",
+      "status": "Full text checked against rendered Diyanet guide page 70; no matched app audio verified."
+    },
+    {
+      "id": "yemek",
+      "source": "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf#page=112",
+      "status": "Short after-meal text; no matched app audio verified."
+    },
+    {
+      "id": "amentü",
+      "status": "Existing text retained; no matched approved recording verified."
+    }
+  ],
+  "notUsed": [
+    {
+      "source": "https://www.youtube.com/watch?v=z8ZxbrqZO8s",
+      "reader": "Mishary Rashid Alafasy",
+      "status": "Official Topic release; recording rights marked Alfan Music. No offline/redistribution grant verified."
+    }
+  ],
+  "audioLoading": "MP3s are not in SW CORE; loaded only for playback or explicit download. Optional downloads are checked by byte length and SHA-256. Personal phrases are cut into exact PCM WAVs before playback; their times are never inferred from text.",
+  "additionalAudioResearch": "docs/dua-audio-research-2026-10-17.json",
+  "adultReaderReplacement": "docs/dua-audio-adult-replacement-2026-10-17.json",
+  "additionalRecordings": [
+    {
+      "id": "istihare-chapter",
+      "path": "/assets/dua-audio/istihare-chapter.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_028_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "bytes": 1612689,
+      "sha256": "1be9a28155054bdc28df1d74534bd27fb96ede28aa42a110e016f6c8b5ef7a3a",
+      "kind": "complete-audiobook-chapter"
+    },
+    {
+      "id": "yemek-chapter",
+      "path": "/assets/dua-audio/yemek-chapter.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_071_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "bytes": 491736,
+      "sha256": "87ab07afaabd79178945db1fe7f5cf5b7241e84d84934579c39c88feedb0299c",
+      "kind": "complete-audiobook-chapter"
+    },
+    {
+      "id": "istigfar-adult",
+      "path": "/assets/dua-audio/istigfar-adult.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_029_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "bytes": 448234,
+      "sha256": "5ffc96288162045bcfb53e72a868ddafde23652046c015d505d6dd84f3d6915c",
+      "kind": "verified-dua-excerpt"
+    }
+  ],
+  "study": "Manual Arabic-word parts are saved locally against the exact text. Audio seconds remain tied to the recording hash. Independent part, cumulative and whole-study counts; selected PCM ranges are concatenated without unselected gaps. Text-only prayers allow manual hide/reveal and next/previous practice without pretending to have sound."
+}

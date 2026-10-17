@@ -1,0 +1,66 @@
+{
+  "checkedAt": "2026-10-17",
+  "purpose": "Follow-up search for remaining adult, reusable native prayer audio. Only new assets and this report may be changed.",
+  "readyRecordings": [],
+  "findings": [
+    {
+      "id": "amentu",
+      "officialPage": "https://egitimhizmetleri.diyanet.gov.tr/Detay/1175/çocuklar-için-dualar-ve-sureler",
+      "officialVideo": "https://www.youtube.com/watch?v=t9aDQsOfh6I",
+      "title": "Âmentü Duası",
+      "publisher": "DİB - Eğitim Hizmetleri Genel Müdürlüğü",
+      "sourceEvidence": {
+        "kind": "official-book-QR",
+        "localPdf": "test-results/cocuk-dualar.pdf",
+        "pdfSha256": "ceed72a6daa3791477c92191197313b323864bcd58d460c9985bdb73c73cad7e",
+        "printedPage": 31,
+        "qrPayload": "https://www.youtube.com/watch?v=t9aDQsOfh6I&list=PLarBJ7nMkMs1pi9YMjhkOjIDfvCBZV3XE&index=22",
+        "renderedQr": "test-results/dua-amentu-qr.png",
+        "independentPublisherVerification": "YouTube public oEmbed returned matching title and official publisher."
+      },
+      "permissionBasis": "User reports Diyanet permission for free non-commercial app use. Not independently obtained public license.",
+      "status": "external-reference-only",
+      "blockedReason": "Standard public video retrieval returned unavailable/n-challenge failure. No bypass attempted. Native media not acquired; reader age/type and full spoken text cannot be verified.",
+      "adultVoiceVerified": false
+    },
+    {
+      "id": "amentu",
+      "officialPage": "https://www.diyanethaber.com.tr/video/diyanet-elifba-amentu",
+      "officialVideo": "https://www.youtube.com/watch?v=hU01Jv_RnYg",
+      "status": "previously-verified-external-reference-only",
+      "reason": "Official Diyanet Haber embeds video. No direct standalone MP3 exposed; no new audio identity verification this pass."
+    },
+    {
+      "id": "kuran-baslama",
+      "textSource": "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf#page=70",
+      "candidateVideo": "https://www.youtube.com/watch?v=H3GLguR3k9w",
+      "candidateReader": "Hasan Lütfi Ramazanoğlu",
+      "candidatePublisher": "Behre TV",
+      "status": "not-eligible-for-native-copy",
+      "reason": "Adult reading candidate exists but independent producer is not covered by the reported Diyanet grant merely because the imam works for Diyanet. No explicit reuse grant verified. No audio copied.",
+      "newEligibleSourceFound": false
+    },
+    {
+      "id": "yemek-short",
+      "status": "no-new-matched-recording",
+      "reason": "Existing IslamHouse adult chapter contains atamani hadha wa razaqanihi... and hamdan kathiran... variants; this does not match the current atamana wa saqana wa jaalana min al-muslimin text. Do not attach the different chapter as though it were a recording of this text.",
+      "existingAlternativeFile": "/assets/dua-audio/yemek-chapter.mp3",
+      "newEligibleSourceFound": false
+    },
+    {
+      "id": "yemek-long",
+      "status": "no-new-matched-recording",
+      "reason": "Long communal/traditional after-food prayer has multiple versions. No independently verified adult reusable recording matching the app version was found. General free MP3 sites and commercial Yasin-book QR offerings were not treated as reuse grants.",
+      "newEligibleSourceFound": false
+    }
+  ],
+  "constraints": {
+    "noChildVoice": "User rejected child-voice istigfar teaching record; it must stay excluded. Official child-education branding alone cannot establish the recorded voice type.",
+    "noInventedAudio": "No generated reciter impersonation, mixed recording timings, guessed cuts, or mismatched audio attached.",
+    "noSourceBypass": "No login, paywall, bot-check, or video access restriction was bypassed.",
+    "noCatalogEdits": true,
+    "noManifestEdits": true,
+    "noCommit": true
+  },
+  "researchOutcome": "No additional fully verified adult recording became eligible during this follow-up. Preserve native-ready recordings already verified in prior reports and leave these entries honestly without native playback."
+}

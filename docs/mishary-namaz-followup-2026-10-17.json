@@ -1,0 +1,90 @@
+{
+  "checkedAt": "2026-10-17",
+  "scope": "Follow-up audit for Mishary Rashid Alafasy recordings of the exact existing namaz prayers. Only new research/assets are owned by this task; no manifest, catalog, UI, version or commit is changed.",
+  "readyRecordings": [],
+  "findings": [
+    {
+      "prayerIds": ["subhaneke", "tahiyyat", "salli", "barik"],
+      "status": "no_new_native_recording_verified",
+      "reason": "The primary IslamHouse Mishary Arabic author index contains 18 works, with Quran, morning/evening/sleep adhkar and selected supplications but no independently identified exact namaz-prayer studio track. An official complete prayer instructional video was found, but its existence is not an app/offline copying license.",
+      "officialExternalReference": "https://www.youtube.com/watch?v=4-jvpGGzrOA",
+      "officialReferenceTitle": "Praying -صفة الصلاة - مشاري راشد العفاسي",
+      "officialReferencePublisher": "Alafasy verified YouTube channel",
+      "officialReferenceDate": "2022-11-14",
+      "exactEachPrayerSpokenMatchVerified": false
+    },
+    {
+      "prayerId": "kunut",
+      "status": "candidate_rejected_different_supplication",
+      "reason": "The primary publisher's selected dua collection starts Allahumma ihdina fi man hadayt, not the existing Hanafi Kunut 1 Allahumma inna nastainuka or Kunut 2 Allahumma iyyaka nabudu. Do not connect a generic Taraweeh Qunut recording to the Hanafi Kunut 1–2 card.",
+      "sourcePage": "https://islamhouse.com/ar/audios/720656/",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain/Ad3eyah_Mokhtarah_Afasy/ar_01_Ad3eyah_Mokhtarah_Afasy.mp3",
+      "localFile": "test-results/mishary-namaz-selected.mp3",
+      "bytes": 5592487,
+      "sha256": "116c6040a97069896caa6ae69b16541c922789daf4d8dc07587da16df1fd6b2a",
+      "durationSeconds": 348.94367346938776,
+      "decodeErrors": [],
+      "readerIdentity": "Publisher page author and source MP3 artist explicitly identify Mishary bin Rashid Alafasy.",
+      "asrEvidence": "test-results/mishary-namaz-followup-asr.json",
+      "fullAsrPass": "Overlapping 25-second windows at 24-second offsets cover the complete 5:48 recording. Approximate ASR establishes neighboring prayer identities, not authoritative vowel-by-vowel wording.",
+      "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+      "notAddedToAssets": true
+    },
+    {
+      "prayerId": "amentü",
+      "status": "no_new_native_recording_verified",
+      "reason": "No primary publisher Mishary performance of the exact Amentu formulation with a reusable recording was established. Current Diyanet external Amentu reference is not evidence of Mishary identity."
+    },
+    {
+      "prayerId": "ezan",
+      "status": "official_external_only",
+      "sourcePage": "https://www.youtube.com/watch?v=z8ZxbrqZO8s",
+      "publisher": "Mishary Rashid Alafasy Topic; provided by Alfan Digital Media Group FZ-LLC",
+      "copyright": "2024 Alfan Music",
+      "reason": "Official reader credit is known, but native/offline reuse permission is not established. Do not apply the IslamHouse permission statement to this unrelated release; do not silently remove the current dua's additional closing clauses."
+    },
+    {
+      "prayerId": "rabbena",
+      "status": "exact_text_source_route_identified_pending_local_audio_validation",
+      "currentText": [
+        "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",
+        "رَبَّنَا اغْفِرْ لِي وَلِوَالِدَيَّ وَلِلْمُؤْمِنِينَ يَوْمَ يَقُومُ الْحِسَابُ"
+      ],
+      "quranReferences": ["2:201 prayer words only, omitting wa minhum man yaqul", "14:41 full verse"],
+      "recording": "mishary_rashid_al_afasy_mp3quran / r1",
+      "audioOrigins": ["https://server8.mp3quran.net/afs/", "https://cdn.mp3quran.net/audio/mishary-alafasy/r1/"],
+      "audioPermission": "https://www.mp3quran.net/eng/privacy",
+      "audioPermissionBasis": "MP3Quran explicitly permits visitors/developers to copy materials or use its links. This does not authorize third-party prayer performances not supplied by MP3Quran.",
+      "timingSource": "assets/afasy-mp3quran-word-timings.json",
+      "timingRecordingIdentity": "The timing file itself declares server8/afs as audio_origin and the same cdn r1 series as audio_alias. Timings from a different performance must not be substituted.",
+      "candidateRangesSeconds": [
+        {"verse":"2:201", "firstWord":4, "lastWord":14, "start":4761.271, "end":4774.522},
+        {"verse":"14:41", "firstWord":1, "lastWord":8, "start":1002.705, "end":1014.645}
+      ],
+      "candidateStatus": "Ranges are research only; no native asset generated before download integrity, actual first/last word and no-next-word checks pass.",
+      "cdnHeadResults": [
+        {"chapter":2,"status":200,"bytes":120641555,"etag":"f8b01a6e9c3574e22e4caf2ad7e2700d"},
+        {"chapter":14,"status":200,"bytes":19643805,"etag":"77007477ede2337dd167ebc9387bdded"}
+      ],
+      "downloadNote": "The 120-second parallel CDN download attempt and the final 90-second original server8 attempt both timed out before writing any complete files. Neither chapter file exists locally after these attempts. No source hash or finished audio is claimed on the basis of HEAD alone. Research downloads are no longer running."
+    }
+  ],
+  "primaryIndexAudit": {
+    "url": "https://islamhouse.com/ar/author/8326/showall/ar/1",
+    "responseStatus": 200,
+    "localHtml": "test-results/mishary-namaz-ar-author1.html",
+    "workCount": 18,
+    "scopeLimit": "The requested page 2 did not preserve the author filter and returned a general index; its unrelated works were excluded. The count applies only to the valid first filtered author page."
+  },
+  "permissionChecks": [
+    {"url":"https://d1.islamhouse.com/html/faq.htm", "basis":"Publisher section 2 permits republication with attribution and unchanged scientific content; commercial third-party uses are separately distinguished by section 12."},
+    {"url":"https://www.mp3quran.net/eng/privacy", "basis":"Rights paragraph explicitly permits copying materials or using site links."},
+    {"url":"https://www.alafasy.co/terms-of-use", "basis":"Personal noncommercial app access and protected content are described; no blanket redistribution license for another app's native/offline catalog is granted."}
+  ],
+  "excludedSources": [
+    {"source":"Hisnmuslim API prayer audio", "reason":"No primary reader credit establishing Mishary. Existence of Tahiyyat/Salli audio there is not identity evidence."},
+    {"source":"Fan blogs, MP3 mirrors and generic reciter-selector websites", "reason":"Names in titles or a page-wide Mishary selector do not establish that each individual prayer audio is Mishary or reusable. Not used as final evidence and no native recordings copied."},
+    {"source":"YouTube search result for repeated salat Ibrahimiyya i3mb0xe707k", "reason":"The actual official artist is Bader Alnufais, despite Mishary mentions in the search description. Not Mishary and not reassigned."}
+  ],
+  "conclusion": "The new follow-up does not establish that every namaz prayer is voiced by Mishary. Preserve current accurate other-reader recordings and existing verified Mishary selections. No uncertain reader or different Hanafi wording is shipped."
+}

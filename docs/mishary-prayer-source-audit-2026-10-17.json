@@ -1,0 +1,118 @@
+{
+  "checkedAt": "2026-10-17",
+  "scope": "Mishary Rashid Alafasy prayer recording identity, exact prayer match and republication basis. This audit does not edit the app catalog, recording manifest or version.",
+  "readyRecordings": [
+    {
+      "id": "mishary-istigfar-1419",
+      "prayerId": "istigfar",
+      "readerId": "mishary-alafasy",
+      "reader": "Mişârî Râşid el-Afâsî",
+      "readerArabic": "مشاري بن راشد العفاسي",
+      "path": "/assets/dua-audio/mishary-istigfar.mp3",
+      "kind": "verified-dua-excerpt",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Mishari_Raashid/Azkar_AlSba7_w_AlMsa/ar_1419_Azkar_AlSba7.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/92368/",
+      "sourceName": "IslamHouse · Mişârî el-Afâsî · Sabah zikirleri, 1419",
+      "sourceTitle": "أذكار الصباح - إصدار عام 1419هـ",
+      "sourceBytes": 18584774,
+      "sourceSha256": "540db3ab38d7086c774b53606f0bd724d865bdce30b3dacb0a4b29c50d70c344",
+      "sourceDurationSeconds": 1161.221224489796,
+      "bytes": 576717,
+      "sha256": "8985f91950f6d8e7f8a690083cefcbfbe5ad996c6b3f130a9a03a7e41ee95021",
+      "durationSeconds": 35.96,
+      "sampleRate": 44100,
+      "channels": 2,
+      "decodeErrors": [],
+      "excerpt": [423.32, 459.28],
+      "permissionUrl": "https://d1.islamhouse.com/html/faq.htm",
+      "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+      "permissionBasis": "IslamHouse publisher FAQ section 2 states its published third-party works have open rights and visitors may republish through various media with source attribution and without changing the scientific content. Section 12 distinguishes commercial reuse of third-party productions; this assessment is for the stated free, nonmonetized app. This is a publisher republication statement for this IslamHouse edition, not a direct personal license from the reader and not permission for unrelated Alfan or YouTube editions.",
+      "attribution": "Mişârî Râşid el-Afâsî — IslamHouse.com, Sabah zikirleri 1419. Kaynak ve yeniden yayım koşulları: https://islamhouse.com/ar/audios/92368/ ; https://d1.islamhouse.com/html/faq.htm",
+      "readerIdentityEvidence": [
+        "Publisher page title and author explicitly name مشاري بن راشد العفاسي.",
+        "Source MP3 artist and album_artist tags name القارئ: مشاري بن راشد العفاسي; publisher tag is www.islamhouse.com.",
+        "Saved primary page: test-results/mishary-prayers-mishary.html. A later web-tool revisit returned HTTP 429; the previously retrieved HTML and working exact audio are retained."
+      ],
+      "matching": {
+        "prayer": "One complete Seyyidul istighfar recitation, from Allahumma anta rabbi through illa anta; no surrounding hadith explanation or neighboring prayer is included.",
+        "secondLaka": "The approximate ASR repeatedly recognizes wa abuu bi dhanbi without a second laka, consistent with the current app Arabic and Turkish transliteration. Do not add a second laka solely on this recording's account.",
+        "currentCatalogTextChangeNeeded": false,
+        "exactWordTimingsVerified": false,
+        "fullVerbatimHumanCheck": false,
+        "validationLimit": "Source attribution, rough independent Arabic ASR identity, source context and acoustic separators agree. Whisper-tiny is not an authoritative literal transcript or word alignment. No word-level or clause-level practice timings are supplied."
+      },
+      "cutEvidence": {
+        "sourceWindowStart": 419,
+        "startSeparator": [423.110612, 423.517279],
+        "endSeparator": [459.128526, 459.409887],
+        "cut": [423.32, 459.28],
+        "silenceDetection": "ffmpeg silencedetect noise=-22dB:d=0.08, applied to this exact recording only",
+        "nextSpeechExcluded": "The following man qalaha muqinan... hadith explanation starts after the 459.128526–459.409887 separator; the excerpt ends inside that separator.",
+        "sourceContextAsr": "test-results/mishary-1419-target-asr.json",
+        "excerptAsr": "test-results/mishary-istigfar-verify.json",
+        "silenceLog": "test-results/mishary-istigfar-silences22.log",
+        "finalDecodeAndHash": "test-results/mishary-istigfar-final-file-verification.json"
+      },
+      "conversion": {
+        "command": "ffmpeg -y -hide_banner -ss 423.32 -t 35.96 -i test-results/mishary-1419-sabah.mp3 -vn -map_metadata -1 -c:a libmp3lame -b:a 128k [accurate source attribution metadata] assets/dua-audio/mishary-istigfar.mp3",
+        "changes": "A complete prayer excerpt was isolated at the actual separators, MP3 re-encoded at 128 kbps, original 44.1 kHz stereo retained, irrelevant blog tags omitted and accurate source attribution added. No time stretch, pitch adjustment, word reordering or alteration to spoken content."
+      }
+    }
+  ],
+  "externalReferences": [
+    {
+      "prayerId": "istigfar",
+      "readerId": "mishary-alafasy",
+      "sourcePage": "https://www.youtube.com/watch?v=HWCKSAvMWn8",
+      "publisher": "Alafasy verified YouTube channel",
+      "title": "سيد الاستغفار مشاري راشد العفاسي من أذكار الصباح والمساء",
+      "status": "Official reader identity verified; external listening reference only. YouTube posting itself does not establish native/offline redistribution rights. Native asset above comes from the separately identified IslamHouse 1419 edition."
+    },
+    {
+      "prayerId": "ezan",
+      "readerId": "mishary-alafasy",
+      "sourcePage": "https://www.youtube.com/watch?v=z8ZxbrqZO8s",
+      "publisher": "Mishary Rashid Alafasy Topic; provided by Alfan Digital Media Group FZ-LLC",
+      "title": "الدعاء بعد الأذان",
+      "status": "Official attribution and 2024 Alfan Music release identified, but no matching native streaming/offline republication grant. Do not copy this recording based on the IslamHouse FAQ for a different edition. Exact app full-text correspondence was not verified."
+    }
+  ],
+  "notReady": [
+    {
+      "prayerIds": ["subhaneke", "tahiyyat", "salli", "barik", "rabbena", "kunut"],
+      "reason": "No independently verified primary-publisher Mishary recording matching the exact prayer and a usable republication basis was located in this bounded search. Other readers must not be labeled Mishary. This is not a claim that no such performance exists."
+    },
+    {
+      "prayerId": "amentu",
+      "reason": "No primary-publisher Mishary recording matching the current Amentu text and reuse permission verified. Existing official Diyanet external recording is not evidence of Mishary identity."
+    },
+    {
+      "prayerId": "kuran-baslama",
+      "reason": "No verified Mishary performance of the exact long traditional Quran-opening prayer was located. Keep text available and do not substitute a different supplication or synthesized reader imitation."
+    },
+    {
+      "prayerIds": ["yemek", "yemek-uzun"],
+      "reason": "No verified Mishary recording matching the current short et'amana wa saqana formula or long traditional food prayer was located. IslamHouse selected-prayer Spanish/Arabic collection 275983 was identified, but its seven large mixed-language recordings were not established as these exact prayers; therefore none was copied as a matching food prayer."
+    }
+  ],
+  "excludedCandidates": [
+    {
+      "sourcePage": "https://www.hisnmuslim.com/",
+      "audio": "https://www.hisnmuslim.com/audio/ar/79.mp3",
+      "reason": "Seyyidul istighfar audio exists, but the site/API does not establish the reader as Mishary. A third-party app names another reader, which is not primary proof either. Not eligible for a Mishary-labeled integration."
+    },
+    {
+      "sourcePage": "https://www.alafasy.co/terms-of-use",
+      "reason": "Current Alafasy application terms describe personal/noncommercial use and protected content; they are not a general license to copy all app recordings into another app. Do not conflate these terms with the older specific IslamHouse edition."
+    },
+    {
+      "sourcePage": "https://alafasy.me/",
+      "reason": "Parent verified this domain is parked/for sale. It is not used as a current official website or licensing source."
+    },
+    {
+      "id": "istigfar-lesson",
+      "reason": "Previous child teaching voice was rejected by the user. It is not an eligible replacement and must remain excluded."
+    }
+  ],
+  "coordination": "Daily prayer Mishary recordings such as sleep, waking and leaving home are owned by the separate mishary-daily-prayer-audit-2026-10-17.json research task. They are not duplicated here."
+}

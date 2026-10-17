@@ -1,0 +1,66 @@
+{
+  "id": "istigfar-adult",
+  "path": "/assets/dua-audio/istigfar-adult.mp3",
+  "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_029_Hisn_Almuslim_Alshwehi.mp3",
+  "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+  "readerArabic": "سليمان بن محمد الشويهي",
+  "reader": "Suleiman al-Shuwaihi",
+  "sourceTitle": "أذكار الصباح والمساء — حصن المسلم",
+  "kind": "verified-dua-excerpt",
+  "sourceBytes": 8049242,
+  "sourceSha256": "ee3a0e1b6d372c2d528d420f085e48efe77d2b33a0c02f6d62e268f9ff5519de",
+  "bytes": 448234,
+  "sha256": "5ffc96288162045bcfb53e72a868ddafde23652046c015d505d6dd84f3d6915c",
+  "sampleRate": 44100,
+  "durationSeconds": 27.9,
+  "decodeErrors": [],
+  "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+  "permissionSummary": "Official IslamHouse FAQ section 2 permits redistribution with attribution and without altering scientific content. Complete supplication excerpt; surrounding separate prayers omitted. Non-commercial free use.",
+  "excerpt": {
+    "fromSeconds": 159.5,
+    "toSeconds": 187.4,
+    "unchangedWords": true,
+    "encoding": "128 kbps MP3, original 44100 Hz stereo; no pitch or speed changes",
+    "conversionArguments": [
+      "-ss",
+      "159.5",
+      "-t",
+      "27.9",
+      "-i",
+      "hisn-29.mp3",
+      "-vn",
+      "-c:a",
+      "libmp3lame",
+      "-b:a",
+      "128k",
+      "istigfar-adult.mp3"
+    ],
+    "cutEvidence": {
+      "beforeGap": [
+        159.317029,
+        159.720408
+      ],
+      "afterGap": [
+        187.141497,
+        187.665465
+      ],
+      "silenceAnalysis": "ffmpeg silencedetect, source window from154s, noise=-20dB,d=0.2; both cuts inside the detected prayer separator gaps",
+      "startIdentity": "Original ASR150–175s identifies end of previous wa-ilayka-n-nushur, then Allahumma anta rabbi la ilaha illa anta khalaqtani wa ana abduk...",
+      "endIdentity": "Original ASR175–200s identifies abuu laka bi nimatika...wa abuu...bi dhanbi faghfirli fa innahu la yaghfiru...illa anta, then a different Allahumma inni asbahtu ush-hiduk prayer after the separator",
+      "nextPrayerIncluded": false,
+      "scope": "Content identity and independent acoustic boundary evidence. Whisper-tiny transcript is approximate, not authoritative spelling or word-level timing."
+    }
+  },
+  "textComparison": {
+    "firstLaka": "Detected in abuu laka bi nimatika alayya.",
+    "secondLaka": "Not reliably detected in multiple ASR windows. Source Hisn al-Muslim text standard has wa abuu bi dhanbi. Keep current Arabic wa-abuu bi-dhanbi and matching transliteration; do not add a second laka based on these ASR outputs.",
+    "fullVerbatimHumanCheck": false
+  },
+  "reviewEvidence": {
+    "coarse": "test-results/istigfar-adult-coarse-asr.json",
+    "tail": "test-results/istigfar-adult-tail-compare-asr.json",
+    "silence": "test-results/adult-silence2.log",
+    "originalMetadata": "Source MP3 copyright www.islamhouse.com and Engineer Arabic tag credits Abu Umar Suleiman al-Shuwaihi."
+  },
+  "supersedes": "istigfar-lesson: user rejected child voice; never re-add."
+}

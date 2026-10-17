@@ -1,5 +1,9 @@
 // Locale order matches the main translation table.
 Object.assign(window.T,{
+  "study_method": ["Çalışma şekli","Übungsart","Practice method","Способ занятий","طريقة التدريب","Méthode de travail","Forma de practicar","Τρόπος εξάσκησης","练习方式","練習方法","학습 방식","अभ्यास का तरीका","مشق کا طریقہ","Metodo di studio","Cara latihan","Manier van oefenen","Forma de praticar","روش تمرین","অনুশীলনের ধরন","Cara latihan","Njia ya mazoezi"],
+  "mode_range_help": ["Seçtiğin bölüm baştan sona okunur. Bittiğinde tüm çalışma sayısına göre başa döner.","Der gewählte Abschnitt wird vollständig gelesen und entsprechend der Gesamtzahl wiederholt.","The selected section is read from start to end, then repeated according to the whole-study count.","Выбранный отрывок читается целиком и повторяется по числу полных циклов.","يُقرأ المقطع من البداية للنهاية، ثم يُعاد حسب عدد تكرار التدريب كاملًا.","Le passage est lu en entier, puis repris selon le nombre de répétitions de l’exercice.","Se lee toda la sección y se vuelve al inicio según las repeticiones del estudio completo.","Διαβάζεται όλο το απόσπασμα και επαναλαμβάνεται με βάση τους συνολικούς κύκλους.","从头到尾诵读所选部分，然后按整轮次数重复。","選んだ区間を最初から最後まで読み、全体の回数に従って繰り返します。","선택한 부분 전체를 읽고 전체 학습 반복 횟수에 따라 반복합니다.","चुना भाग शुरू से अंत तक पढ़ा जाता है, फिर पूरे अभ्यास की संख्या के अनुसार दोहराया जाता है।","منتخب حصہ شروع سے آخر تک پڑھا جاتا ہے، پھر پوری مشق کی تعداد کے مطابق دہرایا جاتا ہے۔","L’intero brano viene letto e poi ripetuto secondo il numero di cicli completi.","Bagian pilihan dibaca utuh, lalu diulang sesuai jumlah seluruh latihan.","Het gekozen gedeelte wordt volledig gelezen en herhaald volgens het aantal hele oefenrondes.","O trecho é lido inteiro e repetido conforme o número de rodadas completas.","بخش انتخابی از ابتدا تا انتها خوانده و طبق تعداد کل تمرین تکرار می‌شود.","নির্বাচিত অংশ শুরু থেকে শেষ পর্যন্ত পড়ে পুরো অনুশীলনের সংখ্যা অনুযায়ী পুনরাবৃত্তি হবে।","Bahagian pilihan dibaca penuh, kemudian diulang mengikut bilangan seluruh latihan.","Sehemu iliyochaguliwa inasomwa yote, kisha kurudiwa kwa idadi ya zoezi lote."],
+  "mode_verse_help": ["Her âyet, âyet/parça sayısı kadar okunur; sonra sıradaki âyete geçer. Birleştir’e basman gerekmez.","Jeder Vers wird nach seiner Wiederholungszahl gelesen. Verbinden muss nicht aktiviert werden.","Each verse follows the verse/part repeat count, then moves to the next. No Combine button is needed.","Каждый аят повторяется заданное число раз. Нажимать «Объединить» не нужно.","تتكرر كل آية بالعدد المحدد ثم ينتقل للتالية. لا تحتاج إلى زر الدمج.","Chaque verset suit son nombre de répétitions puis passe au suivant. Aucun bouton Combiner n’est nécessaire.","Cada versículo se repite según su contador y pasa al siguiente. No hace falta pulsar Combinar.","Κάθε στίχος επαναλαμβάνεται και ακολουθεί ο επόμενος. Δεν χρειάζεται Συνδυασμός.","每节按经节次数重复后进入下一节，无须开启合并。","各節を指定回数読み、次の節に進みます。結合ボタンは不要です。","각 구절을 설정 횟수만큼 읽고 다음으로 넘어갑니다. 합치기를 누를 필요가 없습니다.","हर आयत तय संख्या में पढ़कर अगली पर जाती है। जोड़ें बटन दबाना ज़रूरी नहीं।","ہر آیت مقررہ تعداد میں پڑھی جاتی ہے، پھر اگلی آتی ہے۔ ملانے کا بٹن دبانا ضروری نہیں۔","Ogni versetto segue il suo numero di ripetizioni, poi si passa al successivo. Non serve Combina.","Setiap ayat diulang sesuai hitungannya lalu berlanjut. Tidak perlu tombol Gabungkan.","Elk vers volgt zijn eigen aantal herhalingen en gaat verder. Combineren is niet nodig.","Cada versículo segue sua contagem e passa ao próximo. Não é preciso tocar em Combinar.","هر آیه به تعداد تعیین‌شده خوانده و سپس آیه بعد پخش می‌شود. نیازی به دکمه ترکیب نیست.","প্রতি আয়াত নির্দিষ্ট সংখ্যায় পড়ে পরেরটিতে যাবে। একত্র করার বোতাম লাগবে না।","Setiap ayat diulang mengikut bilangannya, kemudian beralih. Tidak perlu butang Gabungkan.","Kila aya inarudiwa kwa idadi yake kisha inayofuata. Huhitaji kubonyeza Unganisha."],
+  "mode_cumulative_help": ["Önce âyetler tek tek, ardından 1+2, 1+2+3 şeklinde çalışılır. Birleştirme sayısı ayrı uygulanır.","Einzelne Verse, danach 1+2, 1+2+3; verbundene Abschnitte haben eine eigene Wiederholungszahl.","Practice individual verses, then 1+2, 1+2+3. Combined passages use their own repeat count.","Отдельные аяты, затем 1+2, 1+2+3. У объединённых частей свой счётчик.","تدريب الآيات منفردة ثم ١+٢، ١+٢+٣. للمقاطع المدمجة عدد مستقل.","Versets seuls, puis 1+2, 1+2+3. Les passages combinés ont leur propre compteur.","Versículos individuales, luego 1+2, 1+2+3. Los combinados tienen contador propio.","Μεμονωμένοι στίχοι, μετά 1+2, 1+2+3. Οι συνδυασμοί έχουν δικό τους μετρητή.","先练单节，再练1+2、1+2+3；合并部分使用独立次数。","各節の後、1+2、1+2+3と練習します。結合区間には別の回数を使います。","개별 구절 다음에 1+2, 1+2+3을 연습합니다. 합친 부분은 별도 횟수를 사용합니다.","अलग आयतें, फिर 1+2, 1+2+3। जुड़े भागों की अपनी पुनरावृत्ति संख्या है।","پہلے الگ آیات، پھر ۱+۲، ۱+۲+۳۔ ملے حصوں کی گنتی الگ ہے۔","Versetti singoli, poi 1+2, 1+2+3. I brani uniti hanno un contatore proprio.","Ayat satu per satu, lalu 1+2, 1+2+3. Bagian gabungan punya hitungan sendiri.","Losse verzen, dan 1+2, 1+2+3. Gecombineerde delen hebben hun eigen teller.","Versículos individuais, depois 1+2, 1+2+3. Os trechos combinados têm contagem própria.","ابتدا آیات جدا، سپس ۱+۲ و ۱+۲+۳. بخش‌های ترکیبی شمارنده جدا دارند.","আলাদা আয়াত, তারপর ১+২, ১+২+৩। একত্র অংশের পুনরাবৃত্তি আলাদা।","Ayat berasingan, kemudian 1+2, 1+2+3. Bahagian gabungan mempunyai kiraan sendiri.","Aya moja moja, kisha 1+2, 1+2+3. Sehemu zilizounganishwa zina idadi yake."],
   "repeat_scope_work": ["Tüm çalışma","Ganze Übung","Whole study","Всё занятие","التدريب كاملًا","Exercice entier","Todo el estudio","Όλη η μελέτη","整个练习","練習全体","전체 학습","पूरा अभ्यास","مکمل مشق","Intero esercizio","Seluruh latihan","Hele oefening","Estudo completo","کل تمرین","পুরো অনুশীলন","Seluruh latihan","Zoezi lote"],
   "repeat_scope_unit": ["Âyet / parça","Vers / Abschnitt","Verse / part","Аят / часть","الآية / الجزء","Verset / partie","Versículo / parte","Στίχος / τμήμα","经节 / 片段","節 / 区間","구절 / 부분","आयत / भाग","آیت / حصہ","Versetto / parte","Ayat / bagian","Vers / deel","Versículo / parte","آیه / بخش","আয়াত / অংশ","Ayat / bahagian","Aya / sehemu"],
 
@@ -97,7 +101,7 @@ Object.assign(window.T,{
   ]
 ,
   "mode_range": [
-    "Aralığı tekrarla",
+    "Bütün bölümü oku",
     "Bereich wiederholen",
     "Repeat the range",
     "Повторять диапазон",
@@ -120,7 +124,7 @@ Object.assign(window.T,{
     "Rudia fungu"
   ],
   "mode_verse": [
-    "Âyet âyet",
+    "Âyet âyet çalış",
     "Vers für Vers",
     "Verse by verse",
     "Аят за аятом",
@@ -143,7 +147,7 @@ Object.assign(window.T,{
     "Aya kwa aya"
   ],
   "mode_cumulative": [
-    "1+2 birleştir",
+    "1+2 ile birleştir",
     "1+2 verbinden",
     "Combine 1+2",
     "Объединять 1+2",

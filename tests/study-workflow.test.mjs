@@ -68,3 +68,11 @@ test('zero combine and tour preferences save and reopen without being replaced b
  c.window.elifaStudySettings.beforeOpen();assert.deepEqual([c.SET.combineRep,c.SET.rangeRep],[0,0]);
  assert.deepEqual(JSON.parse(JSON.stringify(c.window.elifaStudySettings.capture())),settings);
 });
+
+
+test('choosing verse practice or changing a repeat count enables the requested repetition without Combine or autoplay',()=>{
+ const {c,nodes,events}=harness();nodes.get('studyRepeatEnabled').checked=false;nodes.get('studyMode').value='verse';nodes.get('studyMode').handlers.change();
+ assert.equal(nodes.get('studyRepeatEnabled').checked,true);assert.equal(c.window.elifaPracticeMode(),'verse');assert.equal(c.playing,false);assert.deepEqual(events,[]);
+ nodes.get('studyRepeatEnabled').checked=false;nodes.get('studySetting_rep').value=3;nodes.get('studySetting_rep').handlers.input();assert.equal(nodes.get('studyRepeatEnabled').checked,true);
+ nodes.get('studyRepeatEnabled').checked=false;assert.equal(c.window.elifaStudySettings.capture().repOn,false,'explicitly disabling repeats remains possible');
+});

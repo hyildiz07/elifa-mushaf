@@ -48,9 +48,14 @@
   details.append(grid);
   var choice = modeControl("studyMode", (value) => {
     mode = value;
+    repeat.checked = true;
     syncModes();
   });
-  grid.append(field("study_options", choice));
+  var choiceField = field("study_method", choice);
+  choiceField.classList.add("workflowMethod");
+  var methodHelp = document.createElement("small");
+  methodHelp.className = "repeatHelp";
+  choiceField.append(methodHelp);
   var reciter = document.createElement("select");
   reciter.id = "studyReciter";
   for (const r of RECITERS) {
@@ -80,12 +85,15 @@
       wrapper.append(help);
     }
     grid.append(wrapper);
+    if (["rep", "combineRep", "rangeRep"].includes(key)) input.addEventListener("input", () => {
+      repeat.checked = true;
+    });
   }
   var repeat = document.createElement("input");
   repeat.type = "checkbox";
   repeat.id = "studyRepeatEnabled";
   grid.append(field("pb_repeat", repeat));
-  $("studyOpen").before(details);
+  $("studyOpen").before(choiceField, details);
   var gearMode = modeControl("practiceMode", (value) => {
     mode = value;
     SET.cumu = value === "cumulative";
@@ -93,7 +101,7 @@
     syncModes();
     if (typeof queuePracticeModeChange === "function") queuePracticeModeChange(value);
   });
-  var gearField = field("study_options", gearMode);
+  var gearField = field("study_method", gearMode);
   gearField.classList.add("workflowMode");
   $("rangeStart").before(gearField);
   var status = document.createElement("p");
@@ -133,8 +141,10 @@
     render();
   }
   function render() {
+    methodHelp.textContent = t("mode_" + mode + "_help");
+    choice.setAttribute("aria-label", t("study_method"));
     gearField.hidden = typeof gearCtx !== "undefined" && gearCtx !== "ayah";
-    gearMode.setAttribute("aria-label", t("study_options"));
+    gearMode.setAttribute("aria-label", t("study_method"));
     if (!lastProgress) {
       status.hidden = true;
       readerStatus.hidden = true;
@@ -204,7 +214,7 @@
     },
     resume: () => pendingResume
   };
-  window.elifaActivityBusy = () => !!(playing || $("reader")?.classList.contains("on") || $("split")?.classList.contains("on") || $("studySetup")?.classList.contains("on"));
+  window.elifaActivityBusy = () => !!(playing || $("reader")?.classList.contains("on") || $("split")?.classList.contains("on") || $("studySetup")?.classList.contains("on") || document.getElementById("duaDetBack")?.classList.contains("show"));
   window.elifaPlaybackEvent = (event) => {
     const st = plan[pi] || plan.at(-1);
     const split = window.elifaStudySplitSelection?.();
@@ -292,7 +302,7 @@
     $("q").dispatchEvent(new Event("input"));
     for (const [id, key] of Object.entries({ langBtnH: "language", guideBtnH: "guide", themeBtnH: "theme" })) $(id)?.setAttribute("aria-label", t(key));
     for (const [id, key] of Object.entries({ repInp: "repeat_ayah_count", combineRepInp: "repeat_combine_count", rangeRepInp: "repeat_range_count" })) $(id)?.setAttribute("aria-label", t(key));
-    choice.setAttribute("aria-label", t("study_options"));
+    choice.setAttribute("aria-label", t("study_method"));
     reason.setAttribute("aria-label", t("report_issue"));
   }
   window.addEventListener("elifa:language-changed", refreshLanguage);
