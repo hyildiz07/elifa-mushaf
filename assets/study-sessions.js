@@ -143,6 +143,7 @@
     if(index>=0)items[index]=item;else items.push(item);
     if(!store.set(key,items)){toast(message('study_save_failed'));return;}
     editingId=item.id;activeId=item.id;byId('studySessionTitle').value=title;render();toast(message('study_saved_ok'));
+    try{window.elifaLog?.('study_saved',{range_bucket:to-from===0?'1':to-from<5?'2_5':to-from<10?'6_10':'11_plus'});}catch(e){}
   }
   byId('studySessionSave').addEventListener('click',save);
   for(const id of ['studySurah','studyFrom','studyTo'])byId(id).addEventListener('input',updateSaveState);

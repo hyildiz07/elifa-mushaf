@@ -1,9 +1,14 @@
 import {app,db,isLocal} from './firebase-client.mjs';
 import {collection,query,where,getDocs,getDoc,doc} from 'firebase/firestore';
+import {createUsageReporter,isMeasurementHost} from './usage-analytics.mjs';
 window.__elifaFBTried=true;
-window.__elifaStat=window.__elifaStat||{};
-window.elifaStat=k=>{window.__elifaStat[k]=(window.__elifaStat[k]||0)+1;};
-window.elifaLog=()=>{};
+const usage=createUsageReporter();
+const measure=!isLocal&&isMeasurementHost(location.hostname,{nativeIOS:!!window.ELIFA_NATIVE_IOS});
+const early=Array.isArray(window.__elifaEarlyUsage)?window.__elifaEarlyUsage:[];
+window.__elifaEarlyUsage=[];
+window.elifaLog=(event,params)=>{if(measure)usage.track(event,params);};
+window.elifaStat=key=>{if(measure)usage.track(key);};
+if(measure)for(const [event,params] of early)usage.track(event,params);
 // Public announcements do not require, create, or change the reader's account.
 async function announcements(){
  try{
@@ -22,11 +27,10 @@ async function announcements(){
  }catch{window.elifaCheckStaticDuyuru?.();}
 }
 if(!isLocal)announcements();
-if(!isLocal)import('firebase/analytics').then(async({isSupported,getAnalytics,logEvent})=>{
+if(measure)import('firebase/analytics').then(async({isSupported,getAnalytics,logEvent})=>{
  if(!await isSupported())return;
  const analytics=getAnalytics(app);
- window.elifaLog=(event,params={})=>{try{logEvent(analytics,event,params);}catch{}};
- window.elifaStat=key=>{if(/^[a-z][a-z0-9_]{0,35}$/.test(key))window.elifaLog(key);};
+ usage.ready((event,params)=>{try{logEvent(analytics,event,params);}catch{}});
  window.elifaLog('app_open');
 }).catch(()=>{});
 // Guest access no longer writes shared Firestore counters with anonymous credentials.

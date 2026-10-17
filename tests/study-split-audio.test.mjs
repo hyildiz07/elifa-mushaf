@@ -13,7 +13,7 @@ function source(name){
 }
 const names=['buildStudySplitParts','studyValidateManualCut','playStudySplitRange',
   'playStudySplitPart','activeStudySplitSelection','studySplitRecipeCurrent',
-  'playActiveStudySplit','stepBounds'];
+  'playActiveStudySplit','stepBounds','stepReps'];
 function audio(){
   const rows={
     1:[[1,100,250],[2,250,450],[3,450,870]],
@@ -135,6 +135,8 @@ test('manual three-part verse uses only that verse for repeat and cumulative stu
   assert.deepEqual(Array.from(c.started,step=>[step.f,step.t]),
     [[920,1100],[1100,1400],[920,1400],[1400,1800],[920,1800]]);
   assert.ok(c.started.every(step=>step.studyExact&&step.dyn));
+  assert.deepEqual(Array.from(c.started,step=>c.stepReps(step)),[5,5,5,5,5],
+    'each solo and cumulative take uses the selected repeat count');
   assert.ok(c.started.every(step=>step.f>=901&&step.t<=1800));
   c.SET.cumu=false;
   assert.equal(await c.playStudySplitRange(parts.parts,1,2),true);

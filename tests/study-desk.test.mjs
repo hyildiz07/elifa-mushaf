@@ -39,14 +39,21 @@ test('Study Desk play uses the whole selected range and refuses incomplete audio
   const played=[],messages=[];
   const context=vm.createContext({studyRange:{sid:18,from:1,to:10},curS:18,curAy:5,
     studyPlayRequestId:0,surahRequestId:1,AD_:{ay:{1:[0,1],10:[9,10]}},
-    SET:{reciter:7,repOn:false},audioTimingUnverified:()=>false,
-    buildLadder:()=>[],normalVersePlanReady:()=>true,
+    SET:{reciter:7,repOn:true,rep:5,cumu:false},audioTimingUnverified:()=>false,
+    buildLadder:()=>[],normalVersePlanReady:()=>true,normalChapterAudio:null,
+    normalVerseStep:(_chapter,from,to,options)=>({from,to,...options}),
     runPlan:p=>played.push(p),toast:m=>messages.push(m),window:{tr:null}});
   vm.runInContext(source('playStudyRange'),context);
+  vm.runInContext(source('stepReps'),context);
   await context.playStudyRange();assert.equal(played.length,0);assert.equal(messages.length,1);
-  context.buildLadder=(from,to)=>[{from,to}];await context.playStudyRange();
+  context.buildLadder=(from,to)=>Array.from({length:to-from+1},(_,i)=>({from:from+i,to:from+i}));
+  await context.playStudyRange();
+  assert.equal(played[0].length,1,'the whole passage is one repeatable audio step');
   assert.deepEqual([played[0][0].from,played[0][0].to],[1,10]);
-  assert.equal(context.SET.repOn,false);
+  assert.equal(context.stepReps(played[0][0]),5);
+  assert.equal(played[0][0].full,false,'finishing the range must not advance to another surah');
+  context.SET.cumu=true;await context.playStudyRange();
+  assert.equal(played[1].length,10,'cumulative study keeps its verse ladder');
 });
 
 test('Study Desk waits for chapter audio on the first Play tap',async()=>{
@@ -56,7 +63,8 @@ test('Study Desk waits for chapter audio on the first Play tap',async()=>{
     studyPlayRequestId:0,surahRequestId:1,AD_:{ay:{}},SET:{reciter:223},
     audioTimingUnverified:()=>false,getAudio:()=>new Promise(resolve=>{finishLoad=resolve;}),
     $:()=>({classList:{contains:()=>true}}),rewireTimings(){},
-    buildLadder:()=>[{from:1,to:2}],normalVersePlanReady:()=>true,
+    buildLadder:()=>[{from:1,to:1},{from:2,to:2}],normalVersePlanReady:()=>true,
+    normalVerseStep:(_chapter,from,to,options)=>({from,to,...options}),normalChapterAudio:null,
     runPlan:p=>played.push(p),toast(){},window:{tr:null}});
   vm.runInContext(source('playStudyRange'),context);
   const pending=context.playStudyRange();
