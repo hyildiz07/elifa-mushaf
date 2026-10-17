@@ -58,12 +58,6 @@
   },
   "textOnly": [
     {
-      "id": "istigfar",
-      "officialRecording": "https://www.youtube.com/watch?v=HWCKSAvMWn8",
-      "reader": "Mishary Rashid Alafasy",
-      "status": "Official recording located. In-app redistribution and offline rights not verified; external source link only."
-    },
-    {
       "id": "kuran-baslama",
       "source": "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf#page=70",
       "status": "Full text checked against rendered Diyanet guide page 70; no matched app audio verified."
@@ -85,5 +79,37 @@
       "status": "Official Topic release; recording rights marked Alfan Music. No offline/redistribution grant verified."
     }
   ],
-  "audioLoading": "MP3s are not in SW CORE; loaded only for playback or explicit download. Optional downloads are checked by byte length and SHA-256. Personal phrases are cut into exact PCM WAVs before playback; their times are never inferred from text."
+  "audioLoading": "MP3s are not in SW CORE; loaded only for playback or explicit download. Optional downloads are checked by byte length and SHA-256. Personal phrases are cut into exact PCM WAVs before playback; their times are never inferred from text.",
+  "additionalAudioResearch": "docs/dua-audio-research-2026-10-17.json",
+  "adultReaderReplacement": "docs/dua-audio-adult-replacement-2026-10-17.json",
+  "additionalRecordings": [
+    {
+      "id": "istihare-chapter",
+      "path": "/assets/dua-audio/istihare-chapter.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_028_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "bytes": 1612689,
+      "sha256": "1be9a28155054bdc28df1d74534bd27fb96ede28aa42a110e016f6c8b5ef7a3a",
+      "kind": "complete-audiobook-chapter"
+    },
+    {
+      "id": "yemek-chapter",
+      "path": "/assets/dua-audio/yemek-chapter.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_071_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "bytes": 491736,
+      "sha256": "87ab07afaabd79178945db1fe7f5cf5b7241e84d84934579c39c88feedb0299c",
+      "kind": "complete-audiobook-chapter"
+    },
+    {
+      "id": "istigfar-adult",
+      "path": "/assets/dua-audio/istigfar-adult.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_029_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "bytes": 448234,
+      "sha256": "5ffc96288162045bcfb53e72a868ddafde23652046c015d505d6dd84f3d6915c",
+      "kind": "verified-dua-excerpt"
+    }
+  ],
+  "study": "Manual Arabic-word parts are saved locally against the exact text. Audio seconds remain tied to the recording hash. Independent part, cumulative and whole-study counts; selected PCM ranges are concatenated without unselected gaps. Text-only prayers allow manual hide/reveal and next/previous practice without pretending to have sound."
 }

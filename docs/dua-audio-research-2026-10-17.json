@@ -1,0 +1,544 @@
+{
+  "checkedAt": "2026-10-17",
+  "scope": "Prayer audio source and recording identity research; no catalog or manifest edits.",
+  "permissions": [
+    {
+      "source": "https://d1.islamhouse.com/html/faq.htm",
+      "section": "2: publication of productions; 12: commercial use distinction",
+      "basis": "Official FAQ explicitly permits users to reuse and publish site material by different media with source attribution and without altering the scientific content. Commercial use of externally produced material is separately restricted. Intended use is free and non-monetized.",
+      "limits": "Retain original complete chapters and disclose spoken headings/explanations. Do not imply Diyanet origin or attribute to Mishary."
+    }
+  ],
+  "readyRecordings": [
+    {
+      "id": "istihare-chapter",
+      "path": "/assets/dua-audio/istihare-chapter.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_028_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "readerArabic": "سليمان بن محمد الشويهي",
+      "kind": "complete-audiobook-chapter",
+      "sourceTitle": "دعاء صلاة الاستخارة",
+      "bytes": 1612689,
+      "sha256": "1be9a28155054bdc28df1d74534bd27fb96ede28aa42a110e016f6c8b5ef7a3a",
+      "sampleRate": 44100,
+      "durationSeconds": 97.82857142857142,
+      "decodeErrors": [],
+      "encoding": "Byte-for-byte original MP3; no cuts or transformations.",
+      "matching": "Chapter includes Jabir narration, the full istikhara dua, narration alternatives and advice after the dua. It is not a clean standalone recitation; label as dua and explanation."
+    },
+    {
+      "id": "yemek-chapter",
+      "path": "/assets/dua-audio/yemek-chapter.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_071_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "readerArabic": "سليمان بن محمد الشويهي",
+      "kind": "complete-audiobook-chapter",
+      "sourceTitle": "الدعاء عند الفراغ من الطعام",
+      "bytes": 491736,
+      "sha256": "87ab07afaabd79178945db1fe7f5cf5b7241e84d84934579c39c88feedb0299c",
+      "sampleRate": 44100,
+      "durationSeconds": 27.76816326530612,
+      "decodeErrors": [],
+      "encoding": "Byte-for-byte original MP3; no cuts or transformations.",
+      "matching": "Contains the after-food supplications al-hamdu lillahi alladhi atamani hadha wa razaqanihi... and al-hamdu lillahi hamdan kathiran tayyiban mubarakan fihi... . It is not the same text as the existing short atamana wa saqana prayer. The heading and yaqul are also spoken."
+    },
+    {
+      "id": "istigfar-adult",
+      "path": "/assets/dua-audio/istigfar-adult.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_029_Hisn_Almuslim_Alshwehi.mp3",
+      "sourcePage": "https://islamhouse.com/ar/audios/2799103/",
+      "readerArabic": "سليمان بن محمد الشويهي",
+      "reader": "Suleiman al-Shuwaihi",
+      "sourceTitle": "أذكار الصباح والمساء — حصن المسلم",
+      "kind": "verified-dua-excerpt",
+      "sourceBytes": 8049242,
+      "sourceSha256": "ee3a0e1b6d372c2d528d420f085e48efe77d2b33a0c02f6d62e268f9ff5519de",
+      "bytes": 448234,
+      "sha256": "5ffc96288162045bcfb53e72a868ddafde23652046c015d505d6dd84f3d6915c",
+      "sampleRate": 44100,
+      "durationSeconds": 27.9,
+      "decodeErrors": [],
+      "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+      "permissionSummary": "Official IslamHouse FAQ section 2 permits redistribution with attribution and without altering scientific content. Complete supplication excerpt; surrounding separate prayers omitted. Non-commercial free use.",
+      "excerpt": {
+        "fromSeconds": 159.5,
+        "toSeconds": 187.4,
+        "unchangedWords": true,
+        "encoding": "128 kbps MP3, original 44100 Hz stereo; no pitch or speed changes",
+        "conversionArguments": [
+          "-ss",
+          "159.5",
+          "-t",
+          "27.9",
+          "-i",
+          "hisn-29.mp3",
+          "-vn",
+          "-c:a",
+          "libmp3lame",
+          "-b:a",
+          "128k",
+          "istigfar-adult.mp3"
+        ],
+        "cutEvidence": {
+          "beforeGap": [
+            159.317029,
+            159.720408
+          ],
+          "afterGap": [
+            187.141497,
+            187.665465
+          ],
+          "silenceAnalysis": "ffmpeg silencedetect, source window from154s, noise=-20dB,d=0.2; both cuts inside the detected prayer separator gaps",
+          "startIdentity": "Original ASR150–175s identifies end of previous wa-ilayka-n-nushur, then Allahumma anta rabbi la ilaha illa anta khalaqtani wa ana abduk...",
+          "endIdentity": "Original ASR175–200s identifies abuu laka bi nimatika...wa abuu...bi dhanbi faghfirli fa innahu la yaghfiru...illa anta, then a different Allahumma inni asbahtu ush-hiduk prayer after the separator",
+          "nextPrayerIncluded": false,
+          "scope": "Content identity and independent acoustic boundary evidence. Whisper-tiny transcript is approximate, not authoritative spelling or word-level timing."
+        }
+      },
+      "textComparison": {
+        "firstLaka": "Detected in abuu laka bi nimatika alayya.",
+        "secondLaka": "Not reliably detected in multiple ASR windows. Source Hisn al-Muslim text standard has wa abuu bi dhanbi. Keep current Arabic wa-abuu bi-dhanbi and matching transliteration; do not add a second laka based on these ASR outputs.",
+        "fullVerbatimHumanCheck": false
+      },
+      "reviewEvidence": {
+        "coarse": "test-results/istigfar-adult-coarse-asr.json",
+        "tail": "test-results/istigfar-adult-tail-compare-asr.json",
+        "silence": "test-results/adult-silence2.log",
+        "originalMetadata": "Source MP3 copyright www.islamhouse.com and Engineer Arabic tag credits Abu Umar Suleiman al-Shuwaihi."
+      },
+      "supersedes": "istigfar-lesson: user rejected child voice; never re-add."
+    }
+  ],
+  "verifiedExistingRecording": {
+    "id": "ezan",
+    "file": "/assets/dua-audio/ezan.mp3",
+    "sha256": "31d2f0ab5369249904f6ec918b236735bceae960c987b469d43d36ac3090cd2d",
+    "finding": "Existing Diyanet MP3 does include wa-d-darajata-r-rafia and ends with innaka la tukhlifu-l-miad. The previous UI text was shorter than the recording, not the reverse.",
+    "validation": "Local independent Whisper-tiny Arabic identity probe, on exact source PCM, detected innaka at 23–25s and la tukhlifu-l-miad in 25–28s. ASR has spelling errors and is not word boundary/cut approval.",
+    "asr": {
+      "file": "assets/dua-audio/ezan.mp3",
+      "outputs": [
+        {
+          "from": 0,
+          "text": " اللهم رب هذه الدعاوتي المهاتل قائمة تمحمد للوصيلة والفضيلة والدرجة الرفية وبعثهم قاما محمد للذي واكت إنك",
+          "chunks": [
+            {
+              "timestamp": [
+                0,
+                10
+              ],
+              "text": " اللهم رب هذه الدعاوتي المهاتل قائمة"
+            },
+            {
+              "timestamp": [
+                10,
+                15
+              ],
+              "text": " تمحمد للوصيلة والفضيلة"
+            },
+            {
+              "timestamp": [
+                15,
+                18
+              ],
+              "text": " والدرجة الرفية"
+            },
+            {
+              "timestamp": [
+                18,
+                23
+              ],
+              "text": " وبعثهم قاما محمد للذي واكت"
+            },
+            {
+              "timestamp": [
+                23,
+                25
+              ],
+              "text": " إنك"
+            }
+          ]
+        },
+        {
+          "from": 25,
+          "text": " لتخلف الميار",
+          "chunks": [
+            {
+              "timestamp": [
+                0,
+                3
+              ],
+              "text": " لتخلف الميار"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "researchCandidates": [
+    {
+      "number": 72,
+      "title": "دعاء الضيف لصاحب الطعام",
+      "url": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_072_Hisn_Almuslim_Alshwehi.mp3",
+      "file": "test-results/hisn-72.mp3",
+      "status": "Not copied into app assets; chapter headings precede prayers.",
+      "mime": "audio/mpeg",
+      "bytes": 230086,
+      "sha256": "0f3037d02d3a32229d0148b16a68ad95f13f26a9a68d98b4a144d63d5a8adb25",
+      "sampleRate": 44100,
+      "seconds": 11.415510204081633,
+      "decodeErrors": []
+    },
+    {
+      "number": 44,
+      "title": "دعاء من استصعب عليه أمر",
+      "url": "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_044_Hisn_Almuslim_Alshwehi.mp3",
+      "file": "test-results/hisn-44.mp3",
+      "status": "Not copied into app assets; chapter headings precede prayers.",
+      "mime": "audio/mpeg",
+      "bytes": 271464,
+      "sha256": "f918c2d3a557c81b403ed1735dd87df768861f114404f033fa75d242d0f326f1",
+      "sampleRate": 44100,
+      "seconds": 14.001632653061224,
+      "decodeErrors": []
+    },
+    {
+      "id": "istigfar-lesson",
+      "sourcePage": "https://islamhouse.com/ar/videos/2831662/",
+      "source": "https://d1.islamhouse.com/data/ar/ih_videos/mp4/chain/learn_play/ar-doaa-alestghfar.mp4",
+      "kind": "short-child-teaching-video",
+      "status": "Rejected by user: child voice. Removed from readyRecordings; do not reuse.",
+      "publisherSeries": "Learn and Play, Haytham Sarhan",
+      "sourceBytes": 2573549,
+      "sourceSha256": "d98a682ae77b226bd02de1ff2278f0fa1dbdb4d6f543731db00ad47aa2c9a4aa",
+      "extractedMp3": {
+        "file": "test-results/seyyid-istigfar-lesson.mp3",
+        "bytes": 536377,
+        "sha256": "507ea7ad6a6759382bc3db4fea879293c084156167569cb112f317e91a74747f",
+        "durationSeconds": 33.45995464852608,
+        "sampleRate": 44100,
+        "decodeErrors": []
+      },
+      "transform": "ffmpeg 7.1: full MP4 audio track converted to 128k MP3, original 44100Hz stereo retained; no trimming, no time stretching.",
+      "matching": "Source attachment explicitly named Dua Sayyid al-Istighfar. Frame at 10s shows Arabic start Allahumma. Local independent ASR windows detect opening at 8s, audhu bika min sharri ma sanat at 18s, and closing fa-innahu la yaghfiru...illa anta at 25/28s. Tiny ASR has severe repeated-token artifacts, so not full authoritative transcript or word timing proof."
+    }
+  ],
+  "officialExternalSources": [
+    {
+      "id": "amentu",
+      "url": "https://www.diyanethaber.com.tr/video/diyanet-elifba-amentu",
+      "video": "https://www.youtube.com/watch?v=hU01Jv_RnYg",
+      "finding": "Official Diyanet Haber page embeds Amentu video; no standalone MP3 exposed by page."
+    },
+    {
+      "id": "istigfar",
+      "url": "https://dijital.diyanet.gov.tr/Izle/dua/seyyidul-istigfar-duasi?id=7531",
+      "video": "https://www.youtube.com/watch?v=6DQJAfP6E9g",
+      "finding": "Official Diyanet Digital video; no direct standalone app-ready MP3 exposed by page."
+    }
+  ],
+  "unresolved": [
+    {
+      "id": "kuran-baslama",
+      "textSource": "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf#page=70",
+      "status": "No complete matched standalone official/licensed audio located. Do not synthesize a reciter identity or attach unrelated audio."
+    },
+    {
+      "id": "amentu",
+      "status": "Official video found; no direct clean MP3 verified."
+    }
+  ],
+  "portalsChecked": [
+    {
+      "url": "https://kuran.diyanet.gov.tr/dualar/",
+      "finding": "New React dua app contains Quranic supplication text; no dua audio API or audio references in current app chunk index-BkXBtmdh.js."
+    },
+    {
+      "url": "https://kuran.diyanet.gov.tr/elifba/",
+      "finding": "New React curriculum has /elifba/data/sound/ audio and Quran surah applications but no Amentu lesson in current module index-CCUmlHDg.js."
+    }
+  ],
+  "asrReview": {
+    "model": "Xenova/whisper-tiny",
+    "purpose": "Review only, not authoritative religious text, timings, or clip boundaries.",
+    "results": [
+      {
+        "file": "test-results/hisn-71.mp3",
+        "outputs": [
+          {
+            "from": 0,
+            "text": " الدعوان دلف رغي من الطعام يقول الحمد لله الذي يطعامني هذا ورزقني ويقول الحمد لله حمد انك في رمطي بمبارك في عيارة مكفي ولم ودعين ولم استغاية",
+            "chunks": [
+              {
+                "timestamp": [
+                  0,
+                  8
+                ],
+                "text": " الدعوان دلف رغي من الطعام يقول الحمد لله الذي يطعامني هذا ورزقني"
+              },
+              {
+                "timestamp": [
+                  8,
+                  26
+                ],
+                "text": " ويقول الحمد لله حمد انك في رمطي بمبارك في عيارة مكفي ولم ودعين ولم استغاية"
+              }
+            ]
+          },
+          {
+            "from": 25,
+            "text": " نانو ربنا",
+            "chunks": [
+              {
+                "timestamp": [
+                  0,
+                  2
+                ],
+                "text": " نانو ربنا"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "test-results/hisn-72.mp3",
+        "outputs": [
+          {
+            "from": 0,
+            "text": " دواء وفي رساحي بالطام يقول الله مبرك لهم في مارزقتهم وفي رلاهم وارحمهم",
+            "chunks": [
+              {
+                "timestamp": [
+                  0,
+                  10.8
+                ],
+                "text": " دواء وفي رساحي بالطام يقول الله مبرك لهم في مارزقتهم وفي رلاهم وارحمهم"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "test-results/hisn-44.mp3",
+        "outputs": [
+          {
+            "from": 0,
+            "text": " دعو من الساعة بالي يمر يقول الله الله سهل الله الله مجالة وصهلا وانتتاجعل الحزنين راشي تسخلان",
+            "chunks": [
+              {
+                "timestamp": [
+                  0,
+                  8.84
+                ],
+                "text": " دعو من الساعة بالي يمر يقول الله الله سهل الله الله مجالة وصهلا"
+              },
+              {
+                "timestamp": [
+                  8.84,
+                  13.64
+                ],
+                "text": " وانتتاجعل الحزنين راشي تسخلان"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "test-results/hisn-28.mp3",
+        "outputs": [
+          {
+            "from": 0,
+            "text": " السادس والشرون دعوصة لتلسخار هذا الجابع ربنا بدلا يرضي الله ونهما كان رسول الله والحيو السلام واللم الستخارة في الممريق اللي كان يوالمناسورة من القرآن يقول إذا هما حدوكم بلا مريفا لعركاتين",
+            "chunks": [
+              {
+                "timestamp": [
+                  0,
+                  4.44
+                ],
+                "text": " السادس والشرون دعوصة لتلسخار"
+              },
+              {
+                "timestamp": [
+                  4.44,
+                  15.8
+                ],
+                "text": " هذا الجابع ربنا بدلا يرضي الله ونهما كان رسول الله والحيو السلام واللم الستخارة في الممريق اللي"
+              },
+              {
+                "timestamp": [
+                  15.8,
+                  20.48
+                ],
+                "text": " كان يوالمناسورة من القرآن يقول"
+              },
+              {
+                "timestamp": [
+                  20.48,
+                  24.48
+                ],
+                "text": " إذا هما حدوكم بلا مريفا لعركاتين"
+              }
+            ]
+          },
+          {
+            "from": 25,
+            "text": " في المالي كل الله يستخدمه وكابيال المك وستقدير وكابي قداراتك واسلق من فضلك العظيم لأنك تقدير وعلى عاقدير وتالم والعالم وانتالم وولاو يبقى الله يبقى كل تتالم وانا ادى لامرة ولمسامي حاجة",
+            "chunks": [
+              {
+                "timestamp": [
+                  0,
+                  5.8
+                ],
+                "text": " في المالي كل الله يستخدمه وكابيال المك"
+              },
+              {
+                "timestamp": [
+                  5.8,
+                  11.32
+                ],
+                "text": " وستقدير وكابي قداراتك واسلق من فضلك العظيم"
+              },
+              {
+                "timestamp": [
+                  11.32,
+                  14.2
+                ],
+                "text": " لأنك تقدير وعلى عاقدير"
+              },
+              {
+                "timestamp": [
+                  14.2,
+                  20.24
+                ],
+                "text": " وتالم والعالم وانتالم وولاو يبقى الله يبقى"
+              },
+              {
+                "timestamp": [
+                  20.24,
+                  24.48
+                ],
+                "text": " كل تتالم وانا ادى لامرة ولمسامي حاجة"
+              }
+            ]
+          },
+          {
+            "from": 50,
+            "text": " خير اللي في ديني ومعاشي واكبتيا مري وقالا جليه واجي له واجي له تقدره لي ويسره لي ثم باركلي في انك تتالم وأنها ذلم راش ولي في ديني ومعاش واكبتيا مري وقالا جليه واجي له وصريف واني وصريف ني",
+            "chunks": [
+              {
+                "timestamp": [
+                  0,
+                  4.64
+                ],
+                "text": " خير اللي في ديني ومعاشي واكبتيا مري"
+              },
+              {
+                "timestamp": [
+                  4.64,
+                  7.48
+                ],
+                "text": " وقالا جليه واجي له واجي له"
+              },
+              {
+                "timestamp": [
+                  7.48,
+                  10.12
+                ],
+                "text": " تقدره لي ويسره لي"
+              },
+              {
+                "timestamp": [
+                  10.12,
+                  15.32
+                ],
+                "text": " ثم باركلي في انك تتالم وأنها ذلم راش"
+              },
+              {
+                "timestamp": [
+                  15.32,
+                  22.4
+                ],
+                "text": " ولي في ديني ومعاش واكبتيا مري وقالا جليه واجي له"
+              },
+              {
+                "timestamp": [
+                  22.4,
+                  25.2
+                ],
+                "text": " وصريف واني وصريف ني"
+              }
+            ]
+          },
+          {
+            "from": 75,
+            "text": " وقدر ليال خير حيث كان ثم أرضني به وما نذما نستخار الخالق وشاور المخلوقين المؤمنين وتذبت في عام راقا لصبحان وشاور في الأمر فإذا عزم تفتا وكالى الله",
+            "chunks": [
+              {
+                "timestamp": [
+                  0,
+                  11.68
+                ],
+                "text": " وقدر ليال خير حيث كان ثم أرضني به وما نذما نستخار الخالق وشاور المخلوقين المؤمنين"
+              },
+              {
+                "timestamp": [
+                  11.68,
+                  18.48
+                ],
+                "text": " وتذبت في عام راقا لصبحان وشاور في الأمر"
+              },
+              {
+                "timestamp": [
+                  18.48,
+                  22.16
+                ],
+                "text": " فإذا عزم تفتا وكالى الله"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "excludedCandidates": [
+    {
+      "id": "istigfar-lesson",
+      "path": "/assets/dua-audio/istigfar-lesson.mp3",
+      "source": "https://d1.islamhouse.com/data/ar/ih_videos/mp4/chain/learn_play/ar-doaa-alestghfar.mp4",
+      "sourcePage": "https://islamhouse.com/ar/videos/2831662/",
+      "readerArabic": null,
+      "publishingSeries": "Learn and Play — Haytham Sarhan educational series, as credited by IslamHouse; individual narrator not verified.",
+      "kind": "teaching-recording",
+      "sourceTitle": "دعاء سيد الاستغفار",
+      "sourceBytes": 2573549,
+      "sourceSha256": "d98a682ae77b226bd02de1ff2278f0fa1dbdb4d6f543731db00ad47aa2c9a4aa",
+      "bytes": 536377,
+      "sha256": "507ea7ad6a6759382bc3db4fea879293c084156167569cb112f317e91a74747f",
+      "sampleRate": 44100,
+      "durationSeconds": 33.45995464852608,
+      "decodeErrors": [],
+      "encoding": "Full source video audio track converted to MP3; no content cuts, time stretching, or speech generation.",
+      "conversion": {
+        "tool": "ffmpeg 7.1 (imageio-ffmpeg 0.6.0 bundled executable)",
+        "arguments": [
+          "-i",
+          "seyyid-istigfar-lesson.mp4",
+          "-vn",
+          "-c:a",
+          "libmp3lame",
+          "-b:a",
+          "128k",
+          "istigfar-lesson.mp3"
+        ],
+        "outputChannels": 2,
+        "outputSampleRate": 44100
+      },
+      "licenseSource": "https://d1.islamhouse.com/html/faq.htm",
+      "permissionSummary": "Official FAQ explicitly permits users to reuse and publish site material by different media with source attribution and without altering the scientific content. Commercial use of externally produced material is separately restricted. Intended use is free and non-monetized.",
+      "matching": "Source attachment explicitly named Dua Sayyid al-Istighfar. Frame at 10s shows Arabic start Allahumma. Local independent ASR windows detect opening at 8s, audhu bika min sharri ma sanat at 18s, and closing fa-innahu la yaghfiru...illa anta at 25/28s. Tiny ASR has severe repeated-token artifacts, so not full authoritative transcript or word timing proof.",
+      "disclosure": "A teaching recording with introductory sound, not a bare recitation. Reader not named; do not label Diyanet or Mishary.",
+      "status": "rejected-by-user",
+      "reason": "User identifies child voice and requests calm adult reader. Do not use in app or re-add to manifest."
+    }
+  ]
+}

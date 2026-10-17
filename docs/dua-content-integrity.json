@@ -1,0 +1,76 @@
+{
+  "checkedAt": "2026-10-17",
+  "scope": "Prayer text completeness and recording/text version distinction. New translations and instructions are editorial summaries; traditional Arabic prayer texts retain their source variants.",
+  "checks": [
+    {
+      "id": "ezan",
+      "source": "https://kurul.diyanet.gov.tr/tr/fetva/ezan-duasinin-dini-hukmu-nedir-ve-nasil-yapilir/0193c42d-8590-778e-6819-7c9e7a6f6197",
+      "result": "Added Arabic, transliteration and meanings for both inneke la tuhliful-miad and wad-darajatar-rafiah. Diyanet identifies the ending as an addition in some narrations (Beyhaki); the MEB teaching sheet publishes this extended wording. Critically, Portal HTML omits clauses that the actual existing MP3 DOES recite: the audio audit in test-results/dua-asr-review.json finds wad-darajatar-rafiah at about 15-18s and the ending at about 23-28s. No short-version warning is assigned, and the matched extended text accompanies the existing audio unchanged.",
+      "additionalSource": "https://sehitferhatarslanaihl.meb.k12.tr/meb_iys_dosyalar/65/14/761411/dosyalar/2018_11/09172051_20195555_Ezan_ve_Namaz_TesbihatY.pdf"
+    },
+    {
+      "id": "subhaneke",
+      "source": "https://kurul.diyanet.gov.tr/tr/fetva/namazlarda-subhaneke-okurken-ve-celle-senauke-kismi-nicin/0193c42d-4fad-78f8-6b66-b6ee0ffe1e2a",
+      "result": "Existing Arabic omitted ve celle senauk while transliteration inserted it in parentheses. The prayer-practice catalog now keeps the ordinary-prayer transliteration consistent with its Arabic, and separately explains the funeral-prayer addition. Original NAMAZ array is preserved."
+    },
+    {
+      "ids": [
+        "tahiyyat",
+        "salli",
+        "barik",
+        "kunut",
+        "rabbena"
+      ],
+      "source": "https://namaz.diyanet.gov.tr/namaz/html/sureler-dualar.html",
+      "result": "Existing Arabic prayer wording compared with the Portal HTML. No missing terminal prayer clause identified. Kunut 1 and 2 and both Rabbena prayers remain paired as in their source recordings; no unrelated audio or inferred word timings assigned."
+    },
+    {
+      "id": "kuran-baslama",
+      "source": "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf#page=70",
+      "result": "Compared with rendered page 70, including the full neveytu intention and the closing praise. Existing long text is complete; it remains identified as a traditional pre-recitation supplication, not an obligatory formula. Native audio availability remains a separate audit."
+    },
+    {
+      "ids": [
+        "yemek",
+        "yemek-uzun"
+      ],
+      "source": "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf#page=112",
+      "result": "Existing short thanksgiving is retained and explicitly titled short. A separate long version from visually checked pages 112-113 includes blessings for the host, provision, health, pardon, prayer, parents, believers and closing praise. The source's final al-Fatiha reading direction is instructional guidance rather than inserted as a spoken Arabic prayer clause. The collective long example is not claimed to be one indivisible obligatory prophetic formula."
+    },
+    {
+      "id": "istihare",
+      "source": "https://kurul.diyanet.gov.tr/tr/fetva/istihare-namazi-nasil-kilinir-istihare-nasil-yapilir/0193c42d-555c-727e-768e-8bd66d68104e",
+      "additionalSource": "https://www.diyanet.gov.tr/icerik/9974",
+      "result": "Arabic uses the aqibati amri wording in both good/bad branches; narrator alternatives (aw qala) are not inserted into the prayer. Includes transliteration, Turkish/English meaning, research and consultation, two voluntary rakahs (Fatihah+Kafirun then Fatihah+Ikhlas), subsequent dua, no required dream or colour divination, and dua alone when prayer cannot be performed. No invented success guarantee, posture, silence rule or compulsory bedtime is prescribed."
+    },
+    {
+      "ids": [
+        "uyku",
+        "uyanma"
+      ],
+      "sources": [
+        "https://hadislerleislam.diyanet.gov.tr/sayfa.php?CILT=1&SAYFA=180",
+        "https://hadislerleislam.diyanet.gov.tr/sayfa.php?CILT=6&SAYFA=519"
+      ],
+      "result": "Short bedtime and waking prayers added with Arabic, transliteration and Turkish/English meanings. Bedtime uses the source's bismike ahya wa bismike amut variant; it is not silently mixed with another wording."
+    },
+    {
+      "id": "yolculuk",
+      "source": "https://yayin.diyanet.gov.tr/File/Download?id=3737&path=3737_1.pdf#page=54",
+      "additionalSource": "https://hadislerleislam.diyanet.gov.tr/sayfa.php?CILT=1&SAYFA=180",
+      "result": "Adds the short mounting prayer from Quran 43:13-14. Explicitly distinguishes this from longer travel supplications and explains the preceding three takbirs."
+    },
+    {
+      "id": "iftar",
+      "source": "https://bingol.diyanet.gov.tr/karliova/sayfalar/contentdetail.aspx?ContentId=605&MenuCategory=Kurumsal",
+      "result": "Uses the short leke sumtu wa ala rizqika aftartu wording published by Diyanet. Longer variants exist; absence of extra phrases in this short version is not labelled a defect."
+    },
+    {
+      "id": "ilim",
+      "source": "https://dijital.diyanet.gov.tr/File/Download?id=480&path=480_1.pdf",
+      "result": "Quran 20:114 prayer Rabbi zidni ilma, already present in the Quran-prayers tab, is exposed in this learning catalog as well. Quran reference preserved; no new unrelated recording assigned."
+    }
+  ],
+  "audioPolicy": "This content audit adds no recording to an item merely because its text is known. Added native recordings require an independent identity, content and use-basis audit. Existing seven manifest entries were not edited here.",
+  "regressionChecks": "tests/dua-content.test.mjs: extended ezan ending and lofty-rank clause matching the actual recording; separate short/long meal versions; complete Quran-opening intention; both istikhara branches and practical guidance; source/meaning availability; ordinary Subhaneke pronunciation consistency."
+}

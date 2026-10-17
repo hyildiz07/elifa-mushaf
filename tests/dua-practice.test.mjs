@@ -3,16 +3,16 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import {createHash} from 'node:crypto';
-import {PrayerPlayer,pcmExcerptWav,restorePrayerState,validExcerpt} from '../src/dua-practice-core.mjs';
+import {PrayerPlayer,pcmExcerptWav,pcmRangesWav,buildPrayerStudyPlan,restorePrayerState,validExcerpt} from '../src/dua-practice-core.mjs';
 import {prayerLocales,prayerLabels,prayerCopy} from '../src/dua-copy.mjs';
 import {prayerCatalog} from '../src/dua-catalog.mjs';
 const html=fs.readFileSync('index.html','utf8'),at=html.indexOf('var NAMAZ=['),end=html.indexOf('\n  ];',at)+6;
 const texts=vm.runInNewContext(html.slice(at,end)+';NAMAZ'),catalog=prayerCatalog(texts);
 
 test('prayer recordings retain exact source bytes, and unavailable prayers never acquire a misleading voice',()=>{
-  const recordings=catalog.filter(x=>x.recording);assert.equal(recordings.length,7);
-  for(const item of recordings){const r=item.recording,bytes=fs.readFileSync('.'+r.path);assert.equal(bytes.length,r.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),r.sha256);assert.ok(r.source.startsWith('https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/'));}
-  for(const id of ['istigfar','kuran-baslama','yemek','amentü'])assert.equal(catalog.find(x=>x.id===id).recording,undefined);
+  const recordings=catalog.filter(x=>x.recording);assert.equal(recordings.length,10);
+  for(const item of recordings){const r=item.recording,bytes=fs.readFileSync('.'+r.path);assert.equal(bytes.length,r.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),r.sha256);assert.ok(r.source.startsWith('https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/')||r.source.startsWith('https://d1.islamhouse.com/'));if(r.source.includes('islamhouse.com')){assert.ok(r.reader);assert.equal(r.permissionUrl,'https://d1.islamhouse.com/html/faq.htm');assert.ok(r.sourcePage);}}
+  for(const id of ['kuran-baslama','yemek','amentü'])assert.equal(catalog.find(x=>x.id===id).recording,undefined);
   assert.deepEqual(catalog.find(x=>x.id==='kunut').namaz,[4,5]);
   assert.ok(catalog.find(x=>x.id==='kunut').ar.includes(texts[5].ar),'a combined recording is accompanied by both prayers');
   const sw=fs.readFileSync('sw.js','utf8');const core=sw.slice(sw.indexOf('const CORE'),sw.indexOf('for(const language'));
@@ -70,4 +70,65 @@ test('default repeat timers keep the browser Window receiver',async()=>{
  const jobs=[],states=[];let plays=0,host;const c=vm.createContext({setTimeout:function(fn){assert.equal(this,host,'native browser timer receiver');jobs.push(fn);return jobs.length;},clearTimeout:function(){assert.equal(this,host);}});host=vm.runInContext('globalThis',c);
  vm.runInContext(fs.readFileSync('src/dua-practice-core.mjs','utf8').replaceAll('export ',''),c);const Player=vm.runInContext('PrayerPlayer',c);const audio={pause(){},async play(){plays++;}};const player=new Player({audio,prepare:async()=>'/audio',onState:s=>states.push(s)});
  await player.play(null,{repeat:2,speed:1,wait:0});audio.onended();assert.equal(jobs.length,1);await jobs[0]();assert.equal(plays,2);audio.onended();assert.equal(states.at(-1),'complete');
+});
+
+const studyParts=[{name:'A',start:0,end:1},{name:'B',start:2,end:3},{name:'C',start:4,end:5}];
+const studySettings={method:'cumulative',partRepeat:2,combineRepeat:3,tourRepeat:2,speed:1.25,wait:2};
+test('independent phrase, cumulative and whole-study counts produce the exact hifz sequence',()=>{
+  const plan=Array.from(buildPrayerStudyPlan(studyParts,studySettings));
+  const singleTour=['A','A','B','B','AB','AB','AB','C','C','ABC','ABC','ABC'];
+  assert.deepEqual(plan.map(s=>s.ranges.map(r=>r.name).join('')),[...singleTour,...singleTour]);
+  assert.deepEqual(plan.map(s=>s.tour),[...Array(12).fill(1),...Array(12).fill(2)]);
+  assert.equal(plan[4].phase,'combine');assert.equal(plan[4].partIndex,1);assert.equal(plan[4].current,1);assert.equal(plan[6].current,3);assert.equal(plan[6].total,3);
+  assert.deepEqual(Array.from(buildPrayerStudyPlan(studyParts,{...studySettings,method:'sequential',partRepeat:0,combineRepeat:99,tourRepeat:0})).map(s=>s.ranges[0].name),['A','B','C'],'zero extra part/tour repetitions still reads each part once; combine is separately disabled by method');
+  assert.deepEqual(Array.from(buildPrayerStudyPlan(studyParts,{...studySettings,partRepeat:1,combineRepeat:0,tourRepeat:1})).map(s=>s.phase),['part','part','part']);
+  assert.throws(()=>buildPrayerStudyPlan(studyParts,{...studySettings,partRepeat:-1}));
+  assert.throws(()=>buildPrayerStudyPlan([studyParts[1],studyParts[0]],studySettings));
+  assert.throws(()=>buildPrayerStudyPlan([{start:0,end:2},{start:1,end:3}],studySettings));
+  const huge=buildPrayerStudyPlan(Array.from({length:50},(_,i)=>({start:i,end:i+0.5})),{...studySettings,partRepeat:99,combineRepeat:99,tourRepeat:99});
+  assert.equal(Array.isArray(huge),false,'the million-step plan is streamed');assert.equal(huge.next().value.current,1);
+});
+
+test('combined prayer audio excludes unselected gaps and following words without changing pitch or channels',()=>{
+  const left=Float32Array.from({length:100},(_,i)=>i<20?0.1:i<60?0.9:i<80?0.2:0.8);
+  const right=Float32Array.from(left,x=>-x);
+  const buffer={duration:1,length:100,sampleRate:100,numberOfChannels:2,getChannelData:c=>c?right:left};
+  const wav=pcmRangesWav(buffer,[{start:0,end:0.2},{start:0.6,end:0.8}]),view=new DataView(wav);
+  assert.equal(view.getUint16(22,true),2);assert.equal(view.getUint32(24,true),100);assert.equal(view.getUint32(40,true),40*2*2);
+  for(let i=0;i<40;i++){
+    const sample=view.getInt16(44+i*4,true);assert.ok(Math.abs(sample-(i<20?3277:6553))<=1);
+    assert.ok(view.getInt16(46+i*4,true)<0,'stereo channel polarity survives');
+    assert.ok(sample<7000,'neither loud excluded gap nor following word leaks into the clip');
+  }
+  assert.throws(()=>pcmRangesWav(buffer,[{start:0,end:0.6},{start:0.5,end:0.8}]));
+});
+
+test('hifz playback reports stages, waits, ignores duplicate/stale callbacks and prepares only source changes',async()=>{
+  const states=[],jobs=[],prepared=[];let plays=0;
+  const audio={pause(){},async play(){plays++;}};
+  const player=new PrayerPlayer({audio,preparePlan:async ranges=>{const name=ranges.map(r=>r.name).join('');prepared.push(name);return '/'+name;},schedule:(fn,delay)=>{jobs.push({fn,delay});return jobs.length;},unschedule:id=>{jobs[id-1]=null;},onState:(state,data)=>states.push([state,data])});
+  await player.playPlan(studyParts.slice(0,2),{...studySettings,tourRepeat:1});
+  const firstEnd=audio.onended;firstEnd();firstEnd();assert.equal(jobs.length,1,'duplicate media end must schedule one next step');assert.equal(jobs[0].delay,2000);
+  await jobs[0].fn();firstEnd();assert.equal(jobs.length,1,'a previous playback callback must not advance the next repetition');
+  for(let i=1;i<6;i++){audio.onended();await jobs[i].fn();}
+  audio.onended();assert.equal(plays,7);assert.deepEqual(prepared,['A','B','AB']);assert.equal(player.active,false);assert.equal(states.at(-1)[0],'complete');
+  assert.deepEqual(states.filter(([s])=>s==='playing').map(([,s])=>[s.phase,s.current,s.total]),[['part',1,2],['part',2,2],['part',1,2],['part',2,2],['combine',1,3],['combine',2,3],['combine',3,3]]);
+  assert.equal(audio.preservesPitch,true);assert.equal(audio.playbackRate,1.25);
+});
+
+test('changing a study while its audio is preparing invalidates the old source and pending timers',async()=>{
+  let resolveOld,lateIsCurrent,plays=0;const jobs=[];
+  const audio={pause(){},async play(){plays++;}};
+  const player=new PrayerPlayer({audio,preparePlan:(ranges,isCurrent)=>ranges[0].name==='A'?new Promise(resolve=>{resolveOld=resolve;lateIsCurrent=isCurrent;}):Promise.resolve('/B'),schedule:fn=>{jobs.push(fn);return jobs.length;},unschedule:id=>jobs[id-1]=null});
+  const older=player.playPlan([studyParts[0]],studySettings);
+  await player.playPlan([studyParts[1]],studySettings);assert.equal(lateIsCurrent(),false);resolveOld('/obsolete');await older;
+  assert.equal(audio.src,'/B');assert.equal(plays,1);audio.onended();const stale=jobs[0];player.stop();assert.equal(jobs[0],null);await stale();assert.equal(plays,1);assert.equal(audio.onended,null);
+});
+
+test('study preferences preserve zero and migrate existing recording-bound prayer settings',()=>{
+  const old={hash:'h',repeat:4,speed:1,wait:0,clips:[]};
+  assert.equal(restorePrayerState(old,'h').partRepeat,4);
+  const next=restorePrayerState({...old,method:'cumulative',partRepeat:0,combineRepeat:3,tourRepeat:0},'h');
+  assert.deepEqual([next.method,next.partRepeat,next.combineRepeat,next.tourRepeat],['cumulative',0,3,0]);
+  assert.equal(restorePrayerState({...old,partRepeat:100},'h').partRepeat,4);
 });

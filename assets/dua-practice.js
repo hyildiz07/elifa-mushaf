@@ -49,26 +49,171 @@
       source: "https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/hanefi/EZAN_DUASI.mp3",
       sha256: "31d2f0ab5369249904f6ec918b236735bceae960c987b469d43d36ac3090cd2d",
       bytes: 1145268
+    },
+    {
+      id: "istihare-chapter",
+      path: "/assets/dua-audio/istihare-chapter.mp3",
+      source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_028_Hisn_Almuslim_Alshwehi.mp3",
+      sourcePage: "https://islamhouse.com/ar/audios/2799103/",
+      bytes: 1612689,
+      sha256: "1be9a28155054bdc28df1d74534bd27fb96ede28aa42a110e016f6c8b5ef7a3a",
+      kind: "complete-audiobook-chapter",
+      reader: "S\xFCleyman b. Muhammed e\u015F-\u015Euveyh\xEE \xB7 M\xFCsl\xFCman\u0131n Kalesi",
+      sourceName: "IslamHouse",
+      permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
+      mime: "audio/mpeg"
+    },
+    {
+      id: "yemek-chapter",
+      path: "/assets/dua-audio/yemek-chapter.mp3",
+      source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_071_Hisn_Almuslim_Alshwehi.mp3",
+      sourcePage: "https://islamhouse.com/ar/audios/2799103/",
+      bytes: 491736,
+      sha256: "87ab07afaabd79178945db1fe7f5cf5b7241e84d84934579c39c88feedb0299c",
+      kind: "complete-audiobook-chapter",
+      reader: "S\xFCleyman b. Muhammed e\u015F-\u015Euveyh\xEE \xB7 M\xFCsl\xFCman\u0131n Kalesi",
+      sourceName: "IslamHouse",
+      permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
+      mime: "audio/mpeg"
+    },
+    {
+      id: "istigfar-adult",
+      path: "/assets/dua-audio/istigfar-adult.mp3",
+      source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_029_Hisn_Almuslim_Alshwehi.mp3",
+      sourcePage: "https://islamhouse.com/ar/audios/2799103/",
+      bytes: 448234,
+      sha256: "5ffc96288162045bcfb53e72a868ddafde23652046c015d505d6dd84f3d6915c",
+      kind: "verified-dua-excerpt",
+      reader: "S\xFCleyman b. Muhammed e\u015F-\u015Euveyh\xEE \xB7 M\xFCsl\xFCman\u0131n Kalesi",
+      sourceName: "IslamHouse",
+      permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
+      mime: "audio/mpeg"
     }
   ];
 
+  // src/dua-extra-catalog.mjs
+  var istihareSource = "https://kurul.diyanet.gov.tr/tr/fetva/istihare-namazi-nasil-kilinir-istihare-nasil-yapilir/0193c42d-555c-727e-768e-8bd66d68104e";
+  var book = "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf";
+  var dailySource = "https://hadislerleislam.diyanet.gov.tr/sayfa.php?CILT=1&SAYFA=180";
+  var extraPrayers = [{
+    id: "istihare",
+    title: "\u0130stih\xE2re duas\u0131 ve nas\u0131l yap\u0131l\u0131r?",
+    source: istihareSource,
+    audioNoteTR: "Bu sesli kitap b\xF6l\xFCm\xFC ba\u015Fl\u0131k ve rivayet a\xE7\u0131klamalar\u0131yla birlikte istih\xE2re duas\u0131n\u0131 i\xE7erir. \u201C\xC2k\u0131beti emr\xEE\u201D ve \u201C\xE2cili emr\xEE ve \xE2cilih\xEE\u201D gibi nakil farkl\u0131l\u0131klar\u0131 da okunabilir. Yaln\u0131z dua b\xF6l\xFCm\xFCn\xFC \xE7al\u0131\u015Fmak i\xE7in dinleyerek ba\u015Flang\u0131\xE7 ve biti\u015Fi se\xE7ebilirsin.",
+    audioNoteEN: "This audiobook chapter contains headings, narration notes and the istikhara supplication. It may read alternative reported wordings such as \u201Caqibati amri\u201D and \u201Cajili amri wa ajilihi\u201D. Listen and mark the beginning and end to practise the supplication alone.",
+    ar: "\u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0625\u0650\u0646\u0650\u0651\u064A \u0623\u064E\u0633\u0652\u062A\u064E\u062E\u0650\u064A\u0631\u064F\u0643\u064E \u0628\u0650\u0639\u0650\u0644\u0652\u0645\u0650\u0643\u064E \u0648\u064E\u0623\u064E\u0633\u0652\u062A\u064E\u0642\u0652\u062F\u0650\u0631\u064F\u0643\u064E \u0628\u0650\u0642\u064F\u062F\u0652\u0631\u064E\u062A\u0650\u0643\u064E \u0648\u064E\u0623\u064E\u0633\u0652\u0623\u064E\u0644\u064F\u0643\u064E \u0645\u0650\u0646\u0652 \u0641\u064E\u0636\u0652\u0644\u0650\u0643\u064E \u0627\u0644\u0652\u0639\u064E\u0638\u0650\u064A\u0645\u0650\u060C \u0641\u064E\u0625\u0650\u0646\u064E\u0651\u0643\u064E \u062A\u064E\u0642\u0652\u062F\u0650\u0631\u064F \u0648\u064E\u0644\u064E\u0627 \u0623\u064E\u0642\u0652\u062F\u0650\u0631\u064F \u0648\u064E\u062A\u064E\u0639\u0652\u0644\u064E\u0645\u064F \u0648\u064E\u0644\u064E\u0627 \u0623\u064E\u0639\u0652\u0644\u064E\u0645\u064F \u0648\u064E\u0623\u064E\u0646\u0652\u062A\u064E \u0639\u064E\u0644\u064E\u0651\u0627\u0645\u064F \u0627\u0644\u0652\u063A\u064F\u064A\u064F\u0648\u0628\u0650. \u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0625\u0650\u0646\u0652 \u0643\u064F\u0646\u0652\u062A\u064E \u062A\u064E\u0639\u0652\u0644\u064E\u0645\u064F \u0623\u064E\u0646\u064E\u0651 \u0647\u064E\u0630\u064E\u0627 \u0627\u0644\u0652\u0623\u064E\u0645\u0652\u0631\u064E \u062E\u064E\u064A\u0652\u0631\u064C \u0644\u0650\u064A \u0641\u0650\u064A \u062F\u0650\u064A\u0646\u0650\u064A \u0648\u064E\u0645\u064E\u0639\u064E\u0627\u0634\u0650\u064A \u0648\u064E\u0639\u064E\u0627\u0642\u0650\u0628\u064E\u0629\u0650 \u0623\u064E\u0645\u0652\u0631\u0650\u064A \u0641\u064E\u0627\u0642\u0652\u062F\u064F\u0631\u0652\u0647\u064F \u0644\u0650\u064A \u0648\u064E\u064A\u064E\u0633\u0650\u0651\u0631\u0652\u0647\u064F \u0644\u0650\u064A\u060C \u062B\u064F\u0645\u064E\u0651 \u0628\u064E\u0627\u0631\u0650\u0643\u0652 \u0644\u0650\u064A \u0641\u0650\u064A\u0647\u0650. \u0648\u064E\u0625\u0650\u0646\u0652 \u0643\u064F\u0646\u0652\u062A\u064E \u062A\u064E\u0639\u0652\u0644\u064E\u0645\u064F \u0623\u064E\u0646\u064E\u0651 \u0647\u064E\u0630\u064E\u0627 \u0627\u0644\u0652\u0623\u064E\u0645\u0652\u0631\u064E \u0634\u064E\u0631\u064C\u0651 \u0644\u0650\u064A \u0641\u0650\u064A \u062F\u0650\u064A\u0646\u0650\u064A \u0648\u064E\u0645\u064E\u0639\u064E\u0627\u0634\u0650\u064A \u0648\u064E\u0639\u064E\u0627\u0642\u0650\u0628\u064E\u0629\u0650 \u0623\u064E\u0645\u0652\u0631\u0650\u064A \u0641\u064E\u0627\u0635\u0652\u0631\u0650\u0641\u0652\u0647\u064F \u0639\u064E\u0646\u0650\u0651\u064A \u0648\u064E\u0627\u0635\u0652\u0631\u0650\u0641\u0652\u0646\u0650\u064A \u0639\u064E\u0646\u0652\u0647\u064F \u0648\u064E\u0627\u0642\u0652\u062F\u064F\u0631\u0652 \u0644\u0650\u064A\u064E \u0627\u0644\u0652\u062E\u064E\u064A\u0652\u0631\u064E \u062D\u064E\u064A\u0652\u062B\u064F \u0643\u064E\u0627\u0646\u064E \u062B\u064F\u0645\u064E\u0651 \u0623\u064E\u0631\u0652\u0636\u0650\u0646\u0650\u064A.",
+    ok: "All\xE2h\xFCmme inn\xEE esteh\xEEr\xFCke bi-ilmike ve estakdir\xFCke bi-kudretike ve es\u2019el\xFCke min fadlikel-az\xEEm. Fe-inneke takdiru ve l\xE2 akdiru ve ta\u2018lem\xFC ve l\xE2 a\u2018lem\xFC ve ente all\xE2m\xFCl-guy\xFBb. All\xE2h\xFCmme in k\xFCnte ta\u2018lem\xFC enne h\xE2zel-emra hayrun l\xEE f\xEE d\xEEn\xEE ve me\xE2\u015F\xEE ve \xE2k\u0131beti emr\xEE fakd\xFCrh\xFC l\xEE ve yessirh\xFC l\xEE, s\xFCmme b\xE2rik l\xEE f\xEEh. Ve in k\xFCnte ta\u2018lem\xFC enne h\xE2zel-emra \u015Ferrun l\xEE f\xEE d\xEEn\xEE ve me\xE2\u015F\xEE ve \xE2k\u0131beti emr\xEE fasrifh\xFC ann\xEE vasrifn\xEE anh\xFC vakd\xFCr liyel-hayra hays\xFC k\xE2ne s\xFCmme erd\u0131n\xEE.",
+    meal: { tr: "Allah\u2019\u0131m! Bilginle senden hay\u0131rl\u0131s\u0131n\u0131 se\xE7meni, kudretinle bana g\xFC\xE7 vermeni ve b\xFCy\xFCk l\xFCtfundan ihsan etmeni dilerim. Senin g\xFCc\xFCn yeter, benim yetmez; sen bilirsin, ben bilmem. Gizliyi en iyi bilen sensin. Allah\u2019\u0131m! Bu i\u015F dinim, ya\u015Fay\u0131\u015F\u0131m ve sonucum bak\u0131m\u0131ndan benim i\xE7in hay\u0131rl\u0131ysa onu bana nasip et, kolayla\u015Ft\u0131r ve bereketli k\u0131l. K\xF6t\xFCyse onu benden, beni ondan uzakla\u015Ft\u0131r. Hay\u0131r nerede olursa olsun onu bana nasip et ve beni raz\u0131 k\u0131l.", en: "O Allah, through Your knowledge I seek what is good, through Your power I seek strength, and I ask of Your great bounty. You have power and I do not; You know and I do not. You know all that is hidden. If this matter is good for my religion, livelihood and outcome, decree it for me, make it easy and bless it. If it is bad for me, turn it away from me and me away from it. Decree goodness for me wherever it is, then make me content." },
+    guideTitle: { tr: "\u0130stih\xE2re nas\u0131l yap\u0131l\u0131r?", en: "How to make istikhara" },
+    guide: { tr: [
+      "\u0130stih\xE2re, karar\u0131n hay\u0131rl\u0131 olmas\u0131 i\xE7in Allah\u2019a y\xF6nelmektir. \xD6nce konuyu ara\u015Ft\u0131r ve g\xFCvendi\u011Fin, bilgili ki\u015Filerle isti\u015Fare et. Din\xEE h\xFCkm\xFC a\xE7\u0131k olan farz veya haram bir \u015Fey i\xE7in karar arac\u0131 olarak kullan\u0131lmaz.",
+      "Abdest al\u0131p farz namazlar\u0131n d\u0131\u015F\u0131nda iki rek\xE2t nafile namaza niyet et. Diyanet\u2019in tarifinde ilk rek\xE2tta F\xE2tiha\u2019dan sonra K\xE2fir\xFBn, ikinci rek\xE2tta F\xE2tiha\u2019dan sonra \u0130hl\xE2s okunur; ard\u0131ndan normal bi\xE7imde namaz tamamlan\u0131r.",
+      "Namazdan sonra bu ekrandaki duay\u0131 oku. \u201CH\xE2zel-emra / bu i\u015F\u201D derken karar verece\u011Fin konuyu d\xFC\u015F\xFCn; Allah\u2019tan hay\u0131rl\u0131 olan\u0131 kolayla\u015Ft\u0131rmas\u0131n\u0131, zararl\u0131 olandan uzakla\u015Ft\u0131rmas\u0131n\u0131 iste.",
+      "\u0130stih\xE2re i\xE7in yatmadan \xF6nce dua edebilirsin; r\xFCya g\xF6rmek \u015Fart de\u011Fildir. Beyaz/ye\u015Fil iyi, siyah/k\u0131rm\u0131z\u0131 k\xF6t\xFC gibi bir renk tablosuyla karar verme; Diyanet bu t\xFCr r\xFCya yorumunu dayanak olarak g\xF6stermez.",
+      "Namaz k\u0131lam\u0131yorsan yaln\u0131z istih\xE2re duas\u0131n\u0131 okuyabilirsin. Karar verirken ara\u015Ft\u0131rmay\u0131 ve isti\u015Fareyi s\xFCrd\xFCr; istih\xE2re gelece\u011Fi \xF6\u011Frenme veya kesin sonu\xE7 garantisi de\u011Fildir."
+    ], en: [
+      "Istikhara asks Allah for a good outcome. First examine the matter and consult trustworthy, knowledgeable people. It is not used to reconsider what is already clearly obligatory or forbidden.",
+      "Make ablution and pray two voluntary rak\u2018ahs apart from an obligatory prayer. The Diyanet guide specifies al-Fatihah followed by al-Kafirun in the first rak\u2018ah and al-Fatihah followed by al-Ikhlas in the second. Complete the prayer normally.",
+      "After the prayer, recite the supplication below. At \u201Cthis matter\u201D, have the decision in mind and ask Allah to facilitate what is good and turn you away from what is harmful.",
+      "You may pray before bed; seeing a dream is not required. Do not base the decision on a colour code for dreams. Diyanet does not treat such interpretations as evidence.",
+      "If you cannot perform the prayer, you may recite the supplication alone. Continue research and consultation; istikhara is not fortune-telling or a guarantee of a particular result."
+    ] }
+  }, {
+    id: "yemek-uzun",
+    title: "Yemek sonras\u0131 duas\u0131 \xB7 uzun",
+    source: book + "#page=112",
+    note: "traditional_prayer",
+    ar: "\u0623\u064E\u0639\u064F\u0648\u0630\u064F \u0628\u0650\u0627\u0644\u0644\u0651\u0670\u0647\u0650 \u0645\u0650\u0646\u064E \u0627\u0644\u0634\u064E\u0651\u064A\u0652\u0637\u064E\u0627\u0646\u0650 \u0627\u0644\u0631\u064E\u0651\u062C\u0650\u064A\u0645\u0650. \u0628\u0650\u0633\u0652\u0645\u0650 \u0627\u0644\u0644\u0651\u0670\u0647\u0650 \u0627\u0644\u0631\u064E\u0651\u062D\u0652\u0645\u0670\u0646\u0650 \u0627\u0644\u0631\u064E\u0651\u062D\u0650\u064A\u0645\u0650. \u0627\u0644\u0652\u062D\u064E\u0645\u0652\u062F\u064F \u0644\u0650\u0644\u0651\u0670\u0647\u0650 \u0627\u0644\u064E\u0651\u0630\u0650\u064A \u0623\u064E\u0637\u0652\u0639\u064E\u0645\u064E\u0646\u064E\u0627 \u0648\u064E\u0633\u064E\u0642\u064E\u0627\u0646\u064E\u0627 \u0648\u064E\u062C\u064E\u0639\u064E\u0644\u064E\u0646\u064E\u0627 \u0645\u0650\u0646\u064E \u0627\u0644\u0652\u0645\u064F\u0633\u0652\u0644\u0650\u0645\u0650\u064A\u0646\u064E. \u0648\u064E\u0631\u064E\u062D\u0652\u0645\u064E\u0629\u064F \u0627\u0644\u0644\u0651\u0670\u0647\u0650 \u0648\u064E\u0628\u064E\u0631\u064E\u0643\u064E\u0627\u062A\u064F\u0647\u064F \u0639\u064E\u0644\u064E\u0649 \u0635\u064E\u0627\u062D\u0650\u0628\u0650 \u0627\u0644\u0637\u064E\u0651\u0639\u064E\u0627\u0645\u0650 \u0648\u064E\u0627\u0644\u0652\u0622\u0643\u0650\u0644\u0650\u064A\u0646\u064E. \u0627\u0644\u0644\u0651\u0670\u0647\u064F\u0645\u064E\u0651 \u0623\u064E\u0639\u0652\u0637\u0650 \u0644\u064E\u0646\u064E\u0627 \u0631\u0650\u0632\u0652\u0642\u064B\u0627 \u0648\u064E\u0627\u0633\u0650\u0639\u064B\u0627 \u0648\u064E\u062D\u064E\u0644\u064E\u0627\u0644\u064B\u0627 \u0637\u064E\u064A\u0650\u0651\u0628\u064B\u0627. \u0648\u064E\u0628\u064E\u0627\u0631\u0650\u0643\u0652 \u0644\u064E\u0646\u064E\u0627 \u0641\u0650\u064A\u0645\u064E\u0627 \u0631\u064E\u0632\u064E\u0642\u0652\u062A\u064E\u0646\u064E\u0627\u060C \u0648\u064E\u0627\u0634\u0652\u0641\u0650 \u0645\u064E\u0631\u0652\u0636\u064E\u0627\u0646\u064E\u0627 \u0648\u064E\u0627\u0631\u0652\u062D\u064E\u0645\u0652 \u0645\u064E\u0648\u0652\u062A\u064E\u0627\u0646\u064E\u0627 \u0623\u064E\u0646\u0652\u062A\u064E \u0645\u064E\u0648\u0652\u0644\u064E\u0627\u0646\u064E\u0627. \u0627\u0644\u0644\u0651\u0670\u0647\u064F\u0645\u064E\u0651 \u0625\u0650\u0646\u064E\u0651\u0627 \u0646\u064E\u0633\u0652\u0623\u064E\u0644\u064F\u0643\u064E \u0627\u0644\u0652\u0639\u064E\u0641\u0652\u0648\u064E \u0648\u064E\u0627\u0644\u0652\u0639\u064E\u0627\u0641\u0650\u064A\u064E\u0629\u064E \u0641\u0650\u064A \u0627\u0644\u062F\u064F\u0651\u0646\u0652\u064A\u064E\u0627 \u0648\u064E\u0627\u0644\u0652\u0622\u062E\u0650\u0631\u064E\u0629\u0650. \u0631\u064E\u0628\u0650\u0651 \u0627\u062C\u0652\u0639\u064E\u0644\u0652\u0646\u0650\u064A \u0645\u064F\u0642\u0650\u064A\u0645\u064E \u0627\u0644\u0635\u064E\u0651\u0644\u064E\u0627\u0629\u0650 \u0648\u064E\u0645\u0650\u0646\u0652 \u0630\u064F\u0631\u0650\u0651\u064A\u064E\u0651\u062A\u0650\u064A \u0631\u064E\u0628\u064E\u0651\u0646\u064E\u0627 \u0648\u064E\u062A\u064E\u0642\u064E\u0628\u064E\u0651\u0644\u0652 \u062F\u064F\u0639\u064E\u0627\u0621\u0650. \u0631\u064E\u0628\u064E\u0651\u0646\u064E\u0627 \u0622\u062A\u0650\u0646\u064E\u0627 \u0641\u0650\u064A \u0627\u0644\u062F\u064F\u0651\u0646\u0652\u064A\u064E\u0627 \u062D\u064E\u0633\u064E\u0646\u064E\u0629\u064B \u0648\u064E\u0641\u0650\u064A \u0627\u0644\u0652\u0622\u062E\u0650\u0631\u064E\u0629\u0650 \u062D\u064E\u0633\u064E\u0646\u064E\u0629\u064B. \u0631\u064E\u0628\u064E\u0651\u0646\u064E\u0627 \u0627\u063A\u0652\u0641\u0650\u0631\u0652 \u0644\u0650\u064A \u0648\u064E\u0644\u0650\u0648\u064E\u0627\u0644\u0650\u062F\u064E\u064A\u064E\u0651 \u0648\u064E\u0644\u0650\u0644\u0652\u0645\u064F\u0624\u0652\u0645\u0650\u0646\u0650\u064A\u0646\u064E \u064A\u064E\u0648\u0652\u0645\u064E \u064A\u064E\u0642\u064F\u0648\u0645\u064F \u0627\u0644\u0652\u062D\u0650\u0633\u064E\u0627\u0628\u064F. \u0627\u0644\u0644\u0651\u0670\u0647\u064F\u0645\u064E\u0651 \u0632\u0650\u062F\u0652 \u0648\u064E\u0644\u064E\u0627 \u062A\u064E\u0646\u0652\u0642\u064F\u0635\u0652 \u0628\u0650\u062D\u064F\u0631\u0652\u0645\u064E\u0629\u0650 \u0633\u064E\u064A\u0650\u0651\u062F\u0650 \u0627\u0644\u0652\u0645\u064F\u0631\u0652\u0633\u064E\u0644\u0650\u064A\u0646\u064E. \u0648\u064E\u0627\u0644\u0652\u062D\u064E\u0645\u0652\u062F\u064F \u0644\u0650\u0644\u0651\u0670\u0647\u0650 \u0631\u064E\u0628\u0650\u0651 \u0627\u0644\u0652\u0639\u064E\u0627\u0644\u064E\u0645\u0650\u064A\u0646\u064E.",
+    ok: "E\xFBz\xFC bill\xE2hi mine\u015F-\u015Feyt\xE2nir-rac\xEEm. Bismill\xE2hir-rahm\xE2nir-rah\xEEm. Elhamd\xFC lill\xE2hillez\xEE et\u2018amen\xE2 ve sek\xE2n\xE2 ve cealen\xE2 minel-m\xFCslim\xEEn. Ve rahmetull\xE2hi ve berek\xE2t\xFCh\xFB al\xE2 s\xE2hibit-ta\xE2mi vel-\xE2kil\xEEn. All\xE2h\xFCmme a\u2018t\u0131 len\xE2 r\u0131zkan v\xE2sian ve hal\xE2len tayyib\xE2. Ve b\xE2rik len\xE2 f\xEEm\xE2 razakten\xE2 ve\u015Ffi merd\xE2n\xE2 verham mevt\xE2n\xE2 ente mevl\xE2n\xE2. All\xE2h\xFCmme inn\xE2 nes\u2019el\xFCkel-afve vel-\xE2fiyete fid-d\xFCny\xE2 vel-\xE2hirah. Rabbic\u2018aln\xEE muk\xEEmes-sal\xE2ti ve min z\xFCrriyyet\xEE Rabben\xE2 ve tekabbel d\xFC\xE2. Rabben\xE2 \xE2tin\xE2 fid-d\xFCny\xE2 haseneten ve fil-\xE2hirati haseneh. Rabbena\u011Ffir l\xEE ve li-v\xE2lideyye ve lil-m\xFC\u2019min\xEEne yevme yek\xFBm\xFCl-his\xE2b. All\xE2h\xFCmme zid ve l\xE2 tenkus bi-hurmeti seyyidil-m\xFCrsel\xEEn. Velhamd\xFC lill\xE2hi Rabbil-\xE2lem\xEEn.",
+    meal: { tr: "Kovulmu\u015F \u015Feytandan Allah\u2019a s\u0131\u011F\u0131n\u0131r\u0131m. Rahman ve Rahim Allah\u2019\u0131n ad\u0131yla. Bizi yediren, i\xE7iren ve M\xFCsl\xFCmanlardan k\u0131lan Allah\u2019a hamdolsun. Allah\u2019\u0131n rahmeti ve bereketi yeme\u011Fi sunana ve yiyenlere olsun. Allah\u2019\u0131m! Bize bol, helal ve temiz r\u0131z\u0131k ver; verdiklerini bereketlendir. Hastalar\u0131m\u0131za \u015Fifa, \xF6l\xFClerimize rahmet eyle; sen bizim Mevl\xE2m\u0131zs\u0131n. D\xFCnyada ve ahirette ba\u011F\u0131\u015Flanma ve esenlik dileriz. Rabbim! Beni ve soyumu namaz\u0131 s\xFCrd\xFCrenlerden eyle, duam\u0131z\u0131 kabul et. Bize d\xFCnyada ve ahirette iyilik ver. Hesap g\xFCn\xFCnde beni, ana babam\u0131 ve m\xFCminleri ba\u011F\u0131\u015Fla. Allah\u2019\u0131m! Peygamberlerin efendisinin h\xFCrmetine nimetini art\u0131r, eksiltme. Hamd \xE2lemlerin Rabbi Allah\u2019ad\u0131r.", en: "I seek refuge in Allah from Satan. In the name of Allah, the Most Merciful. Praise belongs to Allah, who fed us, gave us drink and made us Muslims. May His mercy and blessing be upon the host and those eating. O Allah, grant us abundant, lawful, wholesome provision and bless what You give. Heal our sick and have mercy on our deceased; You are our Protector. We ask for pardon and well-being in this life and the next. Make me and my descendants steadfast in prayer and accept our supplication. Grant us good in this life and the next. Forgive me, my parents and the believers on the Day of Reckoning. Increase Your blessings and do not diminish them, in honour of the master of messengers. Praise belongs to Allah, Lord of all worlds." },
+    guideTitle: { tr: "Bu metin hakk\u0131nda", en: "About this text" },
+    guide: { tr: ["Diyanet rehberinin 112\u2013113. sayfalar\u0131ndaki toplu yemek duas\u0131 \xF6rne\u011Fidir. K\u0131sa yemek \u015F\xFCkr\xFC duas\u0131 da ayr\u0131ca bulunur; her yemekte bu uzun metnin tamam\u0131n\u0131 okumak \u015Fart de\u011Fildir. Rehber bu duan\u0131n ard\u0131ndan F\xE2tiha okunabilece\u011Fini belirtir."], en: ["This is the collective after-meal prayer example on pages 112\u2013113 of the Diyanet guide. The short thanksgiving is also available; reciting this entire long version at every meal is not a requirement. The guide follows this example with a direction to recite al-Fatihah."] }
+  }, {
+    id: "yemek-sonrasi-alternatif",
+    title: "Yemek sonras\u0131 \xB7 iki \u015F\xFCk\xFCr duas\u0131",
+    source: "https://islamhouse.com/ar/audios/2799103/",
+    sourceName: "IslamHouse \xB7 M\xFCsl\xFCman\u0131n Kalesi",
+    note: "audio_chapter",
+    ar: "\u0627\u0644\u0652\u062D\u064E\u0645\u0652\u062F\u064F \u0644\u0650\u0644\u064E\u0651\u0647\u0650 \u0627\u0644\u064E\u0651\u0630\u0650\u064A \u0623\u064E\u0637\u0652\u0639\u064E\u0645\u064E\u0646\u0650\u064A \u0647\u064E\u0630\u064E\u0627 \u0648\u064E\u0631\u064E\u0632\u064E\u0642\u064E\u0646\u0650\u064A\u0647\u0650 \u0645\u0650\u0646\u0652 \u063A\u064E\u064A\u0652\u0631\u0650 \u062D\u064E\u0648\u0652\u0644\u064D \u0645\u0650\u0646\u0650\u0651\u064A \u0648\u064E\u0644\u064E\u0627 \u0642\u064F\u0648\u064E\u0651\u0629\u064D.\n\n\u0627\u0644\u0652\u062D\u064E\u0645\u0652\u062F\u064F \u0644\u0650\u0644\u064E\u0651\u0647\u0650 \u062D\u064E\u0645\u0652\u062F\u064B\u0627 \u0643\u064E\u062B\u0650\u064A\u0631\u064B\u0627 \u0637\u064E\u064A\u0650\u0651\u0628\u064B\u0627 \u0645\u064F\u0628\u064E\u0627\u0631\u064E\u0643\u064B\u0627 \u0641\u0650\u064A\u0647\u0650\u060C \u063A\u064E\u064A\u0652\u0631\u064E \u0645\u064E\u0643\u0652\u0641\u0650\u064A\u064D\u0651 \u0648\u064E\u0644\u064E\u0627 \u0645\u064F\u0648\u064E\u062F\u064E\u0651\u0639\u064D \u0648\u064E\u0644\u064E\u0627 \u0645\u064F\u0633\u0652\u062A\u064E\u063A\u0652\u0646\u064B\u0649 \u0639\u064E\u0646\u0652\u0647\u064F \u0631\u064E\u0628\u064E\u0651\u0646\u064E\u0627.",
+    ok: "Elhamd\xFC lill\xE2hillez\xEE et\u2018amen\xEE h\xE2z\xE2 ve razakan\xEEhi min gayri havlin minn\xEE ve l\xE2 kuvveh.\n\nElhamd\xFC lill\xE2hi hamden kes\xEEran tayyiben m\xFCb\xE2reken f\xEEhi, gayra mekfiyyin ve l\xE2 m\xFCveddein ve l\xE2 m\xFCsta\u011Fnen anh\xFC Rabben\xE2.",
+    meal: { tr: "Bana kendi g\xFC\xE7 ve kuvvetim olmaks\u0131z\u0131n bu yeme\u011Fi yediren ve onu bana r\u0131z\u0131k veren Allah\u2019a hamdolsun.\n\nAllah\u2019a \xE7ok\xE7a, temiz ve bereketli hamdolsun. Rabbimiz kimseye muhta\xE7 de\u011Fildir; O\u2019na y\xF6neli\u015F ve \u015F\xFCk\xFCr b\u0131rak\u0131lmaz, O\u2019ndan vazge\xE7ilmez.", en: "Praise belongs to Allah, who fed me this and provided it for me without any might or strength of my own.\n\nAbundant, wholesome, blessed praise belongs to Allah. Our Lord needs no one to sustain Him; He is not forsaken, and we can never do without Him." },
+    audioNoteTR: "S\xFCleyman e\u015F-\u015Euveyhi\u2019nin seslendirdi\u011Fi M\xFCsl\xFCman\u0131n Kalesi b\xF6l\xFCm\xFCd\xFCr. Kay\u0131tta b\xF6l\xFCm ba\u015Fl\u0131\u011F\u0131 ve yemek sonras\u0131 okunabilecek iki alternatif dua yer al\u0131r; bu, yukar\u0131daki uzun toplu yemek duas\u0131n\u0131n seslendirmesi de\u011Fildir. Her bir duay\u0131 ayr\u0131 \xE7al\u0131\u015Fmak i\xE7in dinleyerek i\u015Faretleyebilirsin.",
+    audioNoteEN: "This Fortress of the Muslim chapter is read by Sulayman al-Shuwayhi. It includes the chapter heading and two alternative after-meal supplications; it is not a recording of the separate long collective meal prayer. Listen and mark each supplication to practise it separately.",
+    guideTitle: { tr: "\u0130ki alternatif \u015F\xFCk\xFCr duas\u0131", en: "Two alternative prayers of thanks" },
+    guide: { tr: ["Birinci metin, yeme\u011Fin ve r\u0131zk\u0131n Allah\u2019tan geldi\u011Fini hat\u0131rlatan k\u0131sa \u015F\xFCk\xFCr duas\u0131d\u0131r (Tirmiz\xEE, 3458; Eb\xFB D\xE2v\xFBd, 4023). \u0130kinci metin, sofra kald\u0131r\u0131l\u0131rken okunan hamd duas\u0131d\u0131r (Buh\xE2r\xEE, 5458).", "Bunlar iki ayr\u0131 rivayettir; tek ve zorunlu bir uzun dua gibi de\u011Ferlendirilmez. Sesli kitap ikisini ve ba\u015Fl\u0131\u011F\u0131 birlikte okur. B\xF6lerek \xE7al\u0131\u015Fma i\xE7in ses \xFCzerinde her duan\u0131n s\u0131n\u0131r\u0131n\u0131 ayr\u0131 se\xE7."], en: ["The first text gives thanks for food and provision from Allah (al-Tirmidhi, Da\u2018awat; Abu Dawud, Libas). The second is praise recited when the meal is finished (al-Bukhari, At\u2018imah).", "These are two separate reported supplications, not one compulsory long formula. The audiobook reads both with a heading. Mark each prayer separately in the recording for phrase practice."] },
+    guideSource: "https://d1.islamhouse.com/data/ar/ih_books/single/ar_hisn_almuslim.pdf"
+  }, {
+    id: "uyku",
+    title: "Uyumadan \xF6nce",
+    source: dailySource,
+    ar: "\u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0628\u0650\u0627\u0633\u0652\u0645\u0650\u0643\u064E \u0623\u064E\u062D\u0652\u064A\u064E\u0627 \u0648\u064E\u0628\u0650\u0627\u0633\u0652\u0645\u0650\u0643\u064E \u0623\u064E\u0645\u064F\u0648\u062A\u064F.",
+    ok: "All\xE2h\xFCmme bismike ahy\xE2 ve bismike em\xFBt.",
+    meal: { tr: "Allah\u2019\u0131m! Senin ad\u0131nla ya\u015Far, senin ad\u0131nla \xF6l\xFCr\xFCm.", en: "O Allah, in Your name I live and in Your name I die." }
+  }, {
+    id: "uyanma",
+    title: "Uyan\u0131nca",
+    source: "https://hadislerleislam.diyanet.gov.tr/sayfa.php?CILT=6&SAYFA=519",
+    ar: "\u0627\u0644\u0652\u062D\u064E\u0645\u0652\u062F\u064F \u0644\u0650\u0644\u064E\u0651\u0647\u0650 \u0627\u0644\u064E\u0651\u0630\u0650\u064A \u0623\u064E\u062D\u0652\u064A\u064E\u0627\u0646\u064E\u0627 \u0628\u064E\u0639\u0652\u062F\u064E \u0645\u064E\u0627 \u0623\u064E\u0645\u064E\u0627\u062A\u064E\u0646\u064E\u0627 \u0648\u064E\u0625\u0650\u0644\u064E\u064A\u0652\u0647\u0650 \u0627\u0644\u0646\u064F\u0651\u0634\u064F\u0648\u0631\u064F.",
+    ok: "Elhamd\xFC lill\xE2hillez\xEE ahy\xE2n\xE2 ba\u2018de m\xE2 em\xE2ten\xE2 ve ileyhin-n\xFC\u015F\xFBr.",
+    meal: { tr: "Bizi \xF6l\xFCm gibi uykudan sonra yeniden hayata kavu\u015Fturan Allah\u2019a hamdolsun. Son d\xF6n\xFC\u015F\xFCm\xFCz O\u2019nad\u0131r.", en: "Praise belongs to Allah, who brought us back to life after sleep, and to Him is the resurrection." }
+  }, {
+    id: "yolculuk",
+    title: "Yolculuk \xB7 binite binerken",
+    source: "https://yayin.diyanet.gov.tr/File/Download?id=3737&path=3737_1.pdf#page=54",
+    ar: "\u0633\u064F\u0628\u0652\u062D\u064E\u0627\u0646\u064E \u0627\u0644\u064E\u0651\u0630\u0650\u064A \u0633\u064E\u062E\u064E\u0651\u0631\u064E \u0644\u064E\u0646\u064E\u0627 \u0647\u064E\u0630\u064E\u0627 \u0648\u064E\u0645\u064E\u0627 \u0643\u064F\u0646\u064E\u0651\u0627 \u0644\u064E\u0647\u064F \u0645\u064F\u0642\u0652\u0631\u0650\u0646\u0650\u064A\u0646\u064E. \u0648\u064E\u0625\u0650\u0646\u064E\u0651\u0627 \u0625\u0650\u0644\u064E\u0649 \u0631\u064E\u0628\u0650\u0651\u0646\u064E\u0627 \u0644\u064E\u0645\u064F\u0646\u0652\u0642\u064E\u0644\u0650\u0628\u064F\u0648\u0646\u064E.",
+    ok: "S\xFCbh\xE2nellez\xEE sehhara len\xE2 h\xE2z\xE2 ve m\xE2 k\xFCnn\xE2 leh\xFB mukrin\xEEn. Ve inn\xE2 il\xE2 Rabbin\xE2 le-m\xFCnkalib\xFBn.",
+    meal: { tr: "Bunu hizmetimize veren Allah\u2019\u0131 her eksiklikten uzak tutar\u0131z; yoksa bizim buna g\xFCc\xFCm\xFCz yetmezdi. Ku\u015Fkusuz Rabbimize d\xF6nece\u011Fiz.", en: "Glory be to the One who placed this at our service; we could not have mastered it ourselves. Surely we will return to our Lord." },
+    guideTitle: { tr: "Okuma notu", en: "Recitation note" },
+    guide: { tr: ["Zuhruf 43:13\u201314\u2019ten al\u0131nan k\u0131sa bini\u015F duas\u0131d\u0131r; yolculuk duas\u0131n\u0131n daha uzun rivayetleri de vard\u0131r. Diyanet\u2019in aktard\u0131\u011F\u0131 uygulamada \xF6nce \xFC\xE7 kez \u201CAllahu ekber\u201D denir."], en: ["This short prayer on mounting a vehicle uses Quran 43:13\u201314; longer travel supplications also exist. The practice reported by Diyanet precedes it with \u201CAllahu akbar\u201D three times."] }
+  }, {
+    id: "iftar",
+    title: "\u0130ftar duas\u0131",
+    source: "https://bingol.diyanet.gov.tr/karliova/sayfalar/contentdetail.aspx?ContentId=605&MenuCategory=Kurumsal",
+    ar: "\u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0644\u064E\u0643\u064E \u0635\u064F\u0645\u0652\u062A\u064F \u0648\u064E\u0639\u064E\u0644\u064E\u0649 \u0631\u0650\u0632\u0652\u0642\u0650\u0643\u064E \u0623\u064E\u0641\u0652\u0637\u064E\u0631\u0652\u062A\u064F.",
+    ok: "All\xE2h\xFCmme leke sumt\xFC ve al\xE2 r\u0131zk\u0131ke eftart\xFC.",
+    meal: { tr: "Allah\u2019\u0131m! Senin i\xE7in oru\xE7 tuttum, senin verdi\u011Fin r\u0131z\u0131kla orucumu a\xE7t\u0131m.", en: "O Allah, for You I fasted, and with Your provision I broke my fast." }
+  }, {
+    id: "ilim",
+    title: "\u0130lim duas\u0131",
+    source: "https://dijital.diyanet.gov.tr/File/Download?id=480&path=480_1.pdf",
+    quran: { surah: 20, ayah: 114 },
+    ar: "\u0631\u064E\u0628\u0650\u0651 \u0632\u0650\u062F\u0652\u0646\u0650\u064A \u0639\u0650\u0644\u0652\u0645\u064B\u0627.",
+    ok: "Rabbi zidn\xEE ilm\xE2.",
+    meal: { tr: "Rabbim! \u0130lmimi art\u0131r.", en: "My Lord, increase me in knowledge." }
+  }];
+
   // src/dua-catalog.mjs
   var portal = "https://namaz.diyanet.gov.tr/namaz/#sureler-dualar.html";
-  var book = "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf";
-  var record = (id) => dua_recordings_default.find((r) => r.id === id);
+  var book2 = "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf";
+  var record = (id) => dua_recordings_default.find((r) => r.id === ({ "istigfar": "istigfar-adult", "istihare": "istihare-chapter", "yemek-sonrasi-alternatif": "yemek-chapter" }[id] || id));
   function prayerCatalog(texts) {
     const item = (id, indices, title) => {
       const rows = indices.map((i) => texts[i]), languages = new Set(rows.flatMap((r) => Object.keys(r.meal || {})));
-      return { id, title: title || rows[0].t, ar: rows.map((r) => r.ar).join("\n\n"), ok: rows.map((r) => r.ok).join("\n\n"), meal: Object.fromEntries([...languages].map((l) => [l, rows.map((r) => r.meal?.[l] || r.meal?.en || "").join("\n\n")])), recording: record(id), source: portal, namaz: indices };
+      const result = { id, title: title || rows[0].t, ar: rows.map((r) => r.ar).join("\n\n"), ok: rows.map((r) => r.ok).join("\n\n"), meal: Object.fromEntries([...languages].map((l) => [l, rows.map((r) => r.meal?.[l] || r.meal?.en || "").join("\n\n")])), recording: record(id), source: portal, namaz: indices };
+      if (id === "ament\xFC") {
+        result.source = "https://www.diyanethaber.com.tr/video/diyanet-elifba-amentu";
+        result.external = result.source;
+        result.externalLabel = "Diyanet";
+      }
+      if (id === "subhaneke") {
+        result.ok = result.ok.replace(/\s*\(ve celle senâük\)\s*/u, " ");
+        result.guideTitle = { tr: "Okuma notu", en: "Recitation note" };
+        result.guide = { tr: ["Buradaki metin normal namaz\u0131n ba\u015F\u0131nda okunan bi\xE7imdir. Cenaze namaz\u0131nda ayr\u0131ca \u201Cve celle sen\xE2\xFCk\u201D (\u0648\u064E\u062C\u064E\u0644\u064E\u0651 \u062B\u064E\u0646\u064E\u0627\u0624\u064F\u0643\u064E) ifadesi eklenebilir; bu ifade burada Arap\xE7a metnin ve okunu\u015Fun i\xE7ine kar\u0131\u015Ft\u0131r\u0131lmaz."], en: ["The displayed text is the form used at the start of an ordinary prayer. In a funeral prayer, \u201Cve celle sen\xE2\xFCk\u201D (\u0648\u064E\u062C\u064E\u0644\u064E\u0651 \u062B\u064E\u0646\u064E\u0627\u0624\u064F\u0643\u064E) may be added; it is kept separate from this Arabic text and transliteration."] };
+        result.guideSource = "https://kurul.diyanet.gov.tr/tr/fetva/namazlarda-subhaneke-okurken-ve-celle-senauke-kismi-nicin/0193c42d-4fad-78f8-6b66-b6ee0ffe1e2a";
+      }
+      return result;
     };
-    return [item("subhaneke", [0]), item("tahiyyat", [1]), item("salli", [2]), item("barik", [3]), item("kunut", [4, 5], "Kun\xFBt 1\u20132"), item("ament\xFC", [6]), item("rabbena", [7, 8], "Rabben\xE2 dualar\u0131"), {
+    const entries = [item("subhaneke", [0]), item("tahiyyat", [1]), item("salli", [2]), item("barik", [3]), item("kunut", [4, 5], "Kun\xFBt 1\u20132"), item("ament\xFC", [6]), item("rabbena", [7, 8], "Rabben\xE2 dualar\u0131"), {
       id: "ezan",
       title: "Ezan duas\u0131",
-      source: portal,
+      source: "https://kurul.diyanet.gov.tr/tr/fetva/ezan-duasinin-dini-hukmu-nedir-ve-nasil-yapilir/0193c42d-8590-778e-6819-7c9e7a6f6197",
       recording: record("ezan"),
-      ar: "\u0627\u064E\u0644\u0644\u0651\u0670\u0647\u064F\u0645\u064E\u0651 \u0631\u064E\u0628\u064E\u0651 \u0647\u0670\u0630\u0650\u0647\u0650 \u0627\u0644\u062F\u064E\u0651\u0639\u0652\u0648\u064E\u0629\u0650 \u0627\u0644\u062A\u064E\u0651\u0627\u0645\u064E\u0651\u0629\u0650 \u0648\u064E\u0627\u0644\u0635\u064E\u0651\u0644\u064E\u0627\u0629\u0650 \u0627\u0644\u0652\u0642\u064E\u0627\u0626\u0650\u0645\u064E\u0629\u0650 \u0622\u062A\u0650 \u0645\u064F\u062D\u064E\u0645\u064E\u0651\u062F\u064B\u0627 \u0627\u0644\u0652\u0648\u064E\u0633\u0650\u064A\u0644\u064E\u0629\u064E \u0648\u064E\u0627\u0644\u0652\u0641\u064E\u0636\u0650\u064A\u0644\u064E\u0629\u064E \u0648\u064E\u0627\u0628\u0652\u0639\u064E\u062B\u0652\u0647\u064F \u0645\u064E\u0642\u064E\u0627\u0645\u064B\u0627 \u0645\u064E\u062D\u0652\u0645\u064F\u0648\u062F\u064B\u0627 \u0627\u0644\u064E\u0651\u0630\u0650\u064A \u0648\u064E\u0639\u064E\u062F\u0652\u062A\u064E\u0647\u064F",
-      ok: "All\xE2h\xFCmme Rabbe h\xE2zihid-da\u2018vetit-t\xE2mmeti ves-sal\xE2til-k\xE2imeti, \xE2ti Muhammedenil-ves\xEElete vel-fad\xEElete veb\u2018ash\xFC mak\xE2men mahm\xFBdenillez\xEE va\u2018adteh.",
-      meal: { tr: "Allah\u2019\u0131m! Bu eksiksiz davetin ve k\u0131l\u0131nacak namaz\u0131n Rabbi! Muhammed\u2019e vesileyi ve fazileti ver; onu vadetti\u011Fin \xF6v\xFClm\xFC\u015F makama ula\u015Ft\u0131r.", en: "O Allah, Lord of this complete call and the prayer to be established, grant Muhammad the means of nearness and excellence, and raise him to the praised station You promised." }
+      ar: "\u0627\u064E\u0644\u0644\u0651\u0670\u0647\u064F\u0645\u064E\u0651 \u0631\u064E\u0628\u064E\u0651 \u0647\u0670\u0630\u0650\u0647\u0650 \u0627\u0644\u062F\u064E\u0651\u0639\u0652\u0648\u064E\u0629\u0650 \u0627\u0644\u062A\u064E\u0651\u0627\u0645\u064E\u0651\u0629\u0650 \u0648\u064E\u0627\u0644\u0635\u064E\u0651\u0644\u064E\u0627\u0629\u0650 \u0627\u0644\u0652\u0642\u064E\u0627\u0626\u0650\u0645\u064E\u0629\u0650 \u0622\u062A\u0650 \u0645\u064F\u062D\u064E\u0645\u064E\u0651\u062F\u064B\u0627 \u0627\u0644\u0652\u0648\u064E\u0633\u0650\u064A\u0644\u064E\u0629\u064E \u0648\u064E\u0627\u0644\u0652\u0641\u064E\u0636\u0650\u064A\u0644\u064E\u0629\u064E \u0648\u064E\u0627\u0644\u062F\u064E\u0651\u0631\u064E\u062C\u064E\u0629\u064E \u0627\u0644\u0631\u064E\u0651\u0641\u0650\u064A\u0639\u064E\u0629\u064E \u0648\u064E\u0627\u0628\u0652\u0639\u064E\u062B\u0652\u0647\u064F \u0645\u064E\u0642\u064E\u0627\u0645\u064B\u0627 \u0645\u064E\u062D\u0652\u0645\u064F\u0648\u062F\u064B\u0627 \u0627\u0644\u064E\u0651\u0630\u0650\u064A \u0648\u064E\u0639\u064E\u062F\u0652\u062A\u064E\u0647\u064F. \u0625\u0650\u0646\u064E\u0651\u0643\u064E \u0644\u064E\u0627 \u062A\u064F\u062E\u0652\u0644\u0650\u0641\u064F \u0627\u0644\u0652\u0645\u0650\u064A\u0639\u064E\u0627\u062F\u064E.",
+      ok: "All\xE2h\xFCmme Rabbe h\xE2zihid-da\u2018vetit-t\xE2mmeti ves-sal\xE2til-k\xE2imeti, \xE2ti Muhammedenil-ves\xEElete vel-fad\xEElete ved-dereceter-raf\xEEate veb\u2018ash\xFC mak\xE2men mahm\xFBdenillez\xEE va\u2018adteh. \u0130nneke l\xE2 tuhlif\xFCl-m\xEE\xE2d.",
+      meal: { tr: "Allah\u2019\u0131m! Bu eksiksiz davetin ve k\u0131l\u0131nacak namaz\u0131n Rabbi! Muhammed\u2019e vesileyi, fazileti ve y\xFCksek dereceyi ver; onu vadetti\u011Fin \xF6v\xFClm\xFC\u015F makama ula\u015Ft\u0131r. \u015E\xFCphesiz sen vaadinden d\xF6nmezsin.", en: "O Allah, Lord of this complete call and the prayer to be established, grant Muhammad the means of nearness, excellence and the lofty rank, and raise him to the praised station You promised. Surely You never break Your promise." },
+      guideTitle: { tr: "Metin ve ses s\xFCr\xFCm\xFC", en: "Text and recording versions" },
+      guide: { tr: ["\u201C\u0130nneke l\xE2 tuhlif\xFCl-m\xEE\xE2d\u201D (Sen vaadinden d\xF6nmezsin) c\xFCmlesi baz\u0131 rivayetlerde yer al\u0131r. Buradaki metin, mevcut ses kayd\u0131nda okunan \u201Cved-dereceter-raf\xEEate\u201D ve bu son c\xFCmleyi de i\xE7erir. Daha k\u0131sa ezan duas\u0131 rivayetleri de vard\u0131r."], en: ["\u201CInneke l\xE2 tuhlif\xFCl-m\xEE\xE2d\u201D (You never break Your promise) appears in some narrations. The displayed version includes \u201Cved-dereceter-raf\xEEate\u201D and the closing sentence, as recited in the current recording. Shorter versions also exist."] },
+      guideSource: "https://sehitferhatarslanaihl.meb.k12.tr/meb_iys_dosyalar/65/14/761411/dosyalar/2018_11/09172051_20195555_Ezan_ve_Namaz_TesbihatY.pdf"
     }, {
       id: "istigfar",
       title: "Seyyid\xFCl isti\u011Ffar",
@@ -79,20 +224,21 @@
       meal: { tr: "Allah\u2019\u0131m! Sen benim Rabbimsin; senden ba\u015Fka ilah yoktur. Beni sen yaratt\u0131n, ben senin kulunum. G\xFCc\xFCm yetti\u011Fince sana verdi\u011Fim s\xF6ze ba\u011Fl\u0131y\u0131m. Yapt\u0131klar\u0131m\u0131n k\xF6t\xFCl\xFC\u011F\xFCnden sana s\u0131\u011F\u0131n\u0131r\u0131m. Nimetlerini ve g\xFCnah\u0131m\u0131 itiraf ederim. Beni ba\u011F\u0131\u015Fla; g\xFCnahlar\u0131 ancak sen ba\u011F\u0131\u015Flars\u0131n.", en: "O Allah, You are my Lord; there is no deity but You. You created me and I am Your servant. I keep Your covenant and promise as best I can. I seek refuge in You from my wrongdoing, acknowledge Your blessings and confess my sin. Forgive me, for only You forgive sins." }
     }, {
       id: "yemek",
-      title: "Yemek sonras\u0131 duas\u0131",
-      source: book + "#page=112",
+      title: "Yemek sonras\u0131 duas\u0131 \xB7 k\u0131sa",
+      source: book2 + "#page=112",
       ar: "\u0627\u0644\u0652\u062D\u064E\u0645\u0652\u062F\u064F \u0644\u0650\u0644\u0651\u0670\u0647\u0650 \u0627\u0644\u064E\u0651\u0630\u0650\u064A \u0623\u064E\u0637\u0652\u0639\u064E\u0645\u064E\u0646\u064E\u0627 \u0648\u064E\u0633\u064E\u0642\u064E\u0627\u0646\u064E\u0627 \u0648\u064E\u062C\u064E\u0639\u064E\u0644\u064E\u0646\u064E\u0627 \u0645\u0650\u0646\u064E \u0627\u0644\u0652\u0645\u064F\u0633\u0652\u0644\u0650\u0645\u0650\u064A\u0646\u064E",
       ok: "Elhamd\xFC lill\xE2hillez\xEE et\u2018amen\xE2 ve sek\xE2n\xE2 ve cealen\xE2 minel-m\xFCslim\xEEn.",
       meal: { tr: "Bizi yediren, i\xE7iren ve M\xFCsl\xFCmanlardan k\u0131lan Allah\u2019a hamdolsun.", en: "Praise belongs to Allah, who fed us, gave us drink, and made us Muslims." }
     }, {
       id: "kuran-baslama",
       title: "Kur\u2019an okumaya ba\u015Flama duas\u0131",
-      source: book + "#page=70",
+      source: book2 + "#page=70",
       ar: "\u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0628\u0650\u0627\u0644\u0652\u062D\u064E\u0642\u0650\u0651 \u0623\u064E\u0646\u0652\u0632\u064E\u0644\u0652\u062A\u064E\u0647\u064F \u0648\u064E\u0628\u0650\u0627\u0644\u0652\u062D\u064E\u0642\u0650\u0651 \u0646\u064E\u0632\u064E\u0644\u064E. \u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0639\u064E\u0638\u0650\u0651\u0645\u0652 \u0631\u064E\u063A\u0652\u0628\u064E\u062A\u0650\u064A \u0641\u0650\u064A\u0647\u0650 \u0648\u064E\u0627\u062C\u0652\u0639\u064E\u0644\u0652\u0647\u064F \u0646\u064F\u0648\u0631\u064B\u0627 \u0644\u0650\u0628\u064E\u0635\u064E\u0631\u0650\u064A \u0648\u064E\u0634\u0650\u0641\u064E\u0627\u0621\u064B \u0644\u0650\u0635\u064E\u062F\u0652\u0631\u0650\u064A. \u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0632\u064E\u064A\u0650\u0651\u0646\u0652 \u0628\u0650\u0647\u0650 \u0644\u0650\u0633\u064E\u0627\u0646\u0650\u064A \u0648\u064E\u062C\u064E\u0645\u0650\u0651\u0644\u0652 \u0628\u0650\u0647\u0650 \u0648\u064E\u062C\u0652\u0647\u0650\u064A \u0648\u064E\u0642\u064E\u0648\u0650\u0651 \u0628\u0650\u0647\u0650 \u062C\u064E\u0633\u064E\u062F\u0650\u064A \u0648\u064E\u0627\u0631\u0652\u0632\u064F\u0642\u0652\u0646\u0650\u064A \u062A\u0650\u0644\u064E\u0627\u0648\u064E\u062A\u064E\u0647\u064F \u0639\u064E\u0644\u064E\u0649 \u0637\u064E\u0627\u0639\u064E\u062A\u0650\u0643\u064E \u0622\u0646\u064E\u0627\u0621\u064E \u0627\u0644\u0644\u064E\u0651\u064A\u0652\u0644\u0650 \u0648\u064E\u0623\u064E\u0637\u0652\u0631\u064E\u0627\u0641\u064E \u0627\u0644\u0646\u064E\u0651\u0647\u064E\u0627\u0631\u0650 \u0648\u064E\u0627\u062D\u0652\u0634\u064F\u0631\u0652\u0646\u0650\u064A \u0645\u064E\u0639\u064E \u0627\u0644\u0646\u064E\u0651\u0628\u0650\u064A\u0650\u0651 \u0635\u064E\u0644\u064E\u0651\u0649 \u0627\u0644\u0644\u064E\u0651\u0647\u064F \u0639\u064E\u0644\u064E\u064A\u0652\u0647\u0650 \u0648\u064E\u0633\u064E\u0644\u064E\u0651\u0645\u064E \u0648\u064E\u0622\u0644\u0650\u0647\u0650 \u0627\u0644\u0652\u0623\u064E\u062E\u0652\u064A\u064E\u0627\u0631\u0650. \u0646\u064E\u0648\u064E\u064A\u0652\u062A\u064F \u062A\u0650\u0644\u064E\u0627\u0648\u064E\u0629\u064E \u0627\u0644\u0652\u0642\u064F\u0631\u0652\u0622\u0646\u0650 \u0644\u0650\u0631\u0650\u0636\u064E\u0627\u0621\u0650 \u0627\u0644\u0631\u064E\u0651\u062D\u0652\u0645\u0670\u0646\u0650 \u0648\u064E\u062A\u064E\u0646\u0652\u0648\u0650\u064A\u0631\u0650 \u0642\u064F\u0628\u064F\u0648\u0631\u0650 \u0623\u064E\u0647\u0652\u0644\u0650 \u0627\u0644\u0652\u0625\u0650\u064A\u0645\u064E\u0627\u0646\u0650 \u0648\u064E\u0644\u0650\u0631\u064F\u0648\u062D\u0650 \u0634\u064E\u0645\u0652\u0633\u0650 \u0633\u064E\u064A\u0650\u0651\u062F\u0650 \u0627\u0644\u0652\u0623\u064E\u0646\u0652\u0628\u0650\u064A\u064E\u0627\u0621\u0650 \u0648\u064E\u0642\u064E\u0645\u064E\u0631\u0650 \u0627\u0644\u0652\u0645\u064F\u0631\u0652\u0633\u064E\u0644\u0650\u064A\u0646\u064E \u0633\u064E\u064A\u0650\u0651\u062F\u0650\u0646\u064E\u0627 \u0645\u064F\u062D\u064E\u0645\u064E\u0651\u062F\u064D \u0639\u064E\u0644\u064E\u064A\u0652\u0647\u0650 \u0635\u064E\u0644\u064E\u0648\u064E\u0627\u062A\u064F \u0627\u0644\u0631\u064E\u0651\u062D\u0652\u0645\u0670\u0646\u0650 \u0648\u064E\u0644\u0650\u0637\u064E\u0631\u0652\u062F\u0650 \u0627\u0644\u0634\u064E\u0651\u064A\u0652\u0637\u064E\u0627\u0646\u0650 \u0648\u064E\u0625\u0650\u0633\u0652\u0642\u064E\u0627\u0637\u0650 \u0627\u0644\u0630\u064F\u0651\u0646\u064F\u0648\u0628\u0650 \u0648\u064E\u0642\u064E\u0628\u064F\u0648\u0644\u0650 \u0627\u0644\u062A\u064E\u0651\u0648\u0652\u0628\u064E\u0629\u0650 \u0648\u064E\u0631\u064E\u0641\u0652\u0639\u0650 \u0627\u0644\u062F\u064E\u0651\u0631\u064E\u062C\u064E\u0627\u062A\u0650 \u0648\u064E\u0627\u0644\u0646\u064E\u0651\u062C\u064E\u0627\u0629\u0650 \u0645\u0650\u0646\u064E \u0627\u0644\u0646\u0650\u0651\u064A\u0631\u064E\u0627\u0646\u0650 \u0648\u064E\u0628\u064E\u0642\u064E\u0627\u0621\u0650 \u0627\u0644\u0652\u0625\u0650\u064A\u0645\u064E\u0627\u0646\u0650 \u0648\u064E\u0644\u0650\u0642\u064E\u0627\u0621\u0650 \u0627\u0644\u0631\u064E\u0651\u062D\u0652\u0645\u0670\u0646\u0650 \u0628\u0650\u0631\u064E\u062D\u0652\u0645\u064E\u062A\u0650\u0643\u064E \u064A\u064E\u0627 \u0623\u064E\u0631\u0652\u062D\u064E\u0645\u064E \u0627\u0644\u0631\u064E\u0651\u0627\u062D\u0650\u0645\u0650\u064A\u0646\u064E \u0648\u064E\u0627\u0644\u0652\u062D\u064E\u0645\u0652\u062F\u064F \u0644\u0650\u0644\u064E\u0651\u0647\u0650 \u0631\u064E\u0628\u0650\u0651 \u0627\u0644\u0652\u0639\u064E\u0627\u0644\u064E\u0645\u0650\u064A\u0646\u064E.",
       ok: "All\xE2h\xFCmme bil-hakk\u0131 enzelteh\xFB ve bil-hakk\u0131 nezel. All\xE2h\xFCmme azz\u0131m ra\u011Fbet\xEE f\xEEhi vec\u2018alh\xFC n\xFBran li-basar\xEE ve \u015Fif\xE2en li-sadr\xEE. All\xE2h\xFCmme zeyyin bih\xEE lis\xE2n\xEE ve cemmil bih\xEE vech\xEE ve kavvi bih\xEE cesed\xEE verzukn\xEE til\xE2veteh\xFB al\xE2 t\xE2atike \xE2n\xE2el-leyli ve etr\xE2fen-neh\xE2ri vah\u015Furn\xEE mean-nebiyyi sallall\xE2h\xFC aleyhi ve selleme ve \xE2lih\u0131l-ahy\xE2r. Neveyt\xFC til\xE2vetel-Kur\u2019\xE2ni li-r\u0131d\xE2ir-Rahm\xE2ni ve tenv\xEEri kub\xFBri ehlil-\xEEm\xE2ni ve li-r\xFBhi \u015Femsi seyyidil-enbiy\xE2i ve kameril-m\xFCrsel\xEEne seyyidin\xE2 Muhammedin aleyhi salav\xE2t\xFCr-Rahm\xE2ni ve li-tardi\u015F-\u015Feyt\xE2ni ve isk\xE2tiz-z\xFCn\xFBbi ve kab\xFBlit-tevbeti ve ref\u2018id-derec\xE2ti ven-nec\xE2ti minen-n\xEEr\xE2ni ve bek\xE2il-\xEEm\xE2ni ve lik\xE2ir-Rahm\xE2ni bi-rahmetike y\xE2 erhamer-r\xE2him\xEEn. Velhamd\xFC lill\xE2hi Rabbil-\xE2lem\xEEn.",
       meal: { tr: "Allah\u2019\u0131m! Kur\u2019an\u2019\u0131 hak ile indirdin. Ona ilgimi art\u0131r; onu g\xF6z\xFCme nur, g\xF6nl\xFCme \u015Fifa k\u0131l. Dilimi onunla s\xFCsle, y\xFCz\xFCm\xFC g\xFCzelle\u015Ftir, bedenimi g\xFC\xE7lendir. Gece ve g\xFCnd\xFCz sana itaat ederek onu okumay\u0131 nasip et; beni Peygamberimiz ve onun se\xE7kin yak\u0131nlar\u0131yla ha\u015Fret. Senin r\u0131zan, iman ehlinin kabirlerinin ayd\u0131nlanmas\u0131 ve Peygamberimizin ruhu i\xE7in; \u015Feytandan uzakla\u015Fmak, g\xFCnahlar\u0131n ba\u011F\u0131\u015Flanmas\u0131, t\xF6vbenin kabul\xFC, derecelerin y\xFCkselmesi, cehennemden kurtulu\u015F, iman\u0131n devam\u0131 ve sana kavu\u015Fmak niyetiyle okuyorum. Rahmetinle kabul et. Hamd \xE2lemlerin Rabbi Allah\u2019ad\u0131r.", en: "O Allah, You sent the Quran down in truth. Increase my desire for it; make it light for my sight and healing for my heart. Adorn my speech and strengthen me through it. Grant me its recitation in obedience to You by night and day, and gather me with the Prophet and his righteous family. I intend this recitation for Your pleasure, for light in the believers\u2019 graves, and for the Prophet; for protection from Satan, forgiveness, acceptance of repentance, higher rank, deliverance from the Fire, lasting faith and meeting You. Accept it through Your mercy. Praise belongs to Allah, Lord of all worlds." },
       note: "traditional_prayer"
-    }];
+    }, ...extraPrayers];
+    return entries.map((entry) => ({ ...entry, recording: entry.recording || record(entry.id) }));
   }
 
   // src/dua-copy.mjs
@@ -148,15 +294,29 @@
     return !!value && Number.isInteger(value.repeat) && value.repeat >= 1 && value.repeat <= 99 && Number.isFinite(value.speed) && value.speed >= 0.5 && value.speed <= 2 && Number.isFinite(value.wait) && value.wait >= 0 && value.wait <= 60;
   }
   function restorePrayerState(value, hash) {
-    const defaults = { repeat: 1, speed: 1, wait: 0, clips: [] };
+    const defaults = { repeat: 1, speed: 1, wait: 0, clips: [], method: "sequential", partRepeat: 1, combineRepeat: 0, tourRepeat: 0 };
     if (!value || value.hash !== hash || !validPrayerPreferences(value)) return defaults;
-    return { ...defaults, repeat: value.repeat, speed: value.speed, wait: value.wait, clips: Array.isArray(value.clips) ? value.clips.filter((c) => c && Number.isFinite(c.start) && Number.isFinite(c.end) && c.start >= 0 && c.end - c.start >= 0.2 && typeof c.name === "string" && c.name.length <= 80).slice(0, 50) : [] };
+    const count = (v, fallback) => Number.isInteger(v) && v >= 0 && v <= 99 ? v : fallback;
+    return { ...defaults, repeat: value.repeat, speed: value.speed, wait: value.wait, method: value.method === "cumulative" ? "cumulative" : "sequential", partRepeat: count(value.partRepeat, value.repeat), combineRepeat: count(value.combineRepeat, 0), tourRepeat: count(value.tourRepeat, 0), clips: Array.isArray(value.clips) ? value.clips.filter((c) => c && Number.isFinite(c.start) && Number.isFinite(c.end) && c.start >= 0 && c.end - c.start >= 0.2 && typeof c.name === "string" && c.name.length <= 80).slice(0, 50) : [] };
   }
   function pcmExcerptWav(buffer, range) {
-    if (!validExcerpt(range, buffer.duration)) throw Error("Invalid prayer excerpt");
+    return pcmRangesWav(buffer, [range]);
+  }
+  function checkedRanges(ranges, duration = Infinity) {
+    if (!Array.isArray(ranges) || ranges.length === 0 || ranges.length > 50) throw Error("Invalid prayer ranges");
+    let end = 0;
+    return ranges.map((range) => {
+      if (!range || !Number.isFinite(range.start) || !Number.isFinite(range.end) || range.start < end || range.end - range.start < 0.2 || range.end > duration) throw Error("Invalid or overlapping prayer ranges");
+      end = range.end;
+      return { ...range };
+    });
+  }
+  function pcmRangesWav(buffer, ranges) {
+    if (!Number.isFinite(buffer.duration) || buffer.duration <= 0) throw Error("Invalid prayer recording");
+    const selected = checkedRanges(ranges, buffer.duration);
     const channels = buffer.numberOfChannels, rate = buffer.sampleRate;
-    const from = Math.round(range.start * rate), to = Math.min(buffer.length, Math.round(range.end * rate));
-    const frames = to - from, dataBytes = frames * channels * 2;
+    const bounds = selected.map((range) => [Math.round(range.start * rate), Math.min(buffer.length, Math.round(range.end * rate))]);
+    const frames = bounds.reduce((sum, [from, to]) => sum + to - from, 0), dataBytes = frames * channels * 2;
     const bytes = new ArrayBuffer(44 + dataBytes), view = new DataView(bytes);
     const str = (at2, s) => {
       for (let i = 0; i < s.length; i++) view.setUint8(at2 + i, s.charCodeAt(i));
@@ -176,17 +336,32 @@
     view.setUint32(40, dataBytes, true);
     const tracks = Array.from({ length: channels }, (_, c) => buffer.getChannelData(c));
     let at = 44;
-    for (let f = from; f < to; f++) for (const track of tracks) {
+    for (const [from, to] of bounds) for (let f = from; f < to; f++) for (const track of tracks) {
       const sample = Math.max(-1, Math.min(1, track[f]));
       view.setInt16(at, Math.round(sample * (sample < 0 ? 32768 : 32767)), true);
       at += 2;
     }
     return bytes;
   }
+  function validPrayerStudyPreferences(value) {
+    return !!value && ["sequential", "cumulative"].includes(value.method) && ["partRepeat", "combineRepeat", "tourRepeat"].every((key) => Number.isInteger(value[key]) && value[key] >= 0 && value[key] <= 99) && Number.isFinite(value.speed) && value.speed >= 0.5 && value.speed <= 2 && Number.isFinite(value.wait) && value.wait >= 0 && value.wait <= 60;
+  }
+  function buildPrayerStudyPlan(ranges, preferences) {
+    const selected = checkedRanges(ranges);
+    if (!validPrayerStudyPreferences(preferences)) throw Error("Invalid prayer study settings");
+    const { method, partRepeat, combineRepeat, tourRepeat } = preferences;
+    const tours = Math.max(1, tourRepeat), partTotal = Math.max(1, partRepeat);
+    return (function* () {
+      for (let tour = 1; tour <= tours; tour++) for (let partIndex = 0; partIndex < selected.length; partIndex++) {
+        for (let current = 1; current <= partTotal; current++) yield { ranges: [selected[partIndex]], phase: "part", partIndex, current, total: partTotal, tour, tours };
+        if (method === "cumulative" && combineRepeat > 0 && partIndex > 0) for (let current = 1; current <= combineRepeat; current++) yield { ranges: selected.slice(0, partIndex + 1), phase: "combine", partIndex, current, total: combineRepeat, tour, tours };
+      }
+    })();
+  }
   var PrayerPlayer = class {
-    constructor({ audio, prepare, schedule = (fn, delay) => globalThis.setTimeout(fn, delay), unschedule = (id) => globalThis.clearTimeout(id), onState = () => {
+    constructor({ audio, prepare, preparePlan, schedule = (fn, delay) => globalThis.setTimeout(fn, delay), unschedule = (id) => globalThis.clearTimeout(id), onState = () => {
     } }) {
-      Object.assign(this, { audio, prepare, schedule, unschedule, onState });
+      Object.assign(this, { audio, prepare, preparePlan, schedule, unschedule, onState });
       this.token = 0;
       this.timer = null;
       this.active = false;
@@ -203,65 +378,553 @@
       this.onState("stopped");
     }
     async play(range, preferences) {
+      if (!validPrayerPreferences(preferences)) {
+        this.stop();
+        throw Error("Invalid prayer settings");
+      }
+      const steps = (function* () {
+        for (let current = 1; current <= preferences.repeat; current++) yield { ranges: range ? [range] : [], phase: range ? "part" : "full", partIndex: 0, current, total: preferences.repeat, tour: 1, tours: 1 };
+      })();
+      return this._playSteps(steps, preferences, (_, isCurrent) => this.prepare(range, isCurrent));
+    }
+    async playPlan(ranges, preferences) {
+      let steps;
+      try {
+        steps = buildPrayerStudyPlan(ranges, preferences);
+        if (typeof this.preparePlan !== "function") throw Error("Prayer study audio preparation is unavailable");
+      } catch (error) {
+        this.stop();
+        throw error;
+      }
+      return this._playSteps(steps, preferences, (step, isCurrent) => this.preparePlan(step.ranges, isCurrent));
+    }
+    async _playSteps(steps, preferences, prepare) {
       this.stop();
-      if (!validPrayerPreferences(preferences)) throw Error("Invalid prayer settings");
       const token = this.token;
       this.active = true;
-      this.onState("loading");
-      try {
-        const source = await this.prepare(range, () => token === this.token);
-        if (token !== this.token) return;
-        this.audio.src = source;
-        this.from = range?.start || 0;
-        let done = 0;
-        const run = async () => {
-          if (token !== this.token) return;
-          this.audio.currentTime = 0;
-          this.audio.playbackRate = preferences.speed;
-          this.audio.preservesPitch = true;
-          this.audio.webkitPreservesPitch = true;
-          this.audio.mozPreservesPitch = true;
-          try {
-            await this.audio.play();
-            if (token === this.token) this.onState("playing", { current: done + 1, total: preferences.repeat });
-          } catch (error) {
-            if (token === this.token) {
-              this.stop();
-              this.onState("error", error);
-            }
-          }
-        };
-        this.audio.onerror = () => {
-          if (token === this.token) {
-            this.stop();
-            this.onState("error");
-          }
-        };
-        this.audio.onended = () => {
-          if (token !== this.token) return;
-          done++;
-          if (done >= preferences.repeat) {
-            this.active = false;
-            this.audio.onended = null;
-            this.audio.onerror = null;
-            this.onState("complete");
-            return;
-          }
-          this.onState("waiting", { current: done, total: preferences.repeat });
-          this.timer = this.schedule(() => {
-            this.timer = null;
-            run();
-          }, preferences.wait * 1e3);
-        };
-        await run();
-      } catch (error) {
+      let sourceKey = null, source, stepNumber = 0, pending;
+      const fail = (error) => {
         if (token === this.token) {
           this.stop();
           this.onState("error", error);
         }
+      };
+      const run = async () => {
+        if (token !== this.token) return;
+        const next = pending || steps.next();
+        pending = null;
+        if (next.done) {
+          this.active = false;
+          this.audio.onended = null;
+          this.audio.onerror = null;
+          this.onState("complete");
+          return;
+        }
+        const step = next.value, number = ++stepNumber, key = JSON.stringify(step.ranges.map((r) => [r.start, r.end]));
+        const isCurrent = () => token === this.token && number === stepNumber;
+        this.onState("loading", step);
+        if (key !== sourceKey) {
+          source = await prepare(step, isCurrent);
+          if (!isCurrent()) return;
+          sourceKey = key;
+          this.audio.src = source;
+        }
+        if (!isCurrent()) return;
+        this.from = step.ranges[0]?.start || 0;
+        this.audio.currentTime = 0;
+        this.audio.playbackRate = preferences.speed;
+        this.audio.preservesPitch = true;
+        this.audio.webkitPreservesPitch = true;
+        this.audio.mozPreservesPitch = true;
+        let ended = false;
+        this.audio.onerror = () => {
+          if (isCurrent()) fail();
+        };
+        this.audio.onended = () => {
+          if (!isCurrent() || ended) return;
+          ended = true;
+          this.audio.onended = null;
+          const following = steps.next();
+          if (following.done) {
+            this.active = false;
+            this.audio.onerror = null;
+            this.onState("complete", step);
+            return;
+          }
+          pending = following;
+          this.onState("waiting", step);
+          this.timer = this.schedule(() => {
+            this.timer = null;
+            return run().catch(fail);
+          }, preferences.wait * 1e3);
+        };
+        await this.audio.play();
+        if (isCurrent() && !ended) this.onState("playing", step);
+      };
+      try {
+        await run();
+      } catch (error) {
+        fail(error);
       }
     }
   };
+
+  // src/dua-word-selection.mjs
+  var prayerWords = (text) => String(text || "").trim().split(/\s+/u).filter(Boolean);
+  function validPrayerTextPart(part, count) {
+    return !!part && Number.isInteger(part.wordFrom) && Number.isInteger(part.wordTo) && part.wordFrom >= 0 && part.wordTo >= part.wordFrom && part.wordTo < count;
+  }
+  function prayerPartText(words, part) {
+    return validPrayerTextPart(part, words.length) ? words.slice(part.wordFrom, part.wordTo + 1).join(" ") : "";
+  }
+  function restorePrayerTextParts(value, text, hash) {
+    if (value?.text !== text || !Array.isArray(value.textParts)) return [];
+    const words = prayerWords(text), parts = [];
+    for (const part of value.textParts.slice(0, 50)) if (validPrayerTextPart(part, words.length) && !parts.some((p) => p.wordFrom <= part.wordTo && part.wordFrom <= p.wordTo)) parts.push({ ...part, name: String(part.name || "").slice(0, 80) });
+    return parts.sort((a, b) => a.wordFrom - b.wordFrom).map((part) => {
+      if (hash !== void 0 && value.hash !== hash) {
+        const { start, end, ...textPart } = part;
+        return textPart;
+      }
+      return part;
+    });
+  }
+  function mountPrayerWords(root, text, { onChange = () => {
+  } } = {}) {
+    const words = prayerWords(text);
+    let selected = null, used = [], drag = null, frame = null, closed = false;
+    root.className = "prayerWords";
+    root.dir = "rtl";
+    root.lang = "ar";
+    root.setAttribute("aria-label", "Dua");
+    const buttons = words.map((word, index) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "prayerWord";
+      b.textContent = word;
+      b.dataset.word = index;
+      b.setAttribute("aria-pressed", "false");
+      root.append(b, document.createTextNode(" "));
+      return b;
+    });
+    const isUsed = (index) => used.some((p) => index >= p.wordFrom && index <= p.wordTo);
+    function paint() {
+      buttons.forEach((b, i) => {
+        b.classList.toggle("assigned", isUsed(i));
+        b.classList.toggle("selected", !!selected && i >= selected.wordFrom && i <= selected.wordTo);
+        b.setAttribute("aria-pressed", String(!!selected && i >= selected.wordFrom && i <= selected.wordTo));
+      });
+      onChange(selected);
+    }
+    function choose(a, b) {
+      const from = Math.min(a, b), to = Math.max(a, b);
+      if (buttons.some((_, i) => i >= from && i <= to && isUsed(i))) return;
+      selected = { wordFrom: from, wordTo: to };
+      paint();
+    }
+    const hit = (x, y) => root.ownerDocument.elementFromPoint(x, y)?.closest?.(".prayerWord");
+    function selectAt(x, y) {
+      const target = hit(x, y);
+      if (target && root.contains(target)) choose(drag.anchor, Number(target.dataset.word));
+    }
+    function tick() {
+      if (!drag || closed) return;
+      const area = root.closest(".dd-body") || root.closest(".dua-detail-body") || root.parentElement;
+      let scroller = area;
+      while (scroller && scroller.scrollHeight <= scroller.clientHeight + 1) scroller = scroller.parentElement;
+      if (scroller) {
+        const rect = scroller.getBoundingClientRect(), margin = 55;
+        const dy = drag.y < rect.top + margin ? -12 : drag.y > rect.bottom - margin ? 12 : 0;
+        if (dy) {
+          scroller.scrollTop += dy;
+          selectAt(drag.x, Math.min(rect.bottom - 8, Math.max(rect.top + 8, drag.y)));
+        }
+      }
+      frame = requestAnimationFrame(tick);
+    }
+    const down = (e) => {
+      const target = e.target.closest(".prayerWord");
+      if (!target || isUsed(Number(target.dataset.word))) return;
+      const index = Number(target.dataset.word);
+      drag = { id: e.pointerId, anchor: index, x: e.clientX, y: e.clientY };
+      root.setPointerCapture?.(e.pointerId);
+      choose(index, index);
+      e.preventDefault();
+      frame = requestAnimationFrame(tick);
+    };
+    const move = (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      drag.x = e.clientX;
+      drag.y = e.clientY;
+      selectAt(e.clientX, e.clientY);
+      e.preventDefault();
+    };
+    const up = (e) => {
+      if (!drag || e.pointerId !== drag.id) return;
+      drag = null;
+      if (frame !== null) cancelAnimationFrame(frame);
+      frame = null;
+    };
+    root.addEventListener("pointerdown", down);
+    root.addEventListener("pointermove", move);
+    root.addEventListener("pointerup", up);
+    root.addEventListener("pointercancel", up);
+    root.addEventListener("click", (e) => {
+      if (e.detail !== 0) return;
+      const target = e.target.closest(".prayerWord");
+      if (target) {
+        const i = Number(target.dataset.word);
+        choose(selected?.wordFrom ?? i, i);
+      }
+    });
+    return { words, getSelection: () => selected ? { ...selected } : null, clear() {
+      selected = null;
+      paint();
+    }, setUsed(parts) {
+      used = parts.filter((p) => validPrayerTextPart(p, words.length));
+      selected = null;
+      paint();
+    }, close() {
+      closed = true;
+      drag = null;
+      if (frame !== null) cancelAnimationFrame(frame);
+      root.removeEventListener("pointerdown", down);
+      root.removeEventListener("pointermove", move);
+      root.removeEventListener("pointerup", up);
+      root.removeEventListener("pointercancel", up);
+    } };
+  }
+
+  // src/dua-study-ui.mjs
+  function mountPrayerStudy({ container, item, saved: saved2, preferences, copy, globalText: globalText2, save, audio }) {
+    const local2 = (tr, en) => copy(tr, en);
+    let parts = restorePrayerTextParts(saved2, item.ar, item.recording?.sha256 || "text-only-v1"), clips = preferences.clips.map((c) => ({ ...c })), undo = [], textIndex = 0, textMode = false;
+    const section = document.createElement("section");
+    section.className = "prayerStudy";
+    container.append(section);
+    const heading = document.createElement("h3");
+    heading.textContent = local2("B\xF6lerek ezberle", "Learn in parts");
+    section.append(heading);
+    const help = document.createElement("p");
+    help.className = "prayerHelp";
+    help.textContent = local2("Duay\u0131 b\xF6l\u2019e bas; istedi\u011Fin kelimeleri parma\u011F\u0131nla i\u015Faretleyip bir par\xE7a olu\u015Ftur. Olu\u015Fan par\xE7alar gri g\xF6r\xFCn\xFCr. Sesli \xE7al\u0131\u015Fmada kayd\u0131 dinleyerek her par\xE7an\u0131n ba\u015Flang\u0131\xE7 ve biti\u015Fini de i\u015Faretle.", "Open Split prayer, select words and create a part. Assigned words turn gray. To study with audio, listen and mark the start and end of each part.");
+    section.append(help);
+    const feedback = document.createElement("p");
+    feedback.className = "prayerStatus";
+    feedback.setAttribute("role", "status");
+    section.append(feedback);
+    const editor = document.createElement("details"), summary = document.createElement("summary");
+    summary.textContent = local2("Duay\u0131 b\xF6l", "Split prayer");
+    editor.className = "prayerClips";
+    editor.append(summary);
+    section.append(editor);
+    const wordRoot = document.createElement("div");
+    editor.append(wordRoot);
+    const selection = document.createElement("p");
+    selection.className = "prayerSelectedText";
+    editor.append(selection);
+    const words = mountPrayerWords(wordRoot, item.ar, { onChange: (p) => {
+      selection.textContent = p ? prayerPartText(item.ar.trim().split(/\s+/u), p) : "";
+    } });
+    const clear = button(local2("Se\xE7imi kald\u0131r", "Clear selection"), () => words.clear());
+    editor.append(clear);
+    const markers = document.createElement("div");
+    markers.className = "prayerGrid prayerMarkers";
+    editor.append(markers);
+    const bounds = {};
+    for (const key of ["start", "end"]) {
+      const field = document.createElement("div");
+      field.className = "prayerBoundary";
+      const label = local2(key === "start" ? "Ba\u015Flang\u0131c\u0131 i\u015Faretle" : "Biti\u015Fi i\u015Faretle", key === "start" ? "Mark start" : "Mark end");
+      const mark = button(label, () => {
+        bounds[key].value = audio?.position().toFixed(2) || "0";
+      });
+      const input = document.createElement("input");
+      input.type = "number";
+      input.min = 0;
+      input.step = 0.01;
+      input.value = 0;
+      input.setAttribute("aria-label", label + " (s)");
+      bounds[key] = input;
+      field.append(mark, input);
+      markers.append(field);
+    }
+    markers.hidden = !audio;
+    const title = document.createElement("input");
+    title.maxLength = 80;
+    title.placeholder = local2("Par\xE7a ad\u0131 (iste\u011Fe ba\u011Fl\u0131)", "Part name (optional)");
+    title.setAttribute("aria-label", title.placeholder);
+    editor.append(title);
+    editor.append(button(local2("Par\xE7ay\u0131 olu\u015Ftur", "Create part"), () => {
+      const selected = words.getSelection();
+      if (!selected) {
+        feedback.textContent = local2("\xD6nce metinde istedi\u011Fin kelimeleri i\u015Faretle.", "First select the words in the text.");
+        return;
+      }
+      if (parts.length >= 50) {
+        feedback.textContent = local2("En fazla 50 par\xE7a kaydedebilirsin.", "You can save up to 50 parts.");
+        return;
+      }
+      snapshot();
+      const p = { ...selected, name: title.value.trim() || local2("Par\xE7a ", "Part ") + (parts.length + 1) };
+      const range = { start: Number(bounds.start.value), end: Number(bounds.end.value) };
+      if (audio && validExcerpt(range, audio.duration())) Object.assign(p, range);
+      parts.push(p);
+      parts.sort((a, b) => a.wordFrom - b.wordFrom);
+      title.value = "";
+      words.setUsed(parts);
+      const stored = remember();
+      render();
+      if (stored !== false) feedback.textContent = audio && !validExcerpt(p, audio.duration()) ? local2("Metin par\xE7as\u0131 kaydedildi. Sesli \xE7al\u0131\u015Fmak i\xE7in bu par\xE7an\u0131n saniyelerini ayarla.", "Text part saved. Set this part\u2019s seconds to study with audio.") : local2("Par\xE7a kaydedildi. Sonraki b\xF6l\xFCm\xFC se\xE7ebilirsin.", "Part saved. Select the next section.");
+    }));
+    const undoButton = button(local2("Geri al", "Undo"), () => {
+      const state = undo.pop();
+      if (!state) return;
+      audio?.stop();
+      parts = state.parts;
+      clips = state.clips;
+      words.setUsed(parts);
+      remember();
+      render();
+    });
+    section.append(undoButton);
+    const list = document.createElement("div");
+    list.className = "prayerPartList";
+    section.append(list);
+    const plan = document.createElement("div");
+    plan.className = "prayerStudySettings";
+    section.append(plan);
+    const methodLabel = document.createElement("label");
+    methodLabel.textContent = local2("\xC7al\u0131\u015Fma \u015Fekli", "Study method");
+    const method = document.createElement("select");
+    method.setAttribute("aria-label", methodLabel.textContent);
+    for (const [value, label] of [["sequential", local2("Par\xE7a par\xE7a tekrar", "Repeat each part")], ["cumulative", local2("1+2 ile h\u0131fz", "1+2 memorization")]]) {
+      const option = document.createElement("option");
+      option.value = value;
+      option.textContent = label;
+      method.append(option);
+    }
+    method.value = preferences.method || "sequential";
+    methodLabel.append(method);
+    plan.append(methodLabel);
+    const fields = {};
+    const grid = document.createElement("div");
+    grid.className = "prayerGrid";
+    grid.hidden = !audio;
+    plan.append(grid);
+    for (const [key, label, defaultValue] of [["tourRepeat", globalText2("repeat_range_count"), 0], ["partRepeat", local2("Par\xE7a tekrar say\u0131s\u0131", "Part repeats"), preferences.repeat], ["combineRepeat", globalText2("repeat_combine_count"), 0]]) {
+      const labelEl = document.createElement("label");
+      labelEl.textContent = label;
+      const input = document.createElement("input");
+      input.type = "number";
+      input.min = 0;
+      input.max = 99;
+      input.step = 1;
+      input.value = preferences[key] ?? defaultValue;
+      input.setAttribute("aria-label", label);
+      fields[key] = input;
+      labelEl.append(input);
+      grid.append(labelEl);
+    }
+    const countHelp = document.createElement("small");
+    countHelp.className = "prayerHelp";
+    countHelp.textContent = audio ? local2("Par\xE7a say\u0131s\u0131 her par\xE7aya uygulan\u0131r. Birle\u015Ftirme say\u0131s\u0131 1+2, sonra 1+2+3 i\xE7indir; 0 kapal\u0131d\u0131r. T\xFCm \xE7al\u0131\u015Fma say\u0131s\u0131, b\xFCt\xFCn program bitince ba\u015Fa d\xF6ner; 0 ve 1 tek turdur.", "Part repeats apply to each part. Combine repeats apply to 1+2, then 1+2+3; 0 turns combining off. Whole-study repeats restart the completed program; 0 and 1 both mean one tour.") : local2("Bu duan\u0131n uygulama i\xE7i sesi hen\xFCz yok. Olu\u015Fturdu\u011Fun metin par\xE7alar\u0131n\u0131 gizleyip g\xF6stererek ve Sonraki\u2019ye basarak kendin okuyabilirsin.", "In-app audio is not available for this prayer yet. Read your text parts yourself, hide or reveal them and move on with Next.");
+    plan.append(countHelp);
+    const play = button(local2("\u25B6 Par\xE7alar\u0131 sesli \xE7al\u0131\u015F", "\u25B6 Study parts with audio"), () => {
+      const ranges = chosenRanges();
+      if (!audio || !ranges || !ranges.length) {
+        feedback.textContent = local2("Her par\xE7an\u0131n ses ba\u015Flang\u0131c\u0131n\u0131 ve biti\u015Fini, kayd\u0131 dinleyerek ayarla.", "Set the audio start and end of every part while listening.");
+        return;
+      }
+      const prefs = read();
+      if (!prefs) {
+        feedback.textContent = local2("Tekrar say\u0131lar\u0131 0\u201399 aras\u0131nda tam say\u0131 olmal\u0131.", "Repeat counts must be whole numbers between 0 and 99.");
+        return;
+      }
+      remember();
+      audio.playPlan(ranges, prefs);
+    });
+    play.classList.add("prayerPrimary");
+    plan.append(play);
+    play.hidden = !audio;
+    const textPlay = button(local2("Metinle \xE7al\u0131\u015F", "Study the text"), () => {
+      if (!parts.length) return;
+      audio?.stop();
+      textMode = true;
+      textIndex = 0;
+      renderText();
+    });
+    plan.append(textPlay);
+    const reader = document.createElement("div");
+    reader.className = "prayerTextPractice";
+    reader.hidden = true;
+    section.append(reader);
+    const readerTitle = document.createElement("strong"), readerText = document.createElement("p");
+    readerText.dir = "rtl";
+    readerText.lang = "ar";
+    reader.append(readerTitle, readerText);
+    const toggle = button(local2("Gizle / g\xF6ster", "Hide / show"), () => {
+      readerText.hidden = !readerText.hidden;
+    });
+    const previous = button(local2("\xD6nceki", "Previous"), () => {
+      textIndex = Math.max(0, textIndex - 1);
+      renderText();
+    }), next = button(local2("Sonraki", "Next"), () => {
+      textIndex++;
+      renderText();
+    });
+    reader.append(toggle, previous, next);
+    function button(label, action) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.className = "prayerAction";
+      b.textContent = label;
+      b.onclick = action;
+      return b;
+    }
+    function snapshot() {
+      undo.push({ parts: parts.map((p) => ({ ...p })), clips: clips.map((p) => ({ ...p })) });
+      if (undo.length > 20) undo.shift();
+    }
+    function read() {
+      const p = { method: method.value };
+      for (const key of Object.keys(fields)) {
+        const n = Number(fields[key].value);
+        if (!Number.isInteger(n) || n < 0 || n > 99) return null;
+        p[key] = n;
+      }
+      return p;
+    }
+    function remember() {
+      audio?.stop();
+      const result = save(getState());
+      if (result === false) feedback.textContent = local2("De\u011Fi\u015Fiklik bu cihazda saklanamad\u0131. Ekran\u0131 kapatmadan \xF6nce cihaz\u0131n depolama alan\u0131n\u0131 kontrol et.", "Could not save this change on your device. Check available storage before closing.");
+      return result;
+    }
+    function getState() {
+      return { text: item.ar, textParts: parts.map((p) => ({ ...p })), clips: clips.map((p) => ({ ...p })), ...read() || {} };
+    }
+    function chosenRanges() {
+      const rows = parts.length ? parts : clips;
+      const ranges = rows.map((p, i) => ({ start: p.start, end: p.end, name: p.name || local2("Par\xE7a ", "Part ") + (i + 1) }));
+      return ranges.every((p, i) => validExcerpt(p, audio?.duration() || Number.MAX_VALUE) && (!i || ranges[i - 1].end <= p.start)) ? ranges : null;
+    }
+    function render() {
+      list.replaceChildren();
+      undoButton.hidden = !undo.length;
+      words.setUsed(parts);
+      textPlay.disabled = !parts.length;
+      play.disabled = !(parts.length || clips.length);
+      reader.hidden = !textMode || !parts.length;
+      for (const [p, index] of parts.map((p2, i) => [p2, i])) {
+        const card = document.createElement("article");
+        card.className = "prayerPartCard";
+        card.dataset.part = index;
+        const name = document.createElement("input");
+        name.value = p.name;
+        name.maxLength = 80;
+        name.setAttribute("aria-label", local2("Par\xE7a ad\u0131", "Part name") + " " + (index + 1));
+        name.onchange = () => {
+          p.name = name.value.trim() || local2("Par\xE7a ", "Part ") + (index + 1);
+          remember();
+        };
+        const text = document.createElement("p");
+        text.dir = "rtl";
+        text.lang = "ar";
+        text.className = "prayerPartArabic";
+        text.textContent = prayerPartText(words.words, p);
+        card.append(name, text);
+        if (audio) {
+          const timeFields = document.createElement("div");
+          timeFields.className = "prayerMarkers prayerGrid";
+          for (const key of ["start", "end"]) {
+            const label = document.createElement("label");
+            label.textContent = local2(key === "start" ? "Ba\u015Flang\u0131\xE7 (sn)" : "Biti\u015F (sn)", key === "start" ? "Start (s)" : "End (s)");
+            const input = document.createElement("input");
+            input.type = "number";
+            input.step = 0.01;
+            input.min = 0;
+            input.value = Number.isFinite(p[key]) ? p[key] : "";
+            input.setAttribute("aria-label", p.name + " \xB7 " + label.textContent);
+            input.onchange = () => {
+              p[key] = input.value === "" ? void 0 : Number(input.value);
+              remember();
+            };
+            label.append(input);
+            timeFields.append(label);
+          }
+          card.append(timeFields);
+          card.append(button(local2("\u25B6 Bu par\xE7a", "\u25B6 This part"), () => {
+            if (validExcerpt(p, audio.duration() || Number.MAX_VALUE)) audio.playOne(p);
+            else feedback.textContent = local2("\xD6nce duay\u0131 a\xE7, sonra bu par\xE7an\u0131n saniyelerini ayarla.", "Open the recording first, then set this part\u2019s seconds.");
+          }));
+        }
+        card.append(button(local2("Kald\u0131r", "Remove"), () => {
+          snapshot();
+          audio?.stop();
+          parts = parts.filter((x) => x !== p);
+          remember();
+          render();
+        }));
+        list.append(card);
+      }
+      for (const clip of clips) {
+        const row = document.createElement("div");
+        row.className = "prayerClipRow";
+        const name = document.createElement("input");
+        name.value = clip.name;
+        name.maxLength = 80;
+        name.setAttribute("aria-label", local2("Kay\u0131tl\u0131 c\xFCmle ad\u0131", "Saved phrase name"));
+        name.onchange = () => {
+          clip.name = name.value.trim() || local2("C\xFCmle", "Phrase");
+          remember();
+        };
+        row.append(name, button("\u25B6 " + clip.start.toFixed(1) + "\u2013" + clip.end.toFixed(1), () => audio?.playOne(clip)), button("\xD7", () => {
+          snapshot();
+          clips = clips.filter((p) => p !== clip);
+          remember();
+          render();
+        }));
+        list.append(row);
+      }
+      if (!parts.length && !clips.length) {
+        const empty = document.createElement("p");
+        empty.className = "prayerHelp";
+        empty.textContent = local2("Hen\xFCz par\xE7a yok. Duay\u0131 b\xF6l b\xF6l\xFCm\xFCnden ilk par\xE7an\u0131 olu\u015Ftur.", "No parts yet. Open Split prayer to create your first part.");
+        list.append(empty);
+      }
+      if (textMode && parts.length) renderText();
+    }
+    function renderText() {
+      if (!parts.length) {
+        reader.hidden = true;
+        return;
+      }
+      const cumulative = method.value === "cumulative", steps = cumulative ? parts.flatMap((_, i) => i ? [{ from: i, to: i }, { from: 0, to: i }] : [{ from: 0, to: 0 }]) : parts.map((_, i) => ({ from: i, to: i }));
+      textIndex = Math.max(0, Math.min(steps.length - 1, textIndex));
+      const step = steps[textIndex];
+      reader.hidden = false;
+      readerTitle.textContent = local2("Metin \xE7al\u0131\u015Fmas\u0131", "Text practice") + " \xB7 " + (step.from + 1) + (step.to === step.from ? "" : "\u2013" + (step.to + 1));
+      readerText.textContent = parts.slice(step.from, step.to + 1).map((p) => prayerPartText(words.words, p)).join(" ");
+      readerText.hidden = false;
+      previous.disabled = textIndex === 0;
+      next.disabled = textIndex === steps.length - 1;
+    }
+    method.onchange = () => {
+      remember();
+      if (textMode) {
+        textIndex = 0;
+        renderText();
+      }
+    };
+    for (const input of Object.values(fields)) input.onchange = () => remember();
+    render();
+    return { getState, close: () => words.close(), onProgress(data) {
+      if (!data?.ranges) return;
+      feedback.textContent = local2(data.phase === "combine" ? "Birle\u015Ftirme" : "Par\xE7a", data.phase === "combine" ? "Combine" : "Part") + " " + (data.partIndex + 1) + " \xB7 " + data.current + "/" + data.total + " \xB7 " + local2("Tur ", "Tour ") + data.tour + "/" + data.tours;
+      list.querySelectorAll(".prayerPartCard").forEach((node, i) => node.classList.toggle("active", data.phase === "combine" ? i <= data.partIndex : i === data.partIndex));
+    } };
+  }
 
   // src/dua-practice.mjs
   var ui = window.elifaPrayerUI;
@@ -301,11 +964,13 @@
     window.duaCloseOverlay?.();
     window.stopPlan?.(true);
     const lang = language(), record2 = item.recording, hash = record2?.sha256 || "text-only-v1";
-    const preferences = restorePrayerState(saved()[item.id], hash);
-    let clips = preferences.clips, undo = [];
+    const original = saved()[item.id] || {}, preferences = restorePrayerState(original, hash);
+    let studyUI = null;
     const title = '<h2 class="dd-title">' + esc(item.title) + "</h2>";
     const copy = item.meal?.[lang] || item.meal?.en || item.meal?.tr || "";
-    const body = '<div class="prayerText"><div class="dd-ar" dir="rtl" lang="ar">' + esc(item.ar) + "</div><details><summary>" + esc(ui.translate("dua_okunus")) + '</summary><p class="dd-ok">' + esc(item.ok) + "</p></details><details><summary>" + esc(ui.translate("dua_meal")) + (item.meal?.[lang] ? "" : " \xB7 English") + '</summary><p class="dd-meal">' + esc(copy) + '</p></details></div><div class="prayerPractice"></div>';
+    const arabic = '<div class="dd-ar" dir="rtl" lang="ar">' + esc(item.ar) + "</div>";
+    const textBlock = item.ar.length > 420 ? '<details class="prayerFullText"><summary>' + esc(local("Tam dua metnini a\xE7", "Open the complete prayer text")) + "</summary>" + arabic + "</details>" : arabic;
+    const body = '<div class="prayerText">' + textBlock + "<details><summary>" + esc(ui.translate("dua_okunus")) + '</summary><p class="dd-ok">' + esc(item.ok) + "</p></details><details><summary>" + esc(ui.translate("dua_meal")) + (item.meal?.[lang] ? "" : " \xB7 English") + '</summary><p class="dd-meal">' + esc(copy) + '</p></details></div><div class="prayerPractice"></div>';
     const back = ui.overlay(title, body), box = back.querySelector(".prayerPractice");
     const status = document.createElement("p");
     status.className = "prayerStatus";
@@ -315,20 +980,44 @@
     source.href = item.source;
     source.target = "_blank";
     source.rel = "noopener noreferrer";
-    source.textContent = t("source") + " \xB7 Diyanet";
+    source.textContent = t("source") + " \xB7 " + (item.sourceName || "Diyanet");
     source.className = "prayerSource";
     box.append(source);
-    if (item.note === "traditional_prayer") {
+    if (item.note === "traditional_prayer" && item.id === "kuran-baslama") {
       const p = document.createElement("p");
       p.className = "prayerHelp";
       p.textContent = local("Diyanet rehberinde, okumaya ba\u015Flarken okunmas\u0131 gelenek h\xE2line gelmi\u015F bir dua olarak aktar\u0131l\u0131r.", "The Diyanet guide describes this as a traditional prayer before recitation.");
       box.append(p);
+    }
+    if (item.guideSource) {
+      const a = document.createElement("a");
+      a.href = item.guideSource;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.className = "prayerSource";
+      a.textContent = local("Metin ve a\xE7\u0131klama kayna\u011F\u0131", "Text and guidance source");
+      box.append(document.createTextNode(" \xB7 "), a);
     }
     if (item.id === "kunut" || item.id === "rabbena") {
       const p = document.createElement("p");
       p.className = "prayerHelp";
       p.textContent = local("Bu kay\u0131t iki duay\u0131 birlikte i\xE7erir. Metin ve ses birlikte g\xF6sterilir.", "This recording contains both supplications; their texts are shown together.");
       box.append(p);
+    }
+    if (item.guide) {
+      const guide = document.createElement("details");
+      guide.className = "prayerGuide";
+      const heading = document.createElement("summary");
+      heading.textContent = item.guideTitle?.[lang] || item.guideTitle?.tr || local("Nas\u0131l yap\u0131l\u0131r?", "How to practice");
+      guide.append(heading);
+      const ol = document.createElement("ol");
+      for (const step of item.guide[lang] || item.guide.en || item.guide.tr) {
+        const li = document.createElement("li");
+        li.textContent = step;
+        ol.append(li);
+      }
+      guide.append(ol);
+      box.append(guide);
     }
     if (!record2) {
       status.textContent = t("missing");
@@ -339,15 +1028,44 @@
         a.target = "_blank";
         a.rel = "noopener noreferrer";
         a.className = "prayerAction";
-        a.textContent = t("official") + " \xB7 Mi\u015F\xE2r\xEE";
+        a.textContent = t("official") + " \xB7 " + (item.externalLabel || "Mi\u015F\xE2r\xEE");
         box.append(a);
       }
+      studyUI = mountPrayerStudy({ container: box, item, saved: original, preferences, copy: local, globalText, save: (state) => persist(item.id, { hash, ...preferences, ...state }) });
+      const cleanup2 = () => {
+        studyUI.close();
+        if (activeClose === cleanup2) activeClose = null;
+      };
+      activeClose = cleanup2;
+      back.addEventListener("elifa:dua-close", cleanup2, { once: true });
       return true;
     }
     const sourceNote = document.createElement("p");
     sourceNote.className = "prayerHelp";
-    sourceNote.textContent = local("Diyanet Namaz Portal\u0131 kayd\u0131. Okuyucunun ad\u0131 kaynakta belirtilmiyor.", "Diyanet Prayer Portal recording. The source does not identify the reciter.");
+    sourceNote.textContent = record2.reader ? record2.reader : local("Diyanet Namaz Portal\u0131 kayd\u0131. Okuyucunun ad\u0131 kaynakta belirtilmiyor.", "Diyanet Prayer Portal recording. The source does not identify the reciter.");
     box.append(sourceNote);
+    if (record2.sourceName) {
+      const a = document.createElement("a");
+      a.href = record2.sourcePage || record2.source;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.className = "prayerSource";
+      a.textContent = local("Ses kayna\u011F\u0131", "Audio source") + " \xB7 " + record2.sourceName;
+      box.append(a);
+    }
+    const chapter = record2.kind === "complete-audiobook-chapter", lesson = record2.kind === "teaching-recording", fullCaption = chapter ? local("Dua ve a\xE7\u0131klamas\u0131", "Prayer and explanation") : lesson ? local("Dua \xF6\u011Fretim kayd\u0131", "Prayer teaching recording") : t("full");
+    if (chapter) {
+      const note = document.createElement("p");
+      note.className = "prayerHelp";
+      note.textContent = lang === "tr" ? item.audioNoteTR || "Bu sesli kitap b\xF6l\xFCm\xFC, duayla birlikte ba\u015Fl\u0131k ve rivayet a\xE7\u0131klamalar\u0131n\u0131 da i\xE7erir." : item.audioNoteEN || "This audiobook chapter includes the prayer together with headings and narration explanations.";
+      box.append(note);
+    }
+    if (lesson) {
+      const note = document.createElement("p");
+      note.className = "prayerHelp";
+      note.textContent = local("\xD6\u011Fretim kayd\u0131n\u0131n tamam\u0131d\u0131r; duadan \xF6nce k\u0131sa bir giri\u015F bulunur. Par\xE7a s\u0131n\u0131rlar\u0131n\u0131 kayd\u0131 dinleyerek se\xE7ebilirsin.", "The complete teaching recording includes a short introduction before the prayer. Choose phrase boundaries while listening.");
+      box.append(note);
+    }
     const controls = document.createElement("div");
     controls.className = "prayerGrid";
     const fields = {};
@@ -368,13 +1086,13 @@
     const full = document.createElement("button");
     full.type = "button";
     full.className = "prayerAction prayerPrimary";
-    full.textContent = "\u25B6 " + t("full");
+    full.textContent = "\u25B6 " + fullCaption;
     full.id = "prayerPlay";
     const stop = document.createElement("button");
     stop.type = "button";
     stop.className = "prayerAction";
     stop.textContent = "\u25A0";
-    stop.setAttribute("aria-label", globalText("pb_play"));
+    stop.setAttribute("aria-label", local("Durdur", "Stop"));
     stop.id = "prayerStop";
     const transport = document.createElement("div");
     transport.className = "prayerTransport";
@@ -389,7 +1107,7 @@
     seek.setAttribute("aria-label", t("full"));
     const selectionLabel = document.createElement("p");
     selectionLabel.className = "prayerSelection";
-    selectionLabel.textContent = t("full");
+    selectionLabel.textContent = fullCaption;
     const time = document.createElement("output");
     time.className = "prayerTime";
     time.textContent = "0:00 / 0:00";
@@ -410,16 +1128,34 @@
     box.append(controls, transport, selectionLabel, seek, time, status, offline);
     const audio = new Audio();
     audio.preload = "none";
-    let closed = false, bytes = null, decoded = null, context = null, objectUrl = null, duration = 0, range = null, abort = new AbortController();
+    let closed = false, bytes = null, decoded = null, context = null, objectUrl = null, duration = 0, range = null, activeRanges = null, abort = new AbortController();
     const format = (n) => Math.floor(n / 60) + ":" + String(Math.floor(n % 60)).padStart(2, "0");
     const read = () => ({ repeat: Number(fields.repeat.value), speed: Number(fields.speed.value), wait: Number(fields.wait.value) });
     const remember = () => {
       const p = read();
       if (!validPrayerPreferences(p)) return false;
-      const ok = persist(item.id, { hash, ...p, clips });
+      const ok = persist(item.id, { hash, ...p, ...studyUI?.getState() || { clips: preferences.clips } });
       if (!ok) status.textContent = local("Bu cihazda kaydedilemedi.", "Could not save on this device.");
       return ok;
     };
+    async function prepareRanges(ranges, isCurrent) {
+      bytes ?? (bytes = await verifiedBytes(record2, abort.signal));
+      if (closed || !isCurrent()) throw Error("Closed");
+      if (!decoded) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) throw Error("No audio decoder");
+        context = new AudioContext();
+        decoded = await context.decodeAudioData(bytes.slice(0));
+        duration = decoded.duration;
+      }
+      if (closed || !isCurrent()) throw Error("Closed");
+      const blob = new Blob([pcmRangesWav(decoded, ranges)], { type: "audio/wav" });
+      activeRanges = ranges;
+      range = ranges[0];
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+      objectUrl = URL.createObjectURL(blob);
+      return objectUrl;
+    }
     const player = new PrayerPlayer({ audio, prepare: async (selected, isCurrent) => {
       bytes ?? (bytes = await verifiedBytes(record2, abort.signal));
       if (closed || !isCurrent()) throw Error("Closed");
@@ -436,21 +1172,24 @@
         }
         if (closed || !isCurrent()) throw Error("Closed");
         blob = new Blob([pcmExcerptWav(decoded, selected)], { type: "audio/wav" });
-      } else blob = new Blob([bytes], { type: "audio/mpeg" });
+      } else blob = new Blob([bytes], { type: record2.mime || "audio/mpeg" });
       if (closed || !isCurrent()) throw Error("Closed");
       range = selected;
+      activeRanges = selected ? [selected] : null;
       if (objectUrl) URL.revokeObjectURL(objectUrl);
       objectUrl = URL.createObjectURL(blob);
       return objectUrl;
-    }, onState: (state, progress) => {
+    }, preparePlan: prepareRanges, onState: (state, progress) => {
       if (closed) return;
-      full.classList.toggle("playing", state === "playing");
+      full.classList.toggle("playing", state === "playing" && progress?.phase === "full");
       status.textContent = state === "complete" ? t("complete") : state === "error" ? t("error") : progress ? (state === "waiting" ? t("waiting") + " \xB7 " : "") + progress.current + " / " + progress.total : state === "loading" ? "\u2026" : "";
       status.dataset.state = state;
+      if (progress?.ranges?.length) studyUI?.onProgress(progress);
     } });
     function cleanup() {
       if (closed) return;
       closed = true;
+      studyUI?.close();
       player.stop();
       abort.abort();
       audio.removeAttribute("src");
@@ -463,25 +1202,23 @@
     activeClose = cleanup;
     back.addEventListener("elifa:dua-close", cleanup, { once: true });
     audio.onloadedmetadata = () => {
-      selectionLabel.textContent = (range ? range.name : t("full")) + " \xB7 " + format(audio.duration);
-      if (!range) {
-        duration = audio.duration;
-        seek.max = duration;
-        seek.disabled = !Number.isFinite(duration);
-      }
+      const label = activeRanges?.length > 1 ? local("Birle\u015Ftirme", "Combined parts") : range?.name || fullCaption;
+      selectionLabel.textContent = label + " \xB7 " + format(audio.duration);
+      seek.setAttribute("aria-label", label);
+      seek.min = 0;
+      seek.max = audio.duration;
+      seek.disabled = !Number.isFinite(audio.duration);
+      if (!range) duration = audio.duration;
       updateTime();
     };
     function updateTime() {
       if (closed) return;
-      const pos = audio.currentTime + (range?.start || 0);
-      seek.value = pos;
-      time.textContent = format(pos) + " / " + format(duration);
+      seek.value = audio.currentTime;
+      time.textContent = format(audio.currentTime) + " / " + format(Number.isFinite(audio.duration) ? audio.duration : 0);
     }
     audio.ontimeupdate = updateTime;
     seek.oninput = () => {
-      const start = range?.start || 0, end = range?.end || duration;
-      const pos = Math.min(end, Math.max(start, Number(seek.value)));
-      audio.currentTime = pos - start;
+      audio.currentTime = Math.min(audio.duration || 0, Math.max(0, Number(seek.value)));
       updateTime();
     };
     full.onclick = () => {
@@ -525,7 +1262,7 @@
         const data = bytes || await verifiedBytes(record2, abort.signal);
         if (closed) return;
         const cache = await caches.open(cacheName);
-        await cache.put(record2.path, new Response(data, { headers: { "Content-Type": "audio/mpeg" } }));
+        await cache.put(record2.path, new Response(data, { headers: { "Content-Type": record2.mime || "audio/mpeg" } }));
         if (closed) return;
         status.textContent = t("ready");
         await offlineState();
@@ -545,117 +1282,39 @@
       }
     };
     offlineState();
-    const detail = document.createElement("details");
-    detail.className = "prayerClips";
-    const summary = document.createElement("summary");
-    summary.textContent = t("clip");
-    detail.append(summary);
-    const explanation = document.createElement("p");
-    explanation.className = "prayerHelp";
-    explanation.textContent = local("B\xFCt\xFCn duay\u0131 dinlerken c\xFCmlenin ba\u015F\u0131n\u0131 ve sonunu i\u015Faretle. \u0130stersen saniyeleri d\xFCzelt, sonra kaydet. C\xFCmlelerin bu cihazda kaydedilir. Otomatik kelime zamanlamas\u0131 kullan\u0131lmaz.", "While listening to the whole prayer, mark the phrase\u2019s start and end. Adjust the seconds if needed, then save. Your phrases are saved on this device. No automatic word timing is assumed.");
-    detail.append(explanation);
-    const marks = document.createElement("div");
-    marks.className = "prayerGrid";
-    const boundaries = {};
-    for (const [key, label] of [["start", t("start")], ["end", t("end")]]) {
-      const wrap = document.createElement("div");
-      wrap.className = "prayerBoundary";
-      const mark = document.createElement("button");
-      mark.type = "button";
-      mark.className = "prayerAction";
-      mark.textContent = label;
-      mark.setAttribute("aria-label", label);
-      const input = document.createElement("input");
-      input.type = "number";
-      input.min = 0;
-      input.step = 0.01;
-      input.value = 0;
-      input.setAttribute("aria-label", label + " (s)");
-      input.id = "prayer_" + key;
-      boundaries[key] = input;
-      mark.onclick = () => {
-        input.value = (audio.currentTime + (range?.start || 0)).toFixed(2);
-      };
-      wrap.append(mark, input);
-      marks.append(wrap);
-    }
-    detail.append(marks);
-    const name = document.createElement("input");
-    name.maxLength = 80;
-    name.placeholder = t("clip");
-    name.setAttribute("aria-label", t("clip"));
-    name.id = "prayerClipName";
-    const save = document.createElement("button");
-    save.type = "button";
-    save.className = "prayerAction";
-    save.textContent = t("save");
-    save.id = "prayerClipSave";
-    const undoButton = document.createElement("button");
-    undoButton.type = "button";
-    undoButton.className = "prayerAction";
-    undoButton.textContent = t("undo");
-    undoButton.hidden = true;
-    const list = document.createElement("div");
-    list.className = "prayerClipList";
-    function renderClips() {
-      list.replaceChildren();
-      undoButton.hidden = !undo.length;
-      for (const clip of clips) {
-        const row = document.createElement("div");
-        row.className = "prayerClipRow";
-        const edit = document.createElement("input");
-        edit.maxLength = 80;
-        edit.value = clip.name;
-        edit.setAttribute("aria-label", t("clip"));
-        edit.onchange = () => {
-          clip.name = edit.value.trim().slice(0, 80) || t("clip");
-          remember();
-        };
-        const play = document.createElement("button");
-        play.type = "button";
-        play.className = "prayerAction";
-        play.textContent = "\u25B6 " + format(clip.start) + "\u2013" + format(clip.end);
-        play.setAttribute("aria-label", clip.name);
-        play.onclick = () => {
-          const p = read();
-          if (validPrayerPreferences(p)) player.play(clip, p);
-        };
-        const remove = document.createElement("button");
-        remove.type = "button";
-        remove.className = "prayerAction";
-        remove.textContent = "\xD7";
-        remove.setAttribute("aria-label", clip.name + " \xB7 " + t("remove"));
-        remove.onclick = () => {
-          player.stop();
-          undo.push(clips.map((c) => ({ ...c })));
-          clips = clips.filter((c) => c !== clip);
-          remember();
-          renderClips();
-        };
-        row.append(edit, play, remove);
-        list.append(row);
+    studyUI = mountPrayerStudy({ container: box, item, saved: original, preferences, copy: local, globalText, save: () => remember(), audio: {
+      position() {
+        let left = audio.currentTime;
+        for (const r of activeRanges || []) {
+          const length = r.end - r.start;
+          if (left <= length) return r.start + left;
+          left -= length;
+        }
+        return activeRanges?.at(-1)?.end ?? audio.currentTime;
+      },
+      duration: () => duration,
+      stop: () => player.stop(),
+      playOne: (clip) => {
+        if (!validPrayerPreferences(read())) {
+          status.textContent = t("error");
+          return;
+        }
+        remember();
+        player.play(clip, read()).catch(() => {
+          status.textContent = t("error");
+        });
+      },
+      playPlan: (ranges, prefs) => {
+        if (!validPrayerPreferences(read())) {
+          status.textContent = t("error");
+          return;
+        }
+        remember();
+        player.playPlan(ranges, { ...prefs, speed: read().speed, wait: read().wait }).catch(() => {
+          status.textContent = t("error");
+        });
       }
-    }
-    save.onclick = () => {
-      const clip = { start: Number(boundaries.start.value), end: Number(boundaries.end.value), name: name.value.trim() || t("clip") + " " + (clips.length + 1) };
-      if (!validExcerpt(clip, duration) || clips.length >= 50) {
-        status.textContent = local("\xD6nce kayd\u0131 a\xE7; ba\u015Flang\u0131\xE7 ve biti\u015Fi sesin i\xE7inde, en az 0,2 saniye arayla se\xE7.", "Open the recording first. Select a start and end within the audio, at least 0.2 seconds apart.");
-        return;
-      }
-      undo.push(clips.map((c) => ({ ...c })));
-      clips = [...clips, clip];
-      remember();
-      renderClips();
-    };
-    undoButton.onclick = () => {
-      player.stop();
-      clips = undo.pop() || clips;
-      remember();
-      renderClips();
-    };
-    detail.append(name, save, undoButton, list);
-    box.append(detail);
-    renderClips();
+    } });
     return true;
   }
   window.elifaDuaPractice = {
