@@ -7,11 +7,11 @@ export async function verifyPrayerResponse(response,record){
   return bytes;
 }
 export async function loadPrayerBytes(record,{cache=null,fetcher=fetch,signal}={}){
-  const cached=await cache?.match(record.path);
+  let cached;try{cached=await cache?.match(record.path);}catch{}
   if(cached){
     try{return await verifyPrayerResponse(cached,record);}catch{
       // Remove only this reproducible audio download, never personal study data.
-      await cache.delete(record.path);
+      try{await cache.delete(record.path);}catch{}
     }
   }
   return verifyPrayerResponse(await fetcher(record.path,{signal}),record);

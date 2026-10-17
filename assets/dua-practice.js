@@ -425,12 +425,19 @@
     return bytes;
   }
   async function loadPrayerBytes(record2, { cache = null, fetcher = fetch, signal } = {}) {
-    const cached = await cache?.match(record2.path);
+    let cached;
+    try {
+      cached = await cache?.match(record2.path);
+    } catch {
+    }
     if (cached) {
       try {
         return await verifyPrayerResponse(cached, record2);
       } catch {
-        await cache.delete(record2.path);
+        try {
+          await cache.delete(record2.path);
+        } catch {
+        }
       }
     }
     return verifyPrayerResponse(await fetcher(record2.path, { signal }), record2);
