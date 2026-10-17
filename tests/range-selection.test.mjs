@@ -27,7 +27,7 @@ test('starting a chosen ayah range enables the requested repeats, while an inval
   assert.equal(c.applyRangeProgram(true),true);
   assert.equal(c.SET.repOn,true);
   assert.deepEqual({...c.rangeSelectionDraft},{sid:18,from:26,to:28});
-  assert.deepEqual(Array.from(plans[0],step=>step.first),[26,27,28]);
+  assert.deepEqual(Array.from(plans[0],step=>[step.first,step.last]),[[26,28]]);
   assert.ok(plans[0].every(step=>c.stepReps(step)===6));
 
   c.SET.repOn=false;delete c.AD_.ay[27];
@@ -204,4 +204,24 @@ test('a refined range keeps original word colours and offers explicit action con
   assert.deepEqual([...selected],[1,2]);
   c.selA=null;c.selB=null;c.renderSel();
   assert.equal(studyAction.hidden,true,'study action disappears when the range is cleared');
+});
+
+
+test('settings repeat 1–5 as a complete passage three or five times',()=>{
+  for(const rep of [3,5]){
+    let played;
+    const inputs={fromInp:{value:'1'},toInp:{value:'5'}};
+    const c=vm.createContext({SET:{rep,repOn:false,cumu:false,reciter:223},curS:2,
+      gearCtx:'ayah',splitParts:[],guardedRangeDraft:null,rangeSelectionDraft:null,
+      normalChapterAudio:null,AD_:{buffer:{},ay:{1:[0,100],2:[100,200],3:[200,300],4:[300,400],5:[400,500]}},
+      $:id=>inputs[id],commitInputs(){},syncCumu(){},syncCumu2(){},saveSet(){},syncRep(){},syncRep2(){},
+      clampAy:v=>v,audioTimingUnverified:()=>false,normalVersePlanReady:()=>true,
+      normalVerseStep:(chapter,first,last,extra)=>({...extra,f:chapter.ay[first][0],t:chapter.ay[last][1]}),
+      runPlan:p=>{played=p},toast:()=>assert.fail('unexpected audio rejection')});
+    for(const name of ['buildLadder','applyRangeProgram','stepReps'])vm.runInContext(source(name),c);
+    assert.equal(c.applyRangeProgram(),true);
+    assert.equal(played.length,1,'there must be no separate per-verse repetition steps');
+    assert.equal(played[0].f,0);assert.equal(played[0].t,500);
+    assert.equal(c.stepReps(played[0]),rep);
+  }
 });
