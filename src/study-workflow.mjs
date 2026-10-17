@@ -79,7 +79,7 @@ function diagnostic(){const split=window.elifaStudySplitSelection?.();return {ve
 let context=null;
 function reportText(){const text=t(reason.value)+'\n\n'+JSON.stringify(context,null,2);preview.textContent=text;send.href='mailto:info@elifaplatform.com?subject='+encodeURIComponent('Elifa Mushaf audio')+'&body='+encodeURIComponent(text);}
 report.onclick=()=>{context=diagnostic();reportText();dialog.showModal();window.elifaLog?.('audio_feedback_open');};reason.onchange=reportText;
-function refreshLanguage(){window.elifaApplyI18n?.();render();renderContinue();renderHomeHeroLine();$('q').dispatchEvent(new Event('input'));
+function refreshLanguage(){window.elifaApplyI18n?.();syncRep();syncRep2();render();renderContinue();renderHomeHeroLine();$('q').dispatchEvent(new Event('input'));
   for(const [id,key] of Object.entries({langBtnH:'language',guideBtnH:'guide',themeBtnH:'theme'}))$(id)?.setAttribute('aria-label',t(key));
   for(const [id,key] of Object.entries({repInp:'repeat_ayah_count',combineRepInp:'repeat_combine_count',rangeRepInp:'repeat_range_count'}))$(id)?.setAttribute('aria-label',t(key));
   choice.setAttribute('aria-label',t('study_options'));reason.setAttribute('aria-label',t('report_issue'));
