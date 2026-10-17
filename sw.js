@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   ELIFA MUSHAF — SERVICE WORKER  (v331)
+   ELIFA MUSHAF — SERVICE WORKER  (v332)
    App-shell'i önbelleğe alır, offline açılır; dış API'lere
    (Kur'an metni/ses/tefsir) DOKUNMAZ. Güncellemede VERSION'u artır.
 
@@ -11,7 +11,7 @@
    · version.json / duyuru.json / manual-*.json → her zaman ağ öncelikli.
    · Yönlendirilmiş (redirected) navigasyon yanıtı önbelleğe yazılmaz.
    ═══════════════════════════════════════════════════════════════ */
-const VERSION = 'elifa-mushaf-v331-study-loop-insights';
+const VERSION = 'elifa-mushaf-v332-settings-range-loop';
 const CACHE   = VERSION;
 
 /* Fontlar index.html içinde base64 gömülü → ayrıca cache'lenmez. */
@@ -19,10 +19,10 @@ const CORE = [
   './', './index.html', './manifest.json', './version.json',
   './pwa_icon-192.png', './pwa_icon-512.png',
   './pwa_icon-maskable.png', './pwa_apple-180.png',
-  './top_logo_hilal.svg', './assets/account.js?v=331', './assets/account.css?v=295',
+  './top_logo_hilal.svg', './assets/account.js?v=332', './assets/account.css?v=295',
   './assets/locale.js?v=2', './assets/reader-help.js?v=2', './assets/reader-help-drafts.js?v=1', './assets/reader-help.css?v=1',
   './assets/ui-extra-drafts.js?v=2', './assets/ui-extra.js?v=1',
-  './assets/study-split.js?v=331', './assets/study-sessions.js?v=331',
+  './assets/study-split.js?v=332', './assets/study-sessions.js?v=332',
   './assets/study-surah-picker.js?v=330', './assets/home-study-polish.css?v=330',
   './assets/split-audio.js?v=294', './assets/split-cache.js?v=291',
   './assets/mp3quran-reciter.js?v=2',
