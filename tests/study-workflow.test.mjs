@@ -120,6 +120,14 @@ test('explicit cumulative method also applies to split parts and both Combine bu
  assert.equal(c.playing,false);
 });
 
+test('legacy saved cumulative studies repair the missing parts flag without changing whole-section preferences',()=>{
+ const {c}=harness();const saved={reciter:223,speed:1,rep:2,combineRep:3,rangeRep:4,repOn:true,wait:0,mode:'cumulative',splitCombine:false};
+ c.window.elifaStudySettings.load({settings:saved});assert.equal(c.window.elifaStudySettings.capture().splitCombine,true);
+ c.window.elifaStudySettings.beforeOpen();assert.equal(c.SET.cumu,true);assert.equal(c.window.elifaPracticeMode(),'cumulative');
+ c.window.elifaStudySettings.load({settings:{...saved,mode:'range',splitCombine:true}});c.window.elifaStudySettings.beforeOpen();
+ assert.equal(c.SET.cumu,true);assert.equal(c.window.elifaPracticeMode(),'range','whole-section playback can still remember a separate parts preference');
+});
+
 test('whole-study count preserves the inner method; explicit whole-section selection remains authoritative',()=>{
  const {c,nodes}=harness();c.window.elifaStudySettings.load({settings:{reciter:223,speed:1,rep:2,combineRep:3,rangeRep:4,repOn:true,wait:0,mode:'cumulative',splitCombine:true}});
  nodes.get('studySetting_rangeRep').value=6;nodes.get('studySetting_rangeRep').handlers.input();

@@ -132,7 +132,7 @@
     return { reciter: SET.reciter, speed: SET.speed, rep: Math.min(99, Math.max(1, Math.round(SET.rep))), combineRep: SET.combineRep ?? SET.rep, rangeRep: SET.rangeRep ?? SET.rep, repOn: !!SET.repOn, wait: Math.min(60, Math.max(0, SET.wait)), mode, splitCombine: !!SET.cumu };
   }
   function fill(v) {
-    draftCombine = v.splitCombine;
+    draftCombine = v.mode === "cumulative" || v.splitCombine;
     choice.value = v.mode;
     reciter.value = String(v.reciter);
     for (const key of Object.keys(fields)) $("studySetting_" + key).value = v[key] ?? v.rep;

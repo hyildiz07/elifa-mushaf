@@ -30,7 +30,7 @@ const gearField=field('study_method',gearMode);gearField.classList.add('workflow
 const status=document.createElement('p');status.id='practiceProgress';status.className='workflowProgress';status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.hidden=true;$('studyBanner').append(status);
 const readerStatus=document.createElement('p');readerStatus.id='readerPracticeProgress';readerStatus.className='workflowProgress';readerStatus.setAttribute('role','status');readerStatus.setAttribute('aria-live','polite');readerStatus.hidden=true;$('studyBanner').after(readerStatus);
 function current(){return {reciter:SET.reciter,speed:SET.speed,rep:Math.min(99,Math.max(1,Math.round(SET.rep))),combineRep:SET.combineRep??SET.rep,rangeRep:SET.rangeRep??SET.rep,repOn:!!SET.repOn,wait:Math.min(60,Math.max(0,SET.wait)),mode,splitCombine:!!SET.cumu};}
-function fill(v){draftCombine=v.splitCombine;choice.value=v.mode;reciter.value=String(v.reciter);for(const key of Object.keys(fields))$('studySetting_'+key).value=v[key]??v.rep;repeat.checked=v.repOn;}
+function fill(v){draftCombine=v.mode==='cumulative'||v.splitCombine;choice.value=v.mode;reciter.value=String(v.reciter);for(const key of Object.keys(fields))$('studySetting_'+key).value=v[key]??v.rep;repeat.checked=v.repOn;}
 function read(){const v={...current(),splitCombine:draftCombine,reciter:Number(reciter.value),mode:choice.value,repOn:repeat.checked};for(const key of Object.keys(fields))v[key]=Number($('studySetting_'+key).value);return validStudySettings(v)&&RECITERS.some(r=>r.id===v.reciter)?v:null;}
 function syncModes(){gearMode.value=mode;syncPracticeControls();render();}
 function render(){
