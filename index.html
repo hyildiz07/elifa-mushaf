@@ -5448,8 +5448,8 @@ window.elifaLog=function(event,params){
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
 <link rel="stylesheet" href="/assets/home-study-polish.css?v=336">
-<link rel="stylesheet" href="/assets/study-workflow.css?v=337">
-<link rel="stylesheet" href="/assets/dua-practice.css?v=349">
+<link rel="stylesheet" href="/assets/study-workflow.css?v=351">
+<link rel="stylesheet" href="/assets/dua-practice.css?v=351">
 </head>
 <body>
 <div id="tabletBootError" style="display:none;position:fixed;z-index:99999;left:14px;right:14px;top:14px;background:#fff8e8;color:#0e2c55;border:2px solid #c99a35;border-radius:14px;padding:14px 16px;box-shadow:0 12px 34px rgba(0,0,0,.22);font-family:Arial,sans-serif">
@@ -5810,6 +5810,7 @@ window.elifaLog=function(event,params){
     </div>
     <div class="setsection">
       <div class="setrow" id="setGuide"><span class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.5"/><path d="M9.4 9.2a2.6 2.6 0 015 .8c0 1.7-2.6 2.2-2.6 3.9"/><circle cx="12" cy="17" r="1.1" fill="currentColor" stroke="none"/></svg></span><span class="slbl" data-i18n="guide">Nasıl kullanılır</span><span class="sarrow">›</span></div>
+      <button type="button" class="setrow" id="setReportIssue"><span class="sicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 17h.01"/></svg></span><span class="slbl" data-i18n="report_issue">Sorun bildir</span><span class="sarrow" aria-hidden="true">›</span></button>
       <div class="setrow" id="setManual"><span class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V5a2 2 0 012-2h12a1 1 0 011 1v15.5" stroke-linecap="round"/><path d="M6 17h13M6 21h13a2 2 0 01-2-2H6a2 2 0 000 4" stroke-linecap="round"/><path d="M8 7h8M8 11h6" stroke-linecap="round"/></svg></span><span class="slbl" data-i18n="manual">Kullanma Kılavuzu</span><span class="sarrow">›</span></div>
 <div class="setrow" id="setBackup"><span class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></span><span class="slbl" data-i18n="backup">Yedekle ve geri yükle</span><span class="sbadge" id="bkBadge" hidden></span><span class="sarrow">›</span></div>
 <div class="setrow" id="setPrivacy"><span class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5.2c0 4.3-2.9 7.8-7 9.8-4.1-2-7-5.5-7-9.8V6l7-3z" stroke-linejoin="round"/><path d="M9.2 12.2l1.9 1.9 3.7-3.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="slbl" data-i18n="privacy">Gizlilik Politikası</span><span class="sarrow">›</span></div>
@@ -6459,7 +6460,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v349</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v351</span></div>
   </div>
 
   <div class="tesekkur">
@@ -13410,7 +13411,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v349-focused-duas';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v351-report-settings';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16789,9 +16790,9 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
-<script src="/assets/workflow-i18n.js?v=349"></script>
-<script src="/assets/dua-practice.js?v=349"></script>
-<script src="/assets/study-workflow.js?v=349"></script>
+<script src="/assets/workflow-i18n.js?v=351"></script>
+<script src="/assets/dua-practice.js?v=351"></script>
+<script src="/assets/study-workflow.js?v=351"></script>
 <script src="/assets/study-split.js?v=335"></script>
 <script src="/assets/study-sessions.js?v=335"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>

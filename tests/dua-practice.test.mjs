@@ -10,9 +10,9 @@ const html=fs.readFileSync('index.html','utf8'),at=html.indexOf('var NAMAZ=['),e
 const texts=vm.runInNewContext(html.slice(at,end)+';NAMAZ'),catalog=prayerCatalog(texts);
 
 test('prayer recordings retain exact source bytes, and unavailable prayers never acquire a misleading voice',()=>{
-  const recordings=catalog.filter(x=>x.recording);assert.equal(recordings.length,14);
+  const recordings=catalog.filter(x=>x.recording);assert.equal(recordings.length,13);
   for(const item of recordings){const r=item.recording,bytes=fs.readFileSync('.'+r.path);assert.equal(bytes.length,r.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),r.sha256);assert.ok(r.source.startsWith('https://namaz.diyanet.gov.tr/namaz/assets/audio/dualar/')||r.source.startsWith('https://d1.islamhouse.com/'));if(r.source.includes('islamhouse.com')){assert.ok(r.reader);assert.equal(r.permissionUrl,'https://d1.islamhouse.com/html/faq.htm');assert.ok(r.sourcePage);}}
-  for(const id of ['kuran-baslama','yemek','amentü'])assert.equal(catalog.find(x=>x.id===id).recording,undefined);
+  for(const id of ['kuran-baslama','yemek','amentü','istihare'])assert.equal(catalog.find(x=>x.id===id).recording,undefined);
   assert.deepEqual(catalog.find(x=>x.id==='kunut').namaz,[4,5]);
   assert.ok(catalog.find(x=>x.id==='kunut').ar.includes(texts[5].ar),'a combined recording is accompanied by both prayers');
   const sw=fs.readFileSync('sw.js','utf8');const core=sw.slice(sw.indexOf('const CORE'),sw.indexOf('for(const language'));

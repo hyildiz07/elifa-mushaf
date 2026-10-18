@@ -71,16 +71,17 @@ window.elifaPlaybackEvent=(event)=>{
 };
 window.elifaAudioFailure=code=>{try{window.elifaLog?.('playback_error',{mode:attempt?.mode||'range',error_code:code});}catch(e){}};
 // Explicit, inspectable email report. No note text or audio is collected.
-const report=document.createElement('button');report.type='button';report.className='workflowReport';report.dataset.i18n='report_issue';readerStatus.after(report);
+const report=$('setReportIssue');
 const dialog=document.createElement('dialog');dialog.className='workflowDialog';
-const title=document.createElement('h3');title.dataset.i18n='report_issue';const explanation=document.createElement('p');explanation.dataset.i18n='report_details';
+const title=document.createElement('h3');title.id='issueReportTitle';title.dataset.i18n='report_issue';dialog.setAttribute('aria-labelledby',title.id);const explanation=document.createElement('p');explanation.dataset.i18n='report_details';
 const reason=document.createElement('select');reason.setAttribute('aria-label',t('report_issue'));
-for(const key of ['report_tail','report_cut','report_repeat']){const option=document.createElement('option');option.value=key;option.dataset.i18n=key;reason.append(option);}
+for(const key of ['report_tail','report_cut','report_repeat','report_other']){const option=document.createElement('option');option.value=key;option.dataset.i18n=key;reason.append(option);}
+reason.value='report_other';
 const preview=document.createElement('pre');const send=document.createElement('a');send.dataset.i18n='report_send';send.className='workflowSend';
 const close=document.createElement('button');close.type='button';close.dataset.i18n='close';close.onclick=()=>dialog.close();dialog.append(title,explanation,reason,preview,send,close);document.body.append(dialog);
-function diagnostic(){const split=window.elifaStudySplitSelection?.();return {version:$('appVer').textContent,reciter:SET.reciter,surah:curS,ayah:split?.ay||curAy,part:split?split.selectedIndex+1:null,mode:split?(SET.cumu?'cumulative_parts':'parts'):mode,speed:SET.speed,repeatEnabled:!!SET.repOn,verseRepeats:SET.rep,combineRepeats:SET.combineRep??SET.rep,rangeRounds:SET.rangeRep??SET.rep,online:navigator.onLine};}
+function diagnostic(){const split=window.elifaStudySplitSelection?.();const sid=Number.isInteger(curS)&&curS>=1&&curS<=114?curS:null;return {version:$('appVer').textContent,reciter:SET.reciter,surah:sid,ayah:sid?(split?.ay||curAy):null,part:split?split.selectedIndex+1:null,mode:split?(SET.cumu?'cumulative_parts':'parts'):mode,speed:SET.speed,repeatEnabled:!!SET.repOn,verseRepeats:SET.rep,combineRepeats:SET.combineRep??SET.rep,rangeRounds:SET.rangeRep??SET.rep,online:navigator.onLine};}
 let context=null;
-function reportText(){const text=t(reason.value)+'\n\n'+JSON.stringify(context,null,2);preview.textContent=text;send.href='mailto:info@elifaplatform.com?subject='+encodeURIComponent('Elifa Mushaf audio')+'&body='+encodeURIComponent(text);}
+function reportText(){const text=t(reason.value)+'\n\n'+JSON.stringify(context,null,2);preview.textContent=text;send.href='mailto:info@elifaplatform.com?subject='+encodeURIComponent('Elifa Mushaf · '+t('report_issue'))+'&body='+encodeURIComponent(text);}
 report.onclick=()=>{context=diagnostic();reportText();dialog.showModal();window.elifaLog?.('audio_feedback_open');};reason.onchange=reportText;
 function refreshLanguage(){window.elifaApplyI18n?.();syncRep();syncRep2();render();renderContinue();renderHomeHeroLine();$('q').dispatchEvent(new Event('input'));
   for(const [id,key] of Object.entries({langBtnH:'language',guideBtnH:'guide',themeBtnH:'theme'}))$(id)?.setAttribute('aria-label',t(key));

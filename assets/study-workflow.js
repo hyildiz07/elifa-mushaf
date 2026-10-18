@@ -246,25 +246,24 @@
     } catch (e) {
     }
   };
-  var report = document.createElement("button");
-  report.type = "button";
-  report.className = "workflowReport";
-  report.dataset.i18n = "report_issue";
-  readerStatus.after(report);
+  var report = $("setReportIssue");
   var dialog = document.createElement("dialog");
   dialog.className = "workflowDialog";
   var title = document.createElement("h3");
+  title.id = "issueReportTitle";
   title.dataset.i18n = "report_issue";
+  dialog.setAttribute("aria-labelledby", title.id);
   var explanation = document.createElement("p");
   explanation.dataset.i18n = "report_details";
   var reason = document.createElement("select");
   reason.setAttribute("aria-label", t("report_issue"));
-  for (const key of ["report_tail", "report_cut", "report_repeat"]) {
+  for (const key of ["report_tail", "report_cut", "report_repeat", "report_other"]) {
     const option = document.createElement("option");
     option.value = key;
     option.dataset.i18n = key;
     reason.append(option);
   }
+  reason.value = "report_other";
   var preview = document.createElement("pre");
   var send = document.createElement("a");
   send.dataset.i18n = "report_send";
@@ -277,13 +276,14 @@
   document.body.append(dialog);
   function diagnostic() {
     const split = window.elifaStudySplitSelection?.();
-    return { version: $("appVer").textContent, reciter: SET.reciter, surah: curS, ayah: split?.ay || curAy, part: split ? split.selectedIndex + 1 : null, mode: split ? SET.cumu ? "cumulative_parts" : "parts" : mode, speed: SET.speed, repeatEnabled: !!SET.repOn, verseRepeats: SET.rep, combineRepeats: SET.combineRep ?? SET.rep, rangeRounds: SET.rangeRep ?? SET.rep, online: navigator.onLine };
+    const sid = Number.isInteger(curS) && curS >= 1 && curS <= 114 ? curS : null;
+    return { version: $("appVer").textContent, reciter: SET.reciter, surah: sid, ayah: sid ? split?.ay || curAy : null, part: split ? split.selectedIndex + 1 : null, mode: split ? SET.cumu ? "cumulative_parts" : "parts" : mode, speed: SET.speed, repeatEnabled: !!SET.repOn, verseRepeats: SET.rep, combineRepeats: SET.combineRep ?? SET.rep, rangeRounds: SET.rangeRep ?? SET.rep, online: navigator.onLine };
   }
   var context = null;
   function reportText() {
     const text = t(reason.value) + "\n\n" + JSON.stringify(context, null, 2);
     preview.textContent = text;
-    send.href = "mailto:info@elifaplatform.com?subject=" + encodeURIComponent("Elifa Mushaf audio") + "&body=" + encodeURIComponent(text);
+    send.href = "mailto:info@elifaplatform.com?subject=" + encodeURIComponent("Elifa Mushaf \xB7 " + t("report_issue")) + "&body=" + encodeURIComponent(text);
   }
   report.onclick = () => {
     context = diagnostic();

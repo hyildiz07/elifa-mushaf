@@ -76,3 +76,18 @@ test('choosing verse practice or changing a repeat count enables the requested r
  nodes.get('studyRepeatEnabled').checked=false;nodes.get('studySetting_rep').value=3;nodes.get('studySetting_rep').handlers.input();assert.equal(nodes.get('studyRepeatEnabled').checked,true);
  nodes.get('studyRepeatEnabled').checked=false;assert.equal(c.window.elifaStudySettings.capture().repOn,false,'explicitly disabling repeats remains possible');
 });
+
+test('settings report opens an inspectable diagnostic without sending a message or occupying reader space',()=>{
+ const {c,nodes,events}=harness();const report=nodes.get('setReportIssue');assert.ok(report);assert.equal(typeof report.onclick,'function');
+ const html=fs.readFileSync('index.html','utf8'),settings=html.indexOf('id="ayarlar"'),button=html.indexOf('id="setReportIssue"');assert.ok(button>settings);assert.ok(button<html.indexOf('id="tbAyarlar"'));
+ report.onclick();const dialog=c.document.body.children.find(x=>x.className==='workflowDialog');assert.equal(dialog.open,true);assert.equal(dialog.attrs['aria-labelledby'],'issueReportTitle');
+ const preview=dialog.children[3],data=JSON.parse(preview.textContent.split('\n\n')[1]);assert.equal(data.surah,1);assert.equal(data.ayah,1);assert.equal(data.reciter,223);assert.equal(data.online,true);
+ assert.ok(dialog.children[4].href.startsWith('mailto:info@elifaplatform.com?'),'sending still requires the mail app');assert.equal(events.at(-1).event,'audio_feedback_open');
+ dialog.children[5].onclick();assert.equal(dialog.open,false);
+});
+
+test('a settings report opened before reading has no fabricated verse context',()=>{
+ const {c,nodes}=harness();c.curS=0;nodes.get('setReportIssue').onclick();
+ const dialog=c.document.body.children.find(x=>x.className==='workflowDialog');const data=JSON.parse(dialog.children[3].textContent.split('\n\n')[1]);
+ assert.equal(dialog.children[2].value,'report_other');assert.equal(data.surah,null);assert.equal(data.ayah,null);
+});

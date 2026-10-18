@@ -44,8 +44,10 @@ test('istikhara has both favourable and unfavourable branches plus practical non
   for(const lang of ['tr','en']){assert.equal(item.guide[lang].length,5);assert.ok(item.meal[lang]);assert.ok(item.guideTitle[lang]);}
   const guide=item.guide.tr.join(' ');
   for(const concept of ['istişare','iki rekât','Kâfirûn','İhlâs','rüya görmek şart değildir','Namaz kılamıyorsan']) assert.ok(guide.includes(concept),concept);
-  assert.equal(item.recording.id,'istihare-chapter','the exact istikhara chapter is assigned explicitly');
-  assert.equal(item.recording.kind,'complete-audiobook-chapter');assert.ok(item.audioNoteTR,'chapter explanations must not be presented as bare recitation');
+  assert.equal(item.recording,undefined,'the mismatching recording cannot play or be downloaded');
+  assert.equal(item.audioDisabled,true);assert.equal(item.guideProminent,true,'instructions are visible above the prayer');
+  assert.equal(item.audioNoteTR,undefined);assert.equal(item.audioNoteEN,undefined);
+  assert.equal(fs.existsSync('assets/dua-audio/istihare-chapter.mp3'),false);
 });
 
 test('important daily supplications have distinct ids, sources, Arabic, pronunciation and both meanings',()=>{

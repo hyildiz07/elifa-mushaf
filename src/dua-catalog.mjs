@@ -3,7 +3,7 @@ import {extraPrayers} from './dua-extra-catalog.mjs';
 import {recordedAlternatives} from './dua-recorded-alternatives.mjs';
 const portal='https://namaz.diyanet.gov.tr/namaz/#sureler-dualar.html';
 const book='https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf';
-const record=id=>recordings.find(r=>r.prayerId===id&&r.readerId==='mishary-alafasy')||recordings.find(r=>r.id===({'istigfar':'istigfar-adult','istihare':'istihare-chapter','yemek-sonrasi-alternatif':'yemek-chapter'}[id]||id));
+const record=id=>recordings.find(r=>r.prayerId===id&&r.readerId==='mishary-alafasy')||recordings.find(r=>r.id===({'istigfar':'istigfar-adult','yemek-sonrasi-alternatif':'yemek-chapter'}[id]||id));
 export function prayerCatalog(texts){
   const item=(id,indices,title)=>{
     const rows=indices.map(i=>texts[i]),languages=new Set(rows.flatMap(r=>Object.keys(r.meal||{})));
@@ -41,5 +41,5 @@ export function prayerCatalog(texts){
     meal:{tr:'Allah’ım! Kur’an’ı hak ile indirdin. Ona ilgimi artır; onu gözüme nur, gönlüme şifa kıl. Dilimi onunla süsle, yüzümü güzelleştir, bedenimi güçlendir. Gece ve gündüz sana itaat ederek onu okumayı nasip et; beni Peygamberimiz ve onun seçkin yakınlarıyla haşret. Senin rızan, iman ehlinin kabirlerinin aydınlanması ve Peygamberimizin ruhu için; şeytandan uzaklaşmak, günahların bağışlanması, tövbenin kabulü, derecelerin yükselmesi, cehennemden kurtuluş, imanın devamı ve sana kavuşmak niyetiyle okuyorum. Rahmetinle kabul et. Hamd âlemlerin Rabbi Allah’adır.',en:'O Allah, You sent the Quran down in truth. Increase my desire for it; make it light for my sight and healing for my heart. Adorn my speech and strengthen me through it. Grant me its recitation in obedience to You by night and day, and gather me with the Prophet and his righteous family. I intend this recitation for Your pleasure, for light in the believers’ graves, and for the Prophet; for protection from Satan, forgiveness, acceptance of repentance, higher rank, deliverance from the Fire, lasting faith and meeting You. Accept it through Your mercy. Praise belongs to Allah, Lord of all worlds.'},note:'traditional_prayer'
   },...extraPrayers];
   const withAlternatives=entries.flatMap(entry=>[entry,...recordedAlternatives.filter(a=>a.id===entry.id+'-alternatif')]);
-  return withAlternatives.map(entry=>({...entry,recording:entry.recording||record(entry.id)}));
+  return withAlternatives.map(entry=>({...entry,recording:entry.audioDisabled?undefined:entry.recording||record(entry.id)}));
 }
