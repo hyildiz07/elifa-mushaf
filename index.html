@@ -6467,7 +6467,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v355</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v356</span></div>
   </div>
 
   <div class="tesekkur">
@@ -7844,6 +7844,23 @@ function activateDownloadedChapterAudio(rid,sid){
   pendingOfflineAudioRefresh={rid,sid,generation:audioCacheGeneration[rid+':'+sid]||0};
   void refreshDownloadedChapterAudio();
 }
+// Missing provider file_size must not route short Afasy chapters through a
+// timer-stopped media stream. Bound the download before allocating decoded PCM.
+async function smallChapterBytes(response,limit){
+  if(!response.ok)throw Error('CHAPTER_AUDIO_HTTP');
+  const size=Number(response.headers.get('Content-Length'));
+  if(size>limit){await response.body?.cancel();throw Error('CHAPTER_AUDIO_SIZE');}
+  const reader=response.body?.getReader();if(!reader)throw Error('CHAPTER_AUDIO_BODY');
+  const chunks=[];let length=0;
+  try{
+    for(;;){const {done,value}=await reader.read();if(done)break;
+      length+=value.byteLength;if(length>limit)throw Error('CHAPTER_AUDIO_SIZE');chunks.push(value);
+    }
+  }finally{await reader.cancel().catch(()=>{});reader.releaseLock();}
+  const bytes=new Uint8Array(length);let off=0;
+  for(const chunk of chunks){bytes.set(chunk,off);off+=chunk.byteLength;}
+  return bytes.buffer;
+}
 async function loadAudio(rid,sid,generation=audioCacheGeneration[rid+':'+sid]||0){
   const key=rid+':'+sid;
   let af=null, srcUrl=null, offlineBlob=null, blobUrl=null;
@@ -7935,7 +7952,8 @@ async function loadAudio(rid,sid,generation=audioCacheGeneration[rid+':'+sid]||0
     offlineBlob,offlineCacheId:af.offline_cache_id||null,fileId:af.id,fileSize:offlineBlob?.size||af.file_size,
     verifiedCbr:!!(af.source_recording||af.verified_word_source),buffer:null,ay,ws,verseEnds,verseRanges,verseSegments,
     trustedNext:af.trustedNext||{},allowedSplitCuts:af.trustedCuts||{},
-    repeatWholeVerse:af.repeatWholeVerse||{},end,segs:allSegs,decoding:false};
+    repeatWholeVerse:af.repeatWholeVerse||{},end,segs:allSegs,decoding:false,
+    exactChapter:rid===223&&end>0&&end<=60000};
   if(generation===(audioCacheGeneration[key]||0))audioCache[key]=o;
 
   // Ses verisi elde et (offline'da zaten var, akışta indir) ve kısa ise decode et
@@ -7955,6 +7973,11 @@ async function loadAudio(rid,sid,generation=audioCacheGeneration[rid+':'+sid]||0
   }
   else if(srcUrl && willDecode){                           // akış + küçük: indir+decode (beklenebilir)
     o.decodePromise=fetch(srcUrl).then(r=>r.arrayBuffer()).then(ab=>tryDecode(ab)).catch(()=>{});
+  }else if(srcUrl&&o.exactChapter){
+    // Afasy metadata has no file_size (including Fatiha). Its short chapters
+    // still need the same sample-bounded player used by marked/split audio.
+    o.decodePromise=fetch(srcUrl,{signal:AbortSignal.timeout(20000)}).then(r=>smallChapterBytes(r,DECODE_LIMIT))
+      .then(tryDecode).catch(()=>{});
   }else if(srcUrl){                                         // akış + büyük: decode yok (uzun sûre)
     o.decodePromise=null;
   }
@@ -10156,6 +10179,16 @@ async function goStep(){
       (normalChapterAudio||AD_);
     if(!playing||request!==audioRequestId||stepRequest!==stepRequestId||plan[pi]!==st||
       (piece&&st.sourceRanges[pieceCursor]!==piece))return;
+    const exactNormal=target?.exactChapter&&!piece&&!st.full&&!st.fluent&&
+      !st.preserveTail&&!st.studyExact&&!st.wordCut;
+    if(exactNormal){
+      const context=ac();if(context.state==='suspended')context.resume().catch(()=>{});
+      if(!target.buffer&&target.decodePromise)await target.decodePromise;
+      if(!playing||request!==audioRequestId||stepRequest!==stepRequestId||plan[pi]!==st)return;
+      // Do not silently fall back to timer-stopped HTMLAudio after a failed
+      // precise decode: that is the path that can leak the next ayah on phones.
+      if(!target.buffer)throw Error('EXACT_CHAPTER_AUDIO_UNAVAILABLE');
+    }
     if(piece?.verseSource){
       const ay=piece.verseSource,fullEnd=target?.verseEnds?.[ay];
       if(!(Number.isFinite(fullEnd)&&fullEnd>0))throw Error('HUSARY_VERSE_RANGE');
@@ -13434,7 +13467,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v355-method-menu';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v356-afasy-boundary';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
