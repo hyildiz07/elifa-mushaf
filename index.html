@@ -6460,7 +6460,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v351</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v352</span></div>
   </div>
 
   <div class="tesekkur">
@@ -9859,10 +9859,10 @@ $('playBtn2').onclick=()=>{
 $('prevPart').onclick=()=>startFromPart((plan[pi]&&plan[pi].part!==undefined?plan[pi].part:(splitSelIdx||0))-1);
 $('nextPart').onclick=()=>startFromPart((plan[pi]&&plan[pi].part!==undefined?plan[pi].part:(splitSelIdx||0))+1);
 let repLongFired2=false;
-$('repTog2').onclick=()=>{if(repLongFired2){repLongFired2=false;return;}SET.repOn=!SET.repOn;saveSet();syncRep2();syncRep();toast(SET.repOn?'Tekrar açık · '+SET.rep+'×':'Tekrar kapalı');};
-$('repPlus2').onclick=()=>{SET.rep=Math.min(99,SET.rep+1);SET.repOn=true;saveSet();syncRep2();syncRep();};
-$('repMinus2').onclick=()=>{SET.rep=Math.max(1,SET.rep-1);saveSet();syncRep2();syncRep();};
-$('cumuTog2').onclick=()=>{SET.cumu=!SET.cumu;saveSet();syncCumu2();syncCumu();queuePracticeModeChange(SET.cumu);toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');};
+$('repTog2').onclick=()=>{if(repLongFired2){repLongFired2=false;return;}SET.repOn=!SET.repOn;saveSet();syncPracticeControls();toast(SET.repOn?'Tekrar açık · '+SET.rep+'×':'Tekrar kapalı');};
+$('repPlus2').onclick=()=>{SET.rep=Math.min(99,SET.rep+1);SET.repOn=true;saveSet();syncPracticeControls();};
+$('repMinus2').onclick=()=>{SET.rep=Math.max(1,SET.rep-1);saveSet();syncPracticeControls();};
+$('cumuTog2').onclick=()=>{SET.cumu=!SET.cumu;saveSet();syncPracticeControls();queuePracticeModeChange(SET.cumu);toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');};
 (function(){const b=$('repTog2');if(!b)return;let t=null;
   b.addEventListener('pointerdown',()=>{repLongFired2=false;t=setTimeout(()=>{t=null;repLongFired2=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx='parts';fillGearSheet();openSheet('gearSheet');},480);});
   const c=()=>{if(t){clearTimeout(t);t=null;}};b.addEventListener('pointerup',c);b.addEventListener('pointerleave',c);b.addEventListener('pointercancel',c);})();
@@ -9873,7 +9873,7 @@ function syncRep2(){
   if(playing&&plan[pi]?.part!==undefined)updateStat();
   if(splitAy!=null&&$('split').classList.contains('on'))updateSplitIntro();
 }
-function syncCumu2(){const b=$('cumuTog2');if(b)b.classList.toggle('on',SET.cumu);if(splitAy!=null&&$('split').classList.contains('on'))updateSplitIntro();}
+function syncCumu2(){const b=$('cumuTog2');if(b){b.classList.toggle('on',SET.cumu);b.setAttribute('aria-pressed',String(!!SET.cumu));}if(splitAy!=null&&$('split').classList.contains('on'))updateSplitIntro();}
 
 /* mark save (sheet) */
 let pickedColor='#F5D63D', splitSaving=false;
@@ -10969,11 +10969,11 @@ $('repTog').onclick=()=>{
   if(repLongFired){repLongFired=false;return;}
   SET.repOn=!SET.repOn;saveSet();
   document.querySelector('.repctl').classList.toggle('on',SET.repOn);
-  syncRep();syncRep2();
+  syncPracticeControls();
   toast(SET.repOn?'Tekrar açık · '+SET[readerRepeatKey()]+'×':'Tekrar kapalı');
 };
-$('repPlus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.min(99,SET[key]+1);SET.repOn=true;saveSet();syncRep();};
-$('repMinus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.max(key==='rangeRep'?0:1,SET[key]-1);saveSet();syncRep();};
+$('repPlus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.min(99,SET[key]+1);SET.repOn=true;saveSet();syncPracticeControls();};
+$('repMinus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.max(key==='rangeRep'?0:1,SET[key]-1);saveSet();syncPracticeControls();};
 /* uzun bas → ayarlar */
 (function(){const b=$('repTog');if(!b)return;let t=null;
   b.addEventListener('pointerdown',()=>{repLongFired=false;t=setTimeout(()=>{t=null;repLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');},480);});
@@ -10988,11 +10988,18 @@ $('cumuTog').onclick=()=>{
   const partsActive=!!activeStudySplitSelection();
   SET.cumu=partsActive?!SET.cumu:!(window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu);
   if(!partsActive)window.elifaSetPracticeMode?.(SET.cumu?'cumulative':'range');
-  saveSet();syncCumu();syncRep();syncCumu2();queuePracticeModeChange(SET.cumu);
+  saveSet();syncPracticeControls();queuePracticeModeChange(SET.cumu);
   toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');
 };
 let cumuLongFired=false;
-function syncCumu(){const b=$('cumuTog');const on=activeStudySplitSelection()?SET.cumu:(window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu);if(b)b.classList.toggle('on',on);}
+function syncCumu(){const b=$('cumuTog');const on=activeStudySplitSelection()?SET.cumu:(window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu);if(b){b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(!!on));}}
+function syncPracticeControls(){
+  syncRep();syncRep2();syncCumu();syncCumu2();syncSpeedBtn();
+  for(const [id,key] of Object.entries({repInp:'rep',repInp2:'rep',combineRepInp:'combineRep',rangeRepInp:'rangeRep',waitInp:'wait',waitInp2:'wait',spdInp:'speed'})){
+    const input=$(id);if(input)input.value=SET[key];
+  }
+  window.elifaStudySplitRefreshStatus?.();
+}
 /* 1+2 ikonuna UZUN BAS → âyet aralığı programı paneli (tekrar ikonundaki gibi) */
 (function(){const b=$('cumuTog');if(!b)return;let t=null;
   b.addEventListener('pointerdown',()=>{t=setTimeout(()=>{t=null;cumuLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');},480);});
@@ -11039,9 +11046,10 @@ $('padRange').oninput=e=>{SET.endPad=+e.target.value;$('padVal').textContent=SET
 $('autoSw').onclick=()=>{SET.auto=!SET.auto;saveSet();$('autoSw').classList.toggle('on',SET.auto);};
 $('optAuto').onclick=e=>{if(e.target.closest('#autoSw'))return;$('autoSw').click();};
 ['repInp2','waitInp2'].forEach(id=>$(id).onchange=commitInputs2);
-function commitInputs2(){
-  SET.rep=Math.max(1,+$('repInp2').value||5);SET.wait=Math.max(0,+$('waitInp2').value||0);saveSet();
-  $('repInp').value=SET.rep;$('waitInp').value=SET.wait;if(typeof syncRep==="function")syncRep();
+function commitInputs2(change){
+  SET.rep=Math.min(99,Math.max(1,Math.round(+$('repInp2').value||5)));SET.wait=Math.min(60,Math.max(0,+$('waitInp2').value||0));
+  if(change==='rep'||change?.target?.id==='repInp2')window.elifaRepeatSettingChanged?.('rep',activeStudySplitSelection()||$('split').classList.contains('on')?'parts':'ayah');
+  saveSet();syncPracticeControls();
 }
 
 /* wake lock */
@@ -11194,7 +11202,7 @@ function fillGearSheet(){
   syncTestBtn();
 }
 const _gb=$('gearBtn');if(_gb)_gb.onclick=()=>{
-  gearCtx=activeStudySplitSelection()?'studyParts':gearCtx==='studyParts'?'ayah':gearCtx;
+  gearCtx=activeStudySplitSelection()?'studyParts':$('split').classList.contains('on')?'parts':'ayah';
   fillGearSheet();openSheet('gearSheet');
 };
 $('optProgram').onclick=()=>{gearCtx=activeStudySplitSelection()?'studyParts':'ayah';closeSheets();fillGearSheet();openSheet('gearSheet');};
@@ -11210,24 +11218,27 @@ document.querySelectorAll('.stepper button').forEach(b=>{
     const inp=$(id);const step=b.dataset.t==='spd'?0.05:(b.dataset.t==='sp'||b.dataset.t==='ep'?10:1);
     let v=(+inp.value||0)+step*(+b.dataset.d);
     v=Math.max(inp.min!==''?Number(inp.min):-999,Math.min(inp.max!==''?Number(inp.max):999,+v.toFixed(2)));
-    inp.value=v;inSheet?commitInputs2():commitInputs();
+    inp.value=v;inSheet?commitInputs2(b.dataset.t):commitInputs(b.dataset.t);
     if(b.dataset.t==='from'||b.dataset.t==='to')rememberRangeSelection();
   };
 });
 ['repInp','combineRepInp','rangeRepInp','waitInp','spdInp','startPadInp','endPadInp'].forEach(id=>$(id).onchange=commitInputs);
 ['fromInp','toInp'].forEach(id=>$(id).addEventListener('input',rememberRangeSelection));
-function commitInputs(){
+function commitInputs(change){
   SET.rep=Math.min(99,Math.max(1,Math.round(+$('repInp').value||5)));
   SET.combineRep=Math.min(99,Math.max(0,Math.round(+$('combineRepInp').value||0)));
   SET.rangeRep=Math.min(99,Math.max(0,Math.round(+$('rangeRepInp').value||0)));
-  SET.wait=Math.max(0,+$('waitInp').value||0);
+  SET.wait=Math.min(60,Math.max(0,+$('waitInp').value||0));
   SET.speed=Math.min(2,Math.max(0.5,+$('spdInp').value||1));
   SET.startPad=Math.max(-300,Math.min(300,+$('startPadInp').value||0));
   SET.endPad=Math.max(-300,Math.min(300,+$('endPadInp').value||0));
+  const key=typeof change==='string'?change:({repInp:'rep',combineRepInp:'combineRep',rangeRepInp:'rangeRep'})[change?.target?.id];
+  if(['rep','combineRep','rangeRep'].includes(key))window.elifaRepeatSettingChanged?.(key);
   saveSet();
   applyLiveSpeed();
   if(typeof syncRep==="function")syncRep();
   if(typeof syncSpeedBtn==="function")syncSpeedBtn();
+  if(typeof syncPracticeControls==='function')syncPracticeControls();
   const e1=$('repEcho'),e2=$('repEcho2');if(e1)e1.textContent=SET.rep;if(e2)e2.textContent=SET.rep;
 }
 
@@ -13411,7 +13422,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v351-report-settings';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v352-settings-sync';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16792,7 +16803,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/ui-extra.js?v=1"></script>
 <script src="/assets/workflow-i18n.js?v=351"></script>
 <script src="/assets/dua-practice.js?v=351"></script>
-<script src="/assets/study-workflow.js?v=351"></script>
+<script src="/assets/study-workflow.js?v=352"></script>
 <script src="/assets/study-split.js?v=335"></script>
 <script src="/assets/study-sessions.js?v=335"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>

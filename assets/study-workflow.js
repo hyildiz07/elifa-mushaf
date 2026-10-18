@@ -47,9 +47,9 @@
   grid.className = "workflowGrid";
   details.append(grid);
   var choice = modeControl("studyMode", (value) => {
-    mode = value;
+    draftCombine = value === "cumulative";
     repeat.checked = true;
-    syncModes();
+    render();
   });
   var choiceField = field("study_method", choice);
   choiceField.classList.add("workflowMethod");
@@ -87,6 +87,15 @@
     grid.append(wrapper);
     if (["rep", "combineRep", "rangeRep"].includes(key)) input.addEventListener("input", () => {
       repeat.checked = true;
+      if (key === "rep" && choice.value === "range") {
+        choice.value = "verse";
+        draftCombine = false;
+      }
+      if (key === "combineRep" && Number(input.value) > 0) {
+        choice.value = "cumulative";
+        draftCombine = true;
+      }
+      render();
     });
   }
   var repeat = document.createElement("input");
@@ -97,6 +106,7 @@
   var gearMode = modeControl("practiceMode", (value) => {
     mode = value;
     SET.cumu = value === "cumulative";
+    SET.repOn = true;
     saveSet();
     syncModes();
     if (typeof queuePracticeModeChange === "function") queuePracticeModeChange(value);
@@ -122,7 +132,7 @@
     return { reciter: SET.reciter, speed: SET.speed, rep: Math.min(99, Math.max(1, Math.round(SET.rep))), combineRep: SET.combineRep ?? SET.rep, rangeRep: SET.rangeRep ?? SET.rep, repOn: !!SET.repOn, wait: Math.min(60, Math.max(0, SET.wait)), mode, splitCombine: !!SET.cumu };
   }
   function fill(v) {
-    draftCombine = v.splitCombine;
+    draftCombine = v.mode === "cumulative" || v.splitCombine;
     choice.value = v.mode;
     reciter.value = String(v.reciter);
     for (const key of Object.keys(fields)) $("studySetting_" + key).value = v[key] ?? v.rep;
@@ -134,14 +144,12 @@
     return validStudySettings(v) && RECITERS.some((r) => r.id === v.reciter) ? v : null;
   }
   function syncModes() {
-    choice.value = mode;
     gearMode.value = mode;
-    syncCumu();
-    syncRep();
+    syncPracticeControls();
     render();
   }
   function render() {
-    methodHelp.textContent = t("mode_" + mode + "_help");
+    methodHelp.textContent = t("mode_" + choice.value + "_help");
     choice.setAttribute("aria-label", t("study_method"));
     gearField.hidden = typeof gearCtx !== "undefined" && gearCtx !== "ayah";
     gearMode.setAttribute("aria-label", t("study_method"));
@@ -172,21 +180,33 @@
       syncModes();
     }
   };
+  window.elifaRepeatSettingChanged = (key, context2 = typeof gearCtx !== "undefined" ? gearCtx : "ayah") => {
+    SET.repOn = true;
+    const parts = context2 !== "ayah";
+    let next = mode;
+    if (key === "rep" && mode === "range" && !parts) next = "verse";
+    if (key === "combineRep" && SET.combineRep > 0) {
+      if (parts) SET.cumu = true;
+      else next = "cumulative";
+    }
+    if (next !== mode) {
+      mode = next;
+      SET.cumu = mode === "cumulative";
+      if (typeof queuePracticeModeChange === "function") queuePracticeModeChange(mode);
+    } else if (parts && key === "combineRep" && SET.combineRep > 0 && typeof queuePracticeModeChange === "function") queuePracticeModeChange(true);
+    syncModes();
+  };
   window.elifaStudySettings = {
     valid: validStudySettings,
     validProgress: validStudyProgress,
     capture: () => $("studySetup").classList.contains("on") ? read() : current(),
     onSetup(fromReader) {
-      if (!fromReader) {
-        mode = "range";
-        pendingResume = null;
-      }
-      fill(current());
+      if (!fromReader) pendingResume = null;
+      fill({ ...current(), ...!fromReader ? { mode: "range" } : {} });
       syncModes();
     },
     load(item, { resume = false } = {}) {
       const v = validStudySettings(item.settings) ? item.settings : { ...current(), mode: "range", splitCombine: false };
-      mode = v.mode;
       fill(v);
       syncModes();
       pendingResume = resume && validStudyProgress(item.progress, item.from, item.to) && !item.progress.completed ? { ...item.progress, sid: item.sid } : null;
@@ -199,13 +219,9 @@
       }
       mode = v.mode;
       lastProgress = null;
-      render();
       Object.assign(SET, { reciter: v.reciter, speed: v.speed, rep: v.rep, combineRep: v.combineRep, rangeRep: v.rangeRep, repOn: v.repOn, wait: v.wait, cumu: v.splitCombine });
       saveSet();
-      syncRep();
-      syncRep2();
-      syncCumu();
-      syncSpeedBtn();
+      syncModes();
       return pendingResume || {};
     },
     afterOpen() {
