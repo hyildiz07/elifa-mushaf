@@ -4,3 +4,6 @@
 .repeatHelp{display:block;margin:6px 0 0;font-size:12px;line-height:1.5;font-weight:400;color:var(--muted)}
 #gearSheet .repeatHelp{color:var(--gear-muted);letter-spacing:normal;text-transform:none}
 #gearSheet .gearRepeatRow .repeatHelp{grid-column:1/-1;margin-top:-6px}
+
+/* Mode-specific counters must also respect hidden on flex labels. */
+#studySetup .studyField[hidden]{display:none!important}

@@ -48,7 +48,6 @@
   details.append(grid);
   var choice = modeControl("studyMode", (value) => {
     draftCombine = value === "cumulative";
-    repeat.checked = true;
     render();
   });
   var choiceField = field("study_method", choice);
@@ -65,6 +64,7 @@
     reciter.append(o);
   }
   grid.append(field("rec_title", reciter));
+  var fieldRows = {};
   var fields = { rangeRep: ["repeat_range_count", 0, 99, 1], combineRep: ["repeat_combine_count", 0, 99, 1], rep: ["repeat_ayah_count", 1, 99, 1], speed: ["s_speed", 0.5, 2, 0.05], wait: ["workflow_wait", 0, 60, 1] };
   for (const [key, [label, min, max, step]] of Object.entries(fields)) {
     const input = document.createElement("input");
@@ -84,9 +84,9 @@
       input.setAttribute("aria-describedby", help.id);
       wrapper.append(help);
     }
+    fieldRows[key] = wrapper;
     grid.append(wrapper);
     if (["rep", "combineRep", "rangeRep"].includes(key)) input.addEventListener("input", () => {
-      repeat.checked = true;
       if (key === "rep" && choice.value === "range") {
         choice.value = "verse";
         draftCombine = false;
@@ -98,13 +98,10 @@
       render();
     });
   }
-  var repeat = document.createElement("input");
-  repeat.type = "checkbox";
-  repeat.id = "studyRepeatEnabled";
-  grid.append(field("pb_repeat", repeat));
   $("studyOpen").before(choiceField, details);
   var gearMode = modeControl("practiceMode", (value) => {
     mode = value;
+    SET.studyMode = value;
     SET.cumu = value === "cumulative";
     SET.repOn = true;
     saveSet();
@@ -113,7 +110,20 @@
   });
   var gearField = field("study_method", gearMode);
   gearField.classList.add("workflowMode");
-  $("rangeStart").before(gearField);
+  $("gearRepeats").before(gearField);
+  for (const [inputId, labelKey] of Object.entries({ rangeRepInp: "repeat_range_count", combineRepInp: "repeat_combine_count", repInp: "repeat_ayah_count" })) {
+    const help = $(inputId + "Help");
+    if (!help) continue;
+    const info = document.createElement("details");
+    info.className = "gearInfo";
+    const summary2 = document.createElement("summary");
+    summary2.id = inputId + "Info";
+    summary2.textContent = "?";
+    summary2.setAttribute("aria-label", t(labelKey));
+    info.append(summary2);
+    help.before(info);
+    info.append(help);
+  }
   var status = document.createElement("p");
   status.id = "practiceProgress";
   status.className = "workflowProgress";
@@ -136,10 +146,9 @@
     choice.value = v.mode;
     reciter.value = String(v.reciter);
     for (const key of Object.keys(fields)) $("studySetting_" + key).value = v[key] ?? v.rep;
-    repeat.checked = v.repOn;
   }
   function read() {
-    const v = { ...current(), splitCombine: draftCombine, reciter: Number(reciter.value), mode: choice.value, repOn: repeat.checked };
+    const v = { ...current(), splitCombine: draftCombine, reciter: Number(reciter.value), mode: choice.value, repOn: true };
     for (const key of Object.keys(fields)) v[key] = Number($("studySetting_" + key).value);
     return validStudySettings(v) && RECITERS.some((r) => r.id === v.reciter) ? v : null;
   }
@@ -149,6 +158,8 @@
     render();
   }
   function render() {
+    if (fieldRows.rep) fieldRows.rep.hidden = choice.value === "range";
+    if (fieldRows.combineRep) fieldRows.combineRep.hidden = choice.value !== "cumulative";
     methodHelp.textContent = t("mode_" + choice.value + "_help");
     choice.setAttribute("aria-label", t("study_method"));
     gearField.hidden = typeof gearCtx !== "undefined" && gearCtx !== "ayah";
@@ -177,6 +188,7 @@
   window.elifaSetPracticeMode = (value) => {
     if (modeKeys[value]) {
       mode = value;
+      SET.studyMode = value;
       syncModes();
     }
   };
@@ -191,6 +203,7 @@
     }
     if (next !== mode) {
       mode = next;
+      SET.studyMode = mode;
       SET.cumu = mode === "cumulative";
       if (typeof queuePracticeModeChange === "function") queuePracticeModeChange(mode);
     } else if (parts && key === "combineRep" && SET.combineRep > 0 && typeof queuePracticeModeChange === "function") queuePracticeModeChange(true);
@@ -202,7 +215,7 @@
     capture: () => $("studySetup").classList.contains("on") ? read() : current(),
     onSetup(fromReader) {
       if (!fromReader) pendingResume = null;
-      fill({ ...current(), ...!fromReader ? { mode: "range" } : {} });
+      fill({ ...current(), mode: !fromReader && modeKeys[SET.studyMode] ? SET.studyMode : mode });
       syncModes();
     },
     load(item, { resume = false } = {}) {
@@ -219,7 +232,7 @@
       }
       mode = v.mode;
       lastProgress = null;
-      Object.assign(SET, { reciter: v.reciter, speed: v.speed, rep: v.rep, combineRep: v.combineRep, rangeRep: v.rangeRep, repOn: v.repOn, wait: v.wait, cumu: v.splitCombine });
+      Object.assign(SET, { reciter: v.reciter, speed: v.speed, rep: v.rep, combineRep: v.combineRep, rangeRep: v.rangeRep, repOn: true, wait: v.wait, cumu: v.splitCombine, studyMode: v.mode });
       saveSet();
       syncModes();
       return pendingResume || {};
@@ -227,6 +240,7 @@
     afterOpen() {
       if (pendingResume?.sid === curS && pendingResume.part !== void 0) window.elifaResumeStudySplit?.(pendingResume.ay, pendingResume.part);
       pendingResume = null;
+      syncPracticeControls();
     },
     resume: () => pendingResume
   };
@@ -317,7 +331,10 @@
     renderHomeHeroLine();
     $("q").dispatchEvent(new Event("input"));
     for (const [id, key] of Object.entries({ langBtnH: "language", guideBtnH: "guide", themeBtnH: "theme" })) $(id)?.setAttribute("aria-label", t(key));
-    for (const [id, key] of Object.entries({ repInp: "repeat_ayah_count", combineRepInp: "repeat_combine_count", rangeRepInp: "repeat_range_count" })) $(id)?.setAttribute("aria-label", t(key));
+    for (const [id, key] of Object.entries({ repInp: "repeat_ayah_count", combineRepInp: "repeat_combine_count", rangeRepInp: "repeat_range_count" })) {
+      $(id)?.setAttribute("aria-label", t(key));
+      $(id + "Info")?.setAttribute("aria-label", t(key));
+    }
     choice.setAttribute("aria-label", t("study_method"));
     reason.setAttribute("aria-label", t("report_issue"));
   }
