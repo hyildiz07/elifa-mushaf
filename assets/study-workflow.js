@@ -263,6 +263,7 @@
     option.dataset.i18n = key;
     reason.append(option);
   }
+  reason.value = "report_other";
   var preview = document.createElement("pre");
   var send = document.createElement("a");
   send.dataset.i18n = "report_send";
@@ -275,7 +276,8 @@
   document.body.append(dialog);
   function diagnostic() {
     const split = window.elifaStudySplitSelection?.();
-    return { version: $("appVer").textContent, reciter: SET.reciter, surah: curS, ayah: split?.ay || curAy, part: split ? split.selectedIndex + 1 : null, mode: split ? SET.cumu ? "cumulative_parts" : "parts" : mode, speed: SET.speed, repeatEnabled: !!SET.repOn, verseRepeats: SET.rep, combineRepeats: SET.combineRep ?? SET.rep, rangeRounds: SET.rangeRep ?? SET.rep, online: navigator.onLine };
+    const sid = Number.isInteger(curS) && curS >= 1 && curS <= 114 ? curS : null;
+    return { version: $("appVer").textContent, reciter: SET.reciter, surah: sid, ayah: sid ? split?.ay || curAy : null, part: split ? split.selectedIndex + 1 : null, mode: split ? SET.cumu ? "cumulative_parts" : "parts" : mode, speed: SET.speed, repeatEnabled: !!SET.repOn, verseRepeats: SET.rep, combineRepeats: SET.combineRep ?? SET.rep, rangeRounds: SET.rangeRep ?? SET.rep, online: navigator.onLine };
   }
   var context = null;
   function reportText() {

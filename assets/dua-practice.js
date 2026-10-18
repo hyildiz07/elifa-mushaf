@@ -763,7 +763,7 @@
     section.append(heading);
     const help = document.createElement("p");
     help.className = "prayerHelp";
-    help.textContent = local2("Duay\u0131 b\xF6l\u2019e bas; istedi\u011Fin kelimeleri parma\u011F\u0131nla i\u015Faretleyip bir par\xE7a olu\u015Ftur. Olu\u015Fan par\xE7alar gri g\xF6r\xFCn\xFCr. Sesli \xE7al\u0131\u015Fmada kayd\u0131 dinleyerek her par\xE7an\u0131n ba\u015Flang\u0131\xE7 ve biti\u015Fini de i\u015Faretle.", "Open Split prayer, select words and create a part. Assigned words turn gray. To study with audio, listen and mark the start and end of each part.");
+    help.textContent = local2("Duay\u0131 b\xF6l\u2019e bas; istedi\u011Fin kelimeleri parma\u011F\u0131nla i\u015Faretleyip bir par\xE7a olu\u015Ftur. Olu\u015Fan par\xE7alar gri g\xF6r\xFCn\xFCr.", "Open Split prayer, select words and create a part. Assigned words turn gray.") + (audio ? local2(" Sesli \xE7al\u0131\u015Fmada kayd\u0131 dinleyerek her par\xE7an\u0131n ba\u015Flang\u0131\xE7 ve biti\u015Fini de i\u015Faretle.", " To study with audio, listen and mark the start and end of each part.") : "");
     section.append(help);
     const feedback = document.createElement("p");
     feedback.className = "prayerStatus";
@@ -913,7 +913,7 @@
     }
     const countHelp = document.createElement("small");
     countHelp.className = "prayerHelp";
-    countHelp.textContent = audio ? local2("Par\xE7a say\u0131s\u0131 her par\xE7aya uygulan\u0131r. Birle\u015Ftirme say\u0131s\u0131 1+2, sonra 1+2+3 i\xE7indir; 0 kapal\u0131d\u0131r. T\xFCm \xE7al\u0131\u015Fma say\u0131s\u0131, b\xFCt\xFCn program bitince ba\u015Fa d\xF6ner; 0 ve 1 tek turdur.", "Part repeats apply to each part. Combine repeats apply to 1+2, then 1+2+3; 0 turns combining off. Whole-study repeats restart the completed program; 0 and 1 both mean one tour.") : local2("Bu duan\u0131n uygulama i\xE7i sesi hen\xFCz yok. Olu\u015Fturdu\u011Fun metin par\xE7alar\u0131n\u0131 gizleyip g\xF6stererek ve Sonraki\u2019ye basarak kendin okuyabilirsin.", "In-app audio is not available for this prayer yet. Read your text parts yourself, hide or reveal them and move on with Next.");
+    countHelp.textContent = audio ? local2("Par\xE7a say\u0131s\u0131 her par\xE7aya uygulan\u0131r. Birle\u015Ftirme say\u0131s\u0131 1+2, sonra 1+2+3 i\xE7indir; 0 kapal\u0131d\u0131r. T\xFCm \xE7al\u0131\u015Fma say\u0131s\u0131, b\xFCt\xFCn program bitince ba\u015Fa d\xF6ner; 0 ve 1 tek turdur.", "Part repeats apply to each part. Combine repeats apply to 1+2, then 1+2+3; 0 turns combining off. Whole-study repeats restart the completed program; 0 and 1 both mean one tour.") : local2("Olu\u015Fturdu\u011Fun metin par\xE7alar\u0131n\u0131 gizleyip g\xF6stererek ve Sonraki\u2019ye basarak kendin okuyabilirsin.", "Read your text parts yourself, hide or reveal them and move on with Next.");
     plan.append(countHelp);
     const play = button(local2("\u25B6 Par\xE7alar\u0131 sesli \xE7al\u0131\u015F", "\u25B6 Study parts with audio"), () => {
       const ranges = chosenRanges();

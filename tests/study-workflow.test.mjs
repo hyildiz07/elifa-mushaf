@@ -85,3 +85,9 @@ test('settings report opens an inspectable diagnostic without sending a message 
  assert.ok(dialog.children[4].href.startsWith('mailto:info@elifaplatform.com?'),'sending still requires the mail app');assert.equal(events.at(-1).event,'audio_feedback_open');
  dialog.children[5].onclick();assert.equal(dialog.open,false);
 });
+
+test('a settings report opened before reading has no fabricated verse context',()=>{
+ const {c,nodes}=harness();c.curS=0;nodes.get('setReportIssue').onclick();
+ const dialog=c.document.body.children.find(x=>x.className==='workflowDialog');const data=JSON.parse(dialog.children[3].textContent.split('\n\n')[1]);
+ assert.equal(dialog.children[2].value,'report_other');assert.equal(data.surah,null);assert.equal(data.ayah,null);
+});
