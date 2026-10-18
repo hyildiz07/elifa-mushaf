@@ -17,6 +17,7 @@
   var attempt = null;
   var draftCombine = false;
   var modeKeys = { range: "mode_range", verse: "mode_verse", cumulative: "mode_cumulative" };
+  var methodMenus = [];
   function modeControl(id, onChange) {
     const select = document.createElement("select");
     select.id = id;
@@ -28,6 +29,88 @@
     }
     select.setAttribute("aria-label", t("study_options"));
     select.addEventListener("change", () => onChange(select.value));
+    select.hidden = true;
+    select.className = "workflowNativeMode";
+    select.tabIndex = -1;
+    select.setAttribute("aria-hidden", "true");
+    const picker = document.createElement("div");
+    picker.className = "workflowMethodPicker";
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.id = id + "Toggle";
+    toggle.className = "workflowMethodToggle";
+    toggle.setAttribute("aria-haspopup", "dialog");
+    toggle.setAttribute("aria-expanded", "false");
+    const label = document.createElement("span"), arrow = document.createElement("span");
+    arrow.textContent = "\u2304";
+    arrow.setAttribute("aria-hidden", "true");
+    toggle.append(label, arrow);
+    const panel = document.createElement("dialog");
+    panel.id = id + "Dialog";
+    panel.className = "workflowMethodDialog";
+    toggle.setAttribute("aria-controls", panel.id);
+    const heading = document.createElement("h3");
+    heading.id = id + "Title";
+    heading.dataset.i18n = "study_method";
+    panel.setAttribute("aria-labelledby", heading.id);
+    panel.append(heading);
+    const options = [];
+    function close2() {
+      panel.close();
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.focus?.();
+    }
+    for (const value of Object.keys(modeKeys)) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.id = id + "Option_" + value;
+      button.className = "workflowMethodOption";
+      const name = document.createElement("strong");
+      name.dataset.i18n = modeKeys[value];
+      const help = document.createElement("small");
+      help.dataset.i18n = "mode_" + value + "_help";
+      const check = document.createElement("span");
+      check.className = "workflowMethodCheck";
+      check.setAttribute("aria-hidden", "true");
+      check.textContent = "\u2713";
+      const text = document.createElement("span");
+      text.append(name, help);
+      button.append(check, text);
+      panel.append(button);
+      options.push({ value, button });
+      button.onclick = () => {
+        select.value = value;
+        select.dispatchEvent(new Event("change", { bubbles: true }));
+        close2();
+      };
+    }
+    const dismiss = document.createElement("button");
+    dismiss.type = "button";
+    dismiss.className = "workflowMethodClose";
+    dismiss.dataset.i18n = "close";
+    dismiss.onclick = close2;
+    panel.append(dismiss);
+    toggle.onclick = () => {
+      sync();
+      panel.showModal();
+      toggle.setAttribute("aria-expanded", "true");
+      options.find((o) => o.value === select.value)?.button.focus?.();
+    };
+    panel.addEventListener("close", () => {
+      toggle.setAttribute("aria-expanded", "false");
+    });
+    panel.addEventListener("click", (event) => {
+      if (event.target === panel) close2();
+    });
+    function sync() {
+      label.textContent = t(modeKeys[select.value] || "mode_range");
+      toggle.setAttribute("aria-label", t("study_method") + ": " + label.textContent);
+      for (const o of options) o.button.setAttribute("aria-pressed", String(o.value === select.value));
+    }
+    methodMenus.push(sync);
+    picker.append(select, toggle);
+    select.picker = picker;
+    document.body.append(panel);
     return select;
   }
   function field(key, control) {
@@ -50,7 +133,7 @@
     draftCombine = value === "cumulative";
     render();
   });
-  var choiceField = field("study_method", choice);
+  var choiceField = field("study_method", choice.picker);
   choiceField.classList.add("workflowMethod");
   var methodHelp = document.createElement("small");
   methodHelp.className = "repeatHelp";
@@ -108,7 +191,7 @@
     syncModes();
     if (typeof queuePracticeModeChange === "function") queuePracticeModeChange(value);
   });
-  var gearField = field("study_method", gearMode);
+  var gearField = field("study_method", gearMode.picker);
   gearField.classList.add("workflowMode");
   $("gearRepeats").before(gearField);
   for (const [inputId, labelKey] of Object.entries({ rangeRepInp: "repeat_range_count", combineRepInp: "repeat_combine_count", repInp: "repeat_ayah_count" })) {
@@ -158,6 +241,7 @@
     render();
   }
   function render() {
+    for (const sync of methodMenus) sync();
     if (fieldRows.rep) fieldRows.rep.hidden = choice.value === "range";
     if (fieldRows.combineRep) fieldRows.combineRep.hidden = choice.value !== "cumulative";
     methodHelp.textContent = t("mode_" + choice.value + "_help");
