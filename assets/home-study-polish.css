@@ -99,3 +99,49 @@ body[data-dark="1"] #studySetup .studyCard,
 body[data-dark="1"] #studySetup .studySaveCard,
 body[data-dark="1"] #studySetup .studySaved{box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 24px rgba(0,0,0,.22);}
 body[data-dark="1"] #studySetup .studySaveRow button{box-shadow:inset 0 1px 0 rgba(255,255,255,.14),0 3px 8px rgba(0,0,0,.22);}
+
+/* Compact Study Desk: prioritize the working form over repeated headings. */
+#studySetup .studyTop{min-height:52px;padding:calc(env(safe-area-inset-top) + 5px) max(12px,calc((100vw - 1000px)/2)) 5px;gap:10px}
+#studySetup .studyMain{width:min(100%,1024px);padding:12px 14px 32px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(240px,1fr);gap:12px;align-items:start}
+#studySetup .studyHero{grid-column:1/-1;padding:0 2px 2px}
+#studySetup .studyHero .studyEyebrow,#studySetup .studyHero h1{display:none}
+#studySetup .studyHero .studyLead{font-size:12px;line-height:1.4}
+#studySetup .studyCard{grid-row:span 2}
+#studySetup .studyCard,#studySetup .studySaveCard,#studySetup .studySaved{padding:14px;border-radius:16px;box-shadow:inset 0 1px 0 #ffffff35,0 4px 12px #0f1d2b0d}
+#studySetup .studySaveCard,#studySetup .studySaved{margin-top:0}
+#studySetup .studyCardHeader{gap:9px;margin-bottom:10px}
+#studySetup .studyCardIcon{width:32px;height:32px;border-radius:10px}
+#studySetup .studyCardIcon svg{width:22px;height:22px}
+#studySetup .studyCardHeader h2{font-size:18px;line-height:1.3;margin:0}
+#studySetup .studyField{gap:4px;font-size:11px;letter-spacing:0}
+#studySetup .studyField input{height:44px;min-height:44px;padding:0 11px;border-radius:10px;font-size:15px}
+#studySetup .studySurahToggle{min-height:44px;padding:8px 11px;border-radius:10px;font-size:15px}
+#studySetup .studyFields{gap:10px;margin-top:9px}
+#studySetup .studySummary{margin:9px 0;padding:7px 10px;font-size:12px;border-radius:8px;line-height:1.4}
+#studySetup .workflowMethodToggle{min-height:44px;padding:9px 11px;border-radius:10px;font-size:14px}
+#studySetup .workflowMethod>.repeatHelp{display:none}
+#studySetup .workflowSettings{margin:9px 0;padding:6px 10px;border-radius:10px}
+#studySetup .workflowSettings summary{min-height:32px;display:flex;align-items:center;gap:6px;font-size:12px}
+#studySetup .workflowSettings summary::before{content:'›';font-size:18px;line-height:1}
+#studySetup .workflowSettings[open] summary::before{transform:rotate(90deg)}
+#studySetup .workflowGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:7px}
+#studySetup .workflowGrid>.studyField:first-child{grid-column:1/-1}
+#studySetup .workflowGrid .repeatHelp{font-size:11px;line-height:1.35;margin-top:2px}
+#studySetup .workflowGrid select{min-height:44px;height:44px;font-size:14px;padding:7px 10px}
+#studySetup .studyOpen{min-height:44px;border-radius:11px;font-size:14px;box-shadow:inset 0 1px 0 #fffbe580,0 3px 7px #59411f24}
+#studySetup .studySaveRow{gap:8px}
+#studySetup .studySaveRow button{min-height:44px;padding:8px 10px;border-radius:10px;font-size:12px}
+#studySetup .studyFootnote{margin:8px 0 0;font-size:11px;line-height:1.35}
+#studySetup .studySaved h2{margin:0 0 7px;font-size:16px}
+#studySetup .studySaved p{font-size:12px}
+#studySetup .studySavedList{gap:8px}
+#studySetup .studySavedItem{padding:10px;border-radius:11px;gap:8px}
+@media(max-width:640px){
+ #studySetup .studyMain{grid-template-columns:minmax(0,1fr);padding:10px 10px 24px;gap:10px}
+ #studySetup .studyCard{grid-row:auto}
+ #studySetup .studyCard,#studySetup .studySaveCard,#studySetup .studySaved{padding:12px}
+ #studySetup .studySaveRow{grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:8px}
+ #studySetup .studySaveRow .studyField{font-size:10px}
+ #studySetup .studySaveRow button{max-width:145px;font-size:11px}
+ #studySetup .studySaveRow button::before{display:none}
+}

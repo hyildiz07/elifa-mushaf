@@ -7,3 +7,35 @@
 
 /* Mode-specific counters must also respect hidden on flex labels. */
 #studySetup .studyField[hidden]{display:none!important}
+
+/* Theme-matched method selection in setup and the shared Hifz sheet. */
+select.workflowNativeMode[hidden]{display:none!important}
+.workflowMethodPicker{width:100%;min-width:0}
+.workflowMethodToggle{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:48px;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(155deg,color-mix(in srgb,var(--surface) 94%,white),var(--surface));color:var(--ink);font:inherit;font-weight:700;text-align:start;cursor:pointer;box-shadow:inset 0 1px 0 #ffffff50,0 3px 7px #0000000d}
+#gearSheet .workflowMethodToggle{min-height:44px;padding:8px 11px;border-radius:11px;border-color:var(--gear-line);color:var(--gear-ink);background:var(--gear-card);font-size:13px}
+.workflowMethodToggle:focus-visible,.workflowMethodDialog button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.workflowMethodDialog{--method-bg:var(--bg);--method-card:var(--surface);--method-ink:var(--ink);--method-muted:var(--muted);--method-line:var(--line);--method-accent:var(--gold);box-sizing:border-box;width:min(92vw,480px);max-height:85dvh;overflow-y:auto;overscroll-behavior:contain;padding:20px;border:1px solid var(--method-line);border-radius:22px;background:var(--method-bg);color:var(--method-ink);box-shadow:0 20px 70px #00000055}
+.workflowMethodDialog::backdrop{background:#07162699;backdrop-filter:blur(3px)}
+.workflowMethodDialog h3{font:700 23px Georgia,serif;margin:0 0 14px;color:var(--method-ink)}
+.workflowMethodDialog button{font:inherit;cursor:pointer}
+.workflowMethodOption{display:flex;align-items:center;gap:12px;width:100%;min-height:74px;margin:8px 0;padding:13px;border:1px solid var(--method-line);border-radius:14px;background:linear-gradient(155deg,color-mix(in srgb,var(--method-card) 94%,white),var(--method-card));color:var(--method-ink);text-align:start;box-shadow:inset 0 1px 0 #ffffff30,0 2px 5px #0000000c}
+.workflowMethodOption[aria-pressed=true]{border-color:var(--method-accent);background:color-mix(in srgb,var(--method-accent) 14%,var(--method-card));box-shadow:inset 0 0 0 1px var(--method-accent)}
+.workflowMethodOption strong{display:block;font-size:15px;line-height:1.4}
+.workflowMethodOption small{display:block;margin-top:4px;font-size:12px;line-height:1.5;color:var(--method-muted)}
+.workflowMethodCheck{display:grid;place-items:center;flex:0 0 24px;height:24px;border:1px solid var(--method-line);border-radius:50%;color:transparent;font-size:15px;font-weight:800}
+.workflowMethodOption[aria-pressed=true] .workflowMethodCheck{color:var(--method-ink);background:color-mix(in srgb,var(--method-accent) 42%,var(--method-card));border-color:var(--method-accent)}
+.workflowMethodClose{display:block;width:100%;min-height:44px;margin-top:13px;border:1px solid var(--method-line);border-radius:12px;color:var(--method-ink);background:var(--method-card);font-weight:700!important}
+body[data-layout=saray] .workflowMethodDialog{--method-bg:#f7f0df;--method-card:#fffaf0;--method-ink:#18334f;--method-muted:#5e7084;--method-line:#d8c796;--method-accent:#b68a35}
+body[data-dark='1'] .workflowMethodDialog{--method-bg:#141d2e;--method-card:#1c2940;--method-ink:#f7f5ef;--method-muted:#b6c5d7;--method-line:#45546b;--method-accent:#dcb863}
+body[data-theme=saraygece] .workflowMethodDialog{--method-bg:#101a2b;--method-card:#1b2a41;--method-ink:#f8e8b6;--method-muted:#c9d0d8;--method-line:#957a49;--method-accent:#f4d273}
+body[data-theme=nahlyildizlari] .workflowMethodDialog{--method-bg:#0d1427;--method-card:#17233e;--method-ink:#f6f8ff;--method-muted:#c2d0e8;--method-line:#5169a1;--method-accent:#d6ad5a}
+@media(max-width:380px){.workflowMethodDialog{padding:15px}.workflowMethodOption{padding:11px;gap:10px}}
+
+/* Dense option rows keep the entire method choice comfortably in view. */
+.workflowMethodDialog{width:min(92vw,410px);padding:15px;border-radius:18px}
+.workflowMethodDialog h3{font-size:20px;margin-bottom:10px}
+.workflowMethodOption{min-height:58px;padding:10px;margin:6px 0;gap:10px;border-radius:11px}
+.workflowMethodOption strong{font-size:14px;line-height:1.3}
+.workflowMethodOption small{font-size:11px;line-height:1.35;margin-top:3px}
+.workflowMethodCheck{flex-basis:20px;height:20px;font-size:13px}
+.workflowMethodClose{margin-top:10px}

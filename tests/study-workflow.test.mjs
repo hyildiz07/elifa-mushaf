@@ -277,3 +277,26 @@ test('unchanged saved programs produce real playback plans without any input or 
   if(mode!=='range')assert.equal(c.planCycleReps(),4);
  }
 });
+
+test('the themed method menu applies a draft through the same model and closes with the selected state',()=>{
+ const {c,nodes}=harness({repOn:false,cumu:false});c.window.elifaStudySettings.onSetup(false);
+ const toggle=nodes.get('studyModeToggle'),panel=nodes.get('studyModeDialog');
+ assert.equal(nodes.get('studyMode').hidden,true);assert.equal(toggle.attrs['aria-haspopup'],'dialog');
+ toggle.onclick();assert.equal(panel.open,true);assert.equal(toggle.attrs['aria-expanded'],'true');
+ nodes.get('studyModeOption_cumulative').onclick();
+ assert.equal(panel.open,false);assert.equal(toggle.attrs['aria-expanded'],'false');
+ assert.equal(nodes.get('studyModeOption_cumulative').attrs['aria-pressed'],'true');
+ assert.equal(c.window.elifaStudySettings.capture().mode,'cumulative');
+ assert.equal(c.SET.cumu,false,'draft menu does not change current playback');assert.equal(c.playing,false);
+ c.window.elifaStudySettings.beforeOpen();
+ assert.equal(c.SET.cumu,true);assert.equal(nodes.get('practiceModeOption_cumulative').attrs['aria-pressed'],'true');
+});
+
+test('cancelling the themed menu does not change practice; reader selection uses the existing queued transition',()=>{
+ const {c,nodes}=harness(),queued=[];c.queuePracticeModeChange=m=>queued.push(m);
+ nodes.get('studyModeToggle').onclick();nodes.get('studyModeDialog').handlers.close();
+ assert.equal(nodes.get('studyModeToggle').attrs['aria-expanded'],'false');assert.deepEqual(queued,[]);
+ nodes.get('practiceModeToggle').onclick();nodes.get('practiceModeOption_verse').onclick();
+ assert.deepEqual(queued,['verse']);assert.equal(c.window.elifaPracticeMode(),'verse');
+ assert.equal(nodes.get('practiceModeDialog').open,false);assert.equal(c.playing,false);
+});
