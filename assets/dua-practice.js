@@ -51,19 +51,6 @@
       bytes: 1145268
     },
     {
-      id: "istihare-chapter",
-      path: "/assets/dua-audio/istihare-chapter.mp3",
-      source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_028_Hisn_Almuslim_Alshwehi.mp3",
-      sourcePage: "https://islamhouse.com/ar/audios/2799103/",
-      bytes: 1612689,
-      sha256: "1be9a28155054bdc28df1d74534bd27fb96ede28aa42a110e016f6c8b5ef7a3a",
-      kind: "complete-audiobook-chapter",
-      reader: "S\xFCleyman b. Muhammed e\u015F-\u015Euveyh\xEE \xB7 M\xFCsl\xFCman\u0131n Kalesi",
-      sourceName: "IslamHouse",
-      permissionUrl: "https://d1.islamhouse.com/html/faq.htm",
-      mime: "audio/mpeg"
-    },
-    {
       id: "yemek-chapter",
       path: "/assets/dua-audio/yemek-chapter.mp3",
       source: "https://d1.islamhouse.com/data/ar/ih_sounds/chain_01/Hisn_Almuslim/Hisn_Almuslim_AlShwehi/ar_071_Hisn_Almuslim_Alshwehi.mp3",
@@ -196,8 +183,8 @@
     id: "istihare",
     title: "\u0130stih\xE2re duas\u0131 ve nas\u0131l yap\u0131l\u0131r?",
     source: istihareSource,
-    audioNoteTR: "Bu sesli kitap b\xF6l\xFCm\xFC ba\u015Fl\u0131k ve rivayet a\xE7\u0131klamalar\u0131yla birlikte istih\xE2re duas\u0131n\u0131 i\xE7erir. \u201C\xC2k\u0131beti emr\xEE\u201D ve \u201C\xE2cili emr\xEE ve \xE2cilih\xEE\u201D gibi nakil farkl\u0131l\u0131klar\u0131 da okunabilir. Yaln\u0131z dua b\xF6l\xFCm\xFCn\xFC \xE7al\u0131\u015Fmak i\xE7in dinleyerek ba\u015Flang\u0131\xE7 ve biti\u015Fi se\xE7ebilirsin.",
-    audioNoteEN: "This audiobook chapter contains headings, narration notes and the istikhara supplication. It may read alternative reported wordings such as \u201Caqibati amri\u201D and \u201Cajili amri wa ajilihi\u201D. Listen and mark the beginning and end to practise the supplication alone.",
+    audioDisabled: true,
+    guideProminent: true,
     ar: "\u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0625\u0650\u0646\u0650\u0651\u064A \u0623\u064E\u0633\u0652\u062A\u064E\u062E\u0650\u064A\u0631\u064F\u0643\u064E \u0628\u0650\u0639\u0650\u0644\u0652\u0645\u0650\u0643\u064E \u0648\u064E\u0623\u064E\u0633\u0652\u062A\u064E\u0642\u0652\u062F\u0650\u0631\u064F\u0643\u064E \u0628\u0650\u0642\u064F\u062F\u0652\u0631\u064E\u062A\u0650\u0643\u064E \u0648\u064E\u0623\u064E\u0633\u0652\u0623\u064E\u0644\u064F\u0643\u064E \u0645\u0650\u0646\u0652 \u0641\u064E\u0636\u0652\u0644\u0650\u0643\u064E \u0627\u0644\u0652\u0639\u064E\u0638\u0650\u064A\u0645\u0650\u060C \u0641\u064E\u0625\u0650\u0646\u064E\u0651\u0643\u064E \u062A\u064E\u0642\u0652\u062F\u0650\u0631\u064F \u0648\u064E\u0644\u064E\u0627 \u0623\u064E\u0642\u0652\u062F\u0650\u0631\u064F \u0648\u064E\u062A\u064E\u0639\u0652\u0644\u064E\u0645\u064F \u0648\u064E\u0644\u064E\u0627 \u0623\u064E\u0639\u0652\u0644\u064E\u0645\u064F \u0648\u064E\u0623\u064E\u0646\u0652\u062A\u064E \u0639\u064E\u0644\u064E\u0651\u0627\u0645\u064F \u0627\u0644\u0652\u063A\u064F\u064A\u064F\u0648\u0628\u0650. \u0627\u0644\u0644\u064E\u0651\u0647\u064F\u0645\u064E\u0651 \u0625\u0650\u0646\u0652 \u0643\u064F\u0646\u0652\u062A\u064E \u062A\u064E\u0639\u0652\u0644\u064E\u0645\u064F \u0623\u064E\u0646\u064E\u0651 \u0647\u064E\u0630\u064E\u0627 \u0627\u0644\u0652\u0623\u064E\u0645\u0652\u0631\u064E \u062E\u064E\u064A\u0652\u0631\u064C \u0644\u0650\u064A \u0641\u0650\u064A \u062F\u0650\u064A\u0646\u0650\u064A \u0648\u064E\u0645\u064E\u0639\u064E\u0627\u0634\u0650\u064A \u0648\u064E\u0639\u064E\u0627\u0642\u0650\u0628\u064E\u0629\u0650 \u0623\u064E\u0645\u0652\u0631\u0650\u064A \u0641\u064E\u0627\u0642\u0652\u062F\u064F\u0631\u0652\u0647\u064F \u0644\u0650\u064A \u0648\u064E\u064A\u064E\u0633\u0650\u0651\u0631\u0652\u0647\u064F \u0644\u0650\u064A\u060C \u062B\u064F\u0645\u064E\u0651 \u0628\u064E\u0627\u0631\u0650\u0643\u0652 \u0644\u0650\u064A \u0641\u0650\u064A\u0647\u0650. \u0648\u064E\u0625\u0650\u0646\u0652 \u0643\u064F\u0646\u0652\u062A\u064E \u062A\u064E\u0639\u0652\u0644\u064E\u0645\u064F \u0623\u064E\u0646\u064E\u0651 \u0647\u064E\u0630\u064E\u0627 \u0627\u0644\u0652\u0623\u064E\u0645\u0652\u0631\u064E \u0634\u064E\u0631\u064C\u0651 \u0644\u0650\u064A \u0641\u0650\u064A \u062F\u0650\u064A\u0646\u0650\u064A \u0648\u064E\u0645\u064E\u0639\u064E\u0627\u0634\u0650\u064A \u0648\u064E\u0639\u064E\u0627\u0642\u0650\u0628\u064E\u0629\u0650 \u0623\u064E\u0645\u0652\u0631\u0650\u064A \u0641\u064E\u0627\u0635\u0652\u0631\u0650\u0641\u0652\u0647\u064F \u0639\u064E\u0646\u0650\u0651\u064A \u0648\u064E\u0627\u0635\u0652\u0631\u0650\u0641\u0652\u0646\u0650\u064A \u0639\u064E\u0646\u0652\u0647\u064F \u0648\u064E\u0627\u0642\u0652\u062F\u064F\u0631\u0652 \u0644\u0650\u064A\u064E \u0627\u0644\u0652\u062E\u064E\u064A\u0652\u0631\u064E \u062D\u064E\u064A\u0652\u062B\u064F \u0643\u064E\u0627\u0646\u064E \u062B\u064F\u0645\u064E\u0651 \u0623\u064E\u0631\u0652\u0636\u0650\u0646\u0650\u064A.",
     ok: "All\xE2h\xFCmme inn\xEE esteh\xEEr\xFCke bi-ilmike ve estakdir\xFCke bi-kudretike ve es\u2019el\xFCke min fadlikel-az\xEEm. Fe-inneke takdiru ve l\xE2 akdiru ve ta\u2018lem\xFC ve l\xE2 a\u2018lem\xFC ve ente all\xE2m\xFCl-guy\xFBb. All\xE2h\xFCmme in k\xFCnte ta\u2018lem\xFC enne h\xE2zel-emra hayrun l\xEE f\xEE d\xEEn\xEE ve me\xE2\u015F\xEE ve \xE2k\u0131beti emr\xEE fakd\xFCrh\xFC l\xEE ve yessirh\xFC l\xEE, s\xFCmme b\xE2rik l\xEE f\xEEh. Ve in k\xFCnte ta\u2018lem\xFC enne h\xE2zel-emra \u015Ferrun l\xEE f\xEE d\xEEn\xEE ve me\xE2\u015F\xEE ve \xE2k\u0131beti emr\xEE fasrifh\xFC ann\xEE vasrifn\xEE anh\xFC vakd\xFCr liyel-hayra hays\xFC k\xE2ne s\xFCmme erd\u0131n\xEE.",
     meal: { tr: "Allah\u2019\u0131m! Bilginle senden hay\u0131rl\u0131s\u0131n\u0131 se\xE7meni, kudretinle bana g\xFC\xE7 vermeni ve b\xFCy\xFCk l\xFCtfundan ihsan etmeni dilerim. Senin g\xFCc\xFCn yeter, benim yetmez; sen bilirsin, ben bilmem. Gizliyi en iyi bilen sensin. Allah\u2019\u0131m! Bu i\u015F dinim, ya\u015Fay\u0131\u015F\u0131m ve sonucum bak\u0131m\u0131ndan benim i\xE7in hay\u0131rl\u0131ysa onu bana nasip et, kolayla\u015Ft\u0131r ve bereketli k\u0131l. K\xF6t\xFCyse onu benden, beni ondan uzakla\u015Ft\u0131r. Hay\u0131r nerede olursa olsun onu bana nasip et ve beni raz\u0131 k\u0131l.", en: "O Allah, through Your knowledge I seek what is good, through Your power I seek strength, and I ask of Your great bounty. You have power and I do not; You know and I do not. You know all that is hidden. If this matter is good for my religion, livelihood and outcome, decree it for me, make it easy and bless it. If it is bad for me, turn it away from me and me away from it. Decree goodness for me wherever it is, then make me content." },
@@ -334,7 +321,7 @@
   // src/dua-catalog.mjs
   var portal = "https://namaz.diyanet.gov.tr/namaz/#sureler-dualar.html";
   var book2 = "https://dijital.diyanet.gov.tr/File/Download?id=4061&path=4061_1.pdf";
-  var record = (id) => dua_recordings_default.find((r) => r.prayerId === id && r.readerId === "mishary-alafasy") || dua_recordings_default.find((r) => r.id === ({ "istigfar": "istigfar-adult", "istihare": "istihare-chapter", "yemek-sonrasi-alternatif": "yemek-chapter" }[id] || id));
+  var record = (id) => dua_recordings_default.find((r) => r.prayerId === id && r.readerId === "mishary-alafasy") || dua_recordings_default.find((r) => r.id === ({ "istigfar": "istigfar-adult", "yemek-sonrasi-alternatif": "yemek-chapter" }[id] || id));
   function prayerCatalog(texts) {
     const item = (id, indices, title) => {
       const rows = indices.map((i) => texts[i]), languages = new Set(rows.flatMap((r) => Object.keys(r.meal || {})));
@@ -388,7 +375,7 @@
       note: "traditional_prayer"
     }, ...extraPrayers];
     const withAlternatives = entries.flatMap((entry) => [entry, ...recordedAlternatives.filter((a) => a.id === entry.id + "-alternatif")]);
-    return withAlternatives.map((entry) => ({ ...entry, recording: entry.recording || record(entry.id) }));
+    return withAlternatives.map((entry) => ({ ...entry, recording: entry.audioDisabled ? void 0 : entry.recording || record(entry.id) }));
   }
 
   // src/dua-copy.mjs
@@ -1281,9 +1268,9 @@
       box.append(p);
     }
     if (item.guide) {
-      const guide = document.createElement("details");
+      const guide = document.createElement(item.guideProminent ? "section" : "details");
       guide.className = "prayerGuide";
-      const heading = document.createElement("summary");
+      const heading = document.createElement(item.guideProminent ? "h3" : "summary");
       heading.textContent = item.guideTitle?.[lang] || item.guideTitle?.tr || local("Nas\u0131l yap\u0131l\u0131r?", "How to practice");
       guide.append(heading);
       const ol = document.createElement("ol");
@@ -1293,10 +1280,19 @@
         ol.append(li);
       }
       guide.append(ol);
-      box.append(guide);
+      if (item.guideProminent) {
+        guide.classList.add("prayerGuideProminent");
+        const a = document.createElement("a");
+        a.href = item.guideSource || item.source;
+        a.target = "_blank";
+        a.rel = "noopener noreferrer";
+        a.textContent = local("Kaynak: Diyanet Din \u0130\u015Fleri Y\xFCksek Kurulu", "Source: Diyanet High Board of Religious Affairs");
+        guide.append(a);
+        back.querySelector(".prayerText").before(guide);
+      } else box.append(guide);
     }
     if (!record2) {
-      status.textContent = t("missing");
+      status.textContent = item.audioDisabled ? local("Bu dua metin olarak sunuluyor. Okunu\u015Funu ve anlam\u0131n\u0131 okuyabilir, par\xE7alar\u0131 sessiz \xE7al\u0131\u015Fabilirsin.", "This prayer is available as text. Read its transliteration and meaning, or study the text in parts.") : t("missing");
       box.append(status);
       if (item.external) {
         const a = document.createElement("a");
@@ -1623,7 +1619,7 @@
         const title = document.createElement("strong");
         title.textContent = item.title;
         const sub = document.createElement("span");
-        sub.textContent = item.recording ? "\u25B6 " + t("tab") + (item.recording.readerId === "mishary-alafasy" ? " \xB7 Mi\u015F\xE2r\xEE R\xE2\u015Fid el-Af\xE2s\xEE" : "") : t("missing");
+        sub.textContent = item.recording ? "\u25B6 " + t("tab") + (item.recording.readerId === "mishary-alafasy" ? " \xB7 Mi\u015F\xE2r\xEE R\xE2\u015Fid el-Af\xE2s\xEE" : "") : item.audioDisabled ? local("Metin ve yap\u0131l\u0131\u015F anlat\u0131m\u0131", "Text and practice guide") : t("missing");
         b.append(title, sub);
         b.onclick = () => open(item);
         container.append(b);
