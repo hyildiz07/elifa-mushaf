@@ -149,5 +149,11 @@
   "Geri alma iptal edildi.": "بحالی کو کالعدم کرنے کا عمل منسوخ کر دیا گیا۔",
   "Yedek alınamadı: ": "بیک اپ ناکام ہو گیا: ",
   "Yeni şifreni belirle.": "نیا پاس ورڈ سیٹ کریں۔",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "ای میل کی تصدیق ہو گئی۔ آپ اپنے اکاؤنٹ میں سائن ان کر سکتے ہیں۔"
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "ای میل کی تصدیق ہو گئی۔ آپ اپنے اکاؤنٹ میں سائن ان کر سکتے ہیں۔",
+  "Hesap değişti. Yeniden dene.": "اکاؤنٹ بدل گیا ہے۔ براہ کرم دوبارہ کوشش کریں۔",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "اکاؤنٹ کا ڈیٹا ابھی تیار نہیں۔ اپنے آلے میں کچھ جگہ خالی کر کے دوبارہ کوشش کریں۔",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "اس آلے پر ہر اکاؤنٹ کا ڈیٹا الگ رکھا جاتا ہے۔ مہمان کے ریکارڈ آپ کے اکاؤنٹ میں صرف آپ کی مرضی سے نقل کیے جائیں گے۔",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "اس آلے پر ہم وقت سازی کی ترجیح محفوظ نہیں ہو سکی۔ کچھ جگہ خالی کر کے دوبارہ کوشش کریں۔",
+  "Önce cihaz yedeğini indir": "پہلے آلے کا بیک اپ ڈاؤن لوڈ کریں",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "آپ کا اکاؤنٹ، نجی پروفائل اور کلاؤڈ بیک اپ حذف ہو جائیں گے۔ اجتماعی ختمِ قرآن میں آپ کی پیش رفت برقرار رہے گی، لیکن آپ کا نام اور اکاؤنٹ سے تعلق ہٹا دیا جائے گا۔ پہلے شرکت اور منتظم کے اپنے نجی روابط محفوظ کر لیں۔ آلے کے ریکارڈ الگ نقل میں رہیں گے؛ لاگ آؤٹ کرنے پر مہمان کے ریکارڈ کھلیں گے۔ ہمارا مشورہ ہے کہ پہلے آلے کا بیک اپ ڈاؤن لوڈ کر لیں۔"
 }

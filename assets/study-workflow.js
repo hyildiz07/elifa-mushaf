@@ -148,7 +148,7 @@
   }
   grid.append(field("rec_title", reciter));
   var fieldRows = {};
-  var fields = { rangeRep: ["repeat_range_count", 0, 99, 1], combineRep: ["repeat_combine_count", 0, 99, 1], rep: ["repeat_ayah_count", 1, 99, 1], speed: ["s_speed", 0.5, 2, 0.05], wait: ["workflow_wait", 0, 60, 1] };
+  var fields = { rangeRep: ["repeat_range_count", 1, 99, 1], combineRep: ["repeat_combine_count", 0, 99, 1], rep: ["repeat_ayah_count", 1, 99, 1], speed: ["s_speed", 0.5, 2, 0.05], wait: ["workflow_wait", 0, 60, 1] };
   for (const [key, [label, min, max, step]] of Object.entries(fields)) {
     const input = document.createElement("input");
     input.id = "studySetting_" + key;
@@ -197,15 +197,7 @@
   for (const [inputId, labelKey] of Object.entries({ rangeRepInp: "repeat_range_count", combineRepInp: "repeat_combine_count", repInp: "repeat_ayah_count" })) {
     const help = $(inputId + "Help");
     if (!help) continue;
-    const info = document.createElement("details");
-    info.className = "gearInfo";
-    const summary2 = document.createElement("summary");
-    summary2.id = inputId + "Info";
-    summary2.textContent = "?";
-    summary2.setAttribute("aria-label", t(labelKey));
-    info.append(summary2);
-    help.before(info);
-    info.append(help);
+    help.classList.add("gearCountHelp");
   }
   var status = document.createElement("p");
   status.id = "practiceProgress";
@@ -222,25 +214,36 @@
   readerStatus.hidden = true;
   $("studyBanner").after(readerStatus);
   function current() {
-    return { reciter: SET.reciter, speed: SET.speed, rep: Math.min(99, Math.max(1, Math.round(SET.rep))), combineRep: SET.combineRep ?? SET.rep, rangeRep: SET.rangeRep ?? SET.rep, repOn: !!SET.repOn, wait: Math.min(60, Math.max(0, SET.wait)), mode, splitCombine: !!SET.cumu };
+    return { reciter: SET.reciter, speed: SET.speed, rep: Math.min(99, Math.max(1, Math.round(SET.rep))), combineRep: SET.combineRep ?? SET.rep, rangeRep: Math.max(1, SET.rangeRep ?? SET.rep), repOn: !!SET.repOn, wait: Math.min(60, Math.max(0, SET.wait)), mode, splitCombine: !!SET.cumu };
   }
   function fill(v) {
     draftCombine = v.mode === "cumulative" || v.splitCombine;
     choice.value = v.mode;
     reciter.value = String(v.reciter);
-    for (const key of Object.keys(fields)) $("studySetting_" + key).value = v[key] ?? v.rep;
+    for (const key of Object.keys(fields)) $("studySetting_" + key).value = key === "rangeRep" ? Math.max(1, v[key] ?? v.rep) : v[key] ?? v.rep;
   }
   function read() {
     const v = { ...current(), splitCombine: draftCombine, reciter: Number(reciter.value), mode: choice.value, repOn: true };
     for (const key of Object.keys(fields)) v[key] = Number($("studySetting_" + key).value);
+    if (v.rangeRep === 0) v.rangeRep = 1;
     return validStudySettings(v) && RECITERS.some((r) => r.id === v.reciter) ? v : null;
   }
+  function syncGearRows() {
+    const parts = typeof gearCtx !== "undefined" && gearCtx !== "ayah";
+    const activeMode = parts ? SET.cumu ? "cumulative" : "verse" : mode;
+    const verse = $("gearRepRow"), combined = $("gearCombineRow");
+    if (verse) verse.hidden = activeMode === "range";
+    if (combined) combined.hidden = activeMode !== "cumulative";
+    for (const sync of methodMenus) sync();
+  }
+  window.elifaPracticeUIRefresh = syncGearRows;
   function syncModes() {
     gearMode.value = mode;
     syncPracticeControls();
     render();
   }
   function render() {
+    syncGearRows();
     for (const sync of methodMenus) sync();
     if (fieldRows.rep) fieldRows.rep.hidden = choice.value === "range";
     if (fieldRows.combineRep) fieldRows.combineRep.hidden = choice.value !== "cumulative";
@@ -426,6 +429,7 @@
   new MutationObserver(() => {
     gearField.hidden = gearCtx !== "ayah";
     gearMode.value = mode;
+    syncGearRows();
   }).observe($("gearSheet"), { attributes: true, attributeFilter: ["class"] });
   fill(current());
   refreshLanguage();

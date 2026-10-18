@@ -5,6 +5,7 @@ import './build-account.mjs';
 import './compile-guide-drafts.mjs';
 import './apply-ui-extra-overrides.mjs';
 import './fix-privacy-legal-name.mjs';
+import './update-privacy-behavior.mjs';
 import './fix-privacy-providers.mjs';
 if(process.env.CONTEXT==='production'){
   execFileSync(process.execPath,['scripts/validate-i18n-drafts.mjs'],{stdio:'inherit'});

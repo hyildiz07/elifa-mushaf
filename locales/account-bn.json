@@ -149,5 +149,11 @@
   "Geri alma iptal edildi.": "পূর্ববর্তী রেকর্ডে ফেরার কাজ বাতিল করা হয়েছে।",
   "Yedek alınamadı: ": "ব্যাকআপ ব্যর্থ: ",
   "Yeni şifreni belirle.": "একটি নতুন পাসওয়ার্ড সেট করুন।",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "ইমেল যাচাই করা হয়েছে। আপনি আপনার অ্যাকাউন্টে সাইন ইন করতে পারেন।"
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "ইমেল যাচাই করা হয়েছে। আপনি আপনার অ্যাকাউন্টে সাইন ইন করতে পারেন।",
+  "Hesap değişti. Yeniden dene.": "অ্যাকাউন্ট বদলে গেছে। আবার চেষ্টা করুন।",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "অ্যাকাউন্টের তথ্য এখনও প্রস্তুত নয়। ডিভাইসে কিছু জায়গা খালি করে আবার চেষ্টা করুন।",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "এই ডিভাইসে প্রতিটি অ্যাকাউন্টের তথ্য আলাদা রাখা হয়। আপনি চাইলে তবেই অতিথির রেকর্ড আপনার অ্যাকাউন্টে কপি করা হবে।",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "এই ডিভাইসে সিঙ্কের পছন্দ সংরক্ষণ করা যায়নি। কিছু জায়গা খালি করে আবার চেষ্টা করুন।",
+  "Önce cihaz yedeğini indir": "আগে ডিভাইসের ব্যাকআপ ডাউনলোড করুন",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "আপনার অ্যাকাউন্ট, ব্যক্তিগত প্রোফাইল ও ক্লাউড ব্যাকআপ মুছে যাবে। সম্মিলিত কোরআন খতমে আপনার অগ্রগতি থাকবে, তবে আপনার নাম ও অ্যাকাউন্টের সংযোগ সরিয়ে দেওয়া হবে। আগে অংশগ্রহণকারী ও পরিচালকের ব্যক্তিগত লিংকগুলো সংরক্ষণ করুন। ডিভাইসের রেকর্ড আলাদা কপিতে থাকবে; লগ আউট করলে অতিথির রেকর্ড খুলবে। আগে ডিভাইসের ব্যাকআপ ডাউনলোড করার পরামর্শ দেওয়া হচ্ছে।"
 }

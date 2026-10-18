@@ -2,6 +2,12 @@
 // English is a draft and must receive a language/legal review before release.
 import {ACCOUNT_DRAFTS} from './account-drafts.mjs';
 export const ACCOUNT_EN={
+ 'Hesap değişti. Yeniden dene.':'Your account changed. Please try again.',
+ 'Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.':'Account records are not ready. Free some device storage and try again.',
+ 'Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.':'Each account has separate records on this device. Guest records are copied to your account only if you choose.',
+ 'Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.':'Your sync preference could not be saved on this device. Free some storage and try again.',
+ 'Önce cihaz yedeğini indir':'Download device backup first',
+ 'Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.':'Your account, private profile and cloud backups are deleted. Khatm progress remains, with your name and account link removed. Keep private participant and organizer links first. Device records remain in a separate copy; signing out opens guest records. Download a device backup first.',
  'Hesap':'Account','Hesap penceresini kapat':'Close account window','Giriş yap':'Sign in','Kayıt ol':'Sign up',
  'Tekrar hoş geldin':'Welcome back','Notlarını, işaretlerini ve ezber ilerlemeni hesabına yedekle; başka cihazında devam et. Okuma ve dinleme her zaman hesapsız açık.':'Back up your notes, bookmarks and memorization progress to your account, then continue on another device. Reading and listening are always available without an account.',
  'Apple ile devam et':'Continue with Apple','Google ile devam et':'Continue with Google','Giriş yaparken e-posta adresin hesap oluşturmak için kullanılır.':'Your email address is used to create an account when you sign in.',
@@ -47,7 +53,7 @@ export const ACCOUNT_EN={
  'Yedek alınamadı: ':'Backup failed: ','Yeni şifreni belirle.':'Set a new password.','E-posta doğrulandı. Hesabına giriş yapabilirsin.':'Email verified. You can sign in to your account.'
 };
 
-export function accountLanguage(){return window.ElifaLocale?.current?.()||localStorage.getItem('elifaLang')||'tr';}
+export function accountLanguage(){try{return window.ElifaLocale?.current?.()||localStorage.getItem('elifaLang')||'tr';}catch{return 'tr';}}
 function translation(value,language){return language==='tr'?value:(ACCOUNT_DRAFTS[language]?.[value]||ACCOUNT_EN[value]||value);}
 export function accountText(value){return translation(value,accountLanguage());}
 function isKnownVersion(source,value){return value===source||value===ACCOUNT_EN[source]||Object.values(ACCOUNT_DRAFTS).some(draft=>value===draft[source]);}

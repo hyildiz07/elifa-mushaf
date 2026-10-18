@@ -149,5 +149,11 @@
   "Geri alma iptal edildi.": "Pembatalan pemulihan dibatalkan.",
   "Yedek alınamadı: ": "Pencadangan gagal: ",
   "Yeni şifreni belirle.": "Tetapkan kata sandi baru.",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "Email terverifikasi. Anda dapat masuk ke akun Anda."
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "Email terverifikasi. Anda dapat masuk ke akun Anda.",
+  "Hesap değişti. Yeniden dene.": "Akun telah berganti. Silakan coba lagi.",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "Data akun belum siap. Kosongkan sebagian ruang penyimpanan perangkat, lalu coba lagi.",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "Data setiap akun disimpan terpisah di perangkat ini. Catatan tamu hanya disalin ke akunmu jika kamu memilihnya.",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "Preferensi sinkronisasi tidak dapat disimpan di perangkat ini. Kosongkan sebagian ruang penyimpanan, lalu coba lagi.",
+  "Önce cihaz yedeğini indir": "Unduh cadangan perangkat terlebih dahulu",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "Akun, profil pribadi, dan cadangan cloud milikmu akan dihapus. Progres khatam bersama tetap tersimpan, tetapi nama dan tautannya ke akunmu akan dihapus. Simpan terlebih dahulu tautan pribadi untuk peserta dan pengelola. Catatan perangkat tetap ada sebagai salinan terpisah; setelah keluar, catatan tamu akan dibuka. Sebaiknya unduh cadangan perangkat terlebih dahulu."
 }

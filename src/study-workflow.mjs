@@ -41,7 +41,7 @@ const methodHelp=document.createElement('small');methodHelp.className='repeatHel
 const reciter=document.createElement('select');reciter.id='studyReciter';
 for(const r of RECITERS){const o=document.createElement('option');o.value=r.id;o.textContent=r.n;reciter.append(o);}grid.append(field('rec_title',reciter));
 const fieldRows={};
-const fields={rangeRep:['repeat_range_count',0,99,1],combineRep:['repeat_combine_count',0,99,1],rep:['repeat_ayah_count',1,99,1],speed:['s_speed',0.5,2,0.05],wait:['workflow_wait',0,60,1]};
+const fields={rangeRep:['repeat_range_count',1,99,1],combineRep:['repeat_combine_count',0,99,1],rep:['repeat_ayah_count',1,99,1],speed:['s_speed',0.5,2,0.05],wait:['workflow_wait',0,60,1]};
 for(const [key,[label,min,max,step]] of Object.entries(fields)){const input=document.createElement('input');input.id='studySetting_'+key;input.type='number';input.min=min;input.max=max;input.step=step;input.inputMode='decimal';const wrapper=field(label,input);const helpKey={rep:'repeat_ayah_help',combineRep:'repeat_combine_help',rangeRep:'repeat_range_help'}[key];if(helpKey){const help=document.createElement('small');help.className='repeatHelp';help.id=input.id+'Help';help.dataset.i18n=helpKey;input.setAttribute('aria-describedby',help.id);wrapper.append(help);}fieldRows[key]=wrapper;grid.append(wrapper);if(['rep','combineRep','rangeRep'].includes(key))input.addEventListener('input',()=>{
   if(key==='rep'&&choice.value==='range'){choice.value='verse';draftCombine=false;}
   if(key==='combineRep'&&Number(input.value)>0){choice.value='cumulative';draftCombine=true;}
@@ -50,22 +50,30 @@ for(const [key,[label,min,max,step]] of Object.entries(fields)){const input=docu
 $('studyOpen').before(choiceField,details);
 const gearMode=modeControl('practiceMode',value=>{mode=value;SET.studyMode=value;SET.cumu=value==='cumulative';SET.repOn=true;saveSet();syncModes();if(typeof queuePracticeModeChange==='function')queuePracticeModeChange(value);});
 const gearField=field('study_method',gearMode.picker);gearField.classList.add('workflowMode');$('gearRepeats').before(gearField);
-// Keep the detailed explanations available without stretching the settings panel.
+// Short explanations stay visible next to each independent repeat scope.
 for(const [inputId,labelKey] of Object.entries({rangeRepInp:'repeat_range_count',combineRepInp:'repeat_combine_count',repInp:'repeat_ayah_count'})){
   const help=$(inputId+'Help');if(!help)continue;
-  const info=document.createElement('details');info.className='gearInfo';
-  const summary=document.createElement('summary');summary.id=inputId+'Info';summary.textContent='?';summary.setAttribute('aria-label',t(labelKey));
-  info.append(summary);help.before(info);info.append(help);
+  help.classList.add('gearCountHelp');
 }
 const status=document.createElement('p');status.id='practiceProgress';status.className='workflowProgress';status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.hidden=true;$('studyBanner').append(status);
 const readerStatus=document.createElement('p');readerStatus.id='readerPracticeProgress';readerStatus.className='workflowProgress';readerStatus.setAttribute('role','status');readerStatus.setAttribute('aria-live','polite');readerStatus.hidden=true;$('studyBanner').after(readerStatus);
-function current(){return {reciter:SET.reciter,speed:SET.speed,rep:Math.min(99,Math.max(1,Math.round(SET.rep))),combineRep:SET.combineRep??SET.rep,rangeRep:SET.rangeRep??SET.rep,repOn:!!SET.repOn,wait:Math.min(60,Math.max(0,SET.wait)),mode,splitCombine:!!SET.cumu};}
-function fill(v){draftCombine=v.mode==='cumulative'||v.splitCombine;choice.value=v.mode;reciter.value=String(v.reciter);for(const key of Object.keys(fields))$('studySetting_'+key).value=v[key]??v.rep;}
+function current(){return {reciter:SET.reciter,speed:SET.speed,rep:Math.min(99,Math.max(1,Math.round(SET.rep))),combineRep:SET.combineRep??SET.rep,rangeRep:Math.max(1,SET.rangeRep??SET.rep),repOn:!!SET.repOn,wait:Math.min(60,Math.max(0,SET.wait)),mode,splitCombine:!!SET.cumu};}
+function fill(v){draftCombine=v.mode==='cumulative'||v.splitCombine;choice.value=v.mode;reciter.value=String(v.reciter);for(const key of Object.keys(fields))$('studySetting_'+key).value=key==='rangeRep'?Math.max(1,v[key]??v.rep):v[key]??v.rep;}
 // Opening a configured study applies its counts. The reader's transient repeat
 // pause (or an old saved unchecked box) must not silently disable that program.
-function read(){const v={...current(),splitCombine:draftCombine,reciter:Number(reciter.value),mode:choice.value,repOn:true};for(const key of Object.keys(fields))v[key]=Number($('studySetting_'+key).value);return validStudySettings(v)&&RECITERS.some(r=>r.id===v.reciter)?v:null;}
+function read(){const v={...current(),splitCombine:draftCombine,reciter:Number(reciter.value),mode:choice.value,repOn:true};for(const key of Object.keys(fields))v[key]=Number($('studySetting_'+key).value);if(v.rangeRep===0)v.rangeRep=1;return validStudySettings(v)&&RECITERS.some(r=>r.id===v.reciter)?v:null;}
+function syncGearRows(){
+  const parts=typeof gearCtx!=='undefined'&&gearCtx!=='ayah';
+  const activeMode=parts?(SET.cumu?'cumulative':'verse'):mode;
+  const verse=$('gearRepRow'),combined=$('gearCombineRow');
+  if(verse)verse.hidden=activeMode==='range';
+  if(combined)combined.hidden=activeMode!=='cumulative';
+  for(const sync of methodMenus)sync();
+}
+window.elifaPracticeUIRefresh=syncGearRows;
 function syncModes(){gearMode.value=mode;syncPracticeControls();render();}
 function render(){
+  syncGearRows();
   for(const sync of methodMenus)sync();
   if(fieldRows.rep)fieldRows.rep.hidden=choice.value==='range';
   if(fieldRows.combineRep)fieldRows.combineRep.hidden=choice.value!=='cumulative';
@@ -143,5 +151,5 @@ function refreshLanguage(){window.elifaApplyI18n?.();syncRep();syncRep2();render
   choice.setAttribute('aria-label',t('study_method'));reason.setAttribute('aria-label',t('report_issue'));
 }
 window.addEventListener('elifa:language-changed',refreshLanguage);
-new MutationObserver(()=>{gearField.hidden=gearCtx!=='ayah';gearMode.value=mode;}).observe($('gearSheet'),{attributes:true,attributeFilter:['class']});
+new MutationObserver(()=>{gearField.hidden=gearCtx!=='ayah';gearMode.value=mode;syncGearRows();}).observe($('gearSheet'),{attributes:true,attributeFilter:['class']});
 fill(current());refreshLanguage();

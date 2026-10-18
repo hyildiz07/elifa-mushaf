@@ -149,5 +149,11 @@
   "Geri alma iptal edildi.": "Ongedaan maken geannuleerd.",
   "Yedek alınamadı: ": "Back-up mislukt:",
   "Yeni şifreni belirle.": "Stel een nieuw wachtwoord in.",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "E-mail geverifieerd. U kunt inloggen op uw account."
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "E-mail geverifieerd. U kunt inloggen op uw account.",
+  "Hesap değişti. Yeniden dene.": "Je account is gewijzigd. Probeer het opnieuw.",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "De accountgegevens zijn nog niet klaar. Maak opslagruimte vrij op je apparaat en probeer het opnieuw.",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "De gegevens van elk account worden op dit apparaat apart bewaard. Gastgegevens worden alleen naar je account gekopieerd als je daarvoor kiest.",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "Je synchronisatievoorkeur kon niet op dit apparaat worden opgeslagen. Maak opslagruimte vrij en probeer het opnieuw.",
+  "Önce cihaz yedeğini indir": "Download eerst een back-up van het apparaat",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "Je account, je privéprofiel en je cloudback-ups worden verwijderd. Je voortgang bij de gezamenlijke Koranlezing blijft behouden, maar je naam en de koppeling met je account worden verwijderd. Bewaar eerst je persoonlijke deelname- en beheerderslinks. Je apparaatgegevens blijven als aparte kopie bewaard; na het uitloggen worden je gastgegevens geopend. We raden aan eerst een back-up van het apparaat te downloaden."
 }

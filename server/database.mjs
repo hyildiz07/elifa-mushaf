@@ -2,8 +2,10 @@ import {getStore} from '@netlify/blobs';
 import {firebaseServices} from './firebase.mjs';
 export async function firestoreStoreTransaction(db,legacy,work){
  return db.runTransaction(async tx=>{
-  // Shared aggregate lock serializes legacy imports, votes, claims and index changes.
-  const lock=db.collection('elifaOrgMeta').doc('lock');await tx.get(lock);
+  // Firestore retries conflicts on the actual records read in this transaction.
+  // An application-wide write lock would needlessly make unrelated hatims,
+  // polls and account membership indexes contend with one another. Reading a
+  // missing record also protects simultaneous legacy imports / random codes.
   const records=db.collection('elifaOrgRecords'),pending=new Map(),reads=new Map();
   const ref=key=>records.doc(Buffer.from(key).toString('base64url'));
   const store={
@@ -12,7 +14,13 @@ export async function firestoreStoreTransaction(db,legacy,work){
     if(reads.has(key))return structuredClone(reads.get(key));
     const found=await tx.get(ref(key));let value;
     if(found.exists){const d=found.data();value=d.deleted?null:JSON.parse(d.value);}
-    else{value=await legacy.get(key,{type:options.type==='text'?'text':'json'});if(value!=null)pending.set(key,{key,deleted:false,value:JSON.stringify(value)});}
+    else{
+     // These private indexes were introduced after the Firestore cutover and
+     // have never lived in Blobs. Avoid a redundant legacy network lookup on
+     // every signed-in poll / first membership / creation replay check.
+     value=/^_(?:closed|member|create)_/.test(key)?null:await legacy.get(key,{type:options.type==='text'?'text':'json'});
+     if(value!=null)pending.set(key,{key,deleted:false,value:JSON.stringify(value)});
+    }
     reads.set(key,value);return structuredClone(value);
    },
    async setJSON(key,value){const serialized=JSON.stringify(value);if(Buffer.byteLength(serialized)>900*1024)throw Error('Record size limit');pending.set(key,{key,value:serialized,deleted:false});},
@@ -31,7 +39,6 @@ export async function firestoreStoreTransaction(db,legacy,work){
   if(pending.size>450)throw Error('Transaction record limit');
   // Buffer writes until all reads finish, as Firestore transactions require.
   for(const [key,value]of pending)tx.set(ref(key),value);
-  if(pending.size)tx.set(lock,{updated_at:Date.now()});
   return result;
  },{maxAttempts:8});
 }

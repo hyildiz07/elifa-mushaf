@@ -158,13 +158,16 @@ test('zero whole-study count still reads the fluent range once, not zero times',
   start(c,c.practicePlan({kind:'ayah',from:1,to:3},'range'));
   assert.deepEqual(finish(c),[[1,3]]);
 });
-test('zero preferences survive startup migration and settings commit',()=>{
-  const start=html.indexOf('// Preserve the old count once'),end=html.indexOf('// Repeat and cumulative playback',start);
-  const code=html.slice(start,end),c=vm.createContext({SET:{rep:2,combineRep:0,rangeRep:0}});vm.runInContext(code,c);
-  assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,0,0]);
+test('legacy zero tours become one pass at startup and commit; zero combination remains disabled',()=>{
+  const migrationStart=html.indexOf('// Preserve the old count once'),end=html.indexOf('// Repeat and cumulative playback',migrationStart);
+  const code=html.slice(migrationStart,end),c=vm.createContext({SET:{rep:2,combineRep:0,rangeRep:0}});vm.runInContext(code,c);
+  assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,0,1]);
   const values={repInp:2,combineRepInp:0,rangeRepInp:0,waitInp:0,spdInp:1,startPadInp:0,endPadInp:0};
   c.$=id=>id in values?{value:values[id]}:null;c.saveSet=()=>{};c.applyLiveSpeed=()=>{};c.syncRep=()=>{};c.syncSpeedBtn=()=>{};
-  vm.runInContext(fn('commitInputs'),c);c.commitInputs();assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,0,0]);
+  vm.runInContext(fn('commitInputs'),c);c.commitInputs();assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,0,1]);
+  const playback=harness();playback.SET.rep=1;playback.SET.combineRep=c.SET.combineRep;playback.SET.rangeRep=c.SET.rangeRep;
+  start(playback,playback.practicePlan({kind:'ayah',from:1,to:3},'cumulative'));
+  assert.deepEqual(finish(playback),[[1,1],[2,2],[3,3]],'normalization never adds another round');
 });
 test('zero-count split practice plays only the chosen three parts once',()=>{
   const c=harness();c.SET.rep=1;c.SET.combineRep=0;c.SET.rangeRep=0;

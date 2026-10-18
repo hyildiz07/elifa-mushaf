@@ -149,5 +149,11 @@
   "Geri alma iptal edildi.": "Desfazer cancelado.",
   "Yedek alınamadı: ": "Falha no backup:",
   "Yeni şifreni belirle.": "Defina uma nova senha.",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "E-mail verificado. Você pode fazer login na sua conta."
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "E-mail verificado. Você pode fazer login na sua conta.",
+  "Hesap değişti. Yeniden dene.": "A conta mudou. Tente novamente.",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "Os dados da conta ainda não estão prontos. Libere espaço no dispositivo e tente novamente.",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "Os dados de cada conta ficam separados neste dispositivo. Os registros de visitante só são copiados para sua conta se você escolher.",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "Não foi possível salvar sua preferência de sincronização neste dispositivo. Libere espaço e tente novamente.",
+  "Önce cihaz yedeğini indir": "Baixe primeiro um backup do dispositivo",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "Sua conta, seu perfil privado e seus backups na nuvem serão excluídos. Seu progresso na leitura coletiva do Alcorão será mantido, mas seu nome e o vínculo com sua conta serão removidos. Guarde primeiro seus links privados de participação e administração. Os registros do dispositivo ficarão em uma cópia separada; ao sair da conta, serão abertos os registros de visitante. Recomendamos baixar primeiro um backup do dispositivo."
 }

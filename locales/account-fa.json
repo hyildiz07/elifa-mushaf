@@ -149,5 +149,11 @@
   "Geri alma iptal edildi.": "بازگرداندن سوابق قبلی لغو شد.",
   "Yedek alınamadı: ": "پشتیبان‌گیری انجام نشد: ",
   "Yeni şifreni belirle.": "یک رمز عبور جدید تنظیم کنید.",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "ایمیل تایید شد. می توانید وارد حساب کاربری خود شوید."
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "ایمیل تایید شد. می توانید وارد حساب کاربری خود شوید.",
+  "Hesap değişti. Yeniden dene.": "حساب تغییر کرده است. لطفاً دوباره تلاش کنید.",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "داده‌های حساب هنوز آماده نیست. کمی از فضای ذخیره‌سازی دستگاه را خالی کنید و دوباره تلاش کنید.",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "داده‌های هر حساب در این دستگاه جدا نگهداری می‌شود. سوابق مهمان فقط در صورت انتخاب شما به حسابتان کپی می‌شود.",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "تنظیم همگام‌سازی در این دستگاه ذخیره نشد. کمی فضا خالی کنید و دوباره تلاش کنید.",
+  "Önce cihaz yedeğini indir": "ابتدا نسخهٔ پشتیبان دستگاه را دانلود کنید",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "حساب، نمایهٔ خصوصی و نسخه‌های پشتیبان ابری شما حذف می‌شود. پیشرفت ختم گروهی قرآن حفظ می‌شود، اما نام و پیوند آن با حسابتان برداشته خواهد شد. ابتدا پیوندهای خصوصی مشارکت و مدیریت خود را نگه دارید. سوابق دستگاه در یک نسخهٔ جدا باقی می‌ماند؛ پس از خروج، سوابق مهمان باز می‌شود. پیشنهاد می‌کنیم ابتدا نسخهٔ پشتیبان دستگاه را دانلود کنید."
 }

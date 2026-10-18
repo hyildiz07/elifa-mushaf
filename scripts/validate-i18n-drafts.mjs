@@ -57,7 +57,7 @@ for(const language of languages){
     mustContain(html,service,`${label}: service provider`);
    }
    const prose=digits(readableText(html));
-   for(const number of ['28','2026','20','7','60']){
+   for(const number of ['19','2026','20','7','60']){
     assert.match(prose,new RegExp(`(?<!\\d)${number}(?!\\d)`),`${label}: legal date, backup limit or retention period ${number}`);
    }
    mustContain(html,'id="account-deletion"',`${label}: deletion anchor`);

@@ -71,6 +71,24 @@ test('range inputs retain a chosen interval when settings reopen in the same sur
   assert.equal(nodes.fromInp.value,50,'another surah does not reuse the old interval');
 });
 
+test('all settings entry points keep the active study interval, ignoring stale outside drafts',()=>{
+  const nodes=Object.fromEntries(['repInp','waitInp','spdInp','startPadInp','endPadInp','repEcho','repEcho2',
+    'progTitle','fromLbl','toLbl','fromInp','toInp','testModeBtn'].map(id=>[id,{value:'',style:{}}]));
+  const c=vm.createContext({SET:{rep:1,wait:0,speed:1.25,startPad:0,endPad:0,cumu:true},
+    gearCtx:'ayah',curS:1,curAy:4,visAy:4,splitParts:[],guardedRangeDraft:null,
+    rangeSelectionDraft:null,studyRange:{sid:1,from:1,to:5},SURAHS:[{n:7}],$:id=>nodes[id],syncTestBtn(){}});
+  vm.runInContext(source('fillGearSheet'),c);
+  c.fillGearSheet();
+  assert.deepEqual([nodes.fromInp.value,nodes.toInp.value],[1,5],'upper Settings matches the Study Desk button');
+  assert.deepEqual([nodes.fromInp.min,nodes.toInp.max],[1,5]);
+  c.rangeSelectionDraft={sid:1,from:2,to:4};c.fillGearSheet();
+  assert.deepEqual([nodes.fromInp.value,nodes.toInp.value],[2,4],'an edited subinterval is retained');
+  c.rangeSelectionDraft={sid:1,from:4,to:7};c.fillGearSheet();
+  assert.deepEqual([nodes.fromInp.value,nodes.toInp.value],[1,5],'outside drafts cannot replace this study');
+  c.studyRange=null;c.fillGearSheet();
+  assert.deepEqual([nodes.fromInp.min,nodes.toInp.max],[1,7],'ordinary reader restores the full surah limits');
+});
+
 test('long-press selection scrolls past the screen edge and waits for explicit Play; handles adjust both ends',()=>{
   const listeners={},frames=new Map(),handles={start:{style:{}},end:{style:{}}};
   let nextFrame=0,timer,plays=0,applied=0;

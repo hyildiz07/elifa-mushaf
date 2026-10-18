@@ -149,5 +149,11 @@
   "Geri alma iptal edildi.": "Annuler annulé.",
   "Yedek alınamadı: ": "La sauvegarde a échoué :",
   "Yeni şifreni belirle.": "Définissez un nouveau mot de passe.",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "E-mail vérifié. Vous pouvez vous connecter à votre compte."
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "E-mail vérifié. Vous pouvez vous connecter à votre compte.",
+  "Hesap değişti. Yeniden dene.": "Le compte a changé. Veuillez réessayer.",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "Les données du compte ne sont pas encore prêtes. Libérez de l’espace sur votre appareil, puis réessayez.",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "Les données de chaque compte sont conservées séparément sur cet appareil. Les données invité ne sont copiées vers votre compte que si vous le choisissez.",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "Votre préférence de synchronisation n’a pas pu être enregistrée sur cet appareil. Libérez de l’espace, puis réessayez.",
+  "Önce cihaz yedeğini indir": "Télécharger d’abord une sauvegarde de l’appareil",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "Votre compte, votre profil privé et vos sauvegardes dans le cloud seront supprimés. Votre progression dans la lecture collective du Coran sera conservée, mais votre nom et le lien avec votre compte seront retirés. Conservez d’abord vos liens privés de participation et d’administration. Les données de l’appareil resteront dans une copie séparée ; après la déconnexion, les données invité s’ouvriront. Nous vous conseillons de télécharger d’abord une sauvegarde de l’appareil."
 }

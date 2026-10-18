@@ -8,9 +8,9 @@ Object.assign(window.T,{
   "repeat_scope_unit": ["Âyet / parça","Vers / Abschnitt","Verse / part","Аят / часть","الآية / الجزء","Verset / partie","Versículo / parte","Στίχος / τμήμα","经节 / 片段","節 / 区間","구절 / 부분","आयत / भाग","آیت / حصہ","Versetto / parte","Ayat / bagian","Vers / deel","Versículo / parte","آیه / بخش","আয়াত / অংশ","Ayat / bahagian","Aya / sehemu"],
 
   "repeat_ayah_count": [
-    "Âyet / parça tekrar sayısı",
+    "Her âyet / parça",
     "Wiederholungen je Vers / Abschnitt",
-    "Verse / part repeats",
+    "Each verse / part",
     "Повторы аята / части",
     "عدد تكرارات الآية / الجزء",
     "Répétitions par verset / partie",
@@ -31,9 +31,9 @@ Object.assign(window.T,{
     "Marudio ya aya / sehemu"
   ],
   "repeat_combine_count": [
-    "Birleştirme tekrar sayısı",
+    "Birleşik okumalar · 1+2",
     "Wiederholungen der Kombination",
-    "Combined passage repeats",
+    "Combined readings · 1+2",
     "Повторы объединённого отрывка",
     "عدد تكرارات المقطع المدمج",
     "Répétitions du passage combiné",
@@ -54,9 +54,9 @@ Object.assign(window.T,{
     "Marudio ya sehemu zilizounganishwa"
   ],
   "repeat_range_count": [
-    "Tüm çalışmanın tekrar sayısı",
+    "Çalışmayı baştan sona",
     "Wiederholungen der gesamten Übung",
-    "Whole study repeats",
+    "Whole study, start to finish",
     "Повторы всей тренировки",
     "عدد تكرارات التدريب كاملاً",
     "Répétitions de toute la séance",
@@ -635,9 +635,9 @@ window.T.workflow_wait=["Ara bekleme (sn)","Pause (Sek.)","Pause (sec)","Пау�
 
 Object.assign(window.T,{
   "repeat_ayah_help": [
-    "Her âyetin veya parçanın kaç kez okunacağını belirler.",
+    "Her birini tek başına kaç kez okuyacağını belirler.",
     "Wie oft jeder Vers oder Abschnitt gelesen wird.",
-    "How many times each verse or part is read.",
+    "How many times each verse or part is read on its own.",
     "Сколько раз читается каждый аят или часть.",
     "يحدد عدد مرات قراءة كل آية أو جزء.",
     "Nombre de lectures de chaque verset ou partie.",
@@ -658,9 +658,9 @@ Object.assign(window.T,{
     "Kila aya au sehemu isomwe mara ngapi."
   ],
   "repeat_combine_help": [
-    "1+2, 1+2+3 gibi birleşik bölümler içindir. 0: birleşik okuma yapılmaz.",
+    "1+2, 1+2+3 bölümleri için. 0: kapalı.",
     "Für Abschnitte wie 1+2 und 1+2+3. 0: keine kombinierte Lesung.",
-    "For passages like 1+2 and 1+2+3. 0: skip combined readings.",
+    "For passages like 1+2 and 1+2+3. 0: off.",
     "Для частей 1+2, 1+2+3 и т. п. 0: без объединённого чтения.",
     "للمقاطع المجمّعة مثل 1+2 و1+2+3. 0: لا تُقرأ المقاطع مجمّعة.",
     "Pour les passages 1+2, 1+2+3, etc. 0 : aucune lecture combinée.",
@@ -681,26 +681,26 @@ Object.assign(window.T,{
     "Kwa sehemu zilizounganishwa kama 1+2 na 1+2+3. 0: ruka usomaji uliounganishwa."
   ],
   "repeat_range_help": [
-    "Çalışmanın tamamı bitince başa döner. 0: başa dönmez; 1: tek tur.",
-    "Beginnt nach der ganzen Übung erneut. 0: kein Neustart; 1: ein Durchlauf.",
-    "Returns to the start after the whole study. 0: no restart; 1: one pass.",
-    "Возврат к началу после всей тренировки. 0: без возврата; 1: один проход.",
-    "يعود للبداية بعد إكمال التدريب كله. 0: دون إعادة؛ 1: دورة واحدة.",
-    "Reprend au début après toute la séance. 0 : sans reprise ; 1 : un passage.",
-    "Vuelve al inicio al terminar toda la práctica. 0: sin reinicio; 1: una pasada.",
-    "Ξεκινά από την αρχή μετά από όλη τη μελέτη. 0: χωρίς επανεκκίνηση· 1: ένα πέρασμα.",
-    "完整练习结束后返回开头。0：不返回；1：一轮。",
-    "練習全体の終了後に最初へ戻ります。0：戻らない、1：1周です。",
-    "전체 학습이 끝나면 처음으로 돌아갑니다. 0: 돌아가지 않음, 1: 한 바퀴.",
-    "पूरा अभ्यास समाप्त होने पर शुरुआत से चले। 0: दोबारा शुरू नहीं; 1: एक दौर।",
-    "مکمل مشق کے بعد شروع سے چلے۔ 0: دوبارہ شروع نہ ہو؛ 1: ایک دور۔",
-    "Riparte dall’inizio dopo tutto l’esercizio. 0: nessun riavvio; 1: un giro.",
-    "Kembali ke awal setelah seluruh latihan. 0: tidak mengulang; 1: satu putaran.",
-    "Begint opnieuw na de hele oefening. 0: niet herstarten; 1: één ronde.",
-    "Volta ao início após o exercício completo. 0: sem reinício; 1: uma rodada.",
-    "پس از پایان کل تمرین به ابتدا برمی‌گردد. 0: بدون بازگشت؛ 1: یک دور.",
-    "সম্পূর্ণ অনুশীলন শেষে শুরুতে ফিরবে। 0: ফিরবে না; 1: একবার।",
-    "Kembali ke awal selepas seluruh latihan. 0: tidak bermula semula; 1: satu pusingan.",
-    "Hurudi mwanzo baada ya zoezi lote. 0: usianze upya; 1: mzunguko mmoja."
+    "Programın tamamı için toplam tur sayısı.",
+    "Gesamtzahl der Durchläufe des gesamten Programms.",
+    "Total number of rounds through the complete program.",
+    "Общее число полных проходов программы.",
+    "إجمالي عدد الدورات للبرنامج كاملًا.",
+    "Nombre total de tours du programme complet.",
+    "Número total de vueltas al programa completo.",
+    "Συνολικός αριθμός κύκλων ολόκληρου του προγράμματος.",
+    "完整练习程序的总轮数。",
+    "練習プログラム全体を読む合計回数。",
+    "전체 연습 프로그램을 읽는 총 횟수입니다.",
+    "पूरे अभ्यास कार्यक्रम के कुल दौर।",
+    "پورے مشق پروگرام کے کل دور۔",
+    "Numero totale di cicli dell’intero programma.",
+    "Jumlah putaran seluruh program latihan.",
+    "Totaal aantal rondes van het volledige oefenprogramma.",
+    "Número total de rodadas do programa completo.",
+    "تعداد کل دورهای برنامه کامل تمرین.",
+    "সম্পূর্ণ অনুশীলন কর্মসূচির মোট চক্রসংখ্যা।",
+    "Jumlah pusingan keseluruhan program latihan.",
+    "Jumla ya mizunguko ya programu nzima."
   ]
 });

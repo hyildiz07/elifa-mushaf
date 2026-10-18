@@ -149,5 +149,11 @@
   "Geri alma iptal edildi.": "Восстановление предыдущих записей отменено.",
   "Yedek alınamadı: ": "Не удалось создать резервную копию: ",
   "Yeni şifreni belirle.": "Установите новый пароль.",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "Электронная почта подтверждена. Вы можете войти в свою учетную запись."
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "Электронная почта подтверждена. Вы можете войти в свою учетную запись.",
+  "Hesap değişti. Yeniden dene.": "Аккаунт изменился. Попробуйте ещё раз.",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "Данные аккаунта ещё не готовы. Освободите место на устройстве и попробуйте ещё раз.",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "Данные разных аккаунтов хранятся на этом устройстве отдельно. Гостевые записи копируются в ваш аккаунт только с вашего согласия.",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "Не удалось сохранить настройку синхронизации на этом устройстве. Освободите место и попробуйте ещё раз.",
+  "Önce cihaz yedeğini indir": "Сначала скачать резервную копию с устройства",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "Ваш аккаунт, личный профиль и облачные резервные копии будут удалены. Прогресс совместного хатма сохранится, но ваше имя и связь с аккаунтом будут удалены. Сначала сохраните личные ссылки участника и организатора. Записи на устройстве останутся в отдельной копии; после выхода откроются гостевые записи. Рекомендуем сначала скачать резервную копию с устройства."
 }

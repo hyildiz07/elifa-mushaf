@@ -149,5 +149,11 @@
   "Geri alma iptal edildi.": "記録を元に戻す操作をキャンセルしました。",
   "Yedek alınamadı: ": "バックアップを作成できませんでした：",
   "Yeni şifreni belirle.": "新しいパスワードを設定します。",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "メールアドレスが確認されました。 アカウントにサインインできます。"
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "メールアドレスが確認されました。 アカウントにサインインできます。",
+  "Hesap değişti. Yeniden dene.": "アカウントが変更されました。もう一度お試しください。",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "アカウントのデータはまだ準備できていません。端末の空き容量を増やしてから、もう一度お試しください。",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "この端末では、各アカウントのデータを別々に保存します。ゲストの記録は、ご自身で選択した場合にのみアカウントにコピーされます。",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "この端末に同期設定を保存できませんでした。空き容量を増やしてから、もう一度お試しください。",
+  "Önce cihaz yedeğini indir": "先に端末のバックアップをダウンロード",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "アカウント、非公開のプロフィール、クラウドのバックアップが削除されます。クルアーンの共同読誦の進捗は残りますが、あなたの名前とアカウントとの関連付けは削除されます。先に個人用の参加リンクと管理者リンクを保存してください。端末の記録は別のコピーとして残り、ログアウト後はゲストの記録が開きます。先に端末のバックアップをダウンロードすることをおすすめします。"
 }

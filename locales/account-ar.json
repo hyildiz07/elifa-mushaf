@@ -149,5 +149,11 @@
   "Geri alma iptal edildi.": "أُلغي التراجع عن الاستعادة.",
   "Yedek alınamadı: ": "فشل النسخ الاحتياطي: ",
   "Yeni şifreni belirle.": "قم بتعيين كلمة مرور جديدة.",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "تم التحقق من البريد الإلكتروني. يمكنك تسجيل الدخول إلى حسابك."
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "تم التحقق من البريد الإلكتروني. يمكنك تسجيل الدخول إلى حسابك.",
+  "Hesap değişti. Yeniden dene.": "تغيّر الحساب. يرجى المحاولة مرة أخرى.",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "بيانات الحساب ليست جاهزة بعد. أفرغ بعض مساحة التخزين على جهازك ثم حاول مرة أخرى.",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "تُحفظ بيانات كل حساب بشكل منفصل على هذا الجهاز. لا تُنسخ بيانات الضيف إلى حسابك إلا إذا اخترت ذلك.",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "تعذّر حفظ تفضيل المزامنة على هذا الجهاز. أفرغ بعض مساحة التخزين ثم حاول مرة أخرى.",
+  "Önce cihaz yedeğini indir": "نزّل نسخة احتياطية من الجهاز أولًا",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "سيُحذف حسابك وملفك الشخصي الخاص ونسخك الاحتياطية السحابية. سيبقى تقدمك في الختمة المشتركة، مع إزالة اسمك وارتباطه بحسابك. احفظ أولًا روابط المشاركة والإدارة الخاصة بك. ستبقى سجلات الجهاز في نسخة منفصلة؛ وعند تسجيل الخروج ستُفتح سجلات الضيف. ننصح بتنزيل نسخة احتياطية من الجهاز أولًا."
 }
