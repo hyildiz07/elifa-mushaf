@@ -8,7 +8,7 @@ const qtext=JSON.parse(html.match(/^const QTEXT=(.*);$/m)[1]);
 function fn(name){const p=html.search(new RegExp('(?:async )?function '+name+'\\('));assert.ok(p>=0,name);return html.slice(p,html.indexOf('\n}',p)+2);}
 function loader(sid=1,rid=223,offline=false){
  const meta=afasyWordAudioMeta(sid,pack,qtext[sid].map(v=>v[2].filter(w=>w[1]===0).length));let fetches=0,decodes=0;
- const c=vm.createContext({Response,Uint8Array,URL:{createObjectURL:()=> 'blob:same-source'},console,QTEXT:qtext,audioCacheGeneration:{},audioCache:{},
+ const c=vm.createContext({Response,Uint8Array,AbortSignal,URL:{createObjectURL:()=> 'blob:same-source'},console,QTEXT:qtext,audioCacheGeneration:{},audioCache:{},
   OFF:{getMeta:async()=>offline?meta:null,getBlob:async()=>new Blob([new Uint8Array(10)]),variant:()=>''},
   fetchAudioMeta:async()=>meta,applyVerifiedTimings:async a=>a,pp(){},Audio:class{},
   fetch:async()=>{fetches++;return new Response(new Uint8Array(10));},
