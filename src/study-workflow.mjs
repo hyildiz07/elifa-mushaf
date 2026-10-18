@@ -23,10 +23,18 @@ for(const [key,[label,min,max,step]] of Object.entries(fields)){const input=docu
   if(key==='combineRep'&&Number(input.value)>0){choice.value='cumulative';draftCombine=true;}
   render();
 });}
-const repeat=document.createElement('input');repeat.type='checkbox';repeat.id='studyRepeatEnabled';grid.append(field('pb_repeat',repeat));
-$('studyOpen').before(choiceField,details);
+const repeat=document.createElement('input');repeat.type='checkbox';repeat.id='studyRepeatEnabled';repeat.setAttribute('role','switch');
+const repeatField=field('pb_repeat',repeat);repeatField.classList.add('workflowRepeatToggle');
+$('studyOpen').before(choiceField,repeatField,details);
 const gearMode=modeControl('practiceMode',value=>{mode=value;SET.cumu=value==='cumulative';SET.repOn=true;saveSet();syncModes();if(typeof queuePracticeModeChange==='function')queuePracticeModeChange(value);});
-const gearField=field('study_method',gearMode);gearField.classList.add('workflowMode');$('rangeStart').before(gearField);
+const gearField=field('study_method',gearMode);gearField.classList.add('workflowMode');$('gearRepeats').before(gearField);
+// Keep the detailed explanations available without stretching the settings panel.
+for(const [inputId,labelKey] of Object.entries({rangeRepInp:'repeat_range_count',combineRepInp:'repeat_combine_count',repInp:'repeat_ayah_count'})){
+  const help=$(inputId+'Help');if(!help)continue;
+  const info=document.createElement('details');info.className='gearInfo';
+  const summary=document.createElement('summary');summary.id=inputId+'Info';summary.textContent='?';summary.setAttribute('aria-label',t(labelKey));
+  info.append(summary);help.before(info);info.append(help);
+}
 const status=document.createElement('p');status.id='practiceProgress';status.className='workflowProgress';status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.hidden=true;$('studyBanner').append(status);
 const readerStatus=document.createElement('p');readerStatus.id='readerPracticeProgress';readerStatus.className='workflowProgress';readerStatus.setAttribute('role','status');readerStatus.setAttribute('aria-live','polite');readerStatus.hidden=true;$('studyBanner').after(readerStatus);
 function current(){return {reciter:SET.reciter,speed:SET.speed,rep:Math.min(99,Math.max(1,Math.round(SET.rep))),combineRep:SET.combineRep??SET.rep,rangeRep:SET.rangeRep??SET.rep,repOn:!!SET.repOn,wait:Math.min(60,Math.max(0,SET.wait)),mode,splitCombine:!!SET.cumu};}
@@ -102,7 +110,9 @@ function reportText(){const text=t(reason.value)+'\n\n'+JSON.stringify(context,n
 report.onclick=()=>{context=diagnostic();reportText();dialog.showModal();window.elifaLog?.('audio_feedback_open');};reason.onchange=reportText;
 function refreshLanguage(){window.elifaApplyI18n?.();syncRep();syncRep2();render();renderContinue();renderHomeHeroLine();$('q').dispatchEvent(new Event('input'));
   for(const [id,key] of Object.entries({langBtnH:'language',guideBtnH:'guide',themeBtnH:'theme'}))$(id)?.setAttribute('aria-label',t(key));
-  for(const [id,key] of Object.entries({repInp:'repeat_ayah_count',combineRepInp:'repeat_combine_count',rangeRepInp:'repeat_range_count'}))$(id)?.setAttribute('aria-label',t(key));
+  for(const [id,key] of Object.entries({repInp:'repeat_ayah_count',combineRepInp:'repeat_combine_count',rangeRepInp:'repeat_range_count'})){
+    $(id)?.setAttribute('aria-label',t(key));$(id+'Info')?.setAttribute('aria-label',t(key));
+  }
   choice.setAttribute('aria-label',t('study_method'));reason.setAttribute('aria-label',t('report_issue'));
 }
 window.addEventListener('elifa:language-changed',refreshLanguage);

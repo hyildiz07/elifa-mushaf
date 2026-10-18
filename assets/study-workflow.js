@@ -101,8 +101,10 @@
   var repeat = document.createElement("input");
   repeat.type = "checkbox";
   repeat.id = "studyRepeatEnabled";
-  grid.append(field("pb_repeat", repeat));
-  $("studyOpen").before(choiceField, details);
+  repeat.setAttribute("role", "switch");
+  var repeatField = field("pb_repeat", repeat);
+  repeatField.classList.add("workflowRepeatToggle");
+  $("studyOpen").before(choiceField, repeatField, details);
   var gearMode = modeControl("practiceMode", (value) => {
     mode = value;
     SET.cumu = value === "cumulative";
@@ -113,7 +115,20 @@
   });
   var gearField = field("study_method", gearMode);
   gearField.classList.add("workflowMode");
-  $("rangeStart").before(gearField);
+  $("gearRepeats").before(gearField);
+  for (const [inputId, labelKey] of Object.entries({ rangeRepInp: "repeat_range_count", combineRepInp: "repeat_combine_count", repInp: "repeat_ayah_count" })) {
+    const help = $(inputId + "Help");
+    if (!help) continue;
+    const info = document.createElement("details");
+    info.className = "gearInfo";
+    const summary2 = document.createElement("summary");
+    summary2.id = inputId + "Info";
+    summary2.textContent = "?";
+    summary2.setAttribute("aria-label", t(labelKey));
+    info.append(summary2);
+    help.before(info);
+    info.append(help);
+  }
   var status = document.createElement("p");
   status.id = "practiceProgress";
   status.className = "workflowProgress";
@@ -317,7 +332,10 @@
     renderHomeHeroLine();
     $("q").dispatchEvent(new Event("input"));
     for (const [id, key] of Object.entries({ langBtnH: "language", guideBtnH: "guide", themeBtnH: "theme" })) $(id)?.setAttribute("aria-label", t(key));
-    for (const [id, key] of Object.entries({ repInp: "repeat_ayah_count", combineRepInp: "repeat_combine_count", rangeRepInp: "repeat_range_count" })) $(id)?.setAttribute("aria-label", t(key));
+    for (const [id, key] of Object.entries({ repInp: "repeat_ayah_count", combineRepInp: "repeat_combine_count", rangeRepInp: "repeat_range_count" })) {
+      $(id)?.setAttribute("aria-label", t(key));
+      $(id + "Info")?.setAttribute("aria-label", t(key));
+    }
     choice.setAttribute("aria-label", t("study_method"));
     reason.setAttribute("aria-label", t("report_issue"));
   }

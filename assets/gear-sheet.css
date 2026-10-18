@@ -30,93 +30,56 @@ body[data-theme="nahlyildizlari"] #gearSheet{
   --gear-ink:#f6f8ff;--gear-muted:#c2d0e8;--gear-line:#5169a1;
   --gear-accent:#87a9ff;--gear-accent-ink:#0a1834;
 }
-#gearSheet .grip{background:var(--gear-line)!important;margin:5px auto 10px}
-#gearSheet .sheetActions{position:absolute;top:20px;right:18px;z-index:5}
-#gearSheet .sheetClose{
-  background:var(--gear-card)!important;color:var(--gear-ink)!important;
-  border:1px solid var(--gear-line)!important;border-radius:11px!important;
-  box-shadow:none!important;padding:8px 11px!important;font-size:12px!important;
-}
-#gearSheet .gearIntro{padding:7px 92px 8px 2px}
-#gearSheet h3{
-  color:var(--gear-ink)!important;font-size:clamp(24px,4vw,30px)!important;
-  letter-spacing:-.02em!important;line-height:1.15!important;margin:0!important;
-}
-#gearSheet .gearCard{
-  background:var(--gear-card);border:1px solid var(--gear-line);
-  border-radius:18px;padding:15px;margin:12px 0;
-  box-shadow:0 4px 14px rgba(0,0,0,.04);
-}
-#gearSheet .flbl{
-  color:var(--gear-muted)!important;font-size:11px!important;
-  font-weight:750!important;letter-spacing:.08em!important;
-  margin:0 0 8px!important;
-}
-#gearSheet .gearSectionTitle{
-  color:var(--gear-ink)!important;font-size:13px!important;
-  letter-spacing:.04em!important;margin-bottom:14px!important;
-}
-#gearSheet .gearRepeatRow{display:grid;grid-template-columns:minmax(0,1fr) minmax(160px,200px);align-items:center;gap:14px}
-#gearSheet .gearRepeatRow .flbl{margin:0!important;font-size:13px!important;color:var(--gear-ink)!important}
-#gearSheet .gearPair{gap:12px;margin-top:15px}
-#gearSheet .stepper{
-  height:48px;min-width:0;border-radius:12px!important;overflow:hidden!important;
-  background:var(--gear-input)!important;border:1px solid var(--gear-line)!important;
-  box-shadow:none!important;
-}
-#gearSheet .stepper button{
-  flex:none;width:40px;min-width:36px;height:40px;margin:3px;
-  color:var(--gear-ink)!important;background:var(--gear-card)!important;
-  border:1px solid var(--gear-line)!important;border-radius:9px;
-  font-size:20px;font-weight:650!important;
-}
-#gearSheet .stepper button:hover{background:var(--gear-bg)!important}
-#gearSheet .stepper button:focus-visible,
-#gearSheet .sheetClose:focus-visible{outline:2px solid var(--gear-accent);outline-offset:2px}
-#gearSheet .stepper input{
-  color:var(--gear-ink)!important;background:transparent!important;
-  font-size:19px!important;font-weight:750!important;
-}
-#gearSheet .progHint{
-  background:transparent!important;border:0!important;border-left:3px solid var(--gear-accent)!important;
-  border-radius:0!important;box-shadow:none!important;
-  color:var(--gear-muted)!important;padding:7px 0 7px 12px!important;
-  margin:15px 0 1px!important;font-size:12.5px!important;font-weight:550!important;
-  line-height:1.4!important;
-}
-#gearSheet #rangeStart{
-  display:block;margin:15px 0 0!important;min-height:50px;
-  background:var(--gear-accent)!important;color:var(--gear-accent-ink)!important;
-  border:1px solid var(--gear-accent)!important;border-radius:13px!important;
-  box-shadow:0 5px 13px rgba(0,0,0,.1)!important;
-}
-#gearSheet .testmodebtn{
-  margin-top:11px!important;min-height:46px;
-  background:var(--gear-card)!important;color:var(--gear-ink)!important;
-  border:1px solid var(--gear-line)!important;border-radius:13px!important;
-  box-shadow:none!important;
-}
+
+/* A fixed header/action area surrounds the only scrollable region. */
+#gearSheet{display:flex;flex-direction:column;max-width:560px!important;max-height:calc(96dvh - env(safe-area-inset-top))!important;overflow:hidden!important;padding:6px 12px calc(env(safe-area-inset-bottom) + 10px)!important;border-radius:22px 22px 0 0!important}
+#gearSheet .grip{flex:none;background:var(--gear-line)!important;margin:2px auto 5px;width:34px;height:3px}
+#gearSheet .gearHeader{display:flex;align-items:center;gap:9px;flex:none;min-height:44px;padding:0 0 6px;border-bottom:1px solid var(--gear-line)}
+#gearSheet .gearIntro{flex:1;min-width:0;padding:0}
+#gearSheet h3{color:var(--gear-ink)!important;font-size:clamp(19px,4.6vw,25px)!important;letter-spacing:-.02em!important;line-height:1.15!important;margin:0!important}
+#gearSheet .sheetActions{position:static;flex:none;pointer-events:auto}
+#gearSheet .sheetClose{min-height:40px;padding:7px 10px!important;border-radius:11px!important;font-size:11px!important;background:var(--gear-card)!important;color:var(--gear-ink)!important;border:1px solid var(--gear-line)!important;box-shadow:inset 0 1px 0 #ffffff40,0 2px 5px #00000010!important}
+#gearSheet .gearContent{min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;padding:4px 1px 3px}
+#gearSheet .gearCard{position:relative;background:var(--gear-card);border:1px solid var(--gear-line);border-radius:14px;padding:9px 10px;margin:7px 0;box-shadow:inset 0 1px 0 #ffffff28,0 3px 8px #00000008}
+#gearSheet .flbl{color:var(--gear-muted)!important;font-size:11.5px!important;font-weight:700!important;letter-spacing:0!important;text-transform:none;margin:0 0 4px!important;line-height:1.3}
+#gearSheet .gearSectionTitle{color:var(--gear-ink)!important;font-size:12px!important;margin-bottom:6px!important}
+#gearSheet .gearRepeatRow,#gearSheet .gearCountPair>div{display:grid;grid-template-columns:minmax(0,1fr) 28px 144px;align-items:center;column-gap:5px;min-height:49px}
+#gearSheet .gearRepeatRow .flbl,#gearSheet .gearCountPair .flbl{grid-column:1;grid-row:1;margin:0!important;color:var(--gear-ink)!important}
+#gearSheet .gearRepeatRow .stepper,#gearSheet .gearCountPair .stepper{grid-column:3;grid-row:1}
+#gearSheet .gearRepeatRow .gearInfo,#gearSheet .gearCountPair .gearInfo{grid-column:2;grid-row:1}
+#gearSheet .gearPair{gap:9px;margin-top:8px}
+#gearSheet .gearCountPair{display:grid;grid-template-columns:1fr;gap:0;margin-top:0}
+#gearSheet .gearCountPair>div{border-top:1px solid color-mix(in srgb,var(--gear-line) 45%,transparent);padding-top:2px}
+#gearSheet .stepper{height:44px;min-width:0;border-radius:11px!important;overflow:hidden!important;background:linear-gradient(155deg,color-mix(in srgb,var(--gear-input) 96%,white),var(--gear-input))!important;border:1px solid var(--gear-line)!important;box-shadow:inset 0 1px 3px #0000000d!important}
+#gearSheet .stepper button{flex:none;width:39px;min-width:32px;height:40px;margin:1px;color:var(--gear-ink)!important;background:linear-gradient(160deg,color-mix(in srgb,var(--gear-card) 85%,white),var(--gear-card) 58%,color-mix(in srgb,var(--gear-card) 88%,var(--gear-line)))!important;border:1px solid var(--gear-line)!important;border-radius:9px;font-size:20px;font-weight:700!important;box-shadow:inset 0 1px 0 #ffffff60,0 2px 3px #00000012}
+#gearSheet .stepper button:active{transform:translateY(1px);box-shadow:inset 0 1px 3px #00000026}
+#gearSheet .stepper input{color:var(--gear-ink)!important;background:transparent!important;font-size:17px!important;font-weight:750!important}
+#gearSheet .stepper button:focus-visible,#gearSheet .sheetClose:focus-visible,#gearSheet summary:focus-visible{outline:2px solid var(--gear-accent);outline-offset:1px}
+#gearSheet .workflowMode{margin:4px 0 7px;gap:4px;font-size:11px;color:var(--gear-muted)}
+#gearSheet .workflowMode select{min-height:44px;height:44px;padding:7px 11px;border-radius:11px;border-color:var(--gear-line);color:var(--gear-ink);background:var(--gear-card);font-size:13px}
+#gearSheet .gearInfo summary{display:grid;place-items:center;width:27px;min-height:34px;cursor:pointer;list-style:none;color:var(--gear-muted);font:700 12px 'Inter',sans-serif;border-radius:8px}
+#gearSheet .gearInfo summary::-webkit-details-marker{display:none}
+#gearSheet .gearInfo[open] summary{color:var(--gear-ink);background:var(--gear-bg)}
+#gearSheet .gearInfo .repeatHelp{position:absolute;inset-inline:8px;z-index:6;margin:0;padding:10px 12px;border:1px solid var(--gear-line);border-radius:11px;background:var(--gear-card);color:var(--gear-ink);box-shadow:0 8px 20px #00000026;font-size:12px;line-height:1.45;letter-spacing:normal}
+#gearSheet .progHint{display:none!important}
+#gearSheet .gearActions{flex:none;padding-top:8px;border-top:1px solid var(--gear-line)}
+#gearSheet #rangeStart{display:block;width:100%;margin:0!important;min-height:46px;padding:10px;font-size:14px;background:linear-gradient(160deg,#a17a38,#8b601f 54%,#684414)!important;color:#fff!important;border:1px solid #d5b574!important;border-radius:12px!important;text-shadow:0 1px 1px #35210a66;box-shadow:inset 0 1px 0 #fffbe5a6,inset 0 -2px 4px #41250a33,0 3px 7px #59411f24!important}
+#gearSheet .gearSecondary{display:flex;align-items:stretch;gap:8px;margin:7px 0 0}
+#gearSheet .testmodebtn,#gearSheet .advtoggle{flex:1;min-width:0;min-height:42px;margin:0!important;padding:7px!important;font-size:10.5px!important;line-height:1.3!important;background:var(--gear-card)!important;color:var(--gear-ink)!important;border:1px solid var(--gear-line)!important;border-radius:10px!important;box-shadow:none!important}
+#gearSheet .testmodebtn svg{width:18px;height:18px;flex:none}
 #gearSheet .testmodebtn.on{border-color:var(--gear-accent)!important}
-#gearSheet .advtoggle{
-  margin-top:12px!important;padding:12px!important;
-  color:var(--gear-muted)!important;background:transparent!important;
-  border-top:1px solid var(--gear-line)!important;
-}
-#gearSheet .advbox{
-  color:var(--gear-ink)!important;background:var(--gear-card)!important;
-  border:1px solid var(--gear-line)!important;border-radius:14px!important;
-}
+#gearSheet .advbox{margin:7px 0 0;padding:10px!important;background:var(--gear-card)!important;color:var(--gear-ink)!important;border:1px solid var(--gear-line)!important;border-radius:12px!important}
 #gearSheet .sub{color:var(--gear-muted)!important}
-@media(max-width:480px){
-  #gearSheet{padding-left:14px!important;padding-right:14px!important}
-  #gearSheet .gearCard{padding:13px;margin:10px 0}
-  #gearSheet .gearRepeatRow{grid-template-columns:minmax(0,1fr) 146px;gap:8px}
-  #gearSheet .gearPair{gap:9px}
-  #gearSheet .stepper button{width:34px;min-width:31px;height:38px;margin:3px;font-size:18px}
-  #gearSheet .stepper input{font-size:17px!important}
-}
-@media(max-width:360px){
-  #gearSheet .gearRepeatRow{grid-template-columns:1fr}
-  #gearSheet .gearRepeatRow .stepper{max-width:180px}
-  #gearSheet .flbl{font-size:10px!important}
-}
+.gearRepeatToggle,.workflowRepeatToggle{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:7px;min-height:40px;padding:5px 8px;border:1px solid var(--line);border-radius:11px;background:var(--surface);color:var(--ink);font:700 11px 'Inter',sans-serif;cursor:pointer}
+#gearSheet .gearRepeatToggle{flex:none;color:var(--gear-ink);background:var(--gear-card);border-color:var(--gear-line)}
+.gearRepeatToggle input,.workflowRepeatToggle input{appearance:none;flex:none;width:34px;height:20px!important;min-height:20px!important;padding:0!important;margin:0;border:1px solid var(--line);border-radius:99px;background:var(--muted);background-image:none;position:relative;box-shadow:inset 0 1px 3px #00000024;cursor:pointer}
+.gearRepeatToggle input::after,.workflowRepeatToggle input::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:#fff;box-shadow:0 1px 3px #00000033;transition:transform .15s}
+.gearRepeatToggle input:checked,.workflowRepeatToggle input:checked{background:var(--gold);border-color:var(--gold)}
+.gearRepeatToggle input:checked::after,.workflowRepeatToggle input:checked::after{transform:translateX(14px)}
+.gearRepeatToggle:focus-within,.workflowRepeatToggle:focus-within{outline:2px solid var(--gold);outline-offset:2px}
+.workflowRepeatToggle{margin:7px 0;font-size:13px;padding:5px 11px;min-height:44px}
+.workflowRepeatToggle input{width:34px!important;order:2}
+body[data-dark="1"] #gearSheet .stepper button{box-shadow:inset 0 1px 0 #ffffff20,0 2px 4px #00000030;background:linear-gradient(160deg,color-mix(in srgb,var(--gear-card) 90%,white),var(--gear-card) 65%,color-mix(in srgb,var(--gear-card) 85%,black))!important}
+@media(max-width:360px){#gearSheet{padding-left:9px!important;padding-right:9px!important}#gearSheet .gearHeader{gap:6px}#gearSheet h3{font-size:19px!important}#gearSheet .gearRepeatRow,#gearSheet .gearCountPair>div{grid-template-columns:minmax(0,1fr) 25px 136px;column-gap:4px}#gearSheet .stepper button{width:36px}#gearSheet .sheetClose{padding:7px!important}}
+
+#gearSheet h3{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

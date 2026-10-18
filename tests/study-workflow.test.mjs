@@ -153,9 +153,23 @@ test('gear count edits activate verse practice while wait and speed edits never 
  nodes.get('waitInp').value=1;nodes.get('spdInp').value=1.25;
  c.commitInputs({target:nodes.get('spdInp')});assert.equal(c.SET.repOn,false);assert.equal(c.window.elifaPracticeMode(),'range');
  c.commitInputs({target:nodes.get('repInp')});assert.equal(c.SET.repOn,true);assert.equal(c.window.elifaPracticeMode(),'verse');
+ assert.equal(nodes.get('gearRepeatEnabled').checked,true,'the header switch reflects automatic activation');
  assert.equal(nodes.get('repN2').textContent,2);assert.equal(nodes.get('repTog2').attrs['aria-pressed'],'true');
  c.commitInputs('rangeRep');assert.equal(c.window.elifaPracticeMode(),'verse');
  assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,3,4]);assert.equal(c.playing,false);
+});
+
+test('the visible gear repeat switch updates both players without changing counts, method or starting audio',()=>{
+ const {c,nodes,events}=harness(),html=fs.readFileSync('index.html','utf8');
+ const handler=html.split('\n').find(line=>line.startsWith("$('gearRepeatEnabled').onchange="));vm.runInContext(handler,c);
+ c.SET.combineRep=2;c.SET.rangeRep=4;c.window.elifaSetPracticeMode('cumulative');
+ for(const enabled of [false,true]){
+  nodes.get('gearRepeatEnabled').checked=enabled;nodes.get('gearRepeatEnabled').onchange();
+  assert.equal(c.SET.repOn,enabled);
+  for(const id of ['repTog','repTog2'])assert.equal(nodes.get(id).attrs['aria-pressed'],String(enabled));
+  assert.equal(c.window.elifaPracticeMode(),'cumulative');assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[5,2,4]);
+ }
+ assert.equal(c.playing,false);assert.deepEqual(events,[]);
 });
 
 test('editing positive combine count activates cumulative practice; zero remains a valid skip',()=>{

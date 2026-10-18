@@ -5444,7 +5444,7 @@ window.elifaLog=function(event,params){
 <link rel="stylesheet" href="/assets/theme-legibility.css?v=305">
 <link rel="stylesheet" href="/assets/reader-toolbar.css?v=326">
 <link rel="stylesheet" href="/assets/split-toolbar.css?v=1">
-<link rel="stylesheet" href="/assets/gear-sheet.css?v=1">
+<link rel="stylesheet" href="/assets/gear-sheet.css?v=2">
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
 <link rel="stylesheet" href="/assets/home-study-polish.css?v=336">
@@ -6218,13 +6218,17 @@ window.elifaLog=function(event,params){
 
 <div class="sheet" id="gearSheet">
   <div class="grip"></div>
+  <div class="gearHeader">
   <div class="gearIntro"><h3><span data-i18n="set_hifz">Hıfz ayarları</span></h3></div>
+  <label class="gearRepeatToggle"><input type="checkbox" id="gearRepeatEnabled" role="switch"><span data-i18n="pb_repeat">Tekrar</span></label>
+  </div>
 
-  <section class="gearCard">
+  <div class="gearContent" id="gearContent">
+  <section class="gearCard" id="gearRepeats">
     <div class="gearRepeatRow">
       <div class="flbl" data-i18n="repeat_range_count">Tüm çalışmanın tekrar sayısı</div><div class="stepper"><button data-t="rangeRep" data-d="-1" aria-label="Aralık tekrarını azalt">−</button><input type="number" id="rangeRepInp" min="0" max="99" value="5" inputmode="numeric" aria-label="Tüm çalışmanın tekrar sayısı" aria-describedby="rangeRepInpHelp"><button data-t="rangeRep" data-d="1" aria-label="Aralık tekrarını artır">+</button></div><small class="repeatHelp" id="rangeRepInpHelp" data-i18n="repeat_range_help"></small>
     </div>
-    <div class="two gearPair">
+    <div class="two gearPair gearCountPair">
       <div><div class="flbl" data-i18n="repeat_combine_count">Birleştirme tekrar sayısı</div><div class="stepper"><button data-t="combineRep" data-d="-1" aria-label="Birleştirme tekrarını azalt">−</button><input type="number" id="combineRepInp" min="0" max="99" value="5" inputmode="numeric" aria-label="Birleştirme tekrar sayısı" aria-describedby="combineRepInpHelp"><button data-t="combineRep" data-d="1" aria-label="Birleştirme tekrarını artır">+</button></div><small class="repeatHelp" id="combineRepInpHelp" data-i18n="repeat_combine_help"></small></div>
       <div><div class="flbl" data-i18n="repeat_ayah_count">Âyet / parça tekrar sayısı</div>
       <div class="stepper"><button data-t="rep" data-d="-1" aria-label="Tekrar sayısını azalt">−</button><input type="number" id="repInp" min="1" max="99" value="5" inputmode="numeric" aria-label="Tekrar sayısı" aria-describedby="repInpHelp"><button data-t="rep" data-d="1" aria-label="Tekrar sayısını artır">+</button></div><small class="repeatHelp" id="repInpHelp" data-i18n="repeat_ayah_help"></small></div>
@@ -6255,11 +6259,12 @@ window.elifaLog=function(event,params){
     </div>
     <p class="progHint" id="progHint" data-i18n="s_prog_hint_start">Aralığı ve tekrar sayısını ayarla, ardından Başlat’a bas.</p>
   </section>
-  <button class="gobtn navy" id="rangeStart" type="button" data-i18n="s_range_start">▶ Aralığı başlat</button>
+  <div class="gearSecondary">
 
   <button class="testmodebtn" id="testModeBtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7z"/><path d="M4 4l16 16"/></svg><span id="testModeLbl">Test modu — gizle, ezberden oku</span></button>
 
   <button class="advtoggle" id="advToggle"><span data-i18n="s_advanced">Gelişmiş ayarlar</span> <span class="cv">⌄</span></button>
+  </div>
   <div class="advbox" id="advBox" style="display:none">
     <div class="flbl">Hassas kesim (ms)</div>
     <p class="sub" style="margin:0 0 8px" data-i18n="s_adv_hint">Genelde dokunmana gerek yok. Ses sonraki kelimeye taşarsa bitiş payını eksiye çek; kelime sonu yutuluyorsa artıya al.</p>
@@ -6275,6 +6280,8 @@ window.elifaLog=function(event,params){
     </div>
   </div>
 
+  </div>
+  <div class="gearActions"><button class="gobtn navy" id="rangeStart" type="button" data-i18n="s_range_start">▶ Aralığı başlat</button></div>
 </div>
 
 <div class="sheet" id="reciterSheet">
@@ -6460,7 +6467,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v352</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v353</span></div>
   </div>
 
   <div class="tesekkur">
@@ -10995,6 +11002,7 @@ let cumuLongFired=false;
 function syncCumu(){const b=$('cumuTog');const on=activeStudySplitSelection()?SET.cumu:(window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu);if(b){b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(!!on));}}
 function syncPracticeControls(){
   syncRep();syncRep2();syncCumu();syncCumu2();syncSpeedBtn();
+  const repeat=$('gearRepeatEnabled');if(repeat)repeat.checked=!!SET.repOn;
   for(const [id,key] of Object.entries({repInp:'rep',repInp2:'rep',combineRepInp:'combineRep',rangeRepInp:'rangeRep',waitInp:'wait',waitInp2:'wait',spdInp:'speed'})){
     const input=$(id);if(input)input.value=SET[key];
   }
@@ -11165,7 +11173,9 @@ document.querySelectorAll('.sheet').forEach(sheet=>{
   const actions=document.createElement('div');actions.className='sheetActions';
   const close=document.createElement('button');close.type='button';close.className='sheetClose';
   close.innerHTML='× <span data-i18n="close">Kapat</span>';close.setAttribute('aria-label','Menüyü kapat');close.onclick=closeSheets;
-  actions.appendChild(close);sheet.insertBefore(actions,sheet.firstElementChild?.nextSibling||null);
+  actions.appendChild(close);
+  if(sheet.id==='gearSheet')sheet.querySelector('.gearHeader').append(actions);
+  else sheet.insertBefore(actions,sheet.firstElementChild?.nextSibling||null);
 });
 let gearCtx='ayah';
 function fillGearSheet(){
@@ -11200,7 +11210,9 @@ function fillGearSheet(){
   }
   {const tb=$('testModeBtn');if(tb)tb.style.display=(studySplit||gearCtx==='parts'&&splitParts.length)?'none':'flex';}
   syncTestBtn();
+  const repeat=$('gearRepeatEnabled');if(repeat)repeat.checked=!!SET.repOn;
 }
+$('gearRepeatEnabled').onchange=()=>{SET.repOn=$('gearRepeatEnabled').checked;saveSet();syncPracticeControls();};
 const _gb=$('gearBtn');if(_gb)_gb.onclick=()=>{
   gearCtx=activeStudySplitSelection()?'studyParts':$('split').classList.contains('on')?'parts':'ayah';
   fillGearSheet();openSheet('gearSheet');
@@ -13422,7 +13434,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v352-settings-sync';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v353-compact-settings';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16803,7 +16815,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/ui-extra.js?v=1"></script>
 <script src="/assets/workflow-i18n.js?v=351"></script>
 <script src="/assets/dua-practice.js?v=351"></script>
-<script src="/assets/study-workflow.js?v=352"></script>
+<script src="/assets/study-workflow.js?v=353"></script>
 <script src="/assets/study-split.js?v=335"></script>
 <script src="/assets/study-sessions.js?v=335"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>
