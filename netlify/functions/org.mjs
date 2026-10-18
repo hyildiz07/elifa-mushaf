@@ -14,6 +14,7 @@
 
 import { withOrgTransaction } from '../../server/database.mjs';
 import {firebaseServices} from '../../server/firebase.mjs';
+import {deploymentContext,previewResponse} from '../../server/deploy-context.mjs';
 import {capabilityValid,capabilityHash,membershipKey,closedAccountKey,creationFingerprint,usedCapability,rememberCapability,fullHatim,ownsItem,itemView,rememberMembership,validDate} from '../../server/hatim-access.mjs';
 
 const ALPHA = 'abcdefghijkmnpqrstuvwxyz23456789'; // karışan harfler yok (l,o,0,1)
@@ -148,7 +149,9 @@ async function handlePoll(p, store) {
 }
 
 const NATIVE_ORIGIN='capacitor://localhost';
-export function createOrgHandler({services=firebaseServices,transaction=withOrgTransaction}={}){return async function requestHandler(req) {
+export function createOrgHandler({services=firebaseServices,transaction,environment=()=>process.env}={}){
+ const runTransaction=transaction||(work=>withOrgTransaction(work,{environment:environment(),services}));
+ const requestHandler=async req=>{
   if (req.method !== 'POST') return fail('Yalnız POST', 405);
   const origin=req.headers.get('origin');
   if(origin&&origin!==new URL(req.url).origin&&origin!==NATIVE_ORIGIN)return fail('Bu kaynaktan işlem yapılamıyor.',403);
@@ -168,9 +171,15 @@ export function createOrgHandler({services=firebaseServices,transaction=withOrgT
       session={uid:verified.uid};
     }catch{return fail('Oturum doğrulanamadı. Yeniden giriş yap.',401);}
   }
-  try{return await transaction(store=>handleOrg(p,store,session));}
+  try{return await runTransaction(store=>handleOrg(p,store,session));}
   catch{return fail('İşlem tamamlanamadı. Bağlantını kontrol edip tekrar dene.',503);}
-};}
+ };
+ return async req=>{
+  let context;try{context=deploymentContext(environment());}catch{return fail('Önizleme veri alanı doğrulanamadı. Canlı kayıtlara erişim açılmadı.',503);}
+  if(context.kind==='preview'&&req.headers.has('authorization'))return previewResponse(fail('Bu önizleme yalnız misafir hatim denemesi içindir. Canlı hesap oturumunu burada kullanma.',403),context);
+  return previewResponse(await requestHandler(req),context);
+ };
+}
 const requestHandler=createOrgHandler();
 export default async (req) => {
   const native=req.headers.get('origin')===NATIVE_ORIGIN;

@@ -26,7 +26,9 @@ export function createLocalOrgHandler(){
   });
   queue=result.catch(()=>{});return result;
  };
- const handler=createOrgHandler({transaction,services(){throw Error('Local guest fixture must never initialize Firebase');}});
+ // Exercise the real guest handler against this injected memory transaction,
+ // independently of whichever CONTEXT the build running these tests inherited.
+ const handler=createOrgHandler({environment:()=>({CONTEXT:'production'}),transaction,services(){throw Error('Local guest fixture must never initialize Firebase');}});
  return async req=>{
   if(req.headers.has('authorization'))return Response.json({error:'Bu yerel hatim önizlemesi yalnız misafir testi içindir. Hesaptan çıkıp yeniden dene.',localTest:true},{status:401,headers:{'cache-control':'no-store','x-elifa-local-test':'memory-only'}});
   const response=await handler(req),data=await response.json();

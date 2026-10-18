@@ -172,7 +172,7 @@ test('account-owned creation and claims survive without copying a guest/admin se
 
 test('verified bearer auth is optional for guests but cannot be forged or silently cross account boundaries',async()=>{
  const h=memory();let serviceCalls=0;
- const handler=createOrgHandler({transaction:h.transaction,services(){serviceCalls++;return {auth:{verifyIdToken:async token=>{if(token!=='valid-alice')throw Error('invalid');return {uid:'alice'};},getUser:async()=>({disabled:false})}};}});
+ const handler=createOrgHandler({environment:()=>({CONTEXT:'production'}),transaction:h.transaction,services(){serviceCalls++;return {auth:{verifyIdToken:async token=>{if(token!=='valid-alice')throw Error('invalid');return {uid:'alice'};},getUser:async()=>({disabled:false})}};}});
  const req=(p,token,origin='https://app.test')=>new Request('https://app.test/api/org',{method:'POST',headers:{'content-type':'application/json',origin,...(token?{authorization:'Bearer '+token}:{})},body:JSON.stringify(p)});
  await body(await handler(req({action:'myList',uid:'alice'})),401);assert.equal(serviceCalls,0);
  await body(await handler(req({action:'myList',expectedUser:'bob'},'valid-alice')),409);

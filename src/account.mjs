@@ -6,6 +6,11 @@ import {accountLanguage,accountText,localizeAccountTree} from './account-i18n.mj
 import {createSafeStorage,createAccountWorkspaces,WORKSPACE_OWNER} from './account-workspaces.mjs';
 import {mountAccountProfile} from './account-profile.mjs';
 const dialog=document.getElementById('accountDialog'),$=id=>document.getElementById(id);
+// Build metadata also covers immutable Netlify preview URLs. Host detection is
+// only an accidental-action safeguard; the server enforces its own isolation.
+const previewAccount=(typeof __ELIFA_ACCOUNT_PREVIEW__!=='undefined'&&__ELIFA_ACCOUNT_PREVIEW__)||/^deploy-preview-\d+--[a-z0-9-]+\.netlify\.app$/i.test(location.hostname||new URL(location.href).hostname);
+const previewAccountMessage='Önizlemede hesap/bulut işlemleri kapalı. Gerçek hesabını burada oluşturma veya değiştirme.';
+if(previewAccount){const notice=document.createElement('p');notice.id='accountPreviewNotice';notice.className='account-card';notice.setAttribute('role','note');notice.textContent=previewAccountMessage;notice.style.cssText='font-size:13px;line-height:1.45;padding:10px 12px;margin:8px 0';dialog.prepend(notice);}
 for(const root of [dialog,$('accountHome'),$('accountSettings'),$('storageFailure')].filter(Boolean)){
  localizeAccountTree(root);
  new MutationObserver(()=>localizeAccountTree(root)).observe(root,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['aria-label']});
@@ -27,7 +32,7 @@ function publishSession(){const current=sessionUser();for(const listener of sess
 window.elifaAccountSession={
  getUser:sessionUser,
  isReady:()=>authReady,
- async getIdToken(forceRefresh=false){await auth.authStateReady();const current=user,generation=epoch;if(!current)return null;const token=await current.getIdToken(forceRefresh);if(user?.uid!==current.uid||auth.currentUser?.uid!==current.uid||generation!==epoch)throw Error('Hesap değişti. Yeniden dene.');return token;},
+ async getIdToken(forceRefresh=false){if(previewAccount)return null;await auth.authStateReady();const current=user,generation=epoch;if(!current)return null;const token=await current.getIdToken(forceRefresh);if(user?.uid!==current.uid||auth.currentUser?.uid!==current.uid||generation!==epoch)throw Error('Hesap değişti. Yeniden dene.');return token;},
  onChange(listener){sessionListeners.add(listener);if(authReady)listener(sessionUser());return ()=>sessionListeners.delete(listener);}
 };
 function assertWorkspace(){if(!workspaceReady||workspaceTransition||!workspaces.isActive(user?.uid))throw Error('Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.');}
@@ -67,9 +72,10 @@ function availability(){
  $('accountSave').disabled=busy||!workspaceReady||workspaceTransition||!user?.emailVerified||!$('accountCloudConsent').checked;
  $('accountSyncNow').disabled=busy||syncRunning||!workspaceReady||workspaceTransition||!user?.emailVerified||!$('accountSyncEnabled').checked;
  $('profileSave').disabled=busy||!user?.emailVerified||!profileUI.ready();
+ if(previewAccount)dialog.querySelectorAll('button,input,select,textarea').forEach(n=>{if(n.id!=='accountClose')n.disabled=true;});
 }
 function setBusy(v){busy=v;dialog.setAttribute('aria-busy',String(v));dialog.querySelectorAll('button,input').forEach(n=>{if(n.id!=='accountClose')n.disabled=v;});if(!v){$('accountSyncEnabled').disabled=!user?.emailVerified||!workspaceReady||workspaceTransition;availability();if(syncPending)scheduleSync(50);reloadWorkspace();}}
-async function action(work){if(busy)return;setBusy(true);message('İşlem sürüyor…');try{await work();}catch(e){message(errorText(e),true);}finally{setBusy(false);}}
+async function action(work){if(previewAccount){message(previewAccountMessage);return;}if(busy)return;setBusy(true);message('İşlem sürüyor…');try{await work();}catch(e){message(errorText(e),true);}finally{setBusy(false);}}
 function render(){
  const account=!!user&&mode!=='reset';
  $('accountGuest').hidden=account;$('accountMember').hidden=!account;
@@ -102,6 +108,7 @@ function render(){
  availability();
 }
 function authChanged(next){
+ if(previewAccount)next=null;
  const changed=user?.uid!==next?.uid;
  if(changed){epoch++;pendingConflict=null;syncPending=false;profileName=null;clearTimeout(syncTimer);$('accountConflict').hidden=true;$('accountBackupList').replaceChildren();$('accountBackupCount').textContent='';$('accountBackupStatus').textContent='Henüz kontrol edilmedi.';$('accountCloudConsent').checked=false;$('accountSyncStatus').textContent='Eşitleme kapalı.';$('accountLastSync').textContent='Henüz eşitlenmedi.';}
  user=next;authReady=true;const generation=epoch;
@@ -125,7 +132,7 @@ function authChanged(next){
   prepare();finish();
  }catch(e){fail(e);}
 }
-async function open(){if(!dialog.open)dialog.showModal();render();if(!authReady)message('Hesap hizmeti hazırlanıyor…');else if(user?.emailVerified)await action(async()=>{await Promise.all([loadBackups(),profileUI.load()]);});else message(isLocal?'Yerel test ortamı: gerçek kullanıcı hesabı oluşturulmaz.':'Okuma ve dinleme için hesap gerekmiyor.');}
+async function open(){if(!dialog.open)dialog.showModal();render();if(previewAccount){message(previewAccountMessage);return;}if(!authReady)message('Hesap hizmeti hazırlanıyor…');else if(user?.emailVerified)await action(async()=>{await Promise.all([loadBackups(),profileUI.load()]);});else message(isLocal?'Yerel test ortamı: gerçek kullanıcı hesabı oluşturulmaz.':'Okuma ve dinleme için hesap gerekmiyor.');}
 $('accountClose').onclick=()=>dialog.close();
 dialog.addEventListener('close',()=>{$('accountPassword').value='';$('accountDeletePassword').value='';});
 $('accountHome').onclick=open;
@@ -162,6 +169,7 @@ $('accountForm').onsubmit=e=>{e.preventDefault();action(async()=>{
 $('accountVerifySend').onclick=()=>action(async()=>{await sendEmailVerification(user,actionSettings());message('Doğrulama e-postası gönderildi.');});
 $('accountVerifyRefresh').onclick=()=>action(async()=>{await reload(user);await user.getIdToken(true);authChanged(auth.currentUser);if(user.emailVerified){await Promise.all([loadBackups(),profileUI.load()]);message('E-posta doğrulandı.');}else message('Doğrulama henüz tamamlanmamış. E-postadaki bağlantıyı aç.');});
 async function api(actionName,extra={}){
+ if(previewAccount)throw Error(previewAccountMessage);
  const owner=user?.uid,generation=epoch,current=user;if(!owner)throw Error('Önce giriş yap.');
  const needsWorkspace=['save','syncGet','syncPut','restore'].includes(actionName);if(needsWorkspace)assertWorkspace();
  const token=await current.getIdToken();
@@ -175,6 +183,7 @@ const localSnapshot=()=>collectBackup({getItem:key=>window.elifaReadLocalValue?w
 const sameData=(a,b)=>JSON.stringify(a?.veri||{})===JSON.stringify(b?.veri||{});
 function scheduleSync(delay=1200){
  clearTimeout(syncTimer);
+ if(previewAccount){syncPending=false;return;}
  if(!workspaceReady||workspaceTransition||!user?.emailVerified||accountStorage.getItem(SYNC_ENABLED_PREFIX+user.uid)!=='1'){syncPending=false;return;}
  syncPending=true;const generation=epoch;
  syncTimer=setTimeout(()=>{if(generation!==epoch)return;if(busy||syncRunning){scheduleSync(500);return;}syncPending=false;syncNow().catch(e=>{$('accountSyncStatus').textContent=errorText(e);});},delay);
@@ -189,6 +198,7 @@ function showConflicts(conflicts){
  $('accountSyncStatus').textContent='Aynı kayıt iki cihazda değişmiş. Hangisi kalsın?';
 }
 async function syncNow(resolutions={}){
+ if(previewAccount){message(previewAccountMessage);return;}
  if(syncRunning||!workspaceReady||workspaceTransition||!user?.emailVerified||!$('accountSyncEnabled').checked)return;
  if(!navigator.onLine){$('accountSyncStatus').textContent='Çevrimdışı. Kayıtlar bu cihazda; bağlantı gelince yeniden denenecek.';return;}
  if(window.elifaActivityBusy?.()){$('accountSyncStatus').textContent=window.tr?.('sync_deferred')||'Sync will continue after your study.';scheduleSync(5000);return;}
@@ -218,6 +228,7 @@ async function syncNow(resolutions={}){
  finally{syncRunning=false;availability();if(syncPending)scheduleSync(50);}
 }
 $('accountSyncEnabled').onchange=()=>{
+ if(previewAccount){$('accountSyncEnabled').checked=false;message(previewAccountMessage);return;}
  if(!user)return;const enabled=$('accountSyncEnabled').checked;
  if(enabled){assertWorkspace();if(!accountStorage.setItem(SYNC_ENABLED_PREFIX+user.uid,'1')){accountStorage.removeItem(SYNC_ENABLED_PREFIX+user.uid);$('accountSyncEnabled').checked=false;message('Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.',true);return;}$('accountSyncStatus').textContent='Eşitleme açıldı. Cihaz ve bulut kayıtları karşılaştırılacak.';scheduleSync(50);}
  else{accountStorage.removeItem(SYNC_ENABLED_PREFIX+user.uid);syncPending=false;clearTimeout(syncTimer);pendingConflict=null;$('accountConflict').hidden=true;$('accountSyncStatus').textContent='Eşitleme kapalı. Cihaz kayıtları korunuyor.';}
@@ -286,7 +297,7 @@ $('accountUndo').onclick=()=>action(async()=>{
  restoreBackup(localStorage,{elifa:'yedek',v:1,veri});location.reload();
 });
 window.elifaAccount={open};
-window.elifaRestoreBackup=payload=>{assertWorkspace();restoreBackup(localStorage,validateBackup(payload));location.reload();};
+window.elifaRestoreBackup=payload=>{if(previewAccount)throw Error(previewAccountMessage);assertWorkspace();restoreBackup(localStorage,validateBackup(payload));location.reload();};
 window.addEventListener('elifa-storage-error',()=>{$('storageFailure').hidden=false;});
 $('storageExport').onclick=()=>{
  try{
@@ -295,10 +306,11 @@ $('storageExport').onclick=()=>{
   a.href=url;a.download='elifa-kurtarma-yedegi.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
  }catch(e){alert(accountText('Yedek alınamadı: ')+e.message);}
 };
-onAuthStateChanged(auth,authChanged,e=>{authReady=true;message(errorText(e),true);availability();publishSession();});
+if(previewAccount)authChanged(null);else onAuthStateChanged(auth,authChanged,e=>{authReady=true;message(errorText(e),true);availability();publishSession();});
 try{if(recoverPendingRestore(localStorage))location.reload();}catch(e){$('storageFailure').hidden=false;message(e.message,true);}
 render();if(window.elifaStorageFailed)$('storageFailure').hidden=false;
 (async()=>{
+ if(previewAccount)return;
  const params=new URLSearchParams(location.search),code=params.get('oobCode'),operation=params.get('mode');
  if(!code||!['verifyEmail','resetPassword'].includes(operation))return;
  const clean=new URL(location.href);for(const key of ['oobCode','mode','apiKey','continueUrl','lang'])clean.searchParams.delete(key);

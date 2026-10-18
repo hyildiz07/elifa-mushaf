@@ -377,7 +377,7 @@
   var tab = "open";
   var discover = [];
   var accountItems = [];
-  var discoverEnabled = false;
+  var discoverEnabled = null;
   var loading = false;
   var error = "";
   var refreshing = false;
@@ -447,7 +447,29 @@
     openTogetherScreen();
     await openParsed(p);
   }
-  var api = createOrgClient({ fetcher: (...a) => fetch(...a), session, base: window.ELIFA_API_BASE || "" });
+  var previewMode = false;
+  var requestApi = createOrgClient({ fetcher: (...a) => fetch(...a), session, base: window.ELIFA_API_BASE || "" });
+  var previewNotice = "\xD6nizleme: Buradaki hatim ve c\xFCzler deneme i\xE7indir; canl\u0131 kay\u0131tlar\u0131n\u0131 etkilemez.";
+  function renderPreviewNotice() {
+    for (const id of ["hcHomePreview", "hcOrgPreview", "hcDialogPreview"]) {
+      const node = $(id);
+      if (node) {
+        node.hidden = !previewMode;
+        node.textContent = previewMode ? previewNotice : "";
+      }
+    }
+  }
+  function previewNote(id) {
+    return `<p id="${id}" class="hc-note" role="note" ${previewMode ? "" : "hidden"}>${previewMode ? previewNotice : ""}</p>`;
+  }
+  async function api(payload2) {
+    const result = await requestApi(payload2);
+    if (result.preview === true) {
+      previewMode = true;
+      renderPreviewNotice();
+    }
+    return result;
+  }
   function save(required = false) {
     try {
       const raw = JSON.stringify(local);
@@ -527,7 +549,7 @@
     const d = $("hatimDialog");
     if (d.open) d.close();
     const identity = ++dialogIdentity, context = { owner, generation, current, dialog: identity };
-    d.innerHTML = `<form method="dialog"><header><h2>${esc(title)}</h2><button class="hc-close" value="cancel" aria-label="Kapat">\xD7</button></header></form><div class="hc-dialog-body">${body}<p id="hcError" class="hc-error" role="alert"></p></div><footer>${actions.map((a) => button(a.label, a.id, a.primary ? "primary" : "")).join("")}</footer>`;
+    d.innerHTML = `<form method="dialog"><header><h2>${esc(title)}</h2><button class="hc-close" value="cancel" aria-label="Kapat">\xD7</button></header></form><div class="hc-dialog-body">${previewNote("hcDialogPreview")}${body}<p id="hcError" class="hc-error" role="alert"></p></div><footer>${actions.map((a) => button(a.label, a.id, a.primary ? "primary" : "")).join("")}</footer>`;
     for (const a of actions) on(d.querySelector('[data-hc="' + a.id + '"]'), "click", async (e) => {
       const b = e.currentTarget;
       if (pendingAction) return;
@@ -602,7 +624,7 @@
   function home() {
     const holder = $("birlikte");
     if (!holder) return;
-    holder.innerHTML = `<div class="hc-home"><button type="button" class="hc-button hc-home-back" data-hc="home-back">\u2039 Elifa</button><header class="hc-top"><div><small>B\u0130RL\u0130KTE</small><h1>Hatimde bulu\u015Fal\u0131m</h1><p>Bir c\xFCz se\xE7, ortak niyete kat\u0131l.</p></div><span aria-hidden="true" class="hc-emblem">\u0627</span></header><div class="hc-main-actions">${button("\uFF0B Hatim olu\u015Ftur", "create", "primary")}${button("Ba\u011Flant\u0131yla kat\u0131l", "join")}</div><nav class="hc-tabs" aria-label="Hatim b\xF6l\xFCmleri">${[["open", "A\xE7\u0131k Hatimler"], ["mine", "Benim C\xFCzlerim"], ["created", "Olu\u015Fturduklar\u0131m"]].map(([id, name]) => `<button type="button" data-tab="${id}" aria-pressed="${id === tab}">${name}</button>`).join("")}</nav><div id="hatimStatus" role="status" aria-live="polite"></div><div id="hatimList"></div></div>`;
+    holder.innerHTML = `<div class="hc-home"><button type="button" class="hc-button hc-home-back" data-hc="home-back">\u2039 Elifa</button><header class="hc-top"><div><small>B\u0130RL\u0130KTE</small><h1>Hatimde bulu\u015Fal\u0131m</h1><p>Bir c\xFCz se\xE7, ortak niyete kat\u0131l.</p></div><span aria-hidden="true" class="hc-emblem">\u0627</span></header>${previewNote("hcHomePreview")}<div class="hc-main-actions">${button("\uFF0B Hatim olu\u015Ftur", "create", "primary")}${button("Ba\u011Flant\u0131yla kat\u0131l", "join")}</div><nav class="hc-tabs" aria-label="Hatim b\xF6l\xFCmleri">${[["open", "A\xE7\u0131k Hatimler"], ["mine", "Benim C\xFCzlerim"], ["created", "Olu\u015Fturduklar\u0131m"]].map(([id, name]) => `<button type="button" data-tab="${id}" aria-pressed="${id === tab}">${name}</button>`).join("")}</nav><div id="hatimStatus" role="status" aria-live="polite"></div><div id="hatimList"></div></div>`;
     on(holder.querySelector("[data-hc=home-back]"), "click", () => {
       closeDialog();
       clearInterval(window.bkRefreshTimer);
@@ -623,9 +645,13 @@
   function renderList() {
     const list = $("hatimList");
     if (!list) return;
+    renderPreviewNotice();
     $("hatimStatus").textContent = loading ? "G\xFCncel bilgiler al\u0131n\u0131yor\u2026" : error;
     if (tab === "open") {
-      list.innerHTML = discover.length ? discover.map(card).join("") : `<div class="hc-empty"><h2>${discoverEnabled ? "Hen\xFCz a\xE7\u0131k hatim yok" : "Bir ba\u011Flant\u0131yla da kat\u0131labilirsin"}</h2><p>${discoverEnabled ? "\u0130lk hatmi sen ba\u015Flatabilirsin." : "A\xE7\u0131k hatim listesi \u015Fu an kapal\u0131. Sana g\xF6nderilen ba\u011Flant\u0131yla kat\u0131labilir veya \xF6zel bir hatim olu\u015Fturabilirsin."}</p></div>`;
+      if (loading) list.innerHTML = '<div class="hc-empty"><h2>A\xE7\u0131k hatimler y\xFCkleniyor</h2><p>G\xFCncel liste kontrol ediliyor\u2026</p></div>';
+      else if (error) list.innerHTML = '<div class="hc-empty"><h2>A\xE7\u0131k hatimler \u015Fu an al\u0131namad\u0131</h2><p>Bu, listenin kapal\u0131 oldu\u011Fu anlam\u0131na gelmez. Yeniden deneyebilir veya sana g\xF6nderilen ba\u011Flant\u0131yla kat\u0131labilirsin.</p>' + button("Yeniden dene", "discover-retry") + "</div>";
+      else if (discoverEnabled === null) list.innerHTML = '<div class="hc-empty"><h2>A\xE7\u0131k hatim durumu hen\xFCz do\u011Frulanmad\u0131</h2><p>G\xFCncel listeyi kontrol etmek i\xE7in yeniden dene.</p>' + button("Yeniden dene", "discover-retry") + "</div>";
+      else list.innerHTML = discoverEnabled && discover.length ? discover.map(card).join("") : `<div class="hc-empty"><h2>${discoverEnabled ? "Hen\xFCz a\xE7\u0131k hatim yok" : "Bir ba\u011Flant\u0131yla da kat\u0131labilirsin"}</h2><p>${discoverEnabled ? "\u0130lk hatmi sen ba\u015Flatabilirsin." : "A\xE7\u0131k hatim listesi \u015Fu an kapal\u0131. Sana g\xF6nderilen ba\u011Flant\u0131yla kat\u0131labilir veya \xF6zel bir hatim olu\u015Fturabilirsin."}</p></div>`;
     } else {
       const records = new Map(local.mine.filter((x) => x.type === "hatim").map((m) => [m.code, { ...m, ...local.snapshots[m.code], localOnly: true }]));
       for (const m of accountItems) if (m.type === "hatim") records.set(m.code, { ...records.get(m.code), ...m, localOnly: false });
@@ -641,6 +667,7 @@
       }
     }
     list.querySelectorAll("[data-open]").forEach((b) => on(b, "click", () => bkOpen(b.dataset.open)));
+    on(list.querySelector("[data-hc=discover-retry]"), "click", renderBirlikte);
     on(list.querySelector("[data-hc=account]"), "click", accountOpen);
     on(list.querySelector("[data-hc=bind-list]"), "click", showGuestBindings);
   }
@@ -654,7 +681,8 @@
       if (tab === "open") {
         const d = await api({ action: "discoverList" });
         if (ticket !== listGeneration) return;
-        discoverEnabled = !!d.enabled;
+        if (typeof d.enabled !== "boolean" || d.enabled && !Array.isArray(d.items)) throw Error("A\xE7\u0131k hatim listesi yan\u0131t\u0131 do\u011Frulanamad\u0131. Yeniden dene.");
+        discoverEnabled = d.enabled;
         discover = (d.items || []).filter((x) => x.type === "hatim");
       } else if (user()) {
         let items = [], cursor;
@@ -739,7 +767,7 @@
       return true;
     } catch (e) {
       if (ticket === generation) {
-        $("orgView").innerHTML = `<div class="hc-empty" role="alert"><p>${esc(e.message)}</p>${button("Yeniden dene", "retry")}</div>`;
+        $("orgView").innerHTML = `${previewNote("hcOrgPreview")}<div class="hc-empty" role="alert"><p>${esc(e.message)}</p>${button("Yeniden dene", "retry")}</div>`;
         on($("orgView").querySelector("[data-hc=retry]"), "click", () => bkOpen(code, admin, { fromHistory: true }));
       }
     }
@@ -786,7 +814,7 @@
       renderLegacy(o);
       return;
     }
-    $("orgView").innerHTML = `<div class="hc-detail"><header class="hc-detail-head"><small>${o.fullHatim ? "B\u0130RL\u0130KTE HAT\u0130M" : "C\xDCZ \xC7ALI\u015EMASI"}${o.archived ? " \xB7 AR\u015E\u0130V" : ""}</small><h1>${esc(o.title)}</h1><p>${esc(o.adminName || "")}${o.dueDate ? " \xB7 " + esc(dueText(o.dueDate)) : ""}</p></header><div class="hc-summary"><b>${done}<span> / ${items.length} okundu</span></b><span>${available} bo\u015F c\xFCz</span><progress value="${done}" max="${items.length}" aria-label="Okunan c\xFCzler"></progress></div>${o.complete ? '<p class="hc-success">' + (o.fullHatim ? "Hatim tamamland\u0131." : "C\xFCz \xE7al\u0131\u015Fmas\u0131 tamamland\u0131.") + " Allah kabul etsin.</p>" : ""}${o.archived ? '<p class="hc-note">Bu \xE7al\u0131\u015Fma ar\u015Fivde. Kay\u0131tlar korunur; yeni c\xFCz almak i\xE7in y\xF6netici yeniden a\xE7abilir.</p>' : ""}<div class="hc-detail-actions">${button("Kat\u0131l\u0131m ba\u011Flant\u0131s\u0131n\u0131 payla\u015F", "share")}${button("Yenile", "refresh")}${o.isAdmin ? button("Y\xF6net", "manage") : ""}</div><p class="hc-note">Bo\u015F bir c\xFCz se\xE7ebilirsin. Okumak veya dinlemek, c\xFCz\xFC kendili\u011Finden \u201COkudum\u201D yapmaz.</p><div class="hc-grid">${items.map((i) => `<button type="button" class="hc-juz ${i.mine ? "mine " : ""}${i.status}" data-cuz="${i.no}" aria-label="${i.no}. c\xFCz, ${i.mine ? "Bende, " : ""}${i.status === "bos" ? "Bo\u015F" : i.status === "okundu" ? "Okundu" : "Al\u0131nd\u0131"}${i.name ? ", " + esc(i.name) : ""}"><b>${i.no}</b><span>${i.status === "bos" ? "Bo\u015F" : i.status === "okundu" ? "Okundu \u2713" : i.mine ? "Bende" : "Al\u0131nd\u0131"}</span>${i.name ? `<small>${esc(i.name)}</small>` : ""}</button>`).join("")}</div><p id="hcRefreshState" class="hc-note" role="status">${user() ? "Hesab\u0131na ba\u011Fl\u0131 kat\u0131l\u0131mlar di\u011Fer cihazlarda da g\xF6r\xFCn\xFCr." : "Misafirsen ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131n\u0131 sakla."}</p></div>`;
+    $("orgView").innerHTML = `<div class="hc-detail">${previewNote("hcOrgPreview")}<header class="hc-detail-head"><small>${o.fullHatim ? "B\u0130RL\u0130KTE HAT\u0130M" : "C\xDCZ \xC7ALI\u015EMASI"}${o.archived ? " \xB7 AR\u015E\u0130V" : ""}</small><h1>${esc(o.title)}</h1><p>${esc(o.adminName || "")}${o.dueDate ? " \xB7 " + esc(dueText(o.dueDate)) : ""}</p></header><div class="hc-summary"><b>${done}<span> / ${items.length} okundu</span></b><span>${available} bo\u015F c\xFCz</span><progress value="${done}" max="${items.length}" aria-label="Okunan c\xFCzler"></progress></div>${o.complete ? '<p class="hc-success">' + (o.fullHatim ? "Hatim tamamland\u0131." : "C\xFCz \xE7al\u0131\u015Fmas\u0131 tamamland\u0131.") + " Allah kabul etsin.</p>" : ""}${o.archived ? '<p class="hc-note">Bu \xE7al\u0131\u015Fma ar\u015Fivde. Kay\u0131tlar korunur; yeni c\xFCz almak i\xE7in y\xF6netici yeniden a\xE7abilir.</p>' : ""}<div class="hc-detail-actions">${button("Kat\u0131l\u0131m ba\u011Flant\u0131s\u0131n\u0131 payla\u015F", "share")}${button("Yenile", "refresh")}${o.isAdmin ? button("Y\xF6net", "manage") : ""}</div><p class="hc-note">Bo\u015F bir c\xFCz se\xE7ebilirsin. Okumak veya dinlemek, c\xFCz\xFC kendili\u011Finden \u201COkudum\u201D yapmaz.</p><div class="hc-grid">${items.map((i) => `<button type="button" class="hc-juz ${i.mine ? "mine " : ""}${i.status}" data-cuz="${i.no}" aria-label="${i.no}. c\xFCz, ${i.mine ? "Bende, " : ""}${i.status === "bos" ? "Bo\u015F" : i.status === "okundu" ? "Okundu" : "Al\u0131nd\u0131"}${i.name ? ", " + esc(i.name) : ""}"><b>${i.no}</b><span>${i.status === "bos" ? "Bo\u015F" : i.status === "okundu" ? "Okundu \u2713" : i.mine ? "Bende" : "Al\u0131nd\u0131"}</span>${i.name ? `<small>${esc(i.name)}</small>` : ""}</button>`).join("")}</div><p id="hcRefreshState" class="hc-note" role="status">${user() ? "Hesab\u0131na ba\u011Fl\u0131 kat\u0131l\u0131mlar di\u011Fer cihazlarda da g\xF6r\xFCn\xFCr." : "Misafirsen ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131n\u0131 sakla."}</p></div>`;
     on($("orgView").querySelector("[data-hc=share]"), "click", () => share(c.code, o.title));
     on($("orgView").querySelector("[data-hc=refresh]"), "click", bkSilentRefresh);
     on($("orgView").querySelector("[data-hc=manage]"), "click", showManage);
@@ -853,8 +881,10 @@
     dialog(no + ". c\xFCz sende", `<p>${accountBound ? "Kat\u0131l\u0131m hesab\u0131na ba\u011Fl\u0131. Di\u011Fer cihazda ayn\u0131 hesapla giri\u015F yapabilirsin." : "Bu ba\u011Flant\u0131 c\xFCz\xFCn\xFC y\xF6netir. Yaln\u0131z kendin i\xE7in sakla; kat\u0131l\u0131m payla\u015F\u0131m\u0131nda kullanma."}</p><textarea readonly class="hc-link" aria-label="Ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131s\u0131">${esc(link)}</textarea>`, [{ id: "copy", label: "Ki\u015Fisel ba\u011Flant\u0131y\u0131 kopyala", primary: true, run: () => copy(link) }, { id: "ok", label: "Tamam", run: closeDialog }]);
   }
   function showCreate() {
+    let visibilityStatus = "loading", visibilityEnabled = null;
     createDraft = local.creation || { token: secret(crypto), title: "", name: user()?.displayName || local.myName, dueDate: "", public: false };
-    dialog("Hatim olu\u015Ftur", `<p class="hc-note">30 c\xFCzl\xFCk bir hatim ba\u015Flat. Kat\u0131l\u0131mc\u0131lar hesap a\xE7madan da c\xFCz se\xE7ebilir.</p>${!user() ? '<p class="hc-warning">Hesaps\u0131z olu\u015Fturuyorsun. Cihaz verileri silinirse y\xF6netici eri\u015Fimini kaybedebilirsin. Olu\u015Fturma sonunda \xF6zel y\xF6netici ba\u011Flant\u0131n\u0131 sakla.</p>' : ""}<label class="hc-field">Hatmin ad\u0131 / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="\xD6rn. Ailemizin haftal\u0131k hatmi"></label><label class="hc-field">Y\xF6netici g\xF6r\xFCnen ad\u0131<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih \xB7 iste\u011Fe ba\u011Fl\u0131<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler kat\u0131labilsin?</legend><label><input type="radio" name="hcVisibility" value="private" ${!createDraft.public ? "checked" : ""}> Ba\u011Flant\u0131ya sahip olanlar</label><label><input type="radio" name="hcVisibility" value="public" ${createDraft.public ? "checked" : ""} ${!discoverEnabled ? "disabled" : ""}> Uygulamadaki herkes</label>${!discoverEnabled ? "<small>A\xE7\u0131k hatim listesi \u015Fu an kapal\u0131.</small>" : ""}</fieldset>`, [{ id: "create", label: "Hatmi olu\u015Ftur", primary: true, run: async () => {
+    dialog("Hatim olu\u015Ftur", `<p class="hc-note">30 c\xFCzl\xFCk bir hatim ba\u015Flat. Kat\u0131l\u0131mc\u0131lar hesap a\xE7madan da c\xFCz se\xE7ebilir.</p>${!user() ? '<p class="hc-warning">Hesaps\u0131z olu\u015Fturuyorsun. Cihaz verileri silinirse y\xF6netici eri\u015Fimini kaybedebilirsin. Olu\u015Fturma sonunda \xF6zel y\xF6netici ba\u011Flant\u0131n\u0131 sakla.</p>' : ""}<label class="hc-field">Hatmin ad\u0131 / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="\xD6rn. Ailemizin haftal\u0131k hatmi"></label><label class="hc-field">Y\xF6netici g\xF6r\xFCnen ad\u0131<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih \xB7 iste\u011Fe ba\u011Fl\u0131<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler kat\u0131labilsin?</legend><div id="hcVisibilityOptions" aria-live="polite"><p>Kat\u0131l\u0131m se\xE7enekleri kontrol ediliyor\u2026</p></div></fieldset>`, [{ id: "create", label: "Hatmi olu\u015Ftur", primary: true, run: async () => {
+      if (createDraft.public && visibilityEnabled !== true) throw Error("\xD6nceki a\xE7\u0131k hatim iste\u011Fini g\xFCvenle s\xFCrd\xFCrmek i\xE7in kat\u0131l\u0131m se\xE7eneklerinin do\u011Frulanmas\u0131n\u0131 bekle veya yeniden dene.");
       const form = { title: $("hcTitle").value.trim(), name: $("hcAdminName").value.trim(), dueDate: $("hcDue").value, public: !!document.querySelector("input[name=hcVisibility][value=public]:checked") };
       if (!form.title) throw Error("Hatme bir ad ver.");
       const signature = JSON.stringify(form);
@@ -871,12 +901,31 @@
       await bkOpen(d.code, d.adminToken);
       showAdminBackup(d.code, d.adminToken);
     } }, { id: "cancel", label: "Vazge\xE7", run: closeDialog }]);
-    api({ action: "discoverConfig" }).then((d) => {
-      discoverEnabled = !!d.enabled;
-      const input = document.querySelector("input[name=hcVisibility][value=public]");
-      if (input) input.disabled = !discoverEnabled;
-    }).catch(() => {
-    });
+    const scope = { owner, generation, dialog: dialogIdentity };
+    const visibilityCurrent = () => scope.owner === owner && scope.generation === generation && scope.dialog === dialogIdentity && $("hatimDialog").open;
+    const renderVisibility = () => {
+      if (!visibilityCurrent()) return;
+      $("hcVisibilityOptions").innerHTML = '<label><input type="radio" name="hcVisibility" value="private" ' + (!createDraft.public ? "checked" : "") + "> Ba\u011Flant\u0131ya sahip olanlar</label>" + (visibilityStatus === "ready" && visibilityEnabled ? '<label><input type="radio" name="hcVisibility" value="public" ' + (createDraft.public ? "checked" : "") + "> Uygulamadaki herkes</label>" : "") + (visibilityStatus === "loading" ? "<small>Uygulamadaki herkese a\xE7ma se\xE7ene\u011Fi kontrol ediliyor\u2026</small>" : visibilityStatus === "error" ? '<small>A\xE7\u0131k kat\u0131l\u0131m durumu do\u011Frulanamad\u0131. Ba\u011Flant\u0131yla kat\u0131l\u0131m se\xE7ene\u011Fi kullan\u0131labilir.</small><button type="button" class="hc-text" id="hcVisibilityRetry">Yeniden dene</button>' : visibilityEnabled ? "" : "<small>A\xE7\u0131k hatim listesi \u015Fu an kapal\u0131.</small>");
+      on($("hcVisibilityRetry"), "click", loadVisibility);
+    };
+    const loadVisibility = async () => {
+      visibilityStatus = "loading";
+      visibilityEnabled = null;
+      renderVisibility();
+      try {
+        const d = await api({ action: "discoverConfig" });
+        if (!visibilityCurrent()) return;
+        if (typeof d.enabled !== "boolean") throw Error("Kat\u0131l\u0131m se\xE7enekleri do\u011Frulanamad\u0131.");
+        visibilityEnabled = d.enabled;
+        discoverEnabled = d.enabled;
+        visibilityStatus = "ready";
+      } catch {
+        if (!visibilityCurrent()) return;
+        visibilityStatus = "error";
+      }
+      renderVisibility();
+    };
+    loadVisibility();
   }
   function showAdminBackup(code, token) {
     const link = adminUrl(base(), token);
@@ -981,7 +1030,7 @@
   }
   function renderLegacy(o) {
     const c = current, pend = local.pending[c.code] || 0;
-    $("orgView").innerHTML = `<div class="hc-detail"><small>\xD6NCEK\u0130 ORTAK N\u0130YET KAYDI</small><h1>${esc(o.title)}</h1><p>${esc(o.zikirAd || "")} \xB7 ${o.toplam || 0} / ${o.hedef || 0}</p><p class="hc-note">Bu eski ba\u011Flant\u0131 ve kay\u0131tlar\u0131 korunuyor.</p><div class="hc-main-actions">${button("\uFF0B Okudum (" + pend + ")", "tap")}${button("Pay\u0131m\u0131 ekle", "send", "primary")}</div><p id="hcLegacyStatus" role="status"></p></div>`;
+    $("orgView").innerHTML = `<div class="hc-detail">${previewNote("hcOrgPreview")}<small>\xD6NCEK\u0130 ORTAK N\u0130YET KAYDI</small><h1>${esc(o.title)}</h1><p>${esc(o.zikirAd || "")} \xB7 ${o.toplam || 0} / ${o.hedef || 0}</p><p class="hc-note">Bu eski ba\u011Flant\u0131 ve kay\u0131tlar\u0131 korunuyor.</p><div class="hc-main-actions">${button("\uFF0B Okudum (" + pend + ")", "tap")}${button("Pay\u0131m\u0131 ekle", "send", "primary")}</div><p id="hcLegacyStatus" role="status"></p></div>`;
     on($("orgView").querySelector("[data-hc=tap]"), "click", () => {
       local.pending[c.code] = (local.pending[c.code] || 0) + 1;
       save();

@@ -1,12 +1,13 @@
 import {getStore} from '@netlify/blobs';
 import {firebaseServices} from './firebase.mjs';
-export async function firestoreStoreTransaction(db,legacy,work){
+import {deploymentContext} from './deploy-context.mjs';
+export async function firestoreStoreTransaction(db,legacy,work,{records:recordCollection}={}){
  return db.runTransaction(async tx=>{
   // Firestore retries conflicts on the actual records read in this transaction.
   // An application-wide write lock would needlessly make unrelated hatims,
   // polls and account membership indexes contend with one another. Reading a
   // missing record also protects simultaneous legacy imports / random codes.
-  const records=db.collection('elifaOrgRecords'),pending=new Map(),reads=new Map();
+  const records=recordCollection||db.collection('elifaOrgRecords'),pending=new Map(),reads=new Map();
   const ref=key=>records.doc(Buffer.from(key).toString('base64url'));
   const store={
    async get(key,options={}){
@@ -42,7 +43,17 @@ export async function firestoreStoreTransaction(db,legacy,work){
   return result;
  },{maxAttempts:8});
 }
-export async function withOrgTransaction(work){
- if(process.env.ELIFA_FIRESTORE_GROUPS!=='enabled')throw Error('Firestore group cutover has not been enabled');
- return firestoreStoreTransaction(firebaseServices().db,getStore({name:'elifa-birlikte',consistency:'strong'}),work);
+const noLegacy={get:async()=>null,list:async()=>({blobs:[]})};
+export async function withOrgTransaction(work,{environment=process.env,services=firebaseServices,legacyStore=()=>getStore({name:'elifa-birlikte',consistency:'strong'})}={}){
+ const context=deploymentContext(environment);
+ if(context.kind==='preview'){
+  const db=services().db;
+  const records=db.collection('elifaOrgPreviewRuns').doc(context.scope).collection('records');
+  return firestoreStoreTransaction(db,noLegacy,store=>work({...store,get:async(key,options)=>{
+   const value=await store.get(key,options);
+   return key==='_config'&&value===null?{discoverEnabled:true}:value;
+  }}),{records});
+ }
+ if(environment.ELIFA_FIRESTORE_GROUPS!=='enabled')throw Error('Firestore group cutover has not been enabled');
+ return firestoreStoreTransaction(services().db,legacyStore(),work);
 }

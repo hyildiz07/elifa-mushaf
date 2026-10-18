@@ -2,6 +2,7 @@
 // English is a draft and must receive a language/legal review before release.
 import {ACCOUNT_DRAFTS} from './account-drafts.mjs';
 export const ACCOUNT_EN={
+ 'Önizlemede hesap/bulut işlemleri kapalı. Gerçek hesabını burada oluşturma veya değiştirme.':'Account and cloud actions are disabled in this preview. Do not create or change your real account here.',
  'Hesap değişti. Yeniden dene.':'Your account changed. Please try again.',
  'Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.':'Account records are not ready. Free some device storage and try again.',
  'Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.':'Each account has separate records on this device. Guest records are copied to your account only if you choose.',

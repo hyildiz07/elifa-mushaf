@@ -124,3 +124,50 @@ test('reading a juz uses the reader return contract instead of mutating a global
  h.review.setCurrent(current(codeA,[{no:1,status:'alindi',mine:true,name:'Me'}]));h.review.showJuz(1);await h.click('read');
  assert.equal(opened.length,1);assert.equal(opened[0].page,1);assert.equal(opened[0].options.returnTo,'org');assert.equal(h.c.readerReturn,null);
 });
+
+
+test('open-list loading and transport failure never claim that discovery is administratively closed; retry uses authoritative state',async()=>{
+ let resolve;const h=harness(()=>new Promise(r=>resolve=r));
+ const pending=h.review.renderBirlikte();assert.match(h.get('hatimList').innerHTML,/yükleniyor/);assert.doesNotMatch(h.get('hatimList').innerHTML,/şu an kapalı/);
+ await new Promise(r=>setImmediate(r));resolve(Response.json({error:'Service unavailable'},{status:503}));await pending;
+ assert.match(h.get('hatimList').innerHTML,/şu an alınamadı/);assert.doesNotMatch(h.get('hatimList').innerHTML,/şu an kapalı/);assert.match(h.get('hatimList').innerHTML,/discover-retry/);
+ const retry=h.get('hatimList:[data-hc=discover-retry]').handlers.click();await new Promise(r=>setImmediate(r));resolve(Response.json({enabled:false}));await retry;
+ assert.match(h.get('hatimList').innerHTML,/şu an kapalı/);assert.doesNotMatch(h.get('hatimList').innerHTML,/alınamadı/);
+});
+
+test('an unvalidated discovery response cannot masquerade as disabled configuration',async()=>{
+ const h=harness(()=>Response.json({items:[]}));await h.review.renderBirlikte();assert.match(h.get('hatimStatus').textContent,/doğrulanamadı/);assert.doesNotMatch(h.get('hatimList').innerHTML,/şu an kapalı/);
+});
+
+test('create visibility distinguishes pending, failed, enabled and explicitly disabled configuration without a misleading disabled radio',async()=>{
+ let resolve;const h=harness(()=>new Promise(r=>resolve=r));h.review.showCreate();
+ assert.match(h.get('hcVisibilityOptions').innerHTML,/kontrol ediliyor/);assert.doesNotMatch(h.get('hcVisibilityOptions').innerHTML,/value="public"|şu an kapalı|disabled/);
+ await new Promise(r=>setImmediate(r));resolve(Response.json({error:'Service unavailable'},{status:503}));await new Promise(r=>setImmediate(r));
+ assert.match(h.get('hcVisibilityOptions').innerHTML,/durumu doğrulanamadı/);assert.doesNotMatch(h.get('hcVisibilityOptions').innerHTML,/value="public"|şu an kapalı|disabled/);
+ const retry=h.get('hcVisibilityRetry').handlers.click();await new Promise(r=>setImmediate(r));resolve(Response.json({enabled:true}));await retry;
+ assert.match(h.get('hcVisibilityOptions').innerHTML,/value="public"/);assert.doesNotMatch(h.get('hcVisibilityOptions').innerHTML,/disabled|şu an kapalı/);
+ h.review.showCreate();await new Promise(r=>setImmediate(r));resolve(Response.json({enabled:false}));await new Promise(r=>setImmediate(r));
+ assert.match(h.get('hcVisibilityOptions').innerHTML,/şu an kapalı/);assert.doesNotMatch(h.get('hcVisibilityOptions').innerHTML,/value="public"/);
+});
+
+test('late discovery configuration cannot rewrite a replacement dialog',async()=>{
+ let resolve;const h=harness(()=>new Promise(r=>resolve=r));h.review.showCreate();await new Promise(r=>setImmediate(r));
+ h.review.setCurrent(current(codeA));h.review.showManage();h.get('hcVisibilityOptions').innerHTML='replacement stays';resolve(Response.json({enabled:true}));await new Promise(r=>setImmediate(r));
+ assert.equal(h.get('hcVisibilityOptions').innerHTML,'replacement stays');
+});
+
+test('an ambiguous public creation is never silently retried as a new private operation while configuration is unavailable',async()=>{
+ const h=harness(()=>Response.json({error:'Unavailable'},{status:503}));h.review.setLocal({creation:{token:capA,title:'Aile',name:'Guest',dueDate:'',public:true,signature:'prior public request'}});h.review.showCreate();
+ h.get('hcTitle').value='Aile';h.get('hcAdminName').value='Guest';h.get('hcDue').value='';await h.click('create');
+ assert.equal(h.calls.some(p=>p.action==='create'),false);assert.equal(h.review.state().local.creation.token,capA);assert.match(h.get('hcError').textContent,/Önceki açık hatim isteğini/);
+});
+
+
+test('server preview metadata keeps a compact test-data notice across the list, detail and dialogs; production has none',async()=>{
+ const h=harness(p=>Response.json(p.action==='discoverList'?{enabled:true,items:[],preview:true}:{code:p.code,org:org(p.code),preview:true}));
+ await h.review.renderBirlikte();assert.equal(h.get('hcHomePreview').hidden,false);assert.match(h.get('hcHomePreview').textContent,/deneme içindir; canlı kayıtlarını etkilemez/);
+ await h.review.bkOpen(codeA);assert.match(h.get('orgView').innerHTML,/hcOrgPreview[^>]*>Önizleme:/);
+ h.review.showManage();assert.match(h.get('hatimDialog').innerHTML,/hcDialogPreview[^>]*>Önizleme:/);
+ await h.review.renderBirlikte();assert.equal(h.get('hcHomePreview').hidden,false);
+ const live=harness(p=>Response.json({enabled:true,items:[],preview:false}));await live.review.renderBirlikte();assert.equal(live.get('hcHomePreview').hidden,true);assert.equal(live.get('hcHomePreview').textContent,'');
+});

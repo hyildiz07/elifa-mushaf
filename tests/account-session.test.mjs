@@ -2,17 +2,17 @@ import {test} from 'node:test';import assert from 'node:assert/strict';import fs
 import * as data from '../src/account-data.mjs';
 import {createSafeStorage,createAccountWorkspaces,WORKSPACE_OWNER} from '../src/account-workspaces.mjs';
 const source=fs.readFileSync('src/account.mjs','utf8').replace(/^import .*;\r?\n/gm,'');
-function harness(initial={}){
+function harness(initial={},options={}){
  const map=new Map(Object.entries(initial)),nodes=new Map(),timers=new Map(),events=[],calls=[];let timerId=0;
- const el=id=>{if(!nodes.has(id))nodes.set(id,{id,value:'',checked:false,hidden:false,disabled:false,textContent:'',classList:{toggle(){}},setAttribute(){},replaceChildren(){},addEventListener(){},querySelectorAll(){return []},closest(){return el("deletePanel")},querySelector(){return el("deleteNote")},before(){},append(){},showModal(){this.open=true},close(){this.open=false}});return nodes.get(id);};
+ const el=id=>{if(!nodes.has(id))nodes.set(id,{id,value:'',checked:false,hidden:false,disabled:false,textContent:'',style:{},classList:{toggle(){}},setAttribute(){},replaceChildren(){},addEventListener(){},querySelectorAll(selector){return id==='accountDialog'&&selector==='button,input,select,textarea'?[...nodes.values()]:[]},prepend(){},closest(){return el("deletePanel")},querySelector(){return el("deleteNote")},before(){},append(){},showModal(){this.open=true},close(){this.open=false}});return nodes.get(id);};
  class Provider{setCustomParameters(){}};
  const storage={getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,String(v)),removeItem:k=>map.delete(k)};
  const auth={currentUser:null,authStateReady:async()=>{}};
- const c={...data,createSafeStorage,createAccountWorkspaces,WORKSPACE_OWNER,console,URL,URLSearchParams,AbortSignal,TextEncoder,structuredClone,
+ const c={__ELIFA_ACCOUNT_PREVIEW__:!!options.preview,...data,createSafeStorage,createAccountWorkspaces,WORKSPACE_OWNER,console,URL,URLSearchParams,AbortSignal,TextEncoder,structuredClone,
   CustomEvent:class{constructor(type,options){this.type=type;this.detail=options?.detail}},MutationObserver:class{observe(){}},
   setTimeout:fn=>{timers.set(++timerId,fn);return timerId},clearTimeout:id=>timers.delete(id),
   document:{getElementById:el,createElement:el,querySelectorAll:()=>[]},window:{addEventListener(){},dispatchEvent:event=>events.push(event.type)},navigator:{onLine:true},
-  location:{origin:'https://example.test',search:'',href:'https://example.test/',reload:()=>events.push('reload')},history:{replaceState(){}},localStorage:storage,
+  location:{origin:'https://example.test',search:options.search||'',href:options.url||'https://example.test/',reload:()=>events.push('reload')},history:{replaceState(){}},localStorage:storage,
   GoogleAuthProvider:Provider,OAuthProvider:Provider,EmailAuthProvider:{credential:()=>({})},auth,isLocal:true,
   accountLanguage:()=> 'tr',accountText:s=>s,localizeAccountTree(){},onAuthStateChanged(instance,_changed,failed){instance.initialFailure=failed;},
   mountAccountProfile:()=>({ready:()=>false,hasGuestChoice:()=>false,load:async()=>{},changed(){}}),
@@ -97,4 +97,28 @@ test('queued cross-tab workspace preparation ignores an obsolete identity and pr
  queue.shift()();await new Promise(r=>setImmediate(r));assert.equal(h.map.get(WORKSPACE_OWNER),undefined);
  queue.shift()();await new Promise(r=>setImmediate(r));assert.equal(h.map.get(WORKSPACE_OWNER),'B');
  assert.ok(h.map.get('elifa.workspace.v1.guest').includes('guest original'));assert.equal(h.map.get('elifa.workspace.v1.A'),undefined);
+});
+
+
+test('preview build metadata blocks real auth, cloud APIs, private tokens and recovery startup even on immutable deployment URLs',async()=>{
+ const h=harness({}, {preview:true,url:'https://0123456789abcdef--elifamushaf.netlify.app/?mode=verifyEmail&oobCode=real-code',search:'?mode=verifyEmail&oobCode=real-code'});
+ assert.equal(h.auth.initialFailure,undefined,'preview never subscribes to the persisted production session');
+ assert.equal(h.c.window.elifaAccountSession.isReady(),true);assert.equal(h.c.window.elifaAccountSession.getUser(),null);
+ assert.equal(await h.c.window.elifaAccountSession.getIdToken(),null);assert.equal(h.nodes.get('accountSubmit').disabled,true);
+ assert.match(h.nodes.get('p').textContent,/Önizlemede hesap.bulut işlemleri kapalı/);
+ await h.c.window.elifaAccount.open();assert.match(h.nodes.get('accountStatus').textContent,/Gerçek hesabını burada oluşturma/);
+ for(const mode of ['signup','login','forgot','reset']){h.c.window.review.setMode(mode);h.nodes.get('accountForm').onsubmit({preventDefault(){}});}
+ await h.nodes.get('accountDeleteForm').onsubmit({preventDefault(){}});
+ for(const id of ['accountGoogle','accountApple','accountLinkGoogle','accountVerifySend','accountResetPassword','accountSave','accountRefresh','accountRetry'])await h.nodes.get(id).onclick();
+ h.c.window.review.authChanged(member('A'));await h.c.window.review.syncNow();h.c.window.review.scheduleSync();
+ assert.equal(h.c.window.elifaAccountSession.getUser(),null);await assert.rejects(h.c.window.review.api('profilePut',{profile:{displayName:'Preview'}}),/Önizlemede/);
+ assert.throws(()=>h.c.window.elifaRestoreBackup({elifa:'yedek',v:1,veri:{}}),/Önizlemede/);
+ await new Promise(r=>setImmediate(r));assert.deepEqual(h.calls,[]);assert.equal(h.timers.size,0);
+});
+
+test('canonical deploy-preview hostname also blocks account actions without trusting query parameters or similar production names',async()=>{
+ const preview=harness({}, {url:'https://deploy-preview-20--elifamushaf.netlify.app/'});assert.equal(preview.nodes.get('accountSubmit').disabled,true);
+ preview.c.window.review.setMode('forgot');preview.nodes.get('accountForm').onsubmit({preventDefault(){}});await new Promise(r=>setImmediate(r));assert.deepEqual(preview.calls,[]);
+ const production=harness({}, {url:'https://mushaf.elifaplatform.com/?preview=true',search:'?preview=true'});assert.equal(typeof production.auth.initialFailure,'function');
+ production.c.window.review.setMode('forgot');production.nodes.get('accountEmailInput').value='real@example.test';production.nodes.get('accountForm').onsubmit({preventDefault(){}});await new Promise(r=>setImmediate(r));assert.deepEqual(production.calls,['password-reset']);
 });

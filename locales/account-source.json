@@ -155,5 +155,6 @@
   "Geri alma iptal edildi.": "Undo cancelled.",
   "Yedek alınamadı: ": "Backup failed: ",
   "Yeni şifreni belirle.": "Set a new password.",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "Email verified. You can sign in to your account."
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "Email verified. You can sign in to your account.",
+  "Önizlemede hesap/bulut işlemleri kapalı. Gerçek hesabını burada oluşturma veya değiştirme.": "Account and cloud actions are disabled in this preview. Do not create or change your real account here."
 }

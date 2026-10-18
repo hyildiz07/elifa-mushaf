@@ -1,11 +1,16 @@
 import {initializeApp} from 'firebase/app';
 import {getAuth,initializeAuth,indexedDBLocalPersistence,connectAuthEmulator} from 'firebase/auth';
 import {getFirestore,connectFirestoreEmulator} from 'firebase/firestore';
+export const isPreview=(typeof __ELIFA_ACCOUNT_PREVIEW__!=='undefined'&&__ELIFA_ACCOUNT_PREVIEW__)||/^deploy-preview-\d+--[a-z0-9-]+\.netlify\.app$/i.test(location.hostname||new URL(location.href).hostname);
 export const isLocal=!window.ELIFA_NATIVE_IOS&&/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
 // Local previews always use isolated emulators, never the production user database.
-export const app=initializeApp(isLocal?{apiKey:'demo-key',projectId:'demo-elifa-mushaf',authDomain:'localhost'}:window.ELIFA_FB);
-export const auth=window.ELIFA_NATIVE_IOS?initializeAuth(app,{persistence:indexedDBLocalPersistence}):getAuth(app);
-export const db=getFirestore(app);
-auth.languageCode=window.ElifaLocale?.current?.()||'en';
-window.addEventListener('elifa:language-changed',event=>{auth.languageCode=event.detail?.lang||'en';});
-if(isLocal){connectAuthEmulator(auth,'http://127.0.0.1:9099',{disableWarnings:true});connectFirestoreEmulator(db,'127.0.0.1',8080);}
+// Hosted previews stay entirely outside Firebase: even restoring a persisted
+// Auth session can refresh a production token before any UI action is taken.
+export const app=isPreview?null:initializeApp(isLocal?{apiKey:'demo-key',projectId:'demo-elifa-mushaf',authDomain:'localhost'}:window.ELIFA_FB);
+export const auth=isPreview?null:window.ELIFA_NATIVE_IOS?initializeAuth(app,{persistence:indexedDBLocalPersistence}):getAuth(app);
+export const db=isPreview?null:getFirestore(app);
+if(auth){
+ auth.languageCode=window.ElifaLocale?.current?.()||'en';
+ window.addEventListener('elifa:language-changed',event=>{auth.languageCode=event.detail?.lang||'en';});
+}
+if(isLocal&&!isPreview){connectAuthEmulator(auth,'http://127.0.0.1:9099',{disableWarnings:true});connectFirestoreEmulator(db,'127.0.0.1',8080);}

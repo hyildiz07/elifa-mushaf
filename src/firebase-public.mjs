@@ -1,9 +1,9 @@
-import {app,db,isLocal} from './firebase-client.mjs';
+import {app,db,isLocal,isPreview} from './firebase-client.mjs';
 import {collection,query,where,getDocs,getDoc,doc} from 'firebase/firestore';
 import {createUsageReporter,isMeasurementHost} from './usage-analytics.mjs';
 window.__elifaFBTried=true;
-const usage=createUsageReporter();
-const measure=!isLocal&&isMeasurementHost(location.hostname,{nativeIOS:!!window.ELIFA_NATIVE_IOS});
+const usage=isPreview?null:createUsageReporter();
+const measure=!isPreview&&!isLocal&&isMeasurementHost(location.hostname,{nativeIOS:!!window.ELIFA_NATIVE_IOS});
 const early=Array.isArray(window.__elifaEarlyUsage)?window.__elifaEarlyUsage:[];
 window.__elifaEarlyUsage=[];
 window.elifaLog=(event,params)=>{if(measure)usage.track(event,params);};
@@ -26,7 +26,7 @@ async function announcements(){
   window.__elifaDuyuruHandled=true;
  }catch{window.elifaCheckStaticDuyuru?.();}
 }
-if(!isLocal)announcements();
+if(!isPreview&&!isLocal)announcements();
 if(measure)import('firebase/analytics').then(async({isSupported,getAnalytics,logEvent})=>{
  if(!await isSupported())return;
  const analytics=getAnalytics(app);

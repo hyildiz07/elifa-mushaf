@@ -155,5 +155,6 @@
   "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "이 기기에서는 계정별 데이터를 따로 보관합니다. 게스트 기록은 직접 선택한 경우에만 내 계정으로 복사됩니다.",
   "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "이 기기에 동기화 설정을 저장하지 못했습니다. 저장 공간을 확보한 후 다시 시도해 주세요.",
   "Önce cihaz yedeğini indir": "먼저 기기 백업 다운로드",
-  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "계정, 비공개 프로필, 클라우드 백업이 삭제됩니다. 꾸란 공동 통독 진행 상황은 유지되지만 이름과 계정 연결은 삭제됩니다. 먼저 개인 참여 링크와 관리자 링크를 보관해 주세요. 기기 기록은 별도 사본으로 남으며, 로그아웃하면 게스트 기록이 열립니다. 먼저 기기 백업을 다운로드하는 것을 권장합니다."
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "계정, 비공개 프로필, 클라우드 백업이 삭제됩니다. 꾸란 공동 통독 진행 상황은 유지되지만 이름과 계정 연결은 삭제됩니다. 먼저 개인 참여 링크와 관리자 링크를 보관해 주세요. 기기 기록은 별도 사본으로 남으며, 로그아웃하면 게스트 기록이 열립니다. 먼저 기기 백업을 다운로드하는 것을 권장합니다.",
+  "Önizlemede hesap/bulut işlemleri kapalı. Gerçek hesabını burada oluşturma veya değiştirme.": "이 미리보기에서는 계정 및 클라우드 작업이 비활성화되어 있습니다. 여기서 실제 계정을 만들거나 변경하지 마세요."
 }
