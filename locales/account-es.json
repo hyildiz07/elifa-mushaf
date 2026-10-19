@@ -149,5 +149,12 @@
   "Geri alma iptal edildi.": "Deshacer cancelado.",
   "Yedek alınamadı: ": "La copia de seguridad falló:",
   "Yeni şifreni belirle.": "Establezca una nueva contraseña.",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "Correo electrónico verificado. Puede iniciar sesión en su cuenta."
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "Correo electrónico verificado. Puede iniciar sesión en su cuenta.",
+  "Hesap değişti. Yeniden dene.": "La cuenta ha cambiado. Inténtalo de nuevo.",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "Los datos de la cuenta aún no están listos. Libera espacio en tu dispositivo e inténtalo de nuevo.",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "Los datos de cada cuenta se guardan por separado en este dispositivo. Los datos de invitado solo se copian a tu cuenta si tú lo decides.",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "No se pudo guardar tu preferencia de sincronización en este dispositivo. Libera espacio e inténtalo de nuevo.",
+  "Önce cihaz yedeğini indir": "Descargar primero una copia de seguridad del dispositivo",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "Se eliminarán tu cuenta, tu perfil privado y tus copias de seguridad en la nube. Se conservará tu progreso en la lectura compartida del Corán, pero se eliminarán tu nombre y el vínculo con tu cuenta. Guarda primero tus enlaces privados de participación y administración. Los registros del dispositivo se conservarán en una copia separada; al cerrar sesión se abrirán los registros de invitado. Te recomendamos descargar primero una copia de seguridad del dispositivo.",
+  "Önizlemede hesap/bulut işlemleri kapalı. Gerçek hesabını burada oluşturma veya değiştirme.": "Las acciones de cuenta y nube están desactivadas en esta vista previa. No crees ni modifiques aquí tu cuenta real."
 }

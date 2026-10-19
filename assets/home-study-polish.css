@@ -145,3 +145,21 @@ body[data-dark="1"] #studySetup .studySaveRow button{box-shadow:inset 0 1px 0 rg
  #studySetup .studySaveRow button{max-width:145px;font-size:11px}
  #studySetup .studySaveRow button::before{display:none}
 }
+
+/* Saved studies share the home's slim gold edge and numbered navy badge. */
+#studySetup .studySaved{container-name:savedStudies;container-type:inline-size}
+#studySetup .studySavedList{gap:6px;min-width:0}
+#studySetup .studySavedItem.sd-study-row{display:grid;grid-template-columns:minmax(0,1fr);align-items:center;gap:5px;min-width:0;max-width:100%;box-sizing:border-box;padding:8px 9px;border:1px solid color-mix(in srgb,var(--gold) 65%,var(--line));border-radius:12px;background:linear-gradient(155deg,color-mix(in srgb,var(--surface) 98%,white),var(--surface) 55%,color-mix(in srgb,var(--surface) 95%,var(--gold)));box-shadow:inset 0 1px 0 #ffffff2b,0 2px 5px #0000000b}
+#studySetup .sd-study-copy{display:grid;grid-template-columns:38px minmax(0,1fr);gap:9px;align-items:center;min-width:0}
+#studySetup .sd-study-number{display:flex;align-items:center;justify-content:center;width:38px;height:42px;box-sizing:border-box;border:1px solid #c9aa69;border-radius:10px;background:linear-gradient(145deg,#214969,#092844 48%,#04182d);color:#f4d58d;box-shadow:inset 0 1px 0 #ffffff40,0 2px 4px #061b3226;font-family:Lora,Georgia,serif;font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+#studySetup .sd-study-text{min-width:0}#studySetup .sd-study-text strong{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--ink);font-family:Lora,Georgia,serif;font-size:14px;line-height:1.3;overflow-wrap:anywhere}
+#studySetup .sd-study-text small{margin-top:3px;font-size:10px;line-height:1.5;color:var(--muted);overflow-wrap:anywhere}
+#studySetup .sd-study-actions{display:flex;align-items:center;justify-content:flex-end;gap:5px;min-width:0;flex-wrap:wrap}
+#studySetup .sd-study-actions button{min-width:44px;min-height:44px;max-width:100%;padding:5px 9px;border:1px solid color-mix(in srgb,var(--gold) 55%,var(--line));border-radius:9px;font-size:11px;font-weight:650;line-height:1.3;white-space:normal;overflow-wrap:anywhere;background:linear-gradient(150deg,color-mix(in srgb,var(--surface) 98%,white),color-mix(in srgb,var(--surface) 95%,var(--gold)));color:var(--ink);box-shadow:inset 0 1px 0 #ffffff26,0 2px 4px #00000009}
+#studySetup .sd-study-actions .studyDelete{margin-inline-start:0;margin-left:0}
+#studySetup .sd-study-actions .sd-study-open{border-color:#c9aa69;background:linear-gradient(145deg,#214969,#04182d);color:#f4d58d}
+#studySetup .studySavedItem.is-active{border-color:var(--gold);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 45%,transparent),0 2px 5px #0000000b}
+#studySetup .sd-study-row>.studyDeleteConfirm{grid-column:1/-1;margin-top:4px;padding:10px;border-radius:10px}
+#studySetup .sd-study-actions button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+body[data-dark="1"] #studySetup .studySavedItem.sd-study-row{box-shadow:inset 0 1px 0 #ffffff15,0 2px 5px #0000002b}
+@container savedStudies (min-width:420px){#studySetup .studySavedItem.sd-study-row{grid-template-columns:minmax(0,1fr) auto;gap:10px}#studySetup .sd-study-actions{max-width:240px}}

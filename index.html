@@ -5441,13 +5441,14 @@ window.elifaLog=function(event,params){
 })();
 </script>
 <link rel="stylesheet" href="/assets/account.css?v=336">
+<link rel="stylesheet" href="/assets/hatim-community.css?v=360">
 <link rel="stylesheet" href="/assets/theme-legibility.css?v=305">
 <link rel="stylesheet" href="/assets/reader-toolbar.css?v=326">
 <link rel="stylesheet" href="/assets/split-toolbar.css?v=1">
-<link rel="stylesheet" href="/assets/gear-sheet.css?v=2">
+<link rel="stylesheet" href="/assets/gear-sheet.css?v=358">
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
-<link rel="stylesheet" href="/assets/home-study-polish.css?v=355">
+<link rel="stylesheet" href="/assets/home-study-polish.css?v=360">
 <link rel="stylesheet" href="/assets/study-workflow.css?v=355">
 <link rel="stylesheet" href="/assets/dua-practice.css?v=351">
 </head>
@@ -5836,158 +5837,13 @@ window.elifaLog=function(event,params){
 
 <!-- ALT SEKME ÇUBUĞU -->
 <div id="bkwrap">
-<section class="screen" id="birlikte">
-  <div class="bk-top" style="display:flex;align-items:center;gap:8px;"><a class="bk-home-back" onclick="backFromTogether();return false;">‹ Elifa</a><span style="flex:1"></span><button class="helpbtn" data-guide title="Nasıl kullanılır"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.5"/><path d="M9.4 9.2a2.6 2.6 0 015 .8c0 1.7-2.6 2.2-2.6 3.9"/><circle cx="12" cy="17" r="1.1" fill="currentColor" stroke="none"/></svg></button></div>
-  <h1 class="app-title" style="font-family:'Lora',serif;font-style:italic;font-size:22px;color:var(--navy);margin:2px 0 2px;text-align:center;" data-i18n="together">Birlikte</h1>
-  <p class="app-sub" style="text-align:center;color:var(--muted);font-size:12px;margin:0 0 8px;letter-spacing:2px;" data-i18n="bk_subtitle">HATİM & ORTAK NİYET</p>
-  <div class="elif-wrap" aria-hidden="true">
-    <svg viewBox="0 0 48 170" class="elif-svg">
-      <path fill="var(--yildiz)" d="M27.2 12.4
-        C25.0 18.2 23.6 24.5 23.2 32.0
-        L21.4 118.0
-        C21.0 136.5 22.4 150.0 25.2 160.5
-        C25.6 161.9 26.9 161.9 27.3 160.5
-        C30.1 150.0 31.4 136.5 31.0 118.0
-        L29.3 34.0
-        C29.1 26.0 29.8 19.0 32.4 12.0
-        C33.0 10.4 32.6 9.4 31.4 8.4
-        L29.6 7.0 Z"/>
-      <path fill="var(--yildiz)" d="M29.6 7.0
-        C31.6 3.6 34.6 1.2 38.6 0.4
-        C36.2 3.4 34.4 6.6 33.4 10.6
-        C32.9 12.6 31.9 13.0 30.5 11.6
-        C29.3 10.3 29.0 8.6 29.6 7.0 Z"/>
-    </svg>
-  </div>
-  <hr class="hr">
-  <div id="bkOffline" class="bk-offline" style="display:none;" data-i18n="bk_offline">⚠ Çevrimdışı önizleme — linkler bu cihazda çalışır</div>
-
-  <div class="bk-hero" data-create="hatim">
-    <h3 data-i18n="bk_share_title">Hatim / Cüz Paylaşımı</h3>
-    <p data-i18n="bk_share_desc">30 cüzü tek linkle paylaşın. Herkes linke basar, cüzünü seçer, bitirince işaretler. Üyelik yok.</p>
-    <span class="bk-cta">＋ <span data-i18n="bk_start_hatim">Hatim başlat</span></span>
-  </div>
-
-  <div class="bk-hero" data-create="zikir">
-    <h3 data-i18n="bk_intent_title">Ortak Niyet — Toplu Zikir</h3>
-    <p data-i18n="bk_intent_desc">Bir niyet için ortak hedef belirleyin: 1000 salavat, 313 Ayetel Kürsi… Herkes kendi payını okur, hedef birlikte dolar.</p>
-    <span class="bk-cta">＋ <span data-i18n="bk_start_intent">Niyet başlat</span></span>
-  </div>
-
-
-  <div class="disc-wrap" id="discWrap">
-    <div class="disc-box" id="discBox" onclick="bkOpenDiscover()">
-      <span class="disc-live"><span class="disc-dot"></span><span data-i18n="disc_live">CANLI</span></span>
-      <span class="disc-ic">
-        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.6 9h16.8M3.6 15h16.8M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg>
-      </span>
-      <span class="disc-tx">
-        <h3 data-i18n="disc_box_title">Açık Hatimlere Katıl</h3>
-        <small data-i18n="disc_box_sub">Şu an devam eden hatim ve zikirler · cüz al, birlikte tamamla</small>
-      </span>
-      <span class="disc-go">›</span>
-    </div>
-  </div>
-
-  <label class="modal-label" style="margin-top:18px;" data-i18n="bk_join_label">Link veya kod ile katıl</label>
-  <div class="bk-join">
-    <input id="bkJoinInput" placeholder="Gruptan gelen linki yapıştırın" data-i18n-ph="bk_join_ph" autocomplete="off">
-    <button id="bkJoinBtn" data-i18n="open">Aç</button>
-  </div>
-
-  <div class="custom-head" style="margin-top:8px;"><span data-i18n="bk_mine">Organizasyonlarım</span></div>
-  <div id="bkMineList"></div>
-</section>
-
+<section class="screen" id="birlikte"></section>
 <section class="screen" id="org">
-  <button class="org-back" id="orgBack" data-i18n="back_geri">‹ Geri</button>
-  <div id="orgView"><div class="empty" data-i18n="loading">Yükleniyor…</div></div>
+  <button class="hc-button hc-back" id="orgBack" type="button">‹ Hatimlere dön</button>
+  <div id="orgView" aria-live="polite"></div>
 </section>
-
-<div class="modal-overlay" id="bkCreateModal">
-  <div class="modal-card">
-    <h3 class="modal-title" id="bkCreateTitle" data-i18n="bk_start_hatim">Hatim başlat</h3>
-
-    <div id="bkTypeRow">
-      <label class="modal-label" data-i18n="type">Tür</label>
-      <div class="seg-row" id="bkTypeSeg">
-        <div class="seg active" data-t="hatim30" data-i18n="bk_30juz">30 Cüz</div>
-        <div class="seg" data-t="aralik" data-i18n="bk_juz_range">Cüz Aralığı</div>
-      </div>
-      <div class="seg-row" id="bkAralikRow" style="display:none;">
-        <input id="bkCuzBas" class="modal-input" type="number" min="1" max="30" placeholder="Başlangıç (örn. 1)" data-i18n-ph="bk_from" style="flex:1;">
-        <input id="bkCuzBit" class="modal-input" type="number" min="1" max="30" placeholder="Bitiş (örn. 15)" data-i18n-ph="bk_to" style="flex:1;">
-      </div>
-    </div>
-
-    <div id="bkZikirRow" style="display:none;">
-      <label class="modal-label" data-i18n="bk_what">Ne okunacak?</label>
-      <div class="seg-row" id="bkZikirSeg">
-        <div class="seg active" data-z="Salavat" data-h="1000">Salavat</div>
-        <div class="seg" data-z="Ayetel Kürsi" data-h="313">Ayetel Kürsi</div>
-        <div class="seg" data-z="İhlas" data-h="1000">İhlas</div>
-        <div class="seg" data-z="" data-h="" data-i18n="custom">Özel</div>
-      </div>
-      <input id="bkZikirAd" class="modal-input" placeholder="Zikir/dua adı" data-i18n-ph="bk_dhikr" style="margin-top:6px; display:none;">
-      <label class="modal-label" data-i18n="bk_total">Toplam hedef</label>
-      <input id="bkHedef" class="modal-input" type="number" inputmode="numeric" min="1" placeholder="Örn: 1000" data-i18n-ph="bk_eg1000">
-    </div>
-
-    <label class="modal-label" data-i18n="bk_intent_label">Niyet / başlık</label>
-    <input id="bkNiyet" class="modal-input" placeholder="Örn: Annem için şifa niyetine" data-i18n-ph="bk_intent_ph">
-    <label class="modal-label"><span data-i18n="bk_deadline">Son tarih</span> <span class="opt" data-i18n="bk_opt">— isteğe bağlı</span></label>
-    <input id="bkTarih" class="modal-input" type="date">
-    <label class="modal-label"><span data-i18n="bk_yourname">Adınız</span> <span class="opt" data-i18n="bk_asadmin">— yönetici olarak</span></label>
-    <input id="bkAdmin" class="modal-input" placeholder="Örn: Ayşe" data-i18n-ph="bk_egname">
-    <div class="modal-err" id="bkErr"></div>
-    <div class="modal-actions">
-      <button class="modal-btn ghost" id="bkCancel" data-i18n="cancel">Vazgeç</button>
-      <button class="modal-btn primary" id="bkSave" data-i18n="create">Oluştur</button>
-    </div>
-  </div>
 </div>
-
-<div class="modal-overlay" id="cuzActModal">
-  <div class="modal-card">
-    <h3 class="modal-title" id="cuzActTitle" data-i18n="juz">Cüz</h3>
-    <p class="org-note" id="cuzActSub" style="text-align:left; margin:0 0 14px;"></p>
-    <div class="modal-actions" style="flex-direction:column;">
-      <button class="modal-btn primary" id="cuzActOkudum" data-i18n="read_done">Okudum ✓</button>
-      <button class="modal-btn ghost" id="cuzActBirak" style="color:var(--st-gecikti);" data-i18n="release_juz">Cüzü bırak (geri ver)</button>
-      <button class="modal-btn ghost" id="cuzActVazgec" data-i18n="cancel">Vazgeç</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="bkNameModal">
-  <div class="modal-card">
-    <h3 class="modal-title" id="bkNameTitle" data-i18n="enter_name">İsminizi yazın</h3>
-    <p class="org-note" id="bkNameSub" style="text-align:left; margin:0 0 4px;"></p>
-    <input id="bkNameInput" class="modal-input" placeholder="Adınız Soyadınız" data-i18n-ph="name_ph" autocomplete="name">
-    <div class="modal-err" id="bkNameErr"></div>
-    <div class="modal-actions">
-      <button class="modal-btn ghost" id="bkNameCancel" data-i18n="cancel">Vazgeç</button>
-      <button class="modal-btn primary" id="bkNameOk" data-i18n="ok">Tamam</button>
-    </div>
-  </div>
-</div>
-
-<div class="modal-overlay" id="bkLinksModal">
-  <div class="modal-card">
-    <h3 class="modal-title" data-i18n="ready_bless">Hazır, Allah kabul etsin 🤲</h3>
-    <p class="org-note" style="text-align:left;" data-i18n="share_note">Katılım linkini gruba atın. Yönetici linkini <b>kimseyle paylaşmayın</b> — eksikleri görme ve rapor bu linkte.</p>
-    <div class="bk-links-box"><b data-i18n="join_link_lbl">KATILIM LİNKİ — gruba atılır</b><span id="bkLinkPublic"></span></div>
-    <div class="bk-links-box"><b data-i18n="admin_link_lbl">YÖNETİCİ LİNKİ — sizde kalır</b><span id="bkLinkAdmin"></span></div>
-    <div class="modal-actions" style="flex-direction:column;">
-      <button class="modal-btn primary" id="bkShareWa" data-i18n="share_wa">WhatsApp'ta paylaş</button>
-      <button class="modal-btn ghost" id="bkCopyLinks" data-i18n="copy_links">Linkleri kopyala</button>
-      <button class="modal-btn ghost" id="bkGoOrg" data-i18n="go_org">Organizasyona git</button>
-    </div>
-  </div>
-</div>
-
-
-</div>
+<dialog id="hatimDialog" class="hc-dialog" aria-label="Birlikte Hatim"></dialog>
 
 <section id="meal" class="screen">
   <div class="mealTop">
@@ -6226,17 +6082,17 @@ window.elifaLog=function(event,params){
   <div class="gearContent" id="gearContent">
   <section class="gearCard" id="gearRepeats">
     <div class="gearRepeatRow">
-      <div class="flbl" data-i18n="repeat_range_count">Tüm çalışmanın tekrar sayısı</div><div class="stepper"><button data-t="rangeRep" data-d="-1" aria-label="Aralık tekrarını azalt">−</button><input type="number" id="rangeRepInp" min="0" max="99" value="5" inputmode="numeric" aria-label="Tüm çalışmanın tekrar sayısı" aria-describedby="rangeRepInpHelp"><button data-t="rangeRep" data-d="1" aria-label="Aralık tekrarını artır">+</button></div><small class="repeatHelp" id="rangeRepInpHelp" data-i18n="repeat_range_help"></small>
+      <div class="flbl" data-i18n="repeat_range_count">Çalışmayı baştan sona</div><div class="stepper"><button data-t="rangeRep" data-d="-1" aria-label="Tur sayısını azalt">−</button><input type="number" id="rangeRepInp" min="1" max="99" value="5" inputmode="numeric" aria-label="Çalışmayı baştan sona" aria-describedby="rangeRepInpHelp"><button data-t="rangeRep" data-d="1" aria-label="Tur sayısını artır">+</button></div><small class="repeatHelp" id="rangeRepInpHelp" data-i18n="repeat_range_help"></small>
     </div>
     <div class="two gearPair gearCountPair">
-      <div><div class="flbl" data-i18n="repeat_combine_count">Birleştirme tekrar sayısı</div><div class="stepper"><button data-t="combineRep" data-d="-1" aria-label="Birleştirme tekrarını azalt">−</button><input type="number" id="combineRepInp" min="0" max="99" value="5" inputmode="numeric" aria-label="Birleştirme tekrar sayısı" aria-describedby="combineRepInpHelp"><button data-t="combineRep" data-d="1" aria-label="Birleştirme tekrarını artır">+</button></div><small class="repeatHelp" id="combineRepInpHelp" data-i18n="repeat_combine_help"></small></div>
-      <div><div class="flbl" data-i18n="repeat_ayah_count">Âyet / parça tekrar sayısı</div>
-      <div class="stepper"><button data-t="rep" data-d="-1" aria-label="Tekrar sayısını azalt">−</button><input type="number" id="repInp" min="1" max="99" value="5" inputmode="numeric" aria-label="Tekrar sayısı" aria-describedby="repInpHelp"><button data-t="rep" data-d="1" aria-label="Tekrar sayısını artır">+</button></div><small class="repeatHelp" id="repInpHelp" data-i18n="repeat_ayah_help"></small></div>
+      <div id="gearCombineRow"><div class="flbl" data-i18n="repeat_combine_count">Birleşik okumalar · 1+2</div><div class="stepper"><button data-t="combineRep" data-d="-1" aria-label="Birleştirme tekrarını azalt">−</button><input type="number" id="combineRepInp" min="0" max="99" value="5" inputmode="numeric" aria-label="Birleşik okumalar · 1+2" aria-describedby="combineRepInpHelp"><button data-t="combineRep" data-d="1" aria-label="Birleştirme tekrarını artır">+</button></div><small class="repeatHelp" id="combineRepInpHelp" data-i18n="repeat_combine_help"></small></div>
+      <div id="gearRepRow"><div class="flbl" data-i18n="repeat_ayah_count">Her âyet / parça</div>
+      <div class="stepper"><button data-t="rep" data-d="-1" aria-label="Tekrar sayısını azalt">−</button><input type="number" id="repInp" min="1" max="99" value="5" inputmode="numeric" aria-label="Her âyet / parça" aria-describedby="repInpHelp"><button data-t="rep" data-d="1" aria-label="Tekrar sayısını artır">+</button></div><small class="repeatHelp" id="repInpHelp" data-i18n="repeat_ayah_help"></small></div>
     </div>
     <div class="two gearPair">
       <div>
         <div class="flbl" data-i18n="workflow_wait">Ara bekleme (sn)</div>
-        <div class="stepper"><button data-t="wait" data-d="-1" aria-label="Ara beklemeyi azalt">−</button><input type="number" id="waitInp" min="0" max="30" value="0" inputmode="numeric" aria-label="Ara bekleme, saniye"><button data-t="wait" data-d="1" aria-label="Ara beklemeyi artır">+</button></div>
+        <div class="stepper"><button data-t="wait" data-d="-1" aria-label="Ara beklemeyi azalt">−</button><input type="number" id="waitInp" min="0" max="60" value="0" inputmode="numeric" aria-label="Ara bekleme, saniye"><button data-t="wait" data-d="1" aria-label="Ara beklemeyi artır">+</button></div>
       </div>
       <div>
         <div class="flbl" data-i18n="s_speed">Okuma hızı</div>
@@ -6467,7 +6323,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v356</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v360</span></div>
   </div>
 
   <div class="tesekkur">
@@ -6485,17 +6341,6 @@ window.elifaLog=function(event,params){
   <p class="sub" style="margin-top:14px;font-size:12px;" data-i18n="ab_note">Bu uygulama Kur'ân-ı Kerîm'i öğrenmeye ve ezberlemeye vesile olması niyetiyle hazırlanmıştır. Hatalar için geri bildiriminizi bekleriz.</p>
 </div>
 
-
-<div class="sheet" id="discSheet">
-  <div class="grip"></div>
-  <h3 style="font-family:'Lora',serif;font-style:italic;text-align:center;" data-i18n="disc_sheet_title">Açık Katılım</h3>
-  <p class="sub" style="text-align:center;" data-i18n="disc_sheet_sub">Yayınlanmış · herkese açık · üyelik yok</p>
-  <div class="disc-seg">
-    <button class="on" id="discSegH" onclick="bkDiscSeg('h')" data-i18n="disc_tab_hatim">Hatimler</button>
-    <button id="discSegZ" onclick="bkDiscSeg('z')" data-i18n="disc_tab_zikir">Zikirler</button>
-  </div>
-  <div id="discList"></div>
-</div>
 
 <div class="sheet" id="dlSheet">
   <div class="grip"></div>
@@ -6619,7 +6464,7 @@ window.applySurahLang=applySurahLang;window.activeLatin=activeLatin;
 const mem={};
 const store={
   get(k,d){if(Object.prototype.hasOwnProperty.call(mem,k))return mem[k];try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v);}catch(e){return d;}},
-  set(k,v){try{const raw=JSON.stringify(v);localStorage.setItem(k,raw);if(localStorage.getItem(k)!==raw)throw Error('Kayıt doğrulanamadı');delete mem[k];if(['bookmarks','errs','ezdays','ezlog','hifz','marks','notes','prog','set','studySessions','surahFavorites'].includes(k))window.dispatchEvent(new Event('elifa-data-changed'));return true;}catch(e){mem[k]=v;window.elifaStorageFailed=true;window.dispatchEvent(new Event('elifa-storage-error'));return false;}}
+  set(k,v){if(window.elifaWorkspaceWritable&&!window.elifaWorkspaceWritable())return false;try{const raw=JSON.stringify(v);localStorage.setItem(k,raw);if(localStorage.getItem(k)!==raw)throw Error('Kayıt doğrulanamadı');delete mem[k];if(['bookmarks','errs','ezdays','ezlog','hifz','marks','notes','prog','set','studySessions','surahFavorites'].includes(k))window.dispatchEvent(new Event('elifa-data-changed'));return true;}catch(e){mem[k]=v;window.elifaStorageFailed=true;window.dispatchEvent(new Event('elifa-storage-error'));return false;}}
 };
 window.elifaReadLocalValue=k=>Object.prototype.hasOwnProperty.call(mem,k)?JSON.stringify(mem[k]):localStorage.getItem(k);
 let surahFavorites=store.get('surahFavorites',[]);
@@ -6648,6 +6493,9 @@ let SET=Object.assign({reciter:223,speed:1,rep:5,repOn:false,wait:0,fs:1,qfont:'
 // Preserve the old count once, then keep the three repeat scopes independent.
 SET.rep=Math.min(99,Math.max(1,Math.round(Number(SET.rep)||5)));
 for(const key of ['combineRep','rangeRep'])SET[key]=Math.min(99,Math.max(0,Math.round(Number(SET[key]??SET.rep)||0)));
+// The former 0 whole-study value already meant one pass. Show that equivalent
+// as 1 so total rounds no longer have two labels for the same behaviour.
+SET.rangeRep=Math.max(1,SET.rangeRep);
 // Repeat and cumulative playback are choices for this visit, not startup defaults.
 // Keep the chosen count so the 5× control can enable it with one tap.
 SET.repOn=false;
@@ -7110,6 +6958,7 @@ let toastT;function toast(m){const t=$('toast');t.textContent=m;t.classList.add(
 
 /* ---------- screens ---------- */
 function show(id){
+  window.elifaHatimNavigation?.(id);
   if(id!=='reader')window.elifaCloseStudySplit?.({restoreFocus:false});
   // A verified single-verse split recording has its own time axis. Restore
   // the chapter recording before leaving that screen for normal playback.
@@ -7173,6 +7022,7 @@ $('backBtn').onclick=()=>{
   stopPlan(true);saveProgress();setTest(false);
   if(readerReturn==='saved'){readerReturn='home';show('saved');renderSaved();}
   else if(readerReturn==='dua'){readerReturn='home';show('dua');if(typeof renderDua==='function')renderDua();}
+  else if(readerReturn==='org'){readerReturn='home';if(window.bkCurrent){show('org');window.renderOrg?.();}else openTogetherScreen({fromHistory:true});}
   else if(readerReturn==='studySetup'&&studyRange){openStudySetup(false,true);}
   else{show('home');renderContinue();}
 };
@@ -8193,7 +8043,8 @@ async function openSurah(sid,jumpAy,options={}){
   const request=++surahRequestId;
   if(!options.study && typeof studyRange!=='undefined')studyRange=null;
   curS=sid;show('reader');setTest(false);try{if(window.elifaLog)elifaLog('surah_open',{surah:sid});}catch(e){}try{if(window.elifaStat)elifaStat('read');}catch(e){}
-  if(readerReturn!=='saved'&&readerReturn!=='studySetup')readerReturn='home';
+  if(['home','saved','studySetup','org'].includes(options.returnTo))readerReturn=options.returnTo;
+  if(!['saved','studySetup','org'].includes(readerReturn))readerReturn='home';
   if(typeof syncStudyBanner==='function')syncStudyBanner();
   const meta=SURAHS[sid-1];
   {const rt=$('rTitle');if(rt)rt.textContent=sid+'. '+meta.tr;}
@@ -8207,6 +8058,7 @@ async function openSurah(sid,jumpAy,options={}){
   }catch(e){if(request===surahRequestId)$('rbody').innerHTML='<div class="loading">Metin yüklenemedi. Sûreyi yeniden açmayı deneyin.</div>';return;}
   AD_={buffer:null,ay:{},ws:{},end:0,segs:[]};
   buildDOM(meta,jumpAy);updateStat();
+  options.onTextReady?.();
   const reciter=SET.reciter;
   // SES: ayrı denenir. Başarısız olursa (offline + indirilmemiş) metin YİNE gösterilir,
   // sadece ses çalmaz/kelime takibi olmaz. Kullanıcı okumaya devam edebilir.
@@ -8295,6 +8147,7 @@ function buildDOM(meta,jumpAy){
   if(typeof renderBookmarks==='function')renderBookmarks();
   wirePointer(flow);
   wirePageObserver();
+  if(focused?.wordRange)window.elifaStudySelection?.restore();
   curAy=jumpAy||(focused?.from||1);
   if(jumpAy){requestAnimationFrame(()=>{const el=$('ay-'+jumpAy);if(el)el.scrollIntoView({block:'start'});$('rscroll').scrollTop-=70;});}
   else $('rscroll').scrollTop=0;
@@ -8307,22 +8160,74 @@ function validStudyRange(sid,from,to){
     from>=1&&to>=from&&to<=meta.n;
 }
 function readStudyDraft(){
-  return {sid:Number($('studySurah').value),from:Number($('studyFrom').value),to:Number($('studyTo').value)};
+  const range={sid:Number($('studySurah').value),from:Number($('studyFrom').value),to:Number($('studyTo').value)};
+  if(studyDraft?.sid===range.sid&&studyDraft.from===range.from&&studyDraft.to===range.to&&validStudyWordRange(studyDraft.wordRange,range)){
+    range.wordRange={...studyDraft.wordRange};
+    if(studyDraft.selectionTitle)range.selectionTitle=studyDraft.selectionTitle;
+  }
+  return range;
 }
+function validStudyWordRange(words,range){
+  return !!words&&!!range&&Number.isInteger(words.fromAy)&&Number.isInteger(words.toAy)&&
+    words.fromAy===range.from&&words.toAy===range.to&&
+    Number.isInteger(words.fromWord)&&Number.isInteger(words.toWord)&&
+    words.fromWord>=1&&words.toWord>=1&&words.fromWord<=1000&&words.toWord<=1000&&
+    (words.fromAy<words.toAy||words.fromWord<=words.toWord);
+}
+function studyWordBounds(ay,range=studyRange){
+  const bounds=ayGi[ay];if(!bounds)return null;
+  if(!range?.wordRange||range.sid!==curS)return bounds;
+  const words=range.wordRange;
+  if(!validStudyWordRange(words,range)||ay<words.fromAy||ay>words.toAy)return null;
+  const start=ay===words.fromAy?wordArr.findIndex(w=>w.ay===ay&&w.pos===words.fromWord):bounds[0];
+  const end=ay===words.toAy?wordArr.findLastIndex(w=>w.ay===ay&&w.pos===words.toWord):bounds[1];
+  return start>=bounds[0]&&end<=bounds[1]&&end>=start?[start,end]:null;
+}
+function restoreStudyWordSelection(from=studyRange?.from,to=studyRange?.to){
+  if(!studyRange?.wordRange||studyRange.sid!==curS)return false;
+  if(!Number.isInteger(from)||!Number.isInteger(to)||from<studyRange.from||to>studyRange.to||from>to)return false;
+  const first=studyWordBounds(from),last=studyWordBounds(to);
+  if(!first||!last)return false;
+  selA=first[0];selB=last[1];selMode='word';renderSel();return true;
+}
+function constrainStudyWordSelection(){
+  if(!studyRange?.wordRange||studyRange.sid!==curS||selA==null)return;
+  const first=studyWordBounds(studyRange.from),last=studyWordBounds(studyRange.to);
+  const start=Math.max(Math.min(selA,selB),first?.[0]??Infinity);
+  const end=Math.min(Math.max(selA,selB),last?.[1]??-1);
+  if(start>end){selA=selB=null;return;}
+  selA=start;selB=end;selMode='word';
+}
+window.elifaStudySelection={
+  capture(){const range=$('studySetup').classList.contains('on')?readStudyDraft():studyRange;
+    return range?.wordRange?{wordRange:{...range.wordRange},...(range.selectionTitle?{selectionTitle:range.selectionTitle}:{})}:null;},
+  load(item){const range=readStudyDraft();studyDraft={sid:range.sid,from:range.from,to:range.to};
+    if(item&&item.sid===range.sid&&validStudyWordRange(item.wordRange,range)){
+      studyDraft.wordRange={...item.wordRange};
+      if(typeof item.selectionTitle==='string')studyDraft.selectionTitle=item.selectionTitle.slice(0,160);
+    }
+    updateStudySetup();},
+  clear(){this.load(null);},
+  restore:restoreStudyWordSelection
+};
 function updateStudySetup(){
-  const {sid,from,to}=readStudyDraft(),meta=SURAHS[sid-1],valid=validStudyRange(sid,from,to);
+  const draft=readStudyDraft(),{sid,from,to}=draft,meta=SURAHS[sid-1],valid=validStudyRange(sid,from,to);
   window.elifaStudySurahPicker?.sync();
   $('studyFrom').max=meta?.n||1;$('studyTo').max=meta?.n||1;
   $('studyOpen').disabled=!valid;
   $('studySummary').textContent=valid?meta.tr+' · '+from+'–'+to+'. '+(window.tr?tr('study_verses'):'âyet'):
     (window.tr?tr('study_invalid'):'Geçerli bir âyet aralığı seç.');
-  if(valid)studyDraft={sid,from,to};
+  if(valid){studyDraft=draft;if(draft.wordRange)$('studySummary').textContent+=' · '+(draft.selectionTitle||'Seçili sözler');}
 }
 function openStudySetup(fromSelection=false,fromReader=false){
   if(fromSelection){
     const range=selRange(),first=range&&wordArr[range[0]],last=range&&wordArr[range[1]];
     if(!first||!last){toast(window.tr?tr('study_select_first'):'Önce bir bölüm seç.');return;}
     studyDraft={sid:curS,from:Math.min(first.ay,last.ay),to:Math.max(first.ay,last.ay)};
+    if(range[0]!==ayGi[first.ay]?.[0]||range[1]!==ayGi[last.ay]?.[1]){
+      studyDraft.wordRange={fromAy:first.ay,fromWord:first.pos,toAy:last.ay,toWord:last.pos};
+      const dua=window.elifaDuaSelection?.();if(dua?.title)studyDraft.selectionTitle=dua.title.slice(0,160);
+    }
     studySetupReturn='reader';
   }else if(fromReader){
     studyDraft=studyRange?{...studyRange}:studyDraft;
@@ -8350,6 +8255,10 @@ function syncStudyBanner(){
 }
 async function playStudyRange(){
   const range=studyRange;if(!range||range.sid!==curS)return;
+  if(range.wordRange){
+    if(restoreStudyWordSelection())return playSelection();
+    toast('Kaydedilen kelime seçimi bu yazıda bulunamadı. Çalışmayı yeniden seç.');return;
+  }
   const request=++studyPlayRequestId,visit=surahRequestId,sid=curS,reciter=SET.reciter;
   if(audioTimingUnverified(SET.reciter,curS)){
     try{window.elifaLog?.('playback_error',{mode:'range',error_code:'timing_unverified'});}catch(e){}
@@ -8402,11 +8311,11 @@ $('studyBack').onclick=()=>{
   else{show('home');renderContinue();}
 };
 $('studyOpen').onclick=()=>{
-  const {sid,from,to}=readStudyDraft();
+  const draft=readStudyDraft(),{sid,from,to}=draft;
   if(!validStudyRange(sid,from,to)){updateStudySetup();return;}
   const resume=window.elifaStudySettings?.beforeOpen();if(resume===false)return;
-  window.elifaStudySessions?.activateDraft();
-  studyDraft={sid,from,to};studyRange={sid,from,to};readerReturn='studySetup';
+  const sessionId=window.elifaStudySessions?.activateDraft();
+  studyDraft={...draft};studyRange={...draft,sessionId};readerReturn='studySetup';
   openSurah(sid,resume?.ay||from,{study:true}).then(()=>window.elifaStudySettings?.afterOpen());
 };
 $('studyPlay').onclick=()=>{
@@ -8816,6 +8725,7 @@ $('zenTab').onclick=()=>setSelectionToolsOpen(!selectionToolsOpen);
 }
 let prevSelMulti=null;
 function renderSel(){
+  if(typeof constrainStudyWordSelection==='function')constrainStudyWordSelection();
   const r=selRange();
   const studyAction=$('selStudy');if(studyAction)studyAction.hidden=!r;
   const oldBg=new Map(prevSel.map((i,j)=>[i,prevSelBg[j]]));
@@ -8884,6 +8794,7 @@ function selTimes(){
    Metin ses yüklenmeden çizilebilir; oynatma her seferinde yeniden doğrulanır. */
 function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
   const parts=[],warningAys=[],sid=curS,recipe={sid,fromAy,toAy,mode,cutsByAy};
+  recipe.wordRange=typeof studyRange!=='undefined'&&studyRange?.wordRange?{...studyRange.wordRange}:null;
   if(!Number.isInteger(fromAy)||!Number.isInteger(toAy)||fromAy<1||
     toAy<fromAy||toAy>SURAHS[sid-1]?.n||!['auto','manual'].includes(mode))
     return {parts,error:'Geçerli bir âyet aralığı seç.'};
@@ -8893,16 +8804,21 @@ function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
     const words=wordArr.slice(gi[0],gi[1]+1),n=words.length;
     if(words.some((w,i)=>!w||w.ay!==ay||w.pos!==i+1))
       return {parts,error:ay+'. âyetin kelime sırası doğrulanamadı.'};
+    const bounds=typeof studyWordBounds==='function'?studyWordBounds(ay):recipe.wordRange?null:gi;
+    if(!bounds||!Number.isInteger(bounds[0])||!Number.isInteger(bounds[1])||
+      bounds[0]<gi[0]||bounds[1]>gi[1]||bounds[1]<bounds[0])
+      return {parts,error:ay+'. âyet seçili çalışma bölümünde değil.'};
+    const firstPos=wordArr[bounds[0]].pos,lastPos=wordArr[bounds[1]].pos;
     // Turkish Mushaf can print two timed audio words as one joined word.
     // Keep their verified timestamps together in one automatic card.
-    const cuts=mode==='auto'?Array.from({length:n-1},(_,i)=>i+1)
+    const cuts=mode==='auto'?Array.from({length:lastPos-firstPos},(_,i)=>firstPos+i)
       .filter(pos=>!words[pos-1].joinNext):
       (cutsByAy?.[ay]||[]);
-    if(!Array.isArray(cuts)||cuts.some((p,i)=>!Number.isInteger(p)||p<1||p>=n||
+    if(!Array.isArray(cuts)||cuts.some((p,i)=>!Number.isInteger(p)||p<firstPos||p>=lastPos||
       (i>0&&p<=cuts[i-1])))
       return {parts,error:ay+'. âyetin bölme noktaları sıralı ve tekil olmalı.'};
-    let start=1;
-    for(const end of [...cuts,n]){
+    let start=firstPos;
+    for(const end of [...cuts,lastPos]){
       const selected=words.slice(start-1,end);
       parts.push({sid,ay,fromPos:start,toPos:end,fromGi:selected[0].gi,
         toGi:selected.at(-1).gi,words:selected,canPlay:false,pendingAudio:true,sourceId:null,
@@ -8934,6 +8850,7 @@ function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
     // word labels then move backwards on the recording clock. Preserve the
     // complete verse instead of inventing a one-to-one word cut.
     if(raw.length>n&&audio.reciterId===223&&
+      ayParts[0]?.fromPos===1&&ayParts.at(-1)?.toPos===n&&
       (mode==='auto'||ayParts.length===1)&&ayEnd>verse[0]&&
       raw[0]?.[0]===1&&raw.at(-1)?.[0]===n&&
       raw.every((row,i)=>Array.isArray(row)&&Number.isInteger(row[0])&&row[0]>=1&&row[0]<=n&&
@@ -8963,6 +8880,11 @@ function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
     }
     if(ayEnd<raw[n-1][2]-1)
       return {parts,error:ay+'. âyetin son sesi sonraki âyetle çakışıyor.'};
+    const startCut=ayParts[0]?.fromPos-1;
+    if(startCut>0&&(words[startCut-1].joinNext||
+      audio.allowedSplitCuts?.[ay]&&!audio.allowedSplitCuts[ay].includes(startCut)||
+      raw[startCut][1]<raw[startCut-1][2]))
+      return {parts,error:ay+'. âyette seçili bölümün başlangıcında güvenilir ses sınırı yok.'};
     for(const p of ayParts){
       if(p.toPos<n){
         const left=raw[p.toPos-1],right=raw[p.toPos];
@@ -8982,11 +8904,14 @@ function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
 }
 function studyValidateManualCut(ay,pos){
   const gi=ayGi[ay],n=gi?gi[1]-gi[0]+1:0;
-  if(!Number.isInteger(pos)||pos<1||pos>n)return {ok:false,message:'Önce geçerli bir kelime seç.'};
+  const bounds=typeof studyWordBounds==='function'?studyWordBounds(ay):
+    typeof studyRange!=='undefined'&&studyRange?.wordRange?null:gi;
+  const first=bounds?wordArr[bounds[0]]?.pos:0,last=bounds?wordArr[bounds[1]]?.pos:0;
+  if(!Number.isInteger(pos)||!first||!last||pos<first||pos>last)return {ok:false,message:'Önce geçerli bir kelime seç.'};
   if(pos===n)return {ok:true,endOfAyah:true};
   if(wordArr[gi[0]+pos-1]?.joinNext)
     return {ok:false,message:'Yazıda birleşik görünen kelimenin içinden kesim yapılamaz.'};
-  const result=buildStudySplitParts(ay,ay,'manual',{[ay]:[pos]});
+  const result=buildStudySplitParts(ay,ay,'manual',{[ay]:pos===last?[]:[pos]});
   if(result.error)return {ok:false,message:result.error};
   return {ok:true,pendingAudio:!!result.pendingAudio,
     message:result.pendingAudio?'Ses yüklenince kesim yeniden doğrulanacak.':''};
@@ -9008,9 +8933,12 @@ function syncStudySplitControlLabels(){
 function studySplitRecipeCurrent(recipe){
   if(!recipe||curS!==recipe.sid||studyRange?.sid!==recipe.sid||
     recipe.fromAy<studyRange.from||recipe.toAy>studyRange.to)return false;
+  const wordScope=r=>r?['fromAy','fromWord','toAy','toWord'].map(k=>r[k]).join(':'):'';
+  if(wordScope(recipe.wordRange)!==wordScope(studyRange.wordRange))return false;
   const current=activeStudySplitSelection();
   return !!current&&current.sid===recipe.sid&&current.ay===recipe.fromAy&&
     recipe.fromAy===recipe.toAy&&current.mode===recipe.mode&&
+    wordScope(current.wordRange)===wordScope(recipe.wordRange)&&
     JSON.stringify(current.cutsByAy)===JSON.stringify(recipe.cutsByAy);
 }
 function playActiveStudySplit(firstIndex=0,lastIndex=null){
@@ -9889,16 +9817,18 @@ $('playBtn2').onclick=()=>{
 $('prevPart').onclick=()=>startFromPart((plan[pi]&&plan[pi].part!==undefined?plan[pi].part:(splitSelIdx||0))-1);
 $('nextPart').onclick=()=>startFromPart((plan[pi]&&plan[pi].part!==undefined?plan[pi].part:(splitSelIdx||0))+1);
 let repLongFired2=false;
-$('repTog2').onclick=()=>{if(repLongFired2){repLongFired2=false;return;}SET.repOn=!SET.repOn;saveSet();syncPracticeControls();toast(SET.repOn?'Tekrar açık · '+SET.rep+'×':'Tekrar kapalı');};
-$('repPlus2').onclick=()=>{SET.rep=Math.min(99,SET.rep+1);SET.repOn=true;saveSet();syncPracticeControls();};
-$('repMinus2').onclick=()=>{SET.rep=Math.max(1,SET.rep-1);saveSet();syncPracticeControls();};
+$('repTog2').onclick=()=>{if(repLongFired2){repLongFired2=false;return;}SET.repOn=!SET.repOn;saveSet();syncPracticeControls();toast(SET.repOn?'Tekrar açık · '+(SET[splitRepeatKey()]??SET.rep)+'×':'Tekrar kapalı');};
+$('repPlus2').onclick=()=>{const key=splitRepeatKey();SET[key]=Math.min(99,(SET[key]??SET.rep)+1);SET.repOn=true;saveSet();syncPracticeControls();};
+$('repMinus2').onclick=()=>{const key=splitRepeatKey();SET[key]=Math.max(key==='combineRep'?0:1,(SET[key]??SET.rep)-1);saveSet();syncPracticeControls();};
 $('cumuTog2').onclick=()=>{SET.cumu=!SET.cumu;saveSet();syncPracticeControls();queuePracticeModeChange(SET.cumu);toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');};
 (function(){const b=$('repTog2');if(!b)return;let t=null;
   b.addEventListener('pointerdown',()=>{repLongFired2=false;t=setTimeout(()=>{t=null;repLongFired2=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx='parts';fillGearSheet();openSheet('gearSheet');},480);});
   const c=()=>{if(t){clearTimeout(t);t=null;}};b.addEventListener('pointerup',c);b.addEventListener('pointerleave',c);b.addEventListener('pointercancel',c);})();
 function syncRep2(){
-  syncRepeatScope('splitRepeatScope','repTog2','rep');
-  const rn=$('repN2');if(rn)rn.textContent=SET.rep;
+  const key=typeof splitRepeatKey==='function'?splitRepeatKey():'rep';
+  const remaining=typeof remainingStepRepeats==='function'?remainingStepRepeats():SET.rep;
+  syncRepeatScope('splitRepeatScope','repTog2',key,remaining);
+  const rn=$('repN2');if(rn)rn.textContent=remaining;
   const rc=$('repctl2');if(rc)rc.classList.toggle('on',SET.repOn);
   if(playing&&plan[pi]?.part!==undefined)updateStat();
   if(splitAy!=null&&$('split').classList.contains('on'))updateSplitIntro();
@@ -9986,6 +9916,7 @@ $('noteSave').onclick=()=>{
 /* ---------- playback engine ---------- */
 let plan=[],pi=0,pr=0,pieceCursor=0,raf=null,btimer=null,waiting=null,pendingFn=null,hiEl=null,playing=false;
 let planCycle=0,planCycleTemplate=null,pendingPracticeTransition=null;
+let completedStudyRounds=false,completedStepRepeatKey=null;
 let audioRequestId=0,stepRequestId=0;
 function terminalMuallimTailEnd(st,t){
   const a=AD_,ay=st?.ayEnd;
@@ -10146,12 +10077,14 @@ function applyPendingPracticeTransition(){
     plan=next;planCycle++;
     if(planCycle>=planCycleReps()){finishPlan();return true;}
   }
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   updateStat();pauseThen(goStep);return true;
 }
 function advancePracticeCycle(){
   if(!plan.rangeCycles||plan.at(-1)?.guardedTail)return false;
   if(planCycle+1>=planCycleReps())return false;
   planCycle++;plan=planCycleTemplate||plan;pi=0;pr=0;pieceCursor=0;lastLbl='';
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   updateStat();pauseThen(goStep);return true;
 }
 function skipDisabledPracticeStep(){
@@ -10164,6 +10097,7 @@ function skipDisabledPracticeStep(){
 async function goStep(){
   const st=plan[pi];if(!st)return;
   if(st.dyn&&st.repeatKind==='combine'&&Number(SET.combineRep??SET.rep)===0&&skipDisabledPracticeStep())return;
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   try{globalThis.window?.elifaPlaybackEvent?.('progress');}catch(e){}
   if(typeof SET!=='undefined'&&
     ((SET.reciter===3&&unsafeSudaisNormalStep(st))||(SET.reciter===5&&unsafeHaniNormalStep(st)))){
@@ -10538,6 +10472,7 @@ function handleBoundary(){
   if(typeof applyPendingPracticeTransition==='function'&&applyPendingPracticeTransition())return;
   pr++;
   const st=plan[pi];
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   if(pr<stepReps(st)){updateStat();pauseThen(goStep);}
   else{pi++;pr=0;
     if(pi<plan.length){updateStat();pauseThen(()=>{updateStat();goStep();});}
@@ -10570,6 +10505,9 @@ function runPlan(p){
   if(p.some(st=>st.sourceRanges))normalChapterAudio=AD_;
   plan=p;pi=0;pr=0;pieceCursor=0;playing=true;
   planCycle=0;planCycleTemplate=p;pendingPracticeTransition=null;
+  completedStudyRounds=false;
+  completedStepRepeatKey=null;
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   try{globalThis.window?.elifaPlaybackEvent?.('start');}catch(e){}
   goStep();setIco(true);updateStat();
   wake(true);
@@ -10615,9 +10553,13 @@ function pauseThen(fn){
 function finishPlan(){
   const wasFull=plan.length&&plan[plan.length-1].full;
   const guardedTail=!!(plan.length&&plan[plan.length-1].guardedTail);
+  const last=plan.at(-1),completedPart=last&&(last.part!==undefined||last.studyPart!==undefined);
   try{if(guardedTail)globalThis.window?.elifaAudioFailure?.('timing_unverified');else globalThis.window?.elifaPlaybackEvent?.('complete');}catch(e){}
   const nextS=curS+1;
   stopPlan(false);
+  completedStudyRounds=!guardedTail;
+  completedStepRepeatKey=!guardedTail&&completedPart?(last.repeatKind==='combine'||last.combo?'combineRep':'rep'):null;
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   if(guardedTail){
     toast('Sonraki âyetin son sesi doğrulanamadı. Güvenli bölüm bitti; devam etmek için başka hoca seç.');
   }else if(wasFull&&nextS<=114){
@@ -10636,6 +10578,9 @@ function stopPlan(silent,keepLoading=false){
   if(!keepLoading&&AD_&&AD_.selAbort)AD_.selAbort.abort();
   playing=false;plan=[];pi=0;pr=0;pieceCursor=0;
   planCycle=0;planCycleTemplate=null;pendingPracticeTransition=null;
+  completedStudyRounds=false;
+  completedStepRepeatKey=null;
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   if(raf){cancelAnimationFrame(raf);raf=null;}
   if(waiting){clearTimeout(waiting);waiting=null;pendingFn=null;}
   if(htmlBtimer){clearTimeout(htmlBtimer);htmlBtimer=null;}
@@ -10722,6 +10667,7 @@ function unsafeHaniNormalStep(step){
      (curS===34&&step.ayEnd===46)||(curS===65&&step.ayEnd===12)));
 }
 function playAyahOnce(a){
+  if(studyRange?.sid===curS&&studyRange.wordRange){if(restoreStudyWordSelection(a,a))playSelection();return;}
   const chapter=normalChapterAudio||AD_;if(!chapter?.ay[a])return;curAy=a;
   const steps=[normalVerseStep(chapter,a,a,{x:1,ayEnd:a,l:a+'. âyet'})];
   if(normalVersePlanReady(steps))runPlan(steps);
@@ -10729,6 +10675,7 @@ function playAyahOnce(a){
 function playFromAyah(a){
   const focused=studyRange?.sid===curS?studyRange:null;
   if(focused)a=Math.max(focused.from,Math.min(focused.to,a));
+  if(focused?.wordRange){if(restoreStudyWordSelection(a,focused.to))playSelection();return;}
   const chapter=normalChapterAudio||AD_,last=focused?.to||SURAHS[curS-1].n;
   if(!chapter?.ay[a]||!chapter?.ay[last])return;curAy=a;
   const steps=[normalVerseStep(chapter,a,last,{x:1,l:SURAHS[curS-1].tr,full:!focused})];
@@ -10752,6 +10699,7 @@ function playAyahProgram(a,endAy=null){
   if(!chapter||!chapter.ay[a])return;curAy=a;
   const lastAy=Number.isInteger(endAy)?Math.max(a,Math.min(focused?.to||SURAHS[curS-1].n,endAy)):
     (focused?.to||SURAHS[curS-1].n);
+  if(focused?.wordRange){if(restoreStudyWordSelection(a,lastAy))playSelection();return;}
 
   // SERBEST (tekrar kapalı, birikimli kapalı) → buradan sûre sonuna TEK KESİNTİSİZ AKIŞ
   if(!SET.repOn && !combine){
@@ -10827,6 +10775,7 @@ $('playBtn').onclick=()=>{
 /* SEÇİMİ ÇAL: tam seçilen aralık, deterministik kesim korumalı.
    Tam âyet seçiliyse âyet-sonu güvenliği; kelime/parçaysa kelime kesimi güvenliği. */
 async function playSelection(){
+  if(typeof constrainStudyWordSelection==='function')constrainStudyWordSelection();
   if(selA==null)return;
   if(typeof audioTimingUnverified==='function'&&audioTimingUnverified(SET.reciter,curS)){
     toast('Bu hocanın bu sûre kaydında kelime ve âyet sınırları güvenilir değil. Seçimin korundu; ses için başka bir hoca seç.');
@@ -10990,20 +10939,46 @@ $('nextAy').onclick=()=>{
 let repLongFired=false;
 function syncRep(){
   const key=readerRepeatKey();
-  syncRepeatScope('readerRepeatScope','repTog',key);
-  const rn=$('repN');if(rn)rn.textContent=SET[key];
+  const remaining=typeof remainingStudyRounds==='function'?remainingStudyRounds():SET[key];
+  syncRepeatScope('readerRepeatScope','repTog',key,remaining);
+  const rn=$('repN');if(rn)rn.textContent=remaining;
   const rc=document.querySelector('.repctl');if(rc)rc.classList.toggle('on',SET.repOn);
 }
-function syncRepeatScope(labelId,buttonId,key){
-  const token=key==='rangeRep'?'repeat_scope_work':'repeat_scope_unit';
+function syncRepeatScope(labelId,buttonId,key,count=SET[key]){
+  const token=key==='rangeRep'?'repeat_scope_work':key==='combineRep'?'pb_combine':'repeat_scope_unit';
   const translated=window.elifaT?.(token);
-  const text=translated&&translated!==token?translated:(key==='rangeRep'?'Tüm çalışma':'Âyet / parça');
+  const text=translated&&translated!==token?translated:(key==='rangeRep'?'Tüm çalışma':key==='combineRep'?'1+2':'Âyet / parça');
   const label=$(labelId);if(label){label.dataset.i18n=token;label.textContent=text;}
-  const button=$(buttonId);if(button){button.setAttribute('aria-label',text+' · '+SET[key]+'×');button.setAttribute('aria-pressed',String(!!SET.repOn));}
+  const button=$(buttonId);if(button){button.setAttribute('aria-label',text+' · '+count+'×');button.setAttribute('aria-pressed',String(!!SET.repOn));}
 }
 function readerRepeatKey(){
-  if(activeStudySplitSelection())return 'rep';
-  return window.elifaPracticeMode?.()==='range'?'rangeRep':'rep';
+  return 'rangeRep';
+}
+function remainingStudyRounds(){
+  const configured=Math.min(99,Math.max(1,Math.round(Number(SET.rangeRep??SET.rep)||1)));
+  if(typeof completedStudyRounds!=='undefined'&&completedStudyRounds)return 0;
+  if(typeof plan==='undefined'||!plan.length)return configured;
+  const total=SET.repOn?configured:1;
+  if(plan.rangeCycles)return Math.max(0,total-(typeof planCycle==='number'?planCycle:0));
+  if(plan.length===1&&plan[0].repeatKind==='range')return Math.max(0,total-(typeof pr==='number'?pr:0));
+  return 1;
+}
+function splitRepeatKey(){
+  if(typeof completedStepRepeatKey!=='undefined'&&completedStepRepeatKey)return completedStepRepeatKey;
+  const st=typeof plan!=='undefined'?plan[pi]:null;
+  return st&&(st.part!==undefined||st.studyPart!==undefined)&&(st.repeatKind==='combine'||st.combo)?'combineRep':'rep';
+}
+function remainingStepRepeats(){
+  if(typeof completedStepRepeatKey!=='undefined'&&completedStepRepeatKey)return 0;
+  const st=typeof plan!=='undefined'?plan[pi]:null;
+  if(st&&(st.part!==undefined||st.studyPart!==undefined))return Math.max(0,stepReps(st)-(typeof pr==='number'?pr:0));
+  return SET[splitRepeatKey()]??SET.rep;
+}
+function syncPlaybackRepeatCounters(){
+  syncRep();syncRep2();
+  const st=typeof plan!=='undefined'?plan[pi]:null;
+  if(Number.isInteger(st?.studyPart))window.elifaStudySplitSetIndex?.(st.studyPart);
+  window.elifaStudySplitRefreshStatus?.();
 }
 $('repTog').onclick=()=>{
   if(repLongFired){repLongFired=false;return;}
@@ -11013,7 +10988,7 @@ $('repTog').onclick=()=>{
   toast(SET.repOn?'Tekrar açık · '+SET[readerRepeatKey()]+'×':'Tekrar kapalı');
 };
 $('repPlus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.min(99,SET[key]+1);SET.repOn=true;saveSet();syncPracticeControls();};
-$('repMinus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.max(key==='rangeRep'?0:1,SET[key]-1);saveSet();syncPracticeControls();};
+$('repMinus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.max(1,SET[key]-1);saveSet();syncPracticeControls();};
 /* uzun bas → ayarlar */
 (function(){const b=$('repTog');if(!b)return;let t=null;
   b.addEventListener('pointerdown',()=>{repLongFired=false;t=setTimeout(()=>{t=null;repLongFired=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx=activeStudySplitSelection()?'studyParts':'ayah';fillGearSheet();openSheet('gearSheet');},480);});
@@ -11040,6 +11015,7 @@ function syncPracticeControls(){
     const input=$(id);if(input)input.value=SET[key];
   }
   window.elifaStudySplitRefreshStatus?.();
+  window.elifaPracticeUIRefresh?.();
 }
 /* 1+2 ikonuna UZUN BAS → âyet aralığı programı paneli (tekrar ikonundaki gibi) */
 (function(){const b=$('cumuTog');if(!b)return;let t=null;
@@ -11160,6 +11136,10 @@ function applyRangeProgram(offerReciter=false){
     return false;
   }
   guardedRangeDraft=null;
+  if(typeof studyRange!=='undefined'&&studyRange?.sid===curS&&studyRange.wordRange){
+    if(!restoreStudyWordSelection(from,to)){toast('Kaydedilen kelime seçimi bulunamadı.');return false;}
+    SET.repOn=true;saveSet();syncRep();syncRep2();playSelection();return true;
+  }
   const mode=(typeof window!=='undefined'&&window.elifaPracticeMode?.())||'range';
   const verses=buildLadder(from,to,mode==='cumulative');
   if(!verses.length){toast('Seçilen aralıktaki âyetlerden en az birinin ses sınırı eksik. Aralık çalınmadı.');return false;}
@@ -11219,6 +11199,7 @@ function fillGearSheet(){
   {const _cc=$('cumuChk');if(_cc)_cc.checked=SET.cumu;}
   const e1=$('repEcho'),e2=$('repEcho2');if(e1)e1.textContent=SET.rep;if(e2)e2.textContent=SET.rep;
   const studySplit=gearCtx==='studyParts'?activeStudySplitSelection():null;
+  $('fromInp').min=1;$('toInp').min=1;
   if(studySplit){
     $('progTitle').textContent=studySplit.ay+'. âyet · parça ezber programı';
     $('fromLbl').textContent='Başlangıç parça';$('toLbl').textContent='Bitiş parça';
@@ -11235,10 +11216,16 @@ function fillGearSheet(){
     const safeS=Math.max(1,Math.min(SURAHS.length,Number(curS)||1));
     const surahMeta=SURAHS[safeS-1]||SURAHS[0]||{n:1};
     const maxAy=Math.max(1,Number(surahMeta.n)||1);
-    $('fromInp').max=maxAy;$('toInp').max=maxAy;
+    const focused=typeof studyRange!=='undefined'&&studyRange?.sid===curS?studyRange:null;
+    const minAy=focused?.from||1,limitAy=focused?.to||maxAy;
+    $('fromInp').min=minAy;$('toInp').min=minAy;
+    $('fromInp').max=limitAy;$('toInp').max=limitAy;
     const cur=Math.max(1,Math.min(maxAy,Number(curAy)||Number(visAy)||1));
-    const draft=gearCtx==='ayah'&&guardedRangeDraft?.sid===curS?guardedRangeDraft:
-      (gearCtx==='ayah'&&rangeSelectionDraft?.sid===curS?rangeSelectionDraft:null);
+    // All settings entrances must describe the same active study. A draft from
+    // ordinary reading must not expand a focused study beyond its visible text.
+    const fits=d=>d?.sid===curS&&d.from>=minAy&&d.to<=limitAy&&d.to>=d.from;
+    const draft=gearCtx==='ayah'&&fits(guardedRangeDraft)?guardedRangeDraft:
+      (gearCtx==='ayah'&&fits(rangeSelectionDraft)?rangeSelectionDraft:focused);
     $('fromInp').value=draft?.from??cur;$('toInp').value=draft?.to??Math.min(maxAy,cur+2);
   }
   {const tb=$('testModeBtn');if(tb)tb.style.display=(studySplit||gearCtx==='parts'&&splitParts.length)?'none':'flex';}
@@ -11272,7 +11259,7 @@ document.querySelectorAll('.stepper button').forEach(b=>{
 function commitInputs(change){
   SET.rep=Math.min(99,Math.max(1,Math.round(+$('repInp').value||5)));
   SET.combineRep=Math.min(99,Math.max(0,Math.round(+$('combineRepInp').value||0)));
-  SET.rangeRep=Math.min(99,Math.max(0,Math.round(+$('rangeRepInp').value||0)));
+  SET.rangeRep=Math.min(99,Math.max(1,Math.round(+$('rangeRepInp').value||1)));
   SET.wait=Math.min(60,Math.max(0,+$('waitInp').value||0));
   SET.speed=Math.min(2,Math.max(0.5,+$('spdInp').value||1));
   SET.startPad=Math.max(-300,Math.min(300,+$('startPadInp').value||0));
@@ -11804,11 +11791,11 @@ function surahForPage(P){
   for(const s of SURAHS){if(s.p<=P)sid=s.id;else break;}
   return sid;
 }
-async function gotoPage(P){
+async function gotoPage(P,options={}){
   P=Math.min(604,Math.max(1,P|0));
   const sid=surahForPage(P);
-  readerReturn='home';
-  await openSurah(sid);
+  readerReturn=options.returnTo==='org'?'org':'home';
+  await openSurah(sid,undefined,{returnTo:readerReturn});
   const v=verses.find(x=>x.pg>=P)||verses[verses.length-1];
   if(v){const el=$('ay-'+v.n);if(el){el.scrollIntoView({block:'start'});$('rscroll').scrollTop-=70;}curAy=v.n;}
   $('pageChip').textContent=(window.tr?tr('page'):'Sayfa')+' '+P;
@@ -11875,7 +11862,7 @@ const GUIDE={
     {sel:'.list .card',t:'Sûre listesi',x:'Bir sûreye <b>dokununca</b> okuma ekranı açılır.',pos:'bottom'},
     {sel:'.togetherHero',t:'Çalışma Masası',x:'Çalışmak istediğin sûre ve âyet aralığını seç. Yalnızca o âyetleri okuyabilir, bölebilir ve tekrar edebilirsin.'},
   {sel:'#continueBtn',t:'Kaldığın yer',x:'En son kaldığın âyete tek dokunuşla geri dönersin.'},
-    {sel:'#qTogether',t:'Birlikte',x:'<b>Hatim/cüz paylaşımı</b> ve <b>toplu zikir</b> burada. 30 cüzü <b>tek linkle</b> paylaşırsın — üyelik yok, kimse uygulama kurmak zorunda değil.'},
+    {sel:'#qTogether',fresh:true,t:'Birlikte Hatim',x:'30 cüzlük bir hatim oluştur, açık bir hatme veya bağlantıyla katıl. Hesap zorunlu değil; misafirsen kişisel dönüş bağlantını sakla.'},
     {sel:'#qRepeat',t:'Ezber Takibi',x:'Test modu, günlük tekrar planı ve ezber ilerlemen burada.'},
     {sel:'#tbEzber',t:'Ezber',x:'Ezber takibin ve günlük tekrar planın.'},
     {sel:'#themeBtnH',t:'Tema',x:'Uygulamanın rengini ve görünümünü buradan değiştir.'},
@@ -11906,14 +11893,15 @@ const GUIDE={
     {sel:'#ezberBody',t:'Ezber takibin',x:'“Ezberledim” dediğin âyetler burada toplanır; uygulama tekrar zamanını kendisi hatırlatır (yeni ezber, yakın tekrar ve uzak tekrar olarak).',pos:'bottom'},
   ],
   birlikte:[
-    {sel:'#birlikte .bk-hero',t:'Hatim / Cüz Paylaşımı',x:'30 cüzü <b>tek linkle</b> paylaş. “Hatim başlat” de, niyetini yaz. Uygulama <b>iki link</b> üretir: <b>katılım linki</b> (gruba atılır) ve <b>yönetici linki</b> (sende kalır — <b>kimseye verme</b>).'},
-    {sel:'#birlikte .bk-hero ~ .bk-hero',t:'Ortak Niyet — Toplu Zikir',x:'Ortak hedef koy: <b>1000 salavat</b>, <b>313 Âyetü\'l-Kürsî</b>… Halkaya dokunarak say, sonra <b>“Payımı hedefe ekle”</b>ye bas. Kimin kaç okuduğu <b>görünmez</b> — sadece toplam.'},
-    {sel:'#bkJoinInput',t:'Linkle katıl',x:'Gruptan gelen linki buraya yapıştır. Ya da doğrudan linke dokunman yeterli.'},
-    {sel:'#bkMineList',t:'Organizasyonlarım',x:'Başlattığın ve katıldığın hatimler burada.'},
+    {sel:'#birlikte [data-hc="create"]',t:'Hatim oluştur',x:'30 cüzlük bir hatim başlat. <b>Açık hatimler</b> listesinde veya yalnızca bağlantıyla katılım seçebilirsin. Yönetici bağlantını ayrı ve özel sakla.'},
+    {sel:'#birlikte .hc-tabs',t:'Açık hatimler ve kayıtların',x:'<b>Açık Hatimler</b> katılabileceğin çalışmaları, <b>Benim Cüzlerim</b> kendi katılımlarını, <b>Oluşturduklarım</b> yönettiğin hatimleri gösterir.'},
+    {sel:'#birlikte [data-hc="join"]',t:'Bağlantıyla katıl',x:'Sana gönderilen katılım bağlantısını veya altı haneli kodu yapıştır. Katılmak için hesap ya da uygulama kurulumu zorunlu değil.'},
+    {sel:'#hatimList',t:'Kayıtlarını koru',x:'Misafirsen kişisel dönüş bağlantını sakla. Cihaz verisi silinirse bu bağlantı gerekir. İstersen sana ait katılımları açıkça seçerek hesabına bağlayabilirsin.'},
   ],
   org:[
-    {sel:'.cuz-grid',t:'Cüz tablosu',x:'<b>Gri</b> = boş, dokun al. <b>Sarı</b> = alındı, henüz okunmadı. <b>Yeşil</b> = okundu. <b>Kırmızı</b> = gecikti.'},
-    {sel:'.org-btn.wa',t:'Hatırlatma gönder',x:'Eksik cüzleri listeleyen hazır WhatsApp mesajı üretir.'},
+    {sel:'#orgView .hc-grid',t:'Bir cüz seç',x:'<b>Boş</b> bir cüzü alabilirsin. Sana ait cüzde <b>Okudum</b>, yanlış işareti <b>Geri al</b> ve gerekiyorsa <b>Bırak</b> seçeneklerini kullan. Okumaya başlamak cüzü kendiliğinden tamamlamaz.'},
+    {sel:'#orgView [data-hc="share"]',t:'Katılım bağlantısını paylaş',x:'Bu düğme yalnız katılım bağlantısını paylaşır. Yönetici ve kişisel dönüş bağlantılarını genel gruba gönderme.'},
+    {sel:'#orgView [data-hc="manage"]',t:'Hatmi yönet',x:'Başlık, hedef tarih, görünürlük, cüz durumu ve arşiv ayarları burada. PNG veya PDF raporunu da buradan alabilirsin; katılımcı erişimini yenilemek önceki özel erişimi iptal eder.'},
   ],
   saved:[
     {sel:'#tabMarks',t:'Koleksiyon',x:'Renkli kaydettiğin âyetler.'},
@@ -11931,10 +11919,12 @@ function startGuide(){
   // Seçili dile göre metinleri uygula (çeviri yoksa Türkçe kaynak)
   let lang='en'; try{lang=window.ElifaLocale?window.ElifaLocale.current():localStorage.getItem('elifaLang')||'en';}catch(e){}
   const guidePack=window.ELIFA_GUIDE_L10N||{};
-  const loc=(guidePack[lang]&&guidePack[lang][ctx])||(lang==='tr'?null:guidePack.en&&guidePack.en[ctx])||null;
+  // These rebuilt screens have new steps; the old positional translation pack
+  // still describes removed zikir controls and must not replace this help.
+  const loc=['birlikte','org'].includes(ctx)?null:(guidePack[lang]&&guidePack[lang][ctx])||(lang==='tr'?null:guidePack.en&&guidePack.en[ctx])||null;
   coachSteps=base.map(s=>{
     const idx=full.indexOf(s);
-    const trn=(loc&&loc[idx])?loc[idx]:s;
+    const trn=(!s.fresh&&loc&&loc[idx])?loc[idx]:s;
     return {sel:s.sel, t:trn.t, x:trn.x, pos:s.pos};
   });
   coachIdx=0;$('coach').classList.add('show');showCoachStep();
@@ -12471,951 +12461,7 @@ updateStat();
   el.addEventListener('touchend',end);el.addEventListener('touchcancel',end);
 })();
 </script>
-<script>
-/* ===== BİRLİKTE modülü (Zikirmatik'ten birebir, Elifa'ya uyarlanmış) ===== */
-const BK_LOCAL_KEY = 'elifa_birlikte_v1';   // organizasyonlarım (cihazda)
-const BK_DEMO_KEY  = 'elifa_bk_demo_v1';    // çevrimdışı önizleme deposu
-let bkLocal = bkLoadLocal();
-let bkOffline = false;                       // API erişilemezse true
-let bkCurrent = null;                        // açık organizasyon {org, code, adminToken?}
-let bkRefreshTimer = null;
-
-function bkLoadLocal(){
-  try { const r = localStorage.getItem(BK_LOCAL_KEY); if (r) return JSON.parse(r); } catch(e){}
-  return { mine: [], myName: '', pending: {}, claimed: {} }; // pending: zikir sayımı {code:n}; claimed: bu cihazdan alınan cüzler {code:[no,...]}
-}
-function bkSaveLocal(){ try { localStorage.setItem(BK_LOCAL_KEY, JSON.stringify(bkLocal)); } catch(e){} }
-
-// ---- Ana ekran: pay alınca beliren buton ----
-// Bir hatimde cüz alınmışsa (claimed) ya da ortak niyette bu oturumda
-// gönderilmemiş bir pay (pending) varsa, kişinin "üzerinde iş" olduğu kabul edilir.
-function activeShareCodes(){
-  const codes = new Set();
-  if (bkLocal.pending) for (const c in bkLocal.pending) if (bkLocal.pending[c] > 0) codes.add(c);
-  if (bkLocal.claimed) for (const c in bkLocal.claimed) if (bkLocal.claimed[c] && bkLocal.claimed[c].length) codes.add(c);
-  return [...codes];
-}
-function renderMainPayBtn(){
-  const btn = document.getElementById('mainPayBtn');
-  if (!btn) return;
-  const codes = activeShareCodes();
-  btn.style.display = codes.length ? 'flex' : 'none';
-}
-function bkRandCode(n){
-  const abc = 'abcdefghjkmnpqrstuvwxyz23456789'; let s = '';
-  const arr = new Uint8Array(n); crypto.getRandomValues(arr);
-  for (let i=0;i<n;i++) s += abc[arr[i] % abc.length];
-  return s;
-}
-
-// ---- API katmanı: canlı ağ hatası yerel başarıya dönüştürülmez ----
-function bkErrMsg(err){var m=err&&err.message;if(err&&err.handled&&m&&m!=='hata')return m;return (window.tr?tr('net_err'):'Bağlantı kurulamadı. İnternet bağlantını kontrol edip tekrar dene.');}
-async function bkApi(payload){
-  const localPreview=/^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname);
-  if(!localPreview)bkOffline=false;
-  if (!bkOffline){
-    try {
-      const res = await fetch((window.ELIFA_API_BASE||'')+'/api/org', {
-        method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(payload),signal:AbortSignal.timeout(20000)
-      });
-      const data = await res.json();
-      if (!res.ok) throw Object.assign(new Error(data.error||'hata'), {handled:true});
-      return data;
-    } catch(err){
-      if (err.handled) throw err;      // sunucu cevap verdi ama işlem hatalı (örn. cüz alınmış)
-      if(!localPreview)throw Object.assign(new Error('Sunucuya ulaşılamadı. İşlem kaydedildi sayılmadı; durumunu kontrol edip yeniden dene.'),{handled:true});
-      bkOffline = true;                // yalnızca yerel önizleme
-      document.getElementById('bkOffline').style.display = 'block';
-    }
-  }
-  return bkDemoApi(payload);
-}
-// Çevrimdışı önizleme: aynı işlemler, tek cihazda
-function bkDemoApi(p){
-  let db = {}; try { db = JSON.parse(localStorage.getItem(BK_DEMO_KEY)||'{}'); } catch(e){}
-  const save = ()=>localStorage.setItem(BK_DEMO_KEY, JSON.stringify(db));
-  const fail = m=>{ const e=new Error(m); e.handled=true; throw e; };
-  if (p.action==='create'){
-    const code = bkRandCode(6), adminToken = bkRandCode(12);
-    db[code] = Object.assign({}, p.org, {code, adminToken, createdAt:Date.now()});
-    db['a_'+adminToken] = code; save();
-    return {code, adminToken};
-  }
-  const code = p.code || db['a_'+p.admin]; const org = db[code];
-  if (!org) fail('Organizasyon bulunamadı');
-  if (p.action==='get') return {org: bkPublicView(org, p.admin===org.adminToken), code};
-  if (p.action==='claim'){
-    const it = org.items.find(i=>i.no===p.no);
-    if (!it || it.status!=='bos') fail('Bu cüz az önce başkası tarafından alındı');
-    it.status='alindi'; it.name=p.name; it.ts=Date.now(); save();
-    return {org: bkPublicView(org,false), code};
-  }
-  if (p.action==='release'){
-    const it = org.items.find(i=>i.no===p.no);
-    if (!it || it.status!=='alindi') fail('Sadece alınmış (henüz okunmamış) cüz bırakılabilir');
-    it.status='bos'; it.name=''; it.ts=Date.now(); save();
-    return {org: bkPublicView(org,false), code};
-  }
-  if (p.action==='complete'){
-    const it = org.items.find(i=>i.no===p.no);
-    if (!it || it.status==='bos') fail('Bu cüz henüz alınmamış');
-    it.status='okundu'; it.ts=Date.now(); save();
-    return {org: bkPublicView(org,false), code};
-  }
-  if (p.action==='contribute'){
-    org.contributions = org.contributions||[];
-    org.contributions.push({name:p.name, amount:p.amount, ts:Date.now()}); save();
-    return {org: bkPublicView(org,false), code};
-  }
-  if (p.action==='adminSet'){
-    if (p.admin!==org.adminToken) fail('Yetki yok');
-    const it = org.items.find(i=>i.no===p.no);
-    if (it){ it.status=p.status; if(p.status==='bos'){it.name='';} it.ts=Date.now(); }
-    save(); return {org: bkPublicView(org,true), code};
-  }
-  fail('Bilinmeyen işlem');
-}
-// Ortak kural: zikirde kişi başı sayı DIŞARI SIZMAZ — sadece toplam + isimler.
-function bkPublicView(org, isAdmin){
-  const v = { type:org.type, title:org.title, zikirAd:org.zikirAd, hedef:org.hedef,
-    dueDate:org.dueDate, adminName:org.adminName, createdAt:org.createdAt, items:org.items };
-  if (org.type==='zikir'){
-    const c = org.contributions||[];
-    v.toplam = c.reduce((s,x)=>s+x.amount,0);
-    v.katilanlar = [...new Set(c.map(x=>x.name))];
-  }
-  v.isAdmin = !!isAdmin;
-  return v;
-}
-
-// ---- Organizasyonlarım listesi ----
-function bkAddMine(entry){
-  // KRİTİK: Oluşturan kişi sonradan cüz aldığında yönetici anahtarı ezilmesin.
-  const eski = bkLocal.mine.find(m=>m.code===entry.code);
-  if (eski && eski.adminToken && !entry.adminToken) entry.adminToken = eski.adminToken;
-  bkLocal.mine = bkLocal.mine.filter(m=>m.code!==entry.code);
-  bkLocal.mine.unshift(entry); bkSaveLocal();
-}
-function renderBirlikte(){
-  try{ bkDiscoverInit(); }catch(e){}
-  const list = document.getElementById('bkMineList');
-  if (!bkLocal.mine.length){
-    list.innerHTML = '<div class="custom-empty">'+(window.tr?tr("bk_empty"):"Henüz yok. Bir hatim ya da niyet başlatın — ya da gruptan gelen linke dokunun.")+'</div>';
-    return;
-  }
-  list.innerHTML = bkLocal.mine.map(m=>`
-    <div class="bk-mine-item" data-open="${m.code}" data-admin="${m.adminToken||''}">
-      <div style="min-width:0;">
-        <div class="m-title">${escapeHtml(shortName(m.title, 34))}</div>
-        <div class="m-sub">${m.type==='zikir'?'Ortak niyet':'Hatim / cüz'}${m.adminToken?' · sizin organizasyonunuz':''}</div>
-      </div>
-      <div style="display:flex; align-items:center; gap:4px;">
-        <span class="m-badge">${m.adminToken?'YÖNETİCİ':'KATILIMCI'}</span>
-        <button class="bk-del" data-remove="${m.code}" title="Listeden çıkar">✕</button>
-      </div>
-    </div>`).join('');
-}
-
-// ---- Organizasyon açma / yenileme ----
-/* ═══ v216 — Herkese Açık Keşif (mantık) ═══ */
-var discEnabled=false, discData={h:[],z:[]}, discSeg='h', discLoaded=false;
-function _T(k,fb){ return (window.tr?tr(k):null)||fb; }
-
-/* Birlikte açılınca: özellik açık mı? açıksa kutuyu göster */
-async function bkDiscoverInit(){
-  try{
-    const r = await bkApi({action:'discoverConfig'});
-    discEnabled = !!(r && r.enabled);
-  }catch(e){ discEnabled=false; }
-  const w=document.getElementById('discWrap');
-  if(w) w.classList.toggle('show', discEnabled);
-}
-
-/* Kutuya basınca: sheet aç (openSheet → geri tuşu güvenli), listeyi çek */
-async function bkOpenDiscover(){
-  openSheet('discSheet');           // elifaEnter otomatik → geri ile kapanır
-  discSeg='h'; _discSegUI();
-  document.getElementById('discList').innerHTML='<div class="disc-empty">'+_T('disc_loading','Yükleniyor…')+'</div>';
-  try{
-    const r = await bkApi({action:'discoverList'});
-    const items = (r&&r.items)||[];
-    discData.h = items.filter(x=>x.type==='hatim');
-    discData.z = items.filter(x=>x.type==='zikir');
-    discLoaded=true;
-  }catch(e){ discData={h:[],z:[]}; }
-  bkDiscRender();
-}
-function _discSegUI(){
-  const H=document.getElementById('discSegH'), Z=document.getElementById('discSegZ');
-  if(H)H.classList.toggle('on',discSeg==='h'); if(Z)Z.classList.toggle('on',discSeg==='z');
-}
-function bkDiscSeg(k){ discSeg=k; _discSegUI(); bkDiscRender(); }
-function _esc(x){ return String(x==null?'':x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
-function bkDiscRender(){
-  const L=document.getElementById('discList'); if(!L)return;
-  const data = discSeg==='h'?discData.h:discData.z;
-  if(!data.length){
-    L.innerHTML='<div class="disc-empty"><div class="be">'+_T(discSeg==='h'?'disc_empty_h':'disc_empty_z',discSeg==='h'?'Şu an açık hatim yok':'Şu an açık zikir yok')+'</div><p>'+_T('disc_empty_sub','Yeni bir tane başlat, ilk sen ol.')+'</p></div>';
-    return;
-  }
-  L.innerHTML = data.map(o=>{
-    const isZ = o.type==='zikir';
-    let done,total,pct,full;
-    if(isZ){ done=o.toplam||0; total=o.hedef||0; }
-    else { done=o.done||0; total=o.total||30; }
-    pct = total>0 ? Math.min(100,Math.round(done/total*100)) : 0;
-    full = total>0 && done>=total;
-    const meta = _esc(o.adminName||'') + (o.adminName?' · ':'') + done+'/'+total+(isZ?'':' '+_T('disc_juz','cüz'))+' · '+pct+'%';
-    const title = _esc(isZ ? (o.zikirAd||o.title) : o.title);
-    const btn = full
-      ? '<button class="disc-jbtn full" disabled>'+_T('disc_full','Doldu ✓')+'</button>'
-      : '<button class="disc-jbtn '+(isZ?'z':'')+'" onclick="bkJoinPublic(\''+_esc(o.code)+'\')">'+_T(isZ?'disc_join':'disc_take',isZ?'Katıl':'Cüz al')+'</button>';
-    return '<div class="disc-row">'
-      +'<span class="disc-badge '+(isZ?'z':'h')+'">'+(isZ?'ذ':'خ')+'</span>'
-      +'<div class="disc-mid"><div class="dt">'+title+'</div><div class="dm">'+meta+'</div>'
-      +'<div class="disc-bar"><i style="width:'+pct+'%"></i></div></div>'
-      +'<div class="disc-act">'+btn+'</div></div>';
-  }).join('');
-}
-/* Keşiften katıl → mevcut org akışını kullan (geri tuşu güvenli) */
-function bkJoinPublic(code){
-  try{ closeSheets(); }catch(e){}
-  bkOpen(code);
-}
-
-async function bkOpen(code, adminToken, navOpts={}){
-  // Bu cihaz organizasyonun sahibiyse (yönetici anahtarı kayıtlıysa),
-  // katılım linkiyle bile gelse yönetici görünümüne yükselt.
-  if (!adminToken && code){
-    const m = bkLocal.mine.find(x=>x.code===code);
-    if (m && m.adminToken) adminToken = m.adminToken;
-  }
-  show('org');
-  if(!navOpts.fromHistory){
-    const mode=navOpts.replace?'replace':'push';
-    if(mode==='replace'||!history.state||history.state.elifaRoute!=='org')setElifaRoute('org',mode);
-  }
-  document.getElementById('orgView').innerHTML = '<div class="empty">'+tr('loading')+'</div>';
-  try {
-    const data = await bkApi(adminToken ? {action:'get', admin:adminToken} : {action:'get', code});
-    bkCurrent = { org:data.org, code:data.code, adminToken:adminToken||null };
-    renderOrg();
-    clearInterval(bkRefreshTimer);
-    bkRefreshTimer = setInterval(bkSilentRefresh, 20000); // canlı his: 20 sn'de bir sessiz yenile
-  } catch(err){
-    document.getElementById('orgView').innerHTML =
-      `<div class="empty">${escapeHtml(err.message||tr('org_open_fail'))}</div>`;
-  }
-}
-async function bkSilentRefresh(){
-  if (!bkCurrent || !document.getElementById('org').classList.contains('on')) return;
-  try {
-    const p = bkCurrent.adminToken ? {action:'get', admin:bkCurrent.adminToken} : {action:'get', code:bkCurrent.code};
-    const data = await bkApi(p);
-    bkCurrent.org = data.org; renderOrg();
-  } catch(e){}
-}
-
-// ---- Görselleştirme ----
-function bkDue(org){
-  if (!org.dueDate) return {late:false, txt:''};
-  const end = new Date(org.dueDate+'T23:59:59');
-  const days = Math.ceil((end - Date.now())/86400000);
-  if (days < 0) return {late:true, txt:tr('due_expired')};
-  if (days === 0) return {late:false, txt:tr('due_today')};
-  return {late:false, txt:tr('due_left').replace('{n}',days)};
-}
-function bkProgressRing(done, total, label){
-  const pct = total>0 ? Math.min(1, done/total) : 0;
-  const R=86, C=2*Math.PI*R;
-  return `<div class="org-progress-wrap">
-    <svg viewBox="0 0 200 200">
-      <circle cx="100" cy="100" r="${R}" fill="none" stroke="var(--line)" stroke-width="7" stroke-dasharray="1 6" stroke-linecap="round"/>
-      <circle cx="100" cy="100" r="${R}" fill="none" stroke="var(--yildiz)" stroke-width="7.5" stroke-linecap="round"
-        stroke-dasharray="${(C*pct).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 100 100)" style="transition:stroke-dasharray .6s;"/>
-    </svg>
-    <div class="org-progress-center"><b>${Math.round(pct*100)}%</b><span>${label}</span></div>
-  </div>`;
-}
-function renderOrg(){
-  const {org, code, adminToken} = bkCurrent;
-  const due = bkDue(org);
-  const isAdmin = !!adminToken && org.isAdmin;
-  let html = `<div class="org-head">
-    ${isAdmin?'<div class="org-admin-strip">'+tr('org_admin_view')+'</div>':''}
-    <h2 class="org-niyet">${escapeHtml(org.title)}</h2>
-    <p class="org-meta">${org.adminName?escapeHtml(org.adminName)+' '+tr('org_started'):''}${due.txt?' · '+due.txt:''}</p>
-  </div>`;
-
-  if (isAdmin && discEnabled){
-    const pub = !!org.public;
-    html += `<div class="disc-pub">
-      <div class="pl">${tr('disc_publish')}<small>${tr('disc_sheet_sub')}</small></div>
-      <div class="sw2 ${pub?'on':''}" id="orgPubSw"></div>
-    </div>`;
-  }
-
-  if (org.type === 'hatim'){
-    const done = org.items.filter(i=>i.status==='okundu').length;
-    const taken = org.items.filter(i=>i.status!=='bos').length;
-    html += bkProgressRing(done, org.items.length, done+' / '+org.items.length+' '+tr('juz_read_suffix'));
-    const myCodes = (bkLocal.claimed && bkLocal.claimed[code]) ? bkLocal.claimed[code] : [];
-    const mine = org.items.filter(i=>myCodes.indexOf(i.no)>=0 && i.status==='alindi');
-    mine.forEach(i=>{
-      html += `<div class="org-mytask"><span><b>${i.no}. ${tr('juz')}</b> — ${escapeHtml(shortName(i.name||'',18))}</span>
-        <button class="org-btn primary" style="width:auto; padding:9px 16px;" data-complete="${i.no}">${tr('org_iread')} ✓</button></div>`;
-    });
-    html += `<div class="cuz-grid">` + org.items.map(i=>{
-      const late = due.late && i.status!=='okundu';
-      const cls = i.status + (late?' gecikti':'') + (myCodes.indexOf(i.no)>=0?' mine':'');
-      return `<div class="cuz-cell ${cls}" data-cuz="${i.no}" data-st="${i.status}">
-        <span class="no">${i.no}</span>${i.name?`<span class="who">${escapeHtml(shortName(i.name,12))}</span>`:''}
-      </div>`;
-    }).join('') + `</div>
-    <div class="st-legend">
-      <span><i style="background:var(--bead-off);"></i>${tr('st_empty')}</span>
-      <span><i style="background:var(--st-alindi);"></i>${tr('st_taken')}</span>
-      <span><i style="background:var(--st-okundu);"></i>${tr('st_read')}</span>
-      ${org.dueDate?'<span><i style="background:var(--st-gecikti);"></i>'+tr('st_late')+'</span>':''}
-    </div>
-    <p class="org-note">${tr('org_note_pick')}</p>`;
-    const hatimComplete = done === org.items.length;
-    if (hatimComplete){
-      html += `<div class="org-complete">
-        <h4>${tr('org_hatim_done')} 🤲</h4>
-        <p>${tr('org_accept_readers')}</p>
-        <button class="org-btn primary" id="orgPdf">${tr('org_pdf')}</button>
-      </div>`;
-    }
-    if (isAdmin){
-      const eksik = org.items.filter(i=>i.status==='bos').map(i=>i.no);
-      const bekleyen = org.items.filter(i=>i.status==='alindi');
-      html += `<div class="org-actions">
-        ${hatimComplete?'':'<button class="org-btn wa" id="orgWaRemind">'+tr('org_wa_msg')+' ('+eksik.length+' '+tr('org_empty_n')+', '+bekleyen.length+' '+tr('org_waiting_n')+')</button>'}
-        <button class="org-btn" id="orgLinks">${tr('org_links')}</button>
-        <button class="org-btn" id="orgReport">${tr('org_report_png')}</button>
-        ${hatimComplete?'':'<button class="org-btn" id="orgPdf">'+tr('org_pdf')+'</button>'}
-        <button class="org-btn" id="orgShare">${tr('org_share_join')}</button>
-      </div>
-      <p class="org-note">${tr('org_note_longpress')}</p>`;
-    }
-  } else {
-    // Ortak niyet — toplu zikir. Kişi başı sayı gösterilmez; sadece toplam ve katılanlar.
-    html += bkProgressRing(org.toplam, org.hedef,
-      org.toplam.toLocaleString('tr') + ' / ' + Number(org.hedef).toLocaleString('tr'));
-    html += `<p class="org-meta" style="text-align:center;">${escapeHtml(org.zikirAd||tr('dhikr_word'))}</p>`;
-    const pend = bkLocal.pending[code]||0;
-    html += bkRingSVG() +
-      `<p class="zk-my">${tr('zk_session')} <b id="zkPend">${pend}</b>${pend>0?' — '+tr('zk_dont_forget'):''}</p>
-      <div class="org-actions">
-        <button class="org-btn primary" id="zkSend" ${pend>0?'':'disabled style="opacity:.5;"'}>${tr('zk_add_share')} (${pend})</button>
-      </div>
-      <p class="org-note">${tr('zk_note1')}<br>${tr('zk_note2')} 🤲</p>`;
-    if (org.katilanlar && org.katilanlar.length){
-      html += `<div class="custom-head" style="margin-top:14px;"><span>${tr('zk_dua_people')} (${org.katilanlar.length})</span></div>
-        <div class="org-katilim-list">` +
-        org.katilanlar.map(n=>`<div class="k-item">${escapeHtml(n)}</div>`).join('') + `</div>`;
-    }
-    const zikirComplete = org.toplam >= org.hedef;
-    if (zikirComplete){
-      html += `<div class="org-complete">
-        <h4>${tr('org_goal_done')} 🤲</h4>
-        <p>${tr('org_accept_dua')}</p>
-        <button class="org-btn primary" id="orgPdf">${tr('org_pdf')}</button>
-      </div>`;
-    }
-    if (isAdmin){
-      html += `<div class="org-actions" style="margin-top:14px;">
-        ${zikirComplete?'':'<button class="org-btn wa" id="orgWaRemind">'+tr('org_wa_msg')+'</button>'}
-        <button class="org-btn" id="orgLinks">${tr('org_links')}</button>
-        <button class="org-btn" id="orgReport">${tr('org_report_png')}</button>
-        ${zikirComplete?'':'<button class="org-btn" id="orgPdf">'+tr('org_pdf')+'</button>'}
-        <button class="org-btn" id="orgShare">${tr('org_share_join')}</button>
-      </div>`;
-    }
-  }
-  document.getElementById('orgView').innerHTML = html;
-  if (org.type !== 'hatim') bkRenderBeads(bkLocal.pending[code]||0);
-  bkBindOrgEvents();
-}
-
-// ---- Birlikte: ana ekrandaki tesbih halkasının aynısı ----
-// Ana ekrandaki #markBtn/#beadsGroup ile birebir aynı görsel; sadece
-// bu ekranda çakışmasın diye id'leri farklı (bkMarkBtn/bkBeadsGroup).
-function bkRingSVG(){
-  return `<div class="ring-wrap bk-ring-wrap">
-    <svg viewBox="0 0 340 320">
-      <circle cx="170" cy="145" r="130" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="1 5" stroke-linecap="round"/>
-      <g id="bkBeadsGroup"></g>
-      <g id="bkMarkBtn" class="mark-btn">
-        <circle cx="170" cy="145" r="98" fill="transparent" style="pointer-events:all;"/>
-        <circle cx="170" cy="145" r="58" class="mark-pad"/>
-        <g transform="translate(170,145) scale(0.28810) translate(-348.5,-347.5)">
-        <g class="mark-group">
-          <path class="mark-hilal" transform="translate(285,2)" d="M0 0 C0 0.66 0 1.32 0 2 C-0.674 2.186 -1.347 2.372 -2.041 2.563 C-9.702 4.681 -17.353 6.832 -25 9 C-25.797 9.223 -26.595 9.447 -27.416 9.677 C-44.296 14.447 -60.289 21.802 -75.826 29.874 C-78.289 31.15 -80.762 32.406 -83.234 33.664 C-92.888 38.607 -102.159 43.687 -111 50 C-112.37 50.949 -113.741 51.897 -115.113 52.844 C-126.567 60.782 -137.187 69.263 -147.434 78.723 C-149.637 80.678 -151.852 82.42 -154.25 84.125 C-157.753 86.662 -160.385 89.554 -163.152 92.863 C-165.8 95.925 -168.69 98.715 -171.594 101.531 C-189.552 119.956 -204.208 141.784 -217 164 C-217.536 164.921 -218.071 165.841 -218.623 166.79 C-261.18 240.443 -272.606 333.771 -251.188 416.062 C-250.183 419.727 -249.109 423.366 -248 427 C-247.856 427.475 -247.856 427.475 -247.13 429.881 C-237.988 459.709 -225.155 488.879 -208 515 C-207.696 515.48 -207.696 515.48 -206.16 517.91 C-201.546 525.072 -196.384 531.667 -191.012 538.262 C-188.653 541.164 -186.389 544.122 -184.155 547.121 C-179.694 553.09 -174.858 558.349 -169.512 563.523 C-167.415 565.591 -165.507 567.679 -163.625 569.938 C-156.26 578.536 -147.344 585.899 -138.535 592.965 C-136.728 594.416 -134.945 595.897 -133.18 597.398 C-127.482 602.158 -121.263 606.262 -115.168 610.491 C-113.26 611.819 -111.363 613.163 -109.469 614.512 C-98.575 622.143 -86.84 628.291 -75.052 634.414 C-73.213 635.369 -71.378 636.332 -69.55 637.309 C-42.27 651.852 -10.093 660.174 20.125 665.75 C21.196 665.949 22.267 666.148 23.371 666.353 C41.206 669.462 59.051 670.383 77.125 670.312 C77.614 670.312 77.614 670.312 80.089 670.307 C95.906 670.258 111.363 669.561 127 667 C128.045 666.834 129.089 666.667 130.166 666.496 C165.155 660.768 198.42 649.993 230 634 C231.033 633.483 232.066 632.966 233.131 632.434 C244.692 626.641 255.588 620.694 266 613 C267.388 612.027 268.779 611.059 270.172 610.094 C278.41 604.382 286.36 598.501 294 592 C294.502 591.59 294.502 591.59 297.043 589.516 C304.687 583.215 311.789 576.42 318.812 569.438 C319.248 569.006 319.248 569.006 321.453 566.825 C327.391 560.859 332.771 554.592 338 548 C339.097 546.641 340.195 545.283 341.293 543.926 C342.258 542.722 343.223 541.517 344.188 540.312 C344.428 540.013 344.428 540.013 345.646 538.498 C351.701 530.936 357.248 523.265 362.312 515 C362.596 514.539 362.596 514.539 364.03 512.204 C383.929 479.638 399.504 444.308 408 407 C408.33 407 408.66 407 409 407 C408.518 415.695 406.516 423.969 404.375 432.375 C404.196 433.084 404.016 433.793 403.832 434.523 C390.046 488.77 361.63 537.098 325 579 C324.553 579.513 324.106 580.026 323.645 580.555 C316.209 589.038 308.12 596.717 299.814 604.334 C298.261 605.761 296.717 607.198 295.176 608.637 C289.118 614.227 282.682 619.183 276 624 C275.361 624.463 274.723 624.926 274.065 625.403 C244.265 646.958 212.063 664.645 177 676 C176.031 676.322 175.063 676.644 174.065 676.976 C138.713 688.697 102.735 694.239 65.562 694.188 C65.122 694.187 65.122 694.187 62.894 694.185 C-18.314 693.998 -95.12 664.882 -158 614 C-159.027 613.18 -160.055 612.36 -161.113 611.516 C-169.497 604.669 -177.147 597.065 -184.812 589.438 C-185.348 588.907 -185.884 588.376 -186.437 587.829 C-193.429 580.89 -199.906 573.757 -206 566 C-206.609 565.239 -207.219 564.479 -207.846 563.695 C-230.725 535.095 -248.334 503.938 -262 470 C-262.348 469.136 -262.697 468.272 -263.056 467.381 C-274.831 437.786 -281.558 405.748 -284 374 C-284.027 373.659 -284.027 373.659 -284.167 371.933 C-286.596 340.748 -284.593 309.736 -279 279 C-278.821 277.977 -278.642 276.954 -278.458 275.9 C-274.171 251.569 -266.879 228.62 -257 206 C-256.627 205.136 -256.255 204.273 -255.871 203.383 C-248.325 185.951 -239.741 169.67 -229.218 153.854 C-227.589 151.374 -226.049 148.843 -224.5 146.312 C-220.554 140.091 -215.97 134.389 -211.345 128.665 C-210.116 127.144 -208.898 125.615 -207.68 124.086 C-203.2 118.514 -198.516 113.185 -193.629 107.97 C-191.528 105.72 -189.714 103.571 -188 101 C-187.34 101 -186.68 101 -186 101 C-185.743 100.414 -185.486 99.827 -185.22 99.223 C-183.893 96.805 -182.481 95.308 -180.473 93.426 C-180.12 93.094 -180.12 93.094 -178.338 91.416 C-177.587 90.722 -176.836 90.028 -176.062 89.312 C-175.294 88.596 -174.526 87.88 -173.734 87.143 C-168.005 81.841 -162.137 76.826 -156 72 C-155.243 71.375 -154.487 70.75 -153.707 70.105 C-148.569 65.88 -143.241 61.965 -137.812 58.125 C-137.167 57.668 -136.521 57.21 -135.855 56.739 C-133.58 55.144 -131.291 53.572 -129 52 C-127.926 51.25 -126.853 50.5 -125.746 49.728 C-116.165 43.118 -106.192 37.623 -95.812 32.375 C-94.997 31.96 -94.181 31.545 -93.341 31.117 C-81.461 25.082 -69.634 19.299 -57 15 C-56.484 14.821 -56.484 14.821 -53.87 13.918 C-13.245 0 -13.245 0 0 0 Z"/>
-          <path class="mark-yildiz" transform="translate(348,79)" d="M0 0 C0.33 0 0.66 0 1 0 C3.282 35.189 5.461 70.384 7.543 105.586 C7.652 107.427 7.761 109.267 7.87 111.108 C8.816 127.102 9.759 143.096 10.7 159.09 C11.258 168.566 11.817 178.042 12.378 187.518 C12.693 192.827 13.005 198.135 13.316 203.444 C13.508 206.716 13.702 209.988 13.896 213.259 C13.985 214.765 14.073 216.27 14.161 217.776 C14.593 225.209 15.081 232.608 16 240 C16.629 239.432 17.258 238.863 17.906 238.277 C21.894 234.68 25.883 231.086 29.938 227.562 C33.112 224.802 36.215 221.972 39.312 219.125 C42.871 215.874 46.485 212.76 50.25 209.75 C56.3 204.872 61.903 199.557 67.555 194.23 C70.678 191.29 73.863 188.436 77.113 185.637 C79.437 183.621 81.717 181.562 84 179.5 C85.667 178 87.333 176.5 89 175 C89.75 174.321 90.5 173.641 91.273 172.941 C91.967 172.321 92.66 171.701 93.375 171.062 C93.981 170.517 94.587 169.972 95.211 169.41 C97 168 97 168 99.102 167.059 C101.504 165.719 101.802 164.436 103 162 C105.102 160.105 105.102 160.105 107.625 158.188 C112.237 154.615 116.652 150.887 121 147 C121 151.349 118.304 153.223 115.438 156.188 C114.325 157.364 113.213 158.541 112.102 159.719 C111.563 160.286 111.025 160.853 110.47 161.438 C108.704 163.315 106.998 165.238 105.312 167.188 C102.743 170.157 100.132 173.085 97.5 176 C94.229 179.624 90.998 183.279 87.793 186.961 C85.822 189.203 83.818 191.414 81.812 193.625 C78.235 197.584 74.762 201.618 71.312 205.688 C66.425 211.443 61.332 216.968 56.148 222.457 C51.939 226.937 47.929 231.544 43.997 236.269 C39.191 242.023 34.109 247.515 29 253 C34.163 253.808 39.265 254.272 44.481 254.562 C45.309 254.611 46.137 254.659 46.99 254.709 C49.752 254.87 52.514 255.027 55.276 255.183 C57.263 255.298 59.25 255.413 61.237 255.529 C65.513 255.777 69.789 256.022 74.065 256.267 C80.853 256.655 87.641 257.048 94.429 257.441 C107.645 258.206 120.861 258.966 134.077 259.726 C150.826 260.69 167.575 261.655 184.324 262.624 C189.952 262.95 195.58 263.274 201.209 263.597 C246.858 266.211 246.858 266.211 269 268 C268.67 268.66 268.34 269.32 268 270 C252.334 270.945 236.667 271.882 221 272.812 C219.833 272.882 218.667 272.951 217.465 273.022 C187.686 274.789 157.91 276.479 128.107 277.788 C104.798 278.813 81.515 280.156 58.229 281.598 C56.132 281.728 54.035 281.857 51.938 281.987 C49.379 282.145 46.82 282.305 44.262 282.467 C43.125 282.537 41.987 282.608 40.816 282.68 C40.324 282.711 40.324 282.711 37.834 282.868 C34.886 283.005 31.952 283.022 29 283 C33.557 289.456 38.726 295.135 44.109 300.895 C46.906 303.886 49.613 306.946 52.293 310.043 C54.336 312.386 56.417 314.693 58.5 317 C61.764 320.617 64.988 324.264 68.188 327.938 C70.272 330.31 72.384 332.656 74.5 335 C77.764 338.617 80.988 342.264 84.188 345.938 C86.272 348.31 88.384 350.656 90.5 353 C93.767 356.62 96.995 360.27 100.195 363.949 C102.23 366.261 104.302 368.535 106.375 370.812 C111.888 376.921 117.43 383.145 122 390 C117.914 388.356 115.065 385.432 111.938 382.438 C107.964 378.695 103.966 375.085 99.688 371.688 C94.145 367.245 89.047 362.394 83.901 357.506 C80.228 354.035 76.525 350.705 72.562 347.562 C66.868 343.032 61.672 338.027 56.407 333.013 C51.631 328.483 46.75 324.149 41.681 319.951 C37.216 316.237 32.955 312.328 28.751 308.321 C25.726 305.471 22.587 302.859 19.296 300.317 C18.893 300.006 18.893 300.006 16.854 298.429 C16.242 297.957 15.63 297.486 15 297 C14.959 298.266 14.918 299.532 14.876 300.837 C14.123 322.288 12.784 343.706 11.508 365.131 C11.176 370.716 10.847 376.301 10.517 381.886 C9.964 391.244 9.409 400.601 8.853 409.958 C8.211 420.748 7.573 431.538 6.935 442.328 C6.319 452.766 5.701 463.204 5.082 473.642 C4.82 478.061 4.559 482.481 4.298 486.901 C3.99 492.101 3.681 497.301 3.372 502.501 C3.259 504.4 3.146 506.299 3.034 508.199 C2.467 517.81 1.875 527.411 1 537 C0.67 537 0.34 537 0 537 C-3.392 482.771 -6.713 428.539 -9.967 374.302 C-10.284 369.009 -10.603 363.717 -10.923 358.425 C-11.316 351.913 -11.707 345.4 -12.096 338.888 C-12.296 335.53 -12.498 332.172 -12.701 328.814 C-12.924 325.137 -13.143 321.46 -13.361 317.783 C-13.394 317.249 -13.394 317.249 -13.559 314.545 C-13.903 308.684 -14.062 302.871 -14 297 C-19.4 301.183 -24.553 305.399 -29.312 310.301 C-33.251 314.267 -37.582 317.817 -41.871 321.395 C-48.632 327.039 -55.137 332.879 -61.535 338.932 C-66.078 343.205 -70.772 347.157 -75.645 351.051 C-78.395 353.327 -80.868 355.78 -83.352 358.34 C-87.373 362.389 -91.817 365.996 -96.164 369.688 C-104.293 376.603 -112.211 383.703 -120 391 C-120 385.474 -115.23 381.293 -111.562 377.438 C-110.192 376.134 -108.821 374.83 -107.449 373.527 C-102.976 369.177 -99.097 364.485 -95.188 359.625 C-93.372 357.447 -91.539 355.463 -89.5 353.5 C-86.735 350.83 -84.336 348.004 -81.938 345 C-77.546 339.539 -72.829 334.447 -68.024 329.349 C-64.483 325.591 -61.006 321.8 -57.637 317.887 C-55.621 315.563 -53.562 313.283 -51.5 311 C-48.241 307.389 -45.021 303.748 -41.828 300.078 C-38.929 296.783 -35.971 293.542 -33.016 290.297 C-31.23 288.262 -29.588 286.191 -28 284 C-33.171 283.01 -38.285 282.661 -43.53 282.367 C-44.474 282.312 -45.419 282.257 -46.392 282.199 C-49.524 282.016 -52.657 281.838 -55.789 281.66 C-58.007 281.532 -60.225 281.404 -62.442 281.275 C-67.118 281.005 -71.793 280.737 -76.469 280.471 C-82.321 280.138 -88.172 279.799 -94.023 279.459 C-117.095 278.12 -140.166 276.861 -163.256 275.856 C-183.658 274.965 -204.04 273.773 -224.424 272.545 C-229.26 272.254 -234.097 271.967 -238.934 271.68 C-248.289 271.123 -257.645 270.563 -267 270 C-267.33 269.34 -267.66 268.68 -268 268 C-239.211 265.978 -210.417 264.152 -181.605 262.508 C-176.447 262.212 -171.29 261.914 -166.132 261.616 C-150.931 260.738 -135.73 259.865 -120.529 258.993 C-108.591 258.308 -96.654 257.622 -84.716 256.931 C-78.615 256.579 -72.514 256.229 -66.412 255.881 C-62.64 255.665 -58.869 255.447 -55.097 255.229 C-53.353 255.128 -51.61 255.028 -49.866 254.93 C-47.484 254.795 -45.103 254.657 -42.721 254.518 C-42.036 254.48 -41.351 254.442 -40.645 254.403 C-36.379 254.149 -32.218 253.654 -28 253 C-28.407 252.573 -28.815 252.146 -29.234 251.706 C-42.637 237.618 -42.637 237.618 -47.5 231.5 C-51.267 226.762 -55.335 222.385 -59.5 218 C-64.454 212.784 -69.138 207.483 -73.621 201.852 C-77.79 196.855 -82.308 192.179 -86.77 187.445 C-89.71 184.322 -92.564 181.137 -95.363 177.887 C-97.379 175.563 -99.438 173.283 -101.5 171 C-104.775 167.37 -108.015 163.714 -111.227 160.027 C-114.46 156.33 -117.732 152.667 -121 149 C-120.67 148.34 -120.34 147.68 -120 147 C-119.299 147.641 -118.597 148.281 -117.875 148.941 C-112.966 153.416 -108.041 157.865 -103.027 162.223 C-100.665 164.294 -98.332 166.395 -96 168.5 C-93.019 171.19 -90.028 173.863 -87 176.5 C-83.105 179.893 -79.272 183.352 -75.438 186.812 C-73.306 188.726 -71.16 190.619 -69 192.5 C-65.105 195.893 -61.272 199.352 -57.438 202.812 C-55.306 204.726 -53.16 206.619 -51 208.5 C-47.105 211.893 -43.272 215.352 -39.438 218.812 C-36.674 221.293 -33.88 223.735 -31.078 226.172 C-27.783 229.071 -24.542 232.029 -21.297 234.984 C-19.26 236.771 -17.176 238.39 -15 240 C-13.016 217.475 -11.736 194.909 -10.407 172.338 C-10.081 166.816 -9.752 161.293 -9.423 155.77 C-8.803 145.337 -8.185 134.903 -7.568 124.469 C-6.462 105.771 -5.352 87.074 -4.241 68.376 C-3.852 61.831 -3.465 55.286 -3.078 48.741 C-2.837 44.665 -2.595 40.589 -2.353 36.513 C-2.242 34.637 -2.131 32.761 -2.021 30.885 C-1.414 20.584 -0.769 10.29 0 0 Z"/>
-        </g>
-        </g>
-      </g>
-      <text x="170" y="300" text-anchor="middle" class="dokunarak">DOKUNARAK SAY</text>
-    </svg>
-  </div>`;
-}
-
-// 33 boncuklu halka: gösterilen tur, oturumdaki pay sayısının 33'e göre
-// devirli (tesbih gibi döngülü) ilerleyişini gösterir — ana ekrandaki
-// mantığın aynısı, sadece hedef değil oturum sayımı üzerinden.
-/* ═══ ELIFA v141 — TESBİH HALKASI SABİTLERİ EKSİKTİ ═══
-   bkRenderBeads() ana ekrandaki halkadan kopyalanmış ama SABİTLERİ
-   kopyalanmamış: N, START_DEG, END_DEG, BEAD_CX, BEAD_CY, BEAD_R —
-   altısı da TANIMSIZDI. Zikir ekranı çizilirken "N is not defined"
-   atıp patlıyordu → TOPLU ZİKİR HİÇ AÇILMIYORDU.
-
-   Geometri bkRingSVG()'deki daireden alındı:
-       <svg viewBox="0 0 340 320">
-       <circle cx="170" cy="145" r="130" .../>            */
-const N         = 33;    // tesbih: 33 boncuk
-const BEAD_CX   = 170;   // halkanın merkezi X  (SVG'deki cx)
-const BEAD_CY   = 145;   // halkanın merkezi Y  (SVG'deki cy)
-const BEAD_R    = 130;   // halkanın yarıçapı   (SVG'deki r)
-const START_DEG = 105;   // alt ortada 30°'lik boşluk bırak (90° = alt)
-const END_DEG   = 435;   // 105° → 435° = saat yönünde 330°
-
-function bkRenderBeads(pend){
-  const g = document.getElementById('bkBeadsGroup');
-  if (!g) return;
-  const filled = pend>0 ? (((pend-1)%33)+1) : 0;
-  let html = '';
-  for (let i=0;i<N;i++){
-    const t = i/(N-1);
-    const ang = (START_DEG + (END_DEG-START_DEG)*t) * Math.PI/180;
-    const x = BEAD_CX + BEAD_R*Math.cos(ang);
-    const y = BEAD_CY + BEAD_R*Math.sin(ang);
-    const isImame = (i===10 || i===21);
-    const isFilled = i < filled;
-    const rad = isImame ? 8.5 : 6.4;
-    let fill, stroke;
-    if (isImame){
-      fill = isFilled ? 'var(--hilal)' : 'var(--bead-off)';
-      stroke = isFilled ? 'var(--hilal)' : 'var(--bead-off-stroke)';
-    } else {
-      fill = isFilled ? 'var(--yildiz)' : 'var(--bead-off)';
-      stroke = isFilled ? 'var(--yildiz)' : 'var(--bead-off-stroke)';
-    }
-    html += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad}" fill="${fill}" stroke="${stroke}" stroke-width="1"/>`;
-  }
-  g.innerHTML = html;
-}
-
-// ---- Organizasyon içi olaylar ----
-function bkBindOrgEvents(){
-  const {org, code, adminToken} = bkCurrent;
-  const isAdmin = !!adminToken && org.isAdmin;
-
-  const pubSw = document.getElementById('orgPubSw');
-  if (pubSw){
-    pubSw.addEventListener('click', async ()=>{
-      const yeni = !pubSw.classList.contains('on');
-      pubSw.classList.toggle('on', yeni);
-      try{
-        const data = await bkApi({action:'publish', admin:adminToken, public:yeni});
-        bkCurrent.org = data.org;
-        toast(window.tr?tr(yeni?'disc_published':'disc_unpublished'):(yeni?'Artık herkese açık listede 🌙':'Açık listeden kaldırıldı'));
-      }catch(err){
-        pubSw.classList.toggle('on', !yeni);   // geri al
-        alert(bkErrMsg(err));
-      }
-    });
-  }
-
-  document.querySelectorAll('[data-cuz]').forEach(cell=>{
-    const no = parseInt(cell.dataset.cuz,10);
-    let pressTimer = null;
-    if (isAdmin){
-      const start = ()=>{ pressTimer = setTimeout(()=>bkAdminFix(no), 650); };
-      const stop  = ()=>clearTimeout(pressTimer);
-      cell.addEventListener('touchstart', start, {passive:true});
-      cell.addEventListener('touchend', stop); cell.addEventListener('touchmove', stop);
-      cell.addEventListener('mousedown', start); cell.addEventListener('mouseup', stop); cell.addEventListener('mouseleave', stop);
-    }
-    cell.addEventListener('click', ()=>{
-      if (cell.dataset.st==='bos') bkClaim(no);
-      else if (cell.dataset.st==='alindi'){
-        const it = org.items.find(i=>i.no===no);
-        if (it) bkCuzActions(no, it.name);
-      }
-    });
-  });
-  document.querySelectorAll('[data-complete]').forEach(b=>
-    b.addEventListener('click', ()=>bkComplete(parseInt(b.dataset.complete,10))));
-
-  const tap = document.getElementById('bkMarkBtn');
-  if (tap) tap.addEventListener('click', ()=>{
-    bkLocal.pending[code] = (bkLocal.pending[code]||0) + 1; bkSaveLocal();
-    const pend = bkLocal.pending[code];
-    document.getElementById('zkPend').textContent = pend;
-    bkRenderBeads(pend);
-    const send = document.getElementById('zkSend');
-    send.disabled = false; send.style.opacity = '1';
-    send.textContent = 'Payımı hedefe ekle ('+pend+')';
-    if (navigator.vibrate){
-      if (pend % 33 === 0) navigator.vibrate(420); // bir tur (33) tamamlandı
-      else navigator.vibrate(15);
-    }
-    tap.classList.add('pressed');
-    setTimeout(()=>tap.classList.remove('pressed'), 90);
-  });
-  const send = document.getElementById('zkSend');
-  if (send) send.addEventListener('click', async ()=>{
-    const n = bkLocal.pending[code]||0; if (!n) return;
-    bkEnsureName('Payınızı eklemek için adınızı yazın', 'İsminiz sadece "dua edenler" listesinde görünür, sayınız görünmez.', async name=>{
-      try {
-        const data = await bkApi({action:'contribute', code, name, amount:n});
-        bkLocal.pending[code] = 0; bkSaveLocal();
-        bkCurrent.org = data.org; renderOrg();
-        renderMainPayBtn();
-        if (navigator.vibrate) navigator.vibrate(420);
-      } catch(err){ alert(bkErrMsg(err)); }
-    });
-  });
-
-  const wa = document.getElementById('orgWaRemind');
-  if (wa) wa.addEventListener('click', ()=>bkWaShare(bkReminderText()));
-  const rep = document.getElementById('orgReport');
-  if (rep) rep.addEventListener('click', bkDownloadReportPNG);
-  const pdf = document.getElementById('orgPdf');
-  if (pdf) pdf.addEventListener('click', bkDownloadReportPDF);
-  const shr = document.getElementById('orgShare');
-  if (shr) shr.addEventListener('click', ()=>bkWaShare(bkInviteText()));
-  const lnk = document.getElementById('orgLinks');
-  if (lnk) lnk.addEventListener('click', ()=>{
-    const base = bkShareBase();
-    document.getElementById('bkLinkPublic').textContent = base+'?k='+bkCurrent.code;
-    document.getElementById('bkLinkAdmin').textContent = base+'?y='+bkCurrent.adminToken;
-    document.getElementById('bkCopyLinks').textContent = 'Linkleri kopyala';
-    openElifaModal('bkLinksModal');
-  });
-}
-function bkClaim(no){
-  bkEnsureName(no+'. cüzü kim alıyor?', 'Bu cüzü okuyacak kişinin adı soyadını yazın; tabloda bu cüzün altında görünür.', async name=>{
-    try {
-      const data = await bkApi({action:'claim', code:bkCurrent.code, no, name});
-      bkCurrent.org = data.org;
-      if (!bkLocal.claimed) bkLocal.claimed = {};
-      if (!bkLocal.claimed[bkCurrent.code]) bkLocal.claimed[bkCurrent.code] = [];
-      if (bkLocal.claimed[bkCurrent.code].indexOf(no)<0) bkLocal.claimed[bkCurrent.code].push(no);
-      bkSaveLocal();
-      renderOrg();
-      renderMainPayBtn();
-      bkAddMine({code:bkCurrent.code, title:bkCurrent.org.title, type:'hatim'});
-      if (navigator.vibrate) navigator.vibrate([16,45,16]);
-      try{ toast(window.tr?tr('niyet_reminder'):'Bu emanet seninle Rabbin arasında. Allah kabul etsin 🤲'); }catch(e){}
-    } catch(err){ alert(bkErrMsg(err)); bkSilentRefresh(); }
-  }, true);
-}
-async function bkComplete(no){
-  const it = bkCurrent.org.items.find(i=>i.no===no);
-  try {
-    const data = await bkApi({action:'complete', code:bkCurrent.code, no, name: it?it.name:''});
-    bkCurrent.org = data.org; renderOrg();
-    // Okunan cüzü "üzerimde iş var" listesinden düşür — ana ekran butonu gereksiz kalmasın
-    if (bkLocal.claimed && bkLocal.claimed[bkCurrent.code]){
-      bkLocal.claimed[bkCurrent.code] = bkLocal.claimed[bkCurrent.code].filter(n=>n!==no);
-      bkSaveLocal();
-    }
-    renderMainPayBtn();
-    if (navigator.vibrate) navigator.vibrate(420);
-  } catch(err){ alert(bkErrMsg(err)); }
-}
-async function bkRelease(no){
-  try {
-    const data = await bkApi({action:'release', code:bkCurrent.code, no});
-    bkCurrent.org = data.org;
-    // Bu cihazın alınanlar listesinden de çıkar
-    if (bkLocal.claimed && bkLocal.claimed[bkCurrent.code]){
-      bkLocal.claimed[bkCurrent.code] = bkLocal.claimed[bkCurrent.code].filter(n=>n!==no);
-      bkSaveLocal();
-    }
-    renderOrg();
-    renderMainPayBtn();
-  } catch(err){ alert(bkErrMsg(err)); bkSilentRefresh(); }
-}
-
-// Alınmış cüze dokununca: Okudum / Bırak / Vazgeç
-let bkActNo = null;
-function bkCuzActions(no, name){
-  bkActNo = no;
-  document.getElementById('cuzActTitle').textContent = no+'. cüz — '+(name||'');
-  document.getElementById('cuzActSub').textContent =
-    'Okuma tamamlandıysa "Okudum" deyin. Yanlışlıkla alındıysa cüzü bırakabilirsiniz; tekrar boşa düşer.';
-  openElifaModal('cuzActModal');
-}
-document.getElementById('cuzActOkudum').addEventListener('click', ()=>{
-  closeElifaModal('cuzActModal');
-  if (bkActNo!=null) bkComplete(bkActNo);
-});
-document.getElementById('cuzActBirak').addEventListener('click', ()=>{
-  closeElifaModal('cuzActModal');
-  if (bkActNo!=null && confirm(bkActNo+'. '+(window.tr?tr('cuz_release_confirm'):'Bu cüz boşa alınacak, emin misin?'))) bkRelease(bkActNo);
-});
-document.getElementById('cuzActVazgec').addEventListener('click', ()=>
-  closeElifaModal('cuzActModal'));
-function bkAdminFix(no){
-  const it = bkCurrent.org.items.find(i=>i.no===no); if (!it) return;
-  const secim = prompt(no+'. cüz — düzeltme:\n1 yazın: Boşa al (yanlış alınmış)\n2 yazın: Okundu işaretle\n3 yazın: Alındı işaretle');
-  const map = {'1':'bos', '2':'okundu', '3':'alindi'};
-  if (!map[secim]) return;
-  bkApi({action:'adminSet', code:bkCurrent.code, admin:bkCurrent.adminToken, no, status:map[secim]})
-    .then(d=>{ bkCurrent.org = d.org; renderOrg(); })
-    .catch(err=>alert(bkErrMsg(err)));
-}
-
-// ---- İsim sorma ----
-// forceAsk=true → myName dolu olsa bile sorar (hatimde her cüzü farklı kişi
-// alabilir). İsim kutusu son girilen adla ön-dolu gelir ama düzenlenebilir.
-let bkNameCb = null;
-function bkEnsureName(title, sub, cb, forceAsk){
-  if (bkLocal.myName && !forceAsk){ cb(bkLocal.myName); return; }
-  document.getElementById('bkNameTitle').textContent = title;
-  document.getElementById('bkNameSub').textContent = sub;
-  document.getElementById('bkNameErr').textContent = '';
-  const inp = document.getElementById('bkNameInput');
-  inp.value = '';
-  inp.placeholder = (forceAsk && bkLocal.myName) ? bkLocal.myName : 'Adı Soyadı';
-  bkNameCb = cb;
-  openElifaModal('bkNameModal');
-  setTimeout(()=>inp.focus(), 60);
-}
-document.getElementById('bkNameOk').addEventListener('click', ()=>{
-  const inp = document.getElementById('bkNameInput');
-  let v = inp.value.trim();
-  // Boş bırakıldıysa ve önceki bir isim varsa (placeholder), onu kullan
-  if (!v && bkLocal.myName && inp.placeholder === bkLocal.myName) v = bkLocal.myName;
-  if (v.length < 2){ document.getElementById('bkNameErr').textContent = 'Lütfen adı soyadı yazın.'; return; }
-  bkLocal.myName = v; bkSaveLocal();
-  closeElifaModal('bkNameModal');
-  if (bkNameCb) bkNameCb(v);
-});
-document.getElementById('bkNameCancel').addEventListener('click', ()=>
-  closeElifaModal('bkNameModal'));
-
-// ---- Paylaşım metinleri ----
-function bkShareBase(){ return window.ELIFA_PUBLIC_BASE || location.origin + location.pathname; }
-function bkPublicUrl(){ return bkShareBase() + '?k=' + bkCurrent.code; }
-function bkInviteText(){
-  const o = bkCurrent.org;
-  if (o.type==='hatim')
-    return '🤲 "'+o.title+'" için hatim başlattık.\nLinke dokunun, boş bir cüzü üzerinize alın:\n'+bkPublicUrl();
-  return '🤲 "'+o.title+'" niyetiyle '+Number(o.hedef).toLocaleString('tr')+' '+(o.zikirAd||'zikir')+' okuyoruz.\nLinke dokunun, payınızı ekleyin:\n'+bkPublicUrl();
-}
-function bkReminderText(){
-  const o = bkCurrent.org; const due = bkDue(o);
-  if (o.type==='hatim'){
-    const bos = o.items.filter(i=>i.status==='bos').map(i=>i.no);
-    const bekleyen = o.items.filter(i=>i.status==='alindi').length;
-    let t = '🤲 "'+o.title+'" hatmimizde son durum:\n';
-    t += bos.length ? '• Boşta '+bos.length+' cüz var: '+bos.join(', ')+'\n' : '• Tüm cüzler alındı, maşallah!\n';
-    if (bekleyen) t += '• '+bekleyen+' cüz okunmayı bekliyor.\n';
-    if (due.txt) t += '• '+due.txt+'.\n';
-    return t + 'Katılmak için: '+bkPublicUrl();
-  }
-  const kalan = Math.max(0, o.hedef - o.toplam);
-  let t = '🤲 "'+o.title+'" niyetimizde '+o.toplam.toLocaleString('tr')+' / '+Number(o.hedef).toLocaleString('tr')+' tamamlandı.\n';
-  if (kalan) t += 'Kalan: '+kalan.toLocaleString('tr')+' '+(o.zikirAd||'')+'. ';
-  if (due.txt) t += due.txt+'.';
-  return t + '\nPay eklemek için: '+bkPublicUrl();
-}
-function bkWaShare(text){
-  window.open('https://wa.me/?text='+encodeURIComponent(text), '_blank');
-}
-
-// ---- Rapor belgesi — "Allah kabul etsin" ----
-// Canvas: Türkçe karakterler tarayıcı fontlarıyla kusursuz çizilir;
-// PDF bu görüntüyü gömer. Tasarım: çift çerçeve, süsleme, düzgün tipografi.
-async function bkBuildReportCanvas(o){
-  // Fontlar yüklenmeden çizersek sistem fontuna düşer — önce bekle
-  try {
-    await document.fonts.load('italic 600 58px Lora');
-    await document.fonts.load('700 96px Outfit');
-    await document.fonts.load('400 29px Outfit');
-  } catch(e){}
-
-  const W=1080, pad=96;
-  const rows = o.type==='hatim' ? o.items.filter(i=>i.name) : (o.katilanlar||[]).map(n=>({name:n}));
-  const listRows = Math.ceil(rows.length/2);
-  const H = 700 + listRows*56 + 210;
-  const cv = document.createElement('canvas');
-  cv.width=W; cv.height=H;
-  const x = cv.getContext('2d');
-  const css = getComputedStyle(document.documentElement);
-  const cZemin = css.getPropertyValue('--zemin').trim()||'#ffffff';
-  const cYildiz = css.getPropertyValue('--yildiz').trim()||'#1f3a68';
-  const cInk = css.getPropertyValue('--ink').trim()||'#141414';
-  const cMuted = css.getPropertyValue('--muted').trim()||'#8a8f98';
-  const cLine = css.getPropertyValue('--line').trim()||'#e2e2e2';
-
-  // Zemin + çift çerçeve
-  x.fillStyle = cZemin; x.fillRect(0,0,W,H);
-  x.strokeStyle = cYildiz; x.lineWidth = 3; x.strokeRect(28,28,W-56,H-56);
-  x.strokeStyle = cLine;   x.lineWidth = 1.4; x.strokeRect(44,44,W-88,H-88);
-  // Köşe aksanları
-  x.strokeStyle = cYildiz; x.lineWidth = 2.4;
-  const K = 26;
-  [[44,44,1,1],[W-44,44,-1,1],[44,H-44,1,-1],[W-44,H-44,-1,-1]].forEach(([cx,cy,dx,dy])=>{
-    x.beginPath(); x.moveTo(cx+dx*K, cy); x.lineTo(cx, cy); x.lineTo(cx, cy+dy*K); x.stroke();
-  });
-
-  const mid = W/2;
-  x.textAlign='center';
-
-  // Üst marka satırı (harf aralıklı)
-  x.fillStyle = cMuted; x.font='600 24px Outfit, sans-serif';
-  bkSpaced(x, 'ELIFA  ·  BİRLİKTE', mid, 128, 6);
-
-  // Süs ayracı
-  bkOrnament(x, mid, 162, cYildiz, cLine);
-
-  // Niyet başlığı
-  x.fillStyle = cYildiz; x.font='italic 600 58px Lora, serif';
-  let yy = bkWrap(x, o.title, mid, 236, W-2*pad, 68);
-
-  // Büyük sonuç
-  const done = o.type==='hatim' ? o.items.filter(i=>i.status==='okundu').length : o.toplam;
-  const total = o.type==='hatim' ? o.items.length : o.hedef;
-  x.fillStyle = cYildiz; x.font='700 96px Outfit, sans-serif';
-  x.fillText(o.type==='hatim' ? done+' / '+total : Number(done).toLocaleString('tr'), mid, yy+128);
-
-  // Açıklayıcı cümle — profesyonel dil
-  x.fillStyle = cInk; x.font='400 29px Outfit, sans-serif';
-  let cumle;
-  if (o.type==='hatim'){
-    cumle = done===total
-      ? 'Otuz cüzün tamamı okunarak hatim tamamlanmıştır.'
-      : total+' cüzün '+done+'\u0027i okunmuş, hatim devam etmektedir.';
-  } else {
-    cumle = done>=total
-      ? Number(total).toLocaleString('tr')+' '+(o.zikirAd||'zikir')+' hedefi tamamlanmıştır.'
-      : Number(total).toLocaleString('tr')+' '+(o.zikirAd||'zikir')+' hedefine devam edilmektedir.';
-  }
-  x.fillText(cumle, mid, yy+180);
-
-  x.fillStyle = cMuted; x.font='400 25px Outfit, sans-serif';
-  x.fillText(new Date().toLocaleDateString('tr-TR', {day:'numeric', month:'long', year:'numeric'}), mid, yy+222);
-
-  // Ayraç + liste başlığı
-  bkOrnament(x, mid, yy+268, cYildiz, cLine);
-  x.fillStyle = cYildiz; x.font='italic 600 36px Lora, serif';
-  x.fillText(o.type==='hatim' ? 'Okuyanlar' : 'Dua Edenler', mid, yy+324);
-
-  // İki sütunlu isim listesi
-  x.fillStyle = cInk; x.font='400 27px Outfit, sans-serif'; x.textAlign='left';
-  const colW = (W-2*pad)/2;
-  rows.forEach((r,i)=>{
-    const col = i%2, row = Math.floor(i/2);
-    const tx = pad + col*colW + 14, ty = yy+372 + row*56;
-    const label = o.type==='hatim'
-      ? r.no+'. cüz  —  '+r.name+(r.status==='okundu'?'  ✓':'')
-      : '✦  '+r.name;
-    x.fillText(shortName(label, 32), tx, ty);
-  });
-
-  // Alt kapanış
-  const footY = yy+372 + listRows*56 + 40;
-  x.textAlign='center';
-  bkOrnament(x, mid, footY, cYildiz, cLine);
-  x.fillStyle = cYildiz; x.font='italic 600 46px Lora, serif';
-  x.fillText('Allah kabul etsin \uD83E\uDD32', mid, footY+72);
-  x.fillStyle = cMuted; x.font='500 19px Outfit, sans-serif';
-  bkSpaced(x, 'ELIFAPLATFORM.COM', mid, H-72, 4);
-
-  return cv;
-}
-// Harf aralıklı metin (marka satırları için)
-function bkSpaced(x, text, cx, y, gap){
-  const widths = [...text].map(ch=>x.measureText(ch).width);
-  const total = widths.reduce((a,b)=>a+b,0) + gap*(text.length-1);
-  let tx = cx - total/2;
-  const prevAlign = x.textAlign; x.textAlign='left';
-  [...text].forEach((ch,i)=>{ x.fillText(ch, tx, y); tx += widths[i] + gap; });
-  x.textAlign = prevAlign;
-}
-// — ✦ — süs ayracı
-function bkOrnament(x, cx, y, cAccent, cLine){
-  x.strokeStyle = cLine; x.lineWidth = 1.4;
-  x.beginPath(); x.moveTo(cx-140, y); x.lineTo(cx-26, y); x.stroke();
-  x.beginPath(); x.moveTo(cx+26, y); x.lineTo(cx+140, y); x.stroke();
-  x.save(); x.translate(cx, y); x.rotate(Math.PI/4);
-  x.fillStyle = cAccent; x.fillRect(-7,-7,14,14); x.restore();
-}
-// Ortalanmış satır kaydırma; son satırın y'sini döndürür
-function bkWrap(x, text, cx, y, maxW, lh){
-  const words = String(text).split(' '); let line='', yy=y;
-  words.forEach(w=>{
-    if (x.measureText(line+' '+w).width > maxW && line){ x.fillText(line, cx, yy); line=w; yy+=lh; }
-    else line = line ? line+' '+w : w;
-  });
-  x.fillText(line, cx, yy);
-  return yy;
-}
-async function bkDownloadReportPNG(){
-  const cv = await bkBuildReportCanvas(bkCurrent.org);
-  const a = document.createElement('a');
-  a.download = 'rapor-'+bkCurrent.code+'.png';
-  a.href = cv.toDataURL('image/png');
-  a.click();
-}
-async function bkDownloadReportPDF(){
-  if (!(window.jspdf && window.jspdf.jsPDF)){
-    alert(window.tr?tr('pdf_wait'):'PDF oluşturucu henüz yüklenemedi, birkaç saniye sonra tekrar deneyin.');
-    return;
-  }
-  const cv = await bkBuildReportCanvas(bkCurrent.org);
-  const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF({ orientation:'p', unit:'pt', format:[cv.width, cv.height] });
-  pdf.addImage(cv.toDataURL('image/png'), 'PNG', 0, 0, cv.width, cv.height);
-  pdf.save('hatim-raporu-'+bkCurrent.code+'.pdf');
-}
-
-// ---- Oluşturma sihirbazı ----
-let bkCreateType = 'hatim';
-document.querySelectorAll('[data-create]').forEach(el=>el.addEventListener('click', ()=>{
-  bkCreateType = el.dataset.create;
-  document.getElementById('bkCreateTitle').textContent = (window.tr?tr(bkCreateType==='hatim'?'bk_start_hatim':'bk_start_intent'):(bkCreateType==='hatim'?'Hatim başlat':'Ortak niyet başlat'));
-  document.getElementById('bkTypeRow').style.display = bkCreateType==='hatim' ? 'block' : 'none';
-  document.getElementById('bkZikirRow').style.display = bkCreateType==='zikir' ? 'block' : 'none';
-  if (bkCreateType==='zikir'){
-    /* Modal açılışında AKTİF seçeneğin adını ve hedefini alanlara yaz.
-       (Varsayılan aktif seçenek: Salavat / 1000) */
-    const seg = document.querySelector('#bkZikirSeg .seg.active');
-    const ad  = document.getElementById('bkZikirAd');
-    const hd  = document.getElementById('bkHedef');
-    if (seg){
-      const ozel = seg.dataset.z === '';
-      ad.style.display = ozel ? 'block' : 'none';
-      if (!ozel) ad.value = seg.dataset.z;
-      if (seg.dataset.h && !hd.value) hd.value = seg.dataset.h;
-    }
-  }
-  document.getElementById('bkErr').textContent = '';
-  openElifaModal('bkCreateModal');
-}));
-document.getElementById('bkTypeSeg').addEventListener('click', ev=>{
-  const s = ev.target.closest('.seg'); if (!s) return;
-  document.querySelectorAll('#bkTypeSeg .seg').forEach(e=>e.classList.toggle('active', e===s));
-  document.getElementById('bkAralikRow').style.display = s.dataset.t==='aralik' ? 'flex' : 'none';
-});
-document.getElementById('bkZikirSeg').addEventListener('click', ev=>{
-  const s = ev.target.closest('.seg'); if (!s) return;
-  document.querySelectorAll('#bkZikirSeg .seg').forEach(e=>e.classList.toggle('active', e===s));
-  const ozel = s.dataset.z === '';
-  const ad = document.getElementById('bkZikirAd');
-  ad.style.display = ozel ? 'block' : 'none';
-  /* ═══ ELIFA v141 — TOPLU ZİKİR HİÇ ÇALIŞMIYORDU ═══
-     ESKİ: hazır seçeneğe (Salavat/Ayetel Kürsi/İhlas) basınca yalnız HEDEF yazılıyordu,
-           ZİKİR ADI alanı BOŞ kalıyordu. Doğrulama "Zikir/dua adı gerekli." deyip
-           her seferinde reddediyordu → niyet ASLA oluşmuyordu.
-     YENİ: hazır seçenekte adı da yaz; "Özel"de alanı temizleyip kullanıcıya bırak. */
-  if (ozel) { ad.value = ''; ad.focus(); }
-  else      { ad.value = s.dataset.z; }
-  if (s.dataset.h) document.getElementById('bkHedef').value = s.dataset.h;
-});
-document.getElementById('bkCancel').addEventListener('click', ()=>
-  closeElifaModal('bkCreateModal'));
-
-document.querySelectorAll('#bkwrap .modal-overlay').forEach(mo=>{
-  mo.addEventListener('click',ev=>{if(ev.target===mo)closeElifaModal(mo);});
-});
-
-document.getElementById('bkSave').addEventListener('click', async ()=>{
-  const err = document.getElementById('bkErr');
-  const title = document.getElementById('bkNiyet').value.trim();
-  const adminName = document.getElementById('bkAdmin').value.trim();
-  const dueDate = document.getElementById('bkTarih').value || null;
-  if (!title){ err.textContent = 'Niyet/başlık gerekli.'; return; }
-  let org;
-  if (bkCreateType==='hatim'){
-    let bas=1, bit=30;
-    if (document.querySelector('#bkTypeSeg .seg.active').dataset.t==='aralik'){
-      bas = parseInt(document.getElementById('bkCuzBas').value,10);
-      bit = parseInt(document.getElementById('bkCuzBit').value,10);
-      if (!(bas>=1 && bit<=30 && bas<=bit)){ err.textContent = 'Geçerli bir cüz aralığı girin (1–30).'; return; }
-    }
-    const items = []; for (let n=bas;n<=bit;n++) items.push({no:n, name:'', status:'bos', ts:0});
-    org = {type:'hatim', title, adminName, dueDate, items};
-  } else {
-    const seg = document.querySelector('#bkZikirSeg .seg.active');
-    const zikirAd = seg.dataset.z || document.getElementById('bkZikirAd').value.trim();
-    const hedef = parseInt(document.getElementById('bkHedef').value,10);
-    if (!zikirAd){ err.textContent = 'Zikir/dua adı gerekli.'; return; }
-    if (!(hedef>0)){ err.textContent = 'Geçerli bir hedef sayısı girin.'; return; }
-    org = {type:'zikir', title, adminName, dueDate, zikirAd, hedef, items:[], contributions:[]};
-  }
-  err.textContent = ''; document.getElementById('bkSave').textContent = 'Oluşturuluyor…';
-  try {
-    const data = await bkApi({action:'create', org});
-    closeElifaModal('bkCreateModal');
-    if (adminName && !bkLocal.myName){ bkLocal.myName = adminName; }
-    bkAddMine({code:data.code, adminToken:data.adminToken, title, type:org.type});
-    renderBirlikte();
-    bkCurrent = {org:bkPublicView(Object.assign({adminToken:data.adminToken},org), true), code:data.code, adminToken:data.adminToken};
-    const base = bkShareBase();
-    document.getElementById('bkLinkPublic').textContent = base+'?k='+data.code;
-    document.getElementById('bkLinkAdmin').textContent = base+'?y='+data.adminToken;
-    openElifaModal('bkLinksModal');
-  } catch(e2){ err.textContent = e2.message || 'Oluşturulamadı.'; }
-  document.getElementById('bkSave').textContent = 'Oluştur';
-});
-document.getElementById('bkShareWa').addEventListener('click', ()=>bkWaShare(bkInviteText()));
-document.getElementById('bkCopyLinks').addEventListener('click', ev=>{
-  const t = 'Katılım: '+document.getElementById('bkLinkPublic').textContent+
-    '\nYönetici (paylaşmayın): '+document.getElementById('bkLinkAdmin').textContent;
-  navigator.clipboard && navigator.clipboard.writeText(t);
-  ev.target.textContent = 'Kopyalandı ✓';
-});
-document.getElementById('bkGoOrg').addEventListener('click', ()=>{
-  /* ═══ ELIFA v140 — GEÇMİŞ YARIŞI ONARIMI ═══
-     ESKİ: closeElifaModal(...) → history.back() ÇAĞIRIYOR (asenkron!)
-           hemen ardından bkOpen() org'u push ediyor.
-           Sonra geri gelen popstate org'u GERİ İTİYOR → ana ekrana düşüyor.
-     YENİ: modalı history'e DOKUNMADAN kapat (fromPop=true),
-           org'u 'replace' ile aç → modalın geçmiş katmanının YERİNE geçsin.
-           Org'dan geri → Birlikte. Doğru sıra. */
-  closeElifaModal('bkLinksModal', true);
-  bkOpen(bkCurrent.code, bkCurrent.adminToken, { replace: true });
-});
-
-// ---- Birlikte ana ekran olayları ----
-document.getElementById('bkJoinBtn').addEventListener('click', ()=>{
-  const v = document.getElementById('bkJoinInput').value.trim();
-  if (!v) return;
-  const mK = v.match(/[?&]k=([a-z0-9]+)/i), mY = v.match(/[?&]y=([a-z0-9]+)/i);
-  if (mY) bkOpen(null, mY[1]);
-  else if (mK) bkOpen(mK[1], null);
-  else bkOpen(v, null); // düz kod yazıldıysa
-});
-document.getElementById('bkMineList').addEventListener('click', ev=>{
-  const del = ev.target.closest('[data-remove]');
-  if (del){
-    bkLocal.mine = bkLocal.mine.filter(m=>m.code!==del.dataset.remove);
-    bkSaveLocal(); renderBirlikte(); return;
-  }
-  const item = ev.target.closest('[data-open]');
-  if (item) bkOpen(item.dataset.open, item.dataset.admin || null);
-});
-document.getElementById('orgBack').addEventListener('click', ()=>{
-  clearInterval(bkRefreshTimer);
-  /* v211: org detay → Birlikte ana ekranı; merkezî iz sistemi yönetsin */
-  if(typeof elifaBack==='function'){ elifaBack(); return; }
-  openTogetherScreen({fromHistory:true});
-});
-
-/* Elifa: Birlikte URL yönlendirmesi (?k= katıl, ?y= yönetici) */
-(function bkRoute(){try{var q=new URLSearchParams(location.search);
-  if(q.get('y')){openTogetherScreen();bkOpen(null,q.get('y'));}
-  else if(q.get('k')){openTogetherScreen();bkOpen(q.get('k'),null);}
-}catch(e){}})();
-
-</script>
+<script src="/assets/hatim-community.js?v=360"></script>
 <script>(function(){var s=document.getElementById('splash');if(!s)return;function go(){s.classList.add('hide');setTimeout(function(){if(s&&s.parentNode)s.parentNode.removeChild(s);},560);}var t=setTimeout(go,650);s.addEventListener('click',go);})();</script>
 
 <script>
@@ -13467,7 +12513,7 @@ document.getElementById('orgBack').addEventListener('click', ()=>{
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v356-afasy-boundary';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v360-study-selections';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -14059,7 +13105,7 @@ html body #reader .am::before, html body #reader .am::after{
       <a href="#m4">Durak işaretleri</a><a href="#m5">Dinleme</a>
       <a href="#m6">Kelime seçimi</a><a href="#m7">Test modu</a>
       <a href="#m8">Ezber takibi</a><a href="#m9">Cüz paylaşımı</a>
-      <a href="#m10">Toplu zikir</a><a href="#m11">Çevrimdışı</a>
+      <a href="#m10">Eski ortak niyetler</a><a href="#m11">Çevrimdışı</a>
       <a href="#m12">Sık sorulanlar</a>
     </nav>
 
@@ -14167,88 +13213,18 @@ html body #reader .am::before, html body #reader .am::after{
     </section>
 
     <!-- CÜZ PAYLAŞIMI -->
-    <section id="m9"><h2>Birlikte — Cüz paylaşımı</h2>
-      <p>30 cüzü <b>tek linkle</b> paylaş. Üyelik yok, kimse uygulama kurmak zorunda değil.</p>
-
-      <h3 class="danger">Önce şunu anla: İKİ FARKLI LİNK var</h3>
-      <table>
-        <tr><th>Link</th><th>Kime</th><th>Ne yapar</th></tr>
-        <tr><td><b class="green">KATILIM</b><br><code>?k=abc123</code></td>
-            <td><b>Gruba atılır.</b></td><td>Cüz seçme, okudum işaretleme.</td></tr>
-        <tr><td><b class="danger">YÖNETİCİ</b><br><code>?y=x9k2m…</code></td>
-            <td><b>Sende kalır.</b></td><td>Düzeltme, rapor indirme.</td></tr>
-      </table>
-      <p class="stop"><b>Yönetici linkini gruba atma.</b>
-      O linke sahip olan herkes cüzleri değiştirebilir, silebilir.</p>
-
-      <h3>Baştan sona örnek</h3>
-      <table class="sen">
-        <tr><td><b>1</b></td><td><b>Hüseyin:</b> Birlikte → <b>Hatim başlat</b>.
-            Niyet: “Annem için şifa”. Adı: Hüseyin. <b>Oluştur</b>.</td></tr>
-        <tr><td><b>2</b></td><td>Uygulama <b>iki link</b> üretir.
-            <b>WhatsApp'ta paylaş</b>'a basar → <b>katılım linki</b> gruba düşer.</td></tr>
-        <tr><td><b>3</b></td><td><b>Ayşe:</b> Linke basar. 30 cüzlük tablo açılır.
-            Boş bir kareye dokunur, adını yazar. <b>1. cüz artık Ayşe'nin.</b></td></tr>
-        <tr><td><b>4</b></td><td><b>Mehmet:</b> Aynı linke basar. 1. cüzün alındığını
-            görür (Ayşe yazıyor). Boş olan 5. cüzü alır.</td></tr>
-        <tr><td><b>5</b></td><td><b>Ayşe okur:</b> Bitirince <b>Okudum ✓</b>'a basar.
-            Kare <b>yeşile</b> döner. Herkes anında görür.</td></tr>
-        <tr><td><b>6</b></td><td><b>Hüseyin:</b> Yönetici linkiyle açar.
-            <b>%23 — 7/30 cüz okundu.</b> Kim aldı, kim okudu — hepsi görünür.</td></tr>
-        <tr><td><b>7</b></td><td><b>Hatırlatma:</b> Eksik cüzleri listeleyen hazır
-            WhatsApp mesajı gruba gider.</td></tr>
-        <tr><td><b>8</b></td><td><b>Biter:</b> 30/30 olunca kutlama çıkar.
-            <b>PDF raporu</b> iner — okuyanların isimleriyle.</td></tr>
-      </table>
-
-      <h3>Cüz renkleri</h3>
-      <table>
-        <tr><td><b>Gri</b></td><td><b>Boş</b> — dokun, al.</td></tr>
-        <tr><td><b class="am">Sarı</b></td><td><b>Alındı</b> — birinin üzerinde, henüz okumadı.</td></tr>
-        <tr><td><b class="green">Yeşil</b></td><td><b>Okundu.</b></td></tr>
-        <tr><td><b class="danger">Kırmızı</b></td><td><b>Gecikti</b> — son tarih geçti.</td></tr>
-      </table>
-
-      <h3>Sık karşılaşılanlar</h3>
-      <p><b>“Cüz aldım ama okuyamayacağım”</b><br>
-      Cüzüne uzun bas → <b>Bırak</b>. Tekrar boşa döner.
-      <b>Okundu</b> işaretli cüz bırakılamaz.</p>
-      <p><b>“Yanlışlıkla okudum işaretledim”</b><br>
-      Bunu sadece <b>yönetici</b> düzeltebilir.</p>
-      <p><b>“Herkes uygulamayı kurmak zorunda mı?”</b><br>
-      <b>Hayır.</b> Linke basınca tarayıcıda açılır. Üyelik, kayıt, kurulum yok.</p>
+    <section id="m9"><h2>Birlikte — Hatim ve cüz paylaşımı</h2>
+      <p>30 cüzlük hatmi <b>bağlantıyla</b> paylaşabilir veya keşif açıkken <b>Açık Hatimler</b> listesine ekleyebilirsin. Hesap ve uygulama kurulumu katılım için zorunlu değildir.</p>
+      <h3>Üç ayrı alan</h3><table><tr><td><b>Açık Hatimler</b></td><td>Devam eden hatimleri ve boş cüzleri bul.</td></tr><tr><td><b>Benim Cüzlerim</b></td><td>Aldığın ve tamamladığın cüzleri gör.</td></tr><tr><td><b>Oluşturduklarım</b></td><td>Yönettiğin hatimlere dön.</td></tr></table>
+      <h3>Bağlantıları karıştırma</h3><table><tr><th>Bağlantı</th><th>Kullanımı</th></tr><tr><td><b>Katılım</b></td><td>Gruba paylaşılır. Hatmi açar; kimseye başkasının cüzünü değiştirme yetkisi vermez.</td></tr><tr><td><b>Kişisel dönüş</b></td><td>Yalnız kendi cüzün içindir. Misafir katılımında cihaz verileri silinirse geri dönmeni sağlar.</td></tr><tr><td><b>Yönetici</b></td><td>Yalnız kurucuda kalır. Genel gruba gönderilmez.</td></tr></table>
+      <h3>Cüzünü çalış ve durumunu bildir</h3><p>Boş cüzü seçip adını veya takma adını yaz. <b>Okumaya başla</b> cüzün başlangıcını açar; okuyucunun geri düğmesi hatme döndürür. Okumak veya dinlemek otomatik olarak <b>Okudum</b> işaretlemez.</p>
+      <p>Kendi cüzünde <b>Okudum</b> diyebilir, yanlış işareti <b>Geri al</b>abilir veya okuyamayacaksan <b>Bırak</b>abilirsin. Başkasının durumunu değiştiremezsin. Yönetici gerektiğinde ayrı düzeltme yapabilir.</p>
+      <p class="warn"><b>Misafir kayıtları cihaz verisine bağlıdır.</b> Kişisel dönüş bağlantını sakla. İstersen sana ait misafir katılımlarını açıkça seçerek hesabına bağlayabilirsin; bundan sonra aynı hesapla diğer cihazdan erişebilirsin.</p>
+      <h3>Yönetim ve rapor</h3><p><b>Yönet</b> menüsünden başlık, hedef tarih ve görünürlüğü düzenleyebilir, cüz durumunu düzeltebilir, kişisel erişimi yenileyebilir ve PNG/PDF raporu alabilirsin. Arşivlemek okuma kayıtlarını silmez. Tam 30 cüz bitince <b>Hatim tamamlandı</b>; eski kısmi kayıtta <b>Cüz çalışması tamamlandı</b> görünür.</p>
     </section>
 
     <!-- TOPLU ZİKİR -->
-    <section id="m10"><h2>Birlikte — Toplu zikir</h2>
-      <p>Ortak hedef: <b>1000 salavat</b>, <b>313 Âyetü'l-Kürsî</b>…
-      Herkes kendi payını okur, hedef birlikte dolar.</p>
-
-      <h3>Baştan sona örnek</h3>
-      <table class="sen">
-        <tr><td><b>1</b></td><td><b>Hüseyin:</b> Birlikte → <b>Niyet başlat</b>.
-            <b>Salavat</b>'a basar — hedef otomatik <b>1000</b> gelir.
-            Niyet: “Ümmet için”. <b>Oluştur</b>.</td></tr>
-        <tr><td><b>2</b></td><td>Katılım linkini gruba atar.</td></tr>
-        <tr><td><b>3</b></td><td><b>Ayşe:</b> Linke basar. <b>Tesbih halkası</b> çıkar.
-            Her salavatta ortadaki hilâle dokunur — boncuklar dolar.</td></tr>
-        <tr><td><b>4</b></td><td><b>Payını gönderir:</b> 133 okudu →
-            <b>“Payımı hedefe ekle (133)”</b>. Ortak hedef <b>133/1000</b> olur.</td></tr>
-        <tr><td><b>5</b></td><td>Mehmet 100, Fatma 90… Halka dolmaya başlar.</td></tr>
-        <tr><td><b>6</b></td><td><b>%63 — 633/1000.</b> Altta “Dua edenler (6)” —
-            isimler görünür, <b>ama kimin kaç okuduğu görünmez.</b></td></tr>
-        <tr><td><b>7</b></td><td>Hedef dolunca kutlama. <b>Rapor görseli</b> gruba atılır.</td></tr>
-      </table>
-
-      <p class="tip"><b>Niyet halis, sayı gizli.</b>
-      Kimin kaç okuduğu <b>kimseye görünmez</b> — ne katılımcılara, ne yöneticiye.
-      Sadece <b>toplam</b> ve <b>isimler</b> görünür. Bu kasıtlıdır:
-      <b>gösteriş kapısını kapatmak</b> için. Yarış değil, birlik.</p>
-
-      <p class="warn"><b>Payını göndermeyi unutma.</b>
-      Halkaya dokunman yetmez. <b>“Payımı hedefe ekle”</b>ye basana kadar
-      okuduğun sayı <b>sadece senin telefonunda</b> kalır.</p>
-    </section>
+    <section id="m10"><h2>Önceki ortak niyet kayıtları</h2><p>Birlikte artık <b>hatim ve cüz paylaşımına</b> odaklanır; yeni toplu zikir oluşturma seçeneği yoktur.</p><p>Önceden oluşturduğun ortak niyet kayıtları silinmez. Eski katılım bağlantısı açılabilir; önceki hedefi ve toplamı görebilir, o kayda payını ekleyebilirsin.</p><p class="tip">Eski bağlantını sakla. Yeni hatim için <b>Birlikte → Hatim oluştur</b> seçeneğini kullan.</p></section>
 
     <!-- ÇEVRİMDIŞI -->
     <section id="m11"><h2>Çevrimdışı kullanım</h2>
@@ -16079,6 +15055,10 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     dua_sure:{tr:'Namaz Sûreleri',en:'Prayer Surahs',ar:'سور الصلاة',de:'Gebetssuren',fr:'Sourates de prière',es:'Suras de oración',it:'Sure della preghiera',nl:'Gebedssoera’s',pt:'Suratas da oração',ru:'Суры намаза',id:'Surah salat',ms:'Surah solat'},
     dua_namaz:{tr:'Namaz Duaları',en:'Prayer Duas',ar:'أدعية الصلاة',de:'Gebets-Duas',fr:'Douas de prière',es:'Duas de oración',it:'Dua della preghiera',nl:'Gebedsdoea’s',pt:'Duas da oração',ru:'Дуа намаза',id:'Doa salat',ms:'Doa solat'},
     dua_gunluk:{tr:'Günlük Dualar',en:'Daily Duas',ar:'الأدعية اليومية',de:'Tägliche Duas',fr:'Douas quotidiennes',es:'Duas diarias',it:'Dua quotidiane',nl:'Dagelijkse doea’s',pt:'Duas diárias',ru:'Ежедневные дуа',id:'Doa harian',ms:'Doa harian'},
+    dua_gunluk_info:{tr:'Kur’an’dan konuya göre seçilmiş dualar ve âyetler. Dua bölümü bulunan kartlarda yalnız o kelimeler seçilir; diğer kartlar ilgili âyet veya sûreyi açar. Sesli duaları bölerek çalışmak için Dua Ezberi sekmesini kullan.',en:'Prayers and verses from the Quran, grouped by topic. Where a prayer passage is defined, only its words are selected; other cards open the relevant verse or surah. Use Dua Practice to work on recorded supplications in parts.'},
+    dua_namaz_info:{tr:'Namazda okunan dualar ve tesbihler. Arapça metin, okunuş ve anlamını açabilirsin; ses ve bölerek çalışma seçenekleri Dua Ezberi sekmesinde bulunur.',en:'Supplications and praises recited in prayer. Open the Arabic text, transliteration and meaning; recordings and part practice are available under Dua Practice.'},
+    dua_sure_info:{tr:'Bu kartlar sûreyi veya belirtilen âyetlerin tamamını okuyucuda açar. Dua bölümünü tek başına seçmek için Günlük Dualar sekmesini kullan.',en:'These cards open the full surah or the listed verses in the reader. Use Daily Duas to select a defined prayer passage on its own.'},
+    dua_selection_unavailable:{tr:'Dua kelimeleri bu yazı görünümünde eşleştirilemedi. Âyetin tamamı otomatik seçilmedi; istediğin kelimeleri işaretleyebilirsin.',en:'The prayer words could not be matched in this script. The full verse was not selected automatically; you can mark the words yourself.'},
     fav_sure_head:{tr:'Sûreler & Âyetler',en:'Surahs & Verses'},
     fav_dua_head:{tr:'Dualar',en:'Duas'},
     dua_tam:{tr:'Tam âyet',en:'Full verse',ar:'الآية كاملة',de:'Ganzer Vers',fr:'Verset entier',es:'Versículo completo',it:'Versetto intero',nl:'Hele vers',pt:'Versículo completo',ru:'Весь аят',id:'Ayat penuh',ms:'Ayat penuh'},
@@ -16099,6 +15079,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     dua_favbos:{tr:'Henüz dua favorin yok. Kartlardaki ⭐ ile ekleyebilirsin.',en:'No favorite duas yet. Tap the ⭐ on a card to add.',de:'Noch keine Favoriten',fr:'Aucun favori',es:'Sin favoritos',it:'Nessun preferito',nl:'Nog geen favorieten',pt:'Sem favoritos',ru:'Нет избранного',ar:'لا مفضلة بعد',id:'Belum ada favorit'},
     dua_ac_full:{tr:'Böl · sesli oku · tekrar (ayrı pencere)',en:'Split · recite · repeat (separate view)'},
     dua_ty_dua:{tr:'dua',en:'dua',de:'Dua',fr:'douaa',es:'dua',it:'dua',nl:'doea',pt:'dua',ru:'дуа',ar:'دعاء',id:'doa'},
+    dua_ty_ayet:{tr:'âyet',en:'verse',ar:'آية',de:'Vers',fr:'verset',es:'versículo',it:'versetto',nl:'vers',pt:'versículo',ru:'аят',id:'ayat',ms:'ayat'},
+    dua_ty_sure:{tr:'sûre',en:'surah',ar:'سورة',de:'Sure',fr:'sourate',es:'sura',it:'sura',nl:'soera',pt:'surata',ru:'сура',id:'surah',ms:'surah'},
     dua_ty_emir:{tr:'emir âyeti',en:'command verse',de:'Befehlsvers',fr:'verset d\'ordre',es:'versículo de mandato',it:'versetto di comando',nl:'gebodsvers',pt:'versículo de ordem',ru:'аят-повеление',ar:'آية أمر',id:'ayat perintah'},
     dua_meal_tam:{tr:'Âyetin tamamının meali',en:'Translation of the full verse',de:'Übersetzung des ganzen Verses',fr:'Traduction du verset entier',es:'Traducción del versículo completo',it:'Traduzione del versetto intero',nl:'Vertaling van het hele vers',pt:'Tradução do versículo completo',ru:'Перевод всего аята',ar:'ترجمة الآية كاملة',id:'Terjemahan ayat lengkap'},
     dua_markaj:{tr:'Dua kısmı işaretlidir',en:'The supplication part is highlighted',de:'Der Bittgebet-Teil ist markiert',fr:'La partie de l\'invocation est surlignée',es:'La parte de la súplica está resaltada',it:'La parte della supplica è evidenziata',nl:'Het smeekbede-gedeelte is gemarkeerd',pt:'A parte da súplica está destacada',ru:'Часть с мольбой выделена',ar:'جزء الدعاء مُعلَّم',id:'Bagian doa ditandai'},
@@ -16128,8 +15110,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     c_baslangic:{tr:'Yeni Başlangıç',en:'New Beginning',de:'Neuanfang',fr:'Nouveau départ',es:'Nuevo comienzo',it:'Nuovo inizio',nl:'Nieuw begin',pt:'Novo começo',ru:'Новое начало',ar:'بداية جديدة',id:'Awal Baru'},
     c_savas:{tr:'Savaş & Çatışma',en:'War & Conflict',de:'Krieg',fr:'Guerre',es:'Guerra',it:'Guerra',nl:'Oorlog',pt:'Guerra',ru:'Война',ar:'الحرب',id:'Perang'},
     c_sihir:{tr:'Sihir & Büyüden Korunma',en:'Against Magic',de:'Zauber & Magie',fr:'Sorcellerie',es:'Hechicería',it:'Magia',nl:'Tovenarij',pt:'Feitiçaria',ru:'Колдовство',ar:'السحر',id:'Sihir'},
-    c_gizlen:{tr:'Gizlenme & Görünmezlik',en:'Concealment',de:'Verbergen',fr:'Se cacher',es:'Ocultarse',it:'Nascondersi',nl:'Verbergen',pt:'Ocultar-se',ru:'Укрытие',ar:'الاختباء',id:'Persembunyian'},
-    c_basiret:{tr:'Koruma & Açılım Âyetleri',en:'Insight & Opening Verses',de:'Einsicht & Öffnung',fr:'Clairvoyance',es:'Perspicacia',it:'Discernimento',nl:'Inzicht',pt:'Discernimento',ru:'Прозрение',ar:'البصيرة',id:'Ketajaman Hati'},
+    c_gizlen:{tr:'İnkâr & Hakikati Görme',en:'Denial & Perceiving Truth',ar:'الإنكار وإدراك الحق'},
+    c_basiret:{tr:'Tefekkür & İdrak',en:'Reflection & Understanding',ar:'التفكر والإدراك'},
     c_dusman:{tr:'Düşmana Karşı \u201cSana Yeter\u201d',en:'\u201cAllah Suffices You\u201d',de:'Allah genügt',fr:'Allah suffit',es:'Alá basta',it:'Allah basta',nl:'Allah volstaat',pt:'Alá basta',ru:'Аллаха достаточно',ar:'حسبنا الله',id:'Allah Cukup'},
     c_sebat:{tr:'Sebat & Kalp Kuvveti',en:'Steadfastness',de:'Standhaftigkeit',fr:'Fermeté',es:'Firmeza',it:'Fermezza',nl:'Standvastigheid',pt:'Firmeza',ru:'Стойкость',ar:'الثبات',id:'Keteguhan'},
     c_af:{tr:'Af & Azaptan Kurtuluş',en:'Pardon & Salvation',de:'Verzeihung',fr:'Pardon',es:'Perdón',it:'Perdono',nl:'Vergiffenis',pt:'Perdão',ru:'Прощение',ar:'العفو',id:'Maaf'},
@@ -16234,7 +15216,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     {s:23,a:26,ok:'Rabbi\u2019nsurnî bimâ kezzebûn (Nûh)',cat:['c_zafer'],tn:'Yalanlayanlara karşı zafer (Nûh)'},
     {s:29,a:30,ok:'Rabbi\u2019nsurnî alel-kavmil-müfsidîn (Lût)',cat:['c_zafer'],tn:'Bozgunculara karşı yardım (Lût)'},
     {s:17,a:24,ok:'Rabbirhamhümâ kemâ rabbeyânî sağîrâ',cat:['c_anne'],tn:'Ana-babaya rahmet'},
-    {s:43,a:13,ok:'Sübhânellezî sahhara lenâ hâzâ… (13-14)',cat:['c_yol'],tn:'Yolculuk/binek duası'},
+    {s:43,a:13,ok:'Sübhânellezî sahhara lenâ hâzâ… (Zuhruf 13)',cat:['c_yol'],tn:'Binek nimetine tesbih ve şükür'},
     {s:11,a:41,ok:'Bismillâhi mecrâhâ ve mürsâhâ (Nûh)',cat:['c_yol'],tn:'Gemi/yolculuk (Hz. Nûh)'},
     {s:12,a:101,ok:'Teveffenî müslimen ve elhıknî… (Yûsuf)',cat:['c_hatime'],tn:'Müslüman olarak ölmek (Hz. Yûsuf)'},
     {s:12,a:53,ok:'Ve mâ überriü nefsî… (Yûsuf, nefis)',cat:['c_nefis'],tn:'Nefsi temize çıkarmama (Hz. Yûsuf)'},
@@ -16243,21 +15225,21 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     {s:5,a:114,ok:'Allâhümme Rabbenâ enzil aleynâ mâide… (Îsâ)',cat:['c_rizik'],tn:'Sofra/bereket (Hz. Îsâ)'},
     {s:27,a:19,ok:'Rabbi evzı\u2019nî en eşküra ni\u2019meteke (Süleymân)',cat:['c_rizik'],tn:'Nimete şükür (Hz. Süleymân)'},
     {s:8,a:17,ok:'Vemâ rameyte iz rameyte… (Enfâl · \u201csen atmadın, Allah attı\u201d)',cat:['c_savas'],tn:'Zaferi Allah verir'},
-    {s:36,a:9,ok:'Ve cealnâ min beyni eydîhim sedden… (Yâsîn · set/perde)',cat:['c_savas','c_gizlen'],tn:'Önden-arkadan set (koruma)'},
+    {s:36,a:9,ok:'Ve cealnâ min beyni eydîhim sedden… (Yâsîn · set/perde)',cat:['c_savas','c_gizlen'],tn:'İnkârı anlatan set benzetmesi'},
     {s:2,a:137,ok:'Feseyekfîkehümullâh (\u201cAllah sana yeter\u201d)',cat:['c_dusman','c_savas'],tn:'Allah sana yeter (düşmana karşı)'},
     {s:15,a:95,ok:'İnnâ kefeynâkel-müstehziîn (Hicr · alaycılara karşı)',cat:['c_dusman'],tn:'Alaycılara karşı koruma'},
     {s:113,a:1,ok:'Felak Sûresi (…min şerrin-neffâsâti fil-ukad)',cat:['c_sihir','c_nazar'],tn:'Felak: kötülükten sığınma'},
     {s:10,a:81,ok:'İnnallâhe seyübtıluh (Yûnus · sihri bozar)',cat:['c_sihir'],tn:'Sihrin iptali (Hz. Mûsâ)'},
     {s:7,a:118,ok:'Fevekaal-hakku… (A\u2019râf · sihre galebe)',cat:['c_sihir'],tn:'Sihre karşı hakkın galebesi'},
     
-    {s:50,a:22,ok:'Fekeşefnâ anke ğıtâeke fe basarukel-yevme hadîd (Kāf)',cat:['c_basiret'],tn:'Basiretin açılması'},
+    {s:50,a:22,ok:'Fekeşefnâ anke ğıtâeke fe basarukel-yevme hadîd (Kāf)',cat:['c_basiret'],tn:'Âhirette gaflet perdesinin kalkması'},
     {s:7,a:143,ok:'Rabbi erinî enzur ileyk (Mûsâ · görüş talebi)',cat:['c_basiret'],tn:'Rabbini görme isteği (Hz. Mûsâ)'},
-    {s:17,a:72,ok:'Ve men kâne fî hâzihî a\u2019mâ… (İsrâ · kalp körlüğünden)',cat:['c_basiret'],tn:'Kalp körlüğünden korunma'},
+    {s:17,a:72,ok:'Ve men kâne fî hâzihî a\u2019mâ… (İsrâ · kalp körlüğünden)',cat:['c_basiret'],tn:'Hakikati görmeye dair uyarı'},
     {s:18,a:14,ok:'Ve rabatnâ alâ kulûbihim (Kehf · kalp sebatı)',cat:['c_sebat'],tn:'Kalplerin pekiştirilmesi'},
     {s:94,a:1,ok:'Elem neşrah leke sadrek (İnşirâh · iç ferahlığı)',cat:['c_sebat','c_basiret'],tn:'Göğsün ferahlaması (İnşirâh)'},
     {s:25,a:65,ok:'Rabbenâ\u2019srif annâ azâbe cehennem (Furkān)',cat:['c_af','c_hatime'],tn:'Cehennem azabından kurtuluş'},
-    {s:27,a:62,ok:'Emmen yücîbül-muztarra izâ deâh (Neml · darda kalan)',cat:['c_dar','c_sikinti'],tn:'Darda kalanın duası'},
-    {s:68,a:51,ok:'Ve in yekâdüllezîne keferû le yüzlikûneke bi ebsârihim (Kalem · nazar)',cat:['c_nazar'],tn:'Nazardan koruma'},
+    {s:27,a:62,ok:'Emmen yücîbül-muztarra izâ deâh (Neml · darda kalan)',cat:['c_dar','c_sikinti'],tn:'Darda kalana cevap veren Allah'},
+    {s:68,a:51,ok:'Ve in yekâdüllezîne keferû le yüzlikûneke bi ebsârihim (Kalem · inkârcıların bakışı)',cat:['c_nazar'],tn:'İnkârcıların öfkeli bakışı'},
     {s:17,a:82,ok:'Ve nünezzilü minel-Kur\u2019âni mâ hüve şifâ (İsrâ · şifa/koruma)',cat:['c_nazar','c_sihir','c_hastalik'],tn:'Kur’an: şifa ve rahmet'},
     {s:3,a:27,ok:'Ve terzuku men teşâu bi ğayri hisâb (Âl-i İmrân · rızık)',cat:['c_rizik'],tn:'Hesapsız rızık'},
     {s:51,a:58,ok:'İnnallâhe hüver-rezzâk (Zâriyât · Rezzâk)',cat:['c_rizik'],tn:'Rezzâk olan Allah'},
@@ -16279,7 +15261,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     {s:6,a:59,ok:'Ve indehû mefâtîhul-ğayb (En\u2019âm · gayb ilmi)',cat:['c_ilim'],tn:'Gayb ilmi Allah’ta'},
     {s:2,a:269,ok:'Yü\u2019til-hikmete men yeşâ (Bakara · hikmet)',cat:['c_ilim'],tn:'Hikmet nimeti'},
     {s:96,a:1,ok:'İkra\u2019 bismi Rabbikellezî halak (Alak · ilim)',cat:['c_ilim'],tn:'İkra: ilim (Alak)'},
-    {s:87,a:6,ok:'Senukriuke felâ tensâ (A\u2019lâ · unutmama)',cat:['c_ilim'],tn:'Unutturmama (A’lâ)'},
+    {s:87,a:6,ok:'Senukriuke felâ tensâ (A\u2019lâ · vahiy)',cat:['c_ilim'],tn:'Peygamberimize vahyin öğretilmesi'},
     {s:59,a:21,ok:'Lev enzelnâ hâzel-Kur\u2019âne alâ cebel (Haşr · tefekkür)',cat:['c_ilim'],tn:'Kur’an’ın azameti (tefekkür)'},
     
     {s:2,a:156,ok:'İnnâ lillâhi ve innâ ileyhi râciûn (Bakara · musibette istircâ)',cat:['c_sikinti','c_hatime'],tn:'Musibette istircâ'},
@@ -16303,7 +15285,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     {s:67,a:14,ok:'Elâ ya\u2019lemu men halak ve hüvel-latîful-habîr (Mülk · ilim)',cat:['c_ilim','c_rizik'],tn:'Yaratan bilmez mi (Mülk)'},
     {s:31,a:16,ok:'İnnallâhe latîfun habîr (Lokmân · Latîf)',cat:['c_rizik','c_koruma'],tn:'Latîf ve Habîr (Lokmân)'},
     {s:55,a:1,ok:'Er-Rahmân · rahmet & bereket sûresi (tamamı okunur)',cat:['c_rizik'],tn:'Rahmân sûresi (rahmet)'},
-    {s:56,a:1,ok:'El-Vâkıa · rızık sûresi (tamamı okunur)',cat:['c_rizik'],tn:'Vâkıa sûresi (rızık)'},
+    {s:56,a:1,ok:'El-Vâkıa · kıyamet ve âhiret (tam sûre)',cat:['c_rizik'],tn:'Vâkıa sûresi'},
     {s:26,a:62,ok:'Kellâ inne maiye Rabbî seyehdîn',cat:['c_sikinti'],tn:'Rabbim benimledir, yol gösterecek',ty:'dua'},
     {s:53,a:48,ok:'Ve ennehû hüve ağnâ ve aknâ',cat:['c_rizik'],tn:'Muhtaçlıktan kurtaran zengin kılan',ty:'dua'},
     {s:9,a:51,ok:'Hüve mevlânâ ve alallâhi felyetevekkelil-mü’minûn',cat:['c_koruma'],tn:'O bizim yardımcımız (tevekkül)',ty:'dua'},
@@ -16318,11 +15300,138 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     {s:2,a:128,ok:'Rabbenâ vec’alnâ müslimeyni leke ve min zürriyyetinâ ümmeten müslimeten leke',cat:['c_hatime'],tn:'Bizi sana teslim olanlardan kıl',ty:'dua'},
     {s:7,a:156,ok:'Vektüb lenâ fî hâzihid-dünyâ haseneten ve fil-âhireti',cat:['c_genel'],tn:'Dünyada da âhirette de iyilik yaz',ty:'dua'},
     {s:74,a:1,ok:'Yâ eyyühel-müddessir, kum fe enzir',cat:['c_genel'],tn:'Kalk ve uyar (Müddessir 1-7)',ty:'emir',aEnd:7},
-    {s:18,a:39,ok:'Mâ şâ Allâh, lâ kuvvete illâ billâh',cat:['c_nazar','c_rizik','c_koruma'],tn:'Mâşâallah — kem göze/nazara karşı',ty:'dua'},
+    {s:18,a:39,ok:'Mâ şâ Allâh, lâ kuvvete illâ billâh',cat:['c_nazar','c_rizik','c_koruma'],tn:'Mâşâallah: nimeti Allah’tan bilmek',ty:'dua'},
     {s:41,a:36,ok:'Festeiz billâh, innehû hüves-semî’ul-alîm',cat:['c_nefis','c_nazar'],tn:'Şeytandan Allah’a sığınma',ty:'dua'},
     {s:7,a:200,ok:'Festeiz billâh, innehû semî’un alîm',cat:['c_nefis'],tn:'Vesveseye karşı sığınma',ty:'dua'},
     {s:23,a:118,ok:'Rabbiğfir verham ve ente hayrur-râhimîn',cat:['c_tovbe'],tn:'Bağışla ve merhamet et',ty:'dua'}
   ];
+
+  // Editorial summaries describe the referenced Quran passage, not a promised
+  // effect of reciting it. Types distinguish a request from praise or narrative.
+  // Context checked against Diyanet: Bakara127; Kaf22 (mushaf page519);
+  // Yasin9 (page440); Kalem51-52 (Kur'an Yolu tafsir, vol5 p439).
+  var GINFO={
+    '2:201':['dua','Dünyada ve âhirette iyilik, ateş azabından korunma dileği.','Asking for good in this life and the next, and protection from the Fire.'],
+    '2:286':['dua','Bağışlanma, merhamet ve güç yetmeyen yüklerden esirgenme dileği.','Asking for forgiveness, mercy and relief from burdens beyond one’s ability.'],
+    '3:193':['dua','İman edenlerin bağışlanma ve iyilerle birlikte can verme dileği.','Believers ask for forgiveness and to die in the company of the righteous.'],
+    '7:23':['dua','Âdem ve eşinin hatalarını kabul ederek bağışlanma ve rahmet dilemesi.','Adam and his wife acknowledge their wrong and ask for forgiveness and mercy.'],
+    '21:87':['dua','Yûnus’un sıkıntı içinde Allah’ı tenzih edip hatasını kabul etmesi.','Jonah praises Allah’s perfection and acknowledges his wrong in distress.'],
+    '28:16':['dua','Mûsâ’nın yaptığı hatadan sonra Allah’tan bağışlanma dilemesi.','Moses asks Allah to forgive him after acknowledging his wrong.'],
+    '71:28':['dua','Nûh’un kendisi, anne babası ve müminler için bağışlanma dileği.','Noah asks forgiveness for himself, his parents and the believers.'],
+    '3:16':['dua','İmanlarını dile getiren kulların günahlarının bağışlanması için duası.','Believers affirm their faith and ask for their sins to be forgiven.'],
+    '40:7':['dua','Meleklerin tövbe eden müminler için bağışlanma ve korunma dilemesi.','The angels ask forgiveness and protection for believers who repent.'],
+    '21:89':['dua','Zekeriyyâ’nın yalnız bırakılmamak için Rabbine yakarışı.','Zechariah asks his Lord not to leave him alone without an heir.'],
+    '21:83':['dua','Eyyûb’un sıkıntısını Rabbine arz edip O’nun merhametine sığınması.','Job brings his suffering before his Lord and appeals to His mercy.'],
+    '28:21':['dua','Mûsâ’nın zâlim topluluktan kurtarılma dileği.','Moses asks to be delivered from the wrongdoing people.'],
+    '28:24':['dua','Mûsâ’nın Allah’tan gelecek her hayra ihtiyaç duyduğunu ifade etmesi.','Moses expresses his need for whatever good Allah may send him.'],
+    '7:126':['dua','Sabır ve Allah’a teslim olmuş halde can verme dileği.','Asking for patience and to die in submission to Allah.'],
+    '10:85':['dua','Zâlimlerin baskısı karşısında Allah’a güvenip sığınma duası.','A prayer of trust and refuge in Allah amid oppression.'],
+    '23:29':['dua','Nûh’a öğretilen, bereketli bir yere indirilme duası.','The prayer taught to Noah for a blessed landing place.'],
+    '3:173':['ayet','Tehdit karşısında müminlerin Allah’a güvenini anlatan sözler.','Words expressing believers’ trust in Allah when faced with threats.'],
+    '9:129':['ayet','Allah’ın yeterli olduğunu ve yalnız O’na güvenildiğini bildiren sözler.','A declaration that Allah is sufficient and trust is placed in Him alone.'],
+    '18:10':['dua','Mağaraya sığınan gençlerin rahmet ve doğru çıkış yolu dilemesi.','The youths in the cave ask for mercy and a right way through their situation.'],
+    '60:4':['dua','Allah’a güvenmeyi, O’na yönelmeyi ve dönüşün O’na olduğunu ifade eden dua.','A prayer expressing trust in Allah, turning to Him and returning to Him.'],
+    '66:8':['dua','Müminlerin nurlarının tamamlanması ve bağışlanmaları için duası.','Believers ask for their light to be completed and for forgiveness.'],
+    '59:10':['dua','Önceki müminler için bağışlanma, kalplerde kin bulunmaması dileği.','Asking forgiveness for earlier believers and freedom from resentment.'],
+    '3:38':['dua','Zekeriyyâ’nın Allah’tan temiz ve hayırlı bir nesil dilemesi.','Zechariah asks Allah for good offspring.'],
+    '37:100':['dua','İbrâhim’in Allah’tan sâlih bir evlât dilemesi.','Abraham asks Allah for a righteous child.'],
+    '14:40':['dua','İbrâhim’in kendisi ve nesli için namaza devam etme duası.','Abraham prays for himself and his descendants to remain steadfast in prayer.'],
+    '25:74':['dua','Eş ve çocukların göz aydınlığı, kişinin iyilikte örnek olması dileği.','Asking for joy in family and to be an example to the God-conscious.'],
+    '46:15':['dua','Nimetlere şükretme, iyi işler yapma ve neslin iyiliği için dua.','Asking to be grateful, do righteous deeds and have righteous descendants.'],
+    '20:114':['dua','Allah’tan ilmin artmasını isteyen kısa dua: Rabbi zidnî ilmâ.','The short prayer asking Allah for increased knowledge: Rabbi zidni ilma.'],
+    '20:25':['dua','Mûsâ’nın ferahlık, işinde kolaylık ve sözünün anlaşılması için duası.','Moses asks for reassurance, ease in his task and clear speech.'],
+    '3:8':['dua','Doğru yola erdikten sonra kalbin sapmaması ve rahmet dileği.','Asking that hearts not turn away after guidance, and asking for mercy.'],
+    '17:80':['dua','Doğru bir giriş ve çıkış, Allah katından destek dileği.','Asking for a sound entrance and departure, and support from Allah.'],
+    '26:83':['dua','İbrâhim’in hikmet ve sâlihlerin arasına katılma dileği.','Abraham asks for wisdom and to join the righteous.'],
+    '2:250':['dua','Tâlût’un ordusunun karşılaşma öncesi sabır, sebat ve yardım dileği.','Talut’s army asks for patience, firm footing and help before the encounter.'],
+    '60:5':['dua','İnkârcılar karşısında sınanma konusu olmamak ve bağışlanma için dua.','Asking not to become a trial for disbelievers, and asking for forgiveness.'],
+    '23:26':['dua','Nûh’un kendisini yalanlayan topluluk karşısında yardım istemesi.','Noah asks for help against the people who rejected him.'],
+    '29:30':['dua','Lût’un bozguncu topluluğa karşı Allah’tan yardım istemesi.','Lot asks Allah for help against the corrupting people.'],
+    '17:24':['dua','Anne babanın yetiştirirken gösterdiği emek hatırlanarak rahmet dileği.','Asking mercy for parents, remembering the care they gave in childhood.'],
+    '43:13':['ayet','Binekleri insanın hizmetine veren Allah’a tesbih ve şükür ifadesi.','Praising Allah, who has made means of transport available to people.'],
+    '11:41':['ayet','Nûh’un geminin yolculuğunu ve duruşunu Allah’ın adıyla anması.','Noah invokes Allah’s name for the ship’s course and anchorage.'],
+    '12:101':['dua','Yûsuf’un Müslüman olarak can verme ve sâlihlere katılma dileği.','Joseph asks to die in submission and to join the righteous.'],
+    '12:53':['ayet','Nefsin kötülüğe yöneltebileceğini ve Allah’ın merhametini hatırlatan âyet.','A reminder of the self’s inclination to wrong and Allah’s mercy.'],
+    '12:33':['dua','Yûsuf’un kendisine kurulan tuzak karşısında Allah’a sığınması.','Joseph seeks Allah’s protection from the temptation facing him.'],
+    '23:97':['dua','Şeytanların kışkırtmalarından Allah’a sığınma duası.','A prayer seeking Allah’s refuge from the incitements of devils.'],
+    '5:114':['dua','Îsâ’nın gökten bir sofra ve Allah’tan rızık dilemesi.','Jesus asks for a table from heaven and provision from Allah.'],
+    '27:19':['dua','Süleymân’ın nimetlere şükür, iyi iş ve sâlih kullara katılma dileği.','Solomon asks for gratitude, righteous deeds and a place among righteous servants.'],
+    '8:17':['ayet','Savaşta elde edilen sonucun Allah’ın yardımıyla ilişkisini hatırlatan âyet.','A verse recalling Allah’s help in the outcome of battle.'],
+    '36:9':['ayet','İnkârda direnenlerin hakikati göremeyişini set benzetmesiyle anlatır.','The image of barriers describes persistent denial and inability to see the truth.'],
+    '2:137':['ayet','İman ve ayrılık bağlamında Allah’ın Peygamberine desteğini bildirir.','In the context of faith and division, it affirms Allah’s support for His Messenger.'],
+    '15:95':['ayet','Peygambere, alay edenler karşısında Allah’ın desteği hatırlatılır.','The Prophet is reassured of Allah’s support against those who mock.'],
+    '113:1':['sure','Felak sûresinin tamamı: yaratılmışların kötülüğünden Allah’a sığınma.','The complete surah al-Falaq: seeking Allah’s refuge from harm.'],
+    '10:81':['ayet','Mûsâ’nın sihirbazlara hitabında gerçeğin üstünlüğünü vurgulayan âyet.','Moses addresses the magicians, affirming that Allah will expose their magic.'],
+    '7:118':['ayet','Mûsâ ile sihirbazlar kıssasında gerçeğin ortaya çıkmasını anlatır.','In the account of Moses and the magicians, the truth becomes clear.'],
+    '50:22':['ayet','Âhirette insanın gaflet perdesinin kalkmasını anlatan uyarı.','A warning describing the removal of heedlessness when facing the Hereafter.'],
+    '7:143':['dua','Mûsâ’nın Rabbini görme talebi; âyet bu talebin cevabını da anlatır.','Moses asks to see his Lord; the verse also recounts the response.'],
+    '17:72':['ayet','Dünyada hakikati görmezden gelmenin âhiretle ilişkisine dair uyarı.','A warning about ignoring the truth in this life and its consequence in the next.'],
+    '18:14':['ayet','Ashâb-ı Kehf’in imanlarını dile getirmeleri ve kalplerinin güçlendirilmesi.','The youths of the cave declare their faith and their hearts are strengthened.'],
+    '94:1':['ayet','Allah’ın Peygamberine gönül ferahlığı vermesini hatırlatan ilk âyet.','The opening verse recalling the reassurance Allah gave His Prophet.'],
+    '25:65':['dua','Rahmân’ın kullarının cehennem azabından esirgenme duası.','The servants of the Most Merciful ask to be spared the punishment of Hell.'],
+    '27:62':['ayet','Darda kalanın çağrısına cevap verenin Allah olduğunu hatırlatır.','A reminder that Allah answers the call of the distressed.'],
+    '68:51':['ayet','Kur’an’ı dinleyen inkârcıların Peygambere öfkeli bakışlarını anlatır.','It describes the hostile looks of disbelievers listening to the Quran.'],
+    '17:82':['ayet','Kur’an’ın müminler için şifa ve rahmet oluşunu bildirir.','It describes the Quran as healing and mercy for believers.'],
+    '3:27':['ayet','Geceyi, gündüzü, hayatı ve rızkı Allah’ın kudretiyle ilişkilendiren sözler.','Words affirming Allah’s power over night, day, life and provision.'],
+    '51:58':['ayet','Rızık verenin ve güç sahibinin Allah olduğunu bildirir.','It affirms that Allah is the Provider and Possessor of power.'],
+    '42:19':['ayet','Allah’ın kullarına lütfunu ve rızık vermesini hatırlatır.','A reminder of Allah’s kindness to His servants and His provision.'],
+    '3:74':['ayet','Rahmet ve büyük lütfun Allah’a ait olduğunu bildirir.','It affirms that mercy and great bounty belong to Allah.'],
+    '63:7':['ayet','Göklerin ve yerin hazinelerinin Allah’a ait olduğunu hatırlatır.','A reminder that the treasures of the heavens and earth belong to Allah.'],
+    '48:1':['ayet','Peygambere apaçık bir fetih verildiğini bildiren sûre başlangıcı.','The surah opens by announcing a clear victory granted to the Prophet.'],
+    '8:63':['ayet','Müminlerin kalplerini birleştirenin Allah olduğunu anlatır.','It describes Allah as the One who brought believers’ hearts together.'],
+    '60:7':['ayet','Düşmanlıkların dostluğa dönüşebileceğini Allah’ın kudretiyle ilişkilendirir.','It recalls that Allah can bring affection where there was enmity.'],
+    '9:128':['ayet','Peygamberin müminlere karşı şefkat ve merhametini anlatır.','It describes the Messenger’s compassion and mercy towards believers.'],
+    '12:64':['ayet','Yâkub’un Allah’ın koruyuculuğuna ve merhametine güvenini ifade eder.','Jacob expresses trust in Allah’s protection and mercy.'],
+    '33:3':['ayet','Allah’a güvenmeyi öğütler; vekil olarak O’nun yeterliliğini bildirir.','It calls for trust in Allah and affirms that He is sufficient as guardian.'],
+    '2:257':['ayet','Allah’ın iman edenleri karanlıklardan aydınlığa çıkarmasını anlatır.','It describes Allah bringing believers from darkness into light.'],
+    '5:16':['ayet','Allah’ın rızasını arayanlara selâmet ve hidayet yollarını anlatır.','It describes paths of peace and guidance for those seeking Allah’s pleasure.'],
+    '64:11':['ayet','Allah’a iman ile kalbin doğruya yönelmesi arasındaki bağı hatırlatır.','A reminder of the connection between faith in Allah and guidance of the heart.'],
+    '29:69':['ayet','Allah’ın yolunda çaba gösterenlere hidayet ve destek bildirilir.','It affirms guidance and support for those who strive in Allah’s way.'],
+    '6:103':['ayet','Allah’ın insan idrakini aşan yüceliğini ve her şeyi kuşatan bilgisini anlatır.','It recalls that Allah is beyond human vision while encompassing all vision.'],
+    '6:59':['ayet','Gaybın ve bütün varlıkların bilgisinin Allah’a ait olduğunu bildirir.','It affirms that knowledge of the unseen and all things belongs to Allah.'],
+    '2:269':['ayet','Hikmetin Allah’ın verdiği büyük bir hayır olduğunu anlatır.','It describes wisdom as a great good bestowed by Allah.'],
+    '96:1':['ayet','Yaratan Rabbin adıyla okumaya çağıran vahiy başlangıcı.','The opening revelation calls for reading in the name of the Creator.'],
+    '87:6':['ayet','Allah’ın Peygamberine Kur’an’ı öğreteceğine dair hitabı.','Allah addresses His Prophet about teaching him to recite the Quran.'],
+    '59:21':['ayet','Kur’an’ın büyüklüğünü dağ örneği üzerinden düşünmeye çağırır.','The image of a mountain invites reflection on the Quran’s gravity.'],
+    '2:156':['ayet','Musibet karşısında Allah’a ait olduğumuzu ve O’na döneceğimizi anma.','Remembering in hardship that we belong to Allah and will return to Him.'],
+    '20:46':['ayet','Allah’ın Mûsâ ve Hârûn’a yanlarında olduğunu bildiren hitabı.','Allah reassures Moses and Aaron that He is with them, hearing and seeing.'],
+    '2:186':['ayet','Allah’ın kullarına yakınlığı ve dua edenin çağrısına cevap vermesi.','Allah’s nearness to His servants and response to the one who calls upon Him.'],
+    '93:5':['ayet','Allah’ın Peygamberine ihsanda bulunacağına dair teselli.','Reassurance to the Prophet of the generosity his Lord will grant him.'],
+    '38:35':['dua','Süleymân’ın bağışlanma ve kendisine özgü bir hükümranlık dilemesi.','Solomon asks for forgiveness and a kingdom unique to him.'],
+    '27:40':['ayet','Süleymân’ın verilen nimeti bir şükür sınavı olarak değerlendirmesi.','Solomon recognises a blessing as a test of gratitude.'],
+    '19:57':['ayet','İdrîs’in yüce bir makama yükseltildiğini anlatan âyet.','A verse describing Idris as raised to a high station.'],
+    '65:3':['ayet','Allah’a güvenmeyi, O’nun yeterliliğini ve beklenmedik rızkı hatırlatır.','A reminder of trust in Allah, His sufficiency and provision from unexpected places.'],
+    '36:58':['ayet','Cennet ehline merhametli Rabden gelen selâmı anlatır.','It describes the greeting of peace to the people of Paradise from their Merciful Lord.'],
+    '22:70':['ayet','Göklerde ve yerde olanların Allah’ın bilgisi dahilinde olduğunu bildirir.','It affirms Allah’s knowledge of everything in the heavens and earth.'],
+    '57:1':['ayet','Göklerde ve yerde bulunanların Allah’ı tesbih ettiğini bildirir.','It affirms that all in the heavens and earth glorifies Allah.'],
+    '59:1':['ayet','Varlıkların Allah’ı tesbihini ve O’nun kudret ve hikmetini hatırlatır.','A reminder of creation’s praise of Allah and of His power and wisdom.'],
+    '38:20':['ayet','Dâvûd’a verilen güçlü yönetim, hikmet ve açık hüküm verme yeteneği.','The strong rule, wisdom and sound judgement granted to David.'],
+    '38:36':['ayet','Süleymân kıssasında rüzgârın onun hizmetine verilmesini anlatır.','In Solomon’s story, the wind is placed at his service.'],
+    '38:18':['ayet','Dâvûd ile birlikte dağların tesbih edişini anlatan âyet.','It describes the mountains joining David in glorification.'],
+    '18:84':['ayet','Zülkarneyn’e yeryüzünde imkân ve yollar verildiğini bildirir.','It recounts the means and opportunities granted to Dhul-Qarnayn on earth.'],
+    '67:14':['ayet','Yaratan Allah’ın yarattıklarını bildiğini hatırlatan soru.','A question recalling that the Creator knows what He has created.'],
+    '31:16':['ayet','En küçük ve gizli amelin bile Allah’ın bilgisi dışında kalmadığını anlatır.','A reminder that even the smallest hidden deed is not beyond Allah’s knowledge.'],
+    '55:1':['sure','Rahmân sûresinin tamamı: Allah’ın nimetleri, yaratılış ve âhiret.','The complete surah ar-Rahman: Allah’s blessings, creation and the Hereafter.'],
+    '56:1':['sure','Vâkıa sûresinin tamamı: kıyamet, insan grupları ve Allah’ın kudreti.','The complete surah al-Waqiah: resurrection, groups of people and Allah’s power.'],
+    '26:62':['ayet','Mûsâ’nın tehlike karşısında Rabbine güvenini dile getirmesi.','Moses expresses trust that his Lord will guide him in the face of danger.'],
+    '53:48':['ayet','Zenginliğin ve imkânların Allah’tan geldiğini hatırlatan âyet.','A reminder that wealth and sufficiency come from Allah.'],
+    '9:51':['ayet','Allah’ın takdiri ve müminlerin O’na güvenmesi üzerine sözler.','Words about Allah’s decree and believers placing their trust in Him.'],
+    '39:62':['ayet','Allah’ın her şeyin yaratıcısı ve gözeticisi olduğunu bildirir.','It affirms that Allah is the Creator and Guardian of all things.'],
+    '23:109':['dua','İman eden kulların bağışlanma ve merhamet dileği.','Believing servants ask for forgiveness and mercy.'],
+    '18:24':['ayet','Unutunca Allah’ı anmak ve daha doğru olana yönelmeyi ummak.','Remembering Allah after forgetting, and hoping for guidance towards what is right.'],
+    '7:155':['dua','Mûsâ’nın Allah’ın velâyetine sığınıp bağışlanma ve rahmet dilemesi.','Moses appeals to Allah’s guardianship, asking for forgiveness and mercy.'],
+    '10:86':['dua','Allah’ın rahmetiyle inkârcı topluluktan kurtarılma dileği.','Asking to be delivered by Allah’s mercy from the disbelieving people.'],
+    '11:47':['dua','Nûh’un bilmediği şeyi istemekten sığınması, bağışlanma ve rahmet dilemesi.','Noah seeks refuge from asking without knowledge and asks for forgiveness and mercy.'],
+    '11:88':['ayet','Şuayb’ın başarısını Allah’a bağlayıp O’na güvenini dile getirmesi.','Shuayb attributes his success to Allah, expressing trust and turning to Him.'],
+    '2:127':['dua','İbrâhim ve İsmâil’in Kâbe’yi yükseltirken yaptıkları işin kabulünü dilemesi.','Abraham and Ishmael ask Allah to accept their work as they raise the Kaaba.'],
+    '2:128':['dua','İbrâhim ve İsmâil’in teslimiyet, hayırlı nesil ve tövbenin kabulü için duası.','Abraham and Ishmael pray for submission, a faithful community and accepted repentance.'],
+    '7:156':['dua','Dünyada ve âhirette iyilik dileme ve Allah’a yönelişi ifade eden dua.','A prayer for good in this life and the next, expressing a return to Allah.'],
+    '74:1':['emir','Peygambere uyarı, arınma ve sabır görevlerini bildiren ilk yedi âyet.','The first seven verses call the Prophet to warn, purify and persevere.'],
+    '18:39':['ayet','Bahçe kıssasında nimeti Allah’ın dilemesine ve kudretine bağlayan sözler.','In the story of the gardens, blessings are attributed to Allah’s will and power.'],
+    '41:36':['ayet','Şeytanın kışkırtması karşısında Allah’a sığınmayı öğütler.','It instructs the listener to seek refuge in Allah from Satan’s prompting.'],
+    '7:200':['ayet','Şeytandan bir dürtü geldiğinde Allah’a sığınmayı öğütler.','It calls for seeking refuge in Allah when prompted by Satan.'],
+    '23:118':['dua','Allah’tan bağışlanma ve merhamet isteyen kısa dua.','A short prayer asking Allah for forgiveness and mercy.']
+  };
 
   // ---- favoriler (dua'ya özel; sûre favorilerini bozmaz) ----
   function getFavs(){ try{ return (window.store&&store.get('duaFav',[]))||[]; }catch(e){ return []; } }
@@ -16372,7 +15481,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     }
     return esc(full.slice(0,i))+'<mark class="dsb-mark">'+esc(part)+'</mark>'+esc(full.slice(i+part.length));
   }
-  var _duaMark=null;
+  var _duaMark=null, _duaSelectionInfo=null;
   function markSplitWords(s,a,cut){
     _duaMark=cut?{s:s,a:a,cut:cut}:null;
     try{
@@ -16385,46 +15494,95 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
       });
     }catch(e){}
   }
-  function duaSelectAyah(a,aEnd){
+  function duaSelectAyah(s,a,aEnd,title){
     try{
-      if(typeof ayGi==='undefined'||!ayGi[a])return false;
-      var e=(aEnd&&ayGi[aEnd])?ayGi[aEnd][1]:ayGi[a][1];
-      selA=ayGi[a][0]; selB=e; selMode='ayah';
+      var chosen=duaSelection(s,a,aEnd,title); _duaSelectionInfo=chosen;
+      if(!chosen){
+        if(typeof clearSel==='function')clearSel();
+        if(CUTS[s+':'+a]&&typeof toast==='function')toast(dt('dua_selection_unavailable'));
+        return false;
+      }
+      selA=chosen.wordRange.start; selB=chosen.wordRange.end;
+      selMode=chosen.partial?'word':'ayah';
       if(typeof renderSel==='function')renderSel();
       return true;
     }catch(err){ return false; }
   }
-  function arNorm(t){ return String(t||'').replace(/[\u064B-\u065F\u0670\u0640\u06D6-\u06ED\u0653-\u0655]/g,'').replace(/[\u0622\u0623\u0625]/g,'\u0627').replace(/\s+/g,''); }
+  function arNorm(t){ return String(t||'').normalize('NFKD').replace(/[\u064B-\u065F\u0670\u0640\u06D6-\u06ED]/g,'').replace(/[ٱأإآ]/g,'ا').replace(/[ىی]/g,'ي').replace(/ة/g,'ه').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/[^\u0621-\u063A\u0641-\u064A]/g,''); }
   function duaPortionWords(s,a,cut){
     try{
       if(!cut||typeof QTEXT_TR==='undefined'||!QTEXT_TR[s])return null;
       var v=QTEXT_TR[s][a-1]; if(!v)return null;
-      return String(v).split(/\s+/).filter(Boolean).slice(cut[0],cut[1]).map(arNorm);
+      return String(v).split(/\s+/).filter(Boolean).slice(cut[0],cut[1]).map(arNorm).filter(Boolean);
     }catch(e){ return null; }
   }
-  // METİN eşleştirmeli markaj → hem Türk hem Medine mushafında doğru çalışır
+  // Resolve once for both the visible mark and the actual playback selection.
+  // CUTS indexes the Turkish printed tokens; renderer pos is a 1-based audio word.
+  function duaWordRange(s,a,cut){
+    try{
+      var pw=duaPortionWords(s,a,cut); if(!pw||!pw.length)return null;
+      if(typeof ayGi==='undefined'||!ayGi[a]||typeof wordArr==='undefined')return null;
+      var r=ayGi[a], list=[], joined='';
+      for(var gi=r[0];gi<=r[1];gi++){ var w=wordArr[gi]; if(!w)continue;
+        var text=arNorm(w.txt||(w.el?w.el.textContent:''));
+        if(!text)continue;
+        list.push({gi:gi,start:joined.length,end:joined.length+text.length}); joined+=text;
+      }
+      var target=pw.join(''),pos=joined.indexOf(target);
+      // Match complete words only, and never widen an uncertain match to a verse.
+      var first=list.find(function(x){return x.start===pos;});
+      var last=list.find(function(x){return x.end===pos+target.length;});
+      if(pos>=0&&joined.indexOf(target,pos+1)<0&&first&&last)return {start:first.gi,end:last.gi};
+      // Uthmani spelling can omit letters written in the Turkish mushaf. Reuse
+      // the reader's existing print-to-audio alignment, not fuzzy end words.
+      if(typeof QTEXT==='undefined'||!QTEXT[s]||typeof alignTurkishWords!=='function')return null;
+      var reference=QTEXT[s][a-1][2].filter(function(w){return w[1]===0;}).map(function(w){return w[0];});
+      if(list.length!==reference.length)return null;
+      for(var i=0;i<reference.length;i++){
+        if(arNorm(wordArr[list[i].gi].txt)!==arNorm(reference[i])||wordArr[list[i].gi].pos!==i+1)return null;
+      }
+      var aligned=alignTurkishWords(reference,String(QTEXT_TR[s][a-1]).split(/\s+/).filter(Boolean));
+      if(!aligned)return null;
+      var mapped=[],text='';
+      aligned.forEach(function(w,i){var normalized=arNorm(w);mapped.push({index:i,start:text.length,end:text.length+normalized.length});text+=normalized;});
+      pos=text.indexOf(target);
+      if(pos<0||text.indexOf(target,pos+1)>=0)return null;
+      first=mapped.find(function(x){return x.start===pos;});
+      last=mapped.find(function(x){return x.end===pos+target.length;});
+      return first&&last?{start:list[first.index].gi,end:list[last.index].gi}:null;
+    }catch(e){return null;}
+  }
+  function duaSelection(s,a,aEnd,title){
+    try{
+      if(typeof curS!=='undefined'&&+curS!==+s)return null;
+      if(typeof ayGi==='undefined'||!ayGi[a]||typeof wordArr==='undefined')return null;
+      var endAy=Number.isInteger(aEnd)&&aEnd>=a?aEnd:a;
+      if(!ayGi[endAy])return null;
+      var cut=CUTS[s+':'+a],range=cut?duaWordRange(s,a,cut):{start:ayGi[a][0],end:ayGi[a][1]};
+      if(!range)return null;
+      if(endAy>a)range.end=ayGi[endAy][1];
+      var first=wordArr[range.start],last=wordArr[range.end];if(!first||!last)return null;
+      return {surah:+s,fromAy:first.ay,toAy:last.ay,fromWordInclusive:first.pos,toWordInclusive:last.pos,
+        wordRange:{start:range.start,end:range.end},partial:range.start!==ayGi[a][0]||range.end!==ayGi[endAy][1],title:title||''};
+    }catch(e){return null;}
+  }
+  window.elifaDuaSelection=function(s,a,aEnd,title){
+    if(arguments.length)return duaSelection(s,a,aEnd,title||(_duaSelectionInfo&&_duaSelectionInfo.title));
+    if(!_duaSelectionInfo||typeof curS==='undefined'||_duaSelectionInfo.surah!==curS)return null;
+    // Return the current handles, so an adjusted prayer is transferred as adjusted.
+    if(selA==null||selB==null)return null;
+    var lo=Math.min(selA,selB),hi=Math.max(selA,selB),first=wordArr[lo],last=wordArr[hi];
+    if(!first||!last)return null;
+    return Object.assign({},_duaSelectionInfo,{fromAy:first.ay,toAy:last.ay,
+      fromWordInclusive:first.pos,toWordInclusive:last.pos,wordRange:{start:lo,end:hi},
+      partial:lo!==ayGi[first.ay][0]||hi!==ayGi[last.ay][1]});
+  };
   function markWordsByText(s,a,cut){
     try{
       document.querySelectorAll('.dua-hi').forEach(function(x){x.classList.remove('dua-hi');});
-      var pw=duaPortionWords(s,a,cut); if(!pw||!pw.length)return;
-      if(typeof ayGi==='undefined'||!ayGi[a]||typeof wordArr==='undefined')return;
-      var r=ayGi[a], list=[];
-      for(var gi=r[0];gi<=r[1];gi++){ var w=wordArr[gi]; if(!w)continue;
-        list.push({gi:gi, el:w.el, t:arNorm(w.el?w.el.textContent:'')}); }
-      if(!list.length)return;
-      var joined=list.map(function(x){return x.t;}).join('|');
-      var target=pw.join('|');
-      var pos=joined.indexOf(target), sIdx=-1, eIdx=-1;
-      if(pos>=0){ sIdx=joined.slice(0,pos).split('|').length-1; eIdx=sIdx+pw.length-1; }
-      else { // ilk ve son kelimeyi ayrı ayrı ara (imla farkı toleransı)
-        for(var i=0;i<list.length;i++){ if(list[i].t.indexOf(pw[0])===0||pw[0].indexOf(list[i].t)===0){ sIdx=i; break; } }
-        var last=pw[pw.length-1];
-        for(var j=list.length-1;j>=0;j--){ if(list[j].t.indexOf(last)===0||last.indexOf(list[j].t)===0){ eIdx=j; break; } }
-      }
-      if(sIdx<0||eIdx<sIdx)return;
-      for(var k=sIdx;k<=eIdx;k++){ if(list[k].el)list[k].el.classList.add('dua-hi'); }
-      // böl ekranı açıksa oradaki kopyaları da işaretle
-      var g0=list[sIdx].gi, g1=list[eIdx].gi;
+      var range=duaWordRange(s,a,cut);if(!range)return;
+      var g0=range.start,g1=range.end;
+      for(var gi=g0;gi<=g1;gi++){if(wordArr[gi].el)wordArr[gi].el.classList.add('dua-hi');}
       document.querySelectorAll('#splitBody .pw2').forEach(function(sp){
         var gi=+sp.dataset.gi; sp.classList.toggle('dua-hi', gi>=g0&&gi<=g1); });
     }catch(e){}
@@ -16483,6 +15641,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     }catch(e){}
   }
   function duaClearUI(){
+    _duaMark=null; _duaSelectionInfo=null;
     try{
       var b=document.getElementById('rbody');
       if(b){ b.classList.remove('dua-only'); b.querySelectorAll('.dua-target').forEach(function(x){x.classList.remove('dua-target');}); }
@@ -16562,14 +15721,26 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     if(typeof openSurah!=='function')return;
     window.__duaBannerKeep=true;
     duaClearUI();
-    var p=openSurah(s,a);
-    var after=function(){ try{window.readerReturn='dua';}catch(e){}
+    var visit,applied=false;
+    var after=function(){
+      if(visit===undefined)visit=typeof surahRequestId==='undefined'?null:surahRequestId;
+      if(applied)return;
+      if((typeof curS!=='undefined'&&curS!==s)||(visit!==null&&visit!==surahRequestId))return;
+      applied=true;
+      try{window.readerReturn='dua';}catch(e){}
       duaBuildUI(s,a,aEnd,title,!!fullSurah);
       if(!fullSurah){
-        duaSelectAyah(a,aEnd);
-        setTimeout(function(){ markWordsByText(s,a,CUTS[s+':'+a]||null); duaCleanPage(a,aEnd,true); scrollToAyah(a); },80);
+        duaSelectAyah(s,a,aEnd,title);
+        markWordsByText(s,a,CUTS[s+':'+a]||null);
+        duaCleanPage(a,aEnd,true); scrollToAyah(a);
       }
-      window.__duaBannerKeep=false; };
+    };
+    // Text is embedded and ready before the optional recording download ends.
+    // The completion handler remains a fallback, never a second selection reset.
+    var p;
+    try{p=openSurah(s,a,{onTextReady:after});}
+    finally{window.__duaBannerKeep=false;}
+    if(visit===undefined)visit=typeof surahRequestId==='undefined'?null:surahRequestId;
     if(p&&p.then)p.then(after); else setTimeout(after,450);
   };
 
@@ -16585,7 +15756,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     var c=document.createElement('div'); c.className='duacard'; c.setAttribute('role','button'); c.tabIndex=0;
     if(favK)c.setAttribute('data-favk',favK);
     var on=favK?window.duaIsFav(favK):false;
-    var badge=ty==='emir'?'<span class="dc-badge dc-emir">'+esc(dt('dua_ty_emir'))+'</span>':(ty==='dua'?'<span class="dc-badge">'+esc(dt('dua_ty_dua'))+'</span>':'');
+    var badgeKey={emir:'dua_ty_emir',dua:'dua_ty_dua',ayet:'dua_ty_ayet',sure:'dua_ty_sure'}[ty];
+    var badge=badgeKey?'<span class="dc-badge'+(ty==='emir'?' dc-emir':'')+'">'+esc(dt(badgeKey))+'</span>':'';
     c.innerHTML='<div class="dc-mid"><div class="dc-t">'+esc(title)+badge+'</div><div class="dc-s">'+esc(sub)+'</div></div>'+
       (favK?'<button class="dc-fav'+(on?' on':'')+'" aria-label="Favori">'+STAR+'</button>':'')+
       '<svg class="dc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
@@ -16599,6 +15771,13 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     return c;
   }
 
+  function duaCardType(it){var meta=GINFO[it.s+':'+it.a];return meta?meta[0]:'ayet';}
+  function duaCardDescription(it){
+    var meta=GINFO[it.s+':'+it.a],lang=curLang();
+    var ref=suraName(it.s)+(duaCardType(it)==='sure'?'':' · '+it.a+(it.aEnd?'–'+it.aEnd:'')+'. '+dt('dua_ayet'));
+    var summary=meta&&(lang==='tr'?meta[1]:meta[2]);
+    return ref+(summary?' · '+summary:'');
+  }
   function duaCardTitle(it){ var key=it.s+':'+it.a; var lang=curLang();
     if(lang==='tr') return it.tn||it.ok;
     function cut1(t){ var f=String(t).split(/[.!?\u061F\u06D4\u3002]/)[0].trim(); return f.length>52?f.slice(0,50)+'\u2026':f; }
@@ -16615,6 +15794,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
       (subTab==='gunluk'?'<div class="dua-catbar" id="duaCatBar"></div>':'')+'<div class="dua-list" id="duaList"></div>';
     scr.querySelectorAll('.dua-sub').forEach(function(b){ b.onclick=function(){ subTab=b.dataset.sub; window.renderDua(); }; });
     var L=scr.querySelector('#duaList');
+    var infoKey={sure:'dua_sure_info',namaz:'dua_namaz_info',gunluk:'dua_gunluk_info'}[subTab];
+    if(infoKey){var info=document.createElement('p');info.className='dua-empty';info.textContent=dt(infoKey);L.appendChild(info);}
 
     if(subTab==='sure'){
       SURE.forEach(function(it){
@@ -16638,7 +15819,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
       (gCat==='all'?CATS:[gCat]).forEach(function(ck){
         var items=G.filter(function(g){return g.cat.indexOf(ck)>=0;}); if(!items.length)return;
         var h=document.createElement('div'); h.className='dua-cat'; h.textContent=dt(ck); L.appendChild(h);
-        items.forEach(function(it){ L.appendChild(card(duaCardTitle(it), suraName(it.s)+' · '+it.a+'. '+dt('dua_ayet'), 'q'+it.s+':'+it.a, function(){ window.openFromDua(it.s,it.a,it.aEnd,duaCardTitle(it)); }, it.tn||it.ok, it.ty||'dua')); });
+        items.forEach(function(it){ L.appendChild(card(duaCardTitle(it), duaCardDescription(it), 'q'+it.s+':'+it.a, function(){ window.openFromDua(it.s,it.a,it.aEnd,duaCardTitle(it),duaCardType(it)==='sure'); }, it.tn||it.ok, duaCardType(it))); });
       });
     } else {
       var favs=getFavs(); if(!favs.length){ L.innerHTML='<div class="dua-empty">'+esc(dt('dua_favbos'))+'</div>'; return; }
@@ -16646,7 +15827,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
         if(k.charAt(0)==='q'){ var p=k.slice(1).split(':'),s=+p[0],a=+p[1];
           var it=SURE.concat(G).find(function(x){return x.s===s&&x.a===a;});
           var title=it?(it.tn||it.t||it.ok):(suraName(s)+' '+a);
-          L.appendChild(card(title, suraName(s)+' · '+a+'. '+dt('dua_ayet'), k, function(){ var full=it&&it.a===1&&SURE.indexOf(it)>=0; window.openFromDua(s,a,!full); }));
+          L.appendChild(card(title, suraName(s)+' · '+a+'. '+dt('dua_ayet'), k, function(){ var full=!!(it&&it.a===1&&(SURE.indexOf(it)>=0||duaCardType(it)==='sure')); window.openFromDua(s,a,it&&it.aEnd,title,full); }));
         } else { var idx=+k.slice(1),n=NAMAZ[idx]; if(!n)return; L.appendChild(card(n.t,dt('dua_namaz'),k,function(){ showDuaDetail(idx); })); }
       });
     }
@@ -16801,7 +15982,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     var sec=document.createElement('div'); sec.id='duaFavSection';
     var h=document.createElement('div'); h.className='fhead'; h.textContent=dt('fav_dua_head'); sec.appendChild(h);
     favs.forEach(function(k){ var title,onClick;
-      if(k.charAt(0)==='q'){ var p=k.slice(1).split(':'),s=+p[0],a=+p[1]; var it=SURE.concat(G).find(function(x){return x.s===s&&x.a===a;}); title=favTitle(k)||(it?(it.tn||it.t||it.ok):(suraName(s)+' '+a)); onClick=function(){ var full=it&&it.a===1&&SURE.indexOf(it)>=0; window.openFromDua(s,a,it&&it.aEnd,title,full); }; }
+      if(k.charAt(0)==='q'){ var p=k.slice(1).split(':'),s=+p[0],a=+p[1]; var it=SURE.concat(G).find(function(x){return x.s===s&&x.a===a;}); title=favTitle(k)||(it?(it.tn||it.t||it.ok):(suraName(s)+' '+a)); onClick=function(){ var full=it&&it.a===1&&(SURE.indexOf(it)>=0||duaCardType(it)==='sure'); window.openFromDua(s,a,it&&it.aEnd,title,full); }; }
       else { var idx=+k.slice(1),n=NAMAZ[idx]; if(!n)return; title=favTitle(k)||n.t; onClick=function(){ showDuaDetail(idx); }; }
       var row=document.createElement('div'); row.className='sitem'; row.style.cursor='pointer';
       row.innerHTML='<span class="cd" style="background:var(--gold)"></span><span class="m"><span class="t1">'+esc(title)+'</span></span>';
@@ -16841,16 +16022,16 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     <button type="button" id="accountRetry" class="account-link">Bağlantıyı yeniden dene</button>
   </div><p id="accountStatus" role="status" aria-live="polite"></p>
 </dialog>
-<script type="module" src="/assets/account.js?v=337"></script>
+<script type="module" src="/assets/account.js?v=358"></script>
 <script src="/assets/reader-help-drafts.js?v=1"></script>
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
-<script src="/assets/workflow-i18n.js?v=351"></script>
+<script src="/assets/workflow-i18n.js?v=358"></script>
 <script src="/assets/dua-practice.js?v=351"></script>
-<script src="/assets/study-workflow.js?v=355"></script>
-<script src="/assets/study-split.js?v=335"></script>
-<script src="/assets/study-sessions.js?v=335"></script>
+<script src="/assets/study-workflow.js?v=360"></script>
+<script src="/assets/study-split.js?v=360"></script>
+<script src="/assets/study-sessions.js?v=360"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>
 </body>
 </html>

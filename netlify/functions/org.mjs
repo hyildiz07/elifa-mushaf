@@ -7,12 +7,16 @@
 
    Depo: Firestore işlemleri; mevcut Netlify Blobs verisi ilk erişimde taşınır.
 
-   Üyelik YOK. Kimlik doğrulama yok. İki anahtar var:
+   Misafir katılımı ve isteğe bağlı doğrulanmış hesap birlikte desteklenir.
+   Cüz işlemleri sahiplik anahtarı veya bağlı hesapla doğrulanır:
      · code       → katılım linki (herkese verilir)
      · adminToken → yönetici linki (yalnız kurucuda kalır)
    ══════════════════════════════════════════════════════════════════ */
 
 import { withOrgTransaction } from '../../server/database.mjs';
+import {firebaseServices} from '../../server/firebase.mjs';
+import {deploymentContext,previewResponse} from '../../server/deploy-context.mjs';
+import {capabilityValid,capabilityHash,returnKeyValid,accessKeyValid,deriveReturnKey,returnKeyHash,matchesItemKey,membershipKey,closedAccountKey,creationFingerprint,usedCapability,rememberCapability,fullHatim,ownsItem,itemView,rememberMembership,validDate} from '../../server/hatim-access.mjs';
 
 const ALPHA = 'abcdefghijkmnpqrstuvwxyz23456789'; // karışan harfler yok (l,o,0,1)
 
@@ -25,11 +29,14 @@ function randCode(n) {
 }
 
 /* Zikirde kişi başı sayı DIŞARI SIZMAZ — sadece toplam + isimler. */
-function publicView(org, isAdmin) {
+function publicView(org, isAdmin, p={}, session={},code=org.code||p.code) {
   const v = {
     type: org.type, title: org.title, zikirAd: org.zikirAd, hedef: org.hedef,
     dueDate: org.dueDate, adminName: org.adminName, createdAt: org.createdAt,
-    items: org.items, public: !!org.public,
+    items: (org.items||[]).map(item=>itemView(item,p,session,code)), public: !!org.public,
+    archived: !!org.archivedAt,
+    fullHatim: org.type==='hatim'&&fullHatim(org.items),
+    complete: org.type==='hatim'&&!!org.items?.length&&org.items.every(i=>i.status==='okundu'),
   };
   if (org.type === 'zikir') {
     const c = org.contributions || [];
@@ -42,7 +49,7 @@ function publicView(org, isAdmin) {
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status,
-  headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'no-store' },
+  headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'private, no-store', 'vary':'Authorization, Origin', 'x-content-type-options':'nosniff' },
 });
 const fail = (msg, status = 400) => json({ error: msg }, status);
 
@@ -52,8 +59,10 @@ function validOrg(o) {
   if (o.type !== 'hatim' && o.type !== 'zikir') return 'Geçersiz tür';
   if (typeof o.title !== 'string' || !o.title.trim() || o.title.length > 120) return 'Başlık geçersiz';
   if (o.adminName && String(o.adminName).length > 60) return 'İsim çok uzun';
+  if(!validDate(o.dueDate))return 'Geçersiz son tarih';
+  if(o.public!==undefined&&typeof o.public!=='boolean')return 'Görünürlük geçersiz';
   if (o.type === 'hatim') {
-    if (!Array.isArray(o.items) || o.items.length < 1 || o.items.length > 30)
+    if (!Array.isArray(o.items) || o.items.length !== 30)
       return 'Cüz listesi geçersiz';
     if(o.items.some(i=>!Number.isInteger(+i.no)||+i.no<1||+i.no>30)||new Set(o.items.map(i=>+i.no)).size!==o.items.length)return 'Cüz numaraları geçersiz';
   } else {
@@ -141,31 +150,58 @@ async function handlePoll(p, store) {
 }
 
 const NATIVE_ORIGIN='capacitor://localhost';
-async function requestHandler(req) {
+export function createOrgHandler({services=firebaseServices,transaction,environment=()=>process.env}={}){
+ const requestHandler=async(req,deployment)=>{
   if (req.method !== 'POST') return fail('Yalnız POST', 405);
+  const origin=req.headers.get('origin');
+  if(origin&&origin!==new URL(req.url).origin&&origin!==NATIVE_ORIGIN)return fail('Bu kaynaktan işlem yapılamıyor.',403);
   let p;
-  try { const raw=await req.text();if(raw.length>65536)return fail('İstek çok büyük',413);p=JSON.parse(raw); } catch { return fail('Gövde okunamadı'); }
+  try { const raw=await req.text();if(Buffer.byteLength(raw)>65536)return fail('İstek çok büyük',413);p=JSON.parse(raw); } catch { return fail('Gövde okunamadı'); }
   if (!p || typeof p!=='object'||Array.isArray(p)||!p.action) return fail('İşlem belirtilmedi');
-  try{return await withOrgTransaction(store=>handleOrg(p,store));}
+  let session={};
+  const authorization=req.headers.get('authorization');
+  if(authorization){
+    const token=authorization.match(/^Bearer (\S+)$/)?.[1];
+    if(!token)return fail('Oturum geçersiz. Yeniden giriş yap.',401);
+    try{
+      const {auth}=services(),verified=await auth.verifyIdToken(token,true);
+      const user=await auth.getUser(verified.uid);
+      if(user.disabled)return fail('Oturum geçersiz.',401);
+      if(p.expectedUser!==verified.uid)return fail('Hesap değişti. Yeniden kontrol et.',409);
+      session={uid:verified.uid};
+    }catch{return fail('Oturum doğrulanamadı. Yeniden giriş yap.',401);}
+  }
+  try{
+    const work=store=>handleOrg(p,store,session);
+    return await (transaction?transaction(work):withOrgTransaction(work,{environment:environment(),deployment,services}));
+  }
   catch{return fail('İşlem tamamlanamadı. Bağlantını kontrol edip tekrar dene.',503);}
+ };
+ return async(req,runtime)=>{
+  let context;try{context=deploymentContext(environment(),runtime);}catch{return fail('Önizleme veri alanı doğrulanamadı. Canlı kayıtlara erişim açılmadı.',503);}
+  if(context.kind==='preview'&&req.headers.has('authorization'))return previewResponse(fail('Bu önizleme yalnız misafir hatim denemesi içindir. Canlı hesap oturumunu burada kullanma.',403),context);
+  return previewResponse(await requestHandler(req,context),context);
+ };
 }
-export default async (req) => {
+const requestHandler=createOrgHandler();
+export default async (req,context) => {
   const native=req.headers.get('origin')===NATIVE_ORIGIN;
   if(native&&req.method==='OPTIONS')return new Response(null,{status:204,headers:{
     'Access-Control-Allow-Origin':NATIVE_ORIGIN,
     'Access-Control-Allow-Methods':'POST, OPTIONS',
-    'Access-Control-Allow-Headers':'Content-Type',
+    'Access-Control-Allow-Headers':'Content-Type, Authorization',
     'Access-Control-Max-Age':'3600',
     'Vary':'Origin'
   }});
-  const response=await requestHandler(req);
+  const response=await requestHandler(req,context);
   if(!native)return response;
   const headers=new Headers(response.headers);
   headers.set('Access-Control-Allow-Origin',NATIVE_ORIGIN);
-  headers.set('Vary','Origin');
+  headers.set('Vary','Authorization, Origin');
   return new Response(response.body,{status:response.status,statusText:response.statusText,headers});
 };
-export async function handleOrg(p,store){
+export async function handleOrg(p,store,session={}){
+  if(session.uid&&await store.get(closedAccountKey(session.uid),{type:'json'}))return fail('Bu hesabın silme işlemi başladı. Çıkış yapıp kişisel dönüş bağlantını kullanabilirsin.',409);
 
   /* ── keşif işlemleri (org koduna bağlı değil) ── */
   if (p.action === 'discoverConfig' || p.action === 'discoverSet' || p.action === 'discoverList') {
@@ -177,14 +213,53 @@ export async function handleOrg(p,store){
     if (r) return r;
   }
 
+  if(p.capability!==undefined&&!accessKeyValid(p.capability))return fail('Kişisel erişim anahtarı geçersiz');
+  if(p.capabilities!==undefined){
+    if(!p.capabilities||typeof p.capabilities!=='object'||Array.isArray(p.capabilities)||Object.keys(p.capabilities).length>30||Object.entries(p.capabilities).some(([n,t])=>!/^([1-9]|[12][0-9]|30)$/.test(n)||!accessKeyValid(t)))return fail('Kişisel erişim anahtarları geçersiz');
+  }
+  if(p.action==='myList'){
+    if(!session.uid)return fail('Cüzlerini hesabından görmek için giriş yap.',401);
+    const index=await store.get(membershipKey(session.uid),{type:'json'});
+    const codes=Array.isArray(index?.codes)?index.codes:[];
+    const cursor=p.cursor===undefined?0:Number(p.cursor);
+    if(!Number.isSafeInteger(cursor)||cursor<0)return fail('Geçersiz liste konumu');
+    const items=[];
+    for(const code of codes.slice(cursor,cursor+30)){
+      const org=await store.get(code,{type:'json'});if(!org)continue;
+      const isAdmin=org.ownerUid===session.uid;
+      const mine=(org.items||[]).filter(i=>ownsItem(i,{},session)).map(i=>itemView(i,{},session));
+      if(!isAdmin&&!mine.length)continue;
+      items.push({code,title:org.title,type:org.type,dueDate:org.dueDate||null,createdAt:org.createdAt,isAdmin,archived:!!org.archivedAt,items:mine});
+    }
+    return json({items,nextCursor:cursor+30<codes.length?cursor+30:null});
+  }
+
   /* ── CREATE ── */
   if (p.action === 'create') {
     const bad = validOrg(p.org);
     if (bad) return fail(bad);
 
-    let code=randCode(6),adminToken=randCode(12);
+    if(p.creationToken!==undefined&&!capabilityValid(p.creationToken))return fail('Oluşturma işlem anahtarı geçersiz');
+    const creationKey=p.creationToken?'_create_'+capabilityHash(p.creationToken):null;
+    const fingerprint=creationFingerprint(p.org);
+    if(creationKey){
+      const prior=await store.get(creationKey,{type:'json'});
+      if(prior){
+        if(prior.fingerprint!==fingerprint)return fail('Bu işlem anahtarı başka bir hatim için kullanılmış. Yeni oluşturma başlat.',409);
+        if(prior.ownerUid&&prior.ownerUid!==session.uid)return fail('Oluşturma işlemi başka bir hesaba ait.',403);
+        const existing=await store.get(prior.code,{type:'json'});
+        if(!existing)return fail('Önceki oluşturma kaydı bulunamadı. Yeni işlem başlat.',409);
+        return json({code:prior.code,adminToken:existing.adminToken,org:publicView(existing,true,p,session),replayed:true});
+      }
+    }
+
+    if(p.org.public){
+      const cfg=await store.get('_config',{type:'json'})||{};
+      if(!cfg.discoverEnabled)return fail('Açık hatim listesi şu an kapalı. Bağlantıyla katılımı seçebilirsin.',403);
+    }
+    let code=randCode(6),adminToken=randCode(32);
     while(await store.get(code,{type:'json'}))code=randCode(6);
-    while(await store.get('a_'+adminToken,{type:'text'}))adminToken=randCode(12);
+    while(await store.get('a_'+adminToken,{type:'text'}))adminToken=randCode(32);
     const org = {
       type: p.org.type,
       title: String(p.org.title || '').slice(0, 120),
@@ -196,61 +271,123 @@ export async function handleOrg(p,store){
         no: +i.no, name: '', status: 'bos', ts: 0,
       })),
       contributions: [],
-      public: false, publishedAt: 0,
+      public: !!p.org.public, publishedAt: p.org.public?Date.now():0,
+      ownerUid:session.uid||null, archivedAt:0, creationKey,
       code, adminToken, createdAt: Date.now(), lastActivity: Date.now(),
     };
     await store.setJSON(code, org);
     await store.set('a_' + adminToken, code);      // yönetici anahtarı → kod
-    return json({ code, adminToken });
+    if(creationKey)await store.setJSON(creationKey,{code,fingerprint,ownerUid:session.uid||null});
+    await rememberMembership(store,session.uid,code);
+    if(org.public){const idx=await store.get('_index',{type:'json'})||[];await store.setJSON('_index',[{code,publishedAt:org.publishedAt},...idx.filter(x=>x.code!==code)].slice(0,200));}
+    return json({ code, adminToken,org:publicView(org,true,p,session) });
   }
 
   /* ── kod çöz ── */
   let code = p.code;
   if(code&&!/^[a-z0-9]{6}$/.test(code))return fail('Geçersiz kod');
-  if(p.admin&&!/^[a-z0-9]{12}$/.test(p.admin))return fail('Geçersiz yönetici anahtarı');
+  if(p.admin&&!/^(?:[a-z0-9]{12}|[a-z0-9]{32})$/.test(p.admin))return fail('Geçersiz yönetici anahtarı');
   if (!code && p.admin) code = await store.get('a_' + p.admin, { type: 'text' });
   if (!code) return fail('Organizasyon bulunamadı', 404);
 
   const org = await store.get(code, { type: 'json' });
   if (!org) return fail('Organizasyon bulunamadı', 404);
 
-  const isAdmin = !!p.admin && p.admin === org.adminToken;
+  const isAdmin = (!!p.admin && p.admin === org.adminToken)||(!!session.uid&&org.ownerUid===session.uid);
   const save = () => { org.lastActivity = Date.now(); return store.setJSON(code, org); };
+  const view=()=>publicView(org,isAdmin,p,session,code);
+  const ownerItem=()=>{
+    if(org.type!=='hatim')return null;
+    return (org.items||[]).find(i=>i.no===+p.no);
+  };
 
   /* ── GET ── */
   if (p.action === 'get') {
-    return json({ org: publicView(org, isAdmin), code });
+    return json({ org: view(), code });
   }
 
-  /* ── CLAIM (cüz al) ── */
-  if (p.action === 'claim') {
-    const it = (org.items || []).find(i => i.no === +p.no);
-    if (!it || it.status !== 'bos')
-      return fail('Bu cüz az önce başkası tarafından alındı');
-    it.status = 'alindi';
-    it.name = String(p.name || '').slice(0, 60);
-    it.ts = Date.now();
-    await save();
-    return json({ org: publicView(org, isAdmin), code });
+  /* Claim capabilities are generated and persisted by the client BEFORE the
+     request. Retrying a lost reply with that exact capability is idempotent. */
+  if(p.action==='claim'){
+    const it=ownerItem();
+    if(!it)return fail('Cüz bulunamadı');
+    if(!capabilityValid(p.capability))return fail('Uygulamayı yenileyip cüzünü yeniden seç. Kişisel erişim anahtarı gerekli.',409);
+    if(it.status!=='bos'){
+      const sameHash=capabilityHash(p.capability)===it.claimHash;
+      if(sameHash&&(!it.ownerUid||it.ownerUid===session.uid))return json({org:view(),code,claimedNo:it.no});
+      return fail('Bu cüz az önce başka biri tarafından alındı.',409);
+    }
+    if(org.archivedAt)return fail('Bu hatim arşivde. Yeniden açılması için yöneticisine başvur.',409);
+    if(usedCapability(it,capabilityHash(p.capability)))return fail('Bu kişisel anahtarın önceki katılımı sona ermiş. Cüzü yeni bir anahtarla yeniden seç.',409);
+    const name=String(p.name||'').trim();
+    if(name.length<2||name.length>60)return fail('2–60 karakterlik ad veya takma ad yaz.');
+    rememberCapability(it,capabilityHash(p.capability));
+    Object.assign(it,{status:'alindi',name,ts:Date.now(),claimHash:capabilityHash(p.capability),ownerUid:session.uid||null});
+    delete it.returnHash;delete it.releaseReturnHash;delete it.releaseHash;delete it.releasedUid;
+    await rememberMembership(store,session.uid,code);await save();
+    return json({org:view(),code,claimedNo:it.no});
   }
-
-  /* ── RELEASE (cüzü bırak) ── */
-  if (p.action === 'release') {
-    const it = (org.items || []).find(i => i.no === +p.no);
-    if (!it || it.status !== 'alindi')
-      return fail('Sadece alınmış (henüz okunmamış) cüz bırakılabilir');
-    it.status = 'bos'; it.name = ''; it.ts = Date.now();
-    await save();
-    return json({ org: publicView(org, isAdmin), code });
+  if(p.action==='returnCode'){
+    const it=ownerItem();
+    if(!it||it.status==='bos')return fail('Etkin cüz katılımı bulunamadı.',404);
+    // A signed-in owner or administrator alone cannot mint a new bearer key.
+    // The caller must explicitly possess the current full or prepared short key.
+    if(!matchesItemKey(it,p.capability,code)||(it.ownerUid&&it.ownerUid!==session.uid))return fail('Kişisel dönüş kodu için güncel kişisel anahtarın gerekli.',403);
+    const returnKey=returnKeyValid(p.capability)?p.capability:deriveReturnKey(code,it.no,p.capability);
+    const digest=returnKeyHash(returnKey,code,it.no);
+    if(it.returnHash!==digest){it.returnHash=digest;await save();}
+    return json({code,no:it.no,returnKey});
   }
-
-  /* ── COMPLETE (okundu işaretle) ── */
-  if (p.action === 'complete') {
-    const it = (org.items || []).find(i => i.no === +p.no);
-    if (!it || it.status === 'bos') return fail('Bu cüz henüz alınmamış');
-    it.status = 'okundu'; it.ts = Date.now();
-    await save();
-    return json({ org: publicView(org, isAdmin), code });
+  if(['release','complete','undo'].includes(p.action)){
+    const it=ownerItem();
+    if(!it)return fail('Cüz bulunamadı');
+    if(p.action==='release'&&it.status==='bos'&&((session.uid&&it.releasedUid===session.uid)||(!it.releasedUid&&((capabilityHash(p.capability)&&capabilityHash(p.capability)===it.releaseHash)||(returnKeyHash(p.capability,code,it.no)&&returnKeyHash(p.capability,code,it.no)===it.releaseReturnHash)))))return json({org:view(),code});
+    if(!ownsItem(it,p,session,code))return fail('Yalnız kendi cüzünü değiştirebilirsin. Eski katılımsa yöneticiden sana özel dönüş bağlantısı iste.',403);
+    const target=p.action==='release'?'bos':p.action==='complete'?'okundu':'alindi';
+    if(it.status===target)return json({org:view(),code});
+    if(p.action==='undo'&&it.status!=='okundu')return fail('Yalnız okundu işareti geri alınabilir.',409);
+    it.status=target;it.ts=Date.now();
+    if(target==='bos'){rememberCapability(it,it.claimHash);it.name='';it.releaseHash=it.claimHash||null;it.releaseReturnHash=it.returnHash||null;it.releasedUid=it.ownerUid||null;delete it.claimHash;delete it.returnHash;delete it.ownerUid;}
+    org.archivedAt=0;await save();
+    return json({org:view(),code});
+  }
+  if(p.action==='issueRecovery'){
+    if(!isAdmin)return fail('Yalnız yönetici kişisel dönüş bağlantısı hazırlayabilir.',403);
+    const it=ownerItem();
+    if(!it||it.status==='bos')return fail('Bu cüz henüz alınmamış.',409);
+    if(!capabilityValid(p.capability))return fail('Yeni kişisel erişim anahtarı gerekli.');
+    if(it.claimHash===capabilityHash(p.capability))return json({org:view(),code,recoveryNo:it.no});
+    if(usedCapability(it,capabilityHash(p.capability)))return fail('Bu dönüş bağlantısı daha sonra yenilenmiş. Güncel bağlantıyı kullan veya yeni bir bağlantı oluştur.',409);
+    rememberCapability(it,capabilityHash(p.capability));
+    it.claimHash=capabilityHash(p.capability);delete it.returnHash;delete it.releaseReturnHash;delete it.ownerUid;it.ts=Date.now();await save();
+    return json({org:view(),code,recoveryNo:it.no});
+  }
+  if(p.action==='bind'){
+    if(!session.uid)return fail('Katılımını hesabına bağlamak için giriş yap.',401);
+    const it=ownerItem();
+    if(!it||it.status==='bos')return fail('Katılım bulunamadı.',404);
+    if(it.ownerUid&&it.ownerUid!==session.uid)return fail('Bu katılım başka bir hesaba bağlı.',409);
+    if(it.ownerUid!==session.uid&&!ownsItem(it,p,{},code))return fail('Katılımı bağlamak için kişisel dönüş anahtarı gerekli.',403);
+    it.ownerUid=session.uid;it.ts=Date.now();await rememberMembership(store,session.uid,code);await save();
+    return json({org:view(),code});
+  }
+  if(p.action==='bindAdmin'){
+    if(!session.uid)return fail('Yönetimi hesabına bağlamak için giriş yap.',401);
+    if(!p.admin||p.admin!==org.adminToken)return fail('Özel yönetici bağlantısı gerekli.',403);
+    if(org.ownerUid&&org.ownerUid!==session.uid)return fail('Bu hatim başka bir yönetici hesabına bağlı.',409);
+    org.ownerUid=session.uid;await rememberMembership(store,session.uid,code);await save();
+    return json({org:view(),code});
+  }
+  if(p.action==='update'||p.action==='archive'||p.action==='reopen'){
+    if(!isAdmin)return fail('Yetki yok',403);
+    if(p.action==='update'){
+      if(p.title!==undefined){if(typeof p.title!=='string'||!p.title.trim()||p.title.length>120)return fail('Başlık geçersiz');org.title=p.title.trim();}
+      if(p.dueDate!==undefined){if(!validDate(p.dueDate))return fail('Geçersiz son tarih');org.dueDate=p.dueDate||null;}
+    }else{
+      org.archivedAt=p.action==='archive'?Date.now():0;
+      if(org.archivedAt){org.public=false;org.publishedAt=0;const idx=await store.get('_index',{type:'json'})||[];await store.setJSON('_index',idx.filter(x=>x.code!==code));}
+    }
+    await save();return json({org:view(),code});
   }
 
   /* ── CONTRIBUTE (zikir payı ekle) ── */
@@ -264,28 +401,33 @@ export async function handleOrg(p,store){
       name: String(p.name || '').slice(0, 60), amount: n, ts: Date.now(),
     });
     await save();
-    return json({ org: publicView(org, isAdmin), code });
+    return json({ org: view(), code });
   }
 
   /* ── ADMINSET (yönetici düzeltme) ── */
   if (p.action === 'adminSet') {
     if (!isAdmin) return fail('Yetki yok', 403);
     if(!['bos','alindi','okundu'].includes(p.status))return fail('Geçersiz durum');
-    const it = (org.items || []).find(i => i.no === +p.no);
-    if (it) {
+    const it = ownerItem();
+    if(!it)return fail('Cüz bulunamadı');
+    if(p.name!==undefined&&(typeof p.name!=='string'||p.name.trim().length<2||p.name.length>60))return fail('2–60 karakterlik ad veya takma ad yaz.');
+    {
       it.status = p.status;
-      if (p.status === 'bos') it.name = '';
+      if (p.status === 'bos') {rememberCapability(it,it.claimHash);it.name='';delete it.claimHash;delete it.returnHash;delete it.releaseReturnHash;delete it.ownerUid;delete it.releaseHash;delete it.releasedUid;}
+      else if(p.name!==undefined)it.name=p.name.trim();
       it.ts = Date.now();
     }
     await save();
-    return json({ org: publicView(org, true), code });
+    return json({ org: publicView(org,true,p,session), code });
   }
 
   /* ── PUBLISH (kurucu kendi hatmini herkese açık yapar/kaldırır) ── */
   if (p.action === 'publish') {
     if (!isAdmin) return fail('Yetki yok', 403);
+    if(typeof p.public!=='boolean')return fail('Görünürlük geçersiz');
     const cfg = await store.get('_config', { type: 'json' }) || {};
-    if (!cfg.discoverEnabled) return fail('Herkese açık keşif şu an kapalı', 403);
+    if (p.public&&!cfg.discoverEnabled) return fail('Herkese açık keşif şu an kapalı', 403);
+    if(org.archivedAt&&p.public)return fail('Arşivdeki hatim açık listeye eklenemez.',409);
     org.public = !!p.public;
     org.publishedAt = org.public ? Date.now() : 0;
     await save();
@@ -294,7 +436,7 @@ export async function handleOrg(p,store){
     const rest = idx.filter(x => x.code !== code);
     if (org.public) rest.unshift({ code, publishedAt: org.publishedAt });
     await store.setJSON('_index', rest.slice(0, 200));
-    return json({ org: publicView(org, true), code });
+    return json({ org: publicView(org,true,p,session), code });
   }
 
   return fail('Bilinmeyen işlem');
@@ -324,9 +466,9 @@ async function handleDiscover(p, store) {
     const out = [];
     for (const ent of idx.slice(0, 60)) {
       const o = await store.get(ent.code, { type: 'json' });
-      if (!o || !o.public) continue;
+      if (!o || !o.public || o.archivedAt || o.type!=='hatim') continue;
       const base = {
-        code: o.code, type: o.type, title: o.title, adminName: o.adminName || '',
+        code: ent.code, type: o.type, title: o.title, adminName: o.adminName || '',
         createdAt: o.createdAt, publishedAt: o.publishedAt || 0,
       };
       if (o.type === 'hatim') {
@@ -334,6 +476,9 @@ async function handleDiscover(p, store) {
         base.total = items.length || 30;
         base.done = items.filter(i => i.status === 'okundu').length;
         base.taken = items.filter(i => i.status !== 'bos').length;
+        base.available = items.filter(i => i.status === 'bos').length;
+        base.fullHatim = fullHatim(items);
+        base.dueDate = o.dueDate||null;
       } else {
         const c = o.contributions || [];
         base.hedef = o.hedef || 0; base.zikirAd = o.zikirAd || '';

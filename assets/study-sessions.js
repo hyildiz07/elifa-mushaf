@@ -2,6 +2,7 @@
   'use strict';
   // Same locale order as the app's translation table.
   const labels={
+    study_new:['Yeni çalışma','Neue Übung','New study','Новое занятие','مراجعة جديدة','Nouvelle étude','Nuevo estudio','Νέα μελέτη','新练习','新しい学習','새 학습','नया अभ्यास','نئی مشق','Nuovo studio','Latihan baru','Nieuwe studie','Novo estudo','تمرین جدید','নতুন অনুশীলন','Latihan baharu','Zoezi jipya'],
     study_save_name:['Çalışmaya ad ver (isteğe bağlı)','Übung benennen (optional)','Name this study (optional)','Назовите занятие (необязательно)','سمّ هذه المراجعة (اختياري)','Nommer cette étude (facultatif)','Pon nombre al estudio (opcional)','Ονόμασε τη μελέτη (προαιρετικά)','为练习命名（可选）','学習に名前を付ける（任意）','학습 이름 (선택)','अभ्यास का नाम (वैकल्पिक)','مشق کا نام (اختیاری)','Dai un nome allo studio (facoltativo)','Beri nama latihan (opsional)','Geef de studie een naam (optioneel)','Nomeie o estudo (opcional)','نام تمرین (اختیاری)','অনুশীলনের নাম (ঐচ্ছিক)','Namakan latihan (pilihan)','Ipe zoezi jina (hiari)'],
     study_save_name_hint:['Örn. Kehf 1–10','z. B. Al-Kahf 1–10','e.g. Al-Kahf 1–10','Напр. Аль-Кахф 1–10','مثال: الكهف ١–١٠','Ex. Al-Kahf 1–10','Ej. Al-Kahf 1–10','π.χ. Αλ-Καχφ 1–10','例如：山洞章 1–10','例：洞窟章 1–10','예: 알카흐프 1–10','जैसे अल-कहफ़ 1–10','مثلاً الکہف 1–10','Es. Al-Kahf 1–10','Mis. Al-Kahf 1–10','Bijv. Al-Kahf 1–10','Ex.: Al-Kahf 1–10','مثلاً کهف ۱–۱۰','যেমন আল-কাহফ ১–১০','Contoh: Al-Kahf 1–10','Mf. Al-Kahf 1–10'],
     study_save:['Bu çalışmayı kaydet','Übung speichern','Save this study','Сохранить занятие','احفظ هذه المراجعة','Enregistrer cette étude','Guardar este estudio','Αποθήκευση μελέτης','保存此练习','この学習を保存','이 학습 저장','यह अभ्यास सहेजें','یہ مشق محفوظ کریں','Salva questo studio','Simpan latihan ini','Deze studie opslaan','Guardar este estudo','ذخیره این تمرین','এই অনুশীলন সংরক্ষণ','Simpan latihan ini','Hifadhi zoezi hili'],
@@ -25,11 +26,20 @@
   let editingId=null,activeId=null,confirmation=null,editingFromReader=false;
   function message(label){return window.tr?window.tr(label):label;}
   function rangeOf(item){return SURAHS[item.sid-1].tr+' · '+item.from+'–'+item.to+' '+message('study_verses');}
+  function validSelection(item){
+    const words=item.wordRange;
+    return (item.selectionTitle===undefined||(typeof item.selectionTitle==='string'&&item.selectionTitle.length<=160))&&
+      (words===undefined||(words&&typeof words==='object'&&!Array.isArray(words)&&
+        Number.isInteger(words.fromAy)&&Number.isInteger(words.toAy)&&words.fromAy===item.from&&words.toAy===item.to&&words.fromAy<=words.toAy&&
+        Number.isInteger(words.fromWord)&&Number.isInteger(words.toWord)&&words.fromWord>=1&&words.toWord>=1&&words.fromWord<=1000&&words.toWord<=1000&&
+        (words.fromAy!==words.toAy||words.fromWord<=words.toWord)));
+  }
   function isValid(item){
     return item&&typeof item==='object'&&!Array.isArray(item)&&
       typeof item.id==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(item.id)&&
       typeof item.title==='string'&&!!item.title.trim()&&item.title.length<=80&&
       validStudyRange(item.sid,item.from,item.to)&&
+      validSelection(item)&&
       (item.selectedAy===undefined||(Number.isInteger(item.selectedAy)&&item.selectedAy>=item.from&&item.selectedAy<=item.to))&&
       typeof item.createdAt==='string'&&Number.isFinite(Date.parse(item.createdAt))&&
       typeof item.updatedAt==='string'&&Number.isFinite(Date.parse(item.updatedAt))&&
@@ -41,13 +51,22 @@
           Array.isArray(cuts)&&cuts.every((pos,i)=>Number.isInteger(pos)&&pos>0&&pos<=1000&&
             (i===0||pos>cuts[i-1])))));
   }
-  function read(){const items=store.get(key,[]);return Array.isArray(items)?items.filter(isValid):[];}
+  function read(){const items=store.get(key,[]);return Array.isArray(items)?JSON.parse(JSON.stringify(items.filter(isValid))):[];}
   function uuid(){
     if(crypto.randomUUID)return crypto.randomUUID();
     const bytes=crypto.getRandomValues(new Uint8Array(16));bytes[6]=(bytes[6]&15)|64;bytes[8]=(bytes[8]&63)|128;
     return [...bytes].map((n,i)=>(i===4||i===6||i===8||i===10?'-':'')+n.toString(16).padStart(2,'0')).join('');
   }
   function resetEdit(){editingId=null;byId('studySessionTitle').value='';updateSaveState();}
+  function newDraft({fromReader=false,fromSelection=false}={}){
+    closeConfirmation(false);activeId=null;editingFromReader=fromReader;
+    window.elifaCloseStudySplit?.({restoreFocus:false});
+    // Clearing the remembered range is essential: two independent records may
+    // deliberately cover the exact same verses with different manual cuts.
+    if(!fromReader)window.elifaRememberStudySplitPrefs?.(readStudyDraft(),null);
+    if(!fromSelection&&!fromReader)window.elifaStudySelection?.clear();
+    window.elifaStudySettings?.onSetup(fromReader);resetEdit();render();
+  }
   function updateSaveState(){
     const {sid,from,to}=readStudyDraft(),valid=validStudyRange(sid,from,to);
     byId('studySessionSave').disabled=!valid;
@@ -61,7 +80,7 @@
   }
   function applyRange(item){
     byId('studySurah').value=item.sid;byId('studyFrom').value=item.from;byId('studyTo').value=item.to;
-    updateStudySetup();updateSaveState();
+    updateStudySetup();window.elifaStudySelection?.load(item);updateSaveState();
   }
   function closeConfirmation(returnFocus=true){
     if(!confirmation)return;
@@ -103,43 +122,48 @@
     const list=byId('studySavedList');list.replaceChildren();
     byId('studySavedEmpty').hidden=items.length>0;
     for(const item of items){
-      const row=document.createElement('li');row.className='studySavedItem';
-      const detail=document.createElement('div'),title=document.createElement('strong'),range=document.createElement('small');
-      title.textContent=item.title;range.textContent=rangeOf(item)+(item.splitMode==='manual'?' · '+message('study_split_manual'):'');detail.append(title,range);
+      const row=document.createElement('li');row.className='studySavedItem sd-study-row'+(item.id===activeId?' is-active':'');
+      if(item.id===activeId)row.setAttribute('aria-current','true');
+      const detail=document.createElement('div'),badge=document.createElement('span'),text=document.createElement('div'),title=document.createElement('strong'),range=document.createElement('small');
+      detail.className='studySavedDetail studySavedCopy sd-study-copy';badge.className='studySavedNumber sd-study-number';badge.textContent=String(item.sid);badge.setAttribute('aria-hidden','true');text.className='sd-study-text';
+      title.textContent=item.title;range.textContent=(item.selectionTitle||rangeOf(item))+(item.splitMode==='manual'?' · '+message('study_split_manual'):'');text.append(title,range);detail.append(badge,text);
       if(item.progress?.completed)range.textContent+=' · '+message('practice_completed');
-      const actions=document.createElement('div');actions.className='studySavedActions';
+      const actions=document.createElement('div');actions.className='studySavedActions sd-study-actions';
       const open=button('study_open_saved',()=>{
           window.elifaCloseStudySplit?.({restoreFocus:false});
           applyRange(item);
-          activeId=item.id;editingId=item.id;
+          activeId=item.id;editingId=item.id;editingFromReader=false;byId('studySessionTitle').value=item.title;
           window.elifaRememberStudySplitPrefs?.(item,item.splitMode?{mode:item.splitMode,cutsByAy:item.manualCuts||{},selectedAy:item.selectedAy??null}:null);
           window.elifaStudySettings?.load(item);
           byId('studyOpen').click();
-        });
+        },'sd-study-open');
       const edit=button('study_edit_saved',()=>{
           editingFromReader=false;
+          window.elifaCloseStudySplit?.({restoreFocus:false});
           editingId=item.id;applyRange(item);byId('studySessionTitle').value=item.title;
+          window.elifaRememberStudySplitPrefs?.(item,item.splitMode?{mode:item.splitMode,cutsByAy:item.manualCuts||{},selectedAy:item.selectedAy??null}:null);
           window.elifaStudySettings?.load(item);
           updateSaveState();byId('studySessionTitle').focus();
-        });
-      const remove=button('study_delete',()=>askDelete(item,row,remove),'studyDelete');
+        },'sd-study-edit');
+      const remove=button('study_delete',()=>askDelete(item,row,remove),'studyDelete sd-study-delete');
       remove.setAttribute('aria-expanded','false');
       for(const control of [open,edit,remove])control.setAttribute('aria-label',item.title+' · '+control.textContent);
       actions.append(open,edit,remove);
       if(item.progress&&!item.progress.completed){
         const resume=button('study_resume',()=>{
-          window.elifaCloseStudySplit?.({restoreFocus:false});applyRange(item);activeId=item.id;editingId=item.id;
+          window.elifaCloseStudySplit?.({restoreFocus:false});applyRange(item);activeId=item.id;editingId=item.id;editingFromReader=false;byId('studySessionTitle').value=item.title;
           window.elifaRememberStudySplitPrefs?.(item,item.splitMode?{mode:item.splitMode,cutsByAy:item.manualCuts||{},selectedAy:item.progress.ay}:null);
           window.elifaStudySettings?.load(item,{resume:true});byId('studyOpen').click();
-        });actions.append(resume);
+        },'sd-study-resume');actions.append(resume);
       }
       row.append(detail,actions);list.appendChild(row);
     }
     updateSaveState();
   }
   function save(){
-    const {sid,from,to}=readStudyDraft();
+    const draft=readStudyDraft(),{sid,from,to}=draft;
     if(!validStudyRange(sid,from,to)){updateStudySetup();return;}
+    if(!validSelection(draft)){toast(message('study_invalid'));return;}
     const items=read(),now=new Date().toISOString();
     const title=byId('studySessionTitle').value.trim()||SURAHS[sid-1].tr+' '+from+'–'+to;
     if(title.length>80){toast(message('study_save_failed'));return;}
@@ -148,10 +172,12 @@
     if(index<0&&items.length>=100){toast(message('study_limit'));return;}
     const old=index>=0?items[index]:null;
     const item={id:old?.id||uuid(),title,sid,from,to,createdAt:old?.createdAt||now,updatedAt:now};
+    if(draft.wordRange)item.wordRange={...draft.wordRange};
+    if(draft.selectionTitle)item.selectionTitle=draft.selectionTitle;
     const sameOld=old&&old.sid===sid&&old.from===from&&old.to===to;
     // A title edit belongs to this saved record, never to another study's
     // remembered cuts merely because both records cover the same verses.
-    const livePrefs=(!old||(editingFromReader&&activeId===old.id))?window.elifaStudySplitPrefs?.(item):null;
+    const livePrefs=(editingFromReader&&(!old||activeId===old.id))?window.elifaStudySplitPrefs?.(item):null;
     const prefs=livePrefs||(sameOld&&old.splitMode?{mode:old.splitMode,cutsByAy:old.manualCuts||{},selectedAy:old.selectedAy??null}:null);
     if(prefs){item.splitMode=prefs.mode;item.manualCuts=prefs.cutsByAy;
       if(Number.isInteger(prefs.selectedAy)&&prefs.selectedAy>=from&&prefs.selectedAy<=to)item.selectedAy=prefs.selectedAy;}
@@ -165,6 +191,9 @@
     try{window.elifaLog?.('study_saved',{range_bucket:to-from===0?'1':to-from<5?'2_5':to-from<10?'6_10':'11_plus'});}catch(e){}
   }
   byId('studySessionSave').addEventListener('click',save);
+  let newControl=byId('studySessionNew');
+  if(!newControl){newControl=document.createElement('button');newControl.id='studySessionNew';newControl.type='button';byId('studySessionSave').parentElement?.append(newControl);}
+  newControl.className='studySessionNew';newControl.setAttribute('data-study-i18n','study_new');newControl.textContent=message('study_new');newControl.addEventListener('click',()=>newDraft());
   for(const id of ['studySurah','studyFrom','studyTo'])byId(id).addEventListener('input',updateSaveState);
   window.addEventListener('elifa:language-changed',render);
   window.addEventListener('storage',event=>{if(event.key===key)render();});
@@ -176,20 +205,22 @@
     });
   }
   window.elifaStudySessions={
-    onOpen({fromReader=false}={}){
-      editingFromReader=fromReader;
-      window.elifaStudySettings?.onSetup(fromReader);
-      const current=fromReader&&activeId?read().find(item=>item.id===activeId):null;
+    onOpen({fromReader=false,fromSelection=false}={}){
+      editingFromReader=fromReader&&!fromSelection;
+      const current=editingFromReader&&activeId?read().find(item=>item.id===activeId):null;
       const draft=readStudyDraft();
       if(current&&current.sid===draft.sid&&current.from===draft.from&&current.to===draft.to){
+        window.elifaStudySettings?.onSetup(true);
         editingId=current.id;byId('studySessionTitle').value=current.title;
-      }else{activeId=null;resetEdit();}
+      }else{newDraft({fromReader:editingFromReader,fromSelection});return;}
       render();
     },
     clearActive(){activeId=null;editingFromReader=false;resetEdit();},
+    newDraft,
     activateDraft(){
       const item=read().find(entry=>entry.id===editingId),range=readStudyDraft();
       activeId=item&&item.sid===range.sid&&item.from===range.from&&item.to===range.to?item.id:null;
+      return activeId;
     },
     active(){return activeId?read().find(item=>item.id===activeId):null;},
     rememberProgress(progress){
@@ -198,8 +229,15 @@
       if(!item||progress.ay<item.from||progress.ay>item.to)return;
       if(window.elifaStudySettings&&!window.elifaStudySettings.validProgress(progress,item.from,item.to))return;
       if(typeof studyRange!=='undefined'&&(!studyRange||item.sid!==studyRange.sid||item.from!==studyRange.from||item.to!==studyRange.to))return;
+      if(typeof studyRange!=='undefined'&&studyRange?.sessionId!==undefined&&studyRange.sessionId!==activeId)return;
       if(JSON.stringify(item.progress)===JSON.stringify(progress))return;
       const settings=window.elifaStudySettings?.capture();if(settings)item.settings=settings;
+      const selection=window.elifaStudySelection?.capture();
+      if(selection&&validSelection({...item,...selection})){
+        delete item.wordRange;delete item.selectionTitle;
+        if(selection.wordRange)item.wordRange={...selection.wordRange};
+        if(selection.selectionTitle)item.selectionTitle=selection.selectionTitle;
+      }
       item.progress=progress;item.updatedAt=new Date().toISOString();store.set(key,items);
     },render
   };

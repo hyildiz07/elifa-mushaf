@@ -41,12 +41,16 @@
   };
   const contextMatches = () => session && studyRange &&
     session.sid === curS && session.sid === studyRange.sid &&
-    session.from === studyRange.from && session.to === studyRange.to;
+    session.from === studyRange.from && session.to === studyRange.to &&
+    wordScope(session) === wordScope(studyRange);
   const audioMatches = () => contextMatches() && session.reciter === SET.reciter &&
     (session.pendingAudio || session.audio === AD_);
-  const finalGi = () => ayGi[session?.selectedAy]?.[1];
-  const firstGi = () => ayGi[session?.selectedAy]?.[0];
-  const sameRange = (a,b) => a && b && a.sid === b.sid && a.from === b.from && a.to === b.to;
+  const wordScope = range => range?.wordRange ? ['fromAy','fromWord','toAy','toWord'].map(k=>range.wordRange[k]).join(':') : '';
+  const copyWordRange = range => range?.wordRange ? {...range.wordRange} : null;
+  const verseBounds = ay => typeof studyWordBounds === 'function' ? studyWordBounds(ay,session||studyRange) : (session||studyRange)?.wordRange ? null : ayGi[ay];
+  const finalGi = () => verseBounds(session?.selectedAy)?.[1];
+  const firstGi = () => verseBounds(session?.selectedAy)?.[0];
+  const sameRange = (a,b) => a && b && a.sid === b.sid && a.from === b.from && a.to === b.to && wordScope(a) === wordScope(b);
   function copyPrefs(source) {
     if (!source || !['auto','manual'].includes(source.mode)) return null;
     const cutsByAy = {};let totalCuts=0;
@@ -64,7 +68,7 @@
   }
   function remember() {
     if (!session || !contextMatches()) return;
-    remembered = {sid:session.sid,from:session.from,to:session.to,
+    remembered = {sid:session.sid,from:session.from,to:session.to,wordRange:copyWordRange(session),
       ...copyPrefs({mode:session.mode,cutsByAy:session.cutsByAy,
         selectedAy:session.selectedAy,cursorGi:session.cursorGi,selectedGi:session.selectedGi})};
   }
@@ -105,8 +109,9 @@
 
   function renderLiveStatus() {
     if (!session || ui.panel.hidden || ui.results.hidden || !session.parts.length) return;
+    const remaining=typeof remainingStepRepeats==='function'?remainingStepRepeats():(SET.rep||1);
     const repeat=SET.repOn?
-      tr('study_split_repeat_on','{n}× tekrar').replace('{n}',String(SET.rep||1)):
+      tr('study_split_repeat_on','{n}× tekrar').replace('{n}',String(remaining)):
       tr('study_split_repeat_off','tekrar kapalı');
     ui.liveStatus.textContent=tr('study_split_live_status','Şu an {part}/{total}. parça · {repeat} · 1+2 {combine}')
       .replace('{part}',String(session.selectedIndex+1))
@@ -114,7 +119,8 @@
       .replace('{repeat}',repeat)
       .replace('{combine}',SET.cumu?tr('study_split_on','açık'):tr('study_split_off','kapalı'));
     ui.repeat.textContent=repeat;
-    ui.repeat.setAttribute('aria-label',tr('repeat_ayah_count','Âyet / parça tekrar sayısı')+' · '+repeat);
+    const combined=typeof splitRepeatKey==='function'&&splitRepeatKey()==='combineRep';
+    ui.repeat.setAttribute('aria-label',(combined?tr('repeat_combine_count','Birleşik okumalar · 1+2'):tr('repeat_ayah_count','Âyet / parça tekrar sayısı'))+' · '+repeat);
     ui.repeat.setAttribute('aria-pressed',String(!!SET.repOn));
     ui.combine.setAttribute('aria-pressed',String(!!SET.cumu));
     ui.combine.setAttribute('aria-label',`1+2 · ${SET.cumu?tr('study_split_on','açık'):tr('study_split_off','kapalı')}`);
@@ -236,7 +242,7 @@
   function rebuildCuts() {
     session.cutsByAy = {};
     for (const part of session.confirmed) {
-      if (part.endGi < ayGi[part.ay][1]) {
+      if (part.endGi < verseBounds(part.ay)?.[1]) {
         (session.cutsByAy[part.ay] ||= []).push(wordArr[part.endGi].pos);
       }
     }
@@ -248,15 +254,16 @@
     const confirmed=[];
     const selectedCuts=cutsByAy[session.selectedAy]||[];
     for(let ay=session.selectedAy;ay<=session.selectedAy;ay++){
-      const gi=ayGi[ay];if(!gi)return false;
-      const n=gi[1]-gi[0]+1,cuts=cutsByAy[ay]||[];
-      if(cuts.some(pos=>pos>=n||!safeCut(ay,pos).ok))return false;
-      let startGi=gi[0];
-      for(const pos of [...cuts,n]){
+      const gi=ayGi[ay],bounds=verseBounds(ay);if(!gi||!bounds)return false;
+      const firstPos=wordArr[bounds[0]]?.pos,lastPos=wordArr[bounds[1]]?.pos,cuts=cutsByAy[ay]||[];
+      if(cuts.some(pos=>pos<firstPos||pos>=lastPos||!safeCut(ay,pos).ok))return false;
+      let startGi=bounds[0];
+      for(const pos of [...cuts,lastPos]){
         const endGi=gi[0]+pos-1;
         if(endGi>=cursorGi)break;
         confirmed.push({ay,startGi,endGi});startGi=endGi+1;
       }
+      if(startGi!==cursorGi)return false;
     }
     session.confirmed=confirmed;
     session.cutsByAy=selectedCuts.length?{[session.selectedAy]:[...selectedCuts]}:{};
@@ -287,11 +294,12 @@
     ui.verseList.replaceChildren();
     const fragment = document.createDocumentFragment();
     for (let ay=session.from; ay<=session.to; ay++) {
-      if (!ayGi[ay]) continue;
+      const bounds=verseBounds(ay);
+      if (!bounds) continue;
       const button=document.createElement('button');button.type='button';
       const label=document.createElement('strong');label.textContent=`${tr('study_split_verse','Âyet')} ${ay}`;
       const arabic=document.createElement('span');arabic.lang='ar';arabic.dir='rtl';
-      arabic.textContent=arabicWords(ayGi[ay][0],ayGi[ay][1]);
+      arabic.textContent=arabicWords(bounds[0],bounds[1]);
       button.append(label,arabic);
       button.addEventListener('click',()=>chooseVerse(ay));
       fragment.appendChild(button);
@@ -302,7 +310,7 @@
   }
 
   function chooseVerse(ay) {
-    if (!contextMatches() || !Number.isInteger(ay) || ay<session.from || ay>session.to || !ayGi[ay]) return;
+    if (!contextMatches() || !Number.isInteger(ay) || ay<session.from || ay>session.to || !verseBounds(ay)) return;
     if (typeof stopPlan === 'function') stopPlan(false);
     const saved=session.draftsByAy[ay] || (session.initialSaved?.selectedAy===ay ? session.initialSaved : null);
     session.selectedAy=ay;
@@ -337,7 +345,7 @@
   }
 
   function markEnd(endGi) {
-    if(!contextMatches() || !Number.isInteger(endGi) || endGi<session.cursorGi)return false;
+    if(!contextMatches() || !Number.isInteger(endGi) || endGi<session.cursorGi || endGi>finalGi())return false;
     const word=wordArr[endGi],ay=wordArr[session.cursorGi]?.ay;
     if(!word || word.ay!==ay)return false;
     const valid=safeCut(ay,word.pos);
@@ -388,7 +396,8 @@
     ui.title.textContent = tr('study_split_mark_step', '{n}. parça için kelimeleri işaretle').replace('{n}', session.confirmed.length + 1);
     ui.reason.textContent = tr('study_split_unsafe_hint', 'Soluk görünen kelimelerde güvenilir ses sınırı bulunmuyor.');
     let safeCount = 0;
-    for (let cursor = ayGi[ay][0]; cursor <= ayGi[ay][1]; cursor++) {
+    const bounds=verseBounds(ay);
+    for (let cursor = bounds[0]; cursor <= bounds[1]; cursor++) {
       const word = wordArr[cursor];
       const used=cursor<gi;
       const valid = used?{ok:false}:safeCut(ay, word.pos);
@@ -486,7 +495,7 @@
     if (!ui.panel.hidden) { close(); return; }
     if (typeof stopPlan === 'function') stopPlan(false);
     const saved=savedPrefs(studyRange);
-    session = { sid: curS, from: studyRange.from, to: studyRange.to,
+    session = { sid: curS, from: studyRange.from, to: studyRange.to, wordRange:copyWordRange(studyRange),
       reciter: SET.reciter, audio: AD_, pendingAudio: false, mode: 'manual', manualInitialized: false, cutsByAy: {}, confirmed: [],
       selectedAy: null, selectedGi: null, cursorGi: null, parts: [], draftsByAy:{}, initialSaved:saved };
     el('studySplitRange').textContent = `${SURAHS[curS - 1].tr} · ${session.from}–${session.to}`;
@@ -536,7 +545,7 @@
     if (!contextMatches() || session.selectedGi == null) return;
     const endGi = session.selectedGi;
     const word = wordArr[endGi];
-    if (!word || endGi < session.cursorGi || endGi > ayGi[word.ay][1] || !safeCut(word.ay, word.pos).ok) {
+    if (!word || endGi < session.cursorGi || endGi > finalGi() || !safeCut(word.ay, word.pos).ok) {
       setStatus(tr('study_split_unavailable', 'Bu kayıtta güvenilir ses sınırı bulunamadı. Başka hoca seçebilir veya yeniden deneyebilirsin.'), true);
       return;
     }
@@ -616,7 +625,7 @@
   window.elifaStudySplitSelection = () => {
     if (!contextMatches() || ui.panel.hidden || ui.results.hidden || !Number.isInteger(session.selectedAy) || !session.parts.length) return null;
     return {sid:session.sid,ay:session.selectedAy,parts:session.parts,
-      selectedIndex:session.selectedIndex,mode:session.mode,cutsByAy:session.cutsByAy};
+      selectedIndex:session.selectedIndex,mode:session.mode,cutsByAy:session.cutsByAy,wordRange:copyWordRange(session)};
   };
   window.elifaStudySplitSetIndex = setSelectedIndex;
   window.elifaStudySplitRefreshStatus = renderLiveStatus;
@@ -625,7 +634,7 @@
     if(prefs===null){remembered=null;return true;}
     const clean=copyPrefs(prefs);
     if(!range||!clean)return false;
-    remembered={sid:range.sid,from:range.from,to:range.to,...clean};
+    remembered={sid:range.sid,from:range.from,to:range.to,wordRange:copyWordRange(range),...clean};
     return true;
   };
   if (typeof document.addEventListener === 'function') {

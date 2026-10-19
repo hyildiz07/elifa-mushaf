@@ -66,6 +66,7 @@ test('quota failure remains readable in memory and emits a persistent warning',(
   assert.equal(c.window.elifaReadLocalValue('notes'),'{"1:1":"new"}');
 });
 test('production network failures never fall back to a fake successful local group',async()=>{
-  const c=vm.createContext({location:{hostname:'mushaf.elifaplatform.com'},bkOffline:false,fetch:async()=>{throw Error('network');},AbortSignal,bkDemoApi:()=>{throw Error('must not call demo');}});
-  vm.runInContext(fn('bkApi'),c);await assert.rejects(c.bkApi({action:'contribute'}),/kaydedildi sayılmadı/);assert.equal(c.bkOffline,false);
+ const {createOrgClient}=await import('../src/hatim-client.mjs');
+ const api=createOrgClient({fetcher:async()=>{throw Error('network');},session:()=>null});
+ await assert.rejects(api({action:'contribute'}),/kaydedildi sayılmadı/);
 });

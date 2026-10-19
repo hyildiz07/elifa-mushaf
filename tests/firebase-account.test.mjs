@@ -4,6 +4,7 @@ import {firebaseServices} from '../server/firebase.mjs';
 import {firestoreStoreTransaction} from '../server/database.mjs';
 import {handleOrg} from '../netlify/functions/org.mjs';
 import {createAccountHandler} from '../server/account-handler.mjs';
+import {releaseAccountHatimOwnership} from '../server/hatim-account.mjs';
 const enabled=process.env.FIREBASE_PROJECT_ID==='demo-elifa-mushaf'&&Boolean(process.env.FIREBASE_AUTH_EMULATOR_HOST)&&Boolean(process.env.FIRESTORE_EMULATOR_HOST);
 const payload={elifa:'yedek',v:1,veri:{notes:'{"1:1":"private"}'}};
 test('Firebase Auth + Firestore integration: authorization, concurrency, revocation and erasure',{skip:!enabled},async t=>{
@@ -31,7 +32,7 @@ test('Firebase Auth + Firestore integration: authorization, concurrency, revocat
    const base='http://'+process.env.FIRESTORE_EMULATOR_HOST+'/v1/projects/demo-elifa-mushaf/databases/(default)/documents/';
    await db.collection('config').doc('rule-test').set({public:true});
    assert.equal((await fetch(base+'config/rule-test')).status,200);
-   for(const path of ['elifaAccounts/'+a.uid,'elifaAccounts/'+b.uid,'elifaAccounts/'+a.uid+'/sync/current'])assert.equal((await fetch(base+path,{headers:{authorization:'Bearer '+a.token}})).status,403);
+   for(const path of ['elifaAccounts/'+a.uid,'elifaAccounts/'+b.uid,'elifaAccounts/'+a.uid+'/sync/current','elifaAccounts/'+a.uid+'/private/profile'])assert.equal((await fetch(base+path,{headers:{authorization:'Bearer '+a.token}})).status,403);
    assert.equal((await fetch(base+'config/rule-test',{method:'PATCH',headers:{authorization:'Bearer '+a.token,'content-type':'application/json'},body:JSON.stringify({fields:{public:{booleanValue:false}}})})).status,403);
    await db.collection('config').doc('rule-test').delete();
   });
@@ -42,6 +43,19 @@ test('Firebase Auth + Firestore integration: authorization, concurrency, revocat
    assert.equal((await handler(req(b,'restore',{id}))).status,404);
    assert.equal((await handler(req(b,'deleteBackup',{id}))).status,200);
    assert.equal((await handler(req(a,'restore',{id}))).status,200);
+  });
+  await t.test('private profiles are isolated, versioned, validated and preserved through backup writes',async()=>{
+   const profile={displayName:'Yolcu',birthDate:'1995-05-12',age:null,gender:'unspecified'};
+   assert.equal((await handler(req(unverified,'profilePut',{profile,revision:0}))).status,403);
+   assert.equal((await handler(req(a,'profilePut',{profile,revision:0}))).status,200);
+   assert.equal((await handler(req(a,'profilePut',{profile,revision:0}))).status,409);
+   assert.equal((await handler(req(a,'profilePut',{profile:{...profile,age:30},revision:1}))).status,400);
+   assert.equal((await (await handler(req(b,'profileGet'))).json()).profile,null);
+   assert.equal((await handler(req(a,'save',{payload}))).status,201);
+   const saved=await (await handler(req(a,'profileGet'))).json();assert.deepEqual(saved.profile,profile);assert.equal(saved.revision,1);
+   // Keep the later twenty-backup concurrency fixture's starting count stable.
+   const list=await (await handler(req(a,'list'))).json();const extra=list.backups.find(v=>v.id!==id);assert.ok(extra);
+   assert.equal((await handler(req(a,'deleteBackup',{id:extra.id}))).status,200);
   });
   await t.test('sync is isolated, versioned and rejects stale concurrent writes',async()=>{
    const empty=await (await handler(req(a,'syncGet'))).json();assert.equal(empty.revision,0);assert.equal(empty.payload,null);
@@ -71,6 +85,7 @@ test('Firebase Auth + Firestore integration: authorization, concurrency, revocat
    assert.equal((await handler(req(a,'save',{payload}))).status,409);
    assert.equal((await db.collection('elifaAccounts').doc(a.uid).collection('backups').get()).size,0);
    assert.equal((await db.collection('elifaAccounts').doc(a.uid).collection('sync').doc('current').get()).exists,false);
+   assert.equal((await db.collection('elifaAccounts').doc(a.uid).collection('private').doc('profile').get()).exists,false);
    assert.equal((await handler(req(a,'deleteAccount',{confirmation:'DELETE'}))).status,200);
    assert.equal((await handler(req(a,'list'))).status,401);
    assert.equal((await db.collection('elifaAccounts').doc(a.uid).get()).exists,false);
@@ -95,7 +110,13 @@ test('Firebase Auth + Firestore integration: authorization, concurrency, revocat
  const votes=await Promise.all([run({action:'pollVote',id:'poll-1',option:'o1',voterId:'device-a'}),run({action:'pollVote',id:'poll-1',option:'o1',voterId:'device-b'})]);assert.ok(votes.every(r=>r.status===200));
  assert.equal((await (await run({action:'pollGet'})).json()).poll.total,2);
  await run({action:'pollVote',id:'poll-1',option:'o1',voterId:'device-a'});assert.equal((await (await run({action:'pollGet'})).json()).poll.total,2);
- const claims=await Promise.all([run({action:'claim',code:'group2',no:1,name:'A'}),run({action:'claim',code:'group2',no:1,name:'B'})]);assert.deepEqual(claims.map(r=>r.status).sort(),[200,400]);
+ const claimA={action:'claim',code:'group2',no:1,name:'Alice',capability:'a'.repeat(64)},claimB={action:'claim',code:'group2',no:1,name:'Bob',capability:'b'.repeat(64)};
+ const claims=await Promise.all([run(claimA),run(claimB)]);assert.deepEqual(claims.map(r=>r.status).sort(),[200,409]);
+ const winner=claims[0].status===200?claimA:claimB,loser=claims[0].status===200?claimB:claimA;
+ assert.equal((await run(winner)).status,200,'lost claim response is retryable');
+ assert.equal((await run({...loser,action:'complete'})).status,403,'public code / other capability cannot mutate the winner');
+ assert.equal((await run({...winner,action:'complete'})).status,200);
+ assert.equal((await run({...winner,action:'undo'})).status,200);
  await Promise.all([run({action:'contribute',code:'group1',amount:3,name:'A'}),run({action:'contribute',code:'group1',amount:7,name:'B'})]);assert.equal((await (await run({action:'get',code:'group1'})).json()).org.toplam,10);
  assert.equal(old.get('_poll').counts.o1,0);
  await assert.rejects(firestoreStoreTransaction(db,legacy,async store=>{await store.setJSON('_poll',{bad:true});throw Error('rollback');}),/rollback/);
@@ -104,3 +125,32 @@ test('Firebase Auth + Firestore integration: authorization, concurrency, revocat
  assert.equal((await (await run({action:'pollGet'})).json()).poll,null);
  await db.recursiveDelete(db.collection('elifaOrgRecords'));await db.recursiveDelete(db.collection('elifaOrgMeta'));
  });
+
+test('Firestore hatim creation replay, recovery rotation, account binding and explicit account detach preserve state',{skip:!enabled},async()=>{
+ const {db}=firebaseServices();await db.recursiveDelete(db.collection('elifaOrgRecords'));
+ const legacy={get:async()=>null,list:async()=>({blobs:[]})};
+ const transaction=work=>firestoreStoreTransaction(db,legacy,work);
+ const run=(p,session={})=>transaction(store=>handleOrg(p,store,session));
+ const capA='a'.repeat(64),capB='b'.repeat(64),creationToken='c'.repeat(64);
+ const p={action:'create',creationToken,org:{type:'hatim',title:'Emulator-only hatim',items:Array.from({length:30},(_,i)=>({no:i+1}))}};
+ try{
+  const [r1,r2]=await Promise.all([run(p),run(p)]);assert.equal(r1.status,200);assert.equal(r2.status,200);
+  const a=await r1.json(),b=await r2.json();assert.equal(a.code,b.code);assert.equal(a.adminToken,b.adminToken);
+  const claim={action:'claim',code:a.code,no:1,name:'Local guest',capability:capA};
+  assert.equal((await run(claim)).status,200);assert.equal((await run(claim)).status,200);
+  assert.equal((await run({action:'bind',code:a.code,no:1,capability:capB},{uid:'alice'})).status,403);
+  assert.equal((await run({action:'bind',code:a.code,no:1,capability:capA},{uid:'alice'})).status,200);
+  assert.equal((await run({action:'complete',code:a.code,no:1},{uid:'alice'})).status,200);
+  assert.equal((await run({action:'undo',code:a.code,no:1},{uid:'bob'})).status,403);
+  assert.equal((await run({action:'complete',code:a.code,no:1,capability:capA})).status,403);
+  const mine=await (await run({action:'myList'},{uid:'alice'})).json();assert.equal(mine.items[0].items[0].status,'okundu');
+  await releaseAccountHatimOwnership('alice',{transaction});
+  assert.equal((await run({action:'undo',code:a.code,no:1},{uid:'alice'})).status,409);
+  assert.equal((await run({action:'undo',code:a.code,no:1,capability:capA})).status,200);
+  assert.equal((await run({action:'issueRecovery',code:a.code,admin:a.adminToken,no:1,capability:capB})).status,200);
+  assert.equal((await run({action:'complete',code:a.code,no:1,capability:capA})).status,403);
+  assert.equal((await run({action:'complete',code:a.code,no:1,capability:capB})).status,200);
+  assert.equal((await run({action:'issueRecovery',code:a.code,admin:a.adminToken,no:1,capability:'d'.repeat(64)})).status,200);
+  assert.equal((await run({action:'issueRecovery',code:a.code,admin:a.adminToken,no:1,capability:capB})).status,409,'delayed old recovery cannot resurrect its retired capability');
+ }finally{await db.recursiveDelete(db.collection('elifaOrgRecords'));}
+});

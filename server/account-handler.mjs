@@ -1,5 +1,6 @@
 import {randomUUID} from 'node:crypto';
 import {validateBackup,MAX_BACKUP_BYTES} from '../src/account-data.mjs';
+import {validateProfile} from '../src/account-profile-data.mjs';
 const json=(data,status=200)=>Response.json(data,{status,headers:{'Cache-Control':'private, no-store','Vary':'Authorization','X-Content-Type-Options':'nosniff'}});
 const fail=(error,status)=>json({error},status);
 const NATIVE_ORIGIN='capacitor://localhost';
@@ -13,7 +14,7 @@ export function verifyRequestOrigin(req){
   const origin=req.headers.get('origin');
   if(origin&&origin!==new URL(req.url).origin&&origin!==NATIVE_ORIGIN)throw Object.assign(Error('origin'),{status:403});
 }
-export function createAccountHandler({services,now=Date.now}){
+export function createAccountHandler({services,now=Date.now,detachMemberships=async()=>{}}){
   const handle=async req=>{
     try{
       if(req.method!=='POST')return fail('Yöntem desteklenmiyor.',405);
@@ -31,7 +32,7 @@ export function createAccountHandler({services,now=Date.now}){
       if(!p||typeof p!=='object'||Array.isArray(p))return fail('Geçersiz istek.',400);
       const uid=session.uid;
       if(p.expectedUser!==uid)return fail('Hesap değişti. Yeniden kontrol edin.',409);
-      const profile=db.collection('elifaAccounts').doc(uid),backups=profile.collection('backups'),sync=profile.collection('sync').doc('current');
+      const profile=db.collection('elifaAccounts').doc(uid),backups=profile.collection('backups'),sync=profile.collection('sync').doc('current'),details=profile.collection('private').doc('profile');
       if(p.action==='deleteAccount'){
         const age=now()/1000-session.auth_time;
         if(p.confirmation!=='DELETE'||!Number.isFinite(age)||age<0||age>300)return fail('Hesabı silmek için yeniden giriş yapın.',403);
@@ -39,10 +40,13 @@ export function createAccountHandler({services,now=Date.now}){
         await db.runTransaction(async tx=>{
           const docs=await tx.get(backups);
           await tx.get(sync);
+          await tx.get(details);
           tx.set(profile,{deleting:true});
           docs.forEach(d=>tx.delete(d.ref));
           tx.delete(sync);
+          tx.delete(details);
         });
+        await detachMemberships(uid);
         await auth.deleteUser(uid);
         await profile.delete();
         return json({ok:true});
@@ -51,6 +55,19 @@ export function createAccountHandler({services,now=Date.now}){
       return await db.runTransaction(async tx=>{
         const state=await tx.get(profile);
         if(state.data()?.deleting)return fail('Hesap silme işlemi tamamlanmalı. Silmeyi yeniden deneyin.',409);
+        if(p.action==='profileGet'){
+          const found=await tx.get(details);
+          return json({profile:found.exists?validateProfile(found.data().profile):null,revision:found.data()?.revision||0,updated_at:found.data()?.updated_at||null});
+        }
+        if(p.action==='profilePut'){
+          let value;try{value=validateProfile(p.profile,new Date(now()));}catch(e){return fail(e.message,400);}
+          if(!Number.isSafeInteger(p.revision)||p.revision<0)return fail('Profil sürümü geçersiz.',400);
+          const current=await tx.get(details),revision=current.data()?.revision||0;
+          if(revision!==p.revision)return fail('Profil başka bir cihazda değişti. Güncel profili yeniden yükle.',409);
+          const updated_at=new Date(now()).toISOString();
+          tx.set(details,{profile:value,revision:revision+1,updated_at});
+          return json({profile:value,revision:revision+1,updated_at});
+        }
         if(p.action==='list'){
           const result=await tx.get(backups.orderBy('created_at','desc'));
           return json({backups:result.docs.map(d=>({id:d.id,created_at:d.data().created_at}))});

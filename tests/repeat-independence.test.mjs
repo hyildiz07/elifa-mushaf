@@ -158,13 +158,16 @@ test('zero whole-study count still reads the fluent range once, not zero times',
   start(c,c.practicePlan({kind:'ayah',from:1,to:3},'range'));
   assert.deepEqual(finish(c),[[1,3]]);
 });
-test('zero preferences survive startup migration and settings commit',()=>{
-  const start=html.indexOf('// Preserve the old count once'),end=html.indexOf('// Repeat and cumulative playback',start);
-  const code=html.slice(start,end),c=vm.createContext({SET:{rep:2,combineRep:0,rangeRep:0}});vm.runInContext(code,c);
-  assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,0,0]);
+test('legacy zero tours become one pass at startup and commit; zero combination remains disabled',()=>{
+  const migrationStart=html.indexOf('// Preserve the old count once'),end=html.indexOf('// Repeat and cumulative playback',migrationStart);
+  const code=html.slice(migrationStart,end),c=vm.createContext({SET:{rep:2,combineRep:0,rangeRep:0}});vm.runInContext(code,c);
+  assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,0,1]);
   const values={repInp:2,combineRepInp:0,rangeRepInp:0,waitInp:0,spdInp:1,startPadInp:0,endPadInp:0};
   c.$=id=>id in values?{value:values[id]}:null;c.saveSet=()=>{};c.applyLiveSpeed=()=>{};c.syncRep=()=>{};c.syncSpeedBtn=()=>{};
-  vm.runInContext(fn('commitInputs'),c);c.commitInputs();assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,0,0]);
+  vm.runInContext(fn('commitInputs'),c);c.commitInputs();assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,0,1]);
+  const playback=harness();playback.SET.rep=1;playback.SET.combineRep=c.SET.combineRep;playback.SET.rangeRep=c.SET.rangeRep;
+  start(playback,playback.practicePlan({kind:'ayah',from:1,to:3},'cumulative'));
+  assert.deepEqual(finish(playback),[[1,1],[2,2],[3,3]],'normalization never adds another round');
 });
 test('zero-count split practice plays only the chosen three parts once',()=>{
   const c=harness();c.SET.rep=1;c.SET.combineRep=0;c.SET.rangeRep=0;
@@ -179,12 +182,12 @@ test('quick repeat labels follow their own scope, count, enabled state and langu
   let mode='range',split=false,language='tr';
   const c=vm.createContext({SET:{rep:3,rangeRep:0,combineRep:7,repOn:false},$:node,document:{querySelector:()=>node('repctl')},playing:false,splitAy:null,
     activeStudySplitSelection:()=>split,window:{elifaPracticeMode:()=>mode,elifaT:key=>({tr:{repeat_scope_work:'Tüm çalışma',repeat_scope_unit:'Âyet / parça'},en:{repeat_scope_work:'Whole study',repeat_scope_unit:'Verse / part'}})[language][key]}});
-  for(const name of ['syncRepeatScope','readerRepeatKey','syncRep','syncRep2'])vm.runInContext(fn(name),c);
+  for(const name of ['syncRepeatScope','readerRepeatKey','remainingStudyRounds','syncRep','syncRep2'])vm.runInContext(fn(name),c);
   c.syncRep();c.syncRep2();
-  assert.equal(node('readerRepeatScope').textContent,'Tüm çalışma');assert.equal(node('repN').textContent,0);assert.equal(node('repTog').attrs['aria-pressed'],'false');
+  assert.equal(node('readerRepeatScope').textContent,'Tüm çalışma');assert.equal(node('repN').textContent,1);assert.equal(node('repTog').attrs['aria-pressed'],'false');
   assert.equal(node('splitRepeatScope').textContent,'Âyet / parça');assert.equal(node('repN2').textContent,3);
-  mode='cumulative';c.SET.repOn=true;c.syncRep();assert.equal(node('readerRepeatScope').dataset.i18n,'repeat_scope_unit');assert.equal(node('repN').textContent,3);assert.equal(node('repTog').attrs['aria-pressed'],'true');
-  mode='range';split=true;c.syncRep();assert.equal(node('readerRepeatScope').textContent,'Âyet / parça');
+  mode='cumulative';c.SET.repOn=true;c.syncRep();assert.equal(node('readerRepeatScope').dataset.i18n,'repeat_scope_work');assert.equal(node('repN').textContent,1);assert.equal(node('repTog').attrs['aria-pressed'],'true');
+  mode='range';split=true;c.syncRep();assert.equal(node('readerRepeatScope').textContent,'Tüm çalışma');
   split=false;language='en';c.syncRep();c.syncRep2();assert.equal(node('readerRepeatScope').textContent,'Whole study');assert.equal(node('splitRepeatScope').textContent,'Verse / part');
   assert.deepEqual([c.SET.rep,c.SET.rangeRep,c.SET.combineRep],[3,0,7],'presentation never changes independent counts');
 });

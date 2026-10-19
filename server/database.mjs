@@ -1,10 +1,13 @@
 import {getStore} from '@netlify/blobs';
 import {firebaseServices} from './firebase.mjs';
-export async function firestoreStoreTransaction(db,legacy,work){
+import {deploymentContext} from './deploy-context.mjs';
+export async function firestoreStoreTransaction(db,legacy,work,{records:recordCollection}={}){
  return db.runTransaction(async tx=>{
-  // Shared aggregate lock serializes legacy imports, votes, claims and index changes.
-  const lock=db.collection('elifaOrgMeta').doc('lock');await tx.get(lock);
-  const records=db.collection('elifaOrgRecords'),pending=new Map(),reads=new Map();
+  // Firestore retries conflicts on the actual records read in this transaction.
+  // An application-wide write lock would needlessly make unrelated hatims,
+  // polls and account membership indexes contend with one another. Reading a
+  // missing record also protects simultaneous legacy imports / random codes.
+  const records=recordCollection||db.collection('elifaOrgRecords'),pending=new Map(),reads=new Map();
   const ref=key=>records.doc(Buffer.from(key).toString('base64url'));
   const store={
    async get(key,options={}){
@@ -12,7 +15,13 @@ export async function firestoreStoreTransaction(db,legacy,work){
     if(reads.has(key))return structuredClone(reads.get(key));
     const found=await tx.get(ref(key));let value;
     if(found.exists){const d=found.data();value=d.deleted?null:JSON.parse(d.value);}
-    else{value=await legacy.get(key,{type:options.type==='text'?'text':'json'});if(value!=null)pending.set(key,{key,deleted:false,value:JSON.stringify(value)});}
+    else{
+     // These private indexes were introduced after the Firestore cutover and
+     // have never lived in Blobs. Avoid a redundant legacy network lookup on
+     // every signed-in poll / first membership / creation replay check.
+     value=/^_(?:closed|member|create)_/.test(key)?null:await legacy.get(key,{type:options.type==='text'?'text':'json'});
+     if(value!=null)pending.set(key,{key,deleted:false,value:JSON.stringify(value)});
+    }
     reads.set(key,value);return structuredClone(value);
    },
    async setJSON(key,value){const serialized=JSON.stringify(value);if(Buffer.byteLength(serialized)>900*1024)throw Error('Record size limit');pending.set(key,{key,value:serialized,deleted:false});},
@@ -31,11 +40,22 @@ export async function firestoreStoreTransaction(db,legacy,work){
   if(pending.size>450)throw Error('Transaction record limit');
   // Buffer writes until all reads finish, as Firestore transactions require.
   for(const [key,value]of pending)tx.set(ref(key),value);
-  if(pending.size)tx.set(lock,{updated_at:Date.now()});
   return result;
  },{maxAttempts:8});
 }
-export async function withOrgTransaction(work){
- if(process.env.ELIFA_FIRESTORE_GROUPS!=='enabled')throw Error('Firestore group cutover has not been enabled');
- return firestoreStoreTransaction(firebaseServices().db,getStore({name:'elifa-birlikte',consistency:'strong'}),work);
+const noLegacy={get:async()=>null,list:async()=>({blobs:[]})};
+export async function withOrgTransaction(work,{environment=process.env,deployment,services=firebaseServices,legacyStore=()=>getStore({name:'elifa-birlikte',consistency:'strong'})}={}){
+ const context=deployment||deploymentContext(environment);
+ if(context.kind!=='production'&&context.kind!=='preview')throw Error('Resolved deployment context is invalid');
+ if(context.kind==='preview'){
+  if(typeof context.scope!=='string'||!/^((review-[1-9]\d{0,9})|(deploy-[a-f0-9]{24}))$/.test(context.scope))throw Error('Resolved preview scope is invalid');
+  const db=services().db;
+  const records=db.collection('elifaOrgPreviewRuns').doc(context.scope).collection('records');
+  return firestoreStoreTransaction(db,noLegacy,store=>work({...store,get:async(key,options)=>{
+   const value=await store.get(key,options);
+   return key==='_config'&&value===null?{discoverEnabled:true}:value;
+  }}),{records});
+ }
+ if(environment.ELIFA_FIRESTORE_GROUPS!=='enabled')throw Error('Firestore group cutover has not been enabled');
+ return firestoreStoreTransaction(services().db,legacyStore(),work);
 }

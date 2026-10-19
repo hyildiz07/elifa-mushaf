@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {validStudySettings,validStudyProgress} from '../src/study-settings.mjs';
 function harness(initial={}){
- const nodes=new Map();class Element{
+ const nodes=new Map(),timers=new Map();let timerId=0;class Element{
   constructor(){this.dataset={};this.children=[];this.value='';this.hidden=false;this.handlers={};this.attrs={};this.classes=new Set();this.classList={contains:c=>this.classes.has(c),add:c=>this.classes.add(c),toggle:(c,on)=>on?this.classes.add(c):this.classes.delete(c)};}
   set id(v){this._id=v;nodes.set(v,this);}get id(){return this._id;}
   append(...v){this.children.push(...v);for(const child of v)child.parent=this;}before(){}after(){}setAttribute(k,v){this.attrs[k]=v;}
@@ -17,16 +17,31 @@ function harness(initial={}){
   SET:{reciter:223,speed:1,rep:5,repOn:true,wait:0,cumu:true,...initial},RECITERS:[{id:223,n:'Afasy'},{id:7,n:'Husary'}],SURAHS:[{tr:'Fatiha'}],
   plan:[],pi:0,pr:0,playing:false,curS:1,curAy:1,studyRange:{sid:1,from:1,to:5},rangeSelectionDraft:null,gearCtx:'ayah',
   splitAy:null,activeStudySplitSelection:()=>null,stepReps:()=>5,saveSet(){},syncSpeedBtn(){},renderContinue(){},renderHomeHeroLine(){},toast(){},
+  setTimeout:(fn,delay)=>{timers.set(++timerId,{fn,delay});return timerId;},clearTimeout:id=>timers.delete(id),
   MutationObserver:class{observe(){}},Event:class{constructor(type){this.type=type;}},navigator:{onLine:true},validStudySettings,validStudyProgress});
  const html=fs.readFileSync('index.html','utf8');
- for(const name of ['syncRepeatScope','readerRepeatKey','syncRep','syncRep2','syncCumu','syncCumu2','syncPracticeControls','commitInputs','commitInputs2']){
+ for(const name of ['syncRepeatScope','readerRepeatKey','remainingStudyRounds','syncRep','syncRep2','syncCumu','syncCumu2','syncPracticeControls','commitInputs','commitInputs2']){
   const start=html.indexOf('function '+name+'('),line=html.slice(start,html.indexOf('\n',start)).trimEnd();
   vm.runInContext(line.endsWith('}')?line:html.slice(start,html.indexOf('\n}',start)+2),c);
  }
  c.applyLiveSpeed=()=>{};
  vm.runInContext(fs.readFileSync('src/study-workflow.mjs','utf8').replace(/^import[^\n]*\n/,''),c);
- return {c,nodes,events,progress};
+ return {c,nodes,events,progress,timers};
 }
+test('practice status disappears after three seconds and progress ticks cannot reopen it',()=>{
+ const {c,nodes,timers}=harness();nodes.get('studySetup').classes.delete('on');
+ assert.equal(nodes.get('practiceProgress').hidden,true);
+ c.plan=[{ayEnd:5}];c.window.elifaPlaybackEvent('start');c.window.elifaPlaybackEvent('progress');
+ assert.equal(nodes.get('practiceProgress').hidden,false);assert.equal(timers.size,1);
+ const [id,timer]=[...timers][0];assert.equal(timer.delay,3000);
+ c.pr=1;c.window.elifaPlaybackEvent('progress');assert.equal([...timers][0][0],id,'progress does not postpone the deadline');
+ timers.delete(id);timer.fn();
+ for(let i=0;i<4;i++){c.pr=i;c.window.elifaPlaybackEvent('progress');}
+ assert.equal(nodes.get('practiceProgress').hidden,true);assert.equal(nodes.get('readerPracticeProgress').hidden,true);assert.equal(timers.size,0);
+ nodes.get('practiceMode').value='verse';nodes.get('practiceMode').handlers.change();
+ assert.equal(nodes.get('practiceProgress').hidden,false);assert.equal(timers.size,1,'an explicit mode choice may show a fresh short notice');
+ c.window.elifaPlaybackEvent('stop');assert.equal(nodes.get('practiceProgress').hidden,true);assert.equal(timers.size,0);
+});
 test('workflow mounts against real page anchors and restores saved settings independently of global combine',()=>{
  const {c,nodes}=harness();const settings={reciter:7,speed:1.25,rep:3,repOn:true,wait:2,mode:'verse',splitCombine:false};
  c.window.elifaStudySettings.load({settings});assert.deepEqual(JSON.parse(JSON.stringify(c.window.elifaStudySettings.capture())),{...settings,combineRep:3,rangeRep:3});
@@ -65,14 +80,32 @@ test('split resume focuses the saved verse and part without starting playback',(
 });
 
 
-test('zero combine and tour preferences save and reopen without being replaced by one',()=>{
+test('legacy zero tours migrate to the equivalent single tour while zero combined readings stay disabled',()=>{
  const {c,nodes}=harness();const settings={reciter:223,speed:1,rep:1,combineRep:0,rangeRep:0,repOn:true,wait:0,mode:'cumulative',splitCombine:true};
  assert.equal(validStudySettings(settings),true);
  for(const key of ['combineRep','rangeRep'])assert.equal(validStudySettings({...settings,[key]:-1}),false);
  c.window.elifaStudySettings.load({settings});assert.equal(Number(nodes.get('studySetting_combineRep').value),0);
- assert.equal(Number(nodes.get('studySetting_rangeRep').value),0);
- c.window.elifaStudySettings.beforeOpen();assert.deepEqual([c.SET.combineRep,c.SET.rangeRep],[0,0]);
- assert.deepEqual(JSON.parse(JSON.stringify(c.window.elifaStudySettings.capture())),settings);
+ assert.equal(Number(nodes.get('studySetting_rangeRep').value),1);
+ assert.equal(nodes.get('studySetting_rangeRep').min,1);
+ c.window.elifaStudySettings.beforeOpen();assert.deepEqual([c.SET.combineRep,c.SET.rangeRep],[0,1]);
+ assert.deepEqual(JSON.parse(JSON.stringify(c.window.elifaStudySettings.capture())),{...settings,rangeRep:1});
+});
+
+test('both settings panels expose only relevant repeat counts without losing inactive preferences',()=>{
+ const {c,nodes}=harness({rep:2,combineRep:3,rangeRep:4,cumu:false});
+ for(const mode of ['range','verse','cumulative','range']){
+  nodes.get('studyMode').value=mode;nodes.get('studyMode').handlers.change();
+  assert.equal(nodes.get('studySetting_rep').parent.hidden,mode==='range');
+  assert.equal(nodes.get('studySetting_combineRep').parent.hidden,mode!=='cumulative');
+  c.window.elifaStudySettings.beforeOpen();
+  assert.equal(nodes.get('gearRepRow').hidden,mode==='range');
+  assert.equal(nodes.get('gearCombineRow').hidden,mode!=='cumulative');
+  assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,3,4]);
+ }
+ c.gearCtx='studyParts';c.SET.cumu=false;c.syncPracticeControls();
+ assert.equal(nodes.get('gearRepRow').hidden,false);assert.equal(nodes.get('gearCombineRow').hidden,true);
+ c.SET.cumu=true;c.syncPracticeControls();assert.equal(nodes.get('gearCombineRow').hidden,false);
+ assert.equal(c.playing,false);
 });
 
 
@@ -108,7 +141,7 @@ test('editing verse repeats selects verse practice and activates both repeat con
  assert.equal(c.window.elifaPracticeMode(),'verse');assert.equal(c.SET.rep,2);assert.equal(c.SET.repOn,true);
  for(const id of ['repTog','repTog2'])assert.equal(nodes.get(id).attrs['aria-pressed'],'true');
  for(const id of ['cumuTog','cumuTog2'])assert.equal(nodes.get(id).attrs['aria-pressed'],'false');
- assert.equal(nodes.get('readerRepeatScope').textContent,'Âyet / parça');assert.equal(c.playing,false);
+ assert.equal(nodes.get('readerRepeatScope').textContent,'Tüm çalışma');assert.equal(c.playing,false);
 });
 
 test('explicit cumulative method also applies to split parts and both Combine buttons immediately',()=>{
@@ -276,6 +309,26 @@ test('unchanged saved programs produce real playback plans without any input or 
   assert.deepEqual(Array.from(c.plan,s=>[s.from,s.to,c.stepReps(s)]),expected);
   if(mode!=='range')assert.equal(c.planCycleReps(),4);
  }
+});
+
+test('Fatiha 1–3 with all counts one stays one after Open, Play and opening the settings sheet',async()=>{
+ const {c,nodes}=harness({repOn:false,cumu:false});
+ c.window.elifaStudySettings.load({settings:{reciter:223,speed:1.25,rep:1,combineRep:1,rangeRep:1,repOn:false,wait:0,mode:'cumulative',splitCombine:false}});
+ c.window.elifaStudySettings.beforeOpen();c.window.elifaStudySettings.afterOpen();
+ const html=fs.readFileSync('index.html','utf8');
+ for(const name of ['buildLadder','playStudyRange','stepReps','fillGearSheet']){
+  const start=html.search(new RegExp('(?:async )?function '+name+'\\('));vm.runInContext(html.slice(start,html.indexOf('\n}',start)+2),c);
+ }
+ const chapter={ay:{1:[0,1000],2:[1000,2000],3:[2000,3000]}};
+ Object.assign(c,{AD_:chapter,normalChapterAudio:chapter,studyRange:{sid:1,from:1,to:3},studyPlayRequestId:0,surahRequestId:1,
+  splitParts:[],guardedRangeDraft:null,visAy:1,syncTestBtn(){},SURAHS:[{n:7}],
+  audioTimingUnverified:()=>false,normalVersePlanReady:()=>true,normalVerseStep:(_chapter,from,to,options)=>({from,to,...options}),runPlan:p=>{c.plan=p;}});
+ nodes.get('testModeBtn').style={};
+ await c.playStudyRange();c.fillGearSheet();
+ assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[1,1,1]);
+ assert.deepEqual(['repInp','combineRepInp','rangeRepInp'].map(id=>nodes.get(id).value),[1,1,1]);
+ assert.deepEqual(Array.from(c.plan,s=>[s.from,s.to,c.stepReps(s)]),[[1,1,1],[2,2,1],[1,2,1],[3,3,1],[1,3,1]]);
+ assert.equal(c.SET.speed,1.25);assert.equal(c.SET.wait,0);
 });
 
 test('the themed method menu applies a draft through the same model and closes with the selected state',()=>{

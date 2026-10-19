@@ -149,5 +149,12 @@
   "Geri alma iptal edildi.": "Tendua kumeghairiwa.",
   "Yedek alınamadı: ": "Imeshindwa kuunda nakala rudufu: ",
   "Yeni şifreni belirle.": "Weka nenosiri jipya.",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "Barua pepe imethibitishwa. Unaweza kuingia kwenye akaunti yako."
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "Barua pepe imethibitishwa. Unaweza kuingia kwenye akaunti yako.",
+  "Hesap değişti. Yeniden dene.": "Akaunti imebadilika. Tafadhali jaribu tena.",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "Data ya akaunti bado haiko tayari. Tengeneza nafasi kwenye hifadhi ya kifaa, kisha ujaribu tena.",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "Data ya kila akaunti huhifadhiwa kando kwenye kifaa hiki. Rekodi za mgeni hunakiliwa kwenye akaunti yako tu ukiamua kufanya hivyo.",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "Mpangilio wako wa usawazishaji haukuweza kuhifadhiwa kwenye kifaa hiki. Pata nafasi zaidi ya kuhifadhi, kisha ujaribu tena.",
+  "Önce cihaz yedeğini indir": "Pakua kwanza nakala ya akiba ya kifaa",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "Akaunti yako, wasifu wako wa faragha na nakala zako za akiba kwenye wingu zitafutwa. Maendeleo yako ya khatma ya pamoja yatabaki, lakini jina lako na uhusiano na akaunti yako vitaondolewa. Hifadhi kwanza viungo vyako vya faragha vya ushiriki na usimamizi. Rekodi za kifaa zitabaki kwenye nakala tofauti; ukitoka kwenye akaunti, rekodi za mgeni zitafunguliwa. Tunapendekeza upakue kwanza nakala ya akiba ya kifaa.",
+  "Önizlemede hesap/bulut işlemleri kapalı. Gerçek hesabını burada oluşturma veya değiştirme.": "Vitendo vya akaunti na hifadhi ya wingu vimezimwa katika onyesho hili la majaribio. Usiunde au kubadilisha akaunti yako halisi hapa."
 }

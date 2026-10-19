@@ -76,10 +76,11 @@ test('all workflow locales are complete and preserve message placeholders',()=>{
 test('sync defers before network or restore when a study opens during a pending request',async()=>{
  const s=fs.readFileSync('src/account.mjs','utf8');const a=s.indexOf('async function syncNow('),b=s.indexOf("$('accountSyncEnabled').onchange",a);const fn=s.slice(a,b);
  const events=[],nodes=new Map(),get=id=>{if(!nodes.has(id))nodes.set(id,{checked:true});return nodes.get(id);};let busy=true;
- const c=vm.createContext({syncRunning:false,user:{uid:'u',emailVerified:true},epoch:1,navigator:{onLine:true},$:get,
+ const c=vm.createContext({previewAccount:false,previewAccountMessage:'Preview account actions are disabled.',message:()=>events.push('preview-disabled'),syncRunning:false,syncPending:false,workspaceReady:true,workspaceTransition:false,user:{uid:'u',emailVerified:true},epoch:1,navigator:{onLine:true},$:get,
  window:{elifaActivityBusy:()=>busy,tr:k=>k},scheduleSync:()=>events.push('deferred'),availability(){},localSnapshot:()=>({}),
- api:async()=>{events.push('network');busy=true;return {revision:0};},localStorage:{getItem:()=>null},SYNC_BASE_PREFIX:'base.',
+ api:async()=>{events.push('network');busy=true;return {revision:0};},accountStorage:{getItem:()=>null},SYNC_BASE_PREFIX:'base.',
  restoreBackup:()=>events.push('restore'),location:{reload:()=>events.push('reload')}});
  vm.runInContext(fn,c);await c.syncNow();assert.deepEqual(events,['deferred']);
  events.length=0;busy=false;await c.syncNow();assert.deepEqual(events,['network','deferred']);assert.equal(c.syncRunning,false);
+ events.length=0;c.previewAccount=true;await c.syncNow();assert.deepEqual(events,['preview-disabled'],'preview sync never reaches the network, restores or schedules work');
 });

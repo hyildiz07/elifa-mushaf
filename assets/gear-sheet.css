@@ -83,3 +83,10 @@ body[data-dark="1"] #gearSheet .stepper button{box-shadow:inset 0 1px 0 #ffffff2
 @media(max-width:360px){#gearSheet{padding-left:9px!important;padding-right:9px!important}#gearSheet .gearHeader{gap:6px}#gearSheet h3{font-size:19px!important}#gearSheet .gearRepeatRow,#gearSheet .gearCountPair>div{grid-template-columns:minmax(0,1fr) 25px 136px;column-gap:4px}#gearSheet .stepper button{width:36px}#gearSheet .sheetClose{padding:7px!important}}
 
 #gearSheet h3{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* One compact explanation beside its count; irrelevant modes stay out of view. */
+#gearSheet .gearRepeatRow,#gearSheet .gearCountPair>div{grid-template-columns:minmax(0,1fr) 144px;grid-template-rows:auto auto;min-height:55px;row-gap:2px;padding-block:5px}
+#gearSheet .gearRepeatRow .stepper,#gearSheet .gearCountPair .stepper{grid-column:2;grid-row:1/3}
+#gearSheet .gearCountHelp{grid-column:1!important;grid-row:2;margin:0!important;font-size:10px;line-height:1.3;color:var(--gear-muted)}
+#gearSheet #gearRepRow[hidden],#gearSheet #gearCombineRow[hidden]{display:none!important}
+@media(max-width:360px){#gearSheet .gearRepeatRow,#gearSheet .gearCountPair>div{grid-template-columns:minmax(0,1fr) 136px}}

@@ -149,5 +149,12 @@
   "Geri alma iptal edildi.": "पिछले रिकॉर्ड बहाल करने का कार्य रद्द कर दिया गया।",
   "Yedek alınamadı: ": "बैकअप विफल: ",
   "Yeni şifreni belirle.": "नया पासवर्ड सेट करें.",
-  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "ईमेल सत्यापित. आप अपने खाते में साइन इन कर सकते हैं."
+  "E-posta doğrulandı. Hesabına giriş yapabilirsin.": "ईमेल सत्यापित. आप अपने खाते में साइन इन कर सकते हैं.",
+  "Hesap değişti. Yeniden dene.": "खाता बदल गया है। कृपया फिर से कोशिश करें।",
+  "Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.": "खाते का डेटा अभी तैयार नहीं है। अपने डिवाइस में कुछ जगह खाली करके फिर से कोशिश करें।",
+  "Her hesabın kayıtları bu cihazda ayrı tutulur. Hesapsız kayıtlarını yalnızca istersen kendi hesabına kopyalarsın.": "इस डिवाइस पर हर खाते का डेटा अलग रखा जाता है। अतिथि के रिकॉर्ड आपके खाते में तभी कॉपी होंगे जब आप ऐसा चुनेंगे।",
+  "Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.": "इस डिवाइस पर आपकी सिंक सेटिंग सेव नहीं हो सकी। कुछ जगह खाली करके फिर से कोशिश करें।",
+  "Önce cihaz yedeğini indir": "पहले डिवाइस का बैकअप डाउनलोड करें",
+  "Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.": "आपका खाता, निजी प्रोफ़ाइल और क्लाउड बैकअप हटा दिए जाएँगे। सामूहिक क़ुरआन पाठ में आपकी प्रगति बनी रहेगी, लेकिन आपका नाम और खाते से उसका संबंध हटा दिया जाएगा। पहले अपने निजी सहभागिता और व्यवस्थापक लिंक संभालकर रखें। डिवाइस के रिकॉर्ड एक अलग कॉपी में रहेंगे; लॉग आउट करने पर अतिथि के रिकॉर्ड खुलेंगे। हमारी सलाह है कि पहले डिवाइस का बैकअप डाउनलोड कर लें।",
+  "Önizlemede hesap/bulut işlemleri kapalı. Gerçek hesabını burada oluşturma veya değiştirme.": "इस पूर्वावलोकन में खाता और क्लाउड से जुड़ी कार्रवाइयाँ बंद हैं। यहाँ अपना असली खाता न बनाएँ और न बदलें।"
 }

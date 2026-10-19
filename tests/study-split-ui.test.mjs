@@ -4,6 +4,25 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 const source = fs.readFileSync(new URL('../assets/study-split.js', import.meta.url), 'utf8');
+const html = fs.readFileSync(new URL('../index.html', import.meta.url), 'utf8');
+function partialStudyHarness(){
+  const ids=new Map(),get=id=>{if(!ids.has(id))ids.set(id,element());return ids.get(id);};
+  const words=Array.from({length:5},(_,i)=>({txt:'word'+(i+1),ay:1,pos:i+1,gi:i}));
+  const context={window:{},document:{getElementById:get,createElement:element,
+    createDocumentFragment:()=>element('fragment'),elementFromPoint:()=>null},
+    MutationObserver:class{observe(){}},requestAnimationFrame:()=>1,cancelAnimationFrame(){},
+    studyRange:{sid:1,from:1,to:1,wordRange:{fromAy:1,fromWord:2,toAy:1,toWord:4}},
+    curS:1,ayGi:{1:[0,4]},wordArr:words,SET:{reciter:223},AD_:null,SURAHS:[{tr:'Test',n:1}],stopPlan(){}};
+  for(const id of ['studySplitPanel','studySplitWizard','studySplitResults'])get(id).hidden=true;
+  vm.createContext(context);
+  for(const name of ['validStudyWordRange','studyWordBounds','buildStudySplitParts','studyValidateManualCut']){
+    const start=html.indexOf('function '+name+'('),end=html.indexOf('\n}',start)+2;
+    assert.ok(start>=0,name);vm.runInContext(html.slice(start,end),context);
+  }
+  vm.runInContext(source,context);
+  const open=()=>{context.window.elifaOpenStudySplit();get('studySplitVerseList').children[0].fire('click');};
+  return {context,get,open,words};
+}
 
 function element(tag = 'div') {
   const listeners = new Map();
@@ -167,6 +186,15 @@ test('Study Desk asks for a verse before splitting and builds only three chosen 
   get('studySplitSettings').fire('click');
   assert.equal(settingsOpened,1,'part-specific hifz settings remain accessible while split panel is open');
   assert.match(get('studySplitLiveStatus').textContent,/3\/3.*5× tekrar.*1\+2 açık/);
+  context.remainingStepRepeats=()=>4;
+  context.splitRepeatKey=()=>'combineRep';
+  context.window.elifaStudySplitRefreshStatus();
+  assert.equal(get('studySplitRepeat').textContent,'4× tekrar','the existing repeat button shows the live remaining count');
+  assert.match(get('studySplitRepeat')['aria-label'],/1\+2.*4× tekrar/);
+  context.remainingStepRepeats=()=>0;
+  context.window.elifaStudySplitRefreshStatus();
+  assert.equal(get('studySplitRepeat').textContent,'0× tekrar');
+  assert.equal(context.SET.rep,5,'live countdown never changes the configured value');
   assert.equal(context.window.elifaStudySplitSetIndex(3),false);
   get('studySplitChangeVerse').fire('click');
   assert.equal(get('studySplitVersePicker').hidden,false);
@@ -177,4 +205,45 @@ test('Study Desk asks for a verse before splitting and builds only three chosen 
   assert.equal(setupCalls,1);
   assert.equal(get('studySplitPanel').hidden,true);
   assert.equal(context.window.elifaStudySplitPrefs({sid:1,from:1,to:2}).selectedAy,2);
+});
+
+test('partial-word picker and manual wizard show only the selected text, retain canonical cuts and restore a final before verse end',()=>{
+  const {context:c,get,open}=partialStudyHarness();
+  c.window.elifaOpenStudySplit();
+  assert.equal(get('studySplitVerseList').children[0].children[1].textContent,'word2 word3 word4');
+  get('studySplitVerseList').children[0].fire('click');
+  const row=get('studySplitWords');
+  assert.deepEqual(row.children.map(x=>x.textContent),['word2','word3','word4']);
+  assert.deepEqual(row.children.map(x=>x.dataset.gi),['1','2','3']);
+  row.children[0].fire('click');get('studySplitConfirm').fire('click');
+  assert.equal(row.children[0].classList.contains('studySplitUsed'),true);
+  row.children[2].fire('click');get('studySplitConfirm').fire('click');
+  let selection=c.window.elifaStudySplitSelection();
+  assert.deepEqual(Array.from(selection.parts,p=>[p.fromPos,p.toPos]),[[2,2],[3,4]]);
+  assert.deepEqual(Array.from(selection.cutsByAy[1]),[2],'selection end is implicit, even when the verse has later words');
+  c.window.elifaCloseStudySplit();open();
+  selection=c.window.elifaStudySplitSelection();assert.equal(selection.parts.length,2);
+  assert.deepEqual(Array.from(selection.parts.flatMap(p=>Array.from(p.words,w=>w.pos))),[2,3,4]);
+  get('studySplitRevise').fire('click');
+  assert.equal(get('studySplitWizard').hidden,false);
+  assert.equal(row.children.length,3);assert.equal(row.children[0].disabled,true);
+  assert.equal(row.children[2].classList.contains('studySplitEndpoint'),true);
+  get('studySplitUndo').fire('click');
+  assert.equal(row.children[0].disabled,false);
+});
+
+test('partial split drafts cannot migrate to another word selection or restore cuts outside the selected bounds',()=>{
+  const {context:c,get,open}=partialStudyHarness(),range=c.studyRange;
+  c.window.elifaRememberStudySplitPrefs(range,{mode:'manual',selectedAy:1,cutsByAy:{1:[2]},cursorGi:2,selectedGi:null});
+  open();assert.equal(get('studySplitWords').children[0].classList.contains('studySplitUsed'),true);
+  c.window.elifaCloseStudySplit();
+  const other={...range,wordRange:{...range.wordRange,fromWord:3}};
+  assert.equal(c.window.elifaStudySplitPrefs(other),null,'same verses with different words are different studies');
+  c.window.elifaRememberStudySplitPrefs(range,{mode:'manual',selectedAy:1,cutsByAy:{1:[2,4]},cursorGi:4,selectedGi:null});
+  open();assert.equal(get('studySplitResults').hidden,true);
+  assert.ok(get('studySplitWords').children.every(word=>!word.classList.contains('studySplitUsed')),'invalid final cut restarts bounded marking instead of restoring neighboring words');
+  get('studySplitWords').children[2].fire('click');get('studySplitConfirm').fire('click');
+  assert.equal(c.window.elifaStudySplitSelection().parts.length,1);
+  range.wordRange.fromWord=3;
+  assert.equal(c.window.elifaStudySplitSelection(),null,'in-place word-range change invalidates active split controls');
 });
