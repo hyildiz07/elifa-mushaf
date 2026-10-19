@@ -13,7 +13,7 @@ function harness(initial={},options={}){
   setTimeout:fn=>{timers.set(++timerId,fn);return timerId},clearTimeout:id=>timers.delete(id),
   document:{getElementById:el,createElement:el,querySelectorAll:()=>[]},window:{addEventListener(){},dispatchEvent:event=>events.push(event.type)},navigator:{onLine:true},
   location:{origin:'https://example.test',search:options.search||'',href:options.url||'https://example.test/',reload:()=>events.push('reload')},history:{replaceState(){}},localStorage:storage,
-  GoogleAuthProvider:Provider,OAuthProvider:Provider,EmailAuthProvider:{credential:()=>({})},auth,isLocal:true,
+  GoogleAuthProvider:Provider,OAuthProvider:Provider,EmailAuthProvider:{credential:()=>({})},browserPopupRedirectResolver:'on-click-popup-resolver',auth,isLocal:true,
   accountLanguage:()=> 'tr',accountText:s=>s,localizeAccountTree(){},onAuthStateChanged(instance,_changed,failed){instance.initialFailure=failed;},
   mountAccountProfile:()=>({ready:()=>false,hasGuestChoice:()=>!!options.guestChoice,load:async()=>{calls.push('profile-load')},changed(){}}),
   confirm:()=>true,reauthenticateWithCredential:async()=>calls.push('reauth'),signOut:async()=>{auth.currentUser=null},sendPasswordResetEmail:async()=>calls.push('password-reset'),confirmPasswordReset:async()=>calls.push('password-confirm'),
@@ -97,6 +97,31 @@ test('queued cross-tab workspace preparation ignores an obsolete identity and pr
  queue.shift()();await new Promise(r=>setImmediate(r));assert.equal(h.map.get(WORKSPACE_OWNER),undefined);
  queue.shift()();await new Promise(r=>setImmediate(r));assert.equal(h.map.get(WORKSPACE_OWNER),'B');
  assert.ok(h.map.get('elifa.workspace.v1.guest').includes('guest original'));assert.equal(h.map.get('elifa.workspace.v1.A'),undefined);
+});
+
+test('trusted identity is published before a delayed workspace lock without enabling account data writes or cloud work',async()=>{
+ const h=harness({notes:'{"1:1":"guest original"}'}),queue=[],seen=[];
+ h.c.navigator.locks={request:(_name,fn)=>new Promise(resolve=>queue.push(()=>resolve(fn())))};
+ h.c.window.elifaAccountSession.onChange(u=>seen.push(u?.uid||null));
+ h.c.window.review.authChanged(member('A'));
+ assert.deepEqual(seen,['A']);assert.equal(h.c.window.elifaAccountSession.isReady(),true);
+ assert.equal(h.c.window.elifaWorkspaceWritable(),false);assert.equal(h.calls.length,0);
+ await assert.rejects(h.c.window.review.api('save',{payload:{}}),/Hesap kayıtları/);
+ queue.shift()();await new Promise(r=>setImmediate(r));
+ assert.deepEqual(seen,['A'],'workspace completion must not repeat the membership notification');
+ assert.ok(h.map.get('elifa.workspace.v1.guest').includes('guest original'));
+});
+
+test('web popup sign-in and provider linking explicitly initialize their resolver only on the user action',async()=>{
+ const h=harness({[WORKSPACE_OWNER]:'A'});const resolver=h.c.browserPopupRedirectResolver;
+ h.c.signInWithPopup=async(...args)=>{assert.equal(args[2],resolver);h.auth.currentUser=member('A');h.calls.push('popup-login');};
+ h.c.linkWithPopup=async(...args)=>{assert.equal(args[2],resolver);h.calls.push('popup-link');};h.c.reload=async()=>{};
+ assert.equal(h.calls.length,0);
+ h.nodes.get('accountGoogle').onclick();await new Promise(r=>setImmediate(r));assert.deepEqual(h.calls,['popup-login']);
+ h.nodes.get('accountLinkGoogle').onclick();await new Promise(r=>setImmediate(r));assert.deepEqual(h.calls,['popup-login','popup-link']);
+ h.c.reauthenticateWithPopup=async(...args)=>{assert.equal(args[2],resolver);h.calls.push('popup-reauth');throw Object.assign(Error('cancelled'),{code:'auth/popup-closed-by-user'});};
+ h.nodes.get('accountDeleteForm').onsubmit({preventDefault(){}});await new Promise(r=>setImmediate(r));assert.deepEqual(h.calls,['popup-login','popup-link','popup-reauth']);
+ assert.equal(h.calls.some(call=>call?.action==='deleteAccount'),false);
 });
 
 

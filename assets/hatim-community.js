@@ -116,11 +116,17 @@
     return clean;
   }
   function createOrgClient({ fetcher, session: session2, base: base2 = "", onError }) {
-    return async function api2(payload2) {
+    const reads = /* @__PURE__ */ new Set(["get", "myList", "discoverConfig", "discoverList", "commentList", "commentReplies", "commentReports", "pollGet"]), pending = /* @__PURE__ */ new Map();
+    let revision = 0;
+    const identity = () => {
+      const value = session2()?.getUser();
+      return String(value?.uid || "guest") + ":" + (value?.emailVerified === true ? "verified" : "unverified");
+    };
+    async function request(payload2, capturedIdentity) {
       const user2 = session2()?.getUser(), uid = user2?.uid || null, headers = { "Content-Type": "application/json" };
       if (uid) {
         const token = await session2().getIdToken();
-        if (!token || session2()?.getUser()?.uid !== uid) throw Error("Hesap de\u011Fi\u015Fti. \u0130\u015Flemi yeniden a\xE7.");
+        if (!token || session2()?.getUser()?.uid !== uid || identity() !== capturedIdentity) throw Error("Hesap de\u011Fi\u015Fti. \u0130\u015Flemi yeniden a\xE7.");
         headers.Authorization = "Bearer " + token;
         payload2 = { ...payload2, expectedUser: uid };
       }
@@ -131,7 +137,7 @@
       } catch {
         throw Error("Sunucuya ula\u015F\u0131lamad\u0131. \u0130\u015Flem kaydedildi say\u0131lmad\u0131; durumunu kontrol edip yeniden dene.");
       }
-      if ((session2()?.getUser()?.uid || null) !== uid) throw Error("Hesap de\u011Fi\u015Fti. \u0130\u015Flemi yeniden a\xE7.");
+      if ((session2()?.getUser()?.uid || null) !== uid || identity() !== capturedIdentity) throw Error("Hesap de\u011Fi\u015Fti. \u0130\u015Flemi yeniden a\xE7.");
       if (!result.ok) {
         const e = Object.assign(Error(data.error || "\u0130\u015Flem tamamlanamad\u0131."), { status: result.status, ...typeof data.errorCode === "string" ? { errorCode: data.errorCode } : {} });
         onError?.(e);
@@ -144,6 +150,21 @@
         data = { ...data, code, org: { ...data.org, code } };
       }
       return data;
+    }
+    return async function api2(payload2) {
+      const capturedIdentity = identity();
+      if (!reads.has(payload2.action)) {
+        revision++;
+        return request(payload2, capturedIdentity);
+      }
+      const key2 = JSON.stringify([capturedIdentity, revision, payload2]);
+      let task = pending.get(key2);
+      if (!task) {
+        task = request(payload2, capturedIdentity);
+        pending.set(key2, task);
+        task.then(() => pending.delete(key2), () => pending.delete(key2));
+      }
+      return JSON.parse(JSON.stringify(await task));
     };
   }
 
@@ -832,7 +853,15 @@
   var dialogIdentity = 0;
   var activeAction = null;
   var listErrorCode = "";
+  var homeIdentity = "";
+  var listRun = null;
+  var configCache = null;
+  var listCache = /* @__PURE__ */ new Map();
+  var listFreshMs = 15e3;
+  var configFreshMs = 3e4;
+  var identityKey = () => String(owner || "guest") + ":" + (member() ? "verified" : "unverified");
   var member = () => !!user()?.uid && user()?.emailVerified === true;
+  var sessionIdentity = identityKey();
   var authIntentKey = "elifa_hatim_login_intent_v1";
   var authIntent = null;
   try {
@@ -890,6 +919,15 @@
   var pendingConnection = null;
   var pendingConnectionPersisted = false;
   var connectionAttempt = 0;
+  var openingConnection = false;
+  function openConnectionScreen() {
+    openingConnection = true;
+    try {
+      openTogetherScreen();
+    } finally {
+      openingConnection = false;
+    }
+  }
   function connectionStore() {
     return window.sessionStorage;
   }
@@ -944,7 +982,7 @@
     const attempt = ++connectionAttempt, p = pendingConnection;
     await sessionReady();
     if (attempt !== connectionAttempt || pendingConnection !== p) return;
-    openTogetherScreen();
+    openConnectionScreen();
     await openParsed(p);
   }
   var previewMode = false;
@@ -955,8 +993,9 @@
     for (const id of ["hcHomePreview", "hcOrgPreview", "hcDialogPreview"]) {
       const node = $(id);
       if (node) {
-        node.hidden = !previewMode;
-        node.textContent = previewMode ? previewNotice : "";
+        const text = previewMode ? previewNotice : "";
+        if (node.hidden !== !previewMode) node.hidden = !previewMode;
+        if (node.textContent !== text) node.textContent = text;
       }
     }
   }
@@ -964,8 +1003,14 @@
     return `<p id="${id}" class="hc-note" role="note" ${previewMode ? "" : "hidden"}>${previewMode ? previewNotice : ""}</p>`;
   }
   async function api(payload2) {
-    if (!["get", "myList", "discoverConfig", "discoverList", "commentList", "commentReplies", "commentReports", "pollGet"].includes(payload2.action)) writeRevision++;
+    if (!["get", "myList", "discoverConfig", "discoverList", "commentList", "commentReplies", "commentReports", "pollGet"].includes(payload2.action)) {
+      writeRevision++;
+      listCache.clear();
+      listRun = null;
+      ++listGeneration;
+    }
     const result = await requestApi(payload2);
+    if (["discoverConfig", "discoverList"].includes(payload2.action) && typeof result.enabled === "boolean") configCache = { enabled: result.enabled, at: Date.now() };
     if (result.preview === true) {
       previewMode = true;
       renderPreviewNotice();
@@ -1088,7 +1133,11 @@
     closeDialog();
     dialogIdentity++;
     generation++;
-    listGeneration++;
+    if (screen === "home") {
+      listGeneration++;
+      listRun = null;
+      loading = false;
+    }
     clearInterval(window.bkRefreshTimer);
     current = null;
     window.bkCurrent = null;
@@ -1128,6 +1177,9 @@
   function home() {
     const holder = $("birlikte");
     if (!holder) return;
+    const identity = identityKey() + ":" + tab;
+    if (homeIdentity === identity) return;
+    homeIdentity = identity;
     holder.innerHTML = `<div class="hc-home"><header class="hc-top"><button type="button" class="hc-button hc-home-back" data-hc="home-back" aria-label="Ana sayfaya d\xF6n">\u2039</button><div class="hc-heading"><h1>Birlikte Hatim</h1><p>Bir c\xFCz se\xE7, birlikte okuyal\u0131m.</p></div></header>${previewNote("hcHomePreview")}<div class="hc-main-actions">${button("\uFF0B Hatim olu\u015Ftur", "create", "primary")}${button("Kodla kat\u0131l", "join")}</div><div class="hc-return-entry"><button type="button" class="hc-text" data-hc="return-entry">\u21A9 C\xFCz\xFCme geri d\xF6n</button><span>Daha \xF6nce ald\u0131\u011F\u0131n c\xFCz i\xE7in</span></div><nav class="hc-tabs" aria-label="Hatim b\xF6l\xFCmleri">${[["open", "A\xE7\u0131k hatimler"], ["mine", "C\xFCzlerim"], ["created", "Ba\u015Flatt\u0131klar\u0131m"]].map(([id, name]) => `<button type="button" data-tab="${id}" aria-pressed="${id === tab}">${name}</button>`).join("")}</nav><div id="hatimStatus" role="status" aria-live="polite"></div><div id="hatimList"></div></div>`;
     on(holder.querySelector("[data-hc=home-back]"), "click", () => {
       closeDialog();
@@ -1141,7 +1193,6 @@
       tab = b.dataset.tab;
       renderBirlikte();
     }));
-    renderList();
   }
   function card(o, index = 0) {
     const total = o.total || 30, done = o.done ?? o.items?.filter((x) => x.status === "okundu").length ?? 0, available = o.available ?? Math.max(0, total - (o.taken || 0)), due = dueText(o.dueDate), action = available ? "C\xFCz se\xE7" : "G\xF6r\xFCnt\xFCle";
@@ -1158,73 +1209,107 @@
     const list = $("hatimList");
     if (!list) return;
     renderPreviewNotice();
-    $("hatimStatus").textContent = loading ? "G\xFCncel bilgiler al\u0131n\u0131yor\u2026" : error;
+    const status = loading ? "G\xFCncel bilgiler al\u0131n\u0131yor\u2026" : error;
+    if ($("hatimStatus").textContent !== status) $("hatimStatus").textContent = status;
+    let content = "";
     if (tab === "open") {
-      if (loading) list.innerHTML = '<div class="hc-empty"><h2>A\xE7\u0131k hatimler y\xFCkleniyor</h2><p>G\xFCncel liste kontrol ediliyor\u2026</p></div>';
-      else if (["AUTH_REQUIRED", "EMAIL_UNVERIFIED"].includes(listErrorCode)) list.innerHTML = '<div class="hc-empty"><h2>T\xFCm \xFCyelere a\xE7\u0131k hatimler</h2><p>Kat\u0131lmak i\xE7in hesab\u0131na giri\u015F yap\u0131p e-posta adresini do\u011Frula. Davet ba\u011Flant\u0131s\u0131yla gelen mevcut misafir kat\u0131l\u0131mlar\u0131n korunur.</p>' + button(user() ? "Hesab\u0131m\u0131 a\xE7" : "Giri\u015F yap", "list-login", "primary") + "</div>";
-      else if (error) list.innerHTML = '<div class="hc-empty"><h2>A\xE7\u0131k hatimler \u015Fu an al\u0131namad\u0131</h2><p>Bu, listenin kapal\u0131 oldu\u011Fu anlam\u0131na gelmez. Yeniden deneyebilir veya sana g\xF6nderilen ba\u011Flant\u0131yla kat\u0131labilirsin.</p>' + button("Yeniden dene", "discover-retry") + "</div>";
-      else if (discoverEnabled === null) list.innerHTML = '<div class="hc-empty"><h2>A\xE7\u0131k hatim durumu hen\xFCz do\u011Frulanmad\u0131</h2><p>G\xFCncel listeyi kontrol etmek i\xE7in yeniden dene.</p>' + button("Yeniden dene", "discover-retry") + "</div>";
-      else list.innerHTML = discoverEnabled && discover.length ? discover.map(card).join("") : `<div class="hc-empty"><h2>${discoverEnabled ? "Hen\xFCz a\xE7\u0131k hatim yok" : "Bir ba\u011Flant\u0131yla da kat\u0131labilirsin"}</h2><p>${discoverEnabled ? "\u0130lk hatmi sen ba\u015Flatabilirsin." : "A\xE7\u0131k hatim listesi \u015Fu an kapal\u0131. Sana g\xF6nderilen ba\u011Flant\u0131yla kat\u0131labilir veya \xF6zel bir hatim olu\u015Fturabilirsin."}</p></div>`;
+      if (loading && !listCache.has(identityKey() + ":open")) content = '<div class="hc-empty"><h2>A\xE7\u0131k hatimler y\xFCkleniyor</h2><p>G\xFCncel liste kontrol ediliyor\u2026</p></div>';
+      else if (["AUTH_REQUIRED", "EMAIL_UNVERIFIED"].includes(listErrorCode)) content = '<div class="hc-empty"><h2>T\xFCm \xFCyelere a\xE7\u0131k hatimler</h2><p>Kat\u0131lmak i\xE7in hesab\u0131na giri\u015F yap\u0131p e-posta adresini do\u011Frula. Davet ba\u011Flant\u0131s\u0131yla gelen mevcut misafir kat\u0131l\u0131mlar\u0131n korunur.</p>' + button(user() ? "Hesab\u0131m\u0131 a\xE7" : "Giri\u015F yap", "list-login", "primary") + "</div>";
+      else if (error) content = '<div class="hc-empty"><h2>A\xE7\u0131k hatimler \u015Fu an al\u0131namad\u0131</h2><p>Bu, listenin kapal\u0131 oldu\u011Fu anlam\u0131na gelmez. Yeniden deneyebilir veya sana g\xF6nderilen ba\u011Flant\u0131yla kat\u0131labilirsin.</p>' + button("Yeniden dene", "discover-retry") + "</div>";
+      else if (discoverEnabled === null) content = '<div class="hc-empty"><h2>A\xE7\u0131k hatim durumu hen\xFCz do\u011Frulanmad\u0131</h2><p>G\xFCncel listeyi kontrol etmek i\xE7in yeniden dene.</p>' + button("Yeniden dene", "discover-retry") + "</div>";
+      else content = discoverEnabled && discover.length ? discover.map(card).join("") : `<div class="hc-empty"><h2>${discoverEnabled ? "Hen\xFCz a\xE7\u0131k hatim yok" : "Bir ba\u011Flant\u0131yla da kat\u0131labilirsin"}</h2><p>${discoverEnabled ? "\u0130lk hatmi sen ba\u015Flatabilirsin." : "A\xE7\u0131k hatim listesi \u015Fu an kapal\u0131. Sana g\xF6nderilen ba\u011Flant\u0131yla kat\u0131labilir veya \xF6zel bir hatim olu\u015Fturabilirsin."}</p></div>`;
     } else {
       const records = new Map(local.mine.filter((x) => x.type === "hatim").map((m) => [m.code, { ...m, ...local.snapshots[m.code], title: local.snapshots[m.code]?.title || m.title || "Hatim", localOnly: true }]));
       for (const m of accountItems) if (m.type === "hatim") records.set(m.code, { ...records.get(m.code), ...m, localOnly: false });
       const rows = [...records.values()].filter((m) => tab === "created" ? m.isAdmin || m.adminToken : (m.items || []).length || local.claimed[m.code]?.length || Object.keys(capabilities(m.code)).length);
-      list.innerHTML = rows.map(ownedCard).join("") + (!rows.length ? '<div class="hc-empty"><h2>' + (tab === "created" ? "Hen\xFCz hatim olu\u015Fturmad\u0131n" : "Hen\xFCz c\xFCz se\xE7medin") + "</h2><p>A\xE7\u0131k hatimlerden veya sana g\xF6nderilen ba\u011Flant\u0131dan ba\u015Flayabilirsin.</p></div>" : "") + (!user() ? '<details class="hc-help"><summary>Misafir kay\u0131tlar\u0131m nas\u0131l korunur?</summary><p>Bu cihaz\u0131n verileri silinirse ki\u015Fisel d\xF6n\xFC\u015F kodun gerekir. Kodunu sakla veya <button class="hc-text" data-hc="account">hesab\u0131na giri\u015F yap</button>.</p></details>' : "");
+      content = rows.map(ownedCard).join("") + (!rows.length ? '<div class="hc-empty"><h2>' + (tab === "created" ? "Hen\xFCz hatim olu\u015Fturmad\u0131n" : "Hen\xFCz c\xFCz se\xE7medin") + "</h2><p>A\xE7\u0131k hatimlerden veya sana g\xF6nderilen ba\u011Flant\u0131dan ba\u015Flayabilirsin.</p></div>" : "") + (!user() ? '<details class="hc-help"><summary>Misafir kay\u0131tlar\u0131m nas\u0131l korunur?</summary><p>Bu cihaz\u0131n verileri silinirse ki\u015Fisel d\xF6n\xFC\u015F kodun gerekir. Kodunu sakla veya <button class="hc-text" data-hc="account">hesab\u0131na giri\u015F yap</button>.</p></details>' : "");
       if (user()) {
         let guest;
         try {
           guest = loadLocal(storage, guestKey);
         } catch {
         }
-        if (guest && (Object.values(guest.capabilities).some((x) => Object.keys(x).length) || Object.values(guest.pendingClaims).some((x) => Object.keys(x).length) || guest.mine.some((x) => x.adminToken))) list.innerHTML += '<div class="hc-note"><b>Bu cihazda misafir kat\u0131l\u0131mlar\u0131 var.</b><p>Sana ait olanlar\u0131 se\xE7erek hesab\u0131na ba\u011Flayabilirsin.</p>' + button("Misafir kat\u0131l\u0131mlar\u0131m\u0131 g\xF6ster", "bind-list") + "</div>";
+        if (guest && (Object.values(guest.capabilities).some((x) => Object.keys(x).length) || Object.values(guest.pendingClaims).some((x) => Object.keys(x).length) || guest.mine.some((x) => x.adminToken))) content += '<div class="hc-note"><b>Bu cihazda misafir kat\u0131l\u0131mlar\u0131 var.</b><p>Sana ait olanlar\u0131 se\xE7erek hesab\u0131na ba\u011Flayabilirsin.</p>' + button("Misafir kat\u0131l\u0131mlar\u0131m\u0131 g\xF6ster", "bind-list") + "</div>";
       }
     }
+    if (list.innerHTML === content) return;
+    list.innerHTML = content;
     list.querySelectorAll("[data-open]").forEach((b) => on(b, "click", () => bkOpen(b.dataset.open)));
     on(list.querySelector("[data-hc=return-entry]"), "click", showReturnEntry);
-    on(list.querySelector("[data-hc=discover-retry]"), "click", renderBirlikte);
+    on(list.querySelector("[data-hc=discover-retry]"), "click", () => renderBirlikte({ force: true }));
     on(list.querySelector("[data-hc=account]"), "click", accountOpen);
     on(list.querySelector("[data-hc=bind-list]"), "click", showGuestBindings);
     on(list.querySelector("[data-hc=list-login]"), "click", () => accountFor({ kind: "list" }));
   }
-  async function renderBirlikte() {
-    const ticket = ++listGeneration;
+  async function renderBirlikte(options = {}) {
+    if (openingConnection) {
+      home();
+      return;
+    }
+    const selected = tab, identity = identityKey(), cacheKey = identity + ":" + (selected === "open" ? "open" : "owned");
     home();
+    if (listRun?.key === cacheKey) {
+      loading = true;
+      error = "";
+      listErrorCode = "";
+      renderList();
+      return listRun.promise;
+    }
+    const cached = listCache.get(cacheKey), fresh = cached && Date.now() - cached.at < listFreshMs;
+    if (fresh && !options.force) {
+      loading = false;
+      error = "";
+      listErrorCode = "";
+      renderList();
+      return;
+    }
+    const ticket = ++listGeneration, requestRevision = writeRevision;
     loading = true;
     error = "";
     listErrorCode = "";
     renderList();
-    try {
-      if (tab === "open") {
-        const d = await api({ action: "discoverList" });
-        if (ticket !== listGeneration) return;
-        if (typeof d.enabled !== "boolean" || d.enabled && !Array.isArray(d.items)) throw Error("A\xE7\u0131k hatim listesi yan\u0131t\u0131 do\u011Frulanamad\u0131. Yeniden dene.");
-        discoverEnabled = d.enabled;
-        discover = (d.items || []).filter((x) => x.type === "hatim");
-      } else if (user()) {
-        let items = [], cursor;
-        const seen = /* @__PURE__ */ new Set();
-        do {
-          if (seen.has(cursor)) throw Error("Kat\u0131l\u0131m listesi tamamlanamad\u0131. Yeniden dene.");
-          seen.add(cursor);
-          const d = await api({ action: "myList", ...cursor == null ? {} : { cursor } });
-          if (ticket !== listGeneration) return;
-          if (!Array.isArray(d.items)) throw Error("Kat\u0131l\u0131m listesi yan\u0131t\u0131 ge\xE7ersiz.");
-          items.push(...d.items);
-          cursor = d.nextCursor;
-        } while (cursor != null);
-        accountItems = items;
+    const run = { key: cacheKey, promise: null };
+    listRun = run;
+    run.promise = (async () => {
+      try {
+        if (!session() || session()?.isReady?.() === false) await sessionReady();
+        if (ticket !== listGeneration || identity !== identityKey()) return;
+        if (selected === "open") {
+          const d = await api({ action: "discoverList" });
+          if (ticket !== listGeneration || requestRevision !== writeRevision) return;
+          if (typeof d.enabled !== "boolean" || d.enabled && !Array.isArray(d.items)) throw Error("A\xE7\u0131k hatim listesi yan\u0131t\u0131 do\u011Frulanamad\u0131. Yeniden dene.");
+          discoverEnabled = d.enabled;
+          discover = (d.items || []).filter((x) => x.type === "hatim");
+        } else if (user()) {
+          let items = [], cursor;
+          const seen = /* @__PURE__ */ new Set();
+          do {
+            if (seen.has(cursor)) throw Error("Kat\u0131l\u0131m listesi tamamlanamad\u0131. Yeniden dene.");
+            seen.add(cursor);
+            const d = await api({ action: "myList", ...cursor == null ? {} : { cursor } });
+            if (ticket !== listGeneration || requestRevision !== writeRevision) return;
+            if (!Array.isArray(d.items)) throw Error("Kat\u0131l\u0131m listesi yan\u0131t\u0131 ge\xE7ersiz.");
+            items.push(...d.items);
+            cursor = d.nextCursor;
+          } while (cursor != null);
+          accountItems = items;
+        }
+        if (ticket === listGeneration && requestRevision === writeRevision) listCache.set(cacheKey, { at: Date.now() });
+      } catch (e) {
+        if (ticket === listGeneration) {
+          listCache.delete(cacheKey);
+          error = e.message;
+          listErrorCode = e.errorCode || "";
+        }
+      } finally {
+        if (ticket === listGeneration) {
+          loading = false;
+          renderList();
+        }
+        if (listRun === run) listRun = null;
       }
-    } catch (e) {
-      if (ticket === listGeneration) {
-        error = e.message;
-        listErrorCode = e.errorCode || "";
-      }
-    } finally {
-      if (ticket === listGeneration) {
-        loading = false;
-        renderList();
-      }
-    }
+    })();
+    return run.promise;
   }
   function showJoin() {
     dialog("Ba\u011Flant\u0131yla kat\u0131l", '<p class="hc-note">Yeni bir hatme kat\u0131lmak i\xE7indir. Daha \xF6nce ald\u0131\u011F\u0131n c\xFCze d\xF6nmek i\xE7in \u201CC\xFCz\xFCme geri d\xF6n\u201D\xFC kullan.</p><label class="hc-field">Kat\u0131l\u0131m ba\u011Flant\u0131s\u0131 veya 6 haneli hatim kodu<input id="hcJoin" autocomplete="off" placeholder="Ba\u011Flant\u0131y\u0131 yap\u0131\u015Ft\u0131r veya 6 haneli kodu yaz"></label>', [{ id: "join", label: "Hatmi a\xE7", primary: true, run: async () => {
@@ -1284,7 +1369,7 @@
     if (!navOpts.fromHistory && typeof setElifaRoute === "function") setElifaRoute("org", navOpts.replace ? "replace" : "push");
     $("orgView").innerHTML = '<p class="hc-empty" role="status">Hatim a\xE7\u0131l\u0131yor\u2026</p>';
     try {
-      const d = await api(payload("get", code, { ...admin ? { admin } : {} }));
+      const d = navOpts.response || await api(payload("get", code, { ...admin ? { admin } : {} }));
       if (ticket !== generation) return;
       if (admin && !d.org.isAdmin) throw Error("Y\xF6netici ba\u011Flant\u0131s\u0131 do\u011Frulanamad\u0131. \xD6zel ba\u011Flant\u0131n\u0131 kontrol et.");
       current = { org: d.org, code: d.code, adminToken: admin || adminToken(d.code), ticket };
@@ -1320,9 +1405,15 @@
     try {
       const d = await api(payload("get", c.code, { ...c.adminToken ? { admin: c.adminToken } : {} }));
       if (current === c && c.ticket === generation && revision === writeRevision) {
+        const changed = JSON.stringify(current.org) !== JSON.stringify(d.org);
         current.org = d.org;
-        remember(d.org, c.adminToken);
-        renderOrg();
+        if (changed) {
+          remember(d.org, c.adminToken);
+          renderOrg();
+        } else {
+          const hint = $("hcRefreshState"), message = user() ? "Hesab\u0131na ba\u011Fl\u0131 kat\u0131l\u0131mlar di\u011Fer cihazlarda da g\xF6r\xFCn\xFCr." : "Misafirsen ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131n\u0131 sakla.";
+          if (hint && hint.textContent !== message) hint.textContent = message;
+        }
       }
     } catch (e) {
       if (current === c) {
@@ -1465,10 +1556,13 @@
     prepareCode();
   }
   function showCreate(prefill) {
-    let visibilityStatus = "loading", visibilityEnabled = null;
+    const accountPending = !session() || session()?.isReady?.() === false;
+    const known = configCache && Date.now() - configCache.at < configFreshMs ? configCache : null;
+    let visibilityStatus = known ? "ready" : "loading", visibilityEnabled = known?.enabled ?? null;
     createDraft = local.creation || { token: secret(crypto), title: "", name: user()?.displayName || local.myName, dueDate: "", public: false };
     if (prefill && !local.creation) createDraft = { ...createDraft, title: String(prefill.title || "").slice(0, 120), name: String(prefill.name || "").slice(0, 60), dueDate: String(prefill.dueDate || ""), public: prefill.public === true };
-    dialog("Hatim olu\u015Ftur", `<p class="hc-note">30 c\xFCzl\xFCk bir hatim ba\u015Flat. Davetle kat\u0131l\u0131mda hesap a\xE7madan da c\xFCz se\xE7ilebilir.</p>${!user() ? '<p class="hc-warning">Hesaps\u0131z devam ediyorsun. Bu cihazdaki bilgiler silinirse hatmine geri d\xF6nemeyebilirsin. Sana \xF6zel ba\u011Flant\u0131y\u0131 sakla.</p>' : ""}<label class="hc-field">Hatmin ad\u0131 / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="\xD6rn. Ailemizin haftal\u0131k hatmi"></label><label class="hc-field">Ad\u0131n / takma ad<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih \xB7 iste\u011Fe ba\u011Fl\u0131<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler kat\u0131labilsin?</legend><div id="hcVisibilityOptions" aria-live="polite"><p>Kat\u0131l\u0131m se\xE7enekleri kontrol ediliyor\u2026</p></div></fieldset>`, [{ id: "create", label: "Hatmi olu\u015Ftur", primary: true, run: async () => {
+    dialog("Hatim olu\u015Ftur", `<p class="hc-note">30 c\xFCzl\xFCk bir hatim ba\u015Flat. Davetle kat\u0131l\u0131mda hesap a\xE7madan da c\xFCz se\xE7ilebilir.</p>${accountPending ? '<p class="hc-note" role="status">Hesap durumu haz\u0131rlan\u0131yor\u2026</p>' : !user() ? '<p class="hc-warning">Hesaps\u0131z devam ediyorsun. Bu cihazdaki bilgiler silinirse hatmine geri d\xF6nemeyebilirsin. Sana \xF6zel ba\u011Flant\u0131y\u0131 sakla.</p>' : ""}<label class="hc-field">Hatmin ad\u0131 / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="\xD6rn. Ailemizin haftal\u0131k hatmi"></label><label class="hc-field">Ad\u0131n / takma ad<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih \xB7 iste\u011Fe ba\u011Fl\u0131<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler kat\u0131labilsin?</legend><div id="hcVisibilityOptions" aria-live="polite"><p>Kat\u0131l\u0131m se\xE7enekleri kontrol ediliyor\u2026</p></div></fieldset>`, [{ id: "create", label: "Hatmi olu\u015Ftur", primary: true, run: async () => {
+      if (!session() || session()?.isReady?.() === false) throw Error("Hesap durumu haz\u0131rlan\u0131yor. Biraz sonra yeniden dene.");
       if (createDraft.public && visibilityEnabled !== true) throw Error("\xD6nceki a\xE7\u0131k hatim iste\u011Fini g\xFCvenle s\xFCrd\xFCrmek i\xE7in kat\u0131l\u0131m se\xE7eneklerinin do\u011Frulanmas\u0131n\u0131 bekle veya yeniden dene.");
       const form = { title: $("hcTitle").value.trim(), name: $("hcAdminName").value.trim(), dueDate: $("hcDue").value, public: !!document.querySelector("input[name=hcVisibility][value=public]:checked") };
       if (!form.title) throw Error("Hatme bir ad ver.");
@@ -1487,7 +1581,7 @@
       local.creation = null;
       save();
       closeDialog();
-      await bkOpen(d.code, d.adminToken);
+      await bkOpen(d.code, d.adminToken, { response: d });
       showAdminBackup(d.code, d.adminToken);
     } }, { id: "cancel", label: "Vazge\xE7", run: closeDialog }]);
     const scope = { owner, generation, dialog: dialogIdentity };
@@ -1514,7 +1608,8 @@
       }
       renderVisibility();
     };
-    loadVisibility();
+    if (known) renderVisibility();
+    else loadVisibility();
   }
   function showAdminBackup(code, token) {
     const link = adminUrl(base(), token);
@@ -1720,13 +1815,29 @@
   });
   on(window, "focus", bkSilentRefresh);
   on(window, "elifa:account-changed", (e) => {
-    const uid = e.detail?.user?.uid || null;
+    const uid = e.detail?.user?.uid || null, nextIdentity = String(uid || "guest") + ":" + (member() ? "verified" : "unverified"), identityChanged = nextIdentity !== sessionIdentity;
+    sessionIdentity = nextIdentity;
     if (uid === owner) {
+      if (identityChanged) {
+        listRun = null;
+        listCache.clear();
+        ++listGeneration;
+      }
       if (authIntent && member()) resumeAuthIntent().catch((err) => flash(err.message));
       else if (pendingConnection && !current) resumeConnection().catch((err) => flash(err.message));
+      else if (identityChanged) {
+        if (current) bkOpen(current.code, null, { fromHistory: true });
+        else if ($("birlikte")?.classList.contains("on")) renderBirlikte();
+      }
       return;
     }
     comments.dispose();
+    listRun = null;
+    listCache.clear();
+    configCache = null;
+    discover = [];
+    discoverEnabled = null;
+    homeIdentity = "";
     save();
     owner = uid;
     key = uid ? "elifa_hatim_user_" + uid : guestKey;
@@ -1751,7 +1862,7 @@
   if (initial) {
     stageConnection(initial);
     if (pendingConnectionPersisted) updateAddress();
-    openTogetherScreen();
+    openConnectionScreen();
     const hint = $("hatimStatus");
     if (hint) hint.textContent = "Ba\u011Flant\u0131n korunuyor. Hesap durumu haz\u0131rlan\u0131yor\u2026";
     resumeConnection().catch((err) => flash(err.message));

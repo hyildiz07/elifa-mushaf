@@ -11,7 +11,7 @@
    · version.json / duyuru.json / manual-*.json → her zaman ağ öncelikli.
    · Yönlendirilmiş (redirected) navigasyon yanıtı önbelleğe yazılmaz.
    ═══════════════════════════════════════════════════════════════ */
-const VERSION = 'elifa-mushaf-v362-member-hatim-comments';
+const VERSION = 'elifa-mushaf-v363-community-startup';
 const CACHE   = VERSION;
 
 /* Fontlar index.html içinde base64 gömülü → ayrıca cache'lenmez. */
@@ -19,9 +19,9 @@ const CORE = [
   './', './index.html', './manifest.json', './version.json',
   './pwa_icon-192.png', './pwa_icon-512.png',
   './pwa_icon-maskable.png', './pwa_apple-180.png',
-  './top_logo_hilal.svg', './assets/account.js?v=362', './assets/account.css?v=362',
-  './assets/hatim-community.js?v=362', './assets/hatim-community.css?v=362',
-  './assets/community-admin.js?v=362', './assets/community-admin.css?v=362',
+  './top_logo_hilal.svg', './assets/account.js?v=363', './assets/account.css?v=362',
+  './assets/hatim-community.js?v=363', './assets/hatim-community.css?v=362',
+  './assets/community-admin.js?v=363', './assets/community-admin.css?v=362',
   './assets/locale.js?v=2', './assets/reader-help.js?v=2', './assets/reader-help-drafts.js?v=1', './assets/reader-help.css?v=1',
   './assets/ui-extra-drafts.js?v=2', './assets/ui-extra.js?v=1',
   './assets/dua-practice.js?v=351', './assets/dua-practice.css?v=351',

@@ -136,3 +136,19 @@ test('organization responses normalize the root code exactly once before any UI 
  const missing=createOrgClient({session:()=>null,fetcher:async()=>Response.json({org:{title:'Hatim'}})});await assert.rejects(missing({action:'get',code}),/geçerli kod yok/);
  const malformed=createOrgClient({session:()=>null,fetcher:async()=>Response.json(null)});await assert.rejects(malformed({action:'get',code}),/yanıtı geçersiz/);
 });
+
+
+test('only matching in-flight reads are shared; results are independent and subsequent reads remain authoritative',async()=>{
+ let resolve,count=0;const api=createOrgClient({session:()=>null,fetcher:()=>{count++;return new Promise(r=>resolve=()=>r(Response.json({org:{code,title:'Original'},code})));}});
+ const a=api({action:'get',code}),b=api({action:'get',code});assert.equal(count,1);resolve();const [first,second]=await Promise.all([a,b]);first.org.title='Mutated locally';assert.equal(second.org.title,'Original');const next=api({action:'get',code});assert.equal(count,2);resolve();await next;
+});
+
+test('a write invalidates an older in-flight read for deduplication and writes are never coalesced',async()=>{
+ const resolvers=[],calls=[];const api=createOrgClient({session:()=>null,fetcher:async(_url,options)=>{calls.push(JSON.parse(options.body));if(calls.at(-1).action==='get')return new Promise(r=>resolvers.push(()=>r(Response.json({ok:true}))));return Response.json({ok:true});}});
+ const old=api({action:'get',code});await api({action:'claim',code,no:1});await api({action:'claim',code,no:1});const fresh=api({action:'get',code});assert.equal(calls.filter(p=>p.action==='get').length,2);assert.equal(calls.filter(p=>p.action==='claim').length,2);resolvers.forEach(r=>r());await Promise.all([old,fresh]);
+});
+
+test('verification changes do not share or accept an older authorization read',async()=>{
+ let verified=false;const resolvers=[],session={getUser:()=>({uid:'A',emailVerified:verified}),getIdToken:async()=> 'proof'};let calls=0;const api=createOrgClient({session:()=>session,fetcher:()=>{calls++;return new Promise(r=>resolvers.push(()=>r(Response.json({ok:true}))));}});
+ const old=api({action:'discoverList'});await new Promise(r=>setImmediate(r));verified=true;const fresh=api({action:'discoverList'});await new Promise(r=>setImmediate(r));assert.equal(calls,2);resolvers.forEach(r=>r());await assert.rejects(old,/Hesap değişti/);await fresh;
+});

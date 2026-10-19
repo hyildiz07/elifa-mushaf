@@ -9,7 +9,7 @@ const publicSource=stripImports(fs.readFileSync('src/firebase-public.mjs','utf8'
 function client({hostname='mushaf.elifaplatform.com',previewBuild=false,native=false}={}){
  const calls=[],listeners=new Map(),config={projectId:'production-fixture'},auth={},db={},app={};
  const sdk=name=>(...args)=>{calls.push({name,args});return name==='initializeApp'?app:name==='getFirestore'?db:auth;};
- const context={URL,__ELIFA_ACCOUNT_PREVIEW__:previewBuild,location:{hostname,href:'https://'+hostname+'/'},window:{ELIFA_FB:config,ELIFA_NATIVE_IOS:native,ElifaLocale:{current:()=> 'tr'},addEventListener:(name,fn)=>listeners.set(name,fn)},indexedDBLocalPersistence:'idb',initializeApp:sdk('initializeApp'),getAuth:sdk('getAuth'),initializeAuth:sdk('initializeAuth'),getFirestore:sdk('getFirestore'),connectAuthEmulator:sdk('connectAuthEmulator'),connectFirestoreEmulator:sdk('connectFirestoreEmulator')};
+ const context={URL,__ELIFA_ACCOUNT_PREVIEW__:previewBuild,location:{hostname,href:'https://'+hostname+'/'},window:{ELIFA_FB:config,ELIFA_NATIVE_IOS:native,ElifaLocale:{current:()=> 'tr'},addEventListener:(name,fn)=>listeners.set(name,fn)},indexedDBLocalPersistence:'idb',browserLocalPersistence:'local',browserSessionPersistence:'session',initializeApp:sdk('initializeApp'),getAuth:sdk('getAuth'),initializeAuth:sdk('initializeAuth'),getFirestore:sdk('getFirestore'),connectAuthEmulator:sdk('connectAuthEmulator'),connectFirestoreEmulator:sdk('connectFirestoreEmulator')};
  vm.runInNewContext(clientSource+'\nwindow.result={app,auth,db,isPreview,isLocal};',context);
  return {calls,context,result:context.window.result,listeners,auth,db,app,config};
 }
@@ -18,14 +18,15 @@ test('hosted preview never initializes Firebase SDK, including immutable build U
   const h=client(options);assert.equal(h.result.isPreview,true);assert.equal(h.result.app,null);assert.equal(h.result.auth,null);assert.equal(h.result.db,null);assert.deepEqual(h.calls,[]);assert.equal(h.listeners.size,0);
  }
 });
-test('production Firebase initialization, language changes and native persistence stay unchanged',()=>{
- const h=client();assert.equal(h.result.isPreview,false);assert.deepEqual(h.calls.map(x=>x.name),['initializeApp','getAuth','getFirestore']);assert.equal(h.calls[0].args[0],h.config);assert.equal(h.auth.languageCode,'tr');h.listeners.get('elifa:language-changed')({detail:{lang:'en'}});assert.equal(h.auth.languageCode,'en');
+test('production restores the same persistence hierarchy without a mobile popup iframe and native persistence stays unchanged',()=>{
+ const h=client();assert.equal(h.result.isPreview,false);assert.deepEqual(h.calls.map(x=>x.name),['initializeApp','initializeAuth','getFirestore']);assert.equal(h.calls[0].args[0],h.config);assert.equal(h.auth.languageCode,'tr');h.listeners.get('elifa:language-changed')({detail:{lang:'en'}});assert.equal(h.auth.languageCode,'en');
+ assert.deepEqual(Array.from(h.calls[1].args[1].persistence),['idb','local','session']);assert.equal(h.calls[1].args[1].popupRedirectResolver,undefined);
  const native=client({native:true,hostname:'localhost'});assert.equal(native.result.isLocal,false);assert.deepEqual(native.calls.map(x=>x.name),['initializeApp','initializeAuth','getFirestore']);assert.equal(native.calls[1].args[1].persistence,'idb');
  assert.equal(client({hostname:'deploy-preview-20--elifamushaf.netlify.app.attacker.test'}).result.isPreview,false);
 });
 test('localhost still initializes only the demo project and connects both emulators',()=>{
  for(const hostname of ['localhost','127.0.0.1','[::1]']){
-  const h=client({hostname});assert.equal(h.result.isLocal,true);assert.equal(h.calls[0].args[0].projectId,'demo-elifa-mushaf');assert.deepEqual(h.calls.map(x=>x.name),['initializeApp','getAuth','getFirestore','connectAuthEmulator','connectFirestoreEmulator']);assert.equal(h.calls[3].args[1],'http://127.0.0.1:9099');assert.equal(h.calls[4].args[1],'127.0.0.1');
+  const h=client({hostname});assert.equal(h.result.isLocal,true);assert.equal(h.calls[0].args[0].projectId,'demo-elifa-mushaf');assert.deepEqual(h.calls.map(x=>x.name),['initializeApp','initializeAuth','getFirestore','connectAuthEmulator','connectFirestoreEmulator']);assert.equal(h.calls[3].args[1],'http://127.0.0.1:9099');assert.equal(h.calls[4].args[1],'127.0.0.1');
  }
 });
 async function publicFirebase({isPreview=false,isLocal=false}={}){
