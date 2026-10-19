@@ -150,8 +150,7 @@ async function handlePoll(p, store) {
 
 const NATIVE_ORIGIN='capacitor://localhost';
 export function createOrgHandler({services=firebaseServices,transaction,environment=()=>process.env}={}){
- const runTransaction=transaction||(work=>withOrgTransaction(work,{environment:environment(),services}));
- const requestHandler=async req=>{
+ const requestHandler=async(req,deployment)=>{
   if (req.method !== 'POST') return fail('Yalnız POST', 405);
   const origin=req.headers.get('origin');
   if(origin&&origin!==new URL(req.url).origin&&origin!==NATIVE_ORIGIN)return fail('Bu kaynaktan işlem yapılamıyor.',403);
@@ -171,17 +170,20 @@ export function createOrgHandler({services=firebaseServices,transaction,environm
       session={uid:verified.uid};
     }catch{return fail('Oturum doğrulanamadı. Yeniden giriş yap.',401);}
   }
-  try{return await runTransaction(store=>handleOrg(p,store,session));}
+  try{
+    const work=store=>handleOrg(p,store,session);
+    return await (transaction?transaction(work):withOrgTransaction(work,{environment:environment(),deployment,services}));
+  }
   catch{return fail('İşlem tamamlanamadı. Bağlantını kontrol edip tekrar dene.',503);}
  };
- return async req=>{
-  let context;try{context=deploymentContext(environment());}catch{return fail('Önizleme veri alanı doğrulanamadı. Canlı kayıtlara erişim açılmadı.',503);}
+ return async(req,runtime)=>{
+  let context;try{context=deploymentContext(environment(),runtime);}catch{return fail('Önizleme veri alanı doğrulanamadı. Canlı kayıtlara erişim açılmadı.',503);}
   if(context.kind==='preview'&&req.headers.has('authorization'))return previewResponse(fail('Bu önizleme yalnız misafir hatim denemesi içindir. Canlı hesap oturumunu burada kullanma.',403),context);
-  return previewResponse(await requestHandler(req),context);
+  return previewResponse(await requestHandler(req,context),context);
  };
 }
 const requestHandler=createOrgHandler();
-export default async (req) => {
+export default async (req,context) => {
   const native=req.headers.get('origin')===NATIVE_ORIGIN;
   if(native&&req.method==='OPTIONS')return new Response(null,{status:204,headers:{
     'Access-Control-Allow-Origin':NATIVE_ORIGIN,
@@ -190,7 +192,7 @@ export default async (req) => {
     'Access-Control-Max-Age':'3600',
     'Vary':'Origin'
   }});
-  const response=await requestHandler(req);
+  const response=await requestHandler(req,context);
   if(!native)return response;
   const headers=new Headers(response.headers);
   headers.set('Access-Control-Allow-Origin',NATIVE_ORIGIN);

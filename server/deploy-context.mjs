@@ -1,6 +1,19 @@
 export const PREVIEW_NOTICE='Önizleme: Buradaki hatim ve cüzler deneme içindir; canlı kayıtlarını etkilemez.';
 
-export function deploymentContext(env=process.env){
+export function deploymentContext(env=process.env,runtime){
+ // Netlify's second function argument is authoritative at runtime. CONTEXT and
+ // REVIEW_ID are build variables and need not exist inside a deployed function.
+ // Never derive this from a request URL, header, cookie or JSON field.
+ if(runtime!==undefined){
+  const deploy=runtime?.deploy;
+  if(!deploy||typeof deploy!=='object')throw Error('Runtime deployment metadata is missing');
+  if(deploy.context==='production')return {kind:'production'};
+  if(deploy.context==='deploy-preview'){
+   if(typeof deploy.id!=='string'||!/^[a-f0-9]{24}$/i.test(deploy.id))throw Error('Runtime preview deployment identifier is invalid');
+   return {kind:'preview',scope:'deploy-'+deploy.id.toLowerCase()};
+  }
+  throw Error('Runtime deployment context is not permitted');
+ }
  const context=env.CONTEXT||'';
  const hasReview=typeof env.REVIEW_ID==='string'&&env.REVIEW_ID.length>0;
  const previewHint=hasReview||env.PULL_REQUEST==='true'||/^https:\/\/deploy-preview-\d+--/.test(env.DEPLOY_PRIME_URL||'');

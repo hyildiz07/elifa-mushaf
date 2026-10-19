@@ -1,17 +1,20 @@
 import {withOrgTransaction} from '../../server/database.mjs';
+import {deploymentContext,previewResponse} from '../../server/deploy-context.mjs';
 const DAY=86400000;
 export function expired(o,now){
  if(o.archivedAt)return false;
  const complete=o.type==='hatim'?(o.items?.length>0&&o.items.every(i=>i.status==='okundu')):o.type==='zikir'&&o.hedef>0&&(o.contributions||[]).reduce((n,c)=>n+(+c.amount||0),0)>=o.hedef;
  return now-(o.lastActivity||o.createdAt||0)>(complete?7:60)*DAY;
 }
-export function createOrgCleanup({transaction=withOrgTransaction,now=Date.now}={}){return async()=>{
- const list=await transaction(store=>store.list());
+export function createOrgCleanup({transaction,now=Date.now,environment=()=>process.env}={}){return async(_req,runtime)=>{
+ let deployment;try{deployment=deploymentContext(environment(),runtime);}catch{return Response.json({error:'Dağıtım ortamı doğrulanamadı. Bakım çalıştırılmadı.'},{status:503});}
+ const runTransaction=transaction||(work=>withOrgTransaction(work,{environment:environment(),deployment}));
+ const list=await runTransaction(store=>store.list());
  let archived=0,kept=0,errors=0;
  for(const {key}of list.blobs){
   if(key.startsWith('_')||key.startsWith('a_'))continue;
   try{
-   const result=await transaction(async store=>{
+   const result=await runTransaction(async store=>{
     const o=await store.get(key,{type:'json'});
     if(!o?.type||!expired(o,now()))return false;
     const index=(await store.get('_index',{type:'json'}))||[];
@@ -25,7 +28,7 @@ export function createOrgCleanup({transaction=withOrgTransaction,now=Date.now}={
  }
  const summary={ok:errors===0,silinen:0,arsivlenen:archived,korunan:kept,hata:errors};
  console.log('[ELIFA temizlik]',JSON.stringify(summary));
- return Response.json(summary,{status:errors?500:200});
+ return previewResponse(Response.json(summary,{status:errors?500:200}),deployment);
 };}
 export default createOrgCleanup();
 export const config={schedule:'15 3 * * *'};

@@ -1,5 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
+import {build} from 'esbuild';
+import path from 'node:path';
+import {randomUUID} from 'node:crypto';
 import {deploymentContext,PREVIEW_NOTICE} from '../server/deploy-context.mjs';
 import {withOrgTransaction} from '../server/database.mjs';
 import {createOrgHandler} from '../netlify/functions/org.mjs';
@@ -84,4 +87,59 @@ test('production still requires cutover and uses the original collection and leg
  assert.equal(serviceCalls,1);assert.equal(legacyCalls,1);assert.deepEqual(f.writes,['elifaOrgRecords/'+encoded('test01')]);
  const handler=createDeployedAccountHandler({environment:()=>({CONTEXT:'production'}),services(){throw Error('GET must reject without Firebase');}});
  assert.equal((await handler(new Request('https://example.test/api/account'))).status,405);
+});
+
+test('actual default org, account and cleanup entries forward Netlify runtime deployment metadata without build variables',async()=>{
+ const hook='__elifaRuntimeEntry_'+randomUUID().replaceAll('-',''),f=firestoreFixture();
+ const fixture={serviceCalls:0,authCalls:0,legacyCalls:0,services(){this.serviceCalls++;return {db:f.db,auth:{verifyIdToken(){fixture.authCalls++;throw Error('Production Auth must not be contacted');},deleteUser(){fixture.authCalls++;throw Error('Production Auth deletion must not run');}}};}};
+ globalThis[hook]=fixture;
+ const variables=['CONTEXT','REVIEW_ID','DEPLOY_ID','DEPLOY_PRIME_URL','PULL_REQUEST','ELIFA_FIRESTORE_GROUPS'];
+ const before=Object.fromEntries(variables.map(key=>[key,process.env[key]]));
+ async function entry(name){
+  const result=await build({entryPoints:[path.resolve('netlify/functions/'+name+'.mjs')],bundle:true,write:false,platform:'node',format:'esm',target:'node22',packages:'external',plugins:[{
+   name:'only-infrastructure-is-mocked',setup(builder){
+    builder.onResolve({filter:/(?:^|\/)firebase\.mjs$/},()=>({path:'firebase-services-spy',namespace:'fixture'}));
+    builder.onResolve({filter:/^@netlify\/blobs$/},()=>({path:'legacy-store-bomb',namespace:'fixture'}));
+    builder.onLoad({filter:/.*/,namespace:'fixture'},args=>({contents:args.path==='firebase-services-spy'
+     ?`export function firebaseServices(){return globalThis[${JSON.stringify(hook)}].services();}`
+     :`export function getStore(){globalThis[${JSON.stringify(hook)}].legacyCalls++;throw Error('Production Blobs must not initialize');}`,
+     loader:'js'}));
+   }
+  }]});
+  return (await import('data:text/javascript;base64,'+Buffer.from(result.outputFiles[0].text).toString('base64'))).default;
+ }
+ try{
+  for(const key of variables)delete process.env[key];
+  const [org,account,cleanup]=await Promise.all([entry('org'),entry('account'),entry('org-cleanup')]);
+  const a={deploy:{context:'deploy-preview',id:'a'.repeat(24)}},b={deploy:{context:'deploy-preview',id:'b'.repeat(24)}};
+  const config=await org(request({action:'discoverConfig'}),a);assert.equal(config.status,200);assert.equal((await config.json()).preview,true);
+  const create=await org(request({action:'create',creationToken:'c'.repeat(64),org:{type:'hatim',title:'Runtime scoped',public:true,items:Array.from({length:30},(_,i)=>({no:i+1}))}}),a);
+  assert.equal(create.status,200);const made=await create.json();
+  const claimed=await org(request({action:'claim',code:made.code,no:1,name:'Runtime guest',capability:'d'.repeat(64)}),a);assert.equal(claimed.status,200);assert.equal((await claimed.json()).org.items[0].mine,true);
+  const done=await org(request({action:'complete',code:made.code,no:1,capability:'d'.repeat(64)}),a);assert.equal(done.status,200);
+  assert.equal((await org(request({action:'get',code:made.code}),b)).status,404);
+  const serviceCount=fixture.serviceCalls;
+  assert.equal((await account(request({action:'deleteAccount',confirmation:'DELETE'},{authorization:'Bearer production-user-token'}),a)).status,403);
+  assert.equal((await org(request({action:'myList'},{authorization:'Bearer production-user-token'}),a)).status,403);
+  assert.equal(fixture.serviceCalls,serviceCount,'both auth paths stop before service initialization');
+  assert.equal((await cleanup(request({}),a)).status,200);
+  // Runtime context remains authoritative even if a surrounding build/test
+  // process advertises production. Parallel requests keep separate local scope.
+  process.env.CONTEXT='production';process.env.ELIFA_FIRESTORE_GROUPS='enabled';
+  const parallel=await Promise.all([org(request({action:'discoverList',CONTEXT:'production'}),a),org(request({action:'discoverList'}),b)]);
+  assert.equal((await parallel[0].json()).items.length,1);assert.equal((await parallel[1].json()).items.length,0);
+  for(const context of [{deploy:{context:'deploy-preview',id:'bad'}},{deploy:{context:'branch-deploy',id:'a'.repeat(24)}},{deploy:{id:'a'.repeat(24)}}]){
+   const count=fixture.serviceCalls;
+   assert.equal((await org(request({action:'discoverConfig'}),context)).status,503);
+   assert.equal((await account(request({action:'deleteAccount'}),context)).status,503);
+   assert.equal((await cleanup(request({}),context)).status,503);
+   assert.equal(fixture.serviceCalls,count);
+  }
+  assert.equal(fixture.authCalls,0);assert.equal(fixture.legacyCalls,0);
+  const scoped=[a,b].map(context=>'elifaOrgPreviewRuns/deploy-'+context.deploy.id+'/records');
+  assert.ok([...f.reads,...f.writes].every(value=>scoped.some(prefix=>value===prefix||value.startsWith(prefix+'/'))));
+ }finally{
+  for(const key of variables)if(before[key]===undefined)delete process.env[key];else process.env[key]=before[key];
+  delete globalThis[hook];
+ }
 });

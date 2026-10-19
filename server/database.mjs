@@ -44,9 +44,11 @@ export async function firestoreStoreTransaction(db,legacy,work,{records:recordCo
  },{maxAttempts:8});
 }
 const noLegacy={get:async()=>null,list:async()=>({blobs:[]})};
-export async function withOrgTransaction(work,{environment=process.env,services=firebaseServices,legacyStore=()=>getStore({name:'elifa-birlikte',consistency:'strong'})}={}){
- const context=deploymentContext(environment);
+export async function withOrgTransaction(work,{environment=process.env,deployment,services=firebaseServices,legacyStore=()=>getStore({name:'elifa-birlikte',consistency:'strong'})}={}){
+ const context=deployment||deploymentContext(environment);
+ if(context.kind!=='production'&&context.kind!=='preview')throw Error('Resolved deployment context is invalid');
  if(context.kind==='preview'){
+  if(typeof context.scope!=='string'||!/^((review-[1-9]\d{0,9})|(deploy-[a-f0-9]{24}))$/.test(context.scope))throw Error('Resolved preview scope is invalid');
   const db=services().db;
   const records=db.collection('elifaOrgPreviewRuns').doc(context.scope).collection('records');
   return firestoreStoreTransaction(db,noLegacy,store=>work({...store,get:async(key,options)=>{
