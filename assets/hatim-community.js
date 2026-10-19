@@ -133,7 +133,7 @@
       }
       if ((session2()?.getUser()?.uid || null) !== uid) throw Error("Hesap de\u011Fi\u015Fti. \u0130\u015Flemi yeniden a\xE7.");
       if (!result.ok) {
-        const e = Object.assign(Error(data.error || "\u0130\u015Flem tamamlanamad\u0131."), { status: result.status });
+        const e = Object.assign(Error(data.error || "\u0130\u015Flem tamamlanamad\u0131."), { status: result.status, ...typeof data.errorCode === "string" ? { errorCode: data.errorCode } : {} });
         onError?.(e);
         throw e;
       }
@@ -374,6 +374,428 @@
     return { format: "png", downloaded: true };
   }
 
+  // src/hatim-comments-ui.mjs
+  var escape2 = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
+  var idValid = (id) => typeof id === "string" && /^\d{13}-[a-f0-9]{16}$/.test(id);
+  function createHatimComments({ api: api2, getUser, onLogin, makeOperationId, document: document2 = globalThis.document, storage: storage2, onCount = () => {
+  } }) {
+    const root = document2.createElement("section");
+    root.className = "hc-comments";
+    let context = null, scope = 0, epoch = 0, alive = true, opened = false, loading2 = false, error2 = "", notice = "", rows = [], cursor = null, count = 0, closed = false, canComment = false;
+    let replies = /* @__PURE__ */ new Map(), reports = null, reportCursor = null, reportOpen = false, reportForm = null, confirm = null, busy = false;
+    let draft = { text: "", name: "", parentId: null, replyName: "", editId: null }, pendingCreate = null;
+    const userId = () => getUser()?.uid || null, verified = () => !!userId() && getUser()?.emailVerified === true;
+    const draftKey = () => context && userId() ? "elifa_hatim_comment_pending_v1:" + userId() + ":" + context.code : null;
+    function persistPending() {
+      try {
+        const key2 = draftKey();
+        if (key2) {
+          if (pendingCreate) storage2?.setItem(key2, JSON.stringify(pendingCreate));
+          else storage2?.removeItem(key2);
+        }
+      } catch {
+      }
+    }
+    function restorePending() {
+      try {
+        const saved = JSON.parse(storage2?.getItem(draftKey()) || "null");
+        if (saved && /^[a-f0-9]{64}$/.test(saved.operationId) && typeof saved.text === "string" && saved.text.length <= 1500 && typeof saved.name === "string" && saved.name.length <= 60 && (!saved.parentId || idValid(saved.parentId))) pendingCreate = saved;
+      } catch {
+      }
+      if (pendingCreate) draft = { text: pendingCreate.text, name: pendingCreate.name, parentId: pendingCreate.parentId || null, replyName: "", editId: null };
+    }
+    function token() {
+      return { scope, uid: userId(), epoch };
+    }
+    function valid(t, read = false) {
+      return alive && context && scope === t.scope && userId() === t.uid && (!read || opened && epoch === t.epoch);
+    }
+    function action(label, command, id = "", extra = "") {
+      return `<button type="button" class="hc-comment-action" data-comment-action="${command}"${id ? ` data-id="${escape2(id)}"` : ""}${busy ? " disabled" : ""}${extra}>${label}</button>`;
+    }
+    function date(value) {
+      const d = new Date(value);
+      return Number.isFinite(d.getTime()) ? d.toLocaleString(document2.documentElement?.lang || "tr", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "";
+    }
+    function row(item, reply = false) {
+      const removed = item.deleted || item.hidden, body = item.deleted ? "Yorum silindi." : item.hidden ? "Bu yorum gizlendi." : item.text;
+      const parent = reply ? rows.find((r) => r.id === item.parentId) : null, canReply = canComment && !removed && (!reply || parent && !parent.deleted && !parent.hidden);
+      const ownActions = [item.canEdit && canComment && !removed ? action("D\xFCzenle", "edit", item.id) : "", item.canDelete && !item.deleted ? action("Sil", "ask-delete", item.id) : "", !item.own && !removed ? action("Bildir", "report", item.id) : "", item.canHide && !item.deleted ? action(item.hidden ? "Yeniden g\xF6ster" : "Gizle", "hide", item.id) : ""].join("");
+      const thread = replies.get(item.id);
+      return `<article class="hc-comment${reply ? " hc-comment-reply" : ""}" data-comment-id="${escape2(item.id)}"><header><strong>${escape2(item.name || "Kat\u0131l\u0131mc\u0131")}</strong><span>${escape2(date(item.createdAt))}${item.editedByAdmin ? " \xB7 Y\xF6netici d\xFCzenledi" : item.updatedAt > item.createdAt ? " \xB7 d\xFCzenlendi" : ""}</span>${ownActions ? `<details class="hc-comment-menu"><summary aria-label="Yorum i\u015Flemleri">\u22EF</summary><div>${ownActions}</div></details>` : ""}</header><p class="hc-comment-text${removed ? " is-removed" : ""}">${escape2(body)}</p>${canReply ? action("Yan\u0131tla", "reply", item.id) : ""}${!reply && item.replyCount ? action(thread?.open ? "Yan\u0131tlar\u0131 gizle" : item.replyCount + " yan\u0131t\u0131 g\xF6ster", "replies", item.id) : ""}${!reply && thread?.open ? `<div class="hc-comment-replies">${thread.loading ? '<p class="hc-comment-hint" role="status">Yan\u0131tlar y\xFCkleniyor\u2026</p>' : ""}${thread.error ? `<p role="alert">${escape2(thread.error)}</p>${action("Yeniden dene", "retry-replies", item.id)}` : ""}${(thread.rows || []).map((r) => row(r, true)).join("")}${thread.cursor ? action("Daha eski yan\u0131tlar", "older-replies", item.id) : ""}</div>` : ""}</article>`;
+    }
+    function composer() {
+      if (!verified()) return `<p class="hc-comment-hint">Yorumlar\u0131 okumak ve yazmak i\xE7in ${userId() ? "e-posta adresini do\u011Frula." : "hesab\u0131na giri\u015F yap."}</p>${action(userId() ? "Hesab\u0131m\u0131 a\xE7" : "Giri\u015F yap", "login")}`;
+      if (!canComment && !draft.editId) return '<p class="hc-comment-hint">Bu hatimde yeni yorumlar kapal\u0131.</p>';
+      return `<form class="hc-comment-form" data-comment-form><div class="hc-comment-compose-title">${draft.editId ? "Yorumunu d\xFCzenle" : draft.parentId ? escape2(draft.replyName || "Yoruma") + " \xB7 yan\u0131t yaz" : "Yorum yaz"}${draft.editId || draft.parentId ? action("Vazge\xE7", "cancel-compose") : ""}</div><label>Ad\u0131n / takma ad<input data-comment-field="name" maxlength="60" autocomplete="nickname" value="${escape2(draft.name || getUser()?.displayName || "")}"${draft.editId ? " readonly" : ""}></label><label class="hc-comment-message-label">${draft.editId ? "Yorumun" : "Mesaj\u0131n"}<textarea data-comment-field="text" rows="2" maxlength="1500"${pendingCreate || busy ? " readonly" : ""}>${escape2(draft.text)}</textarea></label><div class="hc-comment-send"><small>Yaln\u0131z metin \xB7 en fazla 1500 karakter</small><button type="submit" class="hc-button primary"${busy ? " disabled" : ""}>${draft.editId ? "Kaydet" : pendingCreate ? "Ayn\u0131 yorumu yeniden g\xF6nder" : "G\xF6nder"}</button></div></form>`;
+    }
+    function reportPanel() {
+      return reportForm ? `<form class="hc-comment-report" data-report-form><label>Bildirme nedeni<textarea data-comment-field="reason" rows="2" maxlength="500">${escape2(reportForm.reason)}</textarea></label><div>${action("Vazge\xE7", "cancel-report")}<button class="hc-button" type="submit"${busy ? " disabled" : ""}>Bildirimi g\xF6nder</button></div></form>` : "";
+    }
+    function reportsPanel() {
+      return !reportOpen ? "" : `<section class="hc-comment-reports"><h3>Bildirilen yorumlar</h3>${reports === null ? "<p>Bildirimler y\xFCkleniyor\u2026</p>" : !reports.length ? "<p>Bildirim yok.</p>" : reports.map((r) => `<article class="hc-comment"><header><strong>Yorum bildirimi</strong><span>${escape2(date(r.createdAt))}</span></header><p>${escape2(r.reason)}</p><blockquote>${escape2(r.comment?.moderatedText || r.comment?.text || (r.comment?.deleted ? "Yorum silindi." : "Yorum bulunamad\u0131."))}</blockquote>${r.comment?.canHide && !r.comment.deleted ? action(r.comment.hidden ? "Yeniden g\xF6ster" : "Yorumu gizle", "hide", r.commentId) : ""}${action("Bildirimi kapat", "resolve-report", r.id)}</article>`).join("")}${reportCursor ? action("Daha eski bildirimler", "older-reports") : ""}</section>`;
+    }
+    function render() {
+      const focus = document2.activeElement?.dataset?.commentField, caret = document2.activeElement?.selectionStart;
+      root.innerHTML = `<button type="button" class="hc-comments-toggle" data-comment-action="toggle" aria-expanded="${opened}"><span>Yorumlar <small>\xB7 ${count}</small></span><span aria-hidden="true">${opened ? "\u2303" : "\u2304"}</span></button>${opened ? `<div class="hc-comments-body"><p class="hc-comment-hint">Bu hatimle ilgili k\u0131sa bir mesaj payla\u015F. Ki\u015Fisel bilgilerini yazma.</p>${context?.isAdmin ? `<div class="hc-comment-tools">${action(closed ? "Yorumlar\u0131 a\xE7" : "Yorumlar\u0131 kapat", "settings")}${action(reportOpen ? "Bildirimleri kapat" : "Bildirilen yorumlar", "reports")}</div>` : ""}${loading2 ? '<p class="hc-comment-hint" role="status">Yorumlar y\xFCkleniyor\u2026</p>' : ""}${error2 ? `<p class="hc-comment-error" role="alert">${escape2(error2)}</p>${!busy ? action("Yeniden dene", "retry") : ""}` : ""}${notice ? `<p class="hc-comment-hint" role="status">${escape2(notice)}</p>` : ""}${rows.map((r) => row(r)).join("")}${!loading2 && !rows.length && verified() && !error2 ? '<p class="hc-comment-hint">Hen\xFCz yorum yok. \u0130lk mesaj\u0131 sen yazabilirsin.</p>' : ""}${cursor ? action("Daha eski yorumlar", "older") : ""}${confirm ? `<div class="hc-comment-confirm" role="group" aria-label="Yorumu silme onay\u0131"><p>Bu yorum silinsin mi? Alt\u0131ndaki yan\u0131tlar korunur.</p>${action("Vazge\xE7", "cancel-delete")}${action("Evet, sil", "delete", confirm)}</div>` : ""}${reportPanel()}${reportsPanel()}${composer()}</div>` : ""}`;
+      if (focus && opened) {
+        const field = root.querySelector(`[data-comment-field="${focus}"]`);
+        field?.focus?.({ preventScroll: true });
+        if (Number.isInteger(caret)) try {
+          field?.setSelectionRange?.(caret, caret);
+        } catch {
+        }
+      }
+    }
+    async function list(older = false) {
+      if (!opened || !verified() || loading2) return;
+      const t = token();
+      loading2 = true;
+      error2 = "";
+      render();
+      try {
+        const data = await api2({ action: "commentList", code: context.code, ...older && cursor ? { cursor } : {} });
+        if (!valid(t, true)) return;
+        if (!Array.isArray(data.comments) || data.code !== context.code) throw Error("Yorum yan\u0131t\u0131 do\u011Frulanamad\u0131.");
+        const next = older ? [...rows, ...data.comments] : data.comments;
+        rows = [...new Map(next.map((r) => [r.id, r])).values()];
+        cursor = data.nextCursor || null;
+        count = Number.isSafeInteger(data.commentCount) ? data.commentCount : count;
+        closed = !!data.commentsClosed;
+        canComment = !!data.canComment;
+        onCount({ code: context.code, commentCount: count, commentsClosed: closed, canComment });
+      } catch (e) {
+        if (valid(t, true)) error2 = e.message;
+      } finally {
+        if (valid(t, true)) {
+          loading2 = false;
+          render();
+        }
+      }
+    }
+    async function loadReplies(parentId, older = false) {
+      if (!idValid(parentId) || !opened || !verified()) return;
+      const existing = replies.get(parentId) || { rows: [], cursor: null, open: true };
+      if (existing.loading) return;
+      const t = token();
+      existing.open = true;
+      existing.loading = true;
+      existing.error = "";
+      replies.set(parentId, existing);
+      render();
+      try {
+        const data = await api2({ action: "commentReplies", code: context.code, parentId, ...older && existing.cursor ? { cursor: existing.cursor } : {} });
+        if (!valid(t, true) || !existing.open) return;
+        if (!Array.isArray(data.comments) || data.code !== context.code) throw Error("Yan\u0131tlar do\u011Frulanamad\u0131.");
+        existing.rows = [...new Map((older ? [...existing.rows, ...data.comments] : data.comments).map((r) => [r.id, r])).values()];
+        existing.cursor = data.nextCursor || null;
+      } catch (e) {
+        if (valid(t, true) && existing.open) existing.error = e.message;
+      } finally {
+        if (valid(t, true)) {
+          existing.loading = false;
+          render();
+        }
+      }
+    }
+    async function loadReports(older = false) {
+      if (!opened || !context.isAdmin || !reportOpen) return;
+      const t = token();
+      try {
+        const data = await api2({ action: "commentReports", code: context.code, ...older && reportCursor ? { cursor: reportCursor } : {} });
+        if (!valid(t, true) || !reportOpen) return;
+        if (!Array.isArray(data.reports)) throw Error("Bildirimler do\u011Frulanamad\u0131.");
+        reports = older ? [...reports || [], ...data.reports] : data.reports;
+        reportCursor = data.nextCursor || null;
+        render();
+      } catch (e) {
+        if (valid(t, true)) {
+          error2 = e.message;
+          render();
+        }
+      }
+    }
+    function find(id) {
+      return rows.find((r) => r.id === id) || [...replies.values()].flatMap((t) => t.rows).find((r) => r.id === id) || reports?.find((r) => r.commentId === id)?.comment;
+    }
+    async function write(payload2, onSuccess) {
+      if (busy || !opened) return;
+      const t = token(), replyParent = payload2.parentId || find(payload2.id)?.parentId;
+      busy = true;
+      error2 = "";
+      notice = "";
+      render();
+      try {
+        const data = await api2({ ...payload2, code: context.code });
+        if (!valid(t)) return;
+        await onSuccess?.(data);
+        if (valid(t) && opened) {
+          await list();
+          if (replyParent && replies.get(replyParent)?.open) await loadReplies(replyParent);
+          if (reportOpen) await loadReports();
+        }
+      } catch (e) {
+        if (valid(t)) {
+          error2 = e.message;
+          if (payload2.action === "commentCreate" && pendingCreate && e.status >= 400 && e.status < 500) {
+            pendingCreate = null;
+            persistPending();
+          }
+        }
+      } finally {
+        if (valid(t)) {
+          busy = false;
+          render();
+        }
+      }
+    }
+    async function submit() {
+      if (!verified()) {
+        onLogin();
+        return;
+      }
+      const text = draft.text.trim(), name = (draft.name || getUser()?.displayName || "").trim();
+      if (!text || text.length > 1500 || !draft.editId && (name.length < 2 || name.length > 60)) {
+        error2 = "2\u201360 karakterlik ad ve 1\u20131500 karakterlik bir yorum yaz.";
+        render();
+        return;
+      }
+      if (draft.editId) {
+        const id = draft.editId;
+        await write({ action: "commentEdit", id, text }, () => {
+          draft = { text: "", name, parentId: null, replyName: "", editId: null };
+          notice = "Yorum g\xFCncellendi.";
+        });
+        return;
+      }
+      if (!pendingCreate) {
+        pendingCreate = { operationId: makeOperationId(), text, name, ...draft.parentId ? { parentId: draft.parentId } : {} };
+        persistPending();
+      }
+      await write({ action: "commentCreate", ...pendingCreate }, (data) => {
+        if (!data.comment || !idValid(data.comment.id)) throw Error("G\xF6nderim sonucu do\u011Frulanamad\u0131. Ayn\u0131 yorumu yeniden dene.");
+        const parentId = pendingCreate?.parentId;
+        pendingCreate = null;
+        persistPending();
+        draft = { text: "", name, parentId: null, replyName: "", editId: null };
+        notice = "Yorum g\xF6nderildi.";
+        if (parentId) replies.set(parentId, { rows: [], cursor: null, open: true, loading: false });
+        if (Number.isSafeInteger(data.commentCount)) count = data.commentCount;
+        else if (!data.replayed) count++;
+        onCount({ code: context.code, commentCount: count });
+      });
+    }
+    async function dispatch(command, id) {
+      if (!alive || !context) return;
+      if (command === "toggle") {
+        opened = !opened;
+        epoch++;
+        loading2 = false;
+        for (const thread of replies.values()) thread.loading = false;
+        error2 = "";
+        if (opened) {
+          render();
+          await list();
+        } else render();
+        return;
+      }
+      if (command === "login") {
+        onLogin();
+        return;
+      }
+      if (!opened || busy) return;
+      if (command === "retry" || command === "older") {
+        await list(command === "older");
+        return;
+      }
+      if (command === "replies") {
+        const thread = replies.get(id);
+        if (thread?.open) {
+          thread.open = false;
+          render();
+        } else await loadReplies(id);
+        return;
+      }
+      if (command === "retry-replies" || command === "older-replies") {
+        await loadReplies(id, command === "older-replies");
+        return;
+      }
+      if (command === "reports") {
+        reportOpen = !reportOpen;
+        render();
+        if (reportOpen) await loadReports();
+        return;
+      }
+      if (command === "older-reports") {
+        await loadReports(true);
+        return;
+      }
+      if (command === "resolve-report" && context.isAdmin && reports?.some((r) => r.id === id)) {
+        await write({ action: "commentResolveReport", id }, () => {
+          reports = reports.filter((r) => r.id !== id);
+          notice = "Bildirim kapat\u0131ld\u0131. Yorum de\u011Fi\u015Ftirilmedi.";
+        });
+        return;
+      }
+      if (command === "cancel-delete") {
+        confirm = null;
+        render();
+        return;
+      }
+      if (command === "cancel-report") {
+        reportForm = null;
+        render();
+        return;
+      }
+      if (command === "cancel-compose") {
+        if (pendingCreate) {
+          error2 = "\xD6nce \xF6nceki g\xF6nderimi ayn\u0131 yorumla yeniden dene.";
+        } else draft = { text: "", name: draft.name, parentId: null, replyName: "", editId: null };
+        render();
+        return;
+      }
+      if (command === "settings" && context.isAdmin) {
+        const wanted = !closed;
+        await write({ action: "commentSettings", closed: wanted }, (data) => {
+          closed = typeof data.commentsClosed === "boolean" ? data.commentsClosed : wanted;
+          canComment = typeof data.canComment === "boolean" ? data.canComment : !closed && !context.archived && verified();
+          onCount({ code: context.code, commentsClosed: closed, canComment });
+        });
+        return;
+      }
+      const item = find(id);
+      if (!item || !idValid(id)) return;
+      if (command === "reply" && canComment && !item.deleted && !item.hidden) {
+        const parent = item.parentId && rows.find((r) => r.id === item.parentId);
+        if (pendingCreate || item.parentId && (!parent || parent.deleted || parent.hidden)) return;
+        draft.parentId = item.parentId || item.id;
+        draft.replyName = item.name;
+        draft.editId = null;
+        render();
+        root.querySelector('[data-comment-field="text"]')?.focus();
+        return;
+      }
+      if (command === "edit" && item.canEdit && canComment) {
+        if (pendingCreate || draft.text.trim()) {
+          error2 = "\xD6nce yazd\u0131\u011F\u0131n mesaj\u0131 g\xF6nder veya Vazge\xE7 ile temizle.";
+          render();
+          return;
+        }
+        draft = { text: item.text, name: item.name, parentId: item.parentId || null, replyName: "", editId: item.id };
+        render();
+        return;
+      }
+      if (command === "ask-delete" && item.canDelete) {
+        confirm = id;
+        render();
+        return;
+      }
+      if (command === "delete" && item.canDelete && confirm === id) {
+        await write({ action: "commentDelete", id }, () => {
+          confirm = null;
+          notice = "Yorum silindi; yan\u0131tlar\u0131 korunuyor.";
+        });
+        return;
+      }
+      if (command === "report" && !item.own) {
+        reportForm = { id, reason: "" };
+        render();
+        return;
+      }
+      if (command === "hide" && item.canHide && context.isAdmin) {
+        await write({ action: "commentHide", id, hidden: !item.hidden }, () => {
+          notice = item.hidden ? "Yorum yeniden g\xF6sterildi." : "Yorum gizlendi.";
+        });
+      }
+    }
+    root.addEventListener("click", (event) => {
+      const target = event.target.closest?.("[data-comment-action]");
+      if (target && root.contains(target)) {
+        event.preventDefault();
+        dispatch(target.dataset.commentAction, target.dataset.id);
+      }
+    });
+    root.addEventListener("input", (event) => {
+      const field = event.target.dataset?.commentField;
+      if (field === "reason" && reportForm) reportForm.reason = event.target.value;
+      else if ((field === "text" || field === "name") && !pendingCreate) draft[field] = event.target.value;
+    });
+    root.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (event.target.matches?.("[data-report-form]")) {
+        if (!reportForm?.reason.trim()) {
+          error2 = "K\u0131saca neden bildirdi\u011Fini yaz.";
+          render();
+          return;
+        }
+        return write({ action: "commentReport", id: reportForm.id, reason: reportForm.reason.trim() }, () => {
+          reportForm = null;
+          notice = "Bildirim hatmi ba\u015Flatan ki\u015Fiye iletildi.";
+        });
+      }
+      return submit();
+    });
+    return {
+      mount(container, next) {
+        const identity = next.code + ":" + next.generation + ":" + userId();
+        if (context?.identity !== identity) {
+          scope++;
+          epoch++;
+          opened = false;
+          loading2 = false;
+          busy = false;
+          rows = [];
+          cursor = null;
+          replies = /* @__PURE__ */ new Map();
+          reports = null;
+          reportCursor = null;
+          reportOpen = false;
+          reportForm = null;
+          confirm = null;
+          error2 = "";
+          notice = "";
+          pendingCreate = null;
+          draft = { text: "", name: "", parentId: null, replyName: "", editId: null };
+          context = { ...next, identity };
+          count = Number.isSafeInteger(next.commentCount) ? next.commentCount : 0;
+          closed = !!next.commentsClosed;
+          canComment = !!next.canComment && verified();
+          restorePending();
+        } else {
+          context = { ...context, ...next };
+          if (Number.isSafeInteger(next.commentCount)) count = Math.max(count, next.commentCount);
+          closed = !!next.commentsClosed;
+          canComment = !!next.canComment && verified();
+        }
+        alive = true;
+        if (root.parentNode !== container) container.appendChild(root);
+        render();
+      },
+      pause() {
+        epoch++;
+        opened = false;
+        loading2 = false;
+        for (const thread of replies.values()) thread.loading = false;
+        render();
+      },
+      dispose() {
+        alive = false;
+        scope++;
+        epoch++;
+        context = null;
+        rows = [];
+        replies.clear();
+        draft = { text: "", name: "", parentId: null, replyName: "", editId: null };
+        pendingCreate = null;
+        root.remove();
+      },
+      // Commands are also useful for keyboard adapters and deterministic local tests.
+      dispatch,
+      submit,
+      element: root
+    };
+  }
+
   // src/hatim-community.mjs
   var $ = (id) => document.getElementById(id);
   var esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
@@ -409,6 +831,61 @@
   var pendingAction = false;
   var dialogIdentity = 0;
   var activeAction = null;
+  var listErrorCode = "";
+  var member = () => !!user()?.uid && user()?.emailVerified === true;
+  var authIntentKey = "elifa_hatim_login_intent_v1";
+  var authIntent = null;
+  try {
+    const saved = JSON.parse(window.sessionStorage?.getItem(authIntentKey) || "null");
+    if (saved && ["list", "org", "claim", "create", "comments", "manage"].includes(saved.kind) && Date.now() - saved.createdAt < 18e5 && (!saved.code || /^[a-z0-9]{6}$/.test(saved.code))) authIntent = saved;
+  } catch {
+  }
+  var commentStorage;
+  try {
+    commentStorage = window.sessionStorage;
+  } catch {
+  }
+  var comments = createHatimComments({ api: (p) => api(payload(p.action, p.code, p)), getUser: user, makeOperationId: () => secret(crypto), document, storage: commentStorage, onLogin: () => accountFor({ kind: "comments", code: current?.code }), onCount: (values) => {
+    if (current?.code === values.code) Object.assign(current.org, values);
+  } });
+  function accountFor(intent) {
+    authIntent = { ...intent, createdAt: Date.now() };
+    try {
+      window.sessionStorage?.setItem(authIntentKey, JSON.stringify(authIntent));
+    } catch {
+    }
+    closeDialog();
+    accountOpen();
+  }
+  function askForLogin(intent) {
+    dialog(member() ? "Hatme d\xF6n" : "Giri\u015F yaparak devam et", "<p>T\xFCm \xFCyelere a\xE7\u0131k hatimler ve yorumlar i\xE7in hesab\u0131na giri\u015F yap\u0131p e-posta adresini do\u011Frula. Giri\u015Ften sonra buraya d\xF6neceksin; c\xFCz alma veya yorum g\xF6nderme kendili\u011Finden yap\u0131lmaz.</p>", [{ id: "member-login", label: user() ? "Hesab\u0131m\u0131 a\xE7" : "Giri\u015F yap", primary: true, run: () => accountFor(intent) }, { id: "member-cancel", label: "Vazge\xE7", run: closeDialog }]);
+  }
+  async function resumeAuthIntent() {
+    if (!authIntent || !member()) return;
+    const intent = authIntent;
+    authIntent = null;
+    try {
+      window.sessionStorage?.removeItem(authIntentKey);
+    } catch {
+    }
+    if (intent.kind === "list") {
+      tab = "open";
+      openTogetherScreen();
+      await renderBirlikte();
+      return;
+    }
+    if (intent.kind === "create") {
+      openTogetherScreen();
+      showCreate(intent.draft);
+      return;
+    }
+    if (pendingConnection) await openParsed(pendingConnection);
+    else await bkOpen(intent.code, null, { fromHistory: true });
+    if (current?.code !== intent.code) return;
+    if (intent.kind === "claim" && Number.isInteger(intent.no)) showJuz(intent.no);
+    if (intent.kind === "manage") showManage();
+    if (intent.kind === "comments") await comments.dispatch("toggle");
+  }
   var pendingConnectionKey = "elifa_hatim_pending_connection_v1";
   var pendingConnection = null;
   var pendingConnectionPersisted = false;
@@ -471,6 +948,7 @@
     await openParsed(p);
   }
   var previewMode = false;
+  var writeRevision = 0;
   var requestApi = createOrgClient({ fetcher: (...a) => fetch(...a), session, base: window.ELIFA_API_BASE || "" });
   var previewNotice = "\xD6nizleme: Buradaki hatim ve c\xFCzler deneme i\xE7indir; canl\u0131 kay\u0131tlar\u0131n\u0131 etkilemez.";
   function renderPreviewNotice() {
@@ -486,6 +964,7 @@
     return `<p id="${id}" class="hc-note" role="note" ${previewMode ? "" : "hidden"}>${previewMode ? previewNotice : ""}</p>`;
   }
   async function api(payload2) {
+    if (!["get", "myList", "discoverConfig", "discoverList", "commentList", "commentReplies", "commentReports", "pollGet"].includes(payload2.action)) writeRevision++;
     const result = await requestApi(payload2);
     if (result.preview === true) {
       previewMode = true;
@@ -603,7 +1082,9 @@
     if (url !== location.href) history.replaceState(history.state, "", url);
   }
   function leaveHatimDetail(screen) {
+    if (screen !== "org") comments.pause();
     if (screen !== "home" && screen !== "birlikte") return;
+    comments.dispose();
     closeDialog();
     dialogIdentity++;
     generation++;
@@ -680,6 +1161,7 @@
     $("hatimStatus").textContent = loading ? "G\xFCncel bilgiler al\u0131n\u0131yor\u2026" : error;
     if (tab === "open") {
       if (loading) list.innerHTML = '<div class="hc-empty"><h2>A\xE7\u0131k hatimler y\xFCkleniyor</h2><p>G\xFCncel liste kontrol ediliyor\u2026</p></div>';
+      else if (["AUTH_REQUIRED", "EMAIL_UNVERIFIED"].includes(listErrorCode)) list.innerHTML = '<div class="hc-empty"><h2>T\xFCm \xFCyelere a\xE7\u0131k hatimler</h2><p>Kat\u0131lmak i\xE7in hesab\u0131na giri\u015F yap\u0131p e-posta adresini do\u011Frula. Davet ba\u011Flant\u0131s\u0131yla gelen mevcut misafir kat\u0131l\u0131mlar\u0131n korunur.</p>' + button(user() ? "Hesab\u0131m\u0131 a\xE7" : "Giri\u015F yap", "list-login", "primary") + "</div>";
       else if (error) list.innerHTML = '<div class="hc-empty"><h2>A\xE7\u0131k hatimler \u015Fu an al\u0131namad\u0131</h2><p>Bu, listenin kapal\u0131 oldu\u011Fu anlam\u0131na gelmez. Yeniden deneyebilir veya sana g\xF6nderilen ba\u011Flant\u0131yla kat\u0131labilirsin.</p>' + button("Yeniden dene", "discover-retry") + "</div>";
       else if (discoverEnabled === null) list.innerHTML = '<div class="hc-empty"><h2>A\xE7\u0131k hatim durumu hen\xFCz do\u011Frulanmad\u0131</h2><p>G\xFCncel listeyi kontrol etmek i\xE7in yeniden dene.</p>' + button("Yeniden dene", "discover-retry") + "</div>";
       else list.innerHTML = discoverEnabled && discover.length ? discover.map(card).join("") : `<div class="hc-empty"><h2>${discoverEnabled ? "Hen\xFCz a\xE7\u0131k hatim yok" : "Bir ba\u011Flant\u0131yla da kat\u0131labilirsin"}</h2><p>${discoverEnabled ? "\u0130lk hatmi sen ba\u015Flatabilirsin." : "A\xE7\u0131k hatim listesi \u015Fu an kapal\u0131. Sana g\xF6nderilen ba\u011Flant\u0131yla kat\u0131labilir veya \xF6zel bir hatim olu\u015Fturabilirsin."}</p></div>`;
@@ -702,12 +1184,14 @@
     on(list.querySelector("[data-hc=discover-retry]"), "click", renderBirlikte);
     on(list.querySelector("[data-hc=account]"), "click", accountOpen);
     on(list.querySelector("[data-hc=bind-list]"), "click", showGuestBindings);
+    on(list.querySelector("[data-hc=list-login]"), "click", () => accountFor({ kind: "list" }));
   }
   async function renderBirlikte() {
     const ticket = ++listGeneration;
     home();
     loading = true;
     error = "";
+    listErrorCode = "";
     renderList();
     try {
       if (tab === "open") {
@@ -731,7 +1215,10 @@
         accountItems = items;
       }
     } catch (e) {
-      if (ticket === listGeneration) error = e.message;
+      if (ticket === listGeneration) {
+        error = e.message;
+        listErrorCode = e.errorCode || "";
+      }
     } finally {
       if (ticket === listGeneration) {
         loading = false;
@@ -786,6 +1273,7 @@
     await bkOpen(p.code, p.admin);
   }
   async function bkOpen(code, admin, navOpts = {}) {
+    comments.dispose();
     closeDialog();
     dialogIdentity++;
     const ticket = ++generation;
@@ -817,18 +1305,21 @@
       return true;
     } catch (e) {
       if (ticket === generation) {
-        $("orgView").innerHTML = `${previewNote("hcOrgPreview")}<div class="hc-empty" role="alert"><p>${esc(e.message)}</p>${button("Yeniden dene", "retry")}</div>`;
+        const login = ["AUTH_REQUIRED", "EMAIL_UNVERIFIED"].includes(e.errorCode);
+        $("orgView").innerHTML = `${previewNote("hcOrgPreview")}<div class="hc-empty" role="alert"><p>${esc(e.message)}</p>${login ? button(user() ? "Hesab\u0131m\u0131 a\xE7" : "Giri\u015F yap", "org-login", "primary") : button("Yeniden dene", "retry")}</div>`;
         on($("orgView").querySelector("[data-hc=retry]"), "click", () => bkOpen(code, admin, { fromHistory: true }));
+        on($("orgView").querySelector("[data-hc=org-login]"), "click", () => accountFor({ kind: "org", code }));
       }
     }
   }
   async function bkSilentRefresh() {
     const c = current;
     if (!c || refreshing || document.hidden || !$("org").classList.contains("on") || $("hatimDialog").open || pendingAction) return;
+    const revision = writeRevision;
     refreshing = true;
     try {
       const d = await api(payload("get", c.code, { ...c.adminToken ? { admin: c.adminToken } : {} }));
-      if (current === c && c.ticket === generation) {
+      if (current === c && c.ticket === generation && revision === writeRevision) {
         current.org = d.org;
         remember(d.org, c.adminToken);
         renderOrg();
@@ -869,6 +1360,7 @@
     on($("orgView").querySelector("[data-hc=refresh]"), "click", bkSilentRefresh);
     on($("orgView").querySelector("[data-hc=manage]"), "click", showManage);
     $("orgView").querySelectorAll("[data-cuz]").forEach((b) => on(b, "click", () => showJuz(Number(b.dataset.cuz))));
+    comments.mount($("orgView"), { code: c.code, generation: c.ticket, isAdmin: o.isAdmin, archived: o.archived, commentCount: o.commentCount, commentsClosed: o.commentsClosed, canComment: o.canComment });
   }
   function showJuz(no) {
     const c = current, i = c?.org.items.find((x) => x.no === no);
@@ -903,6 +1395,10 @@
     } }, { id: "cancel", label: "Vazge\xE7", run: closeDialog }]);
   }
   function showClaim(no) {
+    if (current?.org.public && !member()) {
+      askForLogin({ kind: "claim", code: current.code, no });
+      return;
+    }
     const c = current, guest = !user();
     dialog(no + ". c\xFCz\xFC al", `<label class="hc-field">Ad\u0131n / takma ad<input id="hcName" minlength="2" maxlength="60" value="${esc(user()?.displayName || local.myName)}" autocomplete="nickname"></label><p class="hc-note">Bu ad hatimde c\xFCz\xFCn\xFCn alt\u0131nda g\xF6r\xFCn\xFCr. Ger\xE7ek ad kullanmak zorunda de\u011Filsin.</p>${guest ? '<div class="hc-warning">Hesaps\u0131z kat\u0131l\u0131yorsun. Bu cihaz\u0131n verileri silinirse eri\u015Fimini kaybedebilirsin. Kat\u0131l\u0131mdan sonra ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131n\u0131 sakla; daha sonra hesab\u0131na da ba\u011Flayabilirsin.</div>' : ""}`, [{ id: "claim", label: "Bu c\xFCz\xFC al", primary: true, run: async () => {
       const name = $("hcName").value.trim();
@@ -968,13 +1464,18 @@
     };
     prepareCode();
   }
-  function showCreate() {
+  function showCreate(prefill) {
     let visibilityStatus = "loading", visibilityEnabled = null;
     createDraft = local.creation || { token: secret(crypto), title: "", name: user()?.displayName || local.myName, dueDate: "", public: false };
-    dialog("Hatim olu\u015Ftur", `<p class="hc-note">30 c\xFCzl\xFCk bir hatim ba\u015Flat. Kat\u0131l\u0131mc\u0131lar hesap a\xE7madan da c\xFCz se\xE7ebilir.</p>${!user() ? '<p class="hc-warning">Hesaps\u0131z devam ediyorsun. Bu cihazdaki bilgiler silinirse hatmine geri d\xF6nemeyebilirsin. Sana \xF6zel ba\u011Flant\u0131y\u0131 sakla.</p>' : ""}<label class="hc-field">Hatmin ad\u0131 / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="\xD6rn. Ailemizin haftal\u0131k hatmi"></label><label class="hc-field">Ad\u0131n / takma ad<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih \xB7 iste\u011Fe ba\u011Fl\u0131<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler kat\u0131labilsin?</legend><div id="hcVisibilityOptions" aria-live="polite"><p>Kat\u0131l\u0131m se\xE7enekleri kontrol ediliyor\u2026</p></div></fieldset>`, [{ id: "create", label: "Hatmi olu\u015Ftur", primary: true, run: async () => {
+    if (prefill && !local.creation) createDraft = { ...createDraft, title: String(prefill.title || "").slice(0, 120), name: String(prefill.name || "").slice(0, 60), dueDate: String(prefill.dueDate || ""), public: prefill.public === true };
+    dialog("Hatim olu\u015Ftur", `<p class="hc-note">30 c\xFCzl\xFCk bir hatim ba\u015Flat. Davetle kat\u0131l\u0131mda hesap a\xE7madan da c\xFCz se\xE7ilebilir.</p>${!user() ? '<p class="hc-warning">Hesaps\u0131z devam ediyorsun. Bu cihazdaki bilgiler silinirse hatmine geri d\xF6nemeyebilirsin. Sana \xF6zel ba\u011Flant\u0131y\u0131 sakla.</p>' : ""}<label class="hc-field">Hatmin ad\u0131 / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="\xD6rn. Ailemizin haftal\u0131k hatmi"></label><label class="hc-field">Ad\u0131n / takma ad<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih \xB7 iste\u011Fe ba\u011Fl\u0131<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler kat\u0131labilsin?</legend><div id="hcVisibilityOptions" aria-live="polite"><p>Kat\u0131l\u0131m se\xE7enekleri kontrol ediliyor\u2026</p></div></fieldset>`, [{ id: "create", label: "Hatmi olu\u015Ftur", primary: true, run: async () => {
       if (createDraft.public && visibilityEnabled !== true) throw Error("\xD6nceki a\xE7\u0131k hatim iste\u011Fini g\xFCvenle s\xFCrd\xFCrmek i\xE7in kat\u0131l\u0131m se\xE7eneklerinin do\u011Frulanmas\u0131n\u0131 bekle veya yeniden dene.");
       const form = { title: $("hcTitle").value.trim(), name: $("hcAdminName").value.trim(), dueDate: $("hcDue").value, public: !!document.querySelector("input[name=hcVisibility][value=public]:checked") };
       if (!form.title) throw Error("Hatme bir ad ver.");
+      if (form.public && !member()) {
+        askForLogin({ kind: "create", draft: form });
+        return;
+      }
       const signature = JSON.stringify(form);
       if (createDraft.signature && createDraft.signature !== signature) createDraft.token = secret(crypto);
       createDraft = { ...createDraft, ...form, signature };
@@ -993,7 +1494,7 @@
     const visibilityCurrent = () => scope.owner === owner && scope.generation === generation && scope.dialog === dialogIdentity && $("hatimDialog").open;
     const renderVisibility = () => {
       if (!visibilityCurrent()) return;
-      $("hcVisibilityOptions").innerHTML = '<label><input type="radio" name="hcVisibility" value="private" ' + (!createDraft.public ? "checked" : "") + "> Ba\u011Flant\u0131ya sahip olanlar</label>" + (visibilityStatus === "ready" && visibilityEnabled ? '<label><input type="radio" name="hcVisibility" value="public" ' + (createDraft.public ? "checked" : "") + "> Uygulamadaki herkes</label>" : "") + (visibilityStatus === "loading" ? "<small>Uygulamadaki herkese a\xE7ma se\xE7ene\u011Fi kontrol ediliyor\u2026</small>" : visibilityStatus === "error" ? '<small>A\xE7\u0131k kat\u0131l\u0131m durumu do\u011Frulanamad\u0131. Ba\u011Flant\u0131yla kat\u0131l\u0131m se\xE7ene\u011Fi kullan\u0131labilir.</small><button type="button" class="hc-text" id="hcVisibilityRetry">Yeniden dene</button>' : visibilityEnabled ? "" : "<small>A\xE7\u0131k hatim listesi \u015Fu an kapal\u0131.</small>");
+      $("hcVisibilityOptions").innerHTML = '<label><input type="radio" name="hcVisibility" value="private" ' + (!createDraft.public ? "checked" : "") + "> Davetle kat\u0131l\u0131m</label>" + (visibilityStatus === "ready" && visibilityEnabled ? '<label><input type="radio" name="hcVisibility" value="public" ' + (createDraft.public ? "checked" : "") + "> T\xFCm \xFCyelere a\xE7\u0131k</label>" : "") + (visibilityStatus === "loading" ? "<small>\xDCyelere a\xE7ma se\xE7ene\u011Fi kontrol ediliyor\u2026</small>" : visibilityStatus === "error" ? '<small>A\xE7\u0131k kat\u0131l\u0131m durumu do\u011Frulanamad\u0131. Ba\u011Flant\u0131yla kat\u0131l\u0131m se\xE7ene\u011Fi kullan\u0131labilir.</small><button type="button" class="hc-text" id="hcVisibilityRetry">Yeniden dene</button>' : visibilityEnabled ? "" : "<small>A\xE7\u0131k hatim listesi \u015Fu an kapal\u0131.</small>");
       on($("hcVisibilityRetry"), "click", loadVisibility);
     };
     const loadVisibility = async () => {
@@ -1027,7 +1528,11 @@
         await mutate("update", null, { title: $("hcEditTitle").value.trim(), dueDate: $("hcEditDue").value || null });
         closeDialog();
       } },
-      { id: "visibility", label: o.public ? "A\xE7\u0131k listeden kald\u0131r" : "A\xE7\u0131k hatimlerde g\xF6ster", run: async () => {
+      { id: "visibility", label: o.public ? "Davetle kat\u0131l\u0131ma \xE7evir" : "T\xFCm \xFCyelere a\xE7", run: async () => {
+        if (!o.public && !member()) {
+          askForLogin({ kind: "manage", code: c.code });
+          return;
+        }
         await mutate("publish", null, { public: !o.public });
         closeDialog();
       } },
@@ -1201,6 +1706,7 @@
   window.bkDue = (o) => ({ late: dueText(o.dueDate) === "Hedef tarih ge\xE7ti", txt: dueText(o.dueDate) });
   window.elifaHatimNavigation = leaveHatimDetail;
   on($("orgBack"), "click", () => {
+    comments.dispose();
     closeDialog();
     dialogIdentity++;
     ++generation;
@@ -1216,9 +1722,11 @@
   on(window, "elifa:account-changed", (e) => {
     const uid = e.detail?.user?.uid || null;
     if (uid === owner) {
-      if (pendingConnection && !current) resumeConnection().catch((err) => flash(err.message));
+      if (authIntent && member()) resumeAuthIntent().catch((err) => flash(err.message));
+      else if (pendingConnection && !current) resumeConnection().catch((err) => flash(err.message));
       return;
     }
+    comments.dispose();
     save();
     owner = uid;
     key = uid ? "elifa_hatim_user_" + uid : guestKey;
@@ -1233,7 +1741,8 @@
     window.bkCurrent = null;
     closeDialog();
     payButton();
-    if (pendingConnection) resumeConnection().catch((err) => flash(err.message));
+    if (authIntent && member()) resumeAuthIntent().catch((err) => flash(err.message));
+    else if (pendingConnection) resumeConnection().catch((err) => flash(err.message));
     else if (code) bkOpen(code, null, { fromHistory: true });
     else if ($("birlikte")?.classList.contains("on")) renderBirlikte();
   });
@@ -1247,4 +1756,5 @@
     if (hint) hint.textContent = "Ba\u011Flant\u0131n korunuyor. Hesap durumu haz\u0131rlan\u0131yor\u2026";
     resumeConnection().catch((err) => flash(err.message));
   }
+  if (authIntent) sessionReady().then(() => resumeAuthIntent()).catch((err) => flash(err.message));
 })();

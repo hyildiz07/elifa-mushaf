@@ -9,6 +9,7 @@ process.env.FIREBASE_AUTH_EMULATOR_HOST='127.0.0.1:9099';
 process.env.FIRESTORE_EMULATOR_HOST='127.0.0.1:8080';
 const root = process.cwd();
 const localOrg=createLocalOrgHandler();
+const localMemberOrg=createLocalOrgHandler({memberReview:true});
 const types = {'.html':'text/html; charset=utf-8','.js':'application/javascript','.mjs':'application/javascript','.json':'application/json','.css':'text/css','.svg':'image/svg+xml','.png':'image/png','.woff2':'font/woff2','.mp3':'audio/mpeg'};
 http.createServer(async (req,res) => {
   const pathname = decodeURIComponent(new URL(req.url,'http://localhost').pathname);
@@ -27,12 +28,12 @@ http.createServer(async (req,res) => {
     }catch{res.writeHead(503,{'Content-Type':'application/json'});res.end(JSON.stringify({error:'Yerel hesap test hizmeti başlatılmamış.'}));}
     return;
   }
-  if(pathname==='/api/org'){
+  if(pathname==='/api/org'||pathname==='/review-member/api/org'||pathname==='/review-member/api/community-admin'){
     try{
       const chunks=[];let size=0;
       for await(const part of req){size+=part.length;if(size>65536){res.writeHead(413,{'Content-Type':'application/json','X-Elifa-Local-Test':'memory-only'});res.end(JSON.stringify({error:'İstek çok büyük.',localTest:true}));return;}chunks.push(part);}
       const request=new Request('http://'+req.headers.host+req.url,{method:req.method,headers:req.headers,...(!['GET','HEAD'].includes(req.method)?{body:Buffer.concat(chunks)}:{})});
-      const result=await localOrg(request);res.writeHead(result.status,Object.fromEntries(result.headers));res.end(await result.text());
+      const result=await (pathname.startsWith('/review-member/')?localMemberOrg:localOrg)(request);res.writeHead(result.status,Object.fromEntries(result.headers));res.end(await result.text());
     }catch{res.writeHead(503,{'Content-Type':'application/json','X-Elifa-Local-Test':'memory-only'});res.end(JSON.stringify({error:'Yerel hatim test işlemi tamamlanamadı. Gerçek sunucuya istek yapılmadı.',localTest:true}));}
     return;
   }

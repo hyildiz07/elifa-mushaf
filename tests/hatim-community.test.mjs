@@ -5,10 +5,10 @@ const codeA='aaaaaa',codeB='bbbbbb',capA='aa'.repeat(32),capB='bb'.repeat(32),ad
 const org=(code,items=[],isAdmin=true)=>({type:'hatim',title:code,items,isAdmin,adminName:'Owner',archived:false});
 const current=(code,items=[],ticket=1)=>({code,ticket,adminToken:admin,org:org(code,items)});
 function harness(fetcher,options={}){
- const nodes=new Map(),map=options.localMap||new Map(),sessionMap=options.sessionMap||new Map(),events=new Map(),windowEvents=new Map(),sessionListeners=new Set(),calls=[],reports=[],navigation=[];let currentUser=options.uid?{uid:options.uid,emailVerified:true}:null,ready=options.ready!==false;
+ const nodes=new Map(),map=options.localMap||new Map(),sessionMap=options.sessionMap||new Map(),events=new Map(),windowEvents=new Map(),sessionListeners=new Set(),calls=[],reports=[],navigation=[];let currentUser=options.uid?{uid:options.uid,emailVerified:options.emailVerified!==false}:null,ready=options.ready!==false;
  const get=id=>{if(!nodes.has(id))nodes.set(id,{id,value:'',innerHTML:'',textContent:'',style:{},open:false,disabled:false,handlers:{},classList:{contains:()=>true},addEventListener(type,fn){this.handlers[type]=fn},querySelector(sel){return get(this.id+':'+sel)},querySelectorAll(){return []},showModal(){this.open=true},close(){this.open=false}});return nodes.get(id);};
  const storage={getItem:k=>map.get(k)||null,setItem:(k,v)=>map.set(k,v)};
- const c={...client,downloadHatimReport:async(o,options)=>reports.push({org:o,...options}),console,URL,URLSearchParams,AbortSignal,Uint8Array,Map,Set,Object,Number,JSON,Date,crypto:webcrypto,
+ const c={...client,createHatimComments:()=>({mount(){},pause(){},dispose(){},dispatch:async()=>{}}),downloadHatimReport:async(o,options)=>reports.push({org:o,...options}),console,URL,URLSearchParams,AbortSignal,Uint8Array,Map,Set,Object,Number,JSON,Date,crypto:webcrypto,
   document:{getElementById:get,querySelector:()=>null,addEventListener(type,fn){events.set(type,fn)},hidden:false},
   window:{localStorage:storage,sessionStorage:options.blockSession?{getItem(){throw Error('blocked')},setItem(){throw Error('blocked')},removeItem(){throw Error('blocked')}}:{getItem:k=>sessionMap.get(k)||null,setItem:(k,v)=>sessionMap.set(k,v),removeItem:k=>sessionMap.delete(k)},elifaAccountSession:{getUser:()=>currentUser,isReady:()=>ready,getIdToken:async()=>currentUser?'proof-'+currentUser.uid:null,onChange(fn){sessionListeners.add(fn);if(ready)fn(currentUser);return ()=>sessionListeners.delete(fn)}},addEventListener(type,fn){if(!windowEvents.has(type))windowEvents.set(type,[]);windowEvents.get(type).push(fn)},removeEventListener(type,fn){windowEvents.set(type,(windowEvents.get(type)||[]).filter(x=>x!==fn))}},
   location:{origin:'https://example.test',href:options.url||'https://example.test/'},history:{state:{elifaTrap:true,custom:'preserve'},replaceState(state,title,url){navigation.push({state,title,url});c.location.href=String(url)}},navigator:{},setInterval:()=>1,clearInterval(){},show(){},openTogetherScreen(){},setElifaRoute(){},gotoPage(){},JUZ_PAGE:[],readerReturn:null,
@@ -278,4 +278,39 @@ test('ambiguous or denied deletion retains the local record and can be retried; 
  assert.equal(stale.calls.length,0);assert.match(stale.get('hcError').textContent,/değişti/);
  const denied=harness(()=>Response.json({error:'Katılım geçmişi var. Silmek yerine arşivle.'},{status:409}));denied.review.setLocal({mine:[{code:codeA,type:'hatim',title:'A',adminToken:admin}]});denied.review.setCurrent(current(codeA,unusedJuz()));denied.review.confirmDeleteHatim();await denied.click('delete-confirm');
  assert.equal(denied.review.state().local.mine.length,1);assert.match(denied.get('hcError').textContent,/arşivle/);assert.match(denied.get('hatimDialog').innerHTML,/delete-archive/);
+});
+
+test('member-only discovery offers login and resumes the same list after authentication without any mutation',async()=>{
+ const h=harness(p=>p.expectedUser?Response.json({enabled:true,items:[]}):Response.json({error:'Üye girişi gerekiyor.',errorCode:'AUTH_REQUIRED'},{status:401}));
+ let opens=0;h.c.window.elifaAccount={open(){opens++;}};await h.review.renderBirlikte();
+ assert.match(h.get('hatimList').innerHTML,/Tüm üyelere açık/);assert.match(h.get('hatimList').innerHTML,/list-login/);
+ h.get('hatimList:[data-hc=list-login]').handlers.click();assert.equal(opens,1);assert.equal(JSON.parse(h.sessionMap.get('elifa_hatim_login_intent_v1')).kind,'list');
+ h.account('member');await new Promise(r=>setImmediate(r));await new Promise(r=>setImmediate(r));
+ assert.equal(h.calls.at(-1).expectedUser,'member');assert.ok(h.calls.every(p=>p.action==='discoverList'));assert.equal(h.sessionMap.has('elifa_hatim_login_intent_v1'),false);
+});
+
+test('public claim resumes its exact juz form after login or same-user verification, but never automatically claims',async()=>{
+ for(const options of [{},{uid:'member',emailVerified:false}]){
+  const h=harness(p=>Response.json({code:p.code,org:{...org(p.code,[{no:4,status:'bos'}],false),public:true}}),options);
+  h.c.window.elifaAccount={open(){}};const c=current(codeA,[{no:4,status:'bos'}]);c.org.public=true;h.review.setCurrent(c);h.review.showClaim(4);
+  assert.equal(h.calls.length,0);assert.match(h.get('hatimDialog').innerHTML,/Giriş yaparak devam/);await h.click('member-login');
+  h.account('member');await new Promise(r=>setImmediate(r));await new Promise(r=>setImmediate(r));
+  assert.match(h.get('hatimDialog').innerHTML,/4. cüzü al/);assert.equal(h.calls.some(p=>p.action==='claim'),false);assert.ok(h.calls.every(p=>p.action==='get'));
+ }
+});
+
+test('public creation requests login with its form retained and comes back to an explicit create button',async()=>{
+ const h=harness(p=>Response.json({enabled:true}));h.c.window.elifaAccount={open(){}};h.review.showCreate();await new Promise(r=>setImmediate(r));
+ h.get('hcTitle').value='Üye aile hatmi';h.get('hcAdminName').value='Takma ad';h.get('hcDue').value='2099-01-01';h.c.document.querySelector=selector=>selector.includes('value=public')?{}:null;
+ await h.click('create');assert.equal(h.calls.some(p=>p.action==='create'),false);await h.click('member-login');
+ h.account('member');await new Promise(r=>setImmediate(r));await new Promise(r=>setImmediate(r));
+ assert.match(h.get('hatimDialog').innerHTML,/value="Üye aile hatmi"/);assert.match(h.get('hatimDialog').innerHTML,/value="Takma ad"/);assert.match(h.get('hcVisibilityOptions').innerHTML,/Tüm üyelere açık/);assert.match(h.get('hcVisibilityOptions').innerHTML,/Davetle katılım/);
+ assert.equal(h.calls.some(p=>p.action==='create'),false);assert.match(h.get('hatimDialog').innerHTML,/Hatmi oluştur/);
+});
+
+test('a silent hatim read started before a comment mutation cannot undo the newer discussion metadata',async()=>{
+ let resolve;const h=harness(p=>p.action==='get'?new Promise(r=>resolve=()=>r(Response.json({code:p.code,org:{...org(p.code),commentsClosed:false}}))):Response.json({code:p.code,commentsClosed:true}));
+ const selected=current(codeA);selected.org.commentsClosed=true;h.review.setCurrent(selected);const refreshing=h.review.bkSilentRefresh();await new Promise(r=>setImmediate(r));
+ await h.c.window.bkApi({action:'commentSettings',code:codeA,closed:true});resolve();await refreshing;
+ assert.equal(h.review.state().current.org.commentsClosed,true);
 });

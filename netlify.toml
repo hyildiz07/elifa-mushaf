@@ -29,3 +29,9 @@
 
 [functions]
   node_bundler = "esbuild"
+
+[[redirects]]
+  from = "/api/community-admin"
+  to = "/.netlify/functions/community-admin"
+  status = 200
+  force = true

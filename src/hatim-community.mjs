@@ -1,5 +1,6 @@
 import {secret,dueText,parseHatimLink,participationUrl,recoveryUrl,personalReturnCode,adminUrl,canonicalHatimUrl,loadLocal,createOrgClient,forgetLocalHatim} from './hatim-client.mjs';
 import {downloadHatimReport} from './hatim-report.mjs';
+import {createHatimComments} from './hatim-comments-ui.mjs';
 
 const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const base=()=>window.ELIFA_PUBLIC_BASE||location.origin+'/',session=()=>window.elifaAccountSession,user=()=>session()?.getUser()||null;
@@ -8,6 +9,25 @@ let storage;try{storage=window.localStorage;}catch{storage={getItem(){return nul
 let owner=user()?.uid||null,key=owner?'elifa_hatim_user_'+owner:guestKey;
 let local=loadLocal(storage,key),generation=0,listGeneration=0,tab='open',discover=[],accountItems=[],discoverEnabled=null,loading=false,error='',refreshing=false;
 let current=null,createDraft=null,pendingAction=false,dialogIdentity=0,activeAction=null;
+let listErrorCode='';
+const member=()=>!!user()?.uid&&user()?.emailVerified===true;
+const authIntentKey='elifa_hatim_login_intent_v1';
+let authIntent=null;
+try{const saved=JSON.parse(window.sessionStorage?.getItem(authIntentKey)||'null');if(saved&&['list','org','claim','create','comments','manage'].includes(saved.kind)&&Date.now()-saved.createdAt<1800000&&(!saved.code||/^[a-z0-9]{6}$/.test(saved.code)))authIntent=saved;}catch{}
+let commentStorage;try{commentStorage=window.sessionStorage;}catch{}
+const comments=createHatimComments({api:p=>api(payload(p.action,p.code,p)),getUser:user,makeOperationId:()=>secret(crypto),document,storage:commentStorage,onLogin:()=>accountFor({kind:'comments',code:current?.code}),onCount:values=>{if(current?.code===values.code)Object.assign(current.org,values);}});
+function accountFor(intent){authIntent={...intent,createdAt:Date.now()};try{window.sessionStorage?.setItem(authIntentKey,JSON.stringify(authIntent));}catch{}closeDialog();accountOpen();}
+function askForLogin(intent){dialog(member()?'Hatme dön':'Giriş yaparak devam et','<p>Tüm üyelere açık hatimler ve yorumlar için hesabına giriş yapıp e-posta adresini doğrula. Girişten sonra buraya döneceksin; cüz alma veya yorum gönderme kendiliğinden yapılmaz.</p>',[{id:'member-login',label:user()?'Hesabımı aç':'Giriş yap',primary:true,run:()=>accountFor(intent)},{id:'member-cancel',label:'Vazgeç',run:closeDialog}]);}
+async function resumeAuthIntent(){
+ if(!authIntent||!member())return;const intent=authIntent;authIntent=null;try{window.sessionStorage?.removeItem(authIntentKey);}catch{}
+ if(intent.kind==='list'){tab='open';openTogetherScreen();await renderBirlikte();return;}
+ if(intent.kind==='create'){openTogetherScreen();showCreate(intent.draft);return;}
+ if(pendingConnection)await openParsed(pendingConnection);else await bkOpen(intent.code,null,{fromHistory:true});
+ if(current?.code!==intent.code)return;
+ if(intent.kind==='claim'&&Number.isInteger(intent.no))showJuz(intent.no);
+ if(intent.kind==='manage')showManage();
+ if(intent.kind==='comments')await comments.dispatch('toggle');
+}
 const pendingConnectionKey='elifa_hatim_pending_connection_v1';
 let pendingConnection=null,pendingConnectionPersisted=false,connectionAttempt=0;
 function connectionStore(){return window.sessionStorage;}
@@ -38,12 +58,12 @@ async function resumeConnection(){
  await sessionReady();if(attempt!==connectionAttempt||pendingConnection!==p)return;
  openTogetherScreen();await openParsed(p);
 }
-let previewMode=false;
+let previewMode=false,writeRevision=0;
 const requestApi=createOrgClient({fetcher:(...a)=>fetch(...a),session,base:window.ELIFA_API_BASE||''});
 const previewNotice='Önizleme: Buradaki hatim ve cüzler deneme içindir; canlı kayıtlarını etkilemez.';
 function renderPreviewNotice(){for(const id of ['hcHomePreview','hcOrgPreview','hcDialogPreview']){const node=$(id);if(node){node.hidden=!previewMode;node.textContent=previewMode?previewNotice:'';}}}
 function previewNote(id){return `<p id="${id}" class="hc-note" role="note" ${previewMode?'':'hidden'}>${previewMode?previewNotice:''}</p>`;}
-async function api(payload){const result=await requestApi(payload);if(result.preview===true){previewMode=true;renderPreviewNotice();}return result;}
+async function api(payload){if(!['get','myList','discoverConfig','discoverList','commentList','commentReplies','commentReports','pollGet'].includes(payload.action))writeRevision++;const result=await requestApi(payload);if(result.preview===true){previewMode=true;renderPreviewNotice();}return result;}
 function save(required=false){try{const raw=JSON.stringify(local);storage.setItem(key,raw);if(storage.getItem(key)!==raw)throw Error('Kayıt doğrulanamadı');return true;}catch{if(required)throw Error('Bu tarayıcı kayıt saklayamıyor. Katılım anahtarını korumak için depolamaya izin verip yeniden dene.');return false;}}
 // Copy old guest records once. The old copy remains available and is never
 // treated as proof that a visitor owns an existing server-side cüz.
@@ -91,7 +111,9 @@ function dialog(title,body,actions=[]){
 function closeDialog(){if($('hatimDialog').open)$('hatimDialog').close();}
 function updateAddress(code=null){if(pendingConnection&&!pendingConnectionPersisted)return;const url=canonicalHatimUrl(location.href,code);if(url!==location.href)history.replaceState(history.state,'',url);}
 function leaveHatimDetail(screen){
+ if(screen!=='org')comments.pause();
  if(screen!=='home'&&screen!=='birlikte')return;
+ comments.dispose();
  closeDialog();dialogIdentity++;generation++;listGeneration++;clearInterval(window.bkRefreshTimer);current=null;window.bkCurrent=null;updateAddress();
 }
 async function copy(value,label='Bağlantı'){const scope={owner,generation,dialog:dialogIdentity};const valid=()=>scope.owner===owner&&scope.generation===generation&&scope.dialog===dialogIdentity;try{await navigator.clipboard.writeText(value);if(valid())flash(label+' kopyalandı.');}catch{if(valid())dialog(label+' · seçip kopyala',`<textarea readonly class="hc-link" aria-label="${esc(label)}">${esc(value)}</textarea><p>Yukarıdaki bilgiyi seçip kopyalayabilirsin.</p>`);}}
@@ -121,6 +143,7 @@ function renderList(){
  $('hatimStatus').textContent=loading?'Güncel bilgiler alınıyor…':error;
  if(tab==='open'){
   if(loading)list.innerHTML='<div class="hc-empty"><h2>Açık hatimler yükleniyor</h2><p>Güncel liste kontrol ediliyor…</p></div>';
+  else if(['AUTH_REQUIRED','EMAIL_UNVERIFIED'].includes(listErrorCode))list.innerHTML='<div class="hc-empty"><h2>Tüm üyelere açık hatimler</h2><p>Katılmak için hesabına giriş yapıp e-posta adresini doğrula. Davet bağlantısıyla gelen mevcut misafir katılımların korunur.</p>'+button(user()?'Hesabımı aç':'Giriş yap','list-login','primary')+'</div>';
   else if(error)list.innerHTML='<div class="hc-empty"><h2>Açık hatimler şu an alınamadı</h2><p>Bu, listenin kapalı olduğu anlamına gelmez. Yeniden deneyebilir veya sana gönderilen bağlantıyla katılabilirsin.</p>'+button('Yeniden dene','discover-retry')+'</div>';
   else if(discoverEnabled===null)list.innerHTML='<div class="hc-empty"><h2>Açık hatim durumu henüz doğrulanmadı</h2><p>Güncel listeyi kontrol etmek için yeniden dene.</p>'+button('Yeniden dene','discover-retry')+'</div>';
   else list.innerHTML=discoverEnabled&&discover.length?discover.map(card).join(''):`<div class="hc-empty"><h2>${discoverEnabled?'Henüz açık hatim yok':'Bir bağlantıyla da katılabilirsin'}</h2><p>${discoverEnabled?'İlk hatmi sen başlatabilirsin.':'Açık hatim listesi şu an kapalı. Sana gönderilen bağlantıyla katılabilir veya özel bir hatim oluşturabilirsin.'}</p></div>`;
@@ -133,13 +156,14 @@ function renderList(){
  }
  list.querySelectorAll('[data-open]').forEach(b=>on(b,'click',()=>bkOpen(b.dataset.open)));
  on(list.querySelector('[data-hc=return-entry]'),'click',showReturnEntry);on(list.querySelector('[data-hc=discover-retry]'),'click',renderBirlikte);on(list.querySelector('[data-hc=account]'),'click',accountOpen);on(list.querySelector('[data-hc=bind-list]'),'click',showGuestBindings);
+ on(list.querySelector('[data-hc=list-login]'),'click',()=>accountFor({kind:'list'}));
 }
 async function renderBirlikte(){
- const ticket=++listGeneration;home();loading=true;error='';renderList();
+ const ticket=++listGeneration;home();loading=true;error='';listErrorCode='';renderList();
  try{
   if(tab==='open'){const d=await api({action:'discoverList'});if(ticket!==listGeneration)return;if(typeof d.enabled!=='boolean'||(d.enabled&&!Array.isArray(d.items)))throw Error('Açık hatim listesi yanıtı doğrulanamadı. Yeniden dene.');discoverEnabled=d.enabled;discover=(d.items||[]).filter(x=>x.type==='hatim');}
   else if(user()){let items=[],cursor;const seen=new Set();do{if(seen.has(cursor))throw Error('Katılım listesi tamamlanamadı. Yeniden dene.');seen.add(cursor);const d=await api({action:'myList',...(cursor==null?{}:{cursor})});if(ticket!==listGeneration)return;if(!Array.isArray(d.items))throw Error('Katılım listesi yanıtı geçersiz.');items.push(...d.items);cursor=d.nextCursor;}while(cursor!=null);accountItems=items;}
- }catch(e){if(ticket===listGeneration)error=e.message;}
+ }catch(e){if(ticket===listGeneration){error=e.message;listErrorCode=e.errorCode||'';}}
  finally{if(ticket===listGeneration){loading=false;renderList();}}
 }
 function showJoin(){dialog('Bağlantıyla katıl','<p class="hc-note">Yeni bir hatme katılmak içindir. Daha önce aldığın cüze dönmek için “Cüzüme geri dön”ü kullan.</p><label class="hc-field">Katılım bağlantısı veya 6 haneli hatim kodu<input id="hcJoin" autocomplete="off" placeholder="Bağlantıyı yapıştır veya 6 haneli kodu yaz"></label>',[{id:'join',label:'Hatmi aç',primary:true,run:async()=>{const parsed=parseHatimLink($('hcJoin').value,base());if(!parsed)throw Error('Geçerli bir hatim bağlantısı veya kodu yaz.');stageConnection(parsed);closeDialog();await resumeConnection();}}]);}
@@ -162,7 +186,7 @@ async function openParsed(p){
  await bkOpen(p.code,p.admin);
 }
 async function bkOpen(code,admin,navOpts={}){
- closeDialog();dialogIdentity++;const ticket=++generation;clearInterval(window.bkRefreshTimer);current=null;window.bkCurrent=null;
+ comments.dispose();closeDialog();dialogIdentity++;const ticket=++generation;clearInterval(window.bkRefreshTimer);current=null;window.bkCurrent=null;
  show('org');if(!navOpts.fromHistory&&typeof setElifaRoute==='function')setElifaRoute('org',navOpts.replace?'replace':'push');
  $('orgView').innerHTML='<p class="hc-empty" role="status">Hatim açılıyor…</p>';
  try{
@@ -177,11 +201,12 @@ async function bkOpen(code,admin,navOpts={}){
   }
   updateAddress(d.code);
   renderOrg();window.bkRefreshTimer=setInterval(bkSilentRefresh,60000);return true;
- }catch(e){if(ticket===generation){$('orgView').innerHTML=`${previewNote('hcOrgPreview')}<div class="hc-empty" role="alert"><p>${esc(e.message)}</p>${button('Yeniden dene','retry')}</div>`;on($('orgView').querySelector('[data-hc=retry]'),'click',()=>bkOpen(code,admin,{fromHistory:true}));}}
+ }catch(e){if(ticket===generation){const login=['AUTH_REQUIRED','EMAIL_UNVERIFIED'].includes(e.errorCode);$('orgView').innerHTML=`${previewNote('hcOrgPreview')}<div class="hc-empty" role="alert"><p>${esc(e.message)}</p>${login?button(user()?'Hesabımı aç':'Giriş yap','org-login','primary'):button('Yeniden dene','retry')}</div>`;on($('orgView').querySelector('[data-hc=retry]'),'click',()=>bkOpen(code,admin,{fromHistory:true}));on($('orgView').querySelector('[data-hc=org-login]'),'click',()=>accountFor({kind:'org',code}));}}
 }
 async function bkSilentRefresh(){
  const c=current;if(!c||refreshing||document.hidden||!$('org').classList.contains('on')||$('hatimDialog').open||pendingAction)return;
- refreshing=true;try{const d=await api(payload('get',c.code,{...(c.adminToken?{admin:c.adminToken}:{})}));if(current===c&&c.ticket===generation){current.org=d.org;remember(d.org,c.adminToken);renderOrg();}}
+ const revision=writeRevision;
+ refreshing=true;try{const d=await api(payload('get',c.code,{...(c.adminToken?{admin:c.adminToken}:{})}));if(current===c&&c.ticket===generation&&revision===writeRevision){current.org=d.org;remember(d.org,c.adminToken);renderOrg();}}
  catch(e){if(current===c){const hint=$('hcRefreshState');if(hint)hint.textContent='Bilgiler yenilenemedi. '+e.message;}}finally{refreshing=false;}
 }
 async function mutate(action,no,extra={}){
@@ -195,6 +220,7 @@ function renderOrg(){
  $('orgView').innerHTML=`<div class="hc-detail">${previewNote('hcOrgPreview')}<header class="hc-detail-head"><small>${o.fullHatim?'BİRLİKTE HATİM':'CÜZ ÇALIŞMASI'}${o.archived?' · ARŞİV':''}</small><h1>${esc(o.title)}</h1><p>${esc(o.adminName||'')}${o.dueDate?' · '+esc(dueText(o.dueDate)):''}</p></header><div class="hc-summary"><b>${done}<span> / ${items.length} okundu</span></b><span>${available} boş cüz</span><progress value="${done}" max="${items.length}" aria-label="Okunan cüzler"></progress></div>${o.complete?'<p class="hc-success">'+(o.fullHatim?'Hatim tamamlandı.':'Cüz çalışması tamamlandı.')+' Allah kabul etsin.</p>':''}${o.archived?'<p class="hc-note">Bu çalışma arşivde. Kayıtlar korunur; yeni cüz almak için yönetici yeniden açabilir.</p>':''}<div class="hc-detail-actions">${button('Katılım bağlantısını paylaş','share')}${button('Yenile','refresh')}${o.isAdmin?button('Yönet','manage'):''}</div><p class="hc-note">Boş bir cüz seçebilirsin. Okumak veya dinlemek, cüzü kendiliğinden “Okudum” yapmaz.</p><div class="hc-grid">${items.map(i=>`<button type="button" class="hc-juz ${i.mine?'mine ':''}${i.status}" data-cuz="${i.no}" aria-label="${i.no}. cüz, ${i.mine?'Bende, ':''}${i.status==='bos'?'Boş':i.status==='okundu'?'Okundu':'Alındı'}${i.name?', '+esc(i.name):''}"><b>${i.no}</b><span>${i.status==='bos'?'Boş':i.status==='okundu'?'Okundu ✓':i.mine?'Bende':'Alındı'}</span>${i.name?`<small>${esc(i.name)}</small>`:''}</button>`).join('')}</div><p id="hcRefreshState" class="hc-note" role="status">${user()?'Hesabına bağlı katılımlar diğer cihazlarda da görünür.':'Misafirsen kişisel dönüş bağlantını sakla.'}</p></div>`;
  on($('orgView').querySelector('[data-hc=share]'),'click',()=>share(c.code,o.title));on($('orgView').querySelector('[data-hc=refresh]'),'click',bkSilentRefresh);on($('orgView').querySelector('[data-hc=manage]'),'click',showManage);
  $('orgView').querySelectorAll('[data-cuz]').forEach(b=>on(b,'click',()=>showJuz(Number(b.dataset.cuz))));
+ comments.mount($('orgView'),{code:c.code,generation:c.ticket,isAdmin:o.isAdmin,archived:o.archived,commentCount:o.commentCount,commentsClosed:o.commentsClosed,canComment:o.canComment});
 }
 function showJuz(no){
  const c=current,i=c?.org.items.find(x=>x.no===no);if(!i)return;
@@ -209,6 +235,7 @@ function showJuz(no){
 }
 function confirmRelease(no){const c=current;dialog('Cüzü bırak',`<p>${no}. cüz yeniden seçilebilir olacak. Mevcut kişisel dönüş bağlantısının yetkisi sona erecek.</p>`,[{id:'release',label:'Evet, cüzü bırak',primary:true,run:async()=>{await mutate('release',no);delete local.capabilities[c.code]?.[no];delete local.pendingClaims[c.code]?.[no];save();closeDialog();}},{id:'cancel',label:'Vazgeç',run:closeDialog}]);}
 function showClaim(no){
+ if(current?.org.public&&!member()){askForLogin({kind:'claim',code:current.code,no});return;}
  const c=current,guest=!user();
  dialog(no+'. cüzü al',`<label class="hc-field">Adın / takma ad<input id="hcName" minlength="2" maxlength="60" value="${esc(user()?.displayName||local.myName)}" autocomplete="nickname"></label><p class="hc-note">Bu ad hatimde cüzünün altında görünür. Gerçek ad kullanmak zorunda değilsin.</p>${guest?'<div class="hc-warning">Hesapsız katılıyorsun. Bu cihazın verileri silinirse erişimini kaybedebilirsin. Katılımdan sonra kişisel dönüş bağlantını sakla; daha sonra hesabına da bağlayabilirsin.</div>':''}`,[{id:'claim',label:'Bu cüzü al',primary:true,run:async()=>{
   const name=$('hcName').value.trim();if(name.length<2||name.length>60)throw Error('2–60 karakterlik ad veya takma ad yaz.');if(current!==c)throw Error('Hatim değişti. Cüzü yeniden seç.');
@@ -239,12 +266,14 @@ function showRecovery(code,no,token,accountBound=false,forParticipant=false){
  prepareCode();
 }
 
-function showCreate(){
+function showCreate(prefill){
  let visibilityStatus='loading',visibilityEnabled=null;
  createDraft=local.creation||{token:secret(crypto),title:'',name:user()?.displayName||local.myName,dueDate:'',public:false};
- dialog('Hatim oluştur',`<p class="hc-note">30 cüzlük bir hatim başlat. Katılımcılar hesap açmadan da cüz seçebilir.</p>${!user()?'<p class="hc-warning">Hesapsız devam ediyorsun. Bu cihazdaki bilgiler silinirse hatmine geri dönemeyebilirsin. Sana özel bağlantıyı sakla.</p>':''}<label class="hc-field">Hatmin adı / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="Örn. Ailemizin haftalık hatmi"></label><label class="hc-field">Adın / takma ad<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih · isteğe bağlı<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler katılabilsin?</legend><div id="hcVisibilityOptions" aria-live="polite"><p>Katılım seçenekleri kontrol ediliyor…</p></div></fieldset>`,[{id:'create',label:'Hatmi oluştur',primary:true,run:async()=>{
+ if(prefill&&!local.creation)createDraft={...createDraft,title:String(prefill.title||'').slice(0,120),name:String(prefill.name||'').slice(0,60),dueDate:String(prefill.dueDate||''),public:prefill.public===true};
+ dialog('Hatim oluştur',`<p class="hc-note">30 cüzlük bir hatim başlat. Davetle katılımda hesap açmadan da cüz seçilebilir.</p>${!user()?'<p class="hc-warning">Hesapsız devam ediyorsun. Bu cihazdaki bilgiler silinirse hatmine geri dönemeyebilirsin. Sana özel bağlantıyı sakla.</p>':''}<label class="hc-field">Hatmin adı / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="Örn. Ailemizin haftalık hatmi"></label><label class="hc-field">Adın / takma ad<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih · isteğe bağlı<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler katılabilsin?</legend><div id="hcVisibilityOptions" aria-live="polite"><p>Katılım seçenekleri kontrol ediliyor…</p></div></fieldset>`,[{id:'create',label:'Hatmi oluştur',primary:true,run:async()=>{
   if(createDraft.public&&visibilityEnabled!==true)throw Error('Önceki açık hatim isteğini güvenle sürdürmek için katılım seçeneklerinin doğrulanmasını bekle veya yeniden dene.');
   const form={title:$('hcTitle').value.trim(),name:$('hcAdminName').value.trim(),dueDate:$('hcDue').value,public:!!document.querySelector('input[name=hcVisibility][value=public]:checked')};if(!form.title)throw Error('Hatme bir ad ver.');
+  if(form.public&&!member()){askForLogin({kind:'create',draft:form});return;}
   const signature=JSON.stringify(form);if(createDraft.signature&&createDraft.signature!==signature)createDraft.token=secret(crypto);
   createDraft={...createDraft,...form,signature};local.creation=createDraft;save(true);
   const d=await api({action:'create',creationToken:createDraft.token,org:{type:'hatim',title:form.title,adminName:form.name,dueDate:form.dueDate||null,public:form.public,items:Array.from({length:30},(_,i)=>({no:i+1}))}});
@@ -254,7 +283,7 @@ function showCreate(){
  const visibilityCurrent=()=>scope.owner===owner&&scope.generation===generation&&scope.dialog===dialogIdentity&&$('hatimDialog').open;
  const renderVisibility=()=>{
   if(!visibilityCurrent())return;
-  $('hcVisibilityOptions').innerHTML='<label><input type="radio" name="hcVisibility" value="private" '+(!createDraft.public?'checked':'')+'> Bağlantıya sahip olanlar</label>'+(visibilityStatus==='ready'&&visibilityEnabled?'<label><input type="radio" name="hcVisibility" value="public" '+(createDraft.public?'checked':'')+'> Uygulamadaki herkes</label>':'')+(visibilityStatus==='loading'?'<small>Uygulamadaki herkese açma seçeneği kontrol ediliyor…</small>':visibilityStatus==='error'?'<small>Açık katılım durumu doğrulanamadı. Bağlantıyla katılım seçeneği kullanılabilir.</small><button type="button" class="hc-text" id="hcVisibilityRetry">Yeniden dene</button>':visibilityEnabled?'':'<small>Açık hatim listesi şu an kapalı.</small>');
+  $('hcVisibilityOptions').innerHTML='<label><input type="radio" name="hcVisibility" value="private" '+(!createDraft.public?'checked':'')+'> Davetle katılım</label>'+(visibilityStatus==='ready'&&visibilityEnabled?'<label><input type="radio" name="hcVisibility" value="public" '+(createDraft.public?'checked':'')+'> Tüm üyelere açık</label>':'')+(visibilityStatus==='loading'?'<small>Üyelere açma seçeneği kontrol ediliyor…</small>':visibilityStatus==='error'?'<small>Açık katılım durumu doğrulanamadı. Bağlantıyla katılım seçeneği kullanılabilir.</small><button type="button" class="hc-text" id="hcVisibilityRetry">Yeniden dene</button>':visibilityEnabled?'':'<small>Açık hatim listesi şu an kapalı.</small>');
   on($('hcVisibilityRetry'),'click',loadVisibility);
  };
  const loadVisibility=async()=>{
@@ -270,7 +299,7 @@ function showManage(){
  const c=current,o=c?.org;if(!o?.isAdmin)return;
  dialog('Hatmi yönet',`<label class="hc-field">Hatmin adı<input id="hcEditTitle" maxlength="120" value="${esc(o.title)}"></label><label class="hc-field">Hedef tarih<input id="hcEditDue" type="date" value="${esc(o.dueDate||'')}"></label><p class="hc-note">${o.public?'Açık hatimler listesinde.':'Yalnız bağlantıyla katılım.'}</p>`,[
  {id:'save',label:'Değişiklikleri kaydet',primary:true,run:async()=>{await mutate('update',null,{title:$('hcEditTitle').value.trim(),dueDate:$('hcEditDue').value||null});closeDialog();}},
- {id:'visibility',label:o.public?'Açık listeden kaldır':'Açık hatimlerde göster',run:async()=>{await mutate('publish',null,{public:!o.public});closeDialog();}},
+ {id:'visibility',label:o.public?'Davetle katılıma çevir':'Tüm üyelere aç',run:async()=>{if(!o.public&&!member()){askForLogin({kind:'manage',code:c.code});return;}await mutate('publish',null,{public:!o.public});closeDialog();}},
  {id:'fix',label:'Cüzleri düzenle',run:showAdminCuz},
  {id:'report-png',label:'Görsel olarak indir',run:()=>exportReport('png')},
  {id:'report-pdf',label:'Yazdır / PDF indir',run:()=>exportReport('pdf')},
@@ -332,14 +361,16 @@ window.bkOpen=bkOpen;window.bkCurrent=null;window.bkRefreshTimer=null;window.ren
 window.bkOpenDiscover=()=>{tab='open';openTogetherScreen();};window.bkDiscoverInit=async()=>{};
 window.bkApi=api;window.bkDue=o=>({late:dueText(o.dueDate)==='Hedef tarih geçti',txt:dueText(o.dueDate)});
 window.elifaHatimNavigation=leaveHatimDetail;
-on($('orgBack'),'click',()=>{closeDialog();dialogIdentity++;++generation;clearInterval(window.bkRefreshTimer);current=null;window.bkCurrent=null;openTogetherScreen();});
+on($('orgBack'),'click',()=>{comments.dispose();closeDialog();dialogIdentity++;++generation;clearInterval(window.bkRefreshTimer);current=null;window.bkCurrent=null;openTogetherScreen();});
 on(document,'visibilitychange',()=>{if(!document.hidden)bkSilentRefresh();});on(window,'focus',bkSilentRefresh);
 on(window,'elifa:account-changed',e=>{
  const uid=e.detail?.user?.uid||null;
- if(uid===owner){if(pendingConnection&&!current)resumeConnection().catch(err=>flash(err.message));return;}
+ if(uid===owner){if(authIntent&&member())resumeAuthIntent().catch(err=>flash(err.message));else if(pendingConnection&&!current)resumeConnection().catch(err=>flash(err.message));return;}
+ comments.dispose();
  save();owner=uid;key=uid?'elifa_hatim_user_'+uid:guestKey;local=loadLocal(storage,key);accountItems=[];dialogIdentity++;++generation;++listGeneration;clearInterval(window.bkRefreshTimer);
  const code=current?.code;current=null;window.bkCurrent=null;closeDialog();payButton();
- if(pendingConnection)resumeConnection().catch(err=>flash(err.message));
+ if(authIntent&&member())resumeAuthIntent().catch(err=>flash(err.message));
+ else if(pendingConnection)resumeConnection().catch(err=>flash(err.message));
  else if(code)bkOpen(code,null,{fromHistory:true});else if($('birlikte')?.classList.contains('on'))renderBirlikte();
 });
 payButton();
@@ -351,3 +382,4 @@ if(initial){
  const hint=$('hatimStatus');if(hint)hint.textContent='Bağlantın korunuyor. Hesap durumu hazırlanıyor…';
  resumeConnection().catch(err=>flash(err.message));
 }
+if(authIntent)sessionReady().then(()=>resumeAuthIntent()).catch(err=>flash(err.message));
