@@ -15,13 +15,13 @@ function harness(initial={},options={}){
   location:{origin:'https://example.test',search:options.search||'',href:options.url||'https://example.test/',reload:()=>events.push('reload')},history:{replaceState(){}},localStorage:storage,
   GoogleAuthProvider:Provider,OAuthProvider:Provider,EmailAuthProvider:{credential:()=>({})},auth,isLocal:true,
   accountLanguage:()=> 'tr',accountText:s=>s,localizeAccountTree(){},onAuthStateChanged(instance,_changed,failed){instance.initialFailure=failed;},
-  mountAccountProfile:()=>({ready:()=>false,hasGuestChoice:()=>false,load:async()=>{},changed(){}}),
+  mountAccountProfile:()=>({ready:()=>false,hasGuestChoice:()=>!!options.guestChoice,load:async()=>{calls.push('profile-load')},changed(){}}),
   confirm:()=>true,reauthenticateWithCredential:async()=>calls.push('reauth'),signOut:async()=>{auth.currentUser=null},sendPasswordResetEmail:async()=>calls.push('password-reset'),confirmPasswordReset:async()=>calls.push('password-confirm'),
   createUserWithEmailAndPassword:async()=>{const u={uid:'new',emailVerified:false,providerData:[{providerId:'password'}],getIdToken:async()=> 'new-token'};auth.currentUser=u;calls.push('signup');return {user:u}},
   sendEmailVerification:async()=>calls.push('verify-email'),signInWithEmailAndPassword:async()=>{calls.push('login');},
   fetch:async(_url,options)=>{const body=JSON.parse(options.body);calls.push(body);return Response.json(body.action==='list'?{backups:[]}:body.action==='syncGet'?{revision:0,payload:null}:{revision:1});}
  };
- vm.createContext(c);vm.runInContext(source+'\nwindow.review={authChanged:next=>{auth.currentUser=next;authChanged(next)},scheduleSync,syncNow,setBusy,api,setMode:v=>mode=v,state:()=>({busy,syncPending,workspaceReady,workspaceTransition})};',c);
+ vm.createContext(c);vm.runInContext(source+'\nwindow.review={authChanged:next=>{auth.currentUser=next;authChanged(next)},scheduleSync,syncNow,setBusy,api,action,setMode:v=>mode=v,state:()=>({busy,syncPending,workspaceReady,workspaceTransition})};',c);
  return {c,map,nodes,timers,events,calls,auth,storage,fire:async()=>{const [id,fn]=[...timers][0]||[];assert.ok(fn,'scheduled work');timers.delete(id);await fn();await new Promise(r=>setImmediate(r));}};
 }
 const member=uid=>({uid,emailVerified:true,email:uid+'@example.test',providerData:[],getIdToken:async()=>uid+'-token'});
@@ -121,4 +121,17 @@ test('canonical deploy-preview hostname also blocks account actions without trus
  preview.c.window.review.setMode('forgot');preview.nodes.get('accountForm').onsubmit({preventDefault(){}});await new Promise(r=>setImmediate(r));assert.deepEqual(preview.calls,[]);
  const production=harness({}, {url:'https://mushaf.elifaplatform.com/?preview=true',search:'?preview=true'});assert.equal(typeof production.auth.initialFailure,'function');
  production.c.window.review.setMode('forgot');production.nodes.get('accountEmailInput').value='real@example.test';production.nodes.get('accountForm').onsubmit({preventDefault(){}});await new Promise(r=>setImmediate(r));assert.deepEqual(production.calls,['password-reset']);
+});
+
+
+test('restored accounts never open the profile or migration prompt automatically and deliberate account home does no cloud work',async()=>{
+ const h=harness({[WORKSPACE_OWNER]:'A'},{guestChoice:true});h.c.window.review.authChanged(member('A'));
+ assert.notEqual(h.nodes.get('accountDialog').open,true);assert.deepEqual(h.calls,[]);
+ await h.c.window.elifaAccount.open();assert.equal(h.nodes.get('accountDialog').open,true);assert.deepEqual(h.calls,[]);assert.equal(h.c.window.review.state().busy,false);assert.equal(h.nodes.get('accountStatus').textContent,'');
+});
+
+test('successful actions release controls and clear the default busy message while preserving explicit outcomes and errors',async()=>{
+ const h=harness();await h.c.window.review.action(async()=>{});assert.equal(h.nodes.get('accountStatus').textContent,'');assert.equal(h.c.window.review.state().busy,false);
+ await h.c.window.review.action(async()=>{h.nodes.get('accountStatus').textContent='Saved successfully'});assert.equal(h.nodes.get('accountStatus').textContent,'Saved successfully');
+ await h.c.window.review.action(async()=>{throw Error('Test operation failed')});assert.equal(h.nodes.get('accountStatus').textContent,'Test operation failed');assert.equal(h.c.window.review.state().busy,false);
 });

@@ -1,4 +1,4 @@
-import {secret,dueText,parseHatimLink,participationUrl,recoveryUrl,personalReturnCode,adminUrl,canonicalHatimUrl,loadLocal,createOrgClient} from './hatim-client.mjs';
+import {secret,dueText,parseHatimLink,participationUrl,recoveryUrl,personalReturnCode,adminUrl,canonicalHatimUrl,loadLocal,createOrgClient,forgetLocalHatim} from './hatim-client.mjs';
 import {downloadHatimReport} from './hatim-report.mjs';
 
 const $=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -79,7 +79,7 @@ function on(el,event,handler){el?.addEventListener(event,handler);}
 function button(label,action,cls=''){return `<button type="button" class="hc-button ${cls}" data-hc="${action}">${label}</button>`;}
 function dialog(title,body,actions=[]){
  const d=$('hatimDialog');if(d.open)d.close();const identity=++dialogIdentity,context={owner,generation,current,dialog:identity};
- d.innerHTML=`<form method="dialog"><header><h2>${esc(title)}</h2><button class="hc-close" value="cancel" aria-label="Kapat">×</button></header></form><div class="hc-dialog-body">${previewNote('hcDialogPreview')}${body}<p id="hcError" class="hc-error" role="alert"></p></div><footer>${actions.map(a=>button(a.label,a.id,a.primary?'primary':'')).join('')}</footer>`;
+ d.innerHTML=`<form method="dialog"><header><h2>${esc(title)}</h2><button class="hc-close" value="cancel" aria-label="Kapat">×</button></header></form><div class="hc-dialog-body">${previewNote('hcDialogPreview')}${body}<p id="hcError" class="hc-error" role="alert"></p></div><footer>${actions.map(a=>button(a.label,a.id,a.danger?'danger':a.primary?'primary':'')).join('')}</footer>`;
  for(const a of actions)on(d.querySelector('[data-hc="'+a.id+'"]'),'click',async e=>{
   const b=e.currentTarget;if(pendingAction)return;pendingAction=true;activeAction=context;b.disabled=true;
   try{assertActionContext();$('hcError').textContent='';await a.run();}
@@ -99,13 +99,20 @@ async function share(code,title){const url=participationUrl(base(),code);if(navi
 function accountOpen(){if(window.elifaAccount?.open){window.elifaAccount.open();return;}document.querySelector('[data-account-open]')?.click();const d=$('accountDialog');if(d&&!d.open)d.showModal();}
 function home(){
  const holder=$('birlikte');if(!holder)return;
- holder.innerHTML=`<div class="hc-home"><button type="button" class="hc-button hc-home-back" data-hc="home-back">‹ Elifa</button><header class="hc-top"><div><small>BİRLİKTE</small><h1>Hatimde buluşalım</h1><p>Bir cüz seç, ortak niyete katıl.</p></div><span aria-hidden="true" class="hc-emblem">ا</span></header>${previewNote('hcHomePreview')}<div class="hc-main-actions">${button('＋ Hatim oluştur','create','primary')}${button('Bağlantıyla katıl','join')}</div><div class="hc-return-entry"><button type="button" class="hc-text" data-hc="return-entry">↩ Cüzüme geri dön</button><span>Aynı cihazda Benim Cüzlerim; başka cihazda özel kodun.</span></div><nav class="hc-tabs" aria-label="Hatim bölümleri">${[['open','Açık Hatimler'],['mine','Benim Cüzlerim'],['created','Oluşturduklarım']].map(([id,name])=>`<button type="button" data-tab="${id}" aria-pressed="${id===tab}">${name}</button>`).join('')}</nav><div id="hatimStatus" role="status" aria-live="polite"></div><div id="hatimList"></div></div>`;
+ holder.innerHTML=`<div class="hc-home"><header class="hc-top"><button type="button" class="hc-button hc-home-back" data-hc="home-back" aria-label="Ana sayfaya dön">‹</button><div class="hc-heading"><h1>Birlikte Hatim</h1><p>Bir cüz seç, birlikte okuyalım.</p></div></header>${previewNote('hcHomePreview')}<div class="hc-main-actions">${button('＋ Hatim oluştur','create','primary')}${button('Kodla katıl','join')}</div><div class="hc-return-entry"><button type="button" class="hc-text" data-hc="return-entry">↩ Cüzüme geri dön</button><span>Daha önce aldığın cüz için</span></div><nav class="hc-tabs" aria-label="Hatim bölümleri">${[['open','Açık hatimler'],['mine','Cüzlerim'],['created','Başlattıklarım']].map(([id,name])=>`<button type="button" data-tab="${id}" aria-pressed="${id===tab}">${name}</button>`).join('')}</nav><div id="hatimStatus" role="status" aria-live="polite"></div><div id="hatimList"></div></div>`;
  on(holder.querySelector('[data-hc=home-back]'),'click',()=>{closeDialog();clearInterval(window.bkRefreshTimer);backFromTogether();});on(holder.querySelector('[data-hc=create]'),'click',showCreate);on(holder.querySelector('[data-hc=join]'),'click',showJoin);on(holder.querySelector('[data-hc=return-entry]'),'click',showReturnEntry);
  holder.querySelectorAll('[data-tab]').forEach(b=>on(b,'click',()=>{tab=b.dataset.tab;renderBirlikte();}));renderList();
 }
 function card(o,index=0){
  const total=o.total||30,done=o.done??o.items?.filter(x=>x.status==='okundu').length??0,available=o.available??Math.max(0,total-(o.taken||0)),due=dueText(o.dueDate),action=available?'Cüz seç':'Görüntüle';
  return `<article class="hc-card hc-list-row"><span class="hc-row-number" aria-hidden="true">${index+1}</span><div class="hc-row-copy"><h2 title="${esc(o.title)}">${esc(o.title)}</h2><p class="hc-row-meta"><span>${done}/${total} cüz okundu</span><span>${available} boş cüz</span>${due?`<span class="hc-row-due">${esc(due)}</span>`:''}</p><progress value="${done}" max="${total}" aria-label="${done}/${total} cüz okundu"></progress></div><button type="button" class="hc-button hc-row-open" data-open="${esc(o.code)}" aria-label="${esc(o.title)} · ${action}"><span>${action}</span><span aria-hidden="true">›</span></button></article>`;
+}
+function ownedCard(o,index){
+ const mine=o.items||[],done=mine.filter(i=>i.status==='okundu').length,waiting=mine.filter(i=>i.status!=='okundu').length;
+ const juz=mine.length?mine.slice(0,3).map(i=>i.no).join(', ')+'. cüz'+(mine.length>3?' ve '+(mine.length-3)+' cüz daha':''):'';
+ const state=tab==='created'?(o.archived?'Arşivde':'Sen başlattın'):(juz||(o.pending?'Katılım kontrol ediliyor':'Eski katılım · açıp kontrol et'));
+ const progress=tab==='mine'&&mine.length?`${waiting} okunacak${done?' · '+done+' okundu':''}`:'';
+ return `<article class="hc-card hc-list-row hc-owned-row"><span class="hc-row-number" aria-hidden="true">${index+1}</span><div class="hc-row-copy"><h2 title="${esc(o.title)}">${esc(o.title)}</h2><p class="hc-row-meta"><span>${esc(state)}</span>${progress?`<span>${esc(progress)}</span>`:''}${o.localOnly?'<span title="Güncel durum açılınca kontrol edilir">Bu cihazda</span>':''}</p></div><button type="button" class="hc-button hc-row-open" data-open="${esc(o.code)}" aria-label="${esc(o.title)} · Aç"><span>Aç</span><span aria-hidden="true">›</span></button></article>`;
 }
 
 function renderList(){
@@ -118,10 +125,10 @@ function renderList(){
   else if(discoverEnabled===null)list.innerHTML='<div class="hc-empty"><h2>Açık hatim durumu henüz doğrulanmadı</h2><p>Güncel listeyi kontrol etmek için yeniden dene.</p>'+button('Yeniden dene','discover-retry')+'</div>';
   else list.innerHTML=discoverEnabled&&discover.length?discover.map(card).join(''):`<div class="hc-empty"><h2>${discoverEnabled?'Henüz açık hatim yok':'Bir bağlantıyla da katılabilirsin'}</h2><p>${discoverEnabled?'İlk hatmi sen başlatabilirsin.':'Açık hatim listesi şu an kapalı. Sana gönderilen bağlantıyla katılabilir veya özel bir hatim oluşturabilirsin.'}</p></div>`;
  }else{
-  const records=new Map(local.mine.filter(x=>x.type==='hatim').map(m=>[m.code,{...m,...local.snapshots[m.code],localOnly:true}]));
+  const records=new Map(local.mine.filter(x=>x.type==='hatim').map(m=>[m.code,{...m,...local.snapshots[m.code],title:local.snapshots[m.code]?.title||m.title||'Hatim',localOnly:true}]));
   for(const m of accountItems)if(m.type==='hatim')records.set(m.code,{...records.get(m.code),...m,localOnly:false});
   const rows=[...records.values()].filter(m=>tab==='created'?(m.isAdmin||m.adminToken):((m.items||[]).length||local.claimed[m.code]?.length||Object.keys(capabilities(m.code)).length));
-  list.innerHTML=(tab==='mine'?'<div class="hc-return-row"><p>Aynı cihazda cüzünü aşağıdan aç. Kayıt görünmüyorsa özel dönüş kodunu kullan.</p>'+button('Cüzüme geri dön','return-entry')+'</div>':'')+(!user()?'<p class="hc-note">Misafir kayıtları bu cihazda tutulur. Cihaz verileri silinirse özel dönüş bağlantın gerekir. <button class="hc-text" data-hc="account">Hesaba giriş yap</button></p>':'')+rows.map(m=>`<article class="hc-card"><div><h2>${esc(m.title)}</h2><p>${tab==='created'?(m.archived?'Arşivde':'Yönetici sensin'):(m.items||[]).map(i=>i.no+'. cüz · '+(i.status==='okundu'?'Okudum ✓':'Okunacak')).join(' / ')||(m.pending?'Katılım sonucu doğrulanmadı · açıp kontrol et':'Eski katılım · yönetici dönüş bağlantısı gerekli')}</p>${m.localOnly?'<small>Cihaz kaydı · açınca güncellenir</small>':''}</div><button class="hc-button" data-open="${esc(m.code)}">Aç</button></article>`).join('')+(!rows.length?'<div class="hc-empty"><h2>'+ (tab==='created'?'Henüz hatim oluşturmadın':'Henüz cüz seçmedin')+'</h2><p>Açık hatimlerden veya sana gönderilen bağlantıdan başlayabilirsin.</p></div>':'');
+  list.innerHTML=rows.map(ownedCard).join('')+(!rows.length?'<div class="hc-empty"><h2>'+ (tab==='created'?'Henüz hatim oluşturmadın':'Henüz cüz seçmedin')+'</h2><p>Açık hatimlerden veya sana gönderilen bağlantıdan başlayabilirsin.</p></div>':'')+(!user()?'<details class="hc-help"><summary>Misafir kayıtlarım nasıl korunur?</summary><p>Bu cihazın verileri silinirse kişisel dönüş kodun gerekir. Kodunu sakla veya <button class="hc-text" data-hc="account">hesabına giriş yap</button>.</p></details>':'');
   if(user()){let guest;try{guest=loadLocal(storage,guestKey);}catch{}if(guest&&(Object.values(guest.capabilities).some(x=>Object.keys(x).length)||Object.values(guest.pendingClaims).some(x=>Object.keys(x).length)||guest.mine.some(x=>x.adminToken)))list.innerHTML+='<div class="hc-note"><b>Bu cihazda misafir katılımları var.</b><p>Sana ait olanları seçerek hesabına bağlayabilirsin.</p>'+button('Misafir katılımlarımı göster','bind-list')+'</div>';}
  }
  list.querySelectorAll('[data-open]').forEach(b=>on(b,'click',()=>bkOpen(b.dataset.open)));
@@ -203,7 +210,7 @@ function showJuz(no){
 function confirmRelease(no){const c=current;dialog('Cüzü bırak',`<p>${no}. cüz yeniden seçilebilir olacak. Mevcut kişisel dönüş bağlantısının yetkisi sona erecek.</p>`,[{id:'release',label:'Evet, cüzü bırak',primary:true,run:async()=>{await mutate('release',no);delete local.capabilities[c.code]?.[no];delete local.pendingClaims[c.code]?.[no];save();closeDialog();}},{id:'cancel',label:'Vazgeç',run:closeDialog}]);}
 function showClaim(no){
  const c=current,guest=!user();
- dialog(no+'. cüzü al',`<label class="hc-field">Görünen ad veya takma ad<input id="hcName" minlength="2" maxlength="60" value="${esc(user()?.displayName||local.myName)}" autocomplete="nickname"></label><p class="hc-note">Bu ad hatimde cüzünün altında görünür. Gerçek ad kullanmak zorunda değilsin.</p>${guest?'<div class="hc-warning">Hesapsız katılıyorsun. Bu cihazın verileri silinirse erişimini kaybedebilirsin. Katılımdan sonra kişisel dönüş bağlantını sakla; daha sonra hesabına da bağlayabilirsin.</div>':''}`,[{id:'claim',label:'Bu cüzü al',primary:true,run:async()=>{
+ dialog(no+'. cüzü al',`<label class="hc-field">Adın / takma ad<input id="hcName" minlength="2" maxlength="60" value="${esc(user()?.displayName||local.myName)}" autocomplete="nickname"></label><p class="hc-note">Bu ad hatimde cüzünün altında görünür. Gerçek ad kullanmak zorunda değilsin.</p>${guest?'<div class="hc-warning">Hesapsız katılıyorsun. Bu cihazın verileri silinirse erişimini kaybedebilirsin. Katılımdan sonra kişisel dönüş bağlantını sakla; daha sonra hesabına da bağlayabilirsin.</div>':''}`,[{id:'claim',label:'Bu cüzü al',primary:true,run:async()=>{
   const name=$('hcName').value.trim();if(name.length<2||name.length>60)throw Error('2–60 karakterlik ad veya takma ad yaz.');if(current!==c)throw Error('Hatim değişti. Cüzü yeniden seç.');
   const token=local.pendingClaims[c.code]?.[no]?.token||secret(crypto);local.pendingClaims[c.code]={...local.pendingClaims[c.code],[no]:{token,name,createdAt:Date.now()}};local.myName=name;retainPending(c.code);save(true);
   try{await mutate('claim',no,{name,capability:token});closeDialog();showRecovery(c.code,no,token,!!user());}catch(e){if(e.status===409){delete local.pendingClaims[c.code]?.[no];save();}throw e;}
@@ -235,7 +242,7 @@ function showRecovery(code,no,token,accountBound=false,forParticipant=false){
 function showCreate(){
  let visibilityStatus='loading',visibilityEnabled=null;
  createDraft=local.creation||{token:secret(crypto),title:'',name:user()?.displayName||local.myName,dueDate:'',public:false};
- dialog('Hatim oluştur',`<p class="hc-note">30 cüzlük bir hatim başlat. Katılımcılar hesap açmadan da cüz seçebilir.</p>${!user()?'<p class="hc-warning">Hesapsız oluşturuyorsun. Cihaz verileri silinirse yönetici erişimini kaybedebilirsin. Oluşturma sonunda özel yönetici bağlantını sakla.</p>':''}<label class="hc-field">Hatmin adı / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="Örn. Ailemizin haftalık hatmi"></label><label class="hc-field">Yönetici görünen adı<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih · isteğe bağlı<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler katılabilsin?</legend><div id="hcVisibilityOptions" aria-live="polite"><p>Katılım seçenekleri kontrol ediliyor…</p></div></fieldset>`,[{id:'create',label:'Hatmi oluştur',primary:true,run:async()=>{
+ dialog('Hatim oluştur',`<p class="hc-note">30 cüzlük bir hatim başlat. Katılımcılar hesap açmadan da cüz seçebilir.</p>${!user()?'<p class="hc-warning">Hesapsız devam ediyorsun. Bu cihazdaki bilgiler silinirse hatmine geri dönemeyebilirsin. Sana özel bağlantıyı sakla.</p>':''}<label class="hc-field">Hatmin adı / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="Örn. Ailemizin haftalık hatmi"></label><label class="hc-field">Adın / takma ad<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih · isteğe bağlı<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler katılabilsin?</legend><div id="hcVisibilityOptions" aria-live="polite"><p>Katılım seçenekleri kontrol ediliyor…</p></div></fieldset>`,[{id:'create',label:'Hatmi oluştur',primary:true,run:async()=>{
   if(createDraft.public&&visibilityEnabled!==true)throw Error('Önceki açık hatim isteğini güvenle sürdürmek için katılım seçeneklerinin doğrulanmasını bekle veya yeniden dene.');
   const form={title:$('hcTitle').value.trim(),name:$('hcAdminName').value.trim(),dueDate:$('hcDue').value,public:!!document.querySelector('input[name=hcVisibility][value=public]:checked')};if(!form.title)throw Error('Hatme bir ad ver.');
   const signature=JSON.stringify(form);if(createDraft.signature&&createDraft.signature!==signature)createDraft.token=secret(crypto);
@@ -260,15 +267,34 @@ function showCreate(){
 }
 function showAdminBackup(code,token){const link=adminUrl(base(),token);dialog('Hatmin hazır',`<p>Katılım bağlantısını istediğin kişilerle paylaşabilirsin. Aşağıdaki <b>yönetici bağlantısı sana özeldir</b>; ayrı sakla.</p><textarea readonly class="hc-link" aria-label="Özel yönetici bağlantısı">${esc(link)}</textarea>`,[{id:'admin-copy',label:'Yönetici bağlantısını sakla',run:()=>copy(link)},{id:'share',label:'Katılım bağlantısını paylaş',primary:true,run:()=>share(code,local.mine.find(m=>m.code===code)?.title||'Hatim')},{id:'ok',label:'Tamam',run:closeDialog}]);}
 function showManage(){
- const c=current,o=c.org;
+ const c=current,o=c?.org;if(!o?.isAdmin)return;
  dialog('Hatmi yönet',`<label class="hc-field">Hatmin adı<input id="hcEditTitle" maxlength="120" value="${esc(o.title)}"></label><label class="hc-field">Hedef tarih<input id="hcEditDue" type="date" value="${esc(o.dueDate||'')}"></label><p class="hc-note">${o.public?'Açık hatimler listesinde.':'Yalnız bağlantıyla katılım.'}</p>`,[
  {id:'save',label:'Değişiklikleri kaydet',primary:true,run:async()=>{await mutate('update',null,{title:$('hcEditTitle').value.trim(),dueDate:$('hcEditDue').value||null});closeDialog();}},
  {id:'visibility',label:o.public?'Açık listeden kaldır':'Açık hatimlerde göster',run:async()=>{await mutate('publish',null,{public:!o.public});closeDialog();}},
- {id:'fix',label:'Cüz durumunu düzelt / erişim ver',run:showAdminCuz},
- {id:'report-png',label:'PNG raporu indir',run:()=>exportReport('png')},
- {id:'report-pdf',label:'PDF / yazdırma görünümü',run:()=>exportReport('pdf')},
+ {id:'fix',label:'Cüzleri düzenle',run:showAdminCuz},
+ {id:'report-png',label:'Görsel olarak indir',run:()=>exportReport('png')},
+ {id:'report-pdf',label:'Yazdır / PDF indir',run:()=>exportReport('pdf')},
  ...(c.adminToken?[{id:'backup',label:'Özel yönetici bağlantım',run:()=>showAdminBackup(c.code,c.adminToken)}]:[]),
- {id:'archive',label:o.archived?'Arşivden çıkar':'Arşive al',run:()=>dialog(o.archived?'Hatmi yeniden aç':'Hatmi arşivle','<p>Okuma kayıtları ve kişisel bağlantılar korunur. Arşivdeyken yeni cüz alınamaz; çalışma açık listeden çıkar.</p>',[{id:'confirm',label:o.archived?'Yeniden aç':'Arşive al',primary:true,run:async()=>{await mutate(o.archived?'reopen':'archive');closeDialog();}}])}
+ {id:'archive',label:o.archived?'Arşivden çıkar':'Arşive al',run:()=>dialog(o.archived?'Hatmi yeniden aç':'Hatmi arşivle','<p>Okuma kayıtları ve kişisel bağlantılar korunur. Arşivdeyken yeni cüz alınamaz; çalışma açık listeden çıkar.</p>',[{id:'confirm',label:o.archived?'Yeniden aç':'Arşive al',primary:true,run:async()=>{await mutate(o.archived?'reopen':'archive');closeDialog();}}])},
+ ...(o.type==='hatim'?[{id:'delete-hatim',label:'Hatmi sil',danger:true,run:confirmDeleteHatim}]:[])
+ ]);
+}
+function confirmDeleteHatim(){
+ const c=current;if(!c?.org.isAdmin||c.org.type!=='hatim')return;
+ const empty=c.org.items?.length===30&&c.org.items.every(i=>i.status==='bos'&&!i.name&&!i.ts);
+ const archive={id:'delete-archive',label:'Silmek yerine arşivle',run:async()=>{await mutate('archive');closeDialog();}};
+ const cancel={id:'delete-cancel',label:'Vazgeç',run:closeDialog};
+ if(!empty){dialog('Bu hatimde katılım var',`<p><b>${esc(c.org.title)}</b> kalıcı olarak silinemez. Katılımı veya okuma geçmişi olan hatimleri arşivleyebilirsin. Kayıtlar korunur; yeni cüz alınmaz.</p>`,[archive,cancel]);return;}
+ dialog('Hatmi kalıcı olarak sil',`<p><b>${esc(c.org.title)}</b> silinsin mi? Yalnız hiç katılım olmamış boş hatim silinebilir.</p><p>Bu işlem geri alınamaz. Katılım ve yönetici bağlantıları çalışmaz. Kayıtları korumak istersen arşivle.</p>`,[
+  cancel,archive,{id:'delete-confirm',label:'Evet, hatmi sil',danger:true,run:async()=>{
+   assertActionContext();const requestOwner=owner;
+   const result=await api(payload('delete',c.code,{...(c.adminToken?{admin:c.adminToken}:{}),confirmed:true}));
+   assertActionContext();if(current!==c||requestOwner!==owner||generation!==c.ticket)throw Error('Hatim veya hesap değişti. Güncel durumu kontrol et.');
+   if(result.ok!==true||result.deleted!==true||result.code!==c.code)throw Error('Silme sonucu doğrulanamadı. Yeniden kontrol et.');
+   local=forgetLocalHatim(local,c.code);save();accountItems=accountItems.filter(o=>o.code!==c.code);discover=discover.filter(o=>o.code!==c.code);
+   closeDialog();dialogIdentity++;generation++;clearInterval(window.bkRefreshTimer);current=null;window.bkCurrent=null;payButton();updateAddress();tab='created';
+   show('birlikte');if(typeof setElifaRoute==='function')setElifaRoute('birlikte','replace');await renderBirlikte();flash('Hatim silindi.');
+  }}
  ]);
 }
 async function exportReport(format){

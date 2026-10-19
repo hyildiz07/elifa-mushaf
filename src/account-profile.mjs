@@ -3,29 +3,17 @@ import {validateProfile} from './account-profile-data.mjs';
 export function mountAccountProfile({api,getUser,workspaces,action,onProfile,language=()=> 'tr'}){
  const tr=(a,b)=>language()==='tr'?a:b;
  const member=document.getElementById('accountMember');
- const style=document.createElement('style');style.textContent=`
- #accountProfileForm{margin:0}#accountProfileForm .profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
- #accountProfileForm .profile-choice{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
- #accountProfileForm .profile-choice button{padding:6px 9px;min-height:36px;font-size:12px}
- #accountProfileForm button[aria-pressed=true]{border-color:var(--gold,#b88b29);box-shadow:inset 0 0 0 1px var(--gold,#b88b29);background:var(--bg,#faf6ed)}
- #accountProfileForm .profile-actions,#accountGuestImport .profile-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
- #accountProfileForm .profile-actions button{flex:1}#accountProfileForm small{display:block;color:var(--muted,#596776);font-size:12px}
- #accountGuestImport .profile-conflict{padding:8px 0;border-top:1px solid var(--line,#ddd)}
- #accountGuestImport .profile-conflict label{display:inline-flex;gap:6px;align-items:center;margin-inline-end:12px}
- #accountProfileStatus{font-size:13px;margin:8px 0 0;overflow-wrap:anywhere}
- @media(max-width:380px){#accountProfileForm .profile-grid{grid-template-columns:1fr}}
- `;document.head.append(style);
  const card=document.createElement('section');card.className='account-card';card.id='accountProfileCard';
  // Only fixed UI copy is inserted as HTML. User values are assigned through
  // value/textContent and never rendered into markup or public attributes.
- card.innerHTML=`<form id="accountProfileForm"><strong>${tr('Profilini düzenle','Edit your profile')}</strong>
+ card.innerHTML=`<form id="accountProfileForm">
  <label for="profileDisplayName">${tr('Görünen ad / takma ad','Display name / nickname')}</label><input id="profileDisplayName" type="text" maxlength="60" autocomplete="nickname"><small>${tr('Hatimlerde yalnızca bu ad görünür. Gerçek adını yazmak zorunda değilsin.','Only this name is shown in shared khatms. Your real name is optional.')}</small>
- <div class="profile-grid"><div><label>${tr('Yaş bilgisi (isteğe bağlı)','Age information (optional)')}</label><div id="profileAgeChoice" class="profile-choice" role="group" aria-label="${tr('Yaş bilgisi biçimi','Age information format')}"></div>
+ <details class="profile-optional"><summary>${tr('İsteğe bağlı bilgiler','Optional information')}</summary><div class="profile-grid"><div><label>${tr('Yaş bilgisi (isteğe bağlı)','Age information (optional)')}</label><div id="profileAgeChoice" class="profile-choice" role="group" aria-label="${tr('Yaş bilgisi biçimi','Age information format')}"></div>
  <label id="profileAgeRow" hidden>${tr('Yaş','Age')}<input id="profileAge" type="number" min="1" max="120" step="1" inputmode="numeric"></label>
  <label id="profileBirthRow" hidden>${tr('Doğum tarihi','Date of birth')}<input id="profileBirthDate" type="date" max="${new Date().toISOString().slice(0,10)}"></label></div>
  <div><label>${tr('Cinsiyet (isteğe bağlı)','Gender (optional)')}</label><div id="profileGenderChoice" class="profile-choice" role="group" aria-label="${tr('Cinsiyet','Gender')}"></div></div></div>
  <small>${tr('Yaş, doğum tarihi, cinsiyet ve e-posta başkalarına gösterilmez.','Age, birth date, gender and email are never shown to others.')}</small>
- <div class="profile-actions"><button type="submit" id="profileSave">${tr('Profili kaydet','Save profile')}</button><button type="button" id="profileRefresh">${tr('Yeniden yükle','Reload')}</button></div><p id="accountProfileStatus" role="status" aria-live="polite"></p></form>`;
+ </details><div class="profile-actions"><button type="submit" id="profileSave">${tr('Profili kaydet','Save profile')}</button><button type="button" id="profileRefresh">${tr('Yeniden yükle','Reload')}</button></div><p id="accountProfileStatus" role="status" aria-live="polite"></p></form>`;
  member.prepend(card);
  const $=id=>document.getElementById(id);let owner=null,revision=0,loaded=false,request=0,ageMode='none',gender='unspecified',inFlight=null;
  const choices=(id,values,select)=>{const box=$(id);for(const [key,label] of values){const button=document.createElement('button');button.type='button';button.textContent=label;button.dataset.value=key;button.onclick=()=>select(key);box.append(button);}};

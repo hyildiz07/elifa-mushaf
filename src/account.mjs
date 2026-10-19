@@ -37,7 +37,7 @@ window.elifaAccountSession={
 };
 function assertWorkspace(){if(!workspaceReady||workspaceTransition||!workspaces.isActive(user?.uid))throw Error('Hesap kayıtları hazırlanıyor. Cihazda yer açıp yeniden dene.');}
 function reloadWorkspace(){if(workspaceTransition&&workspaceReady&&!busy){window.dispatchEvent(new CustomEvent('elifa:workspace-changing'));location.reload();}}
-const profileUI=mountAccountProfile({api,getUser:()=>user,workspaces,action,language:accountLanguage,onProfile:value=>{profileName=value?.displayName||null;publishSession();}});
+const profileUI=mountAccountProfile({api,getUser:()=>user,workspaces,action,language:accountLanguage,onProfile:value=>{profileName=value?.displayName||null;render();publishSession();}});
 const deletePanel=$('accountDeleteForm').closest('details');
 deletePanel.querySelector('p').textContent=accountLanguage()==='tr'?'Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.':'Your account, private profile and cloud backups are deleted. Khatm progress remains, with your name and account link removed. Keep private participant and organizer links first. Device records remain in a separate copy; signing out opens guest records. Download a device backup first.';
 const exportBeforeDelete=document.createElement('button');exportBeforeDelete.type='button';exportBeforeDelete.textContent=accountLanguage()==='tr'?'Önce cihaz yedeğini indir':'Download device backup first';exportBeforeDelete.onclick=()=>action(async()=>{assertWorkspace();$('storageExport').click();});$('accountDeleteForm').before(exportBeforeDelete);
@@ -75,7 +75,7 @@ function availability(){
  if(previewAccount)dialog.querySelectorAll('button,input,select,textarea').forEach(n=>{if(n.id!=='accountClose')n.disabled=true;});
 }
 function setBusy(v){busy=v;dialog.setAttribute('aria-busy',String(v));dialog.querySelectorAll('button,input').forEach(n=>{if(n.id!=='accountClose')n.disabled=v;});if(!v){$('accountSyncEnabled').disabled=!user?.emailVerified||!workspaceReady||workspaceTransition;availability();if(syncPending)scheduleSync(50);reloadWorkspace();}}
-async function action(work){if(previewAccount){message(previewAccountMessage);return;}if(busy)return;setBusy(true);message('İşlem sürüyor…');try{await work();}catch(e){message(errorText(e),true);}finally{setBusy(false);}}
+async function action(work){if(previewAccount){message(previewAccountMessage);return;}if(busy)return;setBusy(true);message('İşlem sürüyor…');try{await work();}catch(e){message(errorText(e),true);}finally{if($('accountStatus').textContent===accountText('İşlem sürüyor…'))message('');setBusy(false);}}
 function render(){
  const account=!!user&&mode!=='reset';
  $('accountGuest').hidden=account;$('accountMember').hidden=!account;
@@ -105,21 +105,19 @@ function render(){
  $('accountDeletePassword').required=!!passwordUser;$('accountDeletePasswordRow').hidden=!passwordUser;
  $('accountResetPassword').hidden=!passwordUser;
  $('accountLinkGoogle').hidden=!user||user.providerData.some(p=>p.providerId==='google.com');
- availability();
+ accountNav?.render();availability();
 }
 function authChanged(next){
  if(previewAccount)next=null;
  const changed=user?.uid!==next?.uid;
- if(changed){epoch++;pendingConflict=null;syncPending=false;profileName=null;clearTimeout(syncTimer);$('accountConflict').hidden=true;$('accountBackupList').replaceChildren();$('accountBackupCount').textContent='';$('accountBackupStatus').textContent='Henüz kontrol edilmedi.';$('accountCloudConsent').checked=false;$('accountSyncStatus').textContent='Eşitleme kapalı.';$('accountLastSync').textContent='Henüz eşitlenmedi.';}
+ if(changed){epoch++;pendingConflict=null;syncPending=false;profileName=null;clearTimeout(syncTimer);$('accountConflict').hidden=true;$('accountBackupList').replaceChildren();$('accountBackupCount').textContent='';$('accountBackupStatus').textContent='Henüz kontrol edilmedi.';$('accountCloudConsent').checked=false;$('accountSyncStatus').textContent='Güncelleme kapalı.';$('accountLastSync').textContent='Henüz güncellenmedi.';}
  user=next;authReady=true;const generation=epoch;
  const fail=e=>{if(generation!==epoch)return;workspaceReady=false;message(e.message,true);$('storageFailure').hidden=false;render();publishSession();};
  const prepare=()=>{if(generation!==epoch)return;workspaceReady=true;if(!workspaces.isActive(next?.uid)){workspaceTransition=true;window.stopPlan?.(true);document.querySelectorAll('audio').forEach(audio=>audio.pause());if(workspaces.activate(next?.uid))clearTimeout(syncTimer);}};
  const finish=()=>{
   if(generation!==epoch)return;
-  if(changed)profileUI.changed();render();publishSession();
-  if(next&&!workspaceTransition&&workspaceReady&&profileUI.hasGuestChoice()&&!dialog.open)dialog.showModal();
+  if(changed){profileUI.changed();accountNav?.reset();}render();publishSession();
   if(!workspaceTransition&&workspaceReady&&next?.emailVerified&&accountStorage.getItem(SYNC_ENABLED_PREFIX+next.uid)==='1')scheduleSync(1500);
-  if(!workspaceTransition&&next?.emailVerified)profileUI.load().catch(()=>{});
   reloadWorkspace();
  };
  try{
@@ -132,7 +130,16 @@ function authChanged(next){
   prepare();finish();
  }catch(e){fail(e);}
 }
-async function open(){if(!dialog.open)dialog.showModal();render();if(previewAccount){message(previewAccountMessage);return;}if(!authReady)message('Hesap hizmeti hazırlanıyor…');else if(user?.emailVerified)await action(async()=>{await Promise.all([loadBackups(),profileUI.load()]);});else message(isLocal?'Yerel test ortamı: gerçek kullanıcı hesabı oluşturulmaz.':'Okuma ve dinleme için hesap gerekmiyor.');}
+async function open(panel='home'){
+ if(!dialog.open)dialog.showModal();render();
+ if(typeof panel!=='string')panel='home';
+ accountNav?.show(user?panel:'home');
+ if(previewAccount){message(previewAccountMessage);return;}
+ if(!authReady)message('Hesap hizmeti hazırlanıyor…');
+ else if(!user)message(isLocal?'Yerel test ortamı: gerçek kullanıcı hesabı oluşturulmaz.':'Okuma ve dinleme için hesap gerekmiyor.');
+ else if(!busy)message('');
+}
+
 $('accountClose').onclick=()=>dialog.close();
 dialog.addEventListener('close',()=>{$('accountPassword').value='';$('accountDeletePassword').value='';});
 $('accountHome').onclick=open;
@@ -143,9 +150,9 @@ $('accountCloudConsent').onchange=availability;
 async function signedIn(){
  mode='login';authChanged(auth.currentUser);
  if(!user?.emailVerified){message('Bulut yedeklerini kullanmak için e-posta adresini doğrula.');return;}
- try{await Promise.all([loadBackups(),profileUI.load()]);message('Giriş tamamlandı. Eşitleme yalnızca onayınla açılır.');}
- catch(e){$('accountBackupStatus').textContent='Yedek listesi alınamadı.';message('Giriş tamamlandı. Bulut yedeklerine şu an ulaşılamıyor; yeniden dene.',true);}
+ message('Giriş tamamlandı. Kayıtlarını yedeklemek istersen Yedeklerim bölümünü aç.');
 }
+
 $('accountGoogle').onclick=()=>action(async()=>{if(window.ELIFA_NATIVE_IOS)await signInWithCredential(auth,await googleCredential());else await signInWithPopup(auth,google);await signedIn();});
 $('accountApple').onclick=()=>action(async()=>{const {credential}=await appleProof();await signInWithCredential(auth,credential);await signedIn();});
 $('accountLinkGoogle').onclick=()=>action(async()=>{if(window.ELIFA_NATIVE_IOS)await linkWithCredential(user,await googleCredential());else await linkWithPopup(user,google);await reload(user);authChanged(auth.currentUser);message('Google hesabın bağlandı. Aynı yedeklerine iki giriş yöntemiyle de ulaşabilirsin.');});
@@ -189,10 +196,10 @@ function scheduleSync(delay=1200){
  syncTimer=setTimeout(()=>{if(generation!==epoch)return;if(busy||syncRunning){scheduleSync(500);return;}syncPending=false;syncNow().catch(e=>{$('accountSyncStatus').textContent=errorText(e);});},delay);
 }
 function showConflicts(conflicts){
- pendingConflict=conflicts;const box=$('accountConflict'),list=$('accountConflictList');list.replaceChildren();box.hidden=false;
+ pendingConflict=conflicts;accountNav?.render();const box=$('accountConflict'),list=$('accountConflictList');list.replaceChildren();box.hidden=false;
  for(const c of conflicts){const row=document.createElement('div'),label=document.createElement('span'),local=document.createElement('label'),remote=document.createElement('label'),name='sync-'+c.id.replace(/[^a-z0-9]/gi,'-');
   label.textContent=(c.key==='notes'?'Not':c.key==='set'?'Ayar':c.key==='prog'?'Okuma konumu':c.key==='studySessions'?(window.tr?.('study_title')||'Study'):c.key)+' '+(c.path||'');
-  for(const [container,value,title] of [[local,'local','Bu cihaz'],[remote,'remote','Bulut']]){const input=document.createElement('input');input.type='radio';input.name=name;input.value=value;input.dataset.conflict=c.id;container.append(input,document.createTextNode(title));}
+  for(const [container,value,title] of [[local,'local','Bu cihaz'],[remote,'remote','Hesabımdaki']]){const input=document.createElement('input');input.type='radio';input.name=name;input.value=value;input.dataset.conflict=c.id;container.append(input,document.createTextNode(title));}
   row.append(label,local,remote);list.append(row);
  }
  $('accountSyncStatus').textContent='Aynı kayıt iki cihazda değişmiş. Hangisi kalsın?';
@@ -222,7 +229,7 @@ async function syncNow(resolutions={}){
   if(!sameData(before,payload)){assertWorkspace();restoreBackup(localStorage,payload);}
   accountStorage.setItem(SYNC_BASE_PREFIX+owner,JSON.stringify({revision,payload}));
   $('accountLastSync').textContent=updated_at?new Date(updated_at).toLocaleString(accountLanguage()):accountText('Şimdi');
-  $('accountSyncStatus').textContent='Kayıtlar eşitlendi.';
+  $('accountSyncStatus').textContent='Kayıtlar güncellendi.';
   if(!sameData(before,payload))location.reload();
  }catch(e){if(owner!==user?.uid||generation!==epoch)return;$('accountSyncStatus').textContent=errorText(e);if(/işlem sırasında değişti/.test(e.message||''))scheduleSync(500);throw e;}
  finally{syncRunning=false;availability();if(syncPending)scheduleSync(50);}
@@ -230,14 +237,14 @@ async function syncNow(resolutions={}){
 $('accountSyncEnabled').onchange=()=>{
  if(previewAccount){$('accountSyncEnabled').checked=false;message(previewAccountMessage);return;}
  if(!user)return;const enabled=$('accountSyncEnabled').checked;
- if(enabled){assertWorkspace();if(!accountStorage.setItem(SYNC_ENABLED_PREFIX+user.uid,'1')){accountStorage.removeItem(SYNC_ENABLED_PREFIX+user.uid);$('accountSyncEnabled').checked=false;message('Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.',true);return;}$('accountSyncStatus').textContent='Eşitleme açıldı. Cihaz ve bulut kayıtları karşılaştırılacak.';scheduleSync(50);}
- else{accountStorage.removeItem(SYNC_ENABLED_PREFIX+user.uid);syncPending=false;clearTimeout(syncTimer);pendingConflict=null;$('accountConflict').hidden=true;$('accountSyncStatus').textContent='Eşitleme kapalı. Cihaz kayıtları korunuyor.';}
+ if(enabled){assertWorkspace();if(!accountStorage.setItem(SYNC_ENABLED_PREFIX+user.uid,'1')){accountStorage.removeItem(SYNC_ENABLED_PREFIX+user.uid);$('accountSyncEnabled').checked=false;message('Eşitleme tercihi bu cihazda saklanamadı. Cihazında yer açıp tekrar dene.',true);return;}$('accountSyncStatus').textContent='Güncelleme açık. Bu cihaz ve hesabındaki kayıtlar karşılaştırılacak.';scheduleSync(50);}
+ else{accountStorage.removeItem(SYNC_ENABLED_PREFIX+user.uid);syncPending=false;clearTimeout(syncTimer);pendingConflict=null;$('accountConflict').hidden=true;$('accountSyncStatus').textContent='Güncelleme kapalı. Bu cihazdaki kayıtlar korunuyor.';}
  availability();
 };
 $('accountSyncNow').onclick=()=>syncNow().catch(()=>{});
 $('accountResolve').onclick=()=>{
  if(!pendingConflict)return;const resolutions={};
- for(const c of pendingConflict){const selected=[...$('accountConflictList').querySelectorAll('input:checked')].find(input=>input.dataset.conflict===c.id);if(!selected){message('Her çakışma için cihaz veya bulut kaydını seç.',true);return;}resolutions[c.id]=selected.value;}
+ for(const c of pendingConflict){const selected=[...$('accountConflictList').querySelectorAll('input:checked')].find(input=>input.dataset.conflict===c.id);if(!selected){message('Her kayıt için saklamak istediğin sürümü seç.',true);return;}resolutions[c.id]=selected.value;}
  syncNow(resolutions).catch(()=>{});
 };
 window.addEventListener('online',()=>scheduleSync(200));
@@ -249,7 +256,7 @@ async function loadBackups(){
  $('accountBackupStatus').textContent=backups.length?backups.length+accountText(' tarihli yedek'):'Henüz tarihli yedek yok.';
  for(const backup of backups){
   const row=document.createElement('li'),label=document.createElement('span');label.textContent=new Date(backup.created_at).toLocaleString(accountLanguage());row.append(label);
-  const restore=document.createElement('button');restore.type='button';restore.textContent='Bu cihaza aktar';restore.onclick=()=>action(async()=>{
+  const restore=document.createElement('button');restore.type='button';restore.textContent=accountText('Geri yükle');restore.onclick=()=>action(async()=>{
    if(!confirm(accountText('Bu yedek cihazdaki not, işaret, ezber ve ayar kayıtlarının yerine geçecek. Önceki kayıtların geri alma kopyası cihazda korunacak. Devam edilsin mi?'))){message('Aktarım iptal edildi.');return;}
    const {payload}=await api('restore',{id:backup.id});assertWorkspace();restoreBackup(localStorage,payload);location.reload();
   });
@@ -306,6 +313,7 @@ $('storageExport').onclick=()=>{
   a.href=url;a.download='elifa-kurtarma-yedegi.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
  }catch(e){alert(accountText('Yedek alınamadı: ')+e.message);}
 };
+const accountNav=mountAccountNavigation();
 if(previewAccount)authChanged(null);else onAuthStateChanged(auth,authChanged,e=>{authReady=true;message(errorText(e),true);availability();publishSession();});
 try{if(recoverPendingRestore(localStorage))location.reload();}catch(e){$('storageFailure').hidden=false;message(e.message,true);}
 render();if(window.elifaStorageFailed)$('storageFailure').hidden=false;
@@ -321,3 +329,65 @@ render();if(window.elifaStorageFailed)$('storageFailure').hidden=false;
   else{await applyActionCode(auth,code);if(auth.currentUser){await reload(auth.currentUser);await auth.currentUser.getIdToken(true);authChanged(auth.currentUser);}message('E-posta doğrulandı. Hesabına giriş yapabilirsin.');}
  });
 })();
+
+function mountAccountNavigation(){
+ const member=$('accountMember'),guest=$('accountGuest');
+ if(!member?.children?.length)return null;
+ let current='home',panelRequest=0;const views=new Map(),navButtons=[];
+ const make=(tag,id,cls,text)=>{const node=document.createElement(tag);if(id)node.id=id;if(cls)node.className=cls;if(text)node.textContent=accountText(text);return node;};
+ const view=(id)=>{const node=make('section','accountView-'+id,'account-view');node.hidden=id!=='home';views.set(id,node);return node;};
+ const home=view('home'),profile=view('profile'),sync=view('sync'),backups=view('backups'),security=view('security'),device=view('device');
+ // Keep destination panels connected while moving existing controls: a
+ // document ID lookup cannot find a node in a detached section.
+ member.append(...views.values());
+ const profileCard=$('accountProfileCard'),guestCard=$('accountGuestImport'),verification=$('accountVerification');
+ const email=$('accountEmail'),provider=$('accountProvider').closest('p'),lastSync=$('accountLastSync').closest('p'),syncStatus=$('accountSyncStatus').closest('p'),backupStatus=$('accountBackupStatus').closest('p');
+ const syncCard=$('accountSyncEnabled').closest('.account-card'),saveCard=$('accountCloudConsent').closest('.account-card'),deleteCard=$('accountDeleteForm').closest('details');
+ const backupCount=$('accountBackupCount'),backupHeading=backupCount.previousElementSibling,undo=$('accountUndo').closest('details'),retry=$('accountRetry');
+ const summary=make('div',null,'account-profile-summary'),avatar=make('span','accountAvatar','account-avatar','ا'),identity=make('div',null,'account-identity');avatar.setAttribute('aria-hidden','true');
+ const name=make('strong','accountDisplayName',null,'Hesabım'),emailLine=make('p'),verified=make('span','accountVerifiedLabel','account-verified');emailLine.append(email);identity.append(name,emailLine,verified);summary.append(avatar,identity);
+ const menu=make('nav',null,'account-menu');menu.setAttribute('aria-label',accountText('Hesap bölümleri'));
+ const addMenu=(id,title,description,icon)=>{const button=make('button','accountNav-'+id,'account-menu-row');button.type='button';button.setAttribute('aria-controls','accountView-'+id);const mark=make('span',null,'account-menu-icon',icon);mark.setAttribute('aria-hidden','true');const copy=make('span',null,'account-menu-copy');const heading=make('strong',null,null,title),caption=make('small',null,null,description);copy.append(heading,caption);const arrow=make('span',null,'account-menu-arrow','›');arrow.setAttribute('aria-hidden','true');button.append(mark,copy,arrow);button.onclick=()=>show(id);menu.append(button);navButtons.push({heading,caption,title,description});return button;};
+ addMenu('profile','Bilgilerim','Ad veya takma ad; diğer bilgiler isteğe bağlı.','✎');
+ addMenu('backups','Yedeklerim','Kayıtlarını sakla veya eski yedeğini geri getir.','▣');
+ addMenu('sync','Diğer cihazlarım','Aynı hesapla notlarına ve çalışmalarına ulaş.','⇄');
+ addMenu('security','Hesap seçenekleri','Şifre, giriş yöntemleri ve çıkış.','⚙');
+ const deviceButton=addMenu('device','Bu cihazdaki eski kayıtlar','Hesapsız kayıtlarını istersen hesabına kopyala.','↳');
+ home.append(summary,menu);
+ const attention=make('div','accountAttention','account-attention');attention.hidden=true;attention.setAttribute('role','status');attention.append(make('span',null,null,'Kayıtların için bir seçim gerekiyor.'));const review=make('button',null,null,'Seçimleri aç');review.type='button';review.onclick=()=>show('sync');attention.append(review);
+ if(profileCard)profile.append(profileCard);
+ if(verification)profile.prepend(verification);
+ sync.append(syncCard);if(lastSync)sync.append(lastSync);if(syncStatus)sync.append(syncStatus);
+ const syncLabel=$('accountSyncEnabled').closest('label')?.querySelector('span');if(syncLabel)syncLabel.textContent=accountText('Kayıtlarımı diğer cihazlarımda da kullanmak istiyorum.');
+ syncCard.querySelector('strong').textContent=accountText('Cihazlarımda aynı kayıtlar');$('accountSyncNow').textContent=accountText('Şimdi güncelle');
+ saveCard.querySelector('strong').textContent=accountText('Bir yedek sakla');const consent=$('accountCloudConsent').closest('label')?.querySelector('span');if(consent)consent.textContent=accountText('Bu cihazdaki kayıtlar bana ait. Hesabımda bir kopyasını sakla. Ses dosyaları gönderilmez.');
+ $('accountSave').textContent=accountText('Yedek oluştur');backups.append(saveCard);if(backupHeading)backups.append(backupHeading);backups.append(backupCount,$('accountRefresh'),$('accountBackupList'));if(backupStatus){backupStatus.hidden=true;backups.append(backupStatus);}
+ if(backupHeading)backupHeading.textContent=accountText('Sakladığım yedekler');
+ if(lastSync?.firstChild)lastSync.firstChild.textContent=accountText('Son güncelleme:')+' ';if(syncStatus?.firstChild)syncStatus.firstChild.textContent=accountText('Durum:')+' ';
+ if(undo){const title=undo.querySelector('summary'),description=undo.querySelector('p');if(title)title.textContent=accountText('Son yüklemeyi geri al');if(description)description.textContent=accountText('Son yüklemeden önceki kayıtlarına dönebilirsin.');$('accountUndo').textContent=accountText('Son yüklemeyi geri al');backups.append(undo);}
+ if(provider)security.append(provider);security.append($('accountLinkGoogle'),$('accountResetPassword'),$('accountLogout'),deleteCard,retry);
+ if(guestCard)device.append(guestCard);device.append($('accountDeviceNote'));
+ member.replaceChildren(attention,...views.values());
+ const back=make('button','accountPanelBack','account-panel-back','‹ Geri');back.type='button';back.hidden=true;back.onclick=()=>show('home');dialog.querySelector('.account-head').prepend(back);
+ const guestHelp=make('details','accountGuestHelp','account-guest-help');guestHelp.append(make('summary',null,null,'Hesap neden gerekli?'));for(const p of guest.querySelectorAll(':scope > p.account-muted'))guestHelp.append(p);guest.append(guestHelp);
+ const titles={home:'Hesabım',profile:'Bilgilerim',sync:'Diğer cihazlarım',backups:'Yedeklerim',security:'Hesap seçenekleri',device:'Bu cihazdaki eski kayıtlar'};
+ function show(id){
+  if(!views.has(id))id='home';current=id;const request=++panelRequest,owner=user?.uid;const visible=()=>request===panelRequest&&owner===user?.uid&&current===id;
+  for(const [key,node]of views)node.hidden=key!==id;
+  back.hidden=id==='home'||!user;$('accountTitle').textContent=accountText(user?titles[id]:'Hesap');
+  dialog.dataset.accountPanel=user?id:'guest';dialog.scrollTop=0;const scroller=dialog.querySelector('.account-body');if(scroller)scroller.scrollTop=0;
+  if(user&&id==='profile')profileUI.load().catch(e=>{if(visible())message(errorText(e),true);});
+  if(user&&id==='backups'){message('Yedekler yükleniyor…');loadBackups().then(()=>{if(visible()&&$('accountStatus').textContent===accountText('Yedekler yükleniyor…'))message('');}).catch(e=>{if(visible())message(errorText(e),true);});}
+  if(id!=='home')back.focus({preventScroll:true});renderNav();
+ }
+ function renderNav(){
+  for(const item of navButtons){item.heading.textContent=accountText(item.title);item.caption.textContent=accountText(item.description);}
+  $('accountTitle').textContent=accountText(user?titles[current]:'Hesap');back.textContent=accountText('‹ Geri');
+  name.textContent=profileName||user?.displayName||accountText('Hesabım');avatar.textContent=(profileName||user?.displayName||'ا').trim().slice(0,1).toLocaleUpperCase(accountLanguage());
+  verified.textContent=accountText(user?.emailVerified?'E-posta doğrulandı':'E-posta doğrulanmadı');verified.classList.toggle('pending',!user?.emailVerified);
+  deviceButton.hidden=!profileUI.hasGuestChoice();attention.hidden=!pendingConflict?.length;$('accountHome').dataset.attention=String(!!pendingConflict?.length);
+  if(user){if(undo&&undo.parentElement!==backups)backups.append(undo);if(retry.parentElement!==security)security.append(retry);}else{if(undo)guest.append(undo);guest.append(retry);back.hidden=true;}
+  dialog.dataset.accountPanel=user?current:'guest';
+ }
+ return {show,render:renderNav,reset(){panelRequest++;current='home';for(const [id,node]of views)node.hidden=id!=='home';back.hidden=true;$('accountTitle').textContent=accountText(user?'Hesabım':'Hesap');const scroller=dialog.querySelector('.account-body');if(scroller)scroller.scrollTop=0;message('');renderNav();},panel:()=>current};
+}

@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {handleOrg,createOrgHandler} from '../netlify/functions/org.mjs';
-import {capabilityHash,deriveReturnKey,returnKeyHash,returnKeyValid,membershipKey,closedAccountKey} from '../server/hatim-access.mjs';
+import {capabilityHash,deriveReturnKey,returnKeyHash,returnKeyValid,membershipKey,closedAccountKey,deletedHatimKey} from '../server/hatim-access.mjs';
 import {releaseAccountHatimOwnership} from '../server/hatim-account.mjs';
 import {firestoreStoreTransaction} from '../server/database.mjs';
 import {expired,createOrgCleanup} from '../netlify/functions/org-cleanup.mjs';
@@ -327,8 +327,96 @@ test('new private indexes avoid legacy network lookups while old organizations s
  const db={collection:name=>({doc:id=>({name,id})}),runTransaction:async work=>work({get:async()=>({exists:false}),set:(ref,value)=>writes.push({ref,value})})};
  const legacy={get:async key=>{lookups.push(key);return key==='oldgrp'?{title:'Legacy preserved'}:null;}};
  await firestoreStoreTransaction(db,legacy,async store=>{
-  for(const key of ['_closed_abc','_member_abc','_create_abc'])assert.equal(await store.get(key),null);
+  for(const key of ['_closed_abc','_member_abc','_create_abc','_deleted_abc234'])assert.equal(await store.get(key),null);
   assert.deepEqual(await store.get('oldgrp'),{title:'Legacy preserved'});
  });
  assert.deepEqual(lookups,['oldgrp']);assert.equal(writes.length,1);assert.equal(JSON.parse(writes[0].value.value).title,'Legacy preserved');
+});
+
+test('only the actual owner can explicitly delete a never-used hatim; discovery, admin and account indexes are cleaned',async()=>{
+ const h=memory({_config:{discoverEnabled:true}}),g=await group(h,{public:true},{uid:'alice'});
+ const p={action:'delete',code:g.code,confirmed:true};
+ for(const payload of [p,{...p,admin:g.adminToken}])for(const session of [{},{uid:'bob'}])await body(await h.run(payload,session),403);
+ await body(await h.run({...p,confirmed:false},{uid:'alice'}),400);
+ await body(await h.run({action:'delete',admin:g.adminToken,confirmed:true},{uid:'alice'}),400);
+ assert.equal(h.rows.get(g.code).title,g.org.title);
+ const deleted=await body(await h.run(p,{uid:'alice'}));assert.deepEqual(deleted,{ok:true,deleted:true,code:g.code});
+ assert.equal(h.rows.has(g.code),false);assert.equal(h.rows.has('a_'+g.adminToken),false);
+ assert.deepEqual(h.rows.get('_index'),[]);assert.deepEqual(h.rows.get(membershipKey('alice')).codes,[]);
+ assert.deepEqual((await body(await h.run({action:'myList'},{uid:'alice'}))).items,[]);
+ assert.deepEqual((await body(await h.run({action:'discoverList'}))).items,[]);
+ await body(await h.run({action:'get',code:g.code}),404);
+ assert.equal((await body(await h.run(p,{uid:'alice'}))).replayed,true);
+ await body(await h.run({...p,admin:g.adminToken}),403);await body(await h.run(p,{uid:'bob'}),403);
+ assert.equal(JSON.stringify(h.rows.get(deletedHatimKey(g.code))).includes(g.adminToken),false);
+});
+
+test('guest deletion requires the exact private organizer key and cannot resurrect through creation replay',async()=>{
+ const h=memory(),create={action:'create',creationToken:capC,org:newHatim()},g=await body(await h.run(create));
+ const p={action:'delete',code:g.code,confirmed:true};
+ await body(await h.run(p),403);await body(await h.run({...p,capability:capA}),403);
+ await body(await h.run({...p,admin:'x'.repeat(32)}),403);
+ await body(await h.run({...p,admin:g.adminToken}));
+ assert.equal((await body(await h.run({...p,admin:g.adminToken}))).replayed,true);
+ await body(await h.run(create),409);
+ assert.equal(h.rows.has(g.code),false);
+});
+
+test('claimed, completed, released, cleared and legacy participant records prevent deletion and preserve all data',async()=>{
+ for(const variation of ['claimed','completed','released','cleared','legacy','partial','zikir']){
+  const h=memory(),g=await group(h);const del={action:'delete',code:g.code,admin:g.adminToken,confirmed:true};
+  if(['claimed','completed','released','cleared'].includes(variation))await body(await h.run(claim(g.code,1)));
+  if(variation==='completed')await body(await h.run({action:'complete',code:g.code,no:1,capability:capA}));
+  if(variation==='released')await body(await h.run({action:'release',code:g.code,no:1,capability:capA}));
+  if(variation==='cleared')await body(await h.run({action:'adminSet',code:g.code,admin:g.adminToken,no:1,status:'bos'}));
+  if(variation==='legacy')Object.assign(h.rows.get(g.code).items[0],{name:'Eski kişi',status:'okundu'});
+  if(variation==='partial')h.rows.get(g.code).items.pop();
+  if(variation==='zikir')h.rows.get(g.code).type='zikir';
+  const before=structuredClone(h.rows.get(g.code));
+  assert.match((await body(await h.run(del),409)).error,/arşivle/);
+  assert.deepEqual(h.rows.get(g.code),before,variation+' participant state must survive');
+  assert.equal(h.rows.has(deletedHatimKey(g.code)),false);
+ }
+});
+
+test('a simultaneous claim and empty-hatim deletion serialize without losing an accepted participant',async()=>{
+ for(const claimFirst of [true,false]){
+  const h=memory(),g=await group(h),take=()=>h.run(claim(g.code,1)),remove=()=>h.run({action:'delete',code:g.code,admin:g.adminToken,confirmed:true});
+  const results=await Promise.all(claimFirst?[take(),remove()]:[remove(),take()]);
+  assert.deepEqual(results.map(r=>r.status),claimFirst?[200,409]:[200,404]);
+  if(claimFirst)assert.equal(h.rows.get(g.code).items[0].claimHash,capabilityHash(capA));
+  else assert.equal(h.rows.has(g.code),false);
+ }
+});
+
+test('Firestore adapter retries a conflicting claim/delete and keeps deletion tombstones over stale legacy data',async()=>{
+ const records=new Map(),versions=new Map(),legacyRows=new Map();let conflicts=0;
+ const db={collection:()=>({doc:id=>id}),async runTransaction(work){
+  for(let attempt=0;attempt<8;attempt++){
+   const readVersions=new Map(),pending=new Map();
+   const result=await work({get:async ref=>{
+    readVersions.set(ref,versions.get(ref)||0);
+    const row=structuredClone(records.get(ref));return {exists:row!==undefined,data:()=>row};
+   },set:(ref,row)=>pending.set(ref,structuredClone(row))});
+   if([...readVersions].some(([ref,version])=>(versions.get(ref)||0)!==version)){conflicts++;continue;}
+   for(const [ref,row]of pending){records.set(ref,row);versions.set(ref,(versions.get(ref)||0)+1);}
+   return result;
+  }
+  throw Error('fixture transaction contention');
+ }};
+ const legacy={get:async key=>structuredClone(legacyRows.get(key)??null)};
+ const run=(p,session={})=>firestoreStoreTransaction(db,legacy,store=>handleOrg(p,store,session));
+ const create=async()=>body(await run({action:'create',org:newHatim()}));
+ const a=await create(),remove={action:'delete',code:a.code,admin:a.adminToken,confirmed:true};
+ const raced=await Promise.all([run(claim(a.code,1)),run(remove)]);
+ assert.deepEqual(raced.map(r=>r.status),[200,409]);assert.ok(conflicts>0,'the fixture must exercise an actual transaction retry');
+ assert.equal((await body(await run({action:'get',code:a.code,capability:capA}))).org.items[0].mine,true);
+ const b=await create(),del={action:'delete',code:b.code,admin:b.adminToken,confirmed:true};
+ // Keep an obsolete legacy copy as if it had existed before Firestore import.
+ legacyRows.set(b.code,{...b.org,adminToken:b.adminToken});legacyRows.set('a_'+b.adminToken,b.code);
+ const results=await Promise.all([run(del),run(del)]);assert.ok(results.every(r=>r.status===200));
+ assert.ok((await Promise.all(results.map(r=>r.json()))).some(r=>r.replayed===true));
+ await body(await run({action:'get',code:b.code}),404);
+ await body(await run({action:'get',admin:b.adminToken}),404);
+ const ref=Buffer.from(b.code).toString('base64url');assert.equal(records.get(ref).deleted,true);
 });

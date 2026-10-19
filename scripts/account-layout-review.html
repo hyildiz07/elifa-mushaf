@@ -1,0 +1,6 @@
+<!doctype html><html lang="tr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Yerel hesap görünümü</title>
+<link rel="stylesheet" href="/assets/account.css">
+<style>:root{--surface:#fffdf7;--bg:#f8f3e8;--ink:#17324a;--muted:#677384;--gold:#b88b29;--line:#d8c796;--danger:#a33328}body{margin:0;background:var(--bg);font-family:system-ui;color:var(--ink)}body[data-dark="1"]{--surface:#162337;--bg:#101b2d;--ink:#eef2f7;--muted:#b6c1d1;--line:#6b5837;--gold:#d0aa5d;--danger:#ffb8b1}.fixture-tools{padding:10px;display:flex;gap:6px;flex-wrap:wrap;font-size:11px}.fixture-tools button{min-height:36px}#storageFailure{display:none}</style>
+<div class="fixture-tools"><b>Yerel deneme hesabı · gerçek API yok</b><button id="fixtureOpen">Hesabı aç</button><button id="fixtureDark">Açık / koyu</button><button id="fixtureConflict">Seçim uyarısını göster</button><output id="fixtureSize" aria-live="off"></output></div>
+<button id="accountHome" hidden><span id="accountHomeLabel"></span><span id="accountHomeCompact"></span></button><button id="accountSettings" hidden><span id="accountSettingsLabel"></span><span id="accountSettingsSub"></span></button><div id="storageFailure"><button id="storageExport"></button></div>
+<script type="module" src="/scripts/account-layout-review.mjs"></script></html>

@@ -2,9 +2,10 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {firebaseServices} from '../server/firebase.mjs';
 import {firestoreStoreTransaction} from '../server/database.mjs';
-import {handleOrg} from '../netlify/functions/org.mjs';
+import {handleOrg,createOrgHandler} from '../netlify/functions/org.mjs';
 import {createAccountHandler} from '../server/account-handler.mjs';
 import {releaseAccountHatimOwnership} from '../server/hatim-account.mjs';
+import {deletedHatimKey,membershipKey} from '../server/hatim-access.mjs';
 const enabled=process.env.FIREBASE_PROJECT_ID==='demo-elifa-mushaf'&&Boolean(process.env.FIREBASE_AUTH_EMULATOR_HOST)&&Boolean(process.env.FIRESTORE_EMULATOR_HOST);
 const payload={elifa:'yedek',v:1,veri:{notes:'{"1:1":"private"}'}};
 test('Firebase Auth + Firestore integration: authorization, concurrency, revocation and erasure',{skip:!enabled},async t=>{
@@ -153,4 +154,73 @@ test('Firestore hatim creation replay, recovery rotation, account binding and ex
   assert.equal((await run({action:'issueRecovery',code:a.code,admin:a.adminToken,no:1,capability:'d'.repeat(64)})).status,200);
   assert.equal((await run({action:'issueRecovery',code:a.code,admin:a.adminToken,no:1,capability:capB})).status,409,'delayed old recovery cannot resurrect its retired capability');
  }finally{await db.recursiveDelete(db.collection('elifaOrgRecords'));}
+});
+
+test('real Auth + Firestore empty-hatim deletion protects owners and participants and never resurrects old records',{skip:!enabled},async t=>{
+ const {auth,db}=firebaseServices(),users=[],old=new Map();
+ await db.recursiveDelete(db.collection('elifaOrgRecords'));
+ const legacy={get:async key=>structuredClone(old.get(key)??null),list:async()=>({blobs:[...old.keys()].map(key=>({key}))})};
+ const transaction=work=>firestoreStoreTransaction(db,legacy,work);
+ const handler=createOrgHandler({services:firebaseServices,transaction,environment:()=>({CONTEXT:'production'})});
+ const raw=key=>transaction(store=>store.get(key,{type:'json'}));
+ async function account(){
+  const email='hatim-delete-'+Date.now()+'-'+users.length+'@example.test',password='Emulator-only-delete-9284!';
+  const u=await auth.createUser({email,password,emailVerified:true});users.push(u.uid);
+  const response=await fetch('http://'+process.env.FIREBASE_AUTH_EMULATOR_HOST+'/identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=demo-key',{
+   method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email,password,returnSecureToken:true})});
+  const data=await response.json();assert.ok(data.idToken);return {uid:u.uid,token:data.idToken};
+ }
+ const run=(user,p)=>handler(new Request('https://example.test/api/org',{method:'POST',headers:{origin:'https://example.test','content-type':'application/json',...(user?{authorization:'Bearer '+user.token}:{})},body:JSON.stringify({...p,...(user?{expectedUser:user.uid}:{})})}));
+ const read=async(response,status=200)=>{assert.equal(response.status,status,await response.clone().text());return response.json();};
+ const org=()=>({type:'hatim',title:'Emulator-only accidental hatim',items:Array.from({length:30},(_,i)=>({no:i+1}))});
+ try{
+  const owner=await account(),other=await account(),creation={action:'create',creationToken:'e'.repeat(64),org:{...org(),public:true}};
+  await transaction(store=>store.setJSON('_config',{discoverEnabled:true}));
+  const g=await read(await run(owner,creation)),del={action:'delete',code:g.code,admin:g.adminToken,confirmed:true};
+  await t.test('copied organizer links cannot bypass bound account ownership or explicit confirmation',async()=>{
+   await read(await run(null,del),403);await read(await run(other,del),403);
+   await read(await run(owner,{...del,confirmed:false}),400);
+   assert.equal((await raw(g.code)).ownerUid,owner.uid);
+   assert.ok((await read(await run(owner,{action:'myList'}))).items.some(item=>item.code===g.code));
+   assert.ok((await read(await run(null,{action:'discoverList'}))).items.some(item=>item.code===g.code));
+  });
+  await t.test('concurrent owner deletion is retryable and removes every current index without legacy resurrection',async()=>{
+   old.set(g.code,await raw(g.code));old.set('a_'+g.adminToken,g.code);
+   const results=await Promise.all([run(owner,del),run(owner,del)]),data=await Promise.all(results.map(r=>read(r)));
+   assert.ok(data.every(item=>item.ok&&item.deleted&&item.code===g.code));assert.ok(data.some(item=>item.replayed));
+   assert.equal(await raw(g.code),null);assert.equal(await raw('a_'+g.adminToken),null);
+   assert.equal((await raw(membershipKey(owner.uid))).codes.includes(g.code),false);
+   assert.equal((await raw('_index')).some(item=>item.code===g.code),false);
+   assert.equal((await read(await run(owner,{action:'myList'}))).items.some(item=>item.code===g.code),false);
+   assert.equal((await read(await run(null,{action:'discoverList'}))).items.some(item=>item.code===g.code),false);
+   const tombstone=await raw(deletedHatimKey(g.code));assert.equal(tombstone.ownerUid,owner.uid);
+   assert.equal(JSON.stringify(tombstone).includes(g.adminToken),false);
+   await read(await run(null,{action:'get',code:g.code}),404);await read(await run(null,{action:'get',admin:g.adminToken}),404);
+   await read(await run(owner,creation),409);
+   await read(await run(null,{action:'claim',code:g.code,no:1,capability:'a'.repeat(64),name:'Too late'}),404);
+   await read(await run(null,del),403);await read(await run(other,del),403);
+  });
+  await t.test('active, completed and released participant history blocks deletion and remains recoverable',async()=>{
+   const used=await read(await run(owner,{action:'create',org:org()})),remove={action:'delete',code:used.code,confirmed:true};
+   const personal={code:used.code,no:1,capability:'b'.repeat(64)};
+   await read(await run(null,{action:'claim',...personal,name:'Emulator guest'}));
+   for(const action of [null,'complete','release']){
+    if(action)await read(await run(null,{action,...personal}));
+    const before=await raw(used.code),response=await read(await run(owner,remove),409);
+    assert.match(response.error,/arşivle/);assert.deepEqual(await raw(used.code),before);
+    assert.equal(await raw(deletedHatimKey(used.code)),null);
+   }
+  });
+  await t.test('a racing claim is either accepted and protected or observes the atomic deletion',async()=>{
+   const race=await read(await run(owner,{action:'create',org:org()}));
+   const claim={action:'claim',code:race.code,no:1,capability:'d'.repeat(64),name:'Racing guest'};
+   const [claimed,deleted]=await Promise.all([run(null,claim),run(owner,{action:'delete',code:race.code,confirmed:true})]);
+   if(claimed.status===200){
+    assert.equal(deleted.status,409);assert.equal((await read(await run(null,{action:'get',code:race.code,capability:claim.capability}))).org.items[0].mine,true);
+   }else{assert.equal(claimed.status,404);assert.equal(deleted.status,200);assert.equal(await raw(race.code),null);}
+  });
+ }finally{
+  await db.recursiveDelete(db.collection('elifaOrgRecords'));
+  for(const uid of users)await auth.deleteUser(uid).catch(()=>{});
+ }
 });

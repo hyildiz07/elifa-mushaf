@@ -14,7 +14,7 @@ function harness(fetcher,options={}){
   location:{origin:'https://example.test',href:options.url||'https://example.test/'},history:{state:{elifaTrap:true,custom:'preserve'},replaceState(state,title,url){navigation.push({state,title,url});c.location.href=String(url)}},navigator:{},setInterval:()=>1,clearInterval(){},show(){},openTogetherScreen(){},setElifaRoute(){},gotoPage(){},JUZ_PAGE:[],readerReturn:null,
   fetch:async(_url,options)=>{const p=JSON.parse(options.body);calls.push(p);return fetcher?fetcher(p,{map,calls}):Response.json({org:org(p.code),code:p.code});}
  };
- vm.createContext(c);vm.runInContext(source+`\nwindow.review={showReturnEntry,showManage,showAdminCuz,showJuz,showCreate,confirmRelease,showClaim,showRecovery,bkOpen,bkSilentRefresh,renderBirlikte,setCurrent:c=>{current=c;generation=c.ticket;},setLocal:l=>local=loadLocal({getItem:()=>JSON.stringify(l)},'fixture'),state:()=>({local,current})};`,c);
+ vm.createContext(c);vm.runInContext(source+`\nwindow.review={showReturnEntry,showManage,showAdminCuz,showJuz,showCreate,confirmRelease,confirmDeleteHatim,showClaim,showRecovery,bkOpen,bkSilentRefresh,renderBirlikte,setTab:t=>{tab=t;},setCurrent:c=>{current=c;generation=c.ticket;},setLocal:l=>local=loadLocal({getItem:()=>JSON.stringify(l)},'fixture'),state:()=>({local,current})};`,c);
  const click=async id=>{const button=get('hatimDialog:[data-hc="'+id+'"]');assert.ok(button.handlers.click,'button '+id);await button.handlers.click({currentTarget:button});};
  return {c,get,map,sessionMap,calls,reports,navigation,events,storage,click,review:c.window.review,account:uid=>{currentUser=uid?{uid,emailVerified:true}:null;ready=true;for(const fn of [...sessionListeners])fn(currentUser);for(const fn of [...windowEvents.get('elifa:account-changed')||[]])fn({detail:{user:currentUser}});}};
 }
@@ -141,6 +141,7 @@ test('an unvalidated discovery response cannot masquerade as disabled configurat
 
 test('create visibility distinguishes pending, failed, enabled and explicitly disabled configuration without a misleading disabled radio',async()=>{
  let resolve;const h=harness(()=>new Promise(r=>resolve=r));h.review.showCreate();
+ assert.match(h.get('hatimDialog').innerHTML,/Adın \/ takma ad/);assert.match(h.get('hatimDialog').innerHTML,/Bu cihazdaki bilgiler silinirse hatmine geri dönemeyebilirsin/);assert.doesNotMatch(h.get('hatimDialog').innerHTML,/Yönetici görünen adı|yönetici erişimini/);
  assert.match(h.get('hcVisibilityOptions').innerHTML,/kontrol ediliyor/);assert.doesNotMatch(h.get('hcVisibilityOptions').innerHTML,/value="public"|şu an kapalı|disabled/);
  await new Promise(r=>setImmediate(r));resolve(Response.json({error:'Service unavailable'},{status:503}));await new Promise(r=>setImmediate(r));
  assert.match(h.get('hcVisibilityOptions').innerHTML,/durumu doğrulanamadı/);assert.doesNotMatch(h.get('hcVisibilityOptions').innerHTML,/value="public"|şu an kapalı|disabled/);
@@ -233,4 +234,48 @@ test('compact public hatim rows preserve occupancy, due dates and accessible act
  assert.ok(html.includes('7/30 cüz okundu'));assert.match(html,/12 boş cüz/);assert.match(html,/hc-row-due/);assert.ok(html.includes('progress value="7" max="30" aria-label="7/30 cüz okundu"'));
  assert.match(html,/aria-label="Dolu hatim · Görüntüle"/);assert.match(html,/&lt;img/);assert.doesNotMatch(html,/<img/);assert.equal(controls.length,2);
  await controls[1].handlers.click();assert.equal(h.review.state().current.code,codeB);assert.equal(h.calls.at(-1).code,codeB);
+});
+
+test('all owned and personal lists use compact numbered rows, preserve state and keep private proofs out of markup',async()=>{
+ const h=harness();h.review.setLocal({mine:[{code:codeA,type:'hatim',title:'Deneme',adminToken:admin},{code:codeB,type:'hatim',title:'Diğer <hatim>',adminToken:'b'.repeat(32)}],capabilities:{[codeA]:{1:capA}},snapshots:{[codeA]:{isAdmin:true,items:[{no:1,status:'alindi',mine:true},{no:2,status:'okundu',mine:true}]},[codeB]:{isAdmin:true,archived:true,items:[]}}});
+ h.review.setTab('created');await h.review.renderBirlikte();let html=h.get('hatimList').innerHTML;
+ assert.equal((html.match(/hc-owned-row/g)||[]).length,2);assert.match(html,/Sen başlattın/);assert.match(html,/Arşivde/);assert.match(html,/Diğer &lt;hatim&gt;/);
+ assert.doesNotMatch(html,new RegExp(admin+'|'+capA));assert.match(h.get('birlikte').innerHTML,/Birlikte Hatim/);assert.match(h.get('birlikte').innerHTML,/Ana sayfaya dön/);assert.match(h.get('birlikte').innerHTML,/data-tab="created" aria-pressed="true"/);
+ assert.doesNotMatch(h.get('birlikte').innerHTML,/hc-emblem/);assert.match(h.get('birlikte').innerHTML,/data-tab="mine"[^>]*>Cüzlerim<\/button>/);
+ h.review.setTab('mine');await h.review.renderBirlikte();html=h.get('hatimList').innerHTML;
+ assert.equal((html.match(/hc-owned-row/g)||[]).length,1);assert.match(html,/1, 2. cüz/);assert.match(html,/1 okunacak · 1 okundu/);assert.match(html,/<details class="hc-help">/);
+ const css=fs.readFileSync('assets/hatim-community.css','utf8');
+ assert.match(css,/#bkwrap \.hc-home,#bkwrap \.hc-detail\{[^}]*margin:0 auto/,'a short list stays top-aligned instead of using vertical auto margins');
+ assert.match(css,/\.hc-tabs button\{[^}]*min-height:44px/);assert.match(css,/\.hc-list-row \.hc-row-open\{[^}]*min-height:44px/);
+});
+
+const unusedJuz=()=>Array.from({length:30},(_,i)=>({no:i+1,status:'bos',name:'',ts:0}));
+test('only an owner can open deletion, and an unused hatim needs a separate explicit confirmation before any request',async()=>{
+ const h=harness(p=>p.action==='delete'?Response.json({ok:true,deleted:true,code:p.code}):Response.json({enabled:true,items:[]}));
+ h.review.setLocal({mine:[{code:codeA,type:'hatim',title:'Delete me',adminToken:admin},{code:codeB,type:'hatim',title:'Keep me',adminToken:'b'.repeat(32)}],capabilities:{[codeA]:{1:capA},[codeB]:{1:capB}}});
+ const notOwner=current(codeA,unusedJuz());notOwner.org.isAdmin=false;h.review.setCurrent(notOwner);h.review.showManage();assert.equal(h.get('hatimDialog').open,false);
+ h.review.setCurrent(current(codeA,unusedJuz()));h.review.showManage();assert.match(h.get('hatimDialog').innerHTML,/Hatmi sil/);await h.click('delete-hatim');
+ assert.equal(h.calls.length,0);assert.match(h.get('hatimDialog').innerHTML,/geri alınamaz/);assert.match(h.get('hatimDialog').innerHTML,/Evet, hatmi sil/);
+ await h.click('delete-cancel');assert.equal(h.calls.length,0);assert.equal(h.review.state().local.mine.length,2);
+ h.review.showManage();await h.click('delete-hatim');await h.click('delete-confirm');
+ assert.equal(h.calls[0].action,'delete');assert.equal(h.calls[0].confirmed,true);assert.equal(h.calls[0].code,codeA);assert.equal(h.calls[0].admin,admin);
+ assert.deepEqual(h.review.state().local.mine.map(m=>m.code),[codeB]);assert.equal(h.review.state().local.capabilities[codeB][1],capB);assert.equal(h.review.state().current,null);assert.match(h.get('hatimStatus').textContent,/Hatim silindi/);
+});
+
+test('participated hatims offer archive instead of permanent deletion without discarding any local ownership',async()=>{
+ const h=harness(p=>Response.json({code:p.code,org:{...org(p.code,[{no:1,status:'alindi',mine:true}]),archived:true}}));
+ h.review.setCurrent(current(codeA,[{no:1,status:'alindi',name:'Katılımcı',mine:true}]));h.review.confirmDeleteHatim();
+ assert.match(h.get('hatimDialog').innerHTML,/kalıcı olarak silinemez/);assert.doesNotMatch(h.get('hatimDialog').innerHTML,/data-hc="delete-confirm"/);assert.equal(h.calls.length,0);
+ await h.click('delete-archive');assert.equal(h.calls[0].action,'archive');assert.equal(h.calls.some(p=>p.action==='delete'),false);assert.equal(h.review.state().current.org.archived,true);
+});
+
+test('ambiguous or denied deletion retains the local record and can be retried; stale dialogs never delete another hatim',async()=>{
+ let first=true;const h=harness(p=>{if(first){first=false;throw Error('lost response')}return Response.json({ok:true,deleted:true,code:p.code})});
+ h.review.setLocal({mine:[{code:codeA,type:'hatim',title:'A',adminToken:admin}]});h.review.setCurrent(current(codeA,unusedJuz()));h.review.confirmDeleteHatim();await h.click('delete-confirm');
+ assert.equal(h.review.state().local.mine[0].code,codeA);assert.match(h.get('hcError').textContent,/kaydedildi sayılmadı/);
+ await h.click('delete-confirm');assert.equal(h.calls.filter(p=>p.action==='delete').length,2);assert.equal(h.review.state().local.mine.length,0);
+ const stale=harness();stale.review.setCurrent(current(codeA,unusedJuz()));stale.review.confirmDeleteHatim();stale.review.setCurrent(current(codeB,unusedJuz(),2));await stale.click('delete-confirm');
+ assert.equal(stale.calls.length,0);assert.match(stale.get('hcError').textContent,/değişti/);
+ const denied=harness(()=>Response.json({error:'Katılım geçmişi var. Silmek yerine arşivle.'},{status:409}));denied.review.setLocal({mine:[{code:codeA,type:'hatim',title:'A',adminToken:admin}]});denied.review.setCurrent(current(codeA,unusedJuz()));denied.review.confirmDeleteHatim();await denied.click('delete-confirm');
+ assert.equal(denied.review.state().local.mine.length,1);assert.match(denied.get('hcError').textContent,/arşivle/);assert.match(denied.get('hatimDialog').innerHTML,/delete-archive/);
 });
