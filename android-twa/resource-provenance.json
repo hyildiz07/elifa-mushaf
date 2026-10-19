@@ -1,0 +1,126 @@
+{
+  "sourceArtifact": "4.aab",
+  "sourceArtifactSha256": "dbcebefce27a77cf125d0b172e5b7f121f88a0d6f296a9327fdac21842115a62",
+  "extractedOn": "2026-10-20",
+  "resources": [
+    {
+      "source": "base/res/drawable-hdpi-v4/splash.png",
+      "target": "app/src/main/res/drawable-hdpi/splash.png",
+      "bytes": 68,
+      "sha256": "0464f45b495a5aac8d0e6edd4cc000fef4d3f90187ba1a7b7faf39cf4087085f"
+    },
+    {
+      "source": "base/res/drawable-mdpi-v4/splash.png",
+      "target": "app/src/main/res/drawable-mdpi/splash.png",
+      "bytes": 68,
+      "sha256": "0464f45b495a5aac8d0e6edd4cc000fef4d3f90187ba1a7b7faf39cf4087085f"
+    },
+    {
+      "source": "base/res/drawable-xhdpi-v4/splash.png",
+      "target": "app/src/main/res/drawable-xhdpi/splash.png",
+      "bytes": 68,
+      "sha256": "0464f45b495a5aac8d0e6edd4cc000fef4d3f90187ba1a7b7faf39cf4087085f"
+    },
+    {
+      "source": "base/res/drawable-xxhdpi-v4/splash.png",
+      "target": "app/src/main/res/drawable-xxhdpi/splash.png",
+      "bytes": 68,
+      "sha256": "0464f45b495a5aac8d0e6edd4cc000fef4d3f90187ba1a7b7faf39cf4087085f"
+    },
+    {
+      "source": "base/res/drawable-xxxhdpi-v4/splash.png",
+      "target": "app/src/main/res/drawable-xxxhdpi/splash.png",
+      "bytes": 68,
+      "sha256": "0464f45b495a5aac8d0e6edd4cc000fef4d3f90187ba1a7b7faf39cf4087085f"
+    },
+    {
+      "source": "base/res/mipmap-hdpi-v4/ic_launcher.png",
+      "target": "app/src/main/res/mipmap-hdpi/ic_launcher.png",
+      "bytes": 2378,
+      "sha256": "2aa0904016f8a0d041e02f394c7e6bcb4b941a0d4abe7e508386e59265647efe"
+    },
+    {
+      "source": "base/res/mipmap-hdpi-v4/ic_maskable.png",
+      "target": "app/src/main/res/mipmap-hdpi/ic_maskable.png",
+      "bytes": 2144,
+      "sha256": "6a0d52cc335f19b20310fd3f973717a8af4c2e5b39aabc5174c7782d6ade2569"
+    },
+    {
+      "source": "base/res/mipmap-mdpi-v4/ic_launcher.png",
+      "target": "app/src/main/res/mipmap-mdpi/ic_launcher.png",
+      "bytes": 1495,
+      "sha256": "75446ada47d9d8ab4740c551baf3a9d92040ab1156b76ee9bc4498f8a0d75f51"
+    },
+    {
+      "source": "base/res/mipmap-mdpi-v4/ic_maskable.png",
+      "target": "app/src/main/res/mipmap-mdpi/ic_maskable.png",
+      "bytes": 1387,
+      "sha256": "ceeb50027638d33278bf09ab98c047310cc0f8c04442d7203496ac809531b391"
+    },
+    {
+      "source": "base/res/mipmap-xhdpi-v4/ic_launcher.png",
+      "target": "app/src/main/res/mipmap-xhdpi/ic_launcher.png",
+      "bytes": 3355,
+      "sha256": "5a103fac613bcae668c33eae26590e064a5fff299add21791103b472885ccf93"
+    },
+    {
+      "source": "base/res/mipmap-xhdpi-v4/ic_maskable.png",
+      "target": "app/src/main/res/mipmap-xhdpi/ic_maskable.png",
+      "bytes": 3021,
+      "sha256": "ec510a5eb77927bf25a991c3e2ec2abfd4baa32a8eb6c9ff7d917898ba11a68f"
+    },
+    {
+      "source": "base/res/mipmap-xxhdpi-v4/ic_launcher.png",
+      "target": "app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
+      "bytes": 5615,
+      "sha256": "e15f88ab8197e477dae45d49adc3d614fec873347fd225f7eaa2f3f813d7bd4d"
+    },
+    {
+      "source": "base/res/mipmap-xxhdpi-v4/ic_maskable.png",
+      "target": "app/src/main/res/mipmap-xxhdpi/ic_maskable.png",
+      "bytes": 5301,
+      "sha256": "477e2c45d0da2e6c04f1a4d2c8696041f2820126cf7cc6d49009949427da5f02"
+    },
+    {
+      "source": "base/res/mipmap-xxxhdpi-v4/ic_launcher.png",
+      "target": "app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
+      "bytes": 8271,
+      "sha256": "540153549808b9e88e918fd2615b93b9acb6dc434ad6919826ce9309d7a02388"
+    },
+    {
+      "source": "base/res/mipmap-xxxhdpi-v4/ic_maskable.png",
+      "target": "app/src/main/res/mipmap-xxxhdpi/ic_maskable.png",
+      "bytes": 8145,
+      "sha256": "1da20e9d6b2e48bb5c1e95ba07d2bd1f179397f8427cf35fa8d2a817517c8c60"
+    },
+    {
+      "source": "base/res/raw/web_app_manifest.json",
+      "target": "provenance/web_app_manifest.json",
+      "bytes": 685,
+      "sha256": "b42c9081ddbe15b03350503fb463edd999fedcfbcbe78036f25b96e2f4ffa1c6"
+    }
+  ],
+  "reconstruction": {
+    "tool": "jadx 1.5.6",
+    "officialToolUrl": "https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip",
+    "toolSha256": "545ea2be9c242511bc145755cf4bda2485ade42966e096f8b4d3da2a230e8974",
+    "toolDigestVerified": "GitHub official release asset SHA-256 digest",
+    "scope": "Only Application, LauncherActivity, DelegationService from user-provided com.elifaplatform.mushaf versionCode 4; no third-party implementation copied",
+    "r8MappingId": "ab27680",
+    "appClassBehavior": {
+      "Application": "super.onCreate only",
+      "DelegationService": "super.onCreate only",
+      "LauncherActivity": "getLaunchingUrl delegates to superclass; onCreate delegates then sets unspecified orientation (-1) in both API branches"
+    },
+    "sourceNormalization": "Removed identical API conditional branches, restored superclass/method names using R8 mapping; equivalent behavior in the three inspected hooks.",
+    "xml": "Reconstructed from bundletool resource dump and protobuf XML: theme/url metadata, adaptive icon 8.5dp inset, filepaths and empty shortcuts."
+  },
+  "gradleWrapper": {
+    "version": "9.1.0",
+    "source": "Generated by the official checksum-verified Gradle 9.1.0 distribution in an isolated empty project",
+    "distributionUrl": "https://services.gradle.org/distributions/gradle-9.1.0-bin.zip",
+    "distributionSha256": "a17ddd85a26b6a7f5ddb71ff8b05fc5104c0202c6e64782429790c933686c806",
+    "wrapperJarSha256": "76805e32c009c0cf0dd5d206bddc9fb22ea42e84db904b764f3047de095493f3",
+    "wrapperChecksumSource": "https://services.gradle.org/distributions/gradle-9.1.0-wrapper.jar.sha256"
+  }
+}

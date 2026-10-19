@@ -1,0 +1,55 @@
+plugins { id 'com.android.application' }
+
+def signingNames = ['ELIFA_UPLOAD_STORE_FILE', 'ELIFA_UPLOAD_STORE_PASSWORD', 'ELIFA_UPLOAD_KEY_ALIAS', 'ELIFA_UPLOAD_KEY_PASSWORD']
+def signingValues = signingNames.collectEntries { [(it): providers.environmentVariable(it).orNull] }
+def signingPresent = signingValues.values().count { it != null && !it.isEmpty() }
+
+android {
+    namespace = 'com.elifaplatform.mushaf'
+    compileSdk = 36
+    buildToolsVersion = '36.0.0'
+    defaultConfig {
+        applicationId = 'com.elifaplatform.mushaf'
+        minSdk = 23
+        targetSdk = 36
+        versionCode = 5
+        versionName = '1.1.1'
+    }
+    if (signingPresent == signingNames.size()) {
+        signingConfigs {
+            upload {
+                storeFile = file(signingValues.ELIFA_UPLOAD_STORE_FILE)
+                storePassword = signingValues.ELIFA_UPLOAD_STORE_PASSWORD
+                keyAlias = signingValues.ELIFA_UPLOAD_KEY_ALIAS
+                keyPassword = signingValues.ELIFA_UPLOAD_KEY_PASSWORD
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled = true
+            shrinkResources = true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig = signingPresent == signingNames.size() ? signingConfigs.getByName('upload') : null
+        }
+        // Even an explicitly requested debug build must not silently use a new identity.
+        debug { signingConfig = null }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    packaging {
+        // Equivalent to v4 extractNativeLibs=true via the supported Gradle DSL.
+        // This wrapper has no native .so libraries.
+        jniLibs { useLegacyPackaging = true }
+    }
+}
+
+if (signingPresent != 0 && signingPresent != signingNames.size()) {
+    throw new GradleException('Upload signing requires all four ELIFA_UPLOAD_* environment variables; partial configuration is refused.')
+}
+
+dependencies {
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.7.3'
+}

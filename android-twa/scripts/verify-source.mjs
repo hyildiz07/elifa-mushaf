@@ -1,0 +1,31 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import assert from 'node:assert/strict';
+import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const provenance=JSON.parse(fs.readFileSync(path.join(root,'resource-provenance.json'),'utf8'));
+for(const item of provenance.resources){
+ const target=path.resolve(root,item.target);
+ assert.ok(target.startsWith(root+path.sep),'Resource path must stay inside project');
+ const data=fs.readFileSync(target);
+ assert.equal(data.length,item.bytes,item.target+' size');
+ assert.equal(crypto.createHash('sha256').update(data).digest('hex'),item.sha256,item.target+' SHA-256');
+}
+const wrapper=fs.readFileSync(path.join(root,'gradle/wrapper/gradle-wrapper.jar'));
+assert.equal(crypto.createHash('sha256').update(wrapper).digest('hex'),provenance.gradleWrapper.wrapperJarSha256,'Official Gradle wrapper JAR SHA-256');
+const wrapperProperties=fs.readFileSync(path.join(root,'gradle/wrapper/gradle-wrapper.properties'),'utf8');
+assert.ok(wrapperProperties.includes('distributionSha256Sum='+provenance.gradleWrapper.distributionSha256));
+const gradle=fs.readFileSync(path.join(root,'app/build.gradle'),'utf8');
+assert.match(gradle,/applicationId = 'com\.elifaplatform\.mushaf'/);
+assert.match(gradle,/minSdk = 23/);
+assert.match(gradle,/targetSdk = 36/);
+assert.match(gradle,/minifyEnabled = true/);
+assert.match(gradle,/shrinkResources = true/);
+assert.match(gradle,/proguard-android-optimize\.txt/);
+assert.doesNotMatch(fs.readFileSync(path.join(root,'app/proguard-rules.pro'),'utf8'),/^-dontoptimize|^-keep /m);
+assert.match(gradle,/debug \{ signingConfig = null \}/);
+assert.match(gradle,/signingPresent == signingNames\.size\(\) \? signingConfigs\.getByName\('upload'\) : null/);
+const strings=fs.readFileSync(path.join(root,'app/src/main/res/values/strings.xml'),'utf8');
+assert.match(strings,/<string name="launchUrl">https:\/\/mushaf\.elifaplatform\.com\//);
+console.log('TWA identity, unsigned default and '+provenance.resources.length+' original resource hashes verified.');

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="appName">Elifa Mushaf</string>
+    <string name="launcherName">Elifa Mushaf</string>
+    <string name="hostName">mushaf.elifaplatform.com</string>
+    <string name="launchUrl">https://mushaf.elifaplatform.com/</string>
+    <string name="webManifestUrl">https://mushaf.elifaplatform.com/manifest.json</string>
+    <string name="generatorApp">bubblewrap-cli</string>
+    <string name="launchHandlerClientMode">auto</string>
+    <string name="fallbackType">customtabs</string>
+    <string name="orientation">any</string>
+    <string name="providerAuthority">com.elifaplatform.mushaf.fileprovider</string>
+    <string name="assetStatements">[{ \&quot;relation\&quot;: [\&quot;delegate_permission/common.handle_all_urls\&quot;], \&quot;target\&quot;: { \&quot;namespace\&quot;: \&quot;web\&quot;, \&quot;site\&quot;: \&quot;https://mushaf.elifaplatform.com\&quot; } }]</string>
+</resources>
