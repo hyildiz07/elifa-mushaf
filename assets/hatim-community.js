@@ -3,6 +3,13 @@
   function secret(crypto2) {
     return Array.from(crypto2.getRandomValues(new Uint8Array(32)), (v) => v.toString(16).padStart(2, "0")).join("");
   }
+  var returnKeyPattern = /^[0-9A-HJKMNP-TV-Z]{20}$/i;
+  var validCapability = (value) => typeof value === "string" && (/^[a-f0-9]{64}$/i.test(value) || returnKeyPattern.test(value));
+  var normalizeCapability = (value) => returnKeyPattern.test(value) ? value.toUpperCase() : value.toLowerCase();
+  function personalReturnCode(code, no, key2) {
+    if (!/^[a-z0-9]{6}$/.test(code) || !Number.isInteger(no) || no < 1 || no > 30 || !returnKeyPattern.test(key2)) throw Error("Ki\u015Fisel d\xF6n\xFC\u015F kodu haz\u0131rlanamad\u0131.");
+    return ["C1", code.toUpperCase(), String(no).padStart(2, "0"), ...key2.toUpperCase().match(/.{5}/g)].join("-");
+  }
   function dueText(date, now = /* @__PURE__ */ new Date()) {
     if (!date || !/^\d{4}-\d{2}-\d{2}$/.test(date)) return "";
     const [y, m, d] = date.split("-").map(Number), end = Date.UTC(y, m - 1, d), day = new Date(end);
@@ -13,20 +20,27 @@
   function parseHatimLink(value, base2 = "https://mushaf.elifaplatform.com/") {
     const v = String(value || "").trim();
     if (/^[a-z0-9]{6}$/.test(v)) return { code: v };
+    const compact = v.toUpperCase().replace(/[\s\u2010-\u2015-]/g, "");
+    const personal = /^C1([A-Z0-9]{6})(0[1-9]|[12][0-9]|30)([0-9A-HJKMNP-TV-Z]{20})$/.exec(compact);
+    if (personal) return { code: personal[1].toLowerCase(), no: Number(personal[2]), capability: personal[3] };
+    if (/^C1/i.test(v)) return null;
     let u;
     try {
       u = new URL(v, base2);
     } catch {
       return null;
     }
+    if (["hatim", "cuz", "key", "capability", "token", "adminToken", "admin"].some((name) => u.searchParams.has(name))) return null;
     const recovery = new URLSearchParams(u.hash.slice(1));
+    if ((recovery.has("cuz") || recovery.has("key")) && !recovery.has("hatim")) return null;
     if (recovery.has("hatim")) {
       const code2 = recovery.get("hatim"), no = Number(recovery.get("cuz")), capability = recovery.get("key");
-      if (/^[a-z0-9]{6}$/.test(code2) && Number.isInteger(no) && no >= 1 && no <= 30 && /^[a-f0-9]{64}$/.test(capability)) return { code: code2, no, capability };
+      if (/^[a-z0-9]{6}$/.test(code2) && Number.isInteger(no) && no >= 1 && no <= 30 && (/^[a-f0-9]{64}$/.test(capability) || returnKeyPattern.test(capability))) return { code: code2, no, capability: normalizeCapability(capability) };
       return null;
     }
     const admin = recovery.get("yonetim") || u.searchParams.get("y"), code = u.searchParams.get("k");
     if (admin && /^(?:[a-z0-9]{12}|[a-z0-9]{32})$/.test(admin)) return { admin };
+    if (recovery.has("yonetim") || u.searchParams.has("y")) return null;
     return code && /^[a-z0-9]{6}$/.test(code) ? { code } : null;
   }
   function participationUrl(base2, code) {
@@ -72,7 +86,7 @@
     const tokenMap = (value) => {
       if (!plain(value)) return void 0;
       const out = {};
-      for (const [n, t] of Object.entries(value)) if (/^[0-9]{1,2}$/.test(n) && +n >= 1 && +n <= 30 && cap(t)) out[n] = t.toLowerCase();
+      for (const [n, t] of Object.entries(value)) if (/^[0-9]{1,2}$/.test(n) && +n >= 1 && +n <= 30 && validCapability(t)) out[n] = normalizeCapability(t);
       return out;
     };
     const operationMap = (value) => {
@@ -590,14 +604,14 @@
     window.bkCurrent = null;
     updateAddress();
   }
-  async function copy(value) {
+  async function copy(value, label = "Ba\u011Flant\u0131") {
     const scope = { owner, generation, dialog: dialogIdentity };
     const valid = () => scope.owner === owner && scope.generation === generation && scope.dialog === dialogIdentity;
     try {
       await navigator.clipboard.writeText(value);
-      if (valid()) flash("Ba\u011Flant\u0131 kopyaland\u0131.");
+      if (valid()) flash(label + " kopyaland\u0131.");
     } catch {
-      if (valid()) dialog("Ba\u011Flant\u0131n\u0131 sakla", `<textarea readonly class="hc-link" aria-label="Ba\u011Flant\u0131">${esc(value)}</textarea><p>Ba\u011Flant\u0131y\u0131 se\xE7ip kopyalayabilirsin.</p>`);
+      if (valid()) dialog(label + " \xB7 se\xE7ip kopyala", `<textarea readonly class="hc-link" aria-label="${esc(label)}">${esc(value)}</textarea><p>Yukar\u0131daki bilgiyi se\xE7ip kopyalayabilirsin.</p>`);
     }
   }
   async function share(code, title) {
@@ -624,7 +638,7 @@
   function home() {
     const holder = $("birlikte");
     if (!holder) return;
-    holder.innerHTML = `<div class="hc-home"><button type="button" class="hc-button hc-home-back" data-hc="home-back">\u2039 Elifa</button><header class="hc-top"><div><small>B\u0130RL\u0130KTE</small><h1>Hatimde bulu\u015Fal\u0131m</h1><p>Bir c\xFCz se\xE7, ortak niyete kat\u0131l.</p></div><span aria-hidden="true" class="hc-emblem">\u0627</span></header>${previewNote("hcHomePreview")}<div class="hc-main-actions">${button("\uFF0B Hatim olu\u015Ftur", "create", "primary")}${button("Ba\u011Flant\u0131yla kat\u0131l", "join")}</div><nav class="hc-tabs" aria-label="Hatim b\xF6l\xFCmleri">${[["open", "A\xE7\u0131k Hatimler"], ["mine", "Benim C\xFCzlerim"], ["created", "Olu\u015Fturduklar\u0131m"]].map(([id, name]) => `<button type="button" data-tab="${id}" aria-pressed="${id === tab}">${name}</button>`).join("")}</nav><div id="hatimStatus" role="status" aria-live="polite"></div><div id="hatimList"></div></div>`;
+    holder.innerHTML = `<div class="hc-home"><button type="button" class="hc-button hc-home-back" data-hc="home-back">\u2039 Elifa</button><header class="hc-top"><div><small>B\u0130RL\u0130KTE</small><h1>Hatimde bulu\u015Fal\u0131m</h1><p>Bir c\xFCz se\xE7, ortak niyete kat\u0131l.</p></div><span aria-hidden="true" class="hc-emblem">\u0627</span></header>${previewNote("hcHomePreview")}<div class="hc-main-actions">${button("\uFF0B Hatim olu\u015Ftur", "create", "primary")}${button("Ba\u011Flant\u0131yla kat\u0131l", "join")}</div><div class="hc-return-entry"><button type="button" class="hc-text" data-hc="return-entry">\u21A9 C\xFCz\xFCme geri d\xF6n</button><span>Ayn\u0131 cihazda Benim C\xFCzlerim; ba\u015Fka cihazda \xF6zel kodun.</span></div><nav class="hc-tabs" aria-label="Hatim b\xF6l\xFCmleri">${[["open", "A\xE7\u0131k Hatimler"], ["mine", "Benim C\xFCzlerim"], ["created", "Olu\u015Fturduklar\u0131m"]].map(([id, name]) => `<button type="button" data-tab="${id}" aria-pressed="${id === tab}">${name}</button>`).join("")}</nav><div id="hatimStatus" role="status" aria-live="polite"></div><div id="hatimList"></div></div>`;
     on(holder.querySelector("[data-hc=home-back]"), "click", () => {
       closeDialog();
       clearInterval(window.bkRefreshTimer);
@@ -632,6 +646,7 @@
     });
     on(holder.querySelector("[data-hc=create]"), "click", showCreate);
     on(holder.querySelector("[data-hc=join]"), "click", showJoin);
+    on(holder.querySelector("[data-hc=return-entry]"), "click", showReturnEntry);
     holder.querySelectorAll("[data-tab]").forEach((b) => on(b, "click", () => {
       tab = b.dataset.tab;
       renderBirlikte();
@@ -656,7 +671,7 @@
       const records = new Map(local.mine.filter((x) => x.type === "hatim").map((m) => [m.code, { ...m, ...local.snapshots[m.code], localOnly: true }]));
       for (const m of accountItems) if (m.type === "hatim") records.set(m.code, { ...records.get(m.code), ...m, localOnly: false });
       const rows = [...records.values()].filter((m) => tab === "created" ? m.isAdmin || m.adminToken : (m.items || []).length || local.claimed[m.code]?.length || Object.keys(capabilities(m.code)).length);
-      list.innerHTML = (!user() ? '<p class="hc-note">Misafir kay\u0131tlar\u0131 bu cihazda tutulur. Cihaz verileri silinirse \xF6zel d\xF6n\xFC\u015F ba\u011Flant\u0131n gerekir. <button class="hc-text" data-hc="account">Hesaba giri\u015F yap</button></p>' : "") + rows.map((m) => `<article class="hc-card"><div><h2>${esc(m.title)}</h2><p>${tab === "created" ? m.archived ? "Ar\u015Fivde" : "Y\xF6netici sensin" : (m.items || []).map((i) => i.no + ". c\xFCz \xB7 " + (i.status === "okundu" ? "Okudum \u2713" : "Okunacak")).join(" / ") || (m.pending ? "Kat\u0131l\u0131m sonucu do\u011Frulanmad\u0131 \xB7 a\xE7\u0131p kontrol et" : "Eski kat\u0131l\u0131m \xB7 y\xF6netici d\xF6n\xFC\u015F ba\u011Flant\u0131s\u0131 gerekli")}</p>${m.localOnly ? "<small>Cihaz kayd\u0131 \xB7 a\xE7\u0131nca g\xFCncellenir</small>" : ""}</div><button class="hc-button" data-open="${esc(m.code)}">A\xE7</button></article>`).join("") + (!rows.length ? '<div class="hc-empty"><h2>' + (tab === "created" ? "Hen\xFCz hatim olu\u015Fturmad\u0131n" : "Hen\xFCz c\xFCz se\xE7medin") + "</h2><p>A\xE7\u0131k hatimlerden veya sana g\xF6nderilen ba\u011Flant\u0131dan ba\u015Flayabilirsin.</p></div>" : "");
+      list.innerHTML = (tab === "mine" ? '<div class="hc-return-row"><p>Ayn\u0131 cihazda c\xFCz\xFCn\xFC a\u015Fa\u011F\u0131dan a\xE7. Kay\u0131t g\xF6r\xFCnm\xFCyorsa \xF6zel d\xF6n\xFC\u015F kodunu kullan.</p>' + button("C\xFCz\xFCme geri d\xF6n", "return-entry") + "</div>" : "") + (!user() ? '<p class="hc-note">Misafir kay\u0131tlar\u0131 bu cihazda tutulur. Cihaz verileri silinirse \xF6zel d\xF6n\xFC\u015F ba\u011Flant\u0131n gerekir. <button class="hc-text" data-hc="account">Hesaba giri\u015F yap</button></p>' : "") + rows.map((m) => `<article class="hc-card"><div><h2>${esc(m.title)}</h2><p>${tab === "created" ? m.archived ? "Ar\u015Fivde" : "Y\xF6netici sensin" : (m.items || []).map((i) => i.no + ". c\xFCz \xB7 " + (i.status === "okundu" ? "Okudum \u2713" : "Okunacak")).join(" / ") || (m.pending ? "Kat\u0131l\u0131m sonucu do\u011Frulanmad\u0131 \xB7 a\xE7\u0131p kontrol et" : "Eski kat\u0131l\u0131m \xB7 y\xF6netici d\xF6n\xFC\u015F ba\u011Flant\u0131s\u0131 gerekli")}</p>${m.localOnly ? "<small>Cihaz kayd\u0131 \xB7 a\xE7\u0131nca g\xFCncellenir</small>" : ""}</div><button class="hc-button" data-open="${esc(m.code)}">A\xE7</button></article>`).join("") + (!rows.length ? '<div class="hc-empty"><h2>' + (tab === "created" ? "Hen\xFCz hatim olu\u015Fturmad\u0131n" : "Hen\xFCz c\xFCz se\xE7medin") + "</h2><p>A\xE7\u0131k hatimlerden veya sana g\xF6nderilen ba\u011Flant\u0131dan ba\u015Flayabilirsin.</p></div>" : "");
       if (user()) {
         let guest;
         try {
@@ -667,6 +682,7 @@
       }
     }
     list.querySelectorAll("[data-open]").forEach((b) => on(b, "click", () => bkOpen(b.dataset.open)));
+    on(list.querySelector("[data-hc=return-entry]"), "click", showReturnEntry);
     on(list.querySelector("[data-hc=discover-retry]"), "click", renderBirlikte);
     on(list.querySelector("[data-hc=account]"), "click", accountOpen);
     on(list.querySelector("[data-hc=bind-list]"), "click", showGuestBindings);
@@ -708,13 +724,31 @@
     }
   }
   function showJoin() {
-    dialog("Ba\u011Flant\u0131yla kat\u0131l", '<label class="hc-field">Hatim ba\u011Flant\u0131s\u0131 veya kodu<input id="hcJoin" autocomplete="off" placeholder="Ba\u011Flant\u0131y\u0131 yap\u0131\u015Ft\u0131r veya 6 haneli kodu yaz"></label>', [{ id: "join", label: "Hatmi a\xE7", primary: true, run: async () => {
+    dialog("Ba\u011Flant\u0131yla kat\u0131l", '<p class="hc-note">Yeni bir hatme kat\u0131lmak i\xE7indir. Daha \xF6nce ald\u0131\u011F\u0131n c\xFCze d\xF6nmek i\xE7in \u201CC\xFCz\xFCme geri d\xF6n\u201D\xFC kullan.</p><label class="hc-field">Kat\u0131l\u0131m ba\u011Flant\u0131s\u0131 veya 6 haneli hatim kodu<input id="hcJoin" autocomplete="off" placeholder="Ba\u011Flant\u0131y\u0131 yap\u0131\u015Ft\u0131r veya 6 haneli kodu yaz"></label>', [{ id: "join", label: "Hatmi a\xE7", primary: true, run: async () => {
       const parsed = parseHatimLink($("hcJoin").value, base());
       if (!parsed) throw Error("Ge\xE7erli bir hatim ba\u011Flant\u0131s\u0131 veya kodu yaz.");
       stageConnection(parsed);
       closeDialog();
       await resumeConnection();
     } }]);
+  }
+  function showReturnEntry() {
+    dialog("C\xFCz\xFCme geri d\xF6n", '<ol class="hc-return-steps"><li><b>Ayn\u0131 cihaz:</b> Benim C\xFCzlerim sekmesinden c\xFCz\xFCn\xFC a\xE7.</li><li><b>Ba\u015Fka cihaz / uygulama:</b> \xD6zel d\xF6n\xFC\u015F kodunu yaz veya ki\u015Fisel ba\u011Flant\u0131n\u0131 yap\u0131\u015Ft\u0131r.</li><li><b>Hesaba ba\u011Fl\u0131ysa:</b> \xD6nce c\xFCz\xFC ald\u0131\u011F\u0131n hesapla giri\u015F yap. Kod tek ba\u015F\u0131na hesab\u0131n yerine ge\xE7mez.</li></ol><label class="hc-field">\xD6zel d\xF6n\xFC\u015F kodu veya ki\u015Fisel ba\u011Flant\u0131<textarea id="hcReturnInput" class="hc-return-input" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="C1-\u2026 veya ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131n"></textarea></label><p class="hc-note">Bu bilgi sana \xF6zeldir. Genel hatim kodu yaln\u0131z yeni kat\u0131l\u0131m i\xE7indir; c\xFCz\xFCn\xFC geri a\xE7maz.</p>', [
+      { id: "return-open", label: "C\xFCz\xFCm\xFC a\xE7", primary: true, run: async () => {
+        const parsed = parseHatimLink($("hcReturnInput").value, base());
+        if (!parsed) throw Error("\xD6zel d\xF6n\xFC\u015F kodunu veya ki\u015Fisel ba\u011Flant\u0131n\u0131 eksiksiz gir.");
+        if (!parsed.capability) throw Error("Bu genel kat\u0131l\u0131m veya y\xF6netici bilgisi. C\xFCz\xFCne d\xF6nmek i\xE7in sana \xF6zel C1 d\xF6n\xFC\u015F kodunu ya da ki\u015Fisel ba\u011Flant\u0131n\u0131 kullan.");
+        stageConnection(parsed);
+        closeDialog();
+        await resumeConnection();
+      } },
+      { id: "my-juz", label: "Benim C\xFCzlerim", run: async () => {
+        closeDialog();
+        tab = "mine";
+        openTogetherScreen();
+        await renderBirlikte();
+      } }
+    ]);
   }
   async function openParsed(p) {
     if (p.capability) {
@@ -838,7 +872,7 @@
         closeDialog();
       } });
       actions.push({ id: "release", label: "C\xFCz\xFC b\u0131rak", run: () => confirmRelease(no) });
-      if (capabilities(c.code)[no]) actions.push({ id: "return", label: "Ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131m", run: () => showRecovery(c.code, no, capabilities(c.code)[no], !!user()) });
+      if (capabilities(c.code)[no]) actions.push({ id: "return", label: "\xD6zel d\xF6n\xFC\u015F kodum / ba\u011Flant\u0131m", run: () => showRecovery(c.code, no, capabilities(c.code)[no], !!user()) });
     } else actions.push({ id: "close", label: "Kapat", run: closeDialog });
     dialog(no + ". c\xFCz", `<p>${esc(i.name || "Kat\u0131l\u0131mc\u0131")} \xB7 ${i.status === "okundu" ? "Okundu" : "Al\u0131nd\u0131"}</p>${!i.mine ? "<p>Bu c\xFCz\xFC yaln\u0131z sahibi y\xF6netebilir." + (i.legacy ? " Eski kat\u0131l\u0131m\u0131nsa y\xF6neticiden ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131s\u0131 iste." : "") + "</p>" : ""}`, actions);
   }
@@ -876,9 +910,47 @@
       }
     } }, { id: "cancel", label: "Vazge\xE7", run: closeDialog }]);
   }
-  function showRecovery(code, no, token, accountBound = false) {
+  function showRecovery(code, no, token, accountBound = false, forParticipant = false) {
     const link = recoveryUrl(base(), code, no, token);
-    dialog(no + ". c\xFCz sende", `<p>${accountBound ? "Kat\u0131l\u0131m hesab\u0131na ba\u011Fl\u0131. Di\u011Fer cihazda ayn\u0131 hesapla giri\u015F yapabilirsin." : "Bu ba\u011Flant\u0131 c\xFCz\xFCn\xFC y\xF6netir. Yaln\u0131z kendin i\xE7in sakla; kat\u0131l\u0131m payla\u015F\u0131m\u0131nda kullanma."}</p><textarea readonly class="hc-link" aria-label="Ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131s\u0131">${esc(link)}</textarea>`, [{ id: "copy", label: "Ki\u015Fisel ba\u011Flant\u0131y\u0131 kopyala", primary: true, run: () => copy(link) }, { id: "ok", label: "Tamam", run: closeDialog }]);
+    let returnCode = null, preparing = false;
+    dialog(
+      forParticipant ? "Kat\u0131l\u0131mc\u0131ya \xF6zel d\xF6n\xFC\u015F bilgisi" : no + ". c\xFCz sende",
+      '<p class="hc-warning">' + (forParticipant ? "Bu kod ve ba\u011Flant\u0131y\u0131 yaln\u0131z c\xFCz\xFCn ger\xE7ek sahibine ilet. Genel hatim grubuna g\xF6nderme." : accountBound ? "Bu c\xFCz hesab\u0131na ba\u011Fl\u0131. Di\u011Fer cihazda ayn\u0131 hesapla giri\u015F yap; \xF6zel kod tek ba\u015F\u0131na hesab\u0131n\u0131n yerine ge\xE7mez." : "Bu kod ve ba\u011Flant\u0131 c\xFCz\xFCn\xFC y\xF6netir. Yaln\u0131z kendin i\xE7in sakla; kat\u0131l\u0131m ba\u011Flant\u0131s\u0131 olarak payla\u015Fma.") + '</p><ol class="hc-return-steps"><li><b>Ayn\u0131 cihazda</b> Birlikte \u2192 Benim C\xFCzlerim.</li><li><b>Uygulamada</b> Birlikte \u2192 C\xFCz\xFCme geri d\xF6n \u2192 \xF6zel kodu gir.</li><li><b>Web\u2019de</b> ki\u015Fisel ba\u011Flant\u0131n\u0131 a\xE7; ard\u0131ndan C\xFCz\xFCm\xFC a\xE7\u2019a dokun.</li></ol><div class="hc-return-code"><label for="hcPersonalCode">\xD6zel d\xF6n\xFC\u015F kodu</label><textarea id="hcPersonalCode" readonly rows="2" aria-describedby="hcReturnStatus" placeholder="Kod haz\u0131rlan\u0131yor\u2026"></textarea><small id="hcReturnStatus" role="status" aria-live="polite">\xD6zel kod haz\u0131rlan\u0131yor. Ba\u011Flant\u0131n\u0131 hemen kopyalayabilirsin.</small></div><details class="hc-private-link"><summary>Ki\u015Fisel web ba\u011Flant\u0131s\u0131n\u0131 g\xF6ster</summary><textarea readonly class="hc-link" aria-label="Ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131s\u0131">' + esc(link) + "</textarea></details>",
+      [
+        { id: "copy-code", label: "\xD6zel kodu kopyala", primary: true, run: () => {
+          if (!returnCode) throw Error("\xD6zel kod hen\xFCz haz\u0131r de\u011Fil. Kodu yeniden haz\u0131rla veya ki\u015Fisel ba\u011Flant\u0131n\u0131 kopyala.");
+          return copy(returnCode, "\xD6zel d\xF6n\xFC\u015F kodu");
+        } },
+        { id: "copy", label: "Ki\u015Fisel ba\u011Flant\u0131y\u0131 kopyala", run: () => copy(link, "Ki\u015Fisel ba\u011Flant\u0131") },
+        { id: "return-retry", label: "Kodu yeniden haz\u0131rla", run: () => prepareCode() },
+        { id: "ok", label: "Tamam", run: closeDialog }
+      ]
+    );
+    const scope = { owner, generation, dialog: dialogIdentity }, stillHere = () => scope.owner === owner && scope.generation === generation && scope.dialog === dialogIdentity && $("hatimDialog").open;
+    const prepareCode = async () => {
+      if (preparing || !stillHere()) return;
+      preparing = true;
+      const copyButton = $("hatimDialog").querySelector('[data-hc="copy-code"]'), retry = $("hatimDialog").querySelector('[data-hc="return-retry"]');
+      if (copyButton) copyButton.disabled = true;
+      if (retry) retry.hidden = true;
+      $("hcReturnStatus").textContent = "\xD6zel kod haz\u0131rlan\u0131yor. Ba\u011Flant\u0131n\u0131 hemen kopyalayabilirsin.";
+      try {
+        const data = await api(payload("returnCode", code, { no, capability: token }));
+        if (!stillHere()) return;
+        returnCode = personalReturnCode(code, no, data.returnKey);
+        $("hcPersonalCode").value = returnCode;
+        $("hcReturnStatus").textContent = "Kodu g\xFCvenli bir yere kaydet. Bo\u015Fluklar\u0131 ve \xE7izgileri yazmadan da girebilirsin.";
+        if (copyButton) copyButton.disabled = false;
+      } catch (e) {
+        if (stillHere()) {
+          $("hcReturnStatus").textContent = "\xD6zel kod haz\u0131rlanamad\u0131. Yeniden deneyebilir veya ki\u015Fisel ba\u011Flant\u0131n\u0131 kullanabilirsin.";
+          if (retry) retry.hidden = false;
+        }
+      } finally {
+        preparing = false;
+      }
+    };
+    prepareCode();
   }
   function showCreate() {
     let visibilityStatus = "loading", visibilityEnabled = null;
@@ -989,8 +1061,7 @@
           await mutate("issueRecovery", no, { capability: token });
           local.pendingRecovery[c.code][no].confirmed = true;
           save();
-          const link = recoveryUrl(base(), c.code, no, token);
-          dialog("Kat\u0131l\u0131mc\u0131ya \xF6zel ba\u011Flant\u0131", `<textarea readonly class="hc-link" aria-label="Kat\u0131l\u0131mc\u0131ya \xF6zel ba\u011Flant\u0131">${esc(link)}</textarea><p>Bunu genel gruba g\xF6nderme.</p>`, [{ id: "copy", label: "Kopyala", run: () => copy(link) }, { id: "ok", label: "Tamam", run: closeDialog }]);
+          showRecovery(c.code, no, token, false, true);
         } }]);
       } }
     ]);

@@ -1,4 +1,11 @@
 export function secret(crypto){return Array.from(crypto.getRandomValues(new Uint8Array(32)),v=>v.toString(16).padStart(2,'0')).join('');}
+const returnKeyPattern=/^[0-9A-HJKMNP-TV-Z]{20}$/i;
+const validCapability=value=>typeof value==='string'&&(/^[a-f0-9]{64}$/i.test(value)||returnKeyPattern.test(value));
+const normalizeCapability=value=>returnKeyPattern.test(value)?value.toUpperCase():value.toLowerCase();
+export function personalReturnCode(code,no,key){
+ if(!/^[a-z0-9]{6}$/.test(code)||!Number.isInteger(no)||no<1||no>30||!returnKeyPattern.test(key))throw Error('Kişisel dönüş kodu hazırlanamadı.');
+ return ['C1',code.toUpperCase(),String(no).padStart(2,'0'),...key.toUpperCase().match(/.{5}/g)].join('-');
+}
 export function dueText(date,now=new Date()){
  if(!date||!/^\d{4}-\d{2}-\d{2}$/.test(date))return '';
  const [y,m,d]=date.split('-').map(Number),end=Date.UTC(y,m-1,d),day=new Date(end);
@@ -8,11 +15,18 @@ export function dueText(date,now=new Date()){
 }
 export function parseHatimLink(value,base='https://mushaf.elifaplatform.com/'){
  const v=String(value||'').trim();if(/^[a-z0-9]{6}$/.test(v))return {code:v};
+ const compact=v.toUpperCase().replace(/[\s\u2010-\u2015-]/g,'');
+ const personal=/^C1([A-Z0-9]{6})(0[1-9]|[12][0-9]|30)([0-9A-HJKMNP-TV-Z]{20})$/.exec(compact);
+ if(personal)return {code:personal[1].toLowerCase(),no:Number(personal[2]),capability:personal[3]};
+ if(/^C1/i.test(v))return null;
  let u;try{u=new URL(v,base);}catch{return null;}
+ if(['hatim','cuz','key','capability','token','adminToken','admin'].some(name=>u.searchParams.has(name)))return null;
  const recovery=new URLSearchParams(u.hash.slice(1));
- if(recovery.has('hatim')){const code=recovery.get('hatim'),no=Number(recovery.get('cuz')),capability=recovery.get('key');if(/^[a-z0-9]{6}$/.test(code)&&Number.isInteger(no)&&no>=1&&no<=30&&/^[a-f0-9]{64}$/.test(capability))return {code,no,capability};return null;}
+ if((recovery.has('cuz')||recovery.has('key'))&&!recovery.has('hatim'))return null;
+ if(recovery.has('hatim')){const code=recovery.get('hatim'),no=Number(recovery.get('cuz')),capability=recovery.get('key');if(/^[a-z0-9]{6}$/.test(code)&&Number.isInteger(no)&&no>=1&&no<=30&&(/^[a-f0-9]{64}$/.test(capability)||returnKeyPattern.test(capability)))return {code,no,capability:normalizeCapability(capability)};return null;}
  const admin=recovery.get('yonetim')||u.searchParams.get('y'),code=u.searchParams.get('k');
  if(admin&&/^(?:[a-z0-9]{12}|[a-z0-9]{32})$/.test(admin))return {admin};
+ if(recovery.has('yonetim')||u.searchParams.has('y'))return null;
  return code&&/^[a-z0-9]{6}$/.test(code)?{code}:null;
 }
 export function participationUrl(base,code){const u=new URL(base);u.search='';u.hash='';u.searchParams.set('k',code);return u.href;}
@@ -31,7 +45,7 @@ export function loadLocal(storage,key){
  const code=v=>typeof v==='string'&&/^[a-z0-9]{6}$/.test(v);
  const cap=v=>typeof v==='string'&&/^[a-f0-9]{64}$/i.test(v);
  const maps=(value,convert)=>{const out={};if(plain(value))for(const [key,item]of Object.entries(value).slice(0,2000)){if(!code(key))continue;const clean=convert(item);if(clean!==undefined)out[key]=clean;}return out;};
- const tokenMap=value=>{if(!plain(value))return undefined;const out={};for(const [n,t]of Object.entries(value))if(/^[0-9]{1,2}$/.test(n)&&+n>=1&&+n<=30&&cap(t))out[n]=t.toLowerCase();return out;};
+ const tokenMap=value=>{if(!plain(value))return undefined;const out={};for(const [n,t]of Object.entries(value))if(/^[0-9]{1,2}$/.test(n)&&+n>=1&&+n<=30&&validCapability(t))out[n]=normalizeCapability(t);return out;};
  const operationMap=value=>{if(!plain(value))return undefined;const out={};for(const [n,item]of Object.entries(value))if(/^[0-9]{1,2}$/.test(n)&&+n>=1&&+n<=30&&plain(item)&&cap(item.token))out[n]={token:item.token.toLowerCase(),name:typeof item.name==='string'?item.name.slice(0,60):'',confirmed:item.confirmed===true,createdAt:Number.isFinite(item.createdAt)?item.createdAt:0};return out;};
  const empty=()=>({mine:[],myName:'',pending:{},claimed:{},capabilities:{},snapshots:{},pendingClaims:{},pendingRecovery:{},guestWarned:false,creation:null});
  try{

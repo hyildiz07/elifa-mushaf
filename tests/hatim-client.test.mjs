@@ -2,9 +2,28 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {webcrypto} from 'node:crypto';
-import {dueText,parseHatimLink,participationUrl,recoveryUrl,adminUrl,canonicalHatimUrl,secret,loadLocal,createOrgClient} from '../src/hatim-client.mjs';
+import {dueText,parseHatimLink,participationUrl,recoveryUrl,personalReturnCode,adminUrl,canonicalHatimUrl,secret,loadLocal,createOrgClient} from '../src/hatim-client.mjs';
 
 const key='ab'.repeat(32),code='abc234',base='https://mushaf.elifaplatform.com/';
+test('personal return codes round trip in grouped, compact, lowercase and pasted multiline forms',()=>{
+ const capability='0123456789ABCDEFGHJK',encoded=personalReturnCode(code,5,capability);
+ assert.equal(encoded,'C1-ABC234-05-01234-56789-ABCDE-FGHJK');
+ for(const value of [encoded,encoded.toLowerCase(),encoded.replaceAll('-',''),encoded.replaceAll('-',' '),encoded.replaceAll('-','\n'),encoded.replaceAll('-','–')])assert.deepEqual(parseHatimLink(value),{code,no:5,capability});
+ assert.deepEqual(parseHatimLink(personalReturnCode(code,30,capability)),{code,no:30,capability});
+ for(const value of [encoded.slice(0,-1),encoded+'A',encoded.replace('-05-','-00-'),encoded.replace('-05-','-31-'),encoded.replace('FGHJK','FGHIO')])assert.equal(parseHatimLink(value),null);
+ assert.throws(()=>personalReturnCode(code,0,capability));assert.throws(()=>personalReturnCode(code,1,key));
+ for(const malformed of ['C1ABC23401BAD?k=abc234',base+'?k=abc234#cuz=1&key='+capability,base+'?k=abc234#yonetim=short',base+'?k=abc234&y='])assert.equal(parseHatimLink(malformed),null);
+ for(const field of ['hatim','cuz','key','capability','token','adminToken','admin'])assert.equal(parseHatimLink(base+'?k='+code+'&'+field+'=private'),null);
+});
+test('short return proofs survive local storage and private web links without entering public sharing',()=>{
+ const capability='0123456789ABCDEFGHJK',privateUrl=recoveryUrl(base,code,5,capability);
+ assert.deepEqual(parseHatimLink(privateUrl),{code,no:5,capability});
+ const state=loadLocal({getItem:()=>JSON.stringify({capabilities:{[code]:{5:capability.toLowerCase(),6:key,7:'SHORT'}},creation:{token:capability},pendingClaims:{[code]:{5:{token:capability}}}})},'test');
+ assert.equal(state.capabilities[code][5],capability);assert.equal(state.capabilities[code][6],key);assert.equal(state.capabilities[code][7],undefined);
+ assert.equal(state.creation,null);assert.deepEqual(state.pendingClaims[code],{});
+ const shared=participationUrl(privateUrl,code);assert.equal(shared,base+'?k='+code);assert.equal(shared.includes(capability),false);
+ assert.equal(new URL(privateUrl).search,'');
+});
 test('target date treats today, yesterday and tomorrow as local calendar dates, including DST boundaries',()=>{
  const now=new Date(2026,9,18,23,59,59);
  assert.equal(dueText('2026-10-17',now),'Hedef tarih geçti');

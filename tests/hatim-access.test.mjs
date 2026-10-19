@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {handleOrg,createOrgHandler} from '../netlify/functions/org.mjs';
-import {capabilityHash,membershipKey,closedAccountKey} from '../server/hatim-access.mjs';
+import {capabilityHash,deriveReturnKey,returnKeyHash,returnKeyValid,membershipKey,closedAccountKey} from '../server/hatim-access.mjs';
 import {releaseAccountHatimOwnership} from '../server/hatim-account.mjs';
 import {firestoreStoreTransaction} from '../server/database.mjs';
 import {expired,createOrgCleanup} from '../netlify/functions/org-cleanup.mjs';
@@ -17,6 +17,94 @@ function memory(initial={}){
 async function body(response,status=200){assert.equal(response.status,status,await response.clone().text());return response.json();}
 async function group(h,extra={},session={}){return body(await h.run({action:'create',org:newHatim(extra)},session));}
 const claim=(code,no,capability=capA,name='Takma ad')=>({action:'claim',code,no,capability,name});
+
+test('personal short return keys are stable, context bound, private and usable beside existing full links',async()=>{
+ const h=memory(),g=await group(h);await body(await h.run(claim(g.code,1)));await body(await h.run(claim(g.code,2)));
+ const p={action:'returnCode',code:g.code,no:1,capability:capA};
+ const first=await body(await h.run(p)),short=first.returnKey;
+ assert.equal(returnKeyValid(short),true);assert.equal(short.length,20);assert.equal(first.code,g.code);assert.equal(first.no,1);
+ assert.equal(short,deriveReturnKey(g.code,1,capA));assert.notEqual(short,deriveReturnKey(g.code,2,capA));
+ assert.notEqual(returnKeyHash(short,g.code,1),returnKeyHash(short,g.code,2));
+ const saved=structuredClone(h.rows.get(g.code));
+ assert.equal((await body(await h.run(p))).returnKey,short);
+ assert.equal((await body(await h.run({...p,capability:short}))).returnKey,short);
+ assert.deepEqual(h.rows.get(g.code),saved,'retries do not rotate keys or alter state');
+ const record=JSON.stringify(saved);assert.equal(record.includes(short),false);assert.equal(record.includes(capA),false);
+ for(const capability of [capA,short]){
+  const mine=await body(await h.run({action:'get',code:g.code,capabilities:{1:capability}}));assert.equal(mine.org.items[0].mine,true);assert.equal(mine.org.items[1].mine,false);
+  assert.equal(JSON.stringify(mine).includes('returnHash'),false);assert.equal(JSON.stringify(mine).includes(short),false);
+  await body(await h.run({action:'complete',code:g.code,no:1,capability}));
+  await body(await h.run({action:'undo',code:g.code,no:1,capability}));
+ }
+ await body(await h.run({action:'complete',code:g.code,no:2,capability:short}),403);
+ const other=await group(h);await body(await h.run(claim(other.code,1)));
+ await body(await h.run({action:'complete',code:other.code,no:1,capability:short}),403);
+ const publicView=await body(await h.run({action:'get',code:g.code}));assert.equal(publicView.org.items[0].mine,false);
+});
+
+test('return-code preparation requires the explicitly known current key even for an account owner or admin',async()=>{
+ const h=memory(),g=await group(h);await body(await h.run(claim(g.code,1),{uid:'alice'}));
+ const p={action:'returnCode',code:g.code,no:1};
+ for(const session of [{},{uid:'alice'},{uid:'bob'}]){
+  await body(await h.run(p,session),403);
+  await body(await h.run({...p,admin:g.adminToken},session),403);
+  await body(await h.run({...p,capabilities:{1:capA}},session),403);
+ }
+ await body(await h.run({...p,capability:capA}),403);
+ await body(await h.run({...p,capability:capA},{uid:'bob'}),403);
+ const short=(await body(await h.run({...p,capability:capA},{uid:'alice'}))).returnKey;
+ for(const session of [{},{uid:'bob'}]){
+  await body(await h.run({...p,capability:short},session),403);
+  await body(await h.run({action:'complete',code:g.code,no:1,capability:short},session),403);
+ }
+ await body(await h.run({action:'complete',code:g.code,no:1,capability:short},{uid:'alice'}));
+ await body(await h.run({...p,capability:'000000'}),400);
+ await body(await h.run({...p,capability:'I'.repeat(20)}),400);
+ await body(await h.run({...p,no:2,capability:capA},{uid:'alice'}),404);
+});
+
+test('short codes support explicit guest binding without bypassing the bound account gate',async()=>{
+ const h=memory(),g=await group(h);await body(await h.run(claim(g.code,1)));
+ const short=(await body(await h.run({action:'returnCode',code:g.code,no:1,capability:capA}))).returnKey;
+ await body(await h.run({action:'bind',code:g.code,no:1,capability:short},{uid:'alice'}));
+ await body(await h.run({action:'bind',code:g.code,no:1,capability:short},{uid:'bob'}),409);
+ await body(await h.run({action:'complete',code:g.code,no:1,capability:short}),403);
+ await body(await h.run({action:'complete',code:g.code,no:1,capability:short},{uid:'alice'}));
+ assert.equal((await body(await h.run({action:'returnCode',code:g.code,no:1,capability:capA},{uid:'alice'}))).returnKey,short);
+ await releaseAccountHatimOwnership('alice',{transaction:h.transaction});
+ await body(await h.run({action:'undo',code:g.code,no:1,capability:short}));
+ assert.equal(h.rows.get(g.code).items[0].status,'alindi','explicit account deletion retains personal recovery and reading progress');
+});
+
+test('release, recovery rotation and admin clearing revoke short codes; lost recovery and release replies stay retryable',async()=>{
+ const h=memory(),g=await group(h);await body(await h.run(claim(g.code,1)));
+ const key=async capability=>(await body(await h.run({action:'returnCode',code:g.code,no:1,capability}))).returnKey;
+ const old=await key(capA);
+ await body(await h.run({action:'release',code:g.code,no:1,capability:old}));
+ await body(await h.run({action:'release',code:g.code,no:1,capability:old}));
+ await body(await h.run({action:'returnCode',code:g.code,no:1,capability:old}),404);
+ await body(await h.run(claim(g.code,1,capB)));
+ for(const action of ['complete','undo','release','returnCode'])await body(await h.run({action,code:g.code,no:1,capability:old}),403);
+ const second=await key(capB);
+ const recovery={action:'issueRecovery',code:g.code,no:1,admin:g.adminToken,capability:capC};
+ await body(await h.run(recovery));await body(await h.run({action:'complete',code:g.code,no:1,capability:second}),403);
+ const third=await key(capC);await body(await h.run(recovery));assert.equal(await key(capC),third);
+ for(const status of ['okundu','alindi']){
+  await body(await h.run({action:'adminSet',code:g.code,no:1,admin:g.adminToken,status}));
+  assert.equal(await key(capC),third,'display/status corrections do not reassign the participant or rotate their code');
+ }
+ await body(await h.run({action:'complete',code:g.code,no:1,capability:third}));
+ await body(await h.run({action:'adminSet',code:g.code,no:1,admin:g.adminToken,status:'bos'}));
+ assert.equal(h.rows.get(g.code).items[0].returnHash,undefined);assert.equal(h.rows.get(g.code).items[0].releaseReturnHash,undefined);
+ await body(await h.run({action:'complete',code:g.code,no:1,capability:third}),403);
+ await body(await h.run(claim(g.code,1,third)),409,'short return keys never become claim-generation secrets');
+ await body(await h.run(claim(g.code,2,capB)));
+ await body(await h.run({action:'issueRecovery',code:g.code,no:2,admin:g.adminToken,capability:third}),400);
+ await body(await h.run(claim(g.code,1,'d'.repeat(64))));
+ const current=await key('d'.repeat(64));
+ await body(await h.run({action:'release',code:g.code,no:1,capability:current}));
+ await body(await h.run({action:'release',code:g.code,no:1,capability:third}),403,'the new owner releasing does not resurrect the previous owner retry proof');
+});
 
 test('new full hatim preserves all thirty cüz; partial legacy remains readable with an honest completion label',async()=>{
  const h=memory(),g=await group(h);

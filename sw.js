@@ -11,7 +11,7 @@
    · version.json / duyuru.json / manual-*.json → her zaman ağ öncelikli.
    · Yönlendirilmiş (redirected) navigasyon yanıtı önbelleğe yazılmaz.
    ═══════════════════════════════════════════════════════════════ */
-const VERSION = 'elifa-mushaf-v358-hatim-profile';
+const VERSION = 'elifa-mushaf-v359-hatim-return';
 const CACHE   = VERSION;
 
 /* Fontlar index.html içinde base64 gömülü → ayrıca cache'lenmez. */
@@ -20,7 +20,7 @@ const CORE = [
   './pwa_icon-192.png', './pwa_icon-512.png',
   './pwa_icon-maskable.png', './pwa_apple-180.png',
   './top_logo_hilal.svg', './assets/account.js?v=358', './assets/account.css?v=336',
-  './assets/hatim-community.js?v=358', './assets/hatim-community.css?v=358',
+  './assets/hatim-community.js?v=359', './assets/hatim-community.css?v=359',
   './assets/locale.js?v=2', './assets/reader-help.js?v=2', './assets/reader-help-drafts.js?v=1', './assets/reader-help.css?v=1',
   './assets/ui-extra-drafts.js?v=2', './assets/ui-extra.js?v=1',
   './assets/dua-practice.js?v=351', './assets/dua-practice.css?v=351',

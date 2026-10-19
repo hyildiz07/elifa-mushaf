@@ -14,7 +14,7 @@ function harness(fetcher,options={}){
   location:{origin:'https://example.test',href:options.url||'https://example.test/'},history:{state:{elifaTrap:true,custom:'preserve'},replaceState(state,title,url){navigation.push({state,title,url});c.location.href=String(url)}},navigator:{},setInterval:()=>1,clearInterval(){},show(){},openTogetherScreen(){},setElifaRoute(){},gotoPage(){},JUZ_PAGE:[],readerReturn:null,
   fetch:async(_url,options)=>{const p=JSON.parse(options.body);calls.push(p);return fetcher?fetcher(p,{map,calls}):Response.json({org:org(p.code),code:p.code});}
  };
- vm.createContext(c);vm.runInContext(source+`\nwindow.review={showManage,showAdminCuz,showJuz,showCreate,confirmRelease,showClaim,showRecovery,bkOpen,bkSilentRefresh,renderBirlikte,setCurrent:c=>{current=c;generation=c.ticket;},setLocal:l=>local=loadLocal({getItem:()=>JSON.stringify(l)},'fixture'),state:()=>({local,current})};`,c);
+ vm.createContext(c);vm.runInContext(source+`\nwindow.review={showReturnEntry,showManage,showAdminCuz,showJuz,showCreate,confirmRelease,showClaim,showRecovery,bkOpen,bkSilentRefresh,renderBirlikte,setCurrent:c=>{current=c;generation=c.ticket;},setLocal:l=>local=loadLocal({getItem:()=>JSON.stringify(l)},'fixture'),state:()=>({local,current})};`,c);
  const click=async id=>{const button=get('hatimDialog:[data-hc="'+id+'"]');assert.ok(button.handlers.click,'button '+id);await button.handlers.click({currentTarget:button});};
  return {c,get,map,sessionMap,calls,reports,navigation,events,storage,click,review:c.window.review,account:uid=>{currentUser=uid?{uid,emailVerified:true}:null;ready=true;for(const fn of [...sessionListeners])fn(currentUser);for(const fn of [...windowEvents.get('elifa:account-changed')||[]])fn({detail:{user:currentUser}});}};
 }
@@ -170,4 +170,54 @@ test('server preview metadata keeps a compact test-data notice across the list, 
  h.review.showManage();assert.match(h.get('hatimDialog').innerHTML,/hcDialogPreview[^>]*>Önizleme:/);
  await h.review.renderBirlikte();assert.equal(h.get('hcHomePreview').hidden,false);
  const live=harness(p=>Response.json({enabled:true,items:[],preview:false}));await live.review.renderBirlikte();assert.equal(live.get('hcHomePreview').hidden,true);assert.equal(live.get('hcHomePreview').textContent,'');
+});
+
+
+test('personal recovery instructions provide distinct link and code copies only after an authorized code response',async()=>{
+ const alias='0123456789ABCDEFGHJK';let resolve;const copied=[];const h=harness(p=>p.action==='returnCode'?new Promise(r=>resolve=r):Response.json({code:p.code,org:org(p.code)}));h.c.navigator.clipboard={writeText:async value=>copied.push(value)};
+ h.review.setCurrent(current(codeA,[{no:1,status:'alindi',mine:true}]));h.review.showRecovery(codeA,1,capA);
+ assert.match(h.get('hatimDialog').innerHTML,/Benim Cüzlerim/);assert.match(h.get('hatimDialog').innerHTML,/Cüzüme geri dön/);assert.match(h.get('hatimDialog').innerHTML,/katılım bağlantısı olarak paylaşma/);assert.equal(h.get('hcPersonalCode').value,'');
+ await h.click('copy');assert.equal(copied[0],client.recoveryUrl('https://example.test/',codeA,1,capA));assert.match(h.get('hatimStatus').textContent,/Kişisel bağlantı kopyalandı/);
+ await new Promise(r=>setImmediate(r));assert.equal(h.calls[0].action,'returnCode');assert.equal(h.calls[0].code,codeA);assert.equal(h.calls[0].capability,capA);resolve(Response.json({returnKey:alias}));await new Promise(r=>setImmediate(r));
+ const expected=client.personalReturnCode(codeA,1,alias);assert.equal(h.get('hcPersonalCode').value,expected);await h.click('copy-code');assert.equal(copied[1],expected);assert.match(h.get('hatimStatus').textContent,/Özel dönüş kodu kopyalandı/);
+ assert.equal(h.calls.some(p=>/bind|claim|issueRecovery/.test(p.action)),false);
+});
+
+test('a failed return-code preparation preserves the full recovery link and retries the same authorized key',async()=>{
+ let failed=true;const h=harness(p=>{if(failed){failed=false;throw Error('offline')}return Response.json({returnKey:'0123456789ABCDEFGHJK'})});h.review.setCurrent(current(codeA));h.review.showRecovery(codeA,1,capA);await new Promise(r=>setImmediate(r));
+ assert.match(h.get('hcReturnStatus').textContent,/hazırlanamadı/);assert.match(h.get('hatimDialog').innerHTML,new RegExp(capA));assert.equal(h.get('hcPersonalCode').value,'');
+ await h.click('return-retry');assert.equal(h.calls.length,2);assert.equal(h.calls[0].capability,h.calls[1].capability);assert.equal(h.get('hcPersonalCode').value,client.personalReturnCode(codeA,1,'0123456789ABCDEFGHJK'));
+});
+
+test('late private-code preparation cannot overwrite another dialog or another account',async()=>{
+ let resolve;const h=harness(()=>new Promise(r=>resolve=r));h.review.setCurrent(current(codeA));h.review.showRecovery(codeA,1,capA);await new Promise(r=>setImmediate(r));
+ h.review.setCurrent(current(codeB,[],2));h.review.showManage();h.get('hcPersonalCode').value='replacement';resolve(Response.json({returnKey:'0123456789ABCDEFGHJK'}));await new Promise(r=>setImmediate(r));assert.equal(h.get('hcPersonalCode').value,'replacement');
+});
+
+test('private recovery entry rejects public participation and administrator codes without network access',async()=>{
+ const h=harness();h.review.showReturnEntry();h.get('hcReturnInput').value=codeA;await h.click('return-open');assert.equal(h.calls.length,0);assert.match(h.get('hcError').textContent,/genel katılım veya yönetici/);
+ h.get('hcReturnInput').value=client.adminUrl('https://example.test/',admin);await h.click('return-open');assert.equal(h.calls.length,0);assert.match(h.get('hcError').textContent,/sana özel C1/);
+ assert.match(h.get('hatimDialog').innerHTML,/cüzü aldığın hesapla giriş yap/);assert.match(h.get('hatimDialog').innerHTML,/Genel hatim kodu yalnız yeni katılım/);
+});
+
+test('typed short personal codes reopen only after explicit confirmation and retain recoverable local proof without automatic binding',async()=>{
+ const alias='0123456789ABCDEFGHJK',h=harness(p=>Response.json({code:p.code,org:org(p.code,[{no:1,status:'alindi',mine:true}],false)}));h.review.showReturnEntry();h.get('hcReturnInput').value=client.personalReturnCode(codeA,1,alias).toLowerCase().replaceAll('-',' ');await h.click('return-open');
+ assert.equal(h.calls.length,0);assert.match(h.get('hatimDialog').innerHTML,/Kişisel cüz bağlantısı/);await h.click('recover');assert.ok(h.calls.every(p=>p.action==='get'));assert.equal(h.calls[0].capabilities[1],alias);assert.equal(h.review.state().local.capabilities[codeA][1],alias);
+});
+
+test('clipboard denial offers the private code with the correct label and never labels it as a public link',async()=>{
+ const h=harness(()=>Response.json({returnKey:'0123456789ABCDEFGHJK'}));h.review.setCurrent(current(codeA));h.review.showRecovery(codeA,1,capA,true);await new Promise(r=>setImmediate(r));assert.match(h.get('hatimDialog').innerHTML,/aynı hesapla giriş yap; özel kod tek başına/);
+ await h.click('copy-code');assert.match(h.get('hatimDialog').innerHTML,/Özel dönüş kodu · seçip kopyala/);assert.match(h.get('hatimDialog').innerHTML,/C1-/);assert.doesNotMatch(h.get('hatimDialog').innerHTML,/Katılım bağlantısı/);
+});
+
+
+test('a private code arriving after an account switch cannot leak into the new account or its dialog',async()=>{
+ let resolve;const h=harness(()=>new Promise(r=>resolve=r),{uid:'A'});h.review.setCurrent(current(codeA));h.review.showRecovery(codeA,1,capA,true);await new Promise(r=>setImmediate(r));
+ h.account('B');h.review.showReturnEntry();h.get('hcPersonalCode').value='B untouched';resolve(Response.json({returnKey:'0123456789ABCDEFGHJK'}));await new Promise(r=>setImmediate(r));
+ assert.equal(h.get('hcPersonalCode').value,'B untouched');assert.deepEqual(Object.keys(h.review.state().local.capabilities),[]);assert.match(h.get('hatimDialog').innerHTML,/Cüzüme geri dön/);
+});
+
+test('same-device return opens My Juz without requesting a secret or exposing it in list markup',async()=>{
+ const h=harness();h.review.setLocal({mine:[{code:codeA,type:'hatim',title:'My khatm'}],capabilities:{[codeA]:{1:capA}},snapshots:{[codeA]:{items:[{no:1,status:'alindi',mine:true}]}}});
+ h.review.showReturnEntry();await h.click('my-juz');assert.equal(h.calls.length,0);assert.match(h.get('birlikte').innerHTML,/data-hc="return-entry"/);assert.match(h.get('hatimList').innerHTML,/data-open="aaaaaa"/);assert.doesNotMatch(h.get('hatimList').innerHTML,new RegExp(capA));
 });

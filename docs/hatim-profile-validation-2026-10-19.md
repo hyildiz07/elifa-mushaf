@@ -13,7 +13,7 @@
 ## Doğrulama
 
 - Üretim build: 493 test, 490 başarılı, 0 başarısız; 3 emülatöre bağlı test normal koşuda atlandı.
-- Son izole önizleme build: 513 test, 510 başarılı, 0 başarısız; 3 emülatöre bağlı test ayrı koşuyla doğrulandı.
+- Son izole önizleme build (v359): 527 test, 524 başarılı, 0 başarısız; 3 emülatöre bağlı test önceki ayrı koşuyla doğrulandı.
 - Ayrı gerçek yerel Firebase Auth/Firestore emülatör koşusu: 13/13 başarılı, 0 atlanan. Eşzamanlı cüz talebi, geçersiz eski kurtarma isteği, hesap bağlama/ayırma, profil revizyonu, yedek izolasyonu, yetki kuralları ve silme tekrarları dahil.
 - Bağımsız hesap denetimi: başka sekmede çalışma alanı değişirken geciken yedek geri yükleme reddedilir; diğer hesabın cihaz verisi korunur.
 - Hatim UI regresyonları: eski modalın başka hatme mutation göndermesi, geç yanıt, depolama başarısızlığı, tokenın istekten önce saklanması, özel başlangıç bağlantısı/auth yarışı ve URL yenileme senaryoları.
@@ -24,6 +24,8 @@
 - Netlify önizleme denemeleri ayrı `elifaOrgPreviewRuns/{deploy}/records` alanına gider. Her yeni önizleme dağıtımı ayrı deneme alanı kullanır. Üretim koleksiyonuna ve eski Blobs deposuna geri dönüş yoktur; geçersiz dağıtım kimlikleri reddedilir. Önizleme hem istemcide Firebase hesap başlangıcını hem sunucuda hesap/bulut işlemlerini kapatır.
 - Çalışma ortamı Netlify'ın gerçek ikinci handler argümanındaki `context.deploy.context/id` üzerinden seçilir; build değişkenlerinin fonksiyon çalışma anında bulunacağı varsayılmaz. Gerçek default org/account/cleanup girişleri aynı altyapı spy testiyle doğrulandı. Kaynak: [Netlify Functions deploy context](https://docs.netlify.com/build/functions/api/#deploy).
 - Açık hatim listesinin gerçek sunucu hatasında yanlışlıkla “kapalı” görünmesi giderildi; yüklenme, hata ve doğrulanmış kapalı durumları ayrı gösterilir.
+- Kişisel dönüş: aynı cihazda Benim Cüzlerim, web bağlantısı ve uygulama içinden C1 kodu yolları ayrı açıklanır. Kişisel kod, genel katılım kodundan ayrıdır; eski tam bağlantılar geçerlidir. 100 bitlik özel bölüm yalnız geçerli mevcut kişisel anahtarla hazırlanır; sunucu bağlamlı hash saklar. Hesap bağı atlanmaz; cüz bırakma/erişim yenileme eski kodu iptal eder.
+- v359 tarayıcı kontrolünde yerel gerçek handler ile cüz alındı; 127.0.0.1 ve localhost'un ayrı cihaz kayıtları arasında küçük harf/boşluklu kod girilerek aynı cüzün sahipliği geri alındı. Kod hazırlama hatası, geciken cevap, hesap değişimi, clipboard engeli, yanlış özel kodun genel katılıma düşmemesi ve eski kod iptali regresyonlarla kapsanır.
 
 ## Yayın sınırı
 

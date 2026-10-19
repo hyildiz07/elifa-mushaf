@@ -15,7 +15,7 @@
 import { withOrgTransaction } from '../../server/database.mjs';
 import {firebaseServices} from '../../server/firebase.mjs';
 import {deploymentContext,previewResponse} from '../../server/deploy-context.mjs';
-import {capabilityValid,capabilityHash,membershipKey,closedAccountKey,creationFingerprint,usedCapability,rememberCapability,fullHatim,ownsItem,itemView,rememberMembership,validDate} from '../../server/hatim-access.mjs';
+import {capabilityValid,capabilityHash,returnKeyValid,accessKeyValid,deriveReturnKey,returnKeyHash,matchesItemKey,membershipKey,closedAccountKey,creationFingerprint,usedCapability,rememberCapability,fullHatim,ownsItem,itemView,rememberMembership,validDate} from '../../server/hatim-access.mjs';
 
 const ALPHA = 'abcdefghijkmnpqrstuvwxyz23456789'; // karışan harfler yok (l,o,0,1)
 
@@ -28,11 +28,11 @@ function randCode(n) {
 }
 
 /* Zikirde kişi başı sayı DIŞARI SIZMAZ — sadece toplam + isimler. */
-function publicView(org, isAdmin, p={}, session={}) {
+function publicView(org, isAdmin, p={}, session={},code=org.code||p.code) {
   const v = {
     type: org.type, title: org.title, zikirAd: org.zikirAd, hedef: org.hedef,
     dueDate: org.dueDate, adminName: org.adminName, createdAt: org.createdAt,
-    items: (org.items||[]).map(item=>itemView(item,p,session)), public: !!org.public,
+    items: (org.items||[]).map(item=>itemView(item,p,session,code)), public: !!org.public,
     archived: !!org.archivedAt,
     fullHatim: org.type==='hatim'&&fullHatim(org.items),
     complete: org.type==='hatim'&&!!org.items?.length&&org.items.every(i=>i.status==='okundu'),
@@ -212,9 +212,9 @@ export async function handleOrg(p,store,session={}){
     if (r) return r;
   }
 
-  if(p.capability!==undefined&&!capabilityValid(p.capability))return fail('Kişisel erişim anahtarı geçersiz');
+  if(p.capability!==undefined&&!accessKeyValid(p.capability))return fail('Kişisel erişim anahtarı geçersiz');
   if(p.capabilities!==undefined){
-    if(!p.capabilities||typeof p.capabilities!=='object'||Array.isArray(p.capabilities)||Object.keys(p.capabilities).length>30||Object.entries(p.capabilities).some(([n,t])=>!/^([1-9]|[12][0-9]|30)$/.test(n)||!capabilityValid(t)))return fail('Kişisel erişim anahtarları geçersiz');
+    if(!p.capabilities||typeof p.capabilities!=='object'||Array.isArray(p.capabilities)||Object.keys(p.capabilities).length>30||Object.entries(p.capabilities).some(([n,t])=>!/^([1-9]|[12][0-9]|30)$/.test(n)||!accessKeyValid(t)))return fail('Kişisel erişim anahtarları geçersiz');
   }
   if(p.action==='myList'){
     if(!session.uid)return fail('Cüzlerini hesabından görmek için giriş yap.',401);
@@ -294,7 +294,7 @@ export async function handleOrg(p,store,session={}){
 
   const isAdmin = (!!p.admin && p.admin === org.adminToken)||(!!session.uid&&org.ownerUid===session.uid);
   const save = () => { org.lastActivity = Date.now(); return store.setJSON(code, org); };
-  const view=()=>publicView(org,isAdmin,p,session);
+  const view=()=>publicView(org,isAdmin,p,session,code);
   const ownerItem=()=>{
     if(org.type!=='hatim')return null;
     return (org.items||[]).find(i=>i.no===+p.no);
@@ -322,20 +322,31 @@ export async function handleOrg(p,store,session={}){
     if(name.length<2||name.length>60)return fail('2–60 karakterlik ad veya takma ad yaz.');
     rememberCapability(it,capabilityHash(p.capability));
     Object.assign(it,{status:'alindi',name,ts:Date.now(),claimHash:capabilityHash(p.capability),ownerUid:session.uid||null});
-    delete it.releaseHash;delete it.releasedUid;
+    delete it.returnHash;delete it.releaseReturnHash;delete it.releaseHash;delete it.releasedUid;
     await rememberMembership(store,session.uid,code);await save();
     return json({org:view(),code,claimedNo:it.no});
+  }
+  if(p.action==='returnCode'){
+    const it=ownerItem();
+    if(!it||it.status==='bos')return fail('Etkin cüz katılımı bulunamadı.',404);
+    // A signed-in owner or administrator alone cannot mint a new bearer key.
+    // The caller must explicitly possess the current full or prepared short key.
+    if(!matchesItemKey(it,p.capability,code)||(it.ownerUid&&it.ownerUid!==session.uid))return fail('Kişisel dönüş kodu için güncel kişisel anahtarın gerekli.',403);
+    const returnKey=returnKeyValid(p.capability)?p.capability:deriveReturnKey(code,it.no,p.capability);
+    const digest=returnKeyHash(returnKey,code,it.no);
+    if(it.returnHash!==digest){it.returnHash=digest;await save();}
+    return json({code,no:it.no,returnKey});
   }
   if(['release','complete','undo'].includes(p.action)){
     const it=ownerItem();
     if(!it)return fail('Cüz bulunamadı');
-    if(p.action==='release'&&it.status==='bos'&&((session.uid&&it.releasedUid===session.uid)||(!it.releasedUid&&capabilityHash(p.capability)&&capabilityHash(p.capability)===it.releaseHash)))return json({org:view(),code});
-    if(!ownsItem(it,p,session))return fail('Yalnız kendi cüzünü değiştirebilirsin. Eski katılımsa yöneticiden sana özel dönüş bağlantısı iste.',403);
+    if(p.action==='release'&&it.status==='bos'&&((session.uid&&it.releasedUid===session.uid)||(!it.releasedUid&&((capabilityHash(p.capability)&&capabilityHash(p.capability)===it.releaseHash)||(returnKeyHash(p.capability,code,it.no)&&returnKeyHash(p.capability,code,it.no)===it.releaseReturnHash)))))return json({org:view(),code});
+    if(!ownsItem(it,p,session,code))return fail('Yalnız kendi cüzünü değiştirebilirsin. Eski katılımsa yöneticiden sana özel dönüş bağlantısı iste.',403);
     const target=p.action==='release'?'bos':p.action==='complete'?'okundu':'alindi';
     if(it.status===target)return json({org:view(),code});
     if(p.action==='undo'&&it.status!=='okundu')return fail('Yalnız okundu işareti geri alınabilir.',409);
     it.status=target;it.ts=Date.now();
-    if(target==='bos'){rememberCapability(it,it.claimHash);it.name='';it.releaseHash=it.claimHash||null;it.releasedUid=it.ownerUid||null;delete it.claimHash;delete it.ownerUid;}
+    if(target==='bos'){rememberCapability(it,it.claimHash);it.name='';it.releaseHash=it.claimHash||null;it.releaseReturnHash=it.returnHash||null;it.releasedUid=it.ownerUid||null;delete it.claimHash;delete it.returnHash;delete it.ownerUid;}
     org.archivedAt=0;await save();
     return json({org:view(),code});
   }
@@ -347,7 +358,7 @@ export async function handleOrg(p,store,session={}){
     if(it.claimHash===capabilityHash(p.capability))return json({org:view(),code,recoveryNo:it.no});
     if(usedCapability(it,capabilityHash(p.capability)))return fail('Bu dönüş bağlantısı daha sonra yenilenmiş. Güncel bağlantıyı kullan veya yeni bir bağlantı oluştur.',409);
     rememberCapability(it,capabilityHash(p.capability));
-    it.claimHash=capabilityHash(p.capability);delete it.ownerUid;it.ts=Date.now();await save();
+    it.claimHash=capabilityHash(p.capability);delete it.returnHash;delete it.releaseReturnHash;delete it.ownerUid;it.ts=Date.now();await save();
     return json({org:view(),code,recoveryNo:it.no});
   }
   if(p.action==='bind'){
@@ -355,7 +366,7 @@ export async function handleOrg(p,store,session={}){
     const it=ownerItem();
     if(!it||it.status==='bos')return fail('Katılım bulunamadı.',404);
     if(it.ownerUid&&it.ownerUid!==session.uid)return fail('Bu katılım başka bir hesaba bağlı.',409);
-    if(it.ownerUid!==session.uid&&!ownsItem(it,p,{}))return fail('Katılımı bağlamak için kişisel dönüş anahtarı gerekli.',403);
+    if(it.ownerUid!==session.uid&&!ownsItem(it,p,{},code))return fail('Katılımı bağlamak için kişisel dönüş anahtarı gerekli.',403);
     it.ownerUid=session.uid;it.ts=Date.now();await rememberMembership(store,session.uid,code);await save();
     return json({org:view(),code});
   }
@@ -401,7 +412,7 @@ export async function handleOrg(p,store,session={}){
     if(p.name!==undefined&&(typeof p.name!=='string'||p.name.trim().length<2||p.name.length>60))return fail('2–60 karakterlik ad veya takma ad yaz.');
     {
       it.status = p.status;
-      if (p.status === 'bos') {rememberCapability(it,it.claimHash);it.name='';delete it.claimHash;delete it.ownerUid;delete it.releaseHash;delete it.releasedUid;}
+      if (p.status === 'bos') {rememberCapability(it,it.claimHash);it.name='';delete it.claimHash;delete it.returnHash;delete it.releaseReturnHash;delete it.ownerUid;delete it.releaseHash;delete it.releasedUid;}
       else if(p.name!==undefined)it.name=p.name.trim();
       it.ts = Date.now();
     }
