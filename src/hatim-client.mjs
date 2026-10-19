@@ -55,6 +55,14 @@ export function loadLocal(storage,key){
   return {mine,myName:typeof x.myName==='string'?x.myName.slice(0,60):'',pending:maps(x.pending,v=>Number.isFinite(v)&&v>=0?v:undefined),claimed:maps(x.claimed,v=>Array.isArray(v)?[...new Set(v.filter(n=>Number.isInteger(n)&&n>=1&&n<=30))]:undefined),capabilities:maps(x.capabilities,tokenMap),pendingClaims:maps(x.pendingClaims,operationMap),pendingRecovery:maps(x.pendingRecovery,operationMap),snapshots:maps(x.snapshots,v=>plain(v)?{title:typeof v.title==='string'?v.title.slice(0,120):'',type:v.type==='zikir'?'zikir':'hatim',isAdmin:v.isAdmin===true,archived:v.archived===true,updatedAt:Number.isFinite(v.updatedAt)?v.updatedAt:0,items:Array.isArray(v.items)?v.items.filter(i=>plain(i)&&Number.isInteger(i.no)&&i.no>=1&&i.no<=30&&['alindi','okundu'].includes(i.status)).slice(0,30).map(i=>({no:i.no,status:i.status,mine:true})):[]}:undefined),guestWarned:x.guestWarned===true,creation};
  }catch{return empty();}
 }
+export function forgetLocalHatim(state,code){
+ if(typeof code!=='string'||!/^[a-z0-9]{6}$/.test(code))throw Error('Hatim kodu geçersiz.');
+ const clean={...state,mine:(state.mine||[]).filter(item=>item.code!==code)};
+ for(const field of ['pending','claimed','capabilities','snapshots','pendingClaims','pendingRecovery']){
+  clean[field]={...state[field]};delete clean[field][code];
+ }
+ return clean;
+}
 export function createOrgClient({fetcher,session,base='',onError}){
  return async function api(payload){
   const user=session()?.getUser(),uid=user?.uid||null,headers={'Content-Type':'application/json'};

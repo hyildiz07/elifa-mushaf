@@ -106,6 +106,15 @@
       return empty();
     }
   }
+  function forgetLocalHatim(state, code) {
+    if (typeof code !== "string" || !/^[a-z0-9]{6}$/.test(code)) throw Error("Hatim kodu ge\xE7ersiz.");
+    const clean = { ...state, mine: (state.mine || []).filter((item) => item.code !== code) };
+    for (const field of ["pending", "claimed", "capabilities", "snapshots", "pendingClaims", "pendingRecovery"]) {
+      clean[field] = { ...state[field] };
+      delete clean[field][code];
+    }
+    return clean;
+  }
   function createOrgClient({ fetcher, session: session2, base: base2 = "", onError }) {
     return async function api2(payload2) {
       const user2 = session2()?.getUser(), uid = user2?.uid || null, headers = { "Content-Type": "application/json" };
@@ -563,7 +572,7 @@
     const d = $("hatimDialog");
     if (d.open) d.close();
     const identity = ++dialogIdentity, context = { owner, generation, current, dialog: identity };
-    d.innerHTML = `<form method="dialog"><header><h2>${esc(title)}</h2><button class="hc-close" value="cancel" aria-label="Kapat">\xD7</button></header></form><div class="hc-dialog-body">${previewNote("hcDialogPreview")}${body}<p id="hcError" class="hc-error" role="alert"></p></div><footer>${actions.map((a) => button(a.label, a.id, a.primary ? "primary" : "")).join("")}</footer>`;
+    d.innerHTML = `<form method="dialog"><header><h2>${esc(title)}</h2><button class="hc-close" value="cancel" aria-label="Kapat">\xD7</button></header></form><div class="hc-dialog-body">${previewNote("hcDialogPreview")}${body}<p id="hcError" class="hc-error" role="alert"></p></div><footer>${actions.map((a) => button(a.label, a.id, a.danger ? "danger" : a.primary ? "primary" : "")).join("")}</footer>`;
     for (const a of actions) on(d.querySelector('[data-hc="' + a.id + '"]'), "click", async (e) => {
       const b = e.currentTarget;
       if (pendingAction) return;
@@ -638,7 +647,7 @@
   function home() {
     const holder = $("birlikte");
     if (!holder) return;
-    holder.innerHTML = `<div class="hc-home"><button type="button" class="hc-button hc-home-back" data-hc="home-back">\u2039 Elifa</button><header class="hc-top"><div><small>B\u0130RL\u0130KTE</small><h1>Hatimde bulu\u015Fal\u0131m</h1><p>Bir c\xFCz se\xE7, ortak niyete kat\u0131l.</p></div><span aria-hidden="true" class="hc-emblem">\u0627</span></header>${previewNote("hcHomePreview")}<div class="hc-main-actions">${button("\uFF0B Hatim olu\u015Ftur", "create", "primary")}${button("Ba\u011Flant\u0131yla kat\u0131l", "join")}</div><div class="hc-return-entry"><button type="button" class="hc-text" data-hc="return-entry">\u21A9 C\xFCz\xFCme geri d\xF6n</button><span>Ayn\u0131 cihazda Benim C\xFCzlerim; ba\u015Fka cihazda \xF6zel kodun.</span></div><nav class="hc-tabs" aria-label="Hatim b\xF6l\xFCmleri">${[["open", "A\xE7\u0131k Hatimler"], ["mine", "Benim C\xFCzlerim"], ["created", "Olu\u015Fturduklar\u0131m"]].map(([id, name]) => `<button type="button" data-tab="${id}" aria-pressed="${id === tab}">${name}</button>`).join("")}</nav><div id="hatimStatus" role="status" aria-live="polite"></div><div id="hatimList"></div></div>`;
+    holder.innerHTML = `<div class="hc-home"><header class="hc-top"><button type="button" class="hc-button hc-home-back" data-hc="home-back" aria-label="Ana sayfaya d\xF6n">\u2039</button><div class="hc-heading"><h1>Birlikte Hatim</h1><p>Bir c\xFCz se\xE7, birlikte okuyal\u0131m.</p></div></header>${previewNote("hcHomePreview")}<div class="hc-main-actions">${button("\uFF0B Hatim olu\u015Ftur", "create", "primary")}${button("Kodla kat\u0131l", "join")}</div><div class="hc-return-entry"><button type="button" class="hc-text" data-hc="return-entry">\u21A9 C\xFCz\xFCme geri d\xF6n</button><span>Daha \xF6nce ald\u0131\u011F\u0131n c\xFCz i\xE7in</span></div><nav class="hc-tabs" aria-label="Hatim b\xF6l\xFCmleri">${[["open", "A\xE7\u0131k hatimler"], ["mine", "C\xFCzlerim"], ["created", "Ba\u015Flatt\u0131klar\u0131m"]].map(([id, name]) => `<button type="button" data-tab="${id}" aria-pressed="${id === tab}">${name}</button>`).join("")}</nav><div id="hatimStatus" role="status" aria-live="polite"></div><div id="hatimList"></div></div>`;
     on(holder.querySelector("[data-hc=home-back]"), "click", () => {
       closeDialog();
       clearInterval(window.bkRefreshTimer);
@@ -657,6 +666,13 @@
     const total = o.total || 30, done = o.done ?? o.items?.filter((x) => x.status === "okundu").length ?? 0, available = o.available ?? Math.max(0, total - (o.taken || 0)), due = dueText(o.dueDate), action = available ? "C\xFCz se\xE7" : "G\xF6r\xFCnt\xFCle";
     return `<article class="hc-card hc-list-row"><span class="hc-row-number" aria-hidden="true">${index + 1}</span><div class="hc-row-copy"><h2 title="${esc(o.title)}">${esc(o.title)}</h2><p class="hc-row-meta"><span>${done}/${total} c\xFCz okundu</span><span>${available} bo\u015F c\xFCz</span>${due ? `<span class="hc-row-due">${esc(due)}</span>` : ""}</p><progress value="${done}" max="${total}" aria-label="${done}/${total} c\xFCz okundu"></progress></div><button type="button" class="hc-button hc-row-open" data-open="${esc(o.code)}" aria-label="${esc(o.title)} \xB7 ${action}"><span>${action}</span><span aria-hidden="true">\u203A</span></button></article>`;
   }
+  function ownedCard(o, index) {
+    const mine = o.items || [], done = mine.filter((i) => i.status === "okundu").length, waiting = mine.filter((i) => i.status !== "okundu").length;
+    const juz = mine.length ? mine.slice(0, 3).map((i) => i.no).join(", ") + ". c\xFCz" + (mine.length > 3 ? " ve " + (mine.length - 3) + " c\xFCz daha" : "") : "";
+    const state = tab === "created" ? o.archived ? "Ar\u015Fivde" : "Sen ba\u015Flatt\u0131n" : juz || (o.pending ? "Kat\u0131l\u0131m kontrol ediliyor" : "Eski kat\u0131l\u0131m \xB7 a\xE7\u0131p kontrol et");
+    const progress = tab === "mine" && mine.length ? `${waiting} okunacak${done ? " \xB7 " + done + " okundu" : ""}` : "";
+    return `<article class="hc-card hc-list-row hc-owned-row"><span class="hc-row-number" aria-hidden="true">${index + 1}</span><div class="hc-row-copy"><h2 title="${esc(o.title)}">${esc(o.title)}</h2><p class="hc-row-meta"><span>${esc(state)}</span>${progress ? `<span>${esc(progress)}</span>` : ""}${o.localOnly ? '<span title="G\xFCncel durum a\xE7\u0131l\u0131nca kontrol edilir">Bu cihazda</span>' : ""}</p></div><button type="button" class="hc-button hc-row-open" data-open="${esc(o.code)}" aria-label="${esc(o.title)} \xB7 A\xE7"><span>A\xE7</span><span aria-hidden="true">\u203A</span></button></article>`;
+  }
   function renderList() {
     const list = $("hatimList");
     if (!list) return;
@@ -668,10 +684,10 @@
       else if (discoverEnabled === null) list.innerHTML = '<div class="hc-empty"><h2>A\xE7\u0131k hatim durumu hen\xFCz do\u011Frulanmad\u0131</h2><p>G\xFCncel listeyi kontrol etmek i\xE7in yeniden dene.</p>' + button("Yeniden dene", "discover-retry") + "</div>";
       else list.innerHTML = discoverEnabled && discover.length ? discover.map(card).join("") : `<div class="hc-empty"><h2>${discoverEnabled ? "Hen\xFCz a\xE7\u0131k hatim yok" : "Bir ba\u011Flant\u0131yla da kat\u0131labilirsin"}</h2><p>${discoverEnabled ? "\u0130lk hatmi sen ba\u015Flatabilirsin." : "A\xE7\u0131k hatim listesi \u015Fu an kapal\u0131. Sana g\xF6nderilen ba\u011Flant\u0131yla kat\u0131labilir veya \xF6zel bir hatim olu\u015Fturabilirsin."}</p></div>`;
     } else {
-      const records = new Map(local.mine.filter((x) => x.type === "hatim").map((m) => [m.code, { ...m, ...local.snapshots[m.code], localOnly: true }]));
+      const records = new Map(local.mine.filter((x) => x.type === "hatim").map((m) => [m.code, { ...m, ...local.snapshots[m.code], title: local.snapshots[m.code]?.title || m.title || "Hatim", localOnly: true }]));
       for (const m of accountItems) if (m.type === "hatim") records.set(m.code, { ...records.get(m.code), ...m, localOnly: false });
       const rows = [...records.values()].filter((m) => tab === "created" ? m.isAdmin || m.adminToken : (m.items || []).length || local.claimed[m.code]?.length || Object.keys(capabilities(m.code)).length);
-      list.innerHTML = (tab === "mine" ? '<div class="hc-return-row"><p>Ayn\u0131 cihazda c\xFCz\xFCn\xFC a\u015Fa\u011F\u0131dan a\xE7. Kay\u0131t g\xF6r\xFCnm\xFCyorsa \xF6zel d\xF6n\xFC\u015F kodunu kullan.</p>' + button("C\xFCz\xFCme geri d\xF6n", "return-entry") + "</div>" : "") + (!user() ? '<p class="hc-note">Misafir kay\u0131tlar\u0131 bu cihazda tutulur. Cihaz verileri silinirse \xF6zel d\xF6n\xFC\u015F ba\u011Flant\u0131n gerekir. <button class="hc-text" data-hc="account">Hesaba giri\u015F yap</button></p>' : "") + rows.map((m) => `<article class="hc-card"><div><h2>${esc(m.title)}</h2><p>${tab === "created" ? m.archived ? "Ar\u015Fivde" : "Y\xF6netici sensin" : (m.items || []).map((i) => i.no + ". c\xFCz \xB7 " + (i.status === "okundu" ? "Okudum \u2713" : "Okunacak")).join(" / ") || (m.pending ? "Kat\u0131l\u0131m sonucu do\u011Frulanmad\u0131 \xB7 a\xE7\u0131p kontrol et" : "Eski kat\u0131l\u0131m \xB7 y\xF6netici d\xF6n\xFC\u015F ba\u011Flant\u0131s\u0131 gerekli")}</p>${m.localOnly ? "<small>Cihaz kayd\u0131 \xB7 a\xE7\u0131nca g\xFCncellenir</small>" : ""}</div><button class="hc-button" data-open="${esc(m.code)}">A\xE7</button></article>`).join("") + (!rows.length ? '<div class="hc-empty"><h2>' + (tab === "created" ? "Hen\xFCz hatim olu\u015Fturmad\u0131n" : "Hen\xFCz c\xFCz se\xE7medin") + "</h2><p>A\xE7\u0131k hatimlerden veya sana g\xF6nderilen ba\u011Flant\u0131dan ba\u015Flayabilirsin.</p></div>" : "");
+      list.innerHTML = rows.map(ownedCard).join("") + (!rows.length ? '<div class="hc-empty"><h2>' + (tab === "created" ? "Hen\xFCz hatim olu\u015Fturmad\u0131n" : "Hen\xFCz c\xFCz se\xE7medin") + "</h2><p>A\xE7\u0131k hatimlerden veya sana g\xF6nderilen ba\u011Flant\u0131dan ba\u015Flayabilirsin.</p></div>" : "") + (!user() ? '<details class="hc-help"><summary>Misafir kay\u0131tlar\u0131m nas\u0131l korunur?</summary><p>Bu cihaz\u0131n verileri silinirse ki\u015Fisel d\xF6n\xFC\u015F kodun gerekir. Kodunu sakla veya <button class="hc-text" data-hc="account">hesab\u0131na giri\u015F yap</button>.</p></details>' : "");
       if (user()) {
         let guest;
         try {
@@ -888,7 +904,7 @@
   }
   function showClaim(no) {
     const c = current, guest = !user();
-    dialog(no + ". c\xFCz\xFC al", `<label class="hc-field">G\xF6r\xFCnen ad veya takma ad<input id="hcName" minlength="2" maxlength="60" value="${esc(user()?.displayName || local.myName)}" autocomplete="nickname"></label><p class="hc-note">Bu ad hatimde c\xFCz\xFCn\xFCn alt\u0131nda g\xF6r\xFCn\xFCr. Ger\xE7ek ad kullanmak zorunda de\u011Filsin.</p>${guest ? '<div class="hc-warning">Hesaps\u0131z kat\u0131l\u0131yorsun. Bu cihaz\u0131n verileri silinirse eri\u015Fimini kaybedebilirsin. Kat\u0131l\u0131mdan sonra ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131n\u0131 sakla; daha sonra hesab\u0131na da ba\u011Flayabilirsin.</div>' : ""}`, [{ id: "claim", label: "Bu c\xFCz\xFC al", primary: true, run: async () => {
+    dialog(no + ". c\xFCz\xFC al", `<label class="hc-field">Ad\u0131n / takma ad<input id="hcName" minlength="2" maxlength="60" value="${esc(user()?.displayName || local.myName)}" autocomplete="nickname"></label><p class="hc-note">Bu ad hatimde c\xFCz\xFCn\xFCn alt\u0131nda g\xF6r\xFCn\xFCr. Ger\xE7ek ad kullanmak zorunda de\u011Filsin.</p>${guest ? '<div class="hc-warning">Hesaps\u0131z kat\u0131l\u0131yorsun. Bu cihaz\u0131n verileri silinirse eri\u015Fimini kaybedebilirsin. Kat\u0131l\u0131mdan sonra ki\u015Fisel d\xF6n\xFC\u015F ba\u011Flant\u0131n\u0131 sakla; daha sonra hesab\u0131na da ba\u011Flayabilirsin.</div>' : ""}`, [{ id: "claim", label: "Bu c\xFCz\xFC al", primary: true, run: async () => {
       const name = $("hcName").value.trim();
       if (name.length < 2 || name.length > 60) throw Error("2\u201360 karakterlik ad veya takma ad yaz.");
       if (current !== c) throw Error("Hatim de\u011Fi\u015Fti. C\xFCz\xFC yeniden se\xE7.");
@@ -955,7 +971,7 @@
   function showCreate() {
     let visibilityStatus = "loading", visibilityEnabled = null;
     createDraft = local.creation || { token: secret(crypto), title: "", name: user()?.displayName || local.myName, dueDate: "", public: false };
-    dialog("Hatim olu\u015Ftur", `<p class="hc-note">30 c\xFCzl\xFCk bir hatim ba\u015Flat. Kat\u0131l\u0131mc\u0131lar hesap a\xE7madan da c\xFCz se\xE7ebilir.</p>${!user() ? '<p class="hc-warning">Hesaps\u0131z olu\u015Fturuyorsun. Cihaz verileri silinirse y\xF6netici eri\u015Fimini kaybedebilirsin. Olu\u015Fturma sonunda \xF6zel y\xF6netici ba\u011Flant\u0131n\u0131 sakla.</p>' : ""}<label class="hc-field">Hatmin ad\u0131 / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="\xD6rn. Ailemizin haftal\u0131k hatmi"></label><label class="hc-field">Y\xF6netici g\xF6r\xFCnen ad\u0131<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih \xB7 iste\u011Fe ba\u011Fl\u0131<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler kat\u0131labilsin?</legend><div id="hcVisibilityOptions" aria-live="polite"><p>Kat\u0131l\u0131m se\xE7enekleri kontrol ediliyor\u2026</p></div></fieldset>`, [{ id: "create", label: "Hatmi olu\u015Ftur", primary: true, run: async () => {
+    dialog("Hatim olu\u015Ftur", `<p class="hc-note">30 c\xFCzl\xFCk bir hatim ba\u015Flat. Kat\u0131l\u0131mc\u0131lar hesap a\xE7madan da c\xFCz se\xE7ebilir.</p>${!user() ? '<p class="hc-warning">Hesaps\u0131z devam ediyorsun. Bu cihazdaki bilgiler silinirse hatmine geri d\xF6nemeyebilirsin. Sana \xF6zel ba\u011Flant\u0131y\u0131 sakla.</p>' : ""}<label class="hc-field">Hatmin ad\u0131 / niyeti<input id="hcTitle" maxlength="120" value="${esc(createDraft.title)}" placeholder="\xD6rn. Ailemizin haftal\u0131k hatmi"></label><label class="hc-field">Ad\u0131n / takma ad<input id="hcAdminName" maxlength="60" value="${esc(createDraft.name)}" placeholder="Ad veya takma ad"></label><label class="hc-field">Hedef tarih \xB7 iste\u011Fe ba\u011Fl\u0131<input type="date" id="hcDue" value="${esc(createDraft.dueDate)}"></label><fieldset class="hc-visibility"><legend>Kimler kat\u0131labilsin?</legend><div id="hcVisibilityOptions" aria-live="polite"><p>Kat\u0131l\u0131m se\xE7enekleri kontrol ediliyor\u2026</p></div></fieldset>`, [{ id: "create", label: "Hatmi olu\u015Ftur", primary: true, run: async () => {
       if (createDraft.public && visibilityEnabled !== true) throw Error("\xD6nceki a\xE7\u0131k hatim iste\u011Fini g\xFCvenle s\xFCrd\xFCrmek i\xE7in kat\u0131l\u0131m se\xE7eneklerinin do\u011Frulanmas\u0131n\u0131 bekle veya yeniden dene.");
       const form = { title: $("hcTitle").value.trim(), name: $("hcAdminName").value.trim(), dueDate: $("hcDue").value, public: !!document.querySelector("input[name=hcVisibility][value=public]:checked") };
       if (!form.title) throw Error("Hatme bir ad ver.");
@@ -1004,7 +1020,8 @@
     dialog("Hatmin haz\u0131r", `<p>Kat\u0131l\u0131m ba\u011Flant\u0131s\u0131n\u0131 istedi\u011Fin ki\u015Filerle payla\u015Fabilirsin. A\u015Fa\u011F\u0131daki <b>y\xF6netici ba\u011Flant\u0131s\u0131 sana \xF6zeldir</b>; ayr\u0131 sakla.</p><textarea readonly class="hc-link" aria-label="\xD6zel y\xF6netici ba\u011Flant\u0131s\u0131">${esc(link)}</textarea>`, [{ id: "admin-copy", label: "Y\xF6netici ba\u011Flant\u0131s\u0131n\u0131 sakla", run: () => copy(link) }, { id: "share", label: "Kat\u0131l\u0131m ba\u011Flant\u0131s\u0131n\u0131 payla\u015F", primary: true, run: () => share(code, local.mine.find((m) => m.code === code)?.title || "Hatim") }, { id: "ok", label: "Tamam", run: closeDialog }]);
   }
   function showManage() {
-    const c = current, o = c.org;
+    const c = current, o = c?.org;
+    if (!o?.isAdmin) return;
     dialog("Hatmi y\xF6net", `<label class="hc-field">Hatmin ad\u0131<input id="hcEditTitle" maxlength="120" value="${esc(o.title)}"></label><label class="hc-field">Hedef tarih<input id="hcEditDue" type="date" value="${esc(o.dueDate || "")}"></label><p class="hc-note">${o.public ? "A\xE7\u0131k hatimler listesinde." : "Yaln\u0131z ba\u011Flant\u0131yla kat\u0131l\u0131m."}</p>`, [
       { id: "save", label: "De\u011Fi\u015Fiklikleri kaydet", primary: true, run: async () => {
         await mutate("update", null, { title: $("hcEditTitle").value.trim(), dueDate: $("hcEditDue").value || null });
@@ -1014,14 +1031,58 @@
         await mutate("publish", null, { public: !o.public });
         closeDialog();
       } },
-      { id: "fix", label: "C\xFCz durumunu d\xFCzelt / eri\u015Fim ver", run: showAdminCuz },
-      { id: "report-png", label: "PNG raporu indir", run: () => exportReport("png") },
-      { id: "report-pdf", label: "PDF / yazd\u0131rma g\xF6r\xFCn\xFCm\xFC", run: () => exportReport("pdf") },
+      { id: "fix", label: "C\xFCzleri d\xFCzenle", run: showAdminCuz },
+      { id: "report-png", label: "G\xF6rsel olarak indir", run: () => exportReport("png") },
+      { id: "report-pdf", label: "Yazd\u0131r / PDF indir", run: () => exportReport("pdf") },
       ...c.adminToken ? [{ id: "backup", label: "\xD6zel y\xF6netici ba\u011Flant\u0131m", run: () => showAdminBackup(c.code, c.adminToken) }] : [],
       { id: "archive", label: o.archived ? "Ar\u015Fivden \xE7\u0131kar" : "Ar\u015Five al", run: () => dialog(o.archived ? "Hatmi yeniden a\xE7" : "Hatmi ar\u015Fivle", "<p>Okuma kay\u0131tlar\u0131 ve ki\u015Fisel ba\u011Flant\u0131lar korunur. Ar\u015Fivdeyken yeni c\xFCz al\u0131namaz; \xE7al\u0131\u015Fma a\xE7\u0131k listeden \xE7\u0131kar.</p>", [{ id: "confirm", label: o.archived ? "Yeniden a\xE7" : "Ar\u015Five al", primary: true, run: async () => {
         await mutate(o.archived ? "reopen" : "archive");
         closeDialog();
-      } }]) }
+      } }]) },
+      ...o.type === "hatim" ? [{ id: "delete-hatim", label: "Hatmi sil", danger: true, run: confirmDeleteHatim }] : []
+    ]);
+  }
+  function confirmDeleteHatim() {
+    const c = current;
+    if (!c?.org.isAdmin || c.org.type !== "hatim") return;
+    const empty = c.org.items?.length === 30 && c.org.items.every((i) => i.status === "bos" && !i.name && !i.ts);
+    const archive = { id: "delete-archive", label: "Silmek yerine ar\u015Fivle", run: async () => {
+      await mutate("archive");
+      closeDialog();
+    } };
+    const cancel = { id: "delete-cancel", label: "Vazge\xE7", run: closeDialog };
+    if (!empty) {
+      dialog("Bu hatimde kat\u0131l\u0131m var", `<p><b>${esc(c.org.title)}</b> kal\u0131c\u0131 olarak silinemez. Kat\u0131l\u0131m\u0131 veya okuma ge\xE7mi\u015Fi olan hatimleri ar\u015Fivleyebilirsin. Kay\u0131tlar korunur; yeni c\xFCz al\u0131nmaz.</p>`, [archive, cancel]);
+      return;
+    }
+    dialog("Hatmi kal\u0131c\u0131 olarak sil", `<p><b>${esc(c.org.title)}</b> silinsin mi? Yaln\u0131z hi\xE7 kat\u0131l\u0131m olmam\u0131\u015F bo\u015F hatim silinebilir.</p><p>Bu i\u015Flem geri al\u0131namaz. Kat\u0131l\u0131m ve y\xF6netici ba\u011Flant\u0131lar\u0131 \xE7al\u0131\u015Fmaz. Kay\u0131tlar\u0131 korumak istersen ar\u015Fivle.</p>`, [
+      cancel,
+      archive,
+      { id: "delete-confirm", label: "Evet, hatmi sil", danger: true, run: async () => {
+        assertActionContext();
+        const requestOwner = owner;
+        const result = await api(payload("delete", c.code, { ...c.adminToken ? { admin: c.adminToken } : {}, confirmed: true }));
+        assertActionContext();
+        if (current !== c || requestOwner !== owner || generation !== c.ticket) throw Error("Hatim veya hesap de\u011Fi\u015Fti. G\xFCncel durumu kontrol et.");
+        if (result.ok !== true || result.deleted !== true || result.code !== c.code) throw Error("Silme sonucu do\u011Frulanamad\u0131. Yeniden kontrol et.");
+        local = forgetLocalHatim(local, c.code);
+        save();
+        accountItems = accountItems.filter((o) => o.code !== c.code);
+        discover = discover.filter((o) => o.code !== c.code);
+        closeDialog();
+        dialogIdentity++;
+        generation++;
+        clearInterval(window.bkRefreshTimer);
+        current = null;
+        window.bkCurrent = null;
+        payButton();
+        updateAddress();
+        tab = "created";
+        show("birlikte");
+        if (typeof setElifaRoute === "function") setElifaRoute("birlikte", "replace");
+        await renderBirlikte();
+        flash("Hatim silindi.");
+      } }
     ]);
   }
   async function exportReport(format) {

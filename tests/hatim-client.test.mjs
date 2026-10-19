@@ -2,9 +2,19 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {execFileSync} from 'node:child_process';
 import {webcrypto} from 'node:crypto';
-import {dueText,parseHatimLink,participationUrl,recoveryUrl,personalReturnCode,adminUrl,canonicalHatimUrl,secret,loadLocal,createOrgClient} from '../src/hatim-client.mjs';
+import {dueText,parseHatimLink,participationUrl,recoveryUrl,personalReturnCode,adminUrl,canonicalHatimUrl,secret,loadLocal,forgetLocalHatim,createOrgClient} from '../src/hatim-client.mjs';
 
 const key='ab'.repeat(32),code='abc234',base='https://mushaf.elifaplatform.com/';
+test('successful deletion removes only that hatim from every local ownership cache without changing the input or another creation draft',()=>{
+ const state={mine:[{code,adminToken:'private'},{code:'other1'}],myName:'Ad',creation:{token:key},guestWarned:true};
+ for(const field of ['pending','claimed','capabilities','snapshots','pendingClaims','pendingRecovery'])state[field]={[code]:{private:true},other1:{kept:true}};
+ const before=structuredClone(state),clean=forgetLocalHatim(state,code);
+ assert.deepEqual(state,before);assert.deepEqual(clean.mine,[{code:'other1'}]);
+ for(const field of ['pending','claimed','capabilities','snapshots','pendingClaims','pendingRecovery'])assert.deepEqual(clean[field],{other1:{kept:true}});
+ assert.deepEqual(clean.creation,before.creation);assert.equal(clean.myName,'Ad');assert.equal(clean.guestWarned,true);
+ assert.deepEqual(forgetLocalHatim(clean,code),clean);
+ assert.throws(()=>forgetLocalHatim(state,'bad'),/kodu geçersiz/);
+});
 test('personal return codes round trip in grouped, compact, lowercase and pasted multiline forms',()=>{
  const capability='0123456789ABCDEFGHJK',encoded=personalReturnCode(code,5,capability);
  assert.equal(encoded,'C1-ABC234-05-01234-56789-ABCDE-FGHJK');

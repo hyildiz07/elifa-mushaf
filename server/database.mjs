@@ -19,7 +19,7 @@ export async function firestoreStoreTransaction(db,legacy,work,{records:recordCo
      // These private indexes were introduced after the Firestore cutover and
      // have never lived in Blobs. Avoid a redundant legacy network lookup on
      // every signed-in poll / first membership / creation replay check.
-     value=/^_(?:closed|member|create)_/.test(key)?null:await legacy.get(key,{type:options.type==='text'?'text':'json'});
+     value=/^_(?:closed|member|create|deleted)_/.test(key)?null:await legacy.get(key,{type:options.type==='text'?'text':'json'});
      if(value!=null)pending.set(key,{key,deleted:false,value:JSON.stringify(value)});
     }
     reads.set(key,value);return structuredClone(value);

@@ -30,6 +30,14 @@ export function rememberCapability(item,hash){
  item.usedCapabilities=[...new Set([...(Array.isArray(item.usedCapabilities)?item.usedCapabilities:[]),item.claimHash,item.releaseHash,hash].filter(Boolean))];
 }
 export const fullHatim=items=>Array.isArray(items)&&items.length===30&&new Set(items.map(i=>i.no)).size===30&&items.every(i=>Number.isInteger(i.no)&&i.no>=1&&i.no<=30);
+export const deletedHatimKey=code=>'_deleted_'+code;
+export const adminKeyHash=value=>typeof value==='string'&&/^(?:[a-z0-9]{12}|[a-z0-9]{32})$/.test(value)
+ ?createHash('sha256').update('elifa-hatim-admin-delete-v1\0'+value).digest('hex'):null;
+// Deletion is for an unused accidental creation, never for erasing a
+// participant's work. Released/admin-cleared claims still have a history.
+export const neverUsedHatim=org=>org?.type==='hatim'&&fullHatim(org.items)&&
+ !(org.contributions?.length)&&org.items.every(i=>i.status==='bos'&&!i.name&&!i.ts&&!i.ownerUid&&
+ !i.claimHash&&!i.returnHash&&!i.releaseHash&&!i.releaseReturnHash&&!i.releasedUid&&!i.usedCapabilities?.length);
 export function ownsItem(item,p={},session={},code=p.code){
   if(!item||item.status==='bos')return false;
   if(session.uid&&item.ownerUid===session.uid)return true;

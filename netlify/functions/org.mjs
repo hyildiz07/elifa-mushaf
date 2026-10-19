@@ -16,7 +16,7 @@
 import { withOrgTransaction } from '../../server/database.mjs';
 import {firebaseServices} from '../../server/firebase.mjs';
 import {deploymentContext,previewResponse} from '../../server/deploy-context.mjs';
-import {capabilityValid,capabilityHash,returnKeyValid,accessKeyValid,deriveReturnKey,returnKeyHash,matchesItemKey,membershipKey,closedAccountKey,creationFingerprint,usedCapability,rememberCapability,fullHatim,ownsItem,itemView,rememberMembership,validDate} from '../../server/hatim-access.mjs';
+import {capabilityValid,capabilityHash,returnKeyValid,accessKeyValid,deriveReturnKey,returnKeyHash,matchesItemKey,membershipKey,closedAccountKey,creationFingerprint,usedCapability,rememberCapability,fullHatim,deletedHatimKey,adminKeyHash,neverUsedHatim,ownsItem,itemView,rememberMembership,validDate} from '../../server/hatim-access.mjs';
 
 const ALPHA = 'abcdefghijkmnpqrstuvwxyz23456789'; // karışan harfler yok (l,o,0,1)
 
@@ -258,7 +258,7 @@ export async function handleOrg(p,store,session={}){
       if(!cfg.discoverEnabled)return fail('Açık hatim listesi şu an kapalı. Bağlantıyla katılımı seçebilirsin.',403);
     }
     let code=randCode(6),adminToken=randCode(32);
-    while(await store.get(code,{type:'json'}))code=randCode(6);
+    while(await store.get(code,{type:'json'})||await store.get(deletedHatimKey(code),{type:'json'}))code=randCode(6);
     while(await store.get('a_'+adminToken,{type:'text'}))adminToken=randCode(32);
     const org = {
       type: p.org.type,
@@ -285,13 +285,24 @@ export async function handleOrg(p,store,session={}){
 
   /* ── kod çöz ── */
   let code = p.code;
+  if(p.action==='delete'&&(typeof code!=='string'||!code||p.confirmed!==true))return fail('Silmek için hatim kodu ve açık onay gerekli.');
   if(code&&!/^[a-z0-9]{6}$/.test(code))return fail('Geçersiz kod');
   if(p.admin&&!/^(?:[a-z0-9]{12}|[a-z0-9]{32})$/.test(p.admin))return fail('Geçersiz yönetici anahtarı');
   if (!code && p.admin) code = await store.get('a_' + p.admin, { type: 'text' });
   if (!code) return fail('Organizasyon bulunamadı', 404);
 
   const org = await store.get(code, { type: 'json' });
-  if (!org) return fail('Organizasyon bulunamadı', 404);
+  if (!org){
+    if(p.action==='delete'){
+      const deleted=await store.get(deletedHatimKey(code),{type:'json'});
+      if(deleted){
+        const authorized=deleted.ownerUid?deleted.ownerUid===session.uid:
+          !!adminKeyHash(p.admin)&&adminKeyHash(p.admin)===deleted.adminHash;
+        return authorized?json({ok:true,deleted:true,code,replayed:true}):fail('Bu hatmi silme yetkin yok.',403);
+      }
+    }
+    return fail('Organizasyon bulunamadı', 404);
+  }
 
   const isAdmin = (!!p.admin && p.admin === org.adminToken)||(!!session.uid&&org.ownerUid===session.uid);
   const save = () => { org.lastActivity = Date.now(); return store.setJSON(code, org); };
@@ -300,6 +311,25 @@ export async function handleOrg(p,store,session={}){
     if(org.type!=='hatim')return null;
     return (org.items||[]).find(i=>i.no===+p.no);
   };
+
+  if(p.action==='delete'){
+    // Once explicitly bound to an account, a copied organizer link cannot
+    // bypass that account's ownership for irreversible deletion.
+    const authorized=org.ownerUid?org.ownerUid===session.uid:
+      !!p.admin&&p.admin===org.adminToken;
+    if(!authorized)return fail('Bu hatmi yalnız sahibi silebilir.',403);
+    if(!neverUsedHatim(org))return fail('Bu hatimde katılım veya okuma kaydı var. Katılımcıların çalışmasını korumak için silinemez; silmek yerine arşivle.',409);
+    const idx=await store.get('_index',{type:'json'})||[];
+    if(org.ownerUid){
+      const key=membershipKey(org.ownerUid),membership=await store.get(key,{type:'json'});
+      if(Array.isArray(membership?.codes))await store.setJSON(key,{...membership,codes:membership.codes.filter(c=>c!==code)});
+    }
+    await store.setJSON(deletedHatimKey(code),{ownerUid:org.ownerUid||null,adminHash:adminKeyHash(org.adminToken),deletedAt:Date.now()});
+    await store.setJSON('_index',idx.filter(x=>x.code!==code));
+    await store.delete('a_'+org.adminToken);
+    await store.delete(code);
+    return json({ok:true,deleted:true,code});
+  }
 
   /* ── GET ── */
   if (p.action === 'get') {
