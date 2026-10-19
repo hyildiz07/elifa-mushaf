@@ -11,7 +11,7 @@ function source(name){
   return html.slice(start,html.slice(start,lineEnd).trimEnd().endsWith('}')?
     lineEnd:html.indexOf('\n}',start)+2);
 }
-const names=['buildStudySplitParts','studyValidateManualCut','playStudySplitRange',
+const names=['validStudyWordRange','studyWordBounds','buildStudySplitParts','studyValidateManualCut','playStudySplitRange',
   'playStudySplitPart','activeStudySplitSelection','studySplitRecipeCurrent',
   'playActiveStudySplit','stepBounds','stepReps'];
 function audio(){
@@ -47,8 +47,80 @@ function context(loaded=true){
   return {c,recording};
 }
 function select(c,result,ay=1,mode='manual',cutsByAy={}){
-  c.selection={sid:1,ay,parts:result.parts,selectedIndex:0,mode,cutsByAy};
+  c.selection={sid:1,ay,parts:result.parts,selectedIndex:0,mode,cutsByAy,
+    wordRange:c.studyRange.wordRange?{...c.studyRange.wordRange}:null};
 }
+
+test('partial-word study keeps canonical positions and exact audio bounds without neighboring words or the verse tail',async()=>{
+  const {c}=context();
+  c.studyRange={sid:1,from:1,to:1,wordRange:{fromAy:1,fromWord:2,toAy:1,toWord:2}};
+  const result=c.buildStudySplitParts(1,1,'manual');
+  assert.equal(result.error,null);
+  assert.deepEqual(Array.from(result.parts,p=>[p.fromPos,p.toPos,p.fromGi,p.toGi,p.f,p.t]),[[2,2,1,1,250,450]]);
+  assert.deepEqual(Array.from(result.parts[0].words,w=>w.pos),[2]);
+  assert.equal(c.studyValidateManualCut(1,1).ok,false);
+  assert.equal(c.studyValidateManualCut(1,2).ok,true,'selected end may close a part before the verse ends');
+  assert.equal(c.studyValidateManualCut(1,3).ok,false);
+  assert.ok(c.buildStudySplitParts(1,1,'manual',{1:[1]}).error);
+  assert.ok(c.buildStudySplitParts(1,1,'manual',{1:[2]}).error,'selected final is implicit, not an interior cut');
+  select(c,result);
+  assert.equal(await c.playStudySplitPart(result.parts[0]),true);
+  assert.deepEqual(Array.from(c.started,p=>[p.f,p.t]),[[250,450]]);
+});
+
+test('multi-verse word bounds retain global cut positions while validating every full verse timing row',()=>{
+  const {c,recording}=context();
+  c.studyRange.wordRange={fromAy:1,fromWord:2,toAy:2,toWord:2};
+  const result=c.buildStudySplitParts(1,2,'manual',{1:[2],2:[1]});
+  assert.equal(result.error,null);
+  assert.deepEqual(Array.from(result.parts,p=>[p.ay,p.fromPos,p.toPos,p.f,p.t]),
+    [[1,2,2,250,450],[1,3,3,450,900],[2,1,1,920,1100],[2,2,2,1100,1400]]);
+  recording.ws['1:1']=[101,250];recording.ws['1:1'][0]=103;
+  assert.match(c.buildStudySplitParts(1,2,'auto').error,/zamanları/,'unselected words still participate in recording identity validation');
+});
+
+test('partial start and end boundaries cannot cut joined or unsupported audio words',()=>{
+  const {c,recording}=context();
+  c.studyRange={sid:1,from:1,to:1,wordRange:{fromAy:1,fromWord:2,toAy:1,toWord:2}};
+  c.wordArr[0].joinNext=true;
+  assert.match(c.buildStudySplitParts(1,1,'manual').error,/başlangıcında/);
+  c.wordArr[0].joinNext=false;recording.allowedSplitCuts={1:[2]};
+  assert.match(c.buildStudySplitParts(1,1,'manual').error,/başlangıcında/);
+  recording.allowedSplitCuts={1:[1]};
+  assert.ok(c.buildStudySplitParts(1,1,'manual').error,'the selected final word also needs a verified cut');
+});
+
+test('repeated-recording fallback never widens a partial-word selection to the whole verse',()=>{
+  const {c,recording}=context();
+  c.studyRange={sid:1,from:2,to:2,wordRange:{fromAy:2,fromWord:2,toAy:2,toWord:3}};
+  recording.verseSegments[2]=[[1,920,1100],[2,1100,1250],[2,1250,1400],[3,1400,1770]];
+  for(const mode of ['auto','manual']){
+    const result=c.buildStudySplitParts(2,2,mode);
+    assert.ok(result.error);
+    assert.ok(result.parts.every(p=>p.fromPos>=2&&!p.fallbackVerse&&!p.canPlay));
+  }
+});
+
+test('partial selection fails closed when its bound resolver is unavailable instead of using a whole-verse compatibility fallback',()=>{
+  const {c}=context();c.studyWordBounds=undefined;
+  assert.equal(c.buildStudySplitParts(1,1,'manual').error,null,'old whole-verse callers remain compatible');
+  c.studyRange.wordRange={fromAy:1,fromWord:2,toAy:2,toWord:2};
+  assert.ok(c.buildStudySplitParts(1,1,'manual').error);
+  assert.equal(c.studyValidateManualCut(1,2).ok,false);
+});
+
+test('changing only selected word bounds cancels a pending split playback and invalidates its recipe',async()=>{
+  const {c,recording}=context(false);
+  c.studyRange={sid:1,from:1,to:1,wordRange:{fromAy:1,fromWord:2,toAy:1,toWord:3}};
+  const pending=c.buildStudySplitParts(1,1,'auto');select(c,pending,1,'auto');
+  assert.equal(c.studySplitRecipeCurrent(pending.parts[0].recipe),true);
+  let release;c.getAudio=()=>new Promise(resolve=>release=resolve);
+  const playing=c.playStudySplitPart(pending.parts[0]);
+  c.studyRange.wordRange.fromWord=1;
+  release(recording);
+  assert.equal(await playing,false);assert.equal(c.started,undefined);
+  assert.equal(pending.parts[0].recipe.wordRange.fromWord,2,'recipe keeps its own immutable selection identity');
+});
 
 test('automatic word parts preserve the verse tail and never overlap the next word',()=>{
   const {c}=context();

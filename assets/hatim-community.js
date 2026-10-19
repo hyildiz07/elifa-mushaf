@@ -653,9 +653,9 @@
     }));
     renderList();
   }
-  function card(o) {
-    const total = o.total || 30, done = o.done ?? o.items?.filter((x) => x.status === "okundu").length ?? 0, available = o.available ?? Math.max(0, total - (o.taken || 0));
-    return `<article class="hc-card"><div><h2>${esc(o.title)}</h2><p>${done}/${total} c\xFCz okundu \xB7 ${available} bo\u015F c\xFCz</p>${dueText(o.dueDate) ? `<small>${esc(dueText(o.dueDate))}</small>` : ""}<progress value="${done}" max="${total}" aria-label="${done}/${total} c\xFCz okundu"></progress></div><button class="hc-button" data-open="${esc(o.code)}">${available ? "C\xFCz se\xE7" : "G\xF6r\xFCnt\xFCle"}</button></article>`;
+  function card(o, index = 0) {
+    const total = o.total || 30, done = o.done ?? o.items?.filter((x) => x.status === "okundu").length ?? 0, available = o.available ?? Math.max(0, total - (o.taken || 0)), due = dueText(o.dueDate), action = available ? "C\xFCz se\xE7" : "G\xF6r\xFCnt\xFCle";
+    return `<article class="hc-card hc-list-row"><span class="hc-row-number" aria-hidden="true">${index + 1}</span><div class="hc-row-copy"><h2 title="${esc(o.title)}">${esc(o.title)}</h2><p class="hc-row-meta"><span>${done}/${total} c\xFCz okundu</span><span>${available} bo\u015F c\xFCz</span>${due ? `<span class="hc-row-due">${esc(due)}</span>` : ""}</p><progress value="${done}" max="${total}" aria-label="${done}/${total} c\xFCz okundu"></progress></div><button type="button" class="hc-button hc-row-open" data-open="${esc(o.code)}" aria-label="${esc(o.title)} \xB7 ${action}"><span>${action}</span><span aria-hidden="true">\u203A</span></button></article>`;
   }
   function renderList() {
     const list = $("hatimList");

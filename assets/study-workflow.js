@@ -131,7 +131,7 @@
   details.append(grid);
   var choice = modeControl("studyMode", (value) => {
     draftCombine = value === "cumulative";
-    render();
+    showPracticeNotice(t(modeKeys[value]));
   });
   var choiceField = field("study_method", choice.picker);
   choiceField.classList.add("workflowMethod");
@@ -189,6 +189,7 @@
     SET.repOn = true;
     saveSet();
     syncModes();
+    showPracticeNotice(t(modeKeys[value]));
     if (typeof queuePracticeModeChange === "function") queuePracticeModeChange(value);
   });
   var gearField = field("study_method", gearMode.picker);
@@ -213,6 +214,29 @@
   readerStatus.setAttribute("aria-live", "polite");
   readerStatus.hidden = true;
   $("studyBanner").after(readerStatus);
+  var progressVisible = false;
+  var progressTimer = null;
+  var noticeText = null;
+  function hidePracticeNotice() {
+    clearTimeout(progressTimer);
+    progressTimer = null;
+    progressVisible = false;
+    noticeText = null;
+    status.hidden = true;
+    readerStatus.hidden = true;
+  }
+  function showPracticeNotice(text = null) {
+    clearTimeout(progressTimer);
+    progressVisible = true;
+    noticeText = text;
+    progressTimer = setTimeout(() => {
+      progressTimer = null;
+      progressVisible = false;
+      status.hidden = true;
+      readerStatus.hidden = true;
+    }, 3e3);
+    render();
+  }
   function current() {
     return { reciter: SET.reciter, speed: SET.speed, rep: Math.min(99, Math.max(1, Math.round(SET.rep))), combineRep: SET.combineRep ?? SET.rep, rangeRep: Math.max(1, SET.rangeRep ?? SET.rep), repOn: !!SET.repOn, wait: Math.min(60, Math.max(0, SET.wait)), mode, splitCombine: !!SET.cumu };
   }
@@ -251,9 +275,11 @@
     choice.setAttribute("aria-label", t("study_method"));
     gearField.hidden = typeof gearCtx !== "undefined" && gearCtx !== "ayah";
     gearMode.setAttribute("aria-label", t("study_method"));
-    if (!lastProgress) {
-      status.hidden = true;
-      readerStatus.hidden = true;
+    if (!lastProgress || noticeText) {
+      status.textContent = noticeText || t(modeKeys[mode]);
+      readerStatus.textContent = status.textContent;
+      status.hidden = !progressVisible || !studyRange || studyRange.sid !== curS;
+      readerStatus.hidden = !progressVisible || !status.hidden;
       return;
     }
     const p = lastProgress;
@@ -268,8 +294,8 @@
     const text = location + " \xB7 " + (p.completed ? t("practice_completed") : cycleLabel + t(modeKeys[p.mode] || "mode_range") + " \xB7 " + t("practice_progress").replace("{current}", p.current).replace("{total}", p.total));
     status.textContent = text;
     readerStatus.textContent = text;
-    status.hidden = !studyRange || studyRange.sid !== curS;
-    readerStatus.hidden = !status.hidden;
+    status.hidden = !progressVisible || !studyRange || studyRange.sid !== curS;
+    readerStatus.hidden = !progressVisible || !status.hidden;
   }
   window.elifaPracticeMode = () => mode;
   window.elifaSetPracticeMode = (value) => {
@@ -338,6 +364,7 @@
     if (event === "start") {
       attempt = { mode: split ? "split" : mode === "cumulative" ? "hifz" : mode, started: Date.now() };
       lastProgress = null;
+      showPracticeNotice();
       window.elifaLog?.("playback_start", { mode: attempt.mode });
     }
     if (event === "progress" && st) {
@@ -355,6 +382,7 @@
         if (studyRange) window.elifaStudySessions?.rememberProgress({ ay: studyRange.from, completed: true });
         render();
       }
+      if (event === "stop") hidePracticeNotice();
     }
   };
   window.elifaAudioFailure = (code) => {

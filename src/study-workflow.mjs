@@ -35,7 +35,7 @@ function field(key,control){const label=document.createElement('label');label.cl
 const details=document.createElement('details');details.className='workflowSettings';
 const summary=document.createElement('summary');summary.dataset.i18n='study_options';details.append(summary);
 const grid=document.createElement('div');grid.className='workflowGrid';details.append(grid);
-const choice=modeControl('studyMode',value=>{draftCombine=value==='cumulative';render();});
+const choice=modeControl('studyMode',value=>{draftCombine=value==='cumulative';showPracticeNotice(t(modeKeys[value]));});
 const choiceField=field('study_method',choice.picker);choiceField.classList.add('workflowMethod');
 const methodHelp=document.createElement('small');methodHelp.className='repeatHelp';choiceField.append(methodHelp);
 const reciter=document.createElement('select');reciter.id='studyReciter';
@@ -48,7 +48,7 @@ for(const [key,[label,min,max,step]] of Object.entries(fields)){const input=docu
   render();
 });}
 $('studyOpen').before(choiceField,details);
-const gearMode=modeControl('practiceMode',value=>{mode=value;SET.studyMode=value;SET.cumu=value==='cumulative';SET.repOn=true;saveSet();syncModes();if(typeof queuePracticeModeChange==='function')queuePracticeModeChange(value);});
+const gearMode=modeControl('practiceMode',value=>{mode=value;SET.studyMode=value;SET.cumu=value==='cumulative';SET.repOn=true;saveSet();syncModes();showPracticeNotice(t(modeKeys[value]));if(typeof queuePracticeModeChange==='function')queuePracticeModeChange(value);});
 const gearField=field('study_method',gearMode.picker);gearField.classList.add('workflowMode');$('gearRepeats').before(gearField);
 // Short explanations stay visible next to each independent repeat scope.
 for(const [inputId,labelKey] of Object.entries({rangeRepInp:'repeat_range_count',combineRepInp:'repeat_combine_count',repInp:'repeat_ayah_count'})){
@@ -57,6 +57,13 @@ for(const [inputId,labelKey] of Object.entries({rangeRepInp:'repeat_range_count'
 }
 const status=document.createElement('p');status.id='practiceProgress';status.className='workflowProgress';status.setAttribute('role','status');status.setAttribute('aria-live','polite');status.hidden=true;$('studyBanner').append(status);
 const readerStatus=document.createElement('p');readerStatus.id='readerPracticeProgress';readerStatus.className='workflowProgress';readerStatus.setAttribute('role','status');readerStatus.setAttribute('aria-live','polite');readerStatus.hidden=true;$('studyBanner').after(readerStatus);
+let progressVisible=false,progressTimer=null,noticeText=null;
+function hidePracticeNotice(){clearTimeout(progressTimer);progressTimer=null;progressVisible=false;noticeText=null;status.hidden=true;readerStatus.hidden=true;}
+function showPracticeNotice(text=null){
+  clearTimeout(progressTimer);progressVisible=true;noticeText=text;
+  progressTimer=setTimeout(()=>{progressTimer=null;progressVisible=false;status.hidden=true;readerStatus.hidden=true;},3000);
+  render();
+}
 function current(){return {reciter:SET.reciter,speed:SET.speed,rep:Math.min(99,Math.max(1,Math.round(SET.rep))),combineRep:SET.combineRep??SET.rep,rangeRep:Math.max(1,SET.rangeRep??SET.rep),repOn:!!SET.repOn,wait:Math.min(60,Math.max(0,SET.wait)),mode,splitCombine:!!SET.cumu};}
 function fill(v){draftCombine=v.mode==='cumulative'||v.splitCombine;choice.value=v.mode;reciter.value=String(v.reciter);for(const key of Object.keys(fields))$('studySetting_'+key).value=key==='rangeRep'?Math.max(1,v[key]??v.rep):v[key]??v.rep;}
 // Opening a configured study applies its counts. The reader's transient repeat
@@ -80,14 +87,14 @@ function render(){
   methodHelp.textContent=t('mode_'+choice.value+'_help');choice.setAttribute('aria-label',t('study_method'));
   gearField.hidden=typeof gearCtx!=='undefined'&&gearCtx!=='ayah';
   gearMode.setAttribute('aria-label',t('study_method'));
-  if(!lastProgress){status.hidden=true;readerStatus.hidden=true;return;}
+  if(!lastProgress||noticeText){status.textContent=noticeText||t(modeKeys[mode]);readerStatus.textContent=status.textContent;status.hidden=!progressVisible||!studyRange||studyRange.sid!==curS;readerStatus.hidden=!progressVisible||!status.hidden;return;}
   const p=lastProgress;if(p.sid!==curS){status.hidden=true;readerStatus.hidden=true;return;}
   const partLabel=Number.isInteger(p.combinedFrom)?Array.from({length:p.part-p.combinedFrom+1},(_,i)=>p.combinedFrom+i+1).join('+'):p.part+1;
   const location=(SURAHS[p.sid-1]?.tr||'')+' · '+(p.part!==undefined?t('study_split_part')+' '+partLabel:p.from+'–'+p.to);
   const cycleLabel=p.cycles>1?t('practice_cycle').replace('{current}',p.cycle).replace('{total}',p.cycles)+' · ':'';
   const text=location+' · '+(p.completed?t('practice_completed'):cycleLabel+t(modeKeys[p.mode]||'mode_range')+' · '+t('practice_progress').replace('{current}',p.current).replace('{total}',p.total));
   status.textContent=text;readerStatus.textContent=text;
-  status.hidden=!studyRange||studyRange.sid!==curS;readerStatus.hidden=!status.hidden;
+  status.hidden=!progressVisible||!studyRange||studyRange.sid!==curS;readerStatus.hidden=!progressVisible||!status.hidden;
 }
 window.elifaPracticeMode=()=>mode;
 window.elifaSetPracticeMode=value=>{if(modeKeys[value]){mode=value;SET.studyMode=value;syncModes();}};
@@ -115,7 +122,7 @@ window.elifaStudySettings={
 window.elifaActivityBusy=()=>!!(playing||$('reader')?.classList.contains('on')||$('split')?.classList.contains('on')||$('studySetup')?.classList.contains('on')||document.getElementById('duaDetBack')?.classList.contains('show'));
 window.elifaPlaybackEvent=(event)=>{
   const st=plan[pi]||plan.at(-1);const split=window.elifaStudySplitSelection?.();
-  if(event==='start'){attempt={mode:split?'split':mode==='cumulative'?'hifz':mode,started:Date.now()};lastProgress=null;window.elifaLog?.('playback_start',{mode:attempt.mode});}
+  if(event==='start'){attempt={mode:split?'split':mode==='cumulative'?'hifz':mode,started:Date.now()};lastProgress=null;showPracticeNotice();window.elifaLog?.('playback_start',{mode:attempt.mode});}
   if(event==='progress'&&st){
     const part=st.studyPart??st.part;
     const ay=split?.ay||(mode==='range'?(studyRange?.from||rangeSelectionDraft?.from||curAy):(st.ayEnd||curAy));
@@ -127,6 +134,7 @@ window.elifaPlaybackEvent=(event)=>{
     if(attempt)window.elifaLog?.(event==='complete'?'playback_complete':'playback_stopped',{mode:attempt.mode});
     attempt=null;
     if(event==='complete'&&lastProgress){lastProgress.completed=true;if(studyRange)window.elifaStudySessions?.rememberProgress({ay:studyRange.from,completed:true});render();}
+    if(event==='stop')hidePracticeNotice();
   }
 };
 window.elifaAudioFailure=code=>{try{window.elifaLog?.('playback_error',{mode:attempt?.mode||'range',error_code:code});}catch(e){}};

@@ -103,7 +103,11 @@ function home(){
  on(holder.querySelector('[data-hc=home-back]'),'click',()=>{closeDialog();clearInterval(window.bkRefreshTimer);backFromTogether();});on(holder.querySelector('[data-hc=create]'),'click',showCreate);on(holder.querySelector('[data-hc=join]'),'click',showJoin);on(holder.querySelector('[data-hc=return-entry]'),'click',showReturnEntry);
  holder.querySelectorAll('[data-tab]').forEach(b=>on(b,'click',()=>{tab=b.dataset.tab;renderBirlikte();}));renderList();
 }
-function card(o){const total=o.total||30,done=o.done??o.items?.filter(x=>x.status==='okundu').length??0,available=o.available??Math.max(0,total-(o.taken||0));return `<article class="hc-card"><div><h2>${esc(o.title)}</h2><p>${done}/${total} cüz okundu · ${available} boş cüz</p>${dueText(o.dueDate)?`<small>${esc(dueText(o.dueDate))}</small>`:''}<progress value="${done}" max="${total}" aria-label="${done}/${total} cüz okundu"></progress></div><button class="hc-button" data-open="${esc(o.code)}">${available?'Cüz seç':'Görüntüle'}</button></article>`;}
+function card(o,index=0){
+ const total=o.total||30,done=o.done??o.items?.filter(x=>x.status==='okundu').length??0,available=o.available??Math.max(0,total-(o.taken||0)),due=dueText(o.dueDate),action=available?'Cüz seç':'Görüntüle';
+ return `<article class="hc-card hc-list-row"><span class="hc-row-number" aria-hidden="true">${index+1}</span><div class="hc-row-copy"><h2 title="${esc(o.title)}">${esc(o.title)}</h2><p class="hc-row-meta"><span>${done}/${total} cüz okundu</span><span>${available} boş cüz</span>${due?`<span class="hc-row-due">${esc(due)}</span>`:''}</p><progress value="${done}" max="${total}" aria-label="${done}/${total} cüz okundu"></progress></div><button type="button" class="hc-button hc-row-open" data-open="${esc(o.code)}" aria-label="${esc(o.title)} · ${action}"><span>${action}</span><span aria-hidden="true">›</span></button></article>`;
+}
+
 function renderList(){
  const list=$('hatimList');if(!list)return;
  renderPreviewNotice();

@@ -1,4 +1,4 @@
-# Hatim, hesap ve hıfz önizlemesi — v358
+# Hatim, hesap ve çalışma akışları — v360
 
 ## Kapsam
 
@@ -27,8 +27,19 @@
 - Kişisel dönüş: aynı cihazda Benim Cüzlerim, web bağlantısı ve uygulama içinden C1 kodu yolları ayrı açıklanır. Kişisel kod, genel katılım kodundan ayrıdır; eski tam bağlantılar geçerlidir. 100 bitlik özel bölüm yalnız geçerli mevcut kişisel anahtarla hazırlanır; sunucu bağlamlı hash saklar. Hesap bağı atlanmaz; cüz bırakma/erişim yenileme eski kodu iptal eder.
 - v359 tarayıcı kontrolünde yerel gerçek handler ile cüz alındı; 127.0.0.1 ve localhost'un ayrı cihaz kayıtları arasında küçük harf/boşluklu kod girilerek aynı cüzün sahipliği geri alındı. Kod hazırlama hatası, geciken cevap, hesap değişimi, clipboard engeli, yanlış özel kodun genel katılıma düşmemesi ve eski kod iptali regresyonlarla kapsanır.
 
+## v360 son kontroller
+
+- Son üretim build: 572 test, 569 başarılı, 0 başarısız; normal koşuda atlanan 3 Firebase test grubu ayrı gerçek emülatör koşusunda 13/13 doğrulandı.
+
+- Günlük dua kartlarının mevcut yerleşimi korundu; açıklamalar bağlama göre sadeleştirildi. Dua seçimi yalnız ilgili sözcükleri işaretler. Bakara 127 için kanonik 8–14. kelimeler (7 kelime), ses yüklemesi gecikse de hemen seçilir.
+- Seçim masaya aktarılıp kaydedildiğinde, yeniden açıldığında ve elle bölündüğünde aynı sözcük sınırları korunur. Tam âyet ve kısmi dua aynı aralıkta ayrı kayıtlar olarak açıldı. Yeni çalışma ve isim düzenleme eski kaydı ezmez.
+- Kaydedilen çalışmalar ve açık hatimler dar ekranlara uyumlu kompakt satırlara dönüştürüldü. Günlük dua listesinin tasarımı değiştirilmedi.
+- Üst çalışma durum satırı kısa süre görünür; ilerleme güncellemeleri kalıcı olarak yeniden açmaz. Kalan tekrar sayısı ayarlanan toplamı değiştirmeden azalır.
+- Bağımsız son incelemede ayar değiştirmenin yanlışlıkla oynatma başlatması ve kayıtlı sözcük sınırlarının dışına markaj genişletilmesi giderildi; 14/14 ilgili regresyon testi geçti.
+- Son gerçek Firebase Auth/Firestore emülatör koşusu: 13/13 başarılı, 0 başarısız, 0 atlanan (study-v360-firebase.log).
+
 ## Yayın sınırı
 
-Bu paket önizleme içindir. Üretim yayını yapılmadı. Gerçek telefonda kullanıcının son kabulü ve gerçek Google/Apple girişinin üretim alan adında kontrolü bu kayıtla yapılmış sayılmaz. Yeni Hatim arayüz metinleri Türkçedir; yeni profil alanları Türkçe/İngilizce gösterilir. Diğer mevcut hesap mesajlarının 20 dil kapsamı korunmuştur. Tam forum/yorum sistemi bu sürümde yoktur.
+Kullanıcı bütün çalışmaların son kontrollerinden sonra üretime yayınlanmasını açıkça onayladı. Yayın GitHub PR #20 üzerinden Netlify sürekli dağıtımıyla yapılır; tamamlanma kanıtı üretim sürümü ve dağıtım SHA kontrolüdür. Gerçek telefonda kullanıcının son kabulü ve gerçek Google/Apple girişinin üretim alan adında kontrolü bu kayıtla yapılmış sayılmaz. Yeni Hatim arayüz metinleri Türkçedir; yeni profil alanları Türkçe/İngilizce gösterilir. Diğer mevcut hesap mesajlarının 20 dil kapsamı korunmuştur. Tam forum/yorum sistemi bu sürümde yoktur.
 
-Üretimde açık hatim listesi mevcut yönetim ayarıyla kapalıdır (`discoverConfig: enabled:false`); onaylı canlı yayında ayrıca etkinleştirilmelidir. Önizlemede liste yalnız deneme alanı için açıktır. Önizlemede gerçek hesap oluşturma, giriş ve bulut işlemleri özellikle kapalıdır; bu işlemlerin doğrulaması ayrı yerel Firebase emülatör testlerine dayanır.
+Açık hatim listesinin mevcut yönetim ayarı onaylı canlı yayında etkinleştirilir. Yalnız kurucusunun açık olarak seçtiği, arşivlenmemiş hatimler listelenir; özel katılım ve kişisel dönüş anahtarları yayımlanmaz. Önizlemede liste yalnız deneme alanı için açıktır. Önizlemede gerçek hesap oluşturma, giriş ve bulut işlemleri özellikle kapalıdır; bu işlemlerin doğrulaması ayrı yerel Firebase emülatör testlerine dayanır.

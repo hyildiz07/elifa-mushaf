@@ -7,7 +7,8 @@
 
    Depo: Firestore işlemleri; mevcut Netlify Blobs verisi ilk erişimde taşınır.
 
-   Üyelik YOK. Kimlik doğrulama yok. İki anahtar var:
+   Misafir katılımı ve isteğe bağlı doğrulanmış hesap birlikte desteklenir.
+   Cüz işlemleri sahiplik anahtarı veya bağlı hesapla doğrulanır:
      · code       → katılım linki (herkese verilir)
      · adminToken → yönetici linki (yalnız kurucuda kalır)
    ══════════════════════════════════════════════════════════════════ */

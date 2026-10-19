@@ -5441,14 +5441,14 @@ window.elifaLog=function(event,params){
 })();
 </script>
 <link rel="stylesheet" href="/assets/account.css?v=336">
-<link rel="stylesheet" href="/assets/hatim-community.css?v=359">
+<link rel="stylesheet" href="/assets/hatim-community.css?v=360">
 <link rel="stylesheet" href="/assets/theme-legibility.css?v=305">
 <link rel="stylesheet" href="/assets/reader-toolbar.css?v=326">
 <link rel="stylesheet" href="/assets/split-toolbar.css?v=1">
 <link rel="stylesheet" href="/assets/gear-sheet.css?v=358">
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
-<link rel="stylesheet" href="/assets/home-study-polish.css?v=355">
+<link rel="stylesheet" href="/assets/home-study-polish.css?v=360">
 <link rel="stylesheet" href="/assets/study-workflow.css?v=355">
 <link rel="stylesheet" href="/assets/dua-practice.css?v=351">
 </head>
@@ -6323,7 +6323,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v359</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v360</span></div>
   </div>
 
   <div class="tesekkur">
@@ -8058,6 +8058,7 @@ async function openSurah(sid,jumpAy,options={}){
   }catch(e){if(request===surahRequestId)$('rbody').innerHTML='<div class="loading">Metin yüklenemedi. Sûreyi yeniden açmayı deneyin.</div>';return;}
   AD_={buffer:null,ay:{},ws:{},end:0,segs:[]};
   buildDOM(meta,jumpAy);updateStat();
+  options.onTextReady?.();
   const reciter=SET.reciter;
   // SES: ayrı denenir. Başarısız olursa (offline + indirilmemiş) metin YİNE gösterilir,
   // sadece ses çalmaz/kelime takibi olmaz. Kullanıcı okumaya devam edebilir.
@@ -8146,6 +8147,7 @@ function buildDOM(meta,jumpAy){
   if(typeof renderBookmarks==='function')renderBookmarks();
   wirePointer(flow);
   wirePageObserver();
+  if(focused?.wordRange)window.elifaStudySelection?.restore();
   curAy=jumpAy||(focused?.from||1);
   if(jumpAy){requestAnimationFrame(()=>{const el=$('ay-'+jumpAy);if(el)el.scrollIntoView({block:'start'});$('rscroll').scrollTop-=70;});}
   else $('rscroll').scrollTop=0;
@@ -8158,22 +8160,74 @@ function validStudyRange(sid,from,to){
     from>=1&&to>=from&&to<=meta.n;
 }
 function readStudyDraft(){
-  return {sid:Number($('studySurah').value),from:Number($('studyFrom').value),to:Number($('studyTo').value)};
+  const range={sid:Number($('studySurah').value),from:Number($('studyFrom').value),to:Number($('studyTo').value)};
+  if(studyDraft?.sid===range.sid&&studyDraft.from===range.from&&studyDraft.to===range.to&&validStudyWordRange(studyDraft.wordRange,range)){
+    range.wordRange={...studyDraft.wordRange};
+    if(studyDraft.selectionTitle)range.selectionTitle=studyDraft.selectionTitle;
+  }
+  return range;
 }
+function validStudyWordRange(words,range){
+  return !!words&&!!range&&Number.isInteger(words.fromAy)&&Number.isInteger(words.toAy)&&
+    words.fromAy===range.from&&words.toAy===range.to&&
+    Number.isInteger(words.fromWord)&&Number.isInteger(words.toWord)&&
+    words.fromWord>=1&&words.toWord>=1&&words.fromWord<=1000&&words.toWord<=1000&&
+    (words.fromAy<words.toAy||words.fromWord<=words.toWord);
+}
+function studyWordBounds(ay,range=studyRange){
+  const bounds=ayGi[ay];if(!bounds)return null;
+  if(!range?.wordRange||range.sid!==curS)return bounds;
+  const words=range.wordRange;
+  if(!validStudyWordRange(words,range)||ay<words.fromAy||ay>words.toAy)return null;
+  const start=ay===words.fromAy?wordArr.findIndex(w=>w.ay===ay&&w.pos===words.fromWord):bounds[0];
+  const end=ay===words.toAy?wordArr.findLastIndex(w=>w.ay===ay&&w.pos===words.toWord):bounds[1];
+  return start>=bounds[0]&&end<=bounds[1]&&end>=start?[start,end]:null;
+}
+function restoreStudyWordSelection(from=studyRange?.from,to=studyRange?.to){
+  if(!studyRange?.wordRange||studyRange.sid!==curS)return false;
+  if(!Number.isInteger(from)||!Number.isInteger(to)||from<studyRange.from||to>studyRange.to||from>to)return false;
+  const first=studyWordBounds(from),last=studyWordBounds(to);
+  if(!first||!last)return false;
+  selA=first[0];selB=last[1];selMode='word';renderSel();return true;
+}
+function constrainStudyWordSelection(){
+  if(!studyRange?.wordRange||studyRange.sid!==curS||selA==null)return;
+  const first=studyWordBounds(studyRange.from),last=studyWordBounds(studyRange.to);
+  const start=Math.max(Math.min(selA,selB),first?.[0]??Infinity);
+  const end=Math.min(Math.max(selA,selB),last?.[1]??-1);
+  if(start>end){selA=selB=null;return;}
+  selA=start;selB=end;selMode='word';
+}
+window.elifaStudySelection={
+  capture(){const range=$('studySetup').classList.contains('on')?readStudyDraft():studyRange;
+    return range?.wordRange?{wordRange:{...range.wordRange},...(range.selectionTitle?{selectionTitle:range.selectionTitle}:{})}:null;},
+  load(item){const range=readStudyDraft();studyDraft={sid:range.sid,from:range.from,to:range.to};
+    if(item&&item.sid===range.sid&&validStudyWordRange(item.wordRange,range)){
+      studyDraft.wordRange={...item.wordRange};
+      if(typeof item.selectionTitle==='string')studyDraft.selectionTitle=item.selectionTitle.slice(0,160);
+    }
+    updateStudySetup();},
+  clear(){this.load(null);},
+  restore:restoreStudyWordSelection
+};
 function updateStudySetup(){
-  const {sid,from,to}=readStudyDraft(),meta=SURAHS[sid-1],valid=validStudyRange(sid,from,to);
+  const draft=readStudyDraft(),{sid,from,to}=draft,meta=SURAHS[sid-1],valid=validStudyRange(sid,from,to);
   window.elifaStudySurahPicker?.sync();
   $('studyFrom').max=meta?.n||1;$('studyTo').max=meta?.n||1;
   $('studyOpen').disabled=!valid;
   $('studySummary').textContent=valid?meta.tr+' · '+from+'–'+to+'. '+(window.tr?tr('study_verses'):'âyet'):
     (window.tr?tr('study_invalid'):'Geçerli bir âyet aralığı seç.');
-  if(valid)studyDraft={sid,from,to};
+  if(valid){studyDraft=draft;if(draft.wordRange)$('studySummary').textContent+=' · '+(draft.selectionTitle||'Seçili sözler');}
 }
 function openStudySetup(fromSelection=false,fromReader=false){
   if(fromSelection){
     const range=selRange(),first=range&&wordArr[range[0]],last=range&&wordArr[range[1]];
     if(!first||!last){toast(window.tr?tr('study_select_first'):'Önce bir bölüm seç.');return;}
     studyDraft={sid:curS,from:Math.min(first.ay,last.ay),to:Math.max(first.ay,last.ay)};
+    if(range[0]!==ayGi[first.ay]?.[0]||range[1]!==ayGi[last.ay]?.[1]){
+      studyDraft.wordRange={fromAy:first.ay,fromWord:first.pos,toAy:last.ay,toWord:last.pos};
+      const dua=window.elifaDuaSelection?.();if(dua?.title)studyDraft.selectionTitle=dua.title.slice(0,160);
+    }
     studySetupReturn='reader';
   }else if(fromReader){
     studyDraft=studyRange?{...studyRange}:studyDraft;
@@ -8201,6 +8255,10 @@ function syncStudyBanner(){
 }
 async function playStudyRange(){
   const range=studyRange;if(!range||range.sid!==curS)return;
+  if(range.wordRange){
+    if(restoreStudyWordSelection())return playSelection();
+    toast('Kaydedilen kelime seçimi bu yazıda bulunamadı. Çalışmayı yeniden seç.');return;
+  }
   const request=++studyPlayRequestId,visit=surahRequestId,sid=curS,reciter=SET.reciter;
   if(audioTimingUnverified(SET.reciter,curS)){
     try{window.elifaLog?.('playback_error',{mode:'range',error_code:'timing_unverified'});}catch(e){}
@@ -8253,11 +8311,11 @@ $('studyBack').onclick=()=>{
   else{show('home');renderContinue();}
 };
 $('studyOpen').onclick=()=>{
-  const {sid,from,to}=readStudyDraft();
+  const draft=readStudyDraft(),{sid,from,to}=draft;
   if(!validStudyRange(sid,from,to)){updateStudySetup();return;}
   const resume=window.elifaStudySettings?.beforeOpen();if(resume===false)return;
-  window.elifaStudySessions?.activateDraft();
-  studyDraft={sid,from,to};studyRange={sid,from,to};readerReturn='studySetup';
+  const sessionId=window.elifaStudySessions?.activateDraft();
+  studyDraft={...draft};studyRange={...draft,sessionId};readerReturn='studySetup';
   openSurah(sid,resume?.ay||from,{study:true}).then(()=>window.elifaStudySettings?.afterOpen());
 };
 $('studyPlay').onclick=()=>{
@@ -8667,6 +8725,7 @@ $('zenTab').onclick=()=>setSelectionToolsOpen(!selectionToolsOpen);
 }
 let prevSelMulti=null;
 function renderSel(){
+  if(typeof constrainStudyWordSelection==='function')constrainStudyWordSelection();
   const r=selRange();
   const studyAction=$('selStudy');if(studyAction)studyAction.hidden=!r;
   const oldBg=new Map(prevSel.map((i,j)=>[i,prevSelBg[j]]));
@@ -8735,6 +8794,7 @@ function selTimes(){
    Metin ses yüklenmeden çizilebilir; oynatma her seferinde yeniden doğrulanır. */
 function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
   const parts=[],warningAys=[],sid=curS,recipe={sid,fromAy,toAy,mode,cutsByAy};
+  recipe.wordRange=typeof studyRange!=='undefined'&&studyRange?.wordRange?{...studyRange.wordRange}:null;
   if(!Number.isInteger(fromAy)||!Number.isInteger(toAy)||fromAy<1||
     toAy<fromAy||toAy>SURAHS[sid-1]?.n||!['auto','manual'].includes(mode))
     return {parts,error:'Geçerli bir âyet aralığı seç.'};
@@ -8744,16 +8804,21 @@ function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
     const words=wordArr.slice(gi[0],gi[1]+1),n=words.length;
     if(words.some((w,i)=>!w||w.ay!==ay||w.pos!==i+1))
       return {parts,error:ay+'. âyetin kelime sırası doğrulanamadı.'};
+    const bounds=typeof studyWordBounds==='function'?studyWordBounds(ay):recipe.wordRange?null:gi;
+    if(!bounds||!Number.isInteger(bounds[0])||!Number.isInteger(bounds[1])||
+      bounds[0]<gi[0]||bounds[1]>gi[1]||bounds[1]<bounds[0])
+      return {parts,error:ay+'. âyet seçili çalışma bölümünde değil.'};
+    const firstPos=wordArr[bounds[0]].pos,lastPos=wordArr[bounds[1]].pos;
     // Turkish Mushaf can print two timed audio words as one joined word.
     // Keep their verified timestamps together in one automatic card.
-    const cuts=mode==='auto'?Array.from({length:n-1},(_,i)=>i+1)
+    const cuts=mode==='auto'?Array.from({length:lastPos-firstPos},(_,i)=>firstPos+i)
       .filter(pos=>!words[pos-1].joinNext):
       (cutsByAy?.[ay]||[]);
-    if(!Array.isArray(cuts)||cuts.some((p,i)=>!Number.isInteger(p)||p<1||p>=n||
+    if(!Array.isArray(cuts)||cuts.some((p,i)=>!Number.isInteger(p)||p<firstPos||p>=lastPos||
       (i>0&&p<=cuts[i-1])))
       return {parts,error:ay+'. âyetin bölme noktaları sıralı ve tekil olmalı.'};
-    let start=1;
-    for(const end of [...cuts,n]){
+    let start=firstPos;
+    for(const end of [...cuts,lastPos]){
       const selected=words.slice(start-1,end);
       parts.push({sid,ay,fromPos:start,toPos:end,fromGi:selected[0].gi,
         toGi:selected.at(-1).gi,words:selected,canPlay:false,pendingAudio:true,sourceId:null,
@@ -8785,6 +8850,7 @@ function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
     // word labels then move backwards on the recording clock. Preserve the
     // complete verse instead of inventing a one-to-one word cut.
     if(raw.length>n&&audio.reciterId===223&&
+      ayParts[0]?.fromPos===1&&ayParts.at(-1)?.toPos===n&&
       (mode==='auto'||ayParts.length===1)&&ayEnd>verse[0]&&
       raw[0]?.[0]===1&&raw.at(-1)?.[0]===n&&
       raw.every((row,i)=>Array.isArray(row)&&Number.isInteger(row[0])&&row[0]>=1&&row[0]<=n&&
@@ -8814,6 +8880,11 @@ function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
     }
     if(ayEnd<raw[n-1][2]-1)
       return {parts,error:ay+'. âyetin son sesi sonraki âyetle çakışıyor.'};
+    const startCut=ayParts[0]?.fromPos-1;
+    if(startCut>0&&(words[startCut-1].joinNext||
+      audio.allowedSplitCuts?.[ay]&&!audio.allowedSplitCuts[ay].includes(startCut)||
+      raw[startCut][1]<raw[startCut-1][2]))
+      return {parts,error:ay+'. âyette seçili bölümün başlangıcında güvenilir ses sınırı yok.'};
     for(const p of ayParts){
       if(p.toPos<n){
         const left=raw[p.toPos-1],right=raw[p.toPos];
@@ -8833,11 +8904,14 @@ function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
 }
 function studyValidateManualCut(ay,pos){
   const gi=ayGi[ay],n=gi?gi[1]-gi[0]+1:0;
-  if(!Number.isInteger(pos)||pos<1||pos>n)return {ok:false,message:'Önce geçerli bir kelime seç.'};
+  const bounds=typeof studyWordBounds==='function'?studyWordBounds(ay):
+    typeof studyRange!=='undefined'&&studyRange?.wordRange?null:gi;
+  const first=bounds?wordArr[bounds[0]]?.pos:0,last=bounds?wordArr[bounds[1]]?.pos:0;
+  if(!Number.isInteger(pos)||!first||!last||pos<first||pos>last)return {ok:false,message:'Önce geçerli bir kelime seç.'};
   if(pos===n)return {ok:true,endOfAyah:true};
   if(wordArr[gi[0]+pos-1]?.joinNext)
     return {ok:false,message:'Yazıda birleşik görünen kelimenin içinden kesim yapılamaz.'};
-  const result=buildStudySplitParts(ay,ay,'manual',{[ay]:[pos]});
+  const result=buildStudySplitParts(ay,ay,'manual',{[ay]:pos===last?[]:[pos]});
   if(result.error)return {ok:false,message:result.error};
   return {ok:true,pendingAudio:!!result.pendingAudio,
     message:result.pendingAudio?'Ses yüklenince kesim yeniden doğrulanacak.':''};
@@ -8859,9 +8933,12 @@ function syncStudySplitControlLabels(){
 function studySplitRecipeCurrent(recipe){
   if(!recipe||curS!==recipe.sid||studyRange?.sid!==recipe.sid||
     recipe.fromAy<studyRange.from||recipe.toAy>studyRange.to)return false;
+  const wordScope=r=>r?['fromAy','fromWord','toAy','toWord'].map(k=>r[k]).join(':'):'';
+  if(wordScope(recipe.wordRange)!==wordScope(studyRange.wordRange))return false;
   const current=activeStudySplitSelection();
   return !!current&&current.sid===recipe.sid&&current.ay===recipe.fromAy&&
     recipe.fromAy===recipe.toAy&&current.mode===recipe.mode&&
+    wordScope(current.wordRange)===wordScope(recipe.wordRange)&&
     JSON.stringify(current.cutsByAy)===JSON.stringify(recipe.cutsByAy);
 }
 function playActiveStudySplit(firstIndex=0,lastIndex=null){
@@ -9740,16 +9817,18 @@ $('playBtn2').onclick=()=>{
 $('prevPart').onclick=()=>startFromPart((plan[pi]&&plan[pi].part!==undefined?plan[pi].part:(splitSelIdx||0))-1);
 $('nextPart').onclick=()=>startFromPart((plan[pi]&&plan[pi].part!==undefined?plan[pi].part:(splitSelIdx||0))+1);
 let repLongFired2=false;
-$('repTog2').onclick=()=>{if(repLongFired2){repLongFired2=false;return;}SET.repOn=!SET.repOn;saveSet();syncPracticeControls();toast(SET.repOn?'Tekrar açık · '+SET.rep+'×':'Tekrar kapalı');};
-$('repPlus2').onclick=()=>{SET.rep=Math.min(99,SET.rep+1);SET.repOn=true;saveSet();syncPracticeControls();};
-$('repMinus2').onclick=()=>{SET.rep=Math.max(1,SET.rep-1);saveSet();syncPracticeControls();};
+$('repTog2').onclick=()=>{if(repLongFired2){repLongFired2=false;return;}SET.repOn=!SET.repOn;saveSet();syncPracticeControls();toast(SET.repOn?'Tekrar açık · '+(SET[splitRepeatKey()]??SET.rep)+'×':'Tekrar kapalı');};
+$('repPlus2').onclick=()=>{const key=splitRepeatKey();SET[key]=Math.min(99,(SET[key]??SET.rep)+1);SET.repOn=true;saveSet();syncPracticeControls();};
+$('repMinus2').onclick=()=>{const key=splitRepeatKey();SET[key]=Math.max(key==='combineRep'?0:1,(SET[key]??SET.rep)-1);saveSet();syncPracticeControls();};
 $('cumuTog2').onclick=()=>{SET.cumu=!SET.cumu;saveSet();syncPracticeControls();queuePracticeModeChange(SET.cumu);toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');};
 (function(){const b=$('repTog2');if(!b)return;let t=null;
   b.addEventListener('pointerdown',()=>{repLongFired2=false;t=setTimeout(()=>{t=null;repLongFired2=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx='parts';fillGearSheet();openSheet('gearSheet');},480);});
   const c=()=>{if(t){clearTimeout(t);t=null;}};b.addEventListener('pointerup',c);b.addEventListener('pointerleave',c);b.addEventListener('pointercancel',c);})();
 function syncRep2(){
-  syncRepeatScope('splitRepeatScope','repTog2','rep');
-  const rn=$('repN2');if(rn)rn.textContent=SET.rep;
+  const key=typeof splitRepeatKey==='function'?splitRepeatKey():'rep';
+  const remaining=typeof remainingStepRepeats==='function'?remainingStepRepeats():SET.rep;
+  syncRepeatScope('splitRepeatScope','repTog2',key,remaining);
+  const rn=$('repN2');if(rn)rn.textContent=remaining;
   const rc=$('repctl2');if(rc)rc.classList.toggle('on',SET.repOn);
   if(playing&&plan[pi]?.part!==undefined)updateStat();
   if(splitAy!=null&&$('split').classList.contains('on'))updateSplitIntro();
@@ -9837,6 +9916,7 @@ $('noteSave').onclick=()=>{
 /* ---------- playback engine ---------- */
 let plan=[],pi=0,pr=0,pieceCursor=0,raf=null,btimer=null,waiting=null,pendingFn=null,hiEl=null,playing=false;
 let planCycle=0,planCycleTemplate=null,pendingPracticeTransition=null;
+let completedStudyRounds=false,completedStepRepeatKey=null;
 let audioRequestId=0,stepRequestId=0;
 function terminalMuallimTailEnd(st,t){
   const a=AD_,ay=st?.ayEnd;
@@ -9997,12 +10077,14 @@ function applyPendingPracticeTransition(){
     plan=next;planCycle++;
     if(planCycle>=planCycleReps()){finishPlan();return true;}
   }
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   updateStat();pauseThen(goStep);return true;
 }
 function advancePracticeCycle(){
   if(!plan.rangeCycles||plan.at(-1)?.guardedTail)return false;
   if(planCycle+1>=planCycleReps())return false;
   planCycle++;plan=planCycleTemplate||plan;pi=0;pr=0;pieceCursor=0;lastLbl='';
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   updateStat();pauseThen(goStep);return true;
 }
 function skipDisabledPracticeStep(){
@@ -10015,6 +10097,7 @@ function skipDisabledPracticeStep(){
 async function goStep(){
   const st=plan[pi];if(!st)return;
   if(st.dyn&&st.repeatKind==='combine'&&Number(SET.combineRep??SET.rep)===0&&skipDisabledPracticeStep())return;
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   try{globalThis.window?.elifaPlaybackEvent?.('progress');}catch(e){}
   if(typeof SET!=='undefined'&&
     ((SET.reciter===3&&unsafeSudaisNormalStep(st))||(SET.reciter===5&&unsafeHaniNormalStep(st)))){
@@ -10389,6 +10472,7 @@ function handleBoundary(){
   if(typeof applyPendingPracticeTransition==='function'&&applyPendingPracticeTransition())return;
   pr++;
   const st=plan[pi];
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   if(pr<stepReps(st)){updateStat();pauseThen(goStep);}
   else{pi++;pr=0;
     if(pi<plan.length){updateStat();pauseThen(()=>{updateStat();goStep();});}
@@ -10421,6 +10505,9 @@ function runPlan(p){
   if(p.some(st=>st.sourceRanges))normalChapterAudio=AD_;
   plan=p;pi=0;pr=0;pieceCursor=0;playing=true;
   planCycle=0;planCycleTemplate=p;pendingPracticeTransition=null;
+  completedStudyRounds=false;
+  completedStepRepeatKey=null;
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   try{globalThis.window?.elifaPlaybackEvent?.('start');}catch(e){}
   goStep();setIco(true);updateStat();
   wake(true);
@@ -10466,9 +10553,13 @@ function pauseThen(fn){
 function finishPlan(){
   const wasFull=plan.length&&plan[plan.length-1].full;
   const guardedTail=!!(plan.length&&plan[plan.length-1].guardedTail);
+  const last=plan.at(-1),completedPart=last&&(last.part!==undefined||last.studyPart!==undefined);
   try{if(guardedTail)globalThis.window?.elifaAudioFailure?.('timing_unverified');else globalThis.window?.elifaPlaybackEvent?.('complete');}catch(e){}
   const nextS=curS+1;
   stopPlan(false);
+  completedStudyRounds=!guardedTail;
+  completedStepRepeatKey=!guardedTail&&completedPart?(last.repeatKind==='combine'||last.combo?'combineRep':'rep'):null;
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   if(guardedTail){
     toast('Sonraki âyetin son sesi doğrulanamadı. Güvenli bölüm bitti; devam etmek için başka hoca seç.');
   }else if(wasFull&&nextS<=114){
@@ -10487,6 +10578,9 @@ function stopPlan(silent,keepLoading=false){
   if(!keepLoading&&AD_&&AD_.selAbort)AD_.selAbort.abort();
   playing=false;plan=[];pi=0;pr=0;pieceCursor=0;
   planCycle=0;planCycleTemplate=null;pendingPracticeTransition=null;
+  completedStudyRounds=false;
+  completedStepRepeatKey=null;
+  if(typeof syncPlaybackRepeatCounters==='function')syncPlaybackRepeatCounters();
   if(raf){cancelAnimationFrame(raf);raf=null;}
   if(waiting){clearTimeout(waiting);waiting=null;pendingFn=null;}
   if(htmlBtimer){clearTimeout(htmlBtimer);htmlBtimer=null;}
@@ -10573,6 +10667,7 @@ function unsafeHaniNormalStep(step){
      (curS===34&&step.ayEnd===46)||(curS===65&&step.ayEnd===12)));
 }
 function playAyahOnce(a){
+  if(studyRange?.sid===curS&&studyRange.wordRange){if(restoreStudyWordSelection(a,a))playSelection();return;}
   const chapter=normalChapterAudio||AD_;if(!chapter?.ay[a])return;curAy=a;
   const steps=[normalVerseStep(chapter,a,a,{x:1,ayEnd:a,l:a+'. âyet'})];
   if(normalVersePlanReady(steps))runPlan(steps);
@@ -10580,6 +10675,7 @@ function playAyahOnce(a){
 function playFromAyah(a){
   const focused=studyRange?.sid===curS?studyRange:null;
   if(focused)a=Math.max(focused.from,Math.min(focused.to,a));
+  if(focused?.wordRange){if(restoreStudyWordSelection(a,focused.to))playSelection();return;}
   const chapter=normalChapterAudio||AD_,last=focused?.to||SURAHS[curS-1].n;
   if(!chapter?.ay[a]||!chapter?.ay[last])return;curAy=a;
   const steps=[normalVerseStep(chapter,a,last,{x:1,l:SURAHS[curS-1].tr,full:!focused})];
@@ -10603,6 +10699,7 @@ function playAyahProgram(a,endAy=null){
   if(!chapter||!chapter.ay[a])return;curAy=a;
   const lastAy=Number.isInteger(endAy)?Math.max(a,Math.min(focused?.to||SURAHS[curS-1].n,endAy)):
     (focused?.to||SURAHS[curS-1].n);
+  if(focused?.wordRange){if(restoreStudyWordSelection(a,lastAy))playSelection();return;}
 
   // SERBEST (tekrar kapalı, birikimli kapalı) → buradan sûre sonuna TEK KESİNTİSİZ AKIŞ
   if(!SET.repOn && !combine){
@@ -10678,6 +10775,7 @@ $('playBtn').onclick=()=>{
 /* SEÇİMİ ÇAL: tam seçilen aralık, deterministik kesim korumalı.
    Tam âyet seçiliyse âyet-sonu güvenliği; kelime/parçaysa kelime kesimi güvenliği. */
 async function playSelection(){
+  if(typeof constrainStudyWordSelection==='function')constrainStudyWordSelection();
   if(selA==null)return;
   if(typeof audioTimingUnverified==='function'&&audioTimingUnverified(SET.reciter,curS)){
     toast('Bu hocanın bu sûre kaydında kelime ve âyet sınırları güvenilir değil. Seçimin korundu; ses için başka bir hoca seç.');
@@ -10841,20 +10939,46 @@ $('nextAy').onclick=()=>{
 let repLongFired=false;
 function syncRep(){
   const key=readerRepeatKey();
-  syncRepeatScope('readerRepeatScope','repTog',key);
-  const rn=$('repN');if(rn)rn.textContent=SET[key];
+  const remaining=typeof remainingStudyRounds==='function'?remainingStudyRounds():SET[key];
+  syncRepeatScope('readerRepeatScope','repTog',key,remaining);
+  const rn=$('repN');if(rn)rn.textContent=remaining;
   const rc=document.querySelector('.repctl');if(rc)rc.classList.toggle('on',SET.repOn);
 }
-function syncRepeatScope(labelId,buttonId,key){
-  const token=key==='rangeRep'?'repeat_scope_work':'repeat_scope_unit';
+function syncRepeatScope(labelId,buttonId,key,count=SET[key]){
+  const token=key==='rangeRep'?'repeat_scope_work':key==='combineRep'?'pb_combine':'repeat_scope_unit';
   const translated=window.elifaT?.(token);
-  const text=translated&&translated!==token?translated:(key==='rangeRep'?'Tüm çalışma':'Âyet / parça');
+  const text=translated&&translated!==token?translated:(key==='rangeRep'?'Tüm çalışma':key==='combineRep'?'1+2':'Âyet / parça');
   const label=$(labelId);if(label){label.dataset.i18n=token;label.textContent=text;}
-  const button=$(buttonId);if(button){button.setAttribute('aria-label',text+' · '+SET[key]+'×');button.setAttribute('aria-pressed',String(!!SET.repOn));}
+  const button=$(buttonId);if(button){button.setAttribute('aria-label',text+' · '+count+'×');button.setAttribute('aria-pressed',String(!!SET.repOn));}
 }
 function readerRepeatKey(){
-  if(activeStudySplitSelection())return 'rep';
-  return window.elifaPracticeMode?.()==='range'?'rangeRep':'rep';
+  return 'rangeRep';
+}
+function remainingStudyRounds(){
+  const configured=Math.min(99,Math.max(1,Math.round(Number(SET.rangeRep??SET.rep)||1)));
+  if(typeof completedStudyRounds!=='undefined'&&completedStudyRounds)return 0;
+  if(typeof plan==='undefined'||!plan.length)return configured;
+  const total=SET.repOn?configured:1;
+  if(plan.rangeCycles)return Math.max(0,total-(typeof planCycle==='number'?planCycle:0));
+  if(plan.length===1&&plan[0].repeatKind==='range')return Math.max(0,total-(typeof pr==='number'?pr:0));
+  return 1;
+}
+function splitRepeatKey(){
+  if(typeof completedStepRepeatKey!=='undefined'&&completedStepRepeatKey)return completedStepRepeatKey;
+  const st=typeof plan!=='undefined'?plan[pi]:null;
+  return st&&(st.part!==undefined||st.studyPart!==undefined)&&(st.repeatKind==='combine'||st.combo)?'combineRep':'rep';
+}
+function remainingStepRepeats(){
+  if(typeof completedStepRepeatKey!=='undefined'&&completedStepRepeatKey)return 0;
+  const st=typeof plan!=='undefined'?plan[pi]:null;
+  if(st&&(st.part!==undefined||st.studyPart!==undefined))return Math.max(0,stepReps(st)-(typeof pr==='number'?pr:0));
+  return SET[splitRepeatKey()]??SET.rep;
+}
+function syncPlaybackRepeatCounters(){
+  syncRep();syncRep2();
+  const st=typeof plan!=='undefined'?plan[pi]:null;
+  if(Number.isInteger(st?.studyPart))window.elifaStudySplitSetIndex?.(st.studyPart);
+  window.elifaStudySplitRefreshStatus?.();
 }
 $('repTog').onclick=()=>{
   if(repLongFired){repLongFired=false;return;}
@@ -11012,6 +11136,10 @@ function applyRangeProgram(offerReciter=false){
     return false;
   }
   guardedRangeDraft=null;
+  if(typeof studyRange!=='undefined'&&studyRange?.sid===curS&&studyRange.wordRange){
+    if(!restoreStudyWordSelection(from,to)){toast('Kaydedilen kelime seçimi bulunamadı.');return false;}
+    SET.repOn=true;saveSet();syncRep();syncRep2();playSelection();return true;
+  }
   const mode=(typeof window!=='undefined'&&window.elifaPracticeMode?.())||'range';
   const verses=buildLadder(from,to,mode==='cumulative');
   if(!verses.length){toast('Seçilen aralıktaki âyetlerden en az birinin ses sınırı eksik. Aralık çalınmadı.');return false;}
@@ -12333,7 +12461,7 @@ updateStat();
   el.addEventListener('touchend',end);el.addEventListener('touchcancel',end);
 })();
 </script>
-<script src="/assets/hatim-community.js?v=359"></script>
+<script src="/assets/hatim-community.js?v=360"></script>
 <script>(function(){var s=document.getElementById('splash');if(!s)return;function go(){s.classList.add('hide');setTimeout(function(){if(s&&s.parentNode)s.parentNode.removeChild(s);},560);}var t=setTimeout(go,650);s.addEventListener('click',go);})();</script>
 
 <script>
@@ -12385,7 +12513,7 @@ updateStat();
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v359-hatim-return';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v360-study-selections';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -14927,6 +15055,10 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     dua_sure:{tr:'Namaz Sûreleri',en:'Prayer Surahs',ar:'سور الصلاة',de:'Gebetssuren',fr:'Sourates de prière',es:'Suras de oración',it:'Sure della preghiera',nl:'Gebedssoera’s',pt:'Suratas da oração',ru:'Суры намаза',id:'Surah salat',ms:'Surah solat'},
     dua_namaz:{tr:'Namaz Duaları',en:'Prayer Duas',ar:'أدعية الصلاة',de:'Gebets-Duas',fr:'Douas de prière',es:'Duas de oración',it:'Dua della preghiera',nl:'Gebedsdoea’s',pt:'Duas da oração',ru:'Дуа намаза',id:'Doa salat',ms:'Doa solat'},
     dua_gunluk:{tr:'Günlük Dualar',en:'Daily Duas',ar:'الأدعية اليومية',de:'Tägliche Duas',fr:'Douas quotidiennes',es:'Duas diarias',it:'Dua quotidiane',nl:'Dagelijkse doea’s',pt:'Duas diárias',ru:'Ежедневные дуа',id:'Doa harian',ms:'Doa harian'},
+    dua_gunluk_info:{tr:'Kur’an’dan konuya göre seçilmiş dualar ve âyetler. Dua bölümü bulunan kartlarda yalnız o kelimeler seçilir; diğer kartlar ilgili âyet veya sûreyi açar. Sesli duaları bölerek çalışmak için Dua Ezberi sekmesini kullan.',en:'Prayers and verses from the Quran, grouped by topic. Where a prayer passage is defined, only its words are selected; other cards open the relevant verse or surah. Use Dua Practice to work on recorded supplications in parts.'},
+    dua_namaz_info:{tr:'Namazda okunan dualar ve tesbihler. Arapça metin, okunuş ve anlamını açabilirsin; ses ve bölerek çalışma seçenekleri Dua Ezberi sekmesinde bulunur.',en:'Supplications and praises recited in prayer. Open the Arabic text, transliteration and meaning; recordings and part practice are available under Dua Practice.'},
+    dua_sure_info:{tr:'Bu kartlar sûreyi veya belirtilen âyetlerin tamamını okuyucuda açar. Dua bölümünü tek başına seçmek için Günlük Dualar sekmesini kullan.',en:'These cards open the full surah or the listed verses in the reader. Use Daily Duas to select a defined prayer passage on its own.'},
+    dua_selection_unavailable:{tr:'Dua kelimeleri bu yazı görünümünde eşleştirilemedi. Âyetin tamamı otomatik seçilmedi; istediğin kelimeleri işaretleyebilirsin.',en:'The prayer words could not be matched in this script. The full verse was not selected automatically; you can mark the words yourself.'},
     fav_sure_head:{tr:'Sûreler & Âyetler',en:'Surahs & Verses'},
     fav_dua_head:{tr:'Dualar',en:'Duas'},
     dua_tam:{tr:'Tam âyet',en:'Full verse',ar:'الآية كاملة',de:'Ganzer Vers',fr:'Verset entier',es:'Versículo completo',it:'Versetto intero',nl:'Hele vers',pt:'Versículo completo',ru:'Весь аят',id:'Ayat penuh',ms:'Ayat penuh'},
@@ -14947,6 +15079,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     dua_favbos:{tr:'Henüz dua favorin yok. Kartlardaki ⭐ ile ekleyebilirsin.',en:'No favorite duas yet. Tap the ⭐ on a card to add.',de:'Noch keine Favoriten',fr:'Aucun favori',es:'Sin favoritos',it:'Nessun preferito',nl:'Nog geen favorieten',pt:'Sem favoritos',ru:'Нет избранного',ar:'لا مفضلة بعد',id:'Belum ada favorit'},
     dua_ac_full:{tr:'Böl · sesli oku · tekrar (ayrı pencere)',en:'Split · recite · repeat (separate view)'},
     dua_ty_dua:{tr:'dua',en:'dua',de:'Dua',fr:'douaa',es:'dua',it:'dua',nl:'doea',pt:'dua',ru:'дуа',ar:'دعاء',id:'doa'},
+    dua_ty_ayet:{tr:'âyet',en:'verse',ar:'آية',de:'Vers',fr:'verset',es:'versículo',it:'versetto',nl:'vers',pt:'versículo',ru:'аят',id:'ayat',ms:'ayat'},
+    dua_ty_sure:{tr:'sûre',en:'surah',ar:'سورة',de:'Sure',fr:'sourate',es:'sura',it:'sura',nl:'soera',pt:'surata',ru:'сура',id:'surah',ms:'surah'},
     dua_ty_emir:{tr:'emir âyeti',en:'command verse',de:'Befehlsvers',fr:'verset d\'ordre',es:'versículo de mandato',it:'versetto di comando',nl:'gebodsvers',pt:'versículo de ordem',ru:'аят-повеление',ar:'آية أمر',id:'ayat perintah'},
     dua_meal_tam:{tr:'Âyetin tamamının meali',en:'Translation of the full verse',de:'Übersetzung des ganzen Verses',fr:'Traduction du verset entier',es:'Traducción del versículo completo',it:'Traduzione del versetto intero',nl:'Vertaling van het hele vers',pt:'Tradução do versículo completo',ru:'Перевод всего аята',ar:'ترجمة الآية كاملة',id:'Terjemahan ayat lengkap'},
     dua_markaj:{tr:'Dua kısmı işaretlidir',en:'The supplication part is highlighted',de:'Der Bittgebet-Teil ist markiert',fr:'La partie de l\'invocation est surlignée',es:'La parte de la súplica está resaltada',it:'La parte della supplica è evidenziata',nl:'Het smeekbede-gedeelte is gemarkeerd',pt:'A parte da súplica está destacada',ru:'Часть с мольбой выделена',ar:'جزء الدعاء مُعلَّم',id:'Bagian doa ditandai'},
@@ -14976,8 +15110,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     c_baslangic:{tr:'Yeni Başlangıç',en:'New Beginning',de:'Neuanfang',fr:'Nouveau départ',es:'Nuevo comienzo',it:'Nuovo inizio',nl:'Nieuw begin',pt:'Novo começo',ru:'Новое начало',ar:'بداية جديدة',id:'Awal Baru'},
     c_savas:{tr:'Savaş & Çatışma',en:'War & Conflict',de:'Krieg',fr:'Guerre',es:'Guerra',it:'Guerra',nl:'Oorlog',pt:'Guerra',ru:'Война',ar:'الحرب',id:'Perang'},
     c_sihir:{tr:'Sihir & Büyüden Korunma',en:'Against Magic',de:'Zauber & Magie',fr:'Sorcellerie',es:'Hechicería',it:'Magia',nl:'Tovenarij',pt:'Feitiçaria',ru:'Колдовство',ar:'السحر',id:'Sihir'},
-    c_gizlen:{tr:'Gizlenme & Görünmezlik',en:'Concealment',de:'Verbergen',fr:'Se cacher',es:'Ocultarse',it:'Nascondersi',nl:'Verbergen',pt:'Ocultar-se',ru:'Укрытие',ar:'الاختباء',id:'Persembunyian'},
-    c_basiret:{tr:'Koruma & Açılım Âyetleri',en:'Insight & Opening Verses',de:'Einsicht & Öffnung',fr:'Clairvoyance',es:'Perspicacia',it:'Discernimento',nl:'Inzicht',pt:'Discernimento',ru:'Прозрение',ar:'البصيرة',id:'Ketajaman Hati'},
+    c_gizlen:{tr:'İnkâr & Hakikati Görme',en:'Denial & Perceiving Truth',ar:'الإنكار وإدراك الحق'},
+    c_basiret:{tr:'Tefekkür & İdrak',en:'Reflection & Understanding',ar:'التفكر والإدراك'},
     c_dusman:{tr:'Düşmana Karşı \u201cSana Yeter\u201d',en:'\u201cAllah Suffices You\u201d',de:'Allah genügt',fr:'Allah suffit',es:'Alá basta',it:'Allah basta',nl:'Allah volstaat',pt:'Alá basta',ru:'Аллаха достаточно',ar:'حسبنا الله',id:'Allah Cukup'},
     c_sebat:{tr:'Sebat & Kalp Kuvveti',en:'Steadfastness',de:'Standhaftigkeit',fr:'Fermeté',es:'Firmeza',it:'Fermezza',nl:'Standvastigheid',pt:'Firmeza',ru:'Стойкость',ar:'الثبات',id:'Keteguhan'},
     c_af:{tr:'Af & Azaptan Kurtuluş',en:'Pardon & Salvation',de:'Verzeihung',fr:'Pardon',es:'Perdón',it:'Perdono',nl:'Vergiffenis',pt:'Perdão',ru:'Прощение',ar:'العفو',id:'Maaf'},
@@ -15082,7 +15216,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     {s:23,a:26,ok:'Rabbi\u2019nsurnî bimâ kezzebûn (Nûh)',cat:['c_zafer'],tn:'Yalanlayanlara karşı zafer (Nûh)'},
     {s:29,a:30,ok:'Rabbi\u2019nsurnî alel-kavmil-müfsidîn (Lût)',cat:['c_zafer'],tn:'Bozgunculara karşı yardım (Lût)'},
     {s:17,a:24,ok:'Rabbirhamhümâ kemâ rabbeyânî sağîrâ',cat:['c_anne'],tn:'Ana-babaya rahmet'},
-    {s:43,a:13,ok:'Sübhânellezî sahhara lenâ hâzâ… (13-14)',cat:['c_yol'],tn:'Yolculuk/binek duası'},
+    {s:43,a:13,ok:'Sübhânellezî sahhara lenâ hâzâ… (Zuhruf 13)',cat:['c_yol'],tn:'Binek nimetine tesbih ve şükür'},
     {s:11,a:41,ok:'Bismillâhi mecrâhâ ve mürsâhâ (Nûh)',cat:['c_yol'],tn:'Gemi/yolculuk (Hz. Nûh)'},
     {s:12,a:101,ok:'Teveffenî müslimen ve elhıknî… (Yûsuf)',cat:['c_hatime'],tn:'Müslüman olarak ölmek (Hz. Yûsuf)'},
     {s:12,a:53,ok:'Ve mâ überriü nefsî… (Yûsuf, nefis)',cat:['c_nefis'],tn:'Nefsi temize çıkarmama (Hz. Yûsuf)'},
@@ -15091,21 +15225,21 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     {s:5,a:114,ok:'Allâhümme Rabbenâ enzil aleynâ mâide… (Îsâ)',cat:['c_rizik'],tn:'Sofra/bereket (Hz. Îsâ)'},
     {s:27,a:19,ok:'Rabbi evzı\u2019nî en eşküra ni\u2019meteke (Süleymân)',cat:['c_rizik'],tn:'Nimete şükür (Hz. Süleymân)'},
     {s:8,a:17,ok:'Vemâ rameyte iz rameyte… (Enfâl · \u201csen atmadın, Allah attı\u201d)',cat:['c_savas'],tn:'Zaferi Allah verir'},
-    {s:36,a:9,ok:'Ve cealnâ min beyni eydîhim sedden… (Yâsîn · set/perde)',cat:['c_savas','c_gizlen'],tn:'Önden-arkadan set (koruma)'},
+    {s:36,a:9,ok:'Ve cealnâ min beyni eydîhim sedden… (Yâsîn · set/perde)',cat:['c_savas','c_gizlen'],tn:'İnkârı anlatan set benzetmesi'},
     {s:2,a:137,ok:'Feseyekfîkehümullâh (\u201cAllah sana yeter\u201d)',cat:['c_dusman','c_savas'],tn:'Allah sana yeter (düşmana karşı)'},
     {s:15,a:95,ok:'İnnâ kefeynâkel-müstehziîn (Hicr · alaycılara karşı)',cat:['c_dusman'],tn:'Alaycılara karşı koruma'},
     {s:113,a:1,ok:'Felak Sûresi (…min şerrin-neffâsâti fil-ukad)',cat:['c_sihir','c_nazar'],tn:'Felak: kötülükten sığınma'},
     {s:10,a:81,ok:'İnnallâhe seyübtıluh (Yûnus · sihri bozar)',cat:['c_sihir'],tn:'Sihrin iptali (Hz. Mûsâ)'},
     {s:7,a:118,ok:'Fevekaal-hakku… (A\u2019râf · sihre galebe)',cat:['c_sihir'],tn:'Sihre karşı hakkın galebesi'},
     
-    {s:50,a:22,ok:'Fekeşefnâ anke ğıtâeke fe basarukel-yevme hadîd (Kāf)',cat:['c_basiret'],tn:'Basiretin açılması'},
+    {s:50,a:22,ok:'Fekeşefnâ anke ğıtâeke fe basarukel-yevme hadîd (Kāf)',cat:['c_basiret'],tn:'Âhirette gaflet perdesinin kalkması'},
     {s:7,a:143,ok:'Rabbi erinî enzur ileyk (Mûsâ · görüş talebi)',cat:['c_basiret'],tn:'Rabbini görme isteği (Hz. Mûsâ)'},
-    {s:17,a:72,ok:'Ve men kâne fî hâzihî a\u2019mâ… (İsrâ · kalp körlüğünden)',cat:['c_basiret'],tn:'Kalp körlüğünden korunma'},
+    {s:17,a:72,ok:'Ve men kâne fî hâzihî a\u2019mâ… (İsrâ · kalp körlüğünden)',cat:['c_basiret'],tn:'Hakikati görmeye dair uyarı'},
     {s:18,a:14,ok:'Ve rabatnâ alâ kulûbihim (Kehf · kalp sebatı)',cat:['c_sebat'],tn:'Kalplerin pekiştirilmesi'},
     {s:94,a:1,ok:'Elem neşrah leke sadrek (İnşirâh · iç ferahlığı)',cat:['c_sebat','c_basiret'],tn:'Göğsün ferahlaması (İnşirâh)'},
     {s:25,a:65,ok:'Rabbenâ\u2019srif annâ azâbe cehennem (Furkān)',cat:['c_af','c_hatime'],tn:'Cehennem azabından kurtuluş'},
-    {s:27,a:62,ok:'Emmen yücîbül-muztarra izâ deâh (Neml · darda kalan)',cat:['c_dar','c_sikinti'],tn:'Darda kalanın duası'},
-    {s:68,a:51,ok:'Ve in yekâdüllezîne keferû le yüzlikûneke bi ebsârihim (Kalem · nazar)',cat:['c_nazar'],tn:'Nazardan koruma'},
+    {s:27,a:62,ok:'Emmen yücîbül-muztarra izâ deâh (Neml · darda kalan)',cat:['c_dar','c_sikinti'],tn:'Darda kalana cevap veren Allah'},
+    {s:68,a:51,ok:'Ve in yekâdüllezîne keferû le yüzlikûneke bi ebsârihim (Kalem · inkârcıların bakışı)',cat:['c_nazar'],tn:'İnkârcıların öfkeli bakışı'},
     {s:17,a:82,ok:'Ve nünezzilü minel-Kur\u2019âni mâ hüve şifâ (İsrâ · şifa/koruma)',cat:['c_nazar','c_sihir','c_hastalik'],tn:'Kur’an: şifa ve rahmet'},
     {s:3,a:27,ok:'Ve terzuku men teşâu bi ğayri hisâb (Âl-i İmrân · rızık)',cat:['c_rizik'],tn:'Hesapsız rızık'},
     {s:51,a:58,ok:'İnnallâhe hüver-rezzâk (Zâriyât · Rezzâk)',cat:['c_rizik'],tn:'Rezzâk olan Allah'},
@@ -15127,7 +15261,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     {s:6,a:59,ok:'Ve indehû mefâtîhul-ğayb (En\u2019âm · gayb ilmi)',cat:['c_ilim'],tn:'Gayb ilmi Allah’ta'},
     {s:2,a:269,ok:'Yü\u2019til-hikmete men yeşâ (Bakara · hikmet)',cat:['c_ilim'],tn:'Hikmet nimeti'},
     {s:96,a:1,ok:'İkra\u2019 bismi Rabbikellezî halak (Alak · ilim)',cat:['c_ilim'],tn:'İkra: ilim (Alak)'},
-    {s:87,a:6,ok:'Senukriuke felâ tensâ (A\u2019lâ · unutmama)',cat:['c_ilim'],tn:'Unutturmama (A’lâ)'},
+    {s:87,a:6,ok:'Senukriuke felâ tensâ (A\u2019lâ · vahiy)',cat:['c_ilim'],tn:'Peygamberimize vahyin öğretilmesi'},
     {s:59,a:21,ok:'Lev enzelnâ hâzel-Kur\u2019âne alâ cebel (Haşr · tefekkür)',cat:['c_ilim'],tn:'Kur’an’ın azameti (tefekkür)'},
     
     {s:2,a:156,ok:'İnnâ lillâhi ve innâ ileyhi râciûn (Bakara · musibette istircâ)',cat:['c_sikinti','c_hatime'],tn:'Musibette istircâ'},
@@ -15151,7 +15285,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     {s:67,a:14,ok:'Elâ ya\u2019lemu men halak ve hüvel-latîful-habîr (Mülk · ilim)',cat:['c_ilim','c_rizik'],tn:'Yaratan bilmez mi (Mülk)'},
     {s:31,a:16,ok:'İnnallâhe latîfun habîr (Lokmân · Latîf)',cat:['c_rizik','c_koruma'],tn:'Latîf ve Habîr (Lokmân)'},
     {s:55,a:1,ok:'Er-Rahmân · rahmet & bereket sûresi (tamamı okunur)',cat:['c_rizik'],tn:'Rahmân sûresi (rahmet)'},
-    {s:56,a:1,ok:'El-Vâkıa · rızık sûresi (tamamı okunur)',cat:['c_rizik'],tn:'Vâkıa sûresi (rızık)'},
+    {s:56,a:1,ok:'El-Vâkıa · kıyamet ve âhiret (tam sûre)',cat:['c_rizik'],tn:'Vâkıa sûresi'},
     {s:26,a:62,ok:'Kellâ inne maiye Rabbî seyehdîn',cat:['c_sikinti'],tn:'Rabbim benimledir, yol gösterecek',ty:'dua'},
     {s:53,a:48,ok:'Ve ennehû hüve ağnâ ve aknâ',cat:['c_rizik'],tn:'Muhtaçlıktan kurtaran zengin kılan',ty:'dua'},
     {s:9,a:51,ok:'Hüve mevlânâ ve alallâhi felyetevekkelil-mü’minûn',cat:['c_koruma'],tn:'O bizim yardımcımız (tevekkül)',ty:'dua'},
@@ -15166,11 +15300,138 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     {s:2,a:128,ok:'Rabbenâ vec’alnâ müslimeyni leke ve min zürriyyetinâ ümmeten müslimeten leke',cat:['c_hatime'],tn:'Bizi sana teslim olanlardan kıl',ty:'dua'},
     {s:7,a:156,ok:'Vektüb lenâ fî hâzihid-dünyâ haseneten ve fil-âhireti',cat:['c_genel'],tn:'Dünyada da âhirette de iyilik yaz',ty:'dua'},
     {s:74,a:1,ok:'Yâ eyyühel-müddessir, kum fe enzir',cat:['c_genel'],tn:'Kalk ve uyar (Müddessir 1-7)',ty:'emir',aEnd:7},
-    {s:18,a:39,ok:'Mâ şâ Allâh, lâ kuvvete illâ billâh',cat:['c_nazar','c_rizik','c_koruma'],tn:'Mâşâallah — kem göze/nazara karşı',ty:'dua'},
+    {s:18,a:39,ok:'Mâ şâ Allâh, lâ kuvvete illâ billâh',cat:['c_nazar','c_rizik','c_koruma'],tn:'Mâşâallah: nimeti Allah’tan bilmek',ty:'dua'},
     {s:41,a:36,ok:'Festeiz billâh, innehû hüves-semî’ul-alîm',cat:['c_nefis','c_nazar'],tn:'Şeytandan Allah’a sığınma',ty:'dua'},
     {s:7,a:200,ok:'Festeiz billâh, innehû semî’un alîm',cat:['c_nefis'],tn:'Vesveseye karşı sığınma',ty:'dua'},
     {s:23,a:118,ok:'Rabbiğfir verham ve ente hayrur-râhimîn',cat:['c_tovbe'],tn:'Bağışla ve merhamet et',ty:'dua'}
   ];
+
+  // Editorial summaries describe the referenced Quran passage, not a promised
+  // effect of reciting it. Types distinguish a request from praise or narrative.
+  // Context checked against Diyanet: Bakara127; Kaf22 (mushaf page519);
+  // Yasin9 (page440); Kalem51-52 (Kur'an Yolu tafsir, vol5 p439).
+  var GINFO={
+    '2:201':['dua','Dünyada ve âhirette iyilik, ateş azabından korunma dileği.','Asking for good in this life and the next, and protection from the Fire.'],
+    '2:286':['dua','Bağışlanma, merhamet ve güç yetmeyen yüklerden esirgenme dileği.','Asking for forgiveness, mercy and relief from burdens beyond one’s ability.'],
+    '3:193':['dua','İman edenlerin bağışlanma ve iyilerle birlikte can verme dileği.','Believers ask for forgiveness and to die in the company of the righteous.'],
+    '7:23':['dua','Âdem ve eşinin hatalarını kabul ederek bağışlanma ve rahmet dilemesi.','Adam and his wife acknowledge their wrong and ask for forgiveness and mercy.'],
+    '21:87':['dua','Yûnus’un sıkıntı içinde Allah’ı tenzih edip hatasını kabul etmesi.','Jonah praises Allah’s perfection and acknowledges his wrong in distress.'],
+    '28:16':['dua','Mûsâ’nın yaptığı hatadan sonra Allah’tan bağışlanma dilemesi.','Moses asks Allah to forgive him after acknowledging his wrong.'],
+    '71:28':['dua','Nûh’un kendisi, anne babası ve müminler için bağışlanma dileği.','Noah asks forgiveness for himself, his parents and the believers.'],
+    '3:16':['dua','İmanlarını dile getiren kulların günahlarının bağışlanması için duası.','Believers affirm their faith and ask for their sins to be forgiven.'],
+    '40:7':['dua','Meleklerin tövbe eden müminler için bağışlanma ve korunma dilemesi.','The angels ask forgiveness and protection for believers who repent.'],
+    '21:89':['dua','Zekeriyyâ’nın yalnız bırakılmamak için Rabbine yakarışı.','Zechariah asks his Lord not to leave him alone without an heir.'],
+    '21:83':['dua','Eyyûb’un sıkıntısını Rabbine arz edip O’nun merhametine sığınması.','Job brings his suffering before his Lord and appeals to His mercy.'],
+    '28:21':['dua','Mûsâ’nın zâlim topluluktan kurtarılma dileği.','Moses asks to be delivered from the wrongdoing people.'],
+    '28:24':['dua','Mûsâ’nın Allah’tan gelecek her hayra ihtiyaç duyduğunu ifade etmesi.','Moses expresses his need for whatever good Allah may send him.'],
+    '7:126':['dua','Sabır ve Allah’a teslim olmuş halde can verme dileği.','Asking for patience and to die in submission to Allah.'],
+    '10:85':['dua','Zâlimlerin baskısı karşısında Allah’a güvenip sığınma duası.','A prayer of trust and refuge in Allah amid oppression.'],
+    '23:29':['dua','Nûh’a öğretilen, bereketli bir yere indirilme duası.','The prayer taught to Noah for a blessed landing place.'],
+    '3:173':['ayet','Tehdit karşısında müminlerin Allah’a güvenini anlatan sözler.','Words expressing believers’ trust in Allah when faced with threats.'],
+    '9:129':['ayet','Allah’ın yeterli olduğunu ve yalnız O’na güvenildiğini bildiren sözler.','A declaration that Allah is sufficient and trust is placed in Him alone.'],
+    '18:10':['dua','Mağaraya sığınan gençlerin rahmet ve doğru çıkış yolu dilemesi.','The youths in the cave ask for mercy and a right way through their situation.'],
+    '60:4':['dua','Allah’a güvenmeyi, O’na yönelmeyi ve dönüşün O’na olduğunu ifade eden dua.','A prayer expressing trust in Allah, turning to Him and returning to Him.'],
+    '66:8':['dua','Müminlerin nurlarının tamamlanması ve bağışlanmaları için duası.','Believers ask for their light to be completed and for forgiveness.'],
+    '59:10':['dua','Önceki müminler için bağışlanma, kalplerde kin bulunmaması dileği.','Asking forgiveness for earlier believers and freedom from resentment.'],
+    '3:38':['dua','Zekeriyyâ’nın Allah’tan temiz ve hayırlı bir nesil dilemesi.','Zechariah asks Allah for good offspring.'],
+    '37:100':['dua','İbrâhim’in Allah’tan sâlih bir evlât dilemesi.','Abraham asks Allah for a righteous child.'],
+    '14:40':['dua','İbrâhim’in kendisi ve nesli için namaza devam etme duası.','Abraham prays for himself and his descendants to remain steadfast in prayer.'],
+    '25:74':['dua','Eş ve çocukların göz aydınlığı, kişinin iyilikte örnek olması dileği.','Asking for joy in family and to be an example to the God-conscious.'],
+    '46:15':['dua','Nimetlere şükretme, iyi işler yapma ve neslin iyiliği için dua.','Asking to be grateful, do righteous deeds and have righteous descendants.'],
+    '20:114':['dua','Allah’tan ilmin artmasını isteyen kısa dua: Rabbi zidnî ilmâ.','The short prayer asking Allah for increased knowledge: Rabbi zidni ilma.'],
+    '20:25':['dua','Mûsâ’nın ferahlık, işinde kolaylık ve sözünün anlaşılması için duası.','Moses asks for reassurance, ease in his task and clear speech.'],
+    '3:8':['dua','Doğru yola erdikten sonra kalbin sapmaması ve rahmet dileği.','Asking that hearts not turn away after guidance, and asking for mercy.'],
+    '17:80':['dua','Doğru bir giriş ve çıkış, Allah katından destek dileği.','Asking for a sound entrance and departure, and support from Allah.'],
+    '26:83':['dua','İbrâhim’in hikmet ve sâlihlerin arasına katılma dileği.','Abraham asks for wisdom and to join the righteous.'],
+    '2:250':['dua','Tâlût’un ordusunun karşılaşma öncesi sabır, sebat ve yardım dileği.','Talut’s army asks for patience, firm footing and help before the encounter.'],
+    '60:5':['dua','İnkârcılar karşısında sınanma konusu olmamak ve bağışlanma için dua.','Asking not to become a trial for disbelievers, and asking for forgiveness.'],
+    '23:26':['dua','Nûh’un kendisini yalanlayan topluluk karşısında yardım istemesi.','Noah asks for help against the people who rejected him.'],
+    '29:30':['dua','Lût’un bozguncu topluluğa karşı Allah’tan yardım istemesi.','Lot asks Allah for help against the corrupting people.'],
+    '17:24':['dua','Anne babanın yetiştirirken gösterdiği emek hatırlanarak rahmet dileği.','Asking mercy for parents, remembering the care they gave in childhood.'],
+    '43:13':['ayet','Binekleri insanın hizmetine veren Allah’a tesbih ve şükür ifadesi.','Praising Allah, who has made means of transport available to people.'],
+    '11:41':['ayet','Nûh’un geminin yolculuğunu ve duruşunu Allah’ın adıyla anması.','Noah invokes Allah’s name for the ship’s course and anchorage.'],
+    '12:101':['dua','Yûsuf’un Müslüman olarak can verme ve sâlihlere katılma dileği.','Joseph asks to die in submission and to join the righteous.'],
+    '12:53':['ayet','Nefsin kötülüğe yöneltebileceğini ve Allah’ın merhametini hatırlatan âyet.','A reminder of the self’s inclination to wrong and Allah’s mercy.'],
+    '12:33':['dua','Yûsuf’un kendisine kurulan tuzak karşısında Allah’a sığınması.','Joseph seeks Allah’s protection from the temptation facing him.'],
+    '23:97':['dua','Şeytanların kışkırtmalarından Allah’a sığınma duası.','A prayer seeking Allah’s refuge from the incitements of devils.'],
+    '5:114':['dua','Îsâ’nın gökten bir sofra ve Allah’tan rızık dilemesi.','Jesus asks for a table from heaven and provision from Allah.'],
+    '27:19':['dua','Süleymân’ın nimetlere şükür, iyi iş ve sâlih kullara katılma dileği.','Solomon asks for gratitude, righteous deeds and a place among righteous servants.'],
+    '8:17':['ayet','Savaşta elde edilen sonucun Allah’ın yardımıyla ilişkisini hatırlatan âyet.','A verse recalling Allah’s help in the outcome of battle.'],
+    '36:9':['ayet','İnkârda direnenlerin hakikati göremeyişini set benzetmesiyle anlatır.','The image of barriers describes persistent denial and inability to see the truth.'],
+    '2:137':['ayet','İman ve ayrılık bağlamında Allah’ın Peygamberine desteğini bildirir.','In the context of faith and division, it affirms Allah’s support for His Messenger.'],
+    '15:95':['ayet','Peygambere, alay edenler karşısında Allah’ın desteği hatırlatılır.','The Prophet is reassured of Allah’s support against those who mock.'],
+    '113:1':['sure','Felak sûresinin tamamı: yaratılmışların kötülüğünden Allah’a sığınma.','The complete surah al-Falaq: seeking Allah’s refuge from harm.'],
+    '10:81':['ayet','Mûsâ’nın sihirbazlara hitabında gerçeğin üstünlüğünü vurgulayan âyet.','Moses addresses the magicians, affirming that Allah will expose their magic.'],
+    '7:118':['ayet','Mûsâ ile sihirbazlar kıssasında gerçeğin ortaya çıkmasını anlatır.','In the account of Moses and the magicians, the truth becomes clear.'],
+    '50:22':['ayet','Âhirette insanın gaflet perdesinin kalkmasını anlatan uyarı.','A warning describing the removal of heedlessness when facing the Hereafter.'],
+    '7:143':['dua','Mûsâ’nın Rabbini görme talebi; âyet bu talebin cevabını da anlatır.','Moses asks to see his Lord; the verse also recounts the response.'],
+    '17:72':['ayet','Dünyada hakikati görmezden gelmenin âhiretle ilişkisine dair uyarı.','A warning about ignoring the truth in this life and its consequence in the next.'],
+    '18:14':['ayet','Ashâb-ı Kehf’in imanlarını dile getirmeleri ve kalplerinin güçlendirilmesi.','The youths of the cave declare their faith and their hearts are strengthened.'],
+    '94:1':['ayet','Allah’ın Peygamberine gönül ferahlığı vermesini hatırlatan ilk âyet.','The opening verse recalling the reassurance Allah gave His Prophet.'],
+    '25:65':['dua','Rahmân’ın kullarının cehennem azabından esirgenme duası.','The servants of the Most Merciful ask to be spared the punishment of Hell.'],
+    '27:62':['ayet','Darda kalanın çağrısına cevap verenin Allah olduğunu hatırlatır.','A reminder that Allah answers the call of the distressed.'],
+    '68:51':['ayet','Kur’an’ı dinleyen inkârcıların Peygambere öfkeli bakışlarını anlatır.','It describes the hostile looks of disbelievers listening to the Quran.'],
+    '17:82':['ayet','Kur’an’ın müminler için şifa ve rahmet oluşunu bildirir.','It describes the Quran as healing and mercy for believers.'],
+    '3:27':['ayet','Geceyi, gündüzü, hayatı ve rızkı Allah’ın kudretiyle ilişkilendiren sözler.','Words affirming Allah’s power over night, day, life and provision.'],
+    '51:58':['ayet','Rızık verenin ve güç sahibinin Allah olduğunu bildirir.','It affirms that Allah is the Provider and Possessor of power.'],
+    '42:19':['ayet','Allah’ın kullarına lütfunu ve rızık vermesini hatırlatır.','A reminder of Allah’s kindness to His servants and His provision.'],
+    '3:74':['ayet','Rahmet ve büyük lütfun Allah’a ait olduğunu bildirir.','It affirms that mercy and great bounty belong to Allah.'],
+    '63:7':['ayet','Göklerin ve yerin hazinelerinin Allah’a ait olduğunu hatırlatır.','A reminder that the treasures of the heavens and earth belong to Allah.'],
+    '48:1':['ayet','Peygambere apaçık bir fetih verildiğini bildiren sûre başlangıcı.','The surah opens by announcing a clear victory granted to the Prophet.'],
+    '8:63':['ayet','Müminlerin kalplerini birleştirenin Allah olduğunu anlatır.','It describes Allah as the One who brought believers’ hearts together.'],
+    '60:7':['ayet','Düşmanlıkların dostluğa dönüşebileceğini Allah’ın kudretiyle ilişkilendirir.','It recalls that Allah can bring affection where there was enmity.'],
+    '9:128':['ayet','Peygamberin müminlere karşı şefkat ve merhametini anlatır.','It describes the Messenger’s compassion and mercy towards believers.'],
+    '12:64':['ayet','Yâkub’un Allah’ın koruyuculuğuna ve merhametine güvenini ifade eder.','Jacob expresses trust in Allah’s protection and mercy.'],
+    '33:3':['ayet','Allah’a güvenmeyi öğütler; vekil olarak O’nun yeterliliğini bildirir.','It calls for trust in Allah and affirms that He is sufficient as guardian.'],
+    '2:257':['ayet','Allah’ın iman edenleri karanlıklardan aydınlığa çıkarmasını anlatır.','It describes Allah bringing believers from darkness into light.'],
+    '5:16':['ayet','Allah’ın rızasını arayanlara selâmet ve hidayet yollarını anlatır.','It describes paths of peace and guidance for those seeking Allah’s pleasure.'],
+    '64:11':['ayet','Allah’a iman ile kalbin doğruya yönelmesi arasındaki bağı hatırlatır.','A reminder of the connection between faith in Allah and guidance of the heart.'],
+    '29:69':['ayet','Allah’ın yolunda çaba gösterenlere hidayet ve destek bildirilir.','It affirms guidance and support for those who strive in Allah’s way.'],
+    '6:103':['ayet','Allah’ın insan idrakini aşan yüceliğini ve her şeyi kuşatan bilgisini anlatır.','It recalls that Allah is beyond human vision while encompassing all vision.'],
+    '6:59':['ayet','Gaybın ve bütün varlıkların bilgisinin Allah’a ait olduğunu bildirir.','It affirms that knowledge of the unseen and all things belongs to Allah.'],
+    '2:269':['ayet','Hikmetin Allah’ın verdiği büyük bir hayır olduğunu anlatır.','It describes wisdom as a great good bestowed by Allah.'],
+    '96:1':['ayet','Yaratan Rabbin adıyla okumaya çağıran vahiy başlangıcı.','The opening revelation calls for reading in the name of the Creator.'],
+    '87:6':['ayet','Allah’ın Peygamberine Kur’an’ı öğreteceğine dair hitabı.','Allah addresses His Prophet about teaching him to recite the Quran.'],
+    '59:21':['ayet','Kur’an’ın büyüklüğünü dağ örneği üzerinden düşünmeye çağırır.','The image of a mountain invites reflection on the Quran’s gravity.'],
+    '2:156':['ayet','Musibet karşısında Allah’a ait olduğumuzu ve O’na döneceğimizi anma.','Remembering in hardship that we belong to Allah and will return to Him.'],
+    '20:46':['ayet','Allah’ın Mûsâ ve Hârûn’a yanlarında olduğunu bildiren hitabı.','Allah reassures Moses and Aaron that He is with them, hearing and seeing.'],
+    '2:186':['ayet','Allah’ın kullarına yakınlığı ve dua edenin çağrısına cevap vermesi.','Allah’s nearness to His servants and response to the one who calls upon Him.'],
+    '93:5':['ayet','Allah’ın Peygamberine ihsanda bulunacağına dair teselli.','Reassurance to the Prophet of the generosity his Lord will grant him.'],
+    '38:35':['dua','Süleymân’ın bağışlanma ve kendisine özgü bir hükümranlık dilemesi.','Solomon asks for forgiveness and a kingdom unique to him.'],
+    '27:40':['ayet','Süleymân’ın verilen nimeti bir şükür sınavı olarak değerlendirmesi.','Solomon recognises a blessing as a test of gratitude.'],
+    '19:57':['ayet','İdrîs’in yüce bir makama yükseltildiğini anlatan âyet.','A verse describing Idris as raised to a high station.'],
+    '65:3':['ayet','Allah’a güvenmeyi, O’nun yeterliliğini ve beklenmedik rızkı hatırlatır.','A reminder of trust in Allah, His sufficiency and provision from unexpected places.'],
+    '36:58':['ayet','Cennet ehline merhametli Rabden gelen selâmı anlatır.','It describes the greeting of peace to the people of Paradise from their Merciful Lord.'],
+    '22:70':['ayet','Göklerde ve yerde olanların Allah’ın bilgisi dahilinde olduğunu bildirir.','It affirms Allah’s knowledge of everything in the heavens and earth.'],
+    '57:1':['ayet','Göklerde ve yerde bulunanların Allah’ı tesbih ettiğini bildirir.','It affirms that all in the heavens and earth glorifies Allah.'],
+    '59:1':['ayet','Varlıkların Allah’ı tesbihini ve O’nun kudret ve hikmetini hatırlatır.','A reminder of creation’s praise of Allah and of His power and wisdom.'],
+    '38:20':['ayet','Dâvûd’a verilen güçlü yönetim, hikmet ve açık hüküm verme yeteneği.','The strong rule, wisdom and sound judgement granted to David.'],
+    '38:36':['ayet','Süleymân kıssasında rüzgârın onun hizmetine verilmesini anlatır.','In Solomon’s story, the wind is placed at his service.'],
+    '38:18':['ayet','Dâvûd ile birlikte dağların tesbih edişini anlatan âyet.','It describes the mountains joining David in glorification.'],
+    '18:84':['ayet','Zülkarneyn’e yeryüzünde imkân ve yollar verildiğini bildirir.','It recounts the means and opportunities granted to Dhul-Qarnayn on earth.'],
+    '67:14':['ayet','Yaratan Allah’ın yarattıklarını bildiğini hatırlatan soru.','A question recalling that the Creator knows what He has created.'],
+    '31:16':['ayet','En küçük ve gizli amelin bile Allah’ın bilgisi dışında kalmadığını anlatır.','A reminder that even the smallest hidden deed is not beyond Allah’s knowledge.'],
+    '55:1':['sure','Rahmân sûresinin tamamı: Allah’ın nimetleri, yaratılış ve âhiret.','The complete surah ar-Rahman: Allah’s blessings, creation and the Hereafter.'],
+    '56:1':['sure','Vâkıa sûresinin tamamı: kıyamet, insan grupları ve Allah’ın kudreti.','The complete surah al-Waqiah: resurrection, groups of people and Allah’s power.'],
+    '26:62':['ayet','Mûsâ’nın tehlike karşısında Rabbine güvenini dile getirmesi.','Moses expresses trust that his Lord will guide him in the face of danger.'],
+    '53:48':['ayet','Zenginliğin ve imkânların Allah’tan geldiğini hatırlatan âyet.','A reminder that wealth and sufficiency come from Allah.'],
+    '9:51':['ayet','Allah’ın takdiri ve müminlerin O’na güvenmesi üzerine sözler.','Words about Allah’s decree and believers placing their trust in Him.'],
+    '39:62':['ayet','Allah’ın her şeyin yaratıcısı ve gözeticisi olduğunu bildirir.','It affirms that Allah is the Creator and Guardian of all things.'],
+    '23:109':['dua','İman eden kulların bağışlanma ve merhamet dileği.','Believing servants ask for forgiveness and mercy.'],
+    '18:24':['ayet','Unutunca Allah’ı anmak ve daha doğru olana yönelmeyi ummak.','Remembering Allah after forgetting, and hoping for guidance towards what is right.'],
+    '7:155':['dua','Mûsâ’nın Allah’ın velâyetine sığınıp bağışlanma ve rahmet dilemesi.','Moses appeals to Allah’s guardianship, asking for forgiveness and mercy.'],
+    '10:86':['dua','Allah’ın rahmetiyle inkârcı topluluktan kurtarılma dileği.','Asking to be delivered by Allah’s mercy from the disbelieving people.'],
+    '11:47':['dua','Nûh’un bilmediği şeyi istemekten sığınması, bağışlanma ve rahmet dilemesi.','Noah seeks refuge from asking without knowledge and asks for forgiveness and mercy.'],
+    '11:88':['ayet','Şuayb’ın başarısını Allah’a bağlayıp O’na güvenini dile getirmesi.','Shuayb attributes his success to Allah, expressing trust and turning to Him.'],
+    '2:127':['dua','İbrâhim ve İsmâil’in Kâbe’yi yükseltirken yaptıkları işin kabulünü dilemesi.','Abraham and Ishmael ask Allah to accept their work as they raise the Kaaba.'],
+    '2:128':['dua','İbrâhim ve İsmâil’in teslimiyet, hayırlı nesil ve tövbenin kabulü için duası.','Abraham and Ishmael pray for submission, a faithful community and accepted repentance.'],
+    '7:156':['dua','Dünyada ve âhirette iyilik dileme ve Allah’a yönelişi ifade eden dua.','A prayer for good in this life and the next, expressing a return to Allah.'],
+    '74:1':['emir','Peygambere uyarı, arınma ve sabır görevlerini bildiren ilk yedi âyet.','The first seven verses call the Prophet to warn, purify and persevere.'],
+    '18:39':['ayet','Bahçe kıssasında nimeti Allah’ın dilemesine ve kudretine bağlayan sözler.','In the story of the gardens, blessings are attributed to Allah’s will and power.'],
+    '41:36':['ayet','Şeytanın kışkırtması karşısında Allah’a sığınmayı öğütler.','It instructs the listener to seek refuge in Allah from Satan’s prompting.'],
+    '7:200':['ayet','Şeytandan bir dürtü geldiğinde Allah’a sığınmayı öğütler.','It calls for seeking refuge in Allah when prompted by Satan.'],
+    '23:118':['dua','Allah’tan bağışlanma ve merhamet isteyen kısa dua.','A short prayer asking Allah for forgiveness and mercy.']
+  };
 
   // ---- favoriler (dua'ya özel; sûre favorilerini bozmaz) ----
   function getFavs(){ try{ return (window.store&&store.get('duaFav',[]))||[]; }catch(e){ return []; } }
@@ -15220,7 +15481,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     }
     return esc(full.slice(0,i))+'<mark class="dsb-mark">'+esc(part)+'</mark>'+esc(full.slice(i+part.length));
   }
-  var _duaMark=null;
+  var _duaMark=null, _duaSelectionInfo=null;
   function markSplitWords(s,a,cut){
     _duaMark=cut?{s:s,a:a,cut:cut}:null;
     try{
@@ -15233,46 +15494,95 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
       });
     }catch(e){}
   }
-  function duaSelectAyah(a,aEnd){
+  function duaSelectAyah(s,a,aEnd,title){
     try{
-      if(typeof ayGi==='undefined'||!ayGi[a])return false;
-      var e=(aEnd&&ayGi[aEnd])?ayGi[aEnd][1]:ayGi[a][1];
-      selA=ayGi[a][0]; selB=e; selMode='ayah';
+      var chosen=duaSelection(s,a,aEnd,title); _duaSelectionInfo=chosen;
+      if(!chosen){
+        if(typeof clearSel==='function')clearSel();
+        if(CUTS[s+':'+a]&&typeof toast==='function')toast(dt('dua_selection_unavailable'));
+        return false;
+      }
+      selA=chosen.wordRange.start; selB=chosen.wordRange.end;
+      selMode=chosen.partial?'word':'ayah';
       if(typeof renderSel==='function')renderSel();
       return true;
     }catch(err){ return false; }
   }
-  function arNorm(t){ return String(t||'').replace(/[\u064B-\u065F\u0670\u0640\u06D6-\u06ED\u0653-\u0655]/g,'').replace(/[\u0622\u0623\u0625]/g,'\u0627').replace(/\s+/g,''); }
+  function arNorm(t){ return String(t||'').normalize('NFKD').replace(/[\u064B-\u065F\u0670\u0640\u06D6-\u06ED]/g,'').replace(/[ٱأإآ]/g,'ا').replace(/[ىی]/g,'ي').replace(/ة/g,'ه').replace(/ؤ/g,'و').replace(/ئ/g,'ي').replace(/[^\u0621-\u063A\u0641-\u064A]/g,''); }
   function duaPortionWords(s,a,cut){
     try{
       if(!cut||typeof QTEXT_TR==='undefined'||!QTEXT_TR[s])return null;
       var v=QTEXT_TR[s][a-1]; if(!v)return null;
-      return String(v).split(/\s+/).filter(Boolean).slice(cut[0],cut[1]).map(arNorm);
+      return String(v).split(/\s+/).filter(Boolean).slice(cut[0],cut[1]).map(arNorm).filter(Boolean);
     }catch(e){ return null; }
   }
-  // METİN eşleştirmeli markaj → hem Türk hem Medine mushafında doğru çalışır
+  // Resolve once for both the visible mark and the actual playback selection.
+  // CUTS indexes the Turkish printed tokens; renderer pos is a 1-based audio word.
+  function duaWordRange(s,a,cut){
+    try{
+      var pw=duaPortionWords(s,a,cut); if(!pw||!pw.length)return null;
+      if(typeof ayGi==='undefined'||!ayGi[a]||typeof wordArr==='undefined')return null;
+      var r=ayGi[a], list=[], joined='';
+      for(var gi=r[0];gi<=r[1];gi++){ var w=wordArr[gi]; if(!w)continue;
+        var text=arNorm(w.txt||(w.el?w.el.textContent:''));
+        if(!text)continue;
+        list.push({gi:gi,start:joined.length,end:joined.length+text.length}); joined+=text;
+      }
+      var target=pw.join(''),pos=joined.indexOf(target);
+      // Match complete words only, and never widen an uncertain match to a verse.
+      var first=list.find(function(x){return x.start===pos;});
+      var last=list.find(function(x){return x.end===pos+target.length;});
+      if(pos>=0&&joined.indexOf(target,pos+1)<0&&first&&last)return {start:first.gi,end:last.gi};
+      // Uthmani spelling can omit letters written in the Turkish mushaf. Reuse
+      // the reader's existing print-to-audio alignment, not fuzzy end words.
+      if(typeof QTEXT==='undefined'||!QTEXT[s]||typeof alignTurkishWords!=='function')return null;
+      var reference=QTEXT[s][a-1][2].filter(function(w){return w[1]===0;}).map(function(w){return w[0];});
+      if(list.length!==reference.length)return null;
+      for(var i=0;i<reference.length;i++){
+        if(arNorm(wordArr[list[i].gi].txt)!==arNorm(reference[i])||wordArr[list[i].gi].pos!==i+1)return null;
+      }
+      var aligned=alignTurkishWords(reference,String(QTEXT_TR[s][a-1]).split(/\s+/).filter(Boolean));
+      if(!aligned)return null;
+      var mapped=[],text='';
+      aligned.forEach(function(w,i){var normalized=arNorm(w);mapped.push({index:i,start:text.length,end:text.length+normalized.length});text+=normalized;});
+      pos=text.indexOf(target);
+      if(pos<0||text.indexOf(target,pos+1)>=0)return null;
+      first=mapped.find(function(x){return x.start===pos;});
+      last=mapped.find(function(x){return x.end===pos+target.length;});
+      return first&&last?{start:list[first.index].gi,end:list[last.index].gi}:null;
+    }catch(e){return null;}
+  }
+  function duaSelection(s,a,aEnd,title){
+    try{
+      if(typeof curS!=='undefined'&&+curS!==+s)return null;
+      if(typeof ayGi==='undefined'||!ayGi[a]||typeof wordArr==='undefined')return null;
+      var endAy=Number.isInteger(aEnd)&&aEnd>=a?aEnd:a;
+      if(!ayGi[endAy])return null;
+      var cut=CUTS[s+':'+a],range=cut?duaWordRange(s,a,cut):{start:ayGi[a][0],end:ayGi[a][1]};
+      if(!range)return null;
+      if(endAy>a)range.end=ayGi[endAy][1];
+      var first=wordArr[range.start],last=wordArr[range.end];if(!first||!last)return null;
+      return {surah:+s,fromAy:first.ay,toAy:last.ay,fromWordInclusive:first.pos,toWordInclusive:last.pos,
+        wordRange:{start:range.start,end:range.end},partial:range.start!==ayGi[a][0]||range.end!==ayGi[endAy][1],title:title||''};
+    }catch(e){return null;}
+  }
+  window.elifaDuaSelection=function(s,a,aEnd,title){
+    if(arguments.length)return duaSelection(s,a,aEnd,title||(_duaSelectionInfo&&_duaSelectionInfo.title));
+    if(!_duaSelectionInfo||typeof curS==='undefined'||_duaSelectionInfo.surah!==curS)return null;
+    // Return the current handles, so an adjusted prayer is transferred as adjusted.
+    if(selA==null||selB==null)return null;
+    var lo=Math.min(selA,selB),hi=Math.max(selA,selB),first=wordArr[lo],last=wordArr[hi];
+    if(!first||!last)return null;
+    return Object.assign({},_duaSelectionInfo,{fromAy:first.ay,toAy:last.ay,
+      fromWordInclusive:first.pos,toWordInclusive:last.pos,wordRange:{start:lo,end:hi},
+      partial:lo!==ayGi[first.ay][0]||hi!==ayGi[last.ay][1]});
+  };
   function markWordsByText(s,a,cut){
     try{
       document.querySelectorAll('.dua-hi').forEach(function(x){x.classList.remove('dua-hi');});
-      var pw=duaPortionWords(s,a,cut); if(!pw||!pw.length)return;
-      if(typeof ayGi==='undefined'||!ayGi[a]||typeof wordArr==='undefined')return;
-      var r=ayGi[a], list=[];
-      for(var gi=r[0];gi<=r[1];gi++){ var w=wordArr[gi]; if(!w)continue;
-        list.push({gi:gi, el:w.el, t:arNorm(w.el?w.el.textContent:'')}); }
-      if(!list.length)return;
-      var joined=list.map(function(x){return x.t;}).join('|');
-      var target=pw.join('|');
-      var pos=joined.indexOf(target), sIdx=-1, eIdx=-1;
-      if(pos>=0){ sIdx=joined.slice(0,pos).split('|').length-1; eIdx=sIdx+pw.length-1; }
-      else { // ilk ve son kelimeyi ayrı ayrı ara (imla farkı toleransı)
-        for(var i=0;i<list.length;i++){ if(list[i].t.indexOf(pw[0])===0||pw[0].indexOf(list[i].t)===0){ sIdx=i; break; } }
-        var last=pw[pw.length-1];
-        for(var j=list.length-1;j>=0;j--){ if(list[j].t.indexOf(last)===0||last.indexOf(list[j].t)===0){ eIdx=j; break; } }
-      }
-      if(sIdx<0||eIdx<sIdx)return;
-      for(var k=sIdx;k<=eIdx;k++){ if(list[k].el)list[k].el.classList.add('dua-hi'); }
-      // böl ekranı açıksa oradaki kopyaları da işaretle
-      var g0=list[sIdx].gi, g1=list[eIdx].gi;
+      var range=duaWordRange(s,a,cut);if(!range)return;
+      var g0=range.start,g1=range.end;
+      for(var gi=g0;gi<=g1;gi++){if(wordArr[gi].el)wordArr[gi].el.classList.add('dua-hi');}
       document.querySelectorAll('#splitBody .pw2').forEach(function(sp){
         var gi=+sp.dataset.gi; sp.classList.toggle('dua-hi', gi>=g0&&gi<=g1); });
     }catch(e){}
@@ -15331,6 +15641,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     }catch(e){}
   }
   function duaClearUI(){
+    _duaMark=null; _duaSelectionInfo=null;
     try{
       var b=document.getElementById('rbody');
       if(b){ b.classList.remove('dua-only'); b.querySelectorAll('.dua-target').forEach(function(x){x.classList.remove('dua-target');}); }
@@ -15410,14 +15721,26 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     if(typeof openSurah!=='function')return;
     window.__duaBannerKeep=true;
     duaClearUI();
-    var p=openSurah(s,a);
-    var after=function(){ try{window.readerReturn='dua';}catch(e){}
+    var visit,applied=false;
+    var after=function(){
+      if(visit===undefined)visit=typeof surahRequestId==='undefined'?null:surahRequestId;
+      if(applied)return;
+      if((typeof curS!=='undefined'&&curS!==s)||(visit!==null&&visit!==surahRequestId))return;
+      applied=true;
+      try{window.readerReturn='dua';}catch(e){}
       duaBuildUI(s,a,aEnd,title,!!fullSurah);
       if(!fullSurah){
-        duaSelectAyah(a,aEnd);
-        setTimeout(function(){ markWordsByText(s,a,CUTS[s+':'+a]||null); duaCleanPage(a,aEnd,true); scrollToAyah(a); },80);
+        duaSelectAyah(s,a,aEnd,title);
+        markWordsByText(s,a,CUTS[s+':'+a]||null);
+        duaCleanPage(a,aEnd,true); scrollToAyah(a);
       }
-      window.__duaBannerKeep=false; };
+    };
+    // Text is embedded and ready before the optional recording download ends.
+    // The completion handler remains a fallback, never a second selection reset.
+    var p;
+    try{p=openSurah(s,a,{onTextReady:after});}
+    finally{window.__duaBannerKeep=false;}
+    if(visit===undefined)visit=typeof surahRequestId==='undefined'?null:surahRequestId;
     if(p&&p.then)p.then(after); else setTimeout(after,450);
   };
 
@@ -15433,7 +15756,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     var c=document.createElement('div'); c.className='duacard'; c.setAttribute('role','button'); c.tabIndex=0;
     if(favK)c.setAttribute('data-favk',favK);
     var on=favK?window.duaIsFav(favK):false;
-    var badge=ty==='emir'?'<span class="dc-badge dc-emir">'+esc(dt('dua_ty_emir'))+'</span>':(ty==='dua'?'<span class="dc-badge">'+esc(dt('dua_ty_dua'))+'</span>':'');
+    var badgeKey={emir:'dua_ty_emir',dua:'dua_ty_dua',ayet:'dua_ty_ayet',sure:'dua_ty_sure'}[ty];
+    var badge=badgeKey?'<span class="dc-badge'+(ty==='emir'?' dc-emir':'')+'">'+esc(dt(badgeKey))+'</span>':'';
     c.innerHTML='<div class="dc-mid"><div class="dc-t">'+esc(title)+badge+'</div><div class="dc-s">'+esc(sub)+'</div></div>'+
       (favK?'<button class="dc-fav'+(on?' on':'')+'" aria-label="Favori">'+STAR+'</button>':'')+
       '<svg class="dc-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>';
@@ -15447,6 +15771,13 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     return c;
   }
 
+  function duaCardType(it){var meta=GINFO[it.s+':'+it.a];return meta?meta[0]:'ayet';}
+  function duaCardDescription(it){
+    var meta=GINFO[it.s+':'+it.a],lang=curLang();
+    var ref=suraName(it.s)+(duaCardType(it)==='sure'?'':' · '+it.a+(it.aEnd?'–'+it.aEnd:'')+'. '+dt('dua_ayet'));
+    var summary=meta&&(lang==='tr'?meta[1]:meta[2]);
+    return ref+(summary?' · '+summary:'');
+  }
   function duaCardTitle(it){ var key=it.s+':'+it.a; var lang=curLang();
     if(lang==='tr') return it.tn||it.ok;
     function cut1(t){ var f=String(t).split(/[.!?\u061F\u06D4\u3002]/)[0].trim(); return f.length>52?f.slice(0,50)+'\u2026':f; }
@@ -15463,6 +15794,8 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
       (subTab==='gunluk'?'<div class="dua-catbar" id="duaCatBar"></div>':'')+'<div class="dua-list" id="duaList"></div>';
     scr.querySelectorAll('.dua-sub').forEach(function(b){ b.onclick=function(){ subTab=b.dataset.sub; window.renderDua(); }; });
     var L=scr.querySelector('#duaList');
+    var infoKey={sure:'dua_sure_info',namaz:'dua_namaz_info',gunluk:'dua_gunluk_info'}[subTab];
+    if(infoKey){var info=document.createElement('p');info.className='dua-empty';info.textContent=dt(infoKey);L.appendChild(info);}
 
     if(subTab==='sure'){
       SURE.forEach(function(it){
@@ -15486,7 +15819,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
       (gCat==='all'?CATS:[gCat]).forEach(function(ck){
         var items=G.filter(function(g){return g.cat.indexOf(ck)>=0;}); if(!items.length)return;
         var h=document.createElement('div'); h.className='dua-cat'; h.textContent=dt(ck); L.appendChild(h);
-        items.forEach(function(it){ L.appendChild(card(duaCardTitle(it), suraName(it.s)+' · '+it.a+'. '+dt('dua_ayet'), 'q'+it.s+':'+it.a, function(){ window.openFromDua(it.s,it.a,it.aEnd,duaCardTitle(it)); }, it.tn||it.ok, it.ty||'dua')); });
+        items.forEach(function(it){ L.appendChild(card(duaCardTitle(it), duaCardDescription(it), 'q'+it.s+':'+it.a, function(){ window.openFromDua(it.s,it.a,it.aEnd,duaCardTitle(it),duaCardType(it)==='sure'); }, it.tn||it.ok, duaCardType(it))); });
       });
     } else {
       var favs=getFavs(); if(!favs.length){ L.innerHTML='<div class="dua-empty">'+esc(dt('dua_favbos'))+'</div>'; return; }
@@ -15494,7 +15827,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
         if(k.charAt(0)==='q'){ var p=k.slice(1).split(':'),s=+p[0],a=+p[1];
           var it=SURE.concat(G).find(function(x){return x.s===s&&x.a===a;});
           var title=it?(it.tn||it.t||it.ok):(suraName(s)+' '+a);
-          L.appendChild(card(title, suraName(s)+' · '+a+'. '+dt('dua_ayet'), k, function(){ var full=it&&it.a===1&&SURE.indexOf(it)>=0; window.openFromDua(s,a,!full); }));
+          L.appendChild(card(title, suraName(s)+' · '+a+'. '+dt('dua_ayet'), k, function(){ var full=!!(it&&it.a===1&&(SURE.indexOf(it)>=0||duaCardType(it)==='sure')); window.openFromDua(s,a,it&&it.aEnd,title,full); }));
         } else { var idx=+k.slice(1),n=NAMAZ[idx]; if(!n)return; L.appendChild(card(n.t,dt('dua_namaz'),k,function(){ showDuaDetail(idx); })); }
       });
     }
@@ -15649,7 +15982,7 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     var sec=document.createElement('div'); sec.id='duaFavSection';
     var h=document.createElement('div'); h.className='fhead'; h.textContent=dt('fav_dua_head'); sec.appendChild(h);
     favs.forEach(function(k){ var title,onClick;
-      if(k.charAt(0)==='q'){ var p=k.slice(1).split(':'),s=+p[0],a=+p[1]; var it=SURE.concat(G).find(function(x){return x.s===s&&x.a===a;}); title=favTitle(k)||(it?(it.tn||it.t||it.ok):(suraName(s)+' '+a)); onClick=function(){ var full=it&&it.a===1&&SURE.indexOf(it)>=0; window.openFromDua(s,a,it&&it.aEnd,title,full); }; }
+      if(k.charAt(0)==='q'){ var p=k.slice(1).split(':'),s=+p[0],a=+p[1]; var it=SURE.concat(G).find(function(x){return x.s===s&&x.a===a;}); title=favTitle(k)||(it?(it.tn||it.t||it.ok):(suraName(s)+' '+a)); onClick=function(){ var full=it&&it.a===1&&(SURE.indexOf(it)>=0||duaCardType(it)==='sure'); window.openFromDua(s,a,it&&it.aEnd,title,full); }; }
       else { var idx=+k.slice(1),n=NAMAZ[idx]; if(!n)return; title=favTitle(k)||n.t; onClick=function(){ showDuaDetail(idx); }; }
       var row=document.createElement('div'); row.className='sitem'; row.style.cursor='pointer';
       row.innerHTML='<span class="cd" style="background:var(--gold)"></span><span class="m"><span class="t1">'+esc(title)+'</span></span>';
@@ -15696,9 +16029,9 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/ui-extra.js?v=1"></script>
 <script src="/assets/workflow-i18n.js?v=358"></script>
 <script src="/assets/dua-practice.js?v=351"></script>
-<script src="/assets/study-workflow.js?v=358"></script>
-<script src="/assets/study-split.js?v=335"></script>
-<script src="/assets/study-sessions.js?v=335"></script>
+<script src="/assets/study-workflow.js?v=360"></script>
+<script src="/assets/study-split.js?v=360"></script>
+<script src="/assets/study-sessions.js?v=360"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {validStudySettings,validStudyProgress} from '../src/study-settings.mjs';
 function harness(initial={}){
- const nodes=new Map();class Element{
+ const nodes=new Map(),timers=new Map();let timerId=0;class Element{
   constructor(){this.dataset={};this.children=[];this.value='';this.hidden=false;this.handlers={};this.attrs={};this.classes=new Set();this.classList={contains:c=>this.classes.has(c),add:c=>this.classes.add(c),toggle:(c,on)=>on?this.classes.add(c):this.classes.delete(c)};}
   set id(v){this._id=v;nodes.set(v,this);}get id(){return this._id;}
   append(...v){this.children.push(...v);for(const child of v)child.parent=this;}before(){}after(){}setAttribute(k,v){this.attrs[k]=v;}
@@ -17,16 +17,31 @@ function harness(initial={}){
   SET:{reciter:223,speed:1,rep:5,repOn:true,wait:0,cumu:true,...initial},RECITERS:[{id:223,n:'Afasy'},{id:7,n:'Husary'}],SURAHS:[{tr:'Fatiha'}],
   plan:[],pi:0,pr:0,playing:false,curS:1,curAy:1,studyRange:{sid:1,from:1,to:5},rangeSelectionDraft:null,gearCtx:'ayah',
   splitAy:null,activeStudySplitSelection:()=>null,stepReps:()=>5,saveSet(){},syncSpeedBtn(){},renderContinue(){},renderHomeHeroLine(){},toast(){},
+  setTimeout:(fn,delay)=>{timers.set(++timerId,{fn,delay});return timerId;},clearTimeout:id=>timers.delete(id),
   MutationObserver:class{observe(){}},Event:class{constructor(type){this.type=type;}},navigator:{onLine:true},validStudySettings,validStudyProgress});
  const html=fs.readFileSync('index.html','utf8');
- for(const name of ['syncRepeatScope','readerRepeatKey','syncRep','syncRep2','syncCumu','syncCumu2','syncPracticeControls','commitInputs','commitInputs2']){
+ for(const name of ['syncRepeatScope','readerRepeatKey','remainingStudyRounds','syncRep','syncRep2','syncCumu','syncCumu2','syncPracticeControls','commitInputs','commitInputs2']){
   const start=html.indexOf('function '+name+'('),line=html.slice(start,html.indexOf('\n',start)).trimEnd();
   vm.runInContext(line.endsWith('}')?line:html.slice(start,html.indexOf('\n}',start)+2),c);
  }
  c.applyLiveSpeed=()=>{};
  vm.runInContext(fs.readFileSync('src/study-workflow.mjs','utf8').replace(/^import[^\n]*\n/,''),c);
- return {c,nodes,events,progress};
+ return {c,nodes,events,progress,timers};
 }
+test('practice status disappears after three seconds and progress ticks cannot reopen it',()=>{
+ const {c,nodes,timers}=harness();nodes.get('studySetup').classes.delete('on');
+ assert.equal(nodes.get('practiceProgress').hidden,true);
+ c.plan=[{ayEnd:5}];c.window.elifaPlaybackEvent('start');c.window.elifaPlaybackEvent('progress');
+ assert.equal(nodes.get('practiceProgress').hidden,false);assert.equal(timers.size,1);
+ const [id,timer]=[...timers][0];assert.equal(timer.delay,3000);
+ c.pr=1;c.window.elifaPlaybackEvent('progress');assert.equal([...timers][0][0],id,'progress does not postpone the deadline');
+ timers.delete(id);timer.fn();
+ for(let i=0;i<4;i++){c.pr=i;c.window.elifaPlaybackEvent('progress');}
+ assert.equal(nodes.get('practiceProgress').hidden,true);assert.equal(nodes.get('readerPracticeProgress').hidden,true);assert.equal(timers.size,0);
+ nodes.get('practiceMode').value='verse';nodes.get('practiceMode').handlers.change();
+ assert.equal(nodes.get('practiceProgress').hidden,false);assert.equal(timers.size,1,'an explicit mode choice may show a fresh short notice');
+ c.window.elifaPlaybackEvent('stop');assert.equal(nodes.get('practiceProgress').hidden,true);assert.equal(timers.size,0);
+});
 test('workflow mounts against real page anchors and restores saved settings independently of global combine',()=>{
  const {c,nodes}=harness();const settings={reciter:7,speed:1.25,rep:3,repOn:true,wait:2,mode:'verse',splitCombine:false};
  c.window.elifaStudySettings.load({settings});assert.deepEqual(JSON.parse(JSON.stringify(c.window.elifaStudySettings.capture())),{...settings,combineRep:3,rangeRep:3});
@@ -126,7 +141,7 @@ test('editing verse repeats selects verse practice and activates both repeat con
  assert.equal(c.window.elifaPracticeMode(),'verse');assert.equal(c.SET.rep,2);assert.equal(c.SET.repOn,true);
  for(const id of ['repTog','repTog2'])assert.equal(nodes.get(id).attrs['aria-pressed'],'true');
  for(const id of ['cumuTog','cumuTog2'])assert.equal(nodes.get(id).attrs['aria-pressed'],'false');
- assert.equal(nodes.get('readerRepeatScope').textContent,'Âyet / parça');assert.equal(c.playing,false);
+ assert.equal(nodes.get('readerRepeatScope').textContent,'Tüm çalışma');assert.equal(c.playing,false);
 });
 
 test('explicit cumulative method also applies to split parts and both Combine buttons immediately',()=>{

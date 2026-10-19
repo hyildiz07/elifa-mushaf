@@ -221,3 +221,16 @@ test('same-device return opens My Juz without requesting a secret or exposing it
  const h=harness();h.review.setLocal({mine:[{code:codeA,type:'hatim',title:'My khatm'}],capabilities:{[codeA]:{1:capA}},snapshots:{[codeA]:{items:[{no:1,status:'alindi',mine:true}]}}});
  h.review.showReturnEntry();await h.click('my-juz');assert.equal(h.calls.length,0);assert.match(h.get('birlikte').innerHTML,/data-hc="return-entry"/);assert.match(h.get('hatimList').innerHTML,/data-open="aaaaaa"/);assert.doesNotMatch(h.get('hatimList').innerHTML,new RegExp(capA));
 });
+
+
+test('compact public hatim rows preserve occupancy, due dates and accessible actions with safe full titles',async()=>{
+ const malicious='Uzun hatim niyeti "><img src=x onerror="alert(1)"> '+ 'çok uzun '.repeat(8);
+ const entries=[{code:codeA,type:'hatim',title:malicious,total:30,done:7,available:12,dueDate:'2099-01-01'},{code:codeB,type:'hatim',title:'Dolu hatim',total:30,done:28,available:0}];
+ const h=harness(p=>Response.json(p.action==='discoverList'?{enabled:true,items:entries}:{code:p.code,org:org(p.code)}));
+ const list=h.get('hatimList');let controls=[];list.querySelectorAll=selector=>{if(selector!=='[data-open]')return [];controls=[...list.innerHTML.matchAll(/data-open="([a-z0-9]+)"/g)].map((m,i)=>{const button=h.get('public-open-'+i);button.dataset={open:m[1]};return button});return controls;};
+ await h.review.renderBirlikte();const html=list.innerHTML;
+ assert.equal((html.match(/class="hc-card hc-list-row"/g)||[]).length,2);assert.ok(html.includes('hc-row-number" aria-hidden="true">1</span>'));assert.ok(html.includes('hc-row-number" aria-hidden="true">2</span>'));
+ assert.ok(html.includes('7/30 cüz okundu'));assert.match(html,/12 boş cüz/);assert.match(html,/hc-row-due/);assert.ok(html.includes('progress value="7" max="30" aria-label="7/30 cüz okundu"'));
+ assert.match(html,/aria-label="Dolu hatim · Görüntüle"/);assert.match(html,/&lt;img/);assert.doesNotMatch(html,/<img/);assert.equal(controls.length,2);
+ await controls[1].handlers.click();assert.equal(h.review.state().current.code,codeB);assert.equal(h.calls.at(-1).code,codeB);
+});

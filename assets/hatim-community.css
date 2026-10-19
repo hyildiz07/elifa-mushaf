@@ -55,3 +55,16 @@
 .hc-return-code{margin:12px 0;padding:12px;border:1px solid var(--hc-line);border-radius:12px;background:color-mix(in srgb,var(--hc-gold) 6%,var(--hc-card))}.hc-return-code label{display:block;font-size:12px;font-weight:700;margin-bottom:7px}.hc-return-code textarea{font-family:ui-monospace,monospace;font-size:16px;letter-spacing:.035em;min-height:68px}.hc-return-code small{display:block;font-size:11px;line-height:1.5;color:var(--hc-muted);margin-top:6px}
 .hc-private-link{font-size:12px;color:var(--hc-muted);margin:10px 0}.hc-private-link summary{cursor:pointer;min-height:36px;display:flex;align-items:center;text-decoration:underline}.hc-private-link .hc-link{margin-top:5px;min-height:70px}
 @media(max-width:380px){.hc-return-row{align-items:flex-start;flex-direction:column;gap:7px}.hc-return-entry{gap:0}.hc-return-entry span{width:100%}}
+
+/* Public hatims follow the compact, numbered surah rows on the home screen. */
+#bkwrap .hc-card.hc-list-row{display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:10px;min-width:0;max-width:100%;box-sizing:border-box;padding:9px 10px;margin:0 0 6px;border:1px solid color-mix(in srgb,var(--hc-gold) 65%,var(--hc-line));border-radius:13px;background:linear-gradient(155deg,color-mix(in srgb,var(--hc-card) 98%,white),var(--hc-card) 55%,color-mix(in srgb,var(--hc-card) 95%,var(--hc-gold)));box-shadow:inset 0 1px 0 #ffffff2b,0 2px 5px #0000000b}
+#bkwrap .hc-row-number{display:flex;align-items:center;justify-content:center;width:40px;height:44px;box-sizing:border-box;flex:none;border:1px solid #c9aa69;border-radius:10px;background:linear-gradient(145deg,#214969 0%,#092844 48%,#04182d 100%);box-shadow:inset 0 1px 0 #ffffff40,0 2px 4px #061b3226;color:#f4d58d;font-family:Lora,Georgia,serif;font-size:19px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1}
+#bkwrap .hc-list-row .hc-row-copy{min-width:0;max-width:100%}
+#bkwrap .hc-list-row h2{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere;color:var(--hc-ink);font-family:Lora,Georgia,serif;font-size:15px;line-height:1.3;margin:0 0 3px}
+#bkwrap .hc-list-row .hc-row-meta{display:flex;align-items:baseline;flex-wrap:wrap;gap:1px 6px;font-size:10px;line-height:1.5;margin:0;color:var(--hc-muted)}
+#bkwrap .hc-row-meta>span{min-width:0;overflow-wrap:anywhere}#bkwrap .hc-row-meta>span+span::before{content:'·';margin-inline-end:6px;color:var(--hc-gold)}
+#bkwrap .hc-list-row progress{height:3px;margin-top:5px}
+#bkwrap .hc-list-row .hc-row-open{min-width:60px;min-height:44px;padding:5px 8px;gap:5px;border-radius:9px;font-size:11px;box-shadow:inset 0 1px 0 #ffffff26,0 2px 4px #00000009;white-space:nowrap}
+#bkwrap .hc-row-open>span[aria-hidden]{color:var(--hc-gold);font-size:22px;line-height:1}
+body[data-dark="1"] #bkwrap .hc-card.hc-list-row{box-shadow:inset 0 1px 0 #ffffff15,0 2px 5px #0000002b}
+@media(max-width:390px){#bkwrap .hc-card.hc-list-row{grid-template-columns:38px minmax(0,1fr) auto;gap:8px;padding:8px}#bkwrap .hc-row-number{width:38px;height:42px;font-size:18px}#bkwrap .hc-list-row h2{font-size:14px}#bkwrap .hc-list-row .hc-row-open{min-width:56px;padding:5px 6px;font-size:10px}}
