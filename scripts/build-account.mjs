@@ -11,3 +11,4 @@ await build({entryPoints:['src/study-workflow.mjs'],bundle:true,format:'iife',pl
 await build({entryPoints:['src/dua-practice.mjs'],bundle:true,format:'iife',platform:'browser',target:['es2020'],outfile:'assets/dua-practice.js',legalComments:'none'});
 
 await build({entryPoints:['src/hatim-community.mjs'],bundle:true,format:'iife',platform:'browser',target:['es2020'],outfile:'assets/hatim-community.js',legalComments:'none'});
+await build({entryPoints:['src/community-admin.mjs'],bundle:true,format:'esm',platform:'browser',target:['es2020'],define:{__ELIFA_ACCOUNT_PREVIEW__:JSON.stringify(accountReadOnlyBuild)},outfile:'assets/community-admin.js',minify:true,legalComments:'eof'});

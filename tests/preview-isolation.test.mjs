@@ -41,7 +41,7 @@ test('preview guest create and claim use only the review-scoped collection with 
  const handler=environment=>createOrgHandler({services,environment:()=>environment,transaction:work=>withOrgTransaction(work,{environment,services,legacyStore})});
  const run=async(payload,env=preview)=>{const r=await handler(env)(request(payload));assert.equal(r.status,200,await r.clone().text());return r.json();};
  const config=await run({action:'discoverConfig'});assert.equal(config.enabled,true);assert.equal(config.preview,true);assert.equal(config.previewNotice,PREVIEW_NOTICE);
- const created=await run({action:'create',creationToken:'a'.repeat(64),org:{type:'hatim',title:'Preview-only',public:true,items:Array.from({length:30},(_,i)=>({no:i+1}))}});
+ const created=await run({action:'create',creationToken:'a'.repeat(64),org:{type:'hatim',title:'Preview-only',public:false,items:Array.from({length:30},(_,i)=>({no:i+1}))}});
  const claimed=await run({action:'claim',code:created.code,no:1,name:'Preview guest',capability:'b'.repeat(64)});assert.equal(claimed.org.items[0].mine,true);
  const again=await run({action:'get',code:created.code,capability:'b'.repeat(64)});assert.equal(again.org.items[0].mine,true);
  const another=await handler({...preview,REVIEW_ID:'21'})(request({action:'get',code:created.code}));assert.equal(another.status,404);
@@ -113,7 +113,7 @@ test('actual default org, account and cleanup entries forward Netlify runtime de
   const [org,account,cleanup]=await Promise.all([entry('org'),entry('account'),entry('org-cleanup')]);
   const a={deploy:{context:'deploy-preview',id:'a'.repeat(24)}},b={deploy:{context:'deploy-preview',id:'b'.repeat(24)}};
   const config=await org(request({action:'discoverConfig'}),a);assert.equal(config.status,200);assert.equal((await config.json()).preview,true);
-  const create=await org(request({action:'create',creationToken:'c'.repeat(64),org:{type:'hatim',title:'Runtime scoped',public:true,items:Array.from({length:30},(_,i)=>({no:i+1}))}}),a);
+  const create=await org(request({action:'create',creationToken:'c'.repeat(64),org:{type:'hatim',title:'Runtime scoped',public:false,items:Array.from({length:30},(_,i)=>({no:i+1}))}}),a);
   assert.equal(create.status,200);const made=await create.json();
   const claimed=await org(request({action:'claim',code:made.code,no:1,name:'Runtime guest',capability:'d'.repeat(64)}),a);assert.equal(claimed.status,200);assert.equal((await claimed.json()).org.items[0].mine,true);
   const done=await org(request({action:'complete',code:made.code,no:1,capability:'d'.repeat(64)}),a);assert.equal(done.status,200);
@@ -126,8 +126,8 @@ test('actual default org, account and cleanup entries forward Netlify runtime de
   // Runtime context remains authoritative even if a surrounding build/test
   // process advertises production. Parallel requests keep separate local scope.
   process.env.CONTEXT='production';process.env.ELIFA_FIRESTORE_GROUPS='enabled';
-  const parallel=await Promise.all([org(request({action:'discoverList',CONTEXT:'production'}),a),org(request({action:'discoverList'}),b)]);
-  assert.equal((await parallel[0].json()).items.length,1);assert.equal((await parallel[1].json()).items.length,0);
+  const parallel=await Promise.all([org(request({action:'get',code:made.code,CONTEXT:'production'}),a),org(request({action:'get',code:made.code}),b)]);
+  assert.equal(parallel[0].status,200);assert.equal(parallel[1].status,404);
   for(const context of [{deploy:{context:'deploy-preview',id:'bad'}},{deploy:{context:'branch-deploy',id:'a'.repeat(24)}},{deploy:{id:'a'.repeat(24)}}]){
    const count=fixture.serviceCalls;
    assert.equal((await org(request({action:'discoverConfig'}),context)).status,503);

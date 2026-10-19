@@ -6,10 +6,15 @@ import {releaseAccountHatimOwnership} from '../server/hatim-account.mjs';
 import {firestoreStoreTransaction} from '../server/database.mjs';
 import {expired,createOrgCleanup} from '../netlify/functions/org-cleanup.mjs';
 const capA='a'.repeat(64),capB='b'.repeat(64),capC='c'.repeat(64);
+const member={uid:'alice',emailVerified:true};
 const newHatim=(extra={})=>({type:'hatim',title:'Birlikte okuyalım',items:Array.from({length:30},(_,i)=>({no:i+1})),...extra});
 function memory(initial={}){
  const rows=new Map(Object.entries(structuredClone(initial)));
  const store={get:async key=>structuredClone(rows.get(key)??null),setJSON:async(k,v)=>rows.set(k,structuredClone(v)),set:async(k,v)=>rows.set(k,v),delete:async k=>rows.delete(k),list:async()=>({blobs:[...rows.keys()].map(key=>({key}))})};
+ store.query=async(prefix,{cursor=null,limit=20,reverse=false}={})=>{
+  const all=[...rows].filter(([key])=>key.startsWith(prefix)&&(!cursor||(reverse?key<cursor:key>cursor))).sort(([a],[b])=>reverse?b.localeCompare(a):a.localeCompare(b));
+  const page=all.slice(0,limit);return {entries:page.map(([key,value])=>({key,value:structuredClone(value)})),nextCursor:all.length>limit?page.at(-1)[0]:null};
+ };
  let queue=Promise.resolve();
  const transaction=work=>{const result=queue.then(()=>work(store));queue=result.catch(()=>{});return result;};
  return {rows,store,transaction,run:(p,session={})=>transaction(s=>handleOrg(p,s,session))};
@@ -117,13 +122,13 @@ test('new full hatim preserves all thirty cüz; partial legacy remains readable 
 });
 
 test('private creates never appear in discovery; public create is explicit and reports disabled discovery',async()=>{
- const h=memory();await body(await h.run({action:'create',org:newHatim({public:true})}),403);
+ const h=memory();await body(await h.run({action:'create',org:newHatim({public:true})},member),403);
  assert.equal(h.rows.size,0);
- h.rows.set('_config',{discoverEnabled:true});const g=await group(h,{public:true}),p=await group(h,{public:false});
- const list=await body(await h.run({action:'discoverList'}));assert.deepEqual(list.items.map(i=>i.code),[g.code]);
+ h.rows.set('_config',{discoverEnabled:true});const g=await group(h,{public:true},member),p=await group(h,{public:false});
+ const list=await body(await h.run({action:'discoverList'},member));assert.deepEqual(list.items.map(i=>i.code),[g.code]);
  assert.equal(list.items[0].available,30);assert.equal(h.rows.get(p.code).public,false);
  await body(await h.run({action:'archive',code:g.code,admin:g.adminToken}));
- assert.equal((await body(await h.run({action:'discoverList'}))).items.length,0);
+ assert.equal((await body(await h.run({action:'discoverList'},member))).items.length,0);
  assert.equal((await body(await h.run({action:'get',code:g.code}))).org.archived,true);
  await body(await h.run({action:'reopen',code:g.code,admin:g.adminToken}));
  assert.equal(h.rows.get(g.code).public,false,'reopen is not accidental public disclosure');
@@ -212,12 +217,12 @@ test('a lost recovery reply may be retried without rotating again or undoing a l
 });
 
 test('discovery totals distinguish taken from complete and preserve usable legacy lookup codes',async()=>{
- const h=memory({_config:{discoverEnabled:true}}),g=await group(h,{public:true});
+ const h=memory({_config:{discoverEnabled:true}}),g=await group(h,{public:true},member);
  const record=h.rows.get(g.code);record.items.forEach(i=>{i.status='alindi';i.name='Katılımcı';});delete record.code;
- const listed=await body(await h.run({action:'discoverList'})),card=listed.items[0];
+ const listed=await body(await h.run({action:'discoverList'},member)),card=listed.items[0];
  assert.equal(card.code,g.code);assert.equal(card.total,30);assert.equal(card.taken,30);assert.equal(card.done,0);assert.equal(card.available,0);assert.equal(card.fullHatim,true);
  record.items[0].status='okundu';record.items[1].status='bos';
- const updated=(await body(await h.run({action:'discoverList'}))).items[0];assert.equal(updated.done,1);assert.equal(updated.taken,29);assert.equal(updated.available,1);
+ const updated=(await body(await h.run({action:'discoverList'},member))).items[0];assert.equal(updated.done,1);assert.equal(updated.taken,29);assert.equal(updated.available,1);
 });
 
 test('myList pagination retains all ownership beyond thirty entries and filters stale or foreign index entries',async()=>{
@@ -334,7 +339,7 @@ test('new private indexes avoid legacy network lookups while old organizations s
 });
 
 test('only the actual owner can explicitly delete a never-used hatim; discovery, admin and account indexes are cleaned',async()=>{
- const h=memory({_config:{discoverEnabled:true}}),g=await group(h,{public:true},{uid:'alice'});
+ const h=memory({_config:{discoverEnabled:true}}),g=await group(h,{public:true},member);
  const p={action:'delete',code:g.code,confirmed:true};
  for(const payload of [p,{...p,admin:g.adminToken}])for(const session of [{},{uid:'bob'}])await body(await h.run(payload,session),403);
  await body(await h.run({...p,confirmed:false},{uid:'alice'}),400);
@@ -344,7 +349,7 @@ test('only the actual owner can explicitly delete a never-used hatim; discovery,
  assert.equal(h.rows.has(g.code),false);assert.equal(h.rows.has('a_'+g.adminToken),false);
  assert.deepEqual(h.rows.get('_index'),[]);assert.deepEqual(h.rows.get(membershipKey('alice')).codes,[]);
  assert.deepEqual((await body(await h.run({action:'myList'},{uid:'alice'}))).items,[]);
- assert.deepEqual((await body(await h.run({action:'discoverList'}))).items,[]);
+ assert.deepEqual((await body(await h.run({action:'discoverList'},member))).items,[]);
  await body(await h.run({action:'get',code:g.code}),404);
  assert.equal((await body(await h.run(p,{uid:'alice'}))).replayed,true);
  await body(await h.run({...p,admin:g.adminToken}),403);await body(await h.run(p,{uid:'bob'}),403);

@@ -1,5 +1,7 @@
 import {withOrgTransaction} from './database.mjs';
 import {membershipKey,closedAccountKey} from './hatim-access.mjs';
+import {anonymizeAccountComments} from './hatim-comments.mjs';
+import {cleanupCommunityAccount} from './community-admin.mjs';
 
 // Called only from the explicit account deletion flow AFTER its deletion lock.
 // Each group is detached independently, while the index remains until all work
@@ -31,6 +33,10 @@ export async function releaseAccountHatimOwnership(uid,{transaction=withOrgTrans
   }
   if(changed)await store.setJSON(code,org);
  });
+ // Keep the membership index until comment/report cleanup also succeeds so a
+ // partially completed account deletion can always be retried safely.
+ await anonymizeAccountComments(uid,{transaction});
+ await cleanupCommunityAccount(uid,{transaction});
  await transaction(store=>store.delete(key));
  return {detached:true};
 }

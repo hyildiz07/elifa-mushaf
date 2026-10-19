@@ -19,7 +19,7 @@ export async function firestoreStoreTransaction(db,legacy,work,{records:recordCo
      // These private indexes were introduced after the Firestore cutover and
      // have never lived in Blobs. Avoid a redundant legacy network lookup on
      // every signed-in poll / first membership / creation replay check.
-     value=/^_(?:closed|member|create|deleted)_/.test(key)?null:await legacy.get(key,{type:options.type==='text'?'text':'json'});
+     value=/^_(?:closed|member|create|deleted|hc|hcu|ca)_/.test(key)?null:await legacy.get(key,{type:options.type==='text'?'text':'json'});
      if(value!=null)pending.set(key,{key,deleted:false,value:JSON.stringify(value)});
     }
     reads.set(key,value);return structuredClone(value);
@@ -27,6 +27,22 @@ export async function firestoreStoreTransaction(db,legacy,work,{records:recordCo
    async setJSON(key,value){const serialized=JSON.stringify(value);if(Buffer.byteLength(serialized)>900*1024)throw Error('Record size limit');pending.set(key,{key,value:serialized,deleted:false});},
    async set(key,value){return this.setJSON(key,value);},
    async delete(key){pending.set(key,{key,value:'null',deleted:true});},
+   async query(prefix,{cursor=null,limit=20,reverse=false}={}){
+    if(typeof prefix!=='string'||!/^_[a-z0-9_-]{1,240}$/.test(prefix)||
+      !Number.isInteger(limit)||limit<1||limit>50||
+      (cursor!==null&&(typeof cursor!=='string'||!cursor.startsWith(prefix))))throw Error('Invalid record query');
+    let q=records.where('key','>=',prefix).where('key','<',prefix+'\uf8ff').orderBy('key',reverse?'desc':'asc');
+    if(cursor)q=q.startAfter(cursor);
+    const result=await tx.get(q.limit(limit+1));
+    const rows=result.docs.map(doc=>doc.data()),more=rows.length>limit;
+    const values=new Map(rows.map(row=>[row.key,row]));
+    for(const [key,row]of pending){
+     if(key.startsWith(prefix)&&(!cursor||(reverse?key<cursor:key>cursor)))values.set(key,row);
+    }
+    const ordered=[...values.values()].sort((a,b)=>reverse?b.key.localeCompare(a.key):a.key.localeCompare(b.key)),page=ordered.slice(0,limit);
+    return {entries:page.filter(row=>!row.deleted).map(row=>({key:row.key,value:JSON.parse(row.value)})),
+      nextCursor:(more||ordered.length>limit)&&page.length?page.at(-1).key:null};
+   },
    async list(){
     const keys=new Set();let cursor;
     do{const old=await legacy.list({cursor});for(const b of old.blobs)keys.add(b.key);cursor=old.cursor;}while(cursor);

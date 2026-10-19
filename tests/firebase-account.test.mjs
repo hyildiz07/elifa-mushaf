@@ -182,7 +182,7 @@ test('real Auth + Firestore empty-hatim deletion protects owners and participant
    await read(await run(owner,{...del,confirmed:false}),400);
    assert.equal((await raw(g.code)).ownerUid,owner.uid);
    assert.ok((await read(await run(owner,{action:'myList'}))).items.some(item=>item.code===g.code));
-   assert.ok((await read(await run(null,{action:'discoverList'}))).items.some(item=>item.code===g.code));
+   assert.ok((await read(await run(owner,{action:'discoverList'}))).items.some(item=>item.code===g.code));
   });
   await t.test('concurrent owner deletion is retryable and removes every current index without legacy resurrection',async()=>{
    old.set(g.code,await raw(g.code));old.set('a_'+g.adminToken,g.code);
@@ -192,7 +192,7 @@ test('real Auth + Firestore empty-hatim deletion protects owners and participant
    assert.equal((await raw(membershipKey(owner.uid))).codes.includes(g.code),false);
    assert.equal((await raw('_index')).some(item=>item.code===g.code),false);
    assert.equal((await read(await run(owner,{action:'myList'}))).items.some(item=>item.code===g.code),false);
-   assert.equal((await read(await run(null,{action:'discoverList'}))).items.some(item=>item.code===g.code),false);
+   assert.equal((await read(await run(owner,{action:'discoverList'}))).items.some(item=>item.code===g.code),false);
    const tombstone=await raw(deletedHatimKey(g.code));assert.equal(tombstone.ownerUid,owner.uid);
    assert.equal(JSON.stringify(tombstone).includes(g.adminToken),false);
    await read(await run(null,{action:'get',code:g.code}),404);await read(await run(null,{action:'get',admin:g.adminToken}),404);

@@ -39,7 +39,7 @@ function assertWorkspace(){if(!workspaceReady||workspaceTransition||!workspaces.
 function reloadWorkspace(){if(workspaceTransition&&workspaceReady&&!busy){window.dispatchEvent(new CustomEvent('elifa:workspace-changing'));location.reload();}}
 const profileUI=mountAccountProfile({api,getUser:()=>user,workspaces,action,language:accountLanguage,onProfile:value=>{profileName=value?.displayName||null;render();publishSession();}});
 const deletePanel=$('accountDeleteForm').closest('details');
-deletePanel.querySelector('p').textContent=accountLanguage()==='tr'?'Hesabın, özel profilin ve bulut yedeklerin silinir. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.':'Your account, private profile and cloud backups are deleted. Khatm progress remains, with your name and account link removed. Keep private participant and organizer links first. Device records remain in a separate copy; signing out opens guest records. Download a device backup first.';
+deletePanel.querySelector('p').textContent=accountLanguage()==='tr'?'Hesabın, özel profilin ve bulut yedeklerin silinir. Yorumlarının metni ve yaptığın bildirimler kaldırılır; başkalarının yanıtları kalır. Hatim ilerlemelerin korunur; adın ve hesabınla bağlantısı kaldırılır. Özel katılım ve yönetici bağlantılarını önce sakla. Cihazdaki kayıtların ayrı kopyada kalır; çıkışta hesapsız kayıtların açılır. Önce cihaz yedeğini indirmen önerilir.':'Your account, private profile and cloud backups are deleted. Your comment text and reports are removed; replies by others remain. Khatm progress remains, with your name and account link removed. Keep private participant and organizer links first. Device records remain in a separate copy; signing out opens guest records. Download a device backup first.';
 const exportBeforeDelete=document.createElement('button');exportBeforeDelete.type='button';exportBeforeDelete.textContent=accountLanguage()==='tr'?'Önce cihaz yedeğini indir':'Download device backup first';exportBeforeDelete.onclick=()=>action(async()=>{assertWorkspace();$('storageExport').click();});$('accountDeleteForm').before(exportBeforeDelete);
 const actionSettings=()=>({url:(window.ELIFA_NATIVE_IOS?'https://mushaf.elifaplatform.com/':location.origin+'/'),handleCodeInApp:false});
 const nativeAuth=()=>window.ELIFA_NATIVE_IOS?window.elifaNativeAuth:null;
@@ -289,7 +289,9 @@ $('accountDeleteForm').onsubmit=e=>{e.preventDefault();action(async()=>{
    if(!appleAuthorizationCode)appleAuthorizationCode=(await appleProof()).authorizationCode;
    await nativeAuth().revokeApple(appleAuthorizationCode);
   }
-  await current.getIdToken(true);if(user?.uid!==owner||generation!==epoch)throw Error('Hesap değişti.');await api('deleteAccount',{confirmation:'DELETE',expectedUser:owner});await signOut(auth);mode='login';authChanged(null);message('Hesap ve bulut yedekleri silindi. Cihazdaki kayıtlar korundu.');
+  await current.getIdToken(true);if(user?.uid!==owner||generation!==epoch)throw Error('Hesap değişti.');await api('deleteAccount',{confirmation:'DELETE',expectedUser:owner});
+  try{const pending=window.sessionStorage,prefix='elifa_hatim_comment_pending_v1:'+owner+':';for(let i=pending.length-1;i>=0;i--){const key=pending.key(i);if(key?.startsWith(prefix))pending.removeItem(key);}}catch{}
+  await signOut(auth);mode='login';authChanged(null);message('Hesap ve bulut yedekleri silindi. Cihazdaki kayıtlar korundu.');
  }finally{$('accountDeletePassword').value='';}
 });};
 $('accountUndo').onclick=()=>action(async()=>{

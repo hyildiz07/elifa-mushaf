@@ -5440,8 +5440,10 @@ window.elifaLog=function(event,params){
   });
 })();
 </script>
-<link rel="stylesheet" href="/assets/account.css?v=361">
-<link rel="stylesheet" href="/assets/hatim-community.css?v=361">
+<link rel="stylesheet" href="/assets/account.css?v=362">
+<link rel="stylesheet" href="/assets/hatim-community.css?v=362">
+<link rel="stylesheet" href="/assets/community-admin.css?v=362">
+<style>#setCommunityAdmin[hidden]{display:none!important}</style>
 <link rel="stylesheet" href="/assets/theme-legibility.css?v=305">
 <link rel="stylesheet" href="/assets/reader-toolbar.css?v=326">
 <link rel="stylesheet" href="/assets/split-toolbar.css?v=1">
@@ -5815,6 +5817,7 @@ window.elifaLog=function(event,params){
       <div class="setrow" id="setManual"><span class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5V5a2 2 0 012-2h12a1 1 0 011 1v15.5" stroke-linecap="round"/><path d="M6 17h13M6 21h13a2 2 0 01-2-2H6a2 2 0 000 4" stroke-linecap="round"/><path d="M8 7h8M8 11h6" stroke-linecap="round"/></svg></span><span class="slbl" data-i18n="manual">Kullanma Kılavuzu</span><span class="sarrow">›</span></div>
 <div class="setrow" id="setBackup"><span class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></span><span class="slbl" data-i18n="backup">Yedekle ve geri yükle</span><span class="sbadge" id="bkBadge" hidden></span><span class="sarrow">›</span></div>
 <div class="setrow" id="setPrivacy"><span class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5.2c0 4.3-2.9 7.8-7 9.8-4.1-2-7-5.5-7-9.8V6l7-3z" stroke-linejoin="round"/><path d="M9.2 12.2l1.9 1.9 3.7-3.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="slbl" data-i18n="privacy">Gizlilik Politikası</span><span class="sarrow">›</span></div>
+<button type="button" class="setrow" id="setCommunityAdmin" hidden><span class="sicon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 3v5c0 5-5 9-8 10-3-1-8-5-8-10V6z"/><path d="m8 12 3 3 5-6"/></svg></span><span class="slbl">Yönetim paneli</span><span class="sarrow" aria-hidden="true">›</span></button>
 <div class="setrow" id="setAbout"><span class="sicon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v5M12 7.5v.5" stroke-linecap="round"/></svg></span><span class="slbl" data-i18n="about">Hakkında ve kaynaklar</span><span class="sarrow">›</span></div>
     </div>
     <div class="setgrouptitle" data-i18n="other_works">Diğer reklamsız eserlerimiz</div>
@@ -6323,7 +6326,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v361</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v362</span></div>
   </div>
 
   <div class="tesekkur">
@@ -12461,7 +12464,7 @@ updateStat();
   el.addEventListener('touchend',end);el.addEventListener('touchcancel',end);
 })();
 </script>
-<script src="/assets/hatim-community.js?v=361"></script>
+<script src="/assets/hatim-community.js?v=362"></script>
 <script>(function(){var s=document.getElementById('splash');if(!s)return;function go(){s.classList.add('hide');setTimeout(function(){if(s&&s.parentNode)s.parentNode.removeChild(s);},560);}var t=setTimeout(go,650);s.addEventListener('click',go);})();</script>
 
 <script>
@@ -12513,7 +12516,7 @@ updateStat();
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v361-compact-account-hatim';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v362-member-hatim-comments';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16022,7 +16025,9 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
     <button type="button" id="accountRetry" class="account-link">Bağlantıyı yeniden dene</button>
   </div><p id="accountStatus" role="status" aria-live="polite"></p>
 </dialog>
-<script type="module" src="/assets/account.js?v=361"></script>
+<script type="module" src="/assets/account.js?v=362"></script>
+<dialog id="communityAdminDialog" aria-label="Yönetim paneli"></dialog>
+<script type="module" src="/assets/community-admin.js?v=362"></script>
 <script src="/assets/reader-help-drafts.js?v=1"></script>
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>

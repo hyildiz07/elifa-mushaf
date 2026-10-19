@@ -16,6 +16,8 @@
 import { withOrgTransaction } from '../../server/database.mjs';
 import {firebaseServices} from '../../server/firebase.mjs';
 import {deploymentContext,previewResponse} from '../../server/deploy-context.mjs';
+import {COMMENT_ACTIONS,handleHatimComments,verifiedMemberError} from '../../server/hatim-comments.mjs';
+import {getCommunityAccess,communityRestrictionError} from '../../server/community-admin.mjs';
 import {capabilityValid,capabilityHash,returnKeyValid,accessKeyValid,deriveReturnKey,returnKeyHash,matchesItemKey,membershipKey,closedAccountKey,creationFingerprint,usedCapability,rememberCapability,fullHatim,deletedHatimKey,adminKeyHash,neverUsedHatim,ownsItem,itemView,rememberMembership,validDate} from '../../server/hatim-access.mjs';
 
 const ALPHA = 'abcdefghijkmnpqrstuvwxyz23456789'; // karışan harfler yok (l,o,0,1)
@@ -35,6 +37,8 @@ function publicView(org, isAdmin, p={}, session={},code=org.code||p.code) {
     dueDate: org.dueDate, adminName: org.adminName, createdAt: org.createdAt,
     items: (org.items||[]).map(item=>itemView(item,p,session,code)), public: !!org.public,
     archived: !!org.archivedAt,
+    commentCount:org.commentCount||0,rootCommentCount:org.rootCommentCount||0,commentsClosed:!!org.commentsClosed,
+    canComment:!!session.uid&&session.emailVerified===true&&!session.communityAccess?.restriction.communityBanned&&!session.communityAccess?.restriction.commentsRestricted&&!org.commentsClosed&&!org.archivedAt,
     fullHatim: org.type==='hatim'&&fullHatim(org.items),
     complete: org.type==='hatim'&&!!org.items?.length&&org.items.every(i=>i.status==='okundu'),
   };
@@ -51,7 +55,7 @@ const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
   status,
   headers: { 'content-type': 'application/json; charset=utf-8', 'cache-control': 'private, no-store', 'vary':'Authorization, Origin', 'x-content-type-options':'nosniff' },
 });
-const fail = (msg, status = 400) => json({ error: msg }, status);
+const fail = (msg, status = 400,errorCode) => json({ error: msg,...(errorCode?{errorCode}:{}) }, status);
 
 /* Basit doğrulama — çöp veri yazılmasın */
 function validOrg(o) {
@@ -162,14 +166,14 @@ export function createOrgHandler({services=firebaseServices,transaction,environm
   const authorization=req.headers.get('authorization');
   if(authorization){
     const token=authorization.match(/^Bearer (\S+)$/)?.[1];
-    if(!token)return fail('Oturum geçersiz. Yeniden giriş yap.',401);
+    if(!token)return fail('Oturum geçersiz. Yeniden giriş yap.',401,'AUTH_REQUIRED');
     try{
       const {auth}=services(),verified=await auth.verifyIdToken(token,true);
       const user=await auth.getUser(verified.uid);
-      if(user.disabled)return fail('Oturum geçersiz.',401);
+      if(user.disabled)return fail('Oturum geçersiz.',401,'AUTH_REQUIRED');
       if(p.expectedUser!==verified.uid)return fail('Hesap değişti. Yeniden kontrol et.',409);
-      session={uid:verified.uid};
-    }catch{return fail('Oturum doğrulanamadı. Yeniden giriş yap.',401);}
+      session={uid:verified.uid,emailVerified:user.emailVerified===true};
+    }catch{return fail('Oturum doğrulanamadı. Yeniden giriş yap.',401,'AUTH_REQUIRED');}
   }
   try{
     const work=store=>handleOrg(p,store,session);
@@ -202,9 +206,12 @@ export default async (req,context) => {
 };
 export async function handleOrg(p,store,session={}){
   if(session.uid&&await store.get(closedAccountKey(session.uid),{type:'json'}))return fail('Bu hesabın silme işlemi başladı. Çıkış yapıp kişisel dönüş bağlantını kullanabilirsin.',409);
+  const communityAccess=await getCommunityAccess(store,session);
+  session={...session,communityAccess};
 
   /* ── keşif işlemleri (org koduna bağlı değil) ── */
   if (p.action === 'discoverConfig' || p.action === 'discoverSet' || p.action === 'discoverList') {
+    if(p.action==='discoverList'){const gate=verifiedMemberError(session);if(gate)return gate;}
     const r = await handleDiscover(p, store);
     if (r) return r;
   }
@@ -238,6 +245,7 @@ export async function handleOrg(p,store,session={}){
   if (p.action === 'create') {
     const bad = validOrg(p.org);
     if (bad) return fail(bad);
+    if(p.org.public){const gate=verifiedMemberError(session);if(gate)return gate;}
 
     if(p.creationToken!==undefined&&!capabilityValid(p.creationToken))return fail('Oluşturma işlem anahtarı geçersiz');
     const creationKey=p.creationToken?'_create_'+capabilityHash(p.creationToken):null;
@@ -253,6 +261,7 @@ export async function handleOrg(p,store,session={}){
       }
     }
 
+    const restriction=communityRestrictionError(communityAccess,'community');if(restriction)return restriction;
     if(p.org.public){
       const cfg=await store.get('_config',{type:'json'})||{};
       if(!cfg.discoverEnabled)return fail('Açık hatim listesi şu an kapalı. Bağlantıyla katılımı seçebilirsin.',403);
@@ -311,6 +320,7 @@ export async function handleOrg(p,store,session={}){
     if(org.type!=='hatim')return null;
     return (org.items||[]).find(i=>i.no===+p.no);
   };
+  if(COMMENT_ACTIONS.has(p.action))return handleHatimComments({...p,code},store,session,org,isAdmin);
 
   if(p.action==='delete'){
     // Once explicitly bound to an account, a copied organizer link cannot
@@ -318,7 +328,7 @@ export async function handleOrg(p,store,session={}){
     const authorized=org.ownerUid?org.ownerUid===session.uid:
       !!p.admin&&p.admin===org.adminToken;
     if(!authorized)return fail('Bu hatmi yalnız sahibi silebilir.',403);
-    if(!neverUsedHatim(org))return fail('Bu hatimde katılım veya okuma kaydı var. Katılımcıların çalışmasını korumak için silinemez; silmek yerine arşivle.',409);
+    if(!neverUsedHatim(org)||org.commentCount>0)return fail('Bu hatimde katılım, okuma veya yorum kaydı var. Katılımcıların çalışmasını korumak için silinemez; silmek yerine arşivle.',409);
     const idx=await store.get('_index',{type:'json'})||[];
     if(org.ownerUid){
       const key=membershipKey(org.ownerUid),membership=await store.get(key,{type:'json'});
@@ -333,6 +343,9 @@ export async function handleOrg(p,store,session={}){
 
   /* ── GET ── */
   if (p.action === 'get') {
+    if(org.public&&!isAdmin&&!(org.items||[]).some(item=>ownsItem(item,p,session,code))){
+      const gate=verifiedMemberError(session);if(gate)return gate;
+    }
     return json({ org: view(), code });
   }
 
@@ -348,6 +361,8 @@ export async function handleOrg(p,store,session={}){
       return fail('Bu cüz az önce başka biri tarafından alındı.',409);
     }
     if(org.archivedAt)return fail('Bu hatim arşivde. Yeniden açılması için yöneticisine başvur.',409);
+    const restriction=communityRestrictionError(communityAccess,'community');if(restriction)return restriction;
+    if(org.public){const gate=verifiedMemberError(session);if(gate)return gate;}
     if(usedCapability(it,capabilityHash(p.capability)))return fail('Bu kişisel anahtarın önceki katılımı sona ermiş. Cüzü yeni bir anahtarla yeniden seç.',409);
     const name=String(p.name||'').trim();
     if(name.length<2||name.length>60)return fail('2–60 karakterlik ad veya takma ad yaz.');
@@ -454,6 +469,7 @@ export async function handleOrg(p,store,session={}){
   /* ── PUBLISH (kurucu kendi hatmini herkese açık yapar/kaldırır) ── */
   if (p.action === 'publish') {
     if (!isAdmin) return fail('Yetki yok', 403);
+    if(p.public===true){const gate=verifiedMemberError(session);if(gate)return gate;}
     if(typeof p.public!=='boolean')return fail('Görünürlük geçersiz');
     const cfg = await store.get('_config', { type: 'json' }) || {};
     if (p.public&&!cfg.discoverEnabled) return fail('Herkese açık keşif şu an kapalı', 403);

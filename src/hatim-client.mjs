@@ -71,7 +71,7 @@ export function createOrgClient({fetcher,session,base='',onError}){
   try{result=await fetcher(base+'/api/org',{method:'POST',headers,body:JSON.stringify(payload),signal:AbortSignal.timeout(20000)});data=await result.json();}
   catch{throw Error('Sunucuya ulaşılamadı. İşlem kaydedildi sayılmadı; durumunu kontrol edip yeniden dene.');}
   if((session()?.getUser()?.uid||null)!==uid)throw Error('Hesap değişti. İşlemi yeniden aç.');
-  if(!result.ok){const e=Object.assign(Error(data.error||'İşlem tamamlanamadı.'),{status:result.status});onError?.(e);throw e;}
+  if(!result.ok){const e=Object.assign(Error(data.error||'İşlem tamamlanamadı.'),{status:result.status,...(typeof data.errorCode==='string'?{errorCode:data.errorCode}:{})});onError?.(e);throw e;}
   if(!data||typeof data!=='object'||Array.isArray(data))throw Error('Sunucu yanıtı geçersiz. İşlem durumunu yenileyerek kontrol et.');
   if(data.org&&typeof data.org==='object'&&!Array.isArray(data.org)){
    const code=data.code||data.org.code;if(!/^[a-z0-9]{6}$/.test(code||''))throw Error('Hatim yanıtında geçerli kod yok.');

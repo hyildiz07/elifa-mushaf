@@ -1,0 +1,10 @@
+<!doctype html><html lang="tr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Elifa · Yerel üye hatmi denemesi</title>
+<link rel="stylesheet" href="/assets/hatim-community.css">
+<link rel="stylesheet" href="/assets/community-admin.css">
+<style>
+:root{--bg:#fbf4df;--surface:#fffaf0;--text:#18334f;--ink:#18334f;--muted:#786f55;--line:#dac38b;--accent:#c4972f;--gold:#c4972f;--primary:#173652}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px system-ui}body[data-dark="1"]{--bg:#0c1929;--surface:#172a40;--text:#edf3fa;--ink:#edf3fa;--muted:#b2c0cf;--line:#6a624a}.fixture-controls{display:flex;flex-wrap:wrap;gap:4px;padding:6px;font:11px system-ui;background:var(--surface)}.fixture-controls button{font:inherit;min-height:30px;padding:4px 8px;color:var(--text);background:var(--surface);border:1px solid var(--line);border-radius:6px}.fixture-controls output{width:100%}#orgBack{margin:8px 12px}#fixtureStatus{font-size:12px;padding:8px}[hidden]{display:none!important}
+</style>
+<header class="fixture-controls"><output>Yalnız yerel test · Gerçek hesap ve katılım değildir</output><button data-user="review-organizer">Yönetici</button><button data-user="review-member">Üye</button><button data-user="">Misafir</button><button data-user="review-unverified">Doğrulanmamış</button><button id="fixtureDark">Gece/Gündüz</button><button id="fixtureHome">Hatimler</button><output id="fixtureUser"></output></header>
+<button id="setCommunityAdmin" hidden>Yönetim paneli</button><dialog id="communityAdminDialog" aria-label="Yönetim paneli"></dialog>
+<div id="bkwrap"><main id="birlikte" class="screen on"></main><section id="org" class="screen" hidden><button type="button" id="orgBack" class="hc-button">‹ Hatimler</button><div id="orgView"></div></section></div><dialog id="hatimDialog" class="hc-dialog"></dialog><div id="fixtureStatus" role="status"></div>
+<script type="module" src="/scripts/member-hatim-review.mjs"></script></html>
