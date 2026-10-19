@@ -1,4 +1,4 @@
-import {GoogleAuthProvider,OAuthProvider,EmailAuthProvider,signInWithPopup,signInWithCredential,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut,onAuthStateChanged,sendPasswordResetEmail,sendEmailVerification,reauthenticateWithCredential,reauthenticateWithPopup,applyActionCode,verifyPasswordResetCode,confirmPasswordReset,reload,linkWithPopup,linkWithCredential} from 'firebase/auth';
+import {GoogleAuthProvider,OAuthProvider,EmailAuthProvider,browserPopupRedirectResolver,signInWithPopup,signInWithCredential,signInWithEmailAndPassword,createUserWithEmailAndPassword,signOut,onAuthStateChanged,sendPasswordResetEmail,sendEmailVerification,reauthenticateWithCredential,reauthenticateWithPopup,applyActionCode,verifyPasswordResetCode,confirmPasswordReset,reload,linkWithPopup,linkWithCredential} from 'firebase/auth';
 import {auth,isLocal} from './firebase-client.mjs';
 import './firebase-public.mjs';
 import {collectBackup,validateBackup,restoreBackup,recoverPendingRestore,mergeBackups,PREVIOUS_KEY,BACKUP_KEYS,SYNC_BASE_PREFIX,SYNC_ENABLED_PREFIX} from './account-data.mjs';
@@ -112,11 +112,14 @@ function authChanged(next){
  const changed=user?.uid!==next?.uid;
  if(changed){epoch++;pendingConflict=null;syncPending=false;profileName=null;clearTimeout(syncTimer);$('accountConflict').hidden=true;$('accountBackupList').replaceChildren();$('accountBackupCount').textContent='';$('accountBackupStatus').textContent='Henüz kontrol edilmedi.';$('accountCloudConsent').checked=false;$('accountSyncStatus').textContent='Güncelleme kapalı.';$('accountLastSync').textContent='Henüz güncellenmedi.';}
  user=next;authReady=true;const generation=epoch;
+ // Authentication is already known. Public/member UI must not wait for an
+ // unrelated cross-tab workspace lock; account data APIs retain their own guard.
+ publishSession();
  const fail=e=>{if(generation!==epoch)return;workspaceReady=false;message(e.message,true);$('storageFailure').hidden=false;render();publishSession();};
  const prepare=()=>{if(generation!==epoch)return;workspaceReady=true;if(!workspaces.isActive(next?.uid)){workspaceTransition=true;window.stopPlan?.(true);document.querySelectorAll('audio').forEach(audio=>audio.pause());if(workspaces.activate(next?.uid))clearTimeout(syncTimer);}};
  const finish=()=>{
   if(generation!==epoch)return;
-  if(changed){profileUI.changed();accountNav?.reset();}render();publishSession();
+  if(changed){profileUI.changed();accountNav?.reset();}render();
   if(!workspaceTransition&&workspaceReady&&next?.emailVerified&&accountStorage.getItem(SYNC_ENABLED_PREFIX+next.uid)==='1')scheduleSync(1500);
   reloadWorkspace();
  };
@@ -153,9 +156,9 @@ async function signedIn(){
  message('Giriş tamamlandı. Kayıtlarını yedeklemek istersen Yedeklerim bölümünü aç.');
 }
 
-$('accountGoogle').onclick=()=>action(async()=>{if(window.ELIFA_NATIVE_IOS)await signInWithCredential(auth,await googleCredential());else await signInWithPopup(auth,google);await signedIn();});
+$('accountGoogle').onclick=()=>action(async()=>{if(window.ELIFA_NATIVE_IOS)await signInWithCredential(auth,await googleCredential());else await signInWithPopup(auth,google,browserPopupRedirectResolver);await signedIn();});
 $('accountApple').onclick=()=>action(async()=>{const {credential}=await appleProof();await signInWithCredential(auth,credential);await signedIn();});
-$('accountLinkGoogle').onclick=()=>action(async()=>{if(window.ELIFA_NATIVE_IOS)await linkWithCredential(user,await googleCredential());else await linkWithPopup(user,google);await reload(user);authChanged(auth.currentUser);message('Google hesabın bağlandı. Aynı yedeklerine iki giriş yöntemiyle de ulaşabilirsin.');});
+$('accountLinkGoogle').onclick=()=>action(async()=>{if(window.ELIFA_NATIVE_IOS)await linkWithCredential(user,await googleCredential());else await linkWithPopup(user,google,browserPopupRedirectResolver);await reload(user);authChanged(auth.currentUser);message('Google hesabın bağlandı. Aynı yedeklerine iki giriş yöntemiyle de ulaşabilirsin.');});
 $('accountForm').onsubmit=e=>{e.preventDefault();action(async()=>{
  const email=$('accountEmailInput').value.trim(),password=$('accountPassword').value;
  try{
@@ -283,7 +286,7 @@ $('accountDeleteForm').onsubmit=e=>{e.preventDefault();action(async()=>{
   else if(window.ELIFA_NATIVE_IOS){
    if(user.providerData.some(p=>p.providerId==='apple.com')){const proof=await appleProof();appleAuthorizationCode=proof.authorizationCode;await reauthenticateWithCredential(user,proof.credential);}
    else await reauthenticateWithCredential(user,await googleCredential());
-  }else await reauthenticateWithPopup(user,google);
+  }else await reauthenticateWithPopup(user,google,browserPopupRedirectResolver);
   if(user?.uid!==owner||generation!==epoch)throw Error('Hesap değişti.');
   if(window.ELIFA_NATIVE_IOS&&user.providerData.some(p=>p.providerId==='apple.com')){
    if(!appleAuthorizationCode)appleAuthorizationCode=(await appleProof()).authorizationCode;

@@ -1,8 +1,9 @@
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const roles={owner:'Uygulama sahibi',admin:'Admin',moderator:'Yönetici'};
 const socialNote='Topluluk engeli yalnız hatim, katılım ve yorum alanları içindir. Kur’an okuma, yedekleme ve hesabı silme açık kalır.';
-export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=globalThis.fetch,preview=()=>false,eventTarget=globalThis.window,location=globalThis.location}){
+export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=globalThis.fetch,preview=()=>false,eventTarget=globalThis.window,location=globalThis.location,now=Date.now}){
  let initialized=false,disposed=false,boundBridge=null,unsubscribe=null,identity='',epoch=0,statusTicket=0;
+ let statusJob=null,statusAt=null,statusIdentity=null;
  let access=null,opened=false,tab='comments',queue='comments',rows=[],cursor=null,people=null,roleRows=[],roleCursor=null,busy=false,loading=false,error='',notice='',confirmation=null,edit=null;
  const fields={email:'',grantEmail:'',grantRole:'moderator'};
  const user=()=>session?.()?.getUser?.()||null;
@@ -14,7 +15,7 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
  function hideEntry(){entry.hidden=true;entry.disabled=false;entry.setAttribute?.('aria-busy','false');}
  function resetContent(){rows=[];cursor=null;people=null;roleRows=[];roleCursor=null;confirmation=null;edit=null;error='';notice='';loading=false;busy=false;fields.email='';fields.grantEmail='';fields.grantRole='moderator';}
  function close(){if(!opened)return;opened=false;epoch++;resetContent();if(host.open)host.close();host.innerHTML='';}
- function deny(){access=null;hideEntry();close();host.innerHTML='';}
+ function deny(){access=null;statusAt=null;statusIdentity=null;hideEntry();close();host.innerHTML='';}
  async function request(action,payload={}){
   if(blockedPreview())throw Object.assign(Error('Önizlemede yönetim paneli kapalı.'),{errorCode:'PREVIEW_RESTRICTED'});
   const {stamp,person}=snapshot(),bridge=session?.();
@@ -27,7 +28,17 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
   if(!data||typeof data!=='object'||Array.isArray(data))throw Error('Sunucu yanıtı doğrulanamadı.');
   return data;
  }
- async function refreshStatus(){
+ async function refreshStatus({force=false}={}){
+  const cachedIdentity=(uid()||'')+':'+(user()?.emailVerified===true?'verified':'unverified');
+  if(statusJob&&statusJob.identity===cachedIdentity&&statusJob.epoch===epoch)return statusJob.promise;
+  // This only avoids a second status request immediately after login. Every
+  // protected queue/mutation still authorizes against the current server role.
+  if(!force&&access&&statusIdentity===cachedIdentity&&statusAt!==null&&now()-statusAt>=0&&now()-statusAt<15000&&!blockedPreview())return access;
+  const job={identity:cachedIdentity,epoch,promise:null};
+  job.promise=fetchStatus(cachedIdentity);statusJob=job;
+  try{return await job.promise;}finally{if(statusJob===job)statusJob=null;}
+ }
+ async function fetchStatus(cachedIdentity){
   const ticket=++statusTicket,{stamp,person}=snapshot();hideEntry();
   if(!person||user()?.emailVerified!==true||blockedPreview()){deny();return null;}
   entry.disabled=true;entry.setAttribute?.('aria-busy','true');
@@ -35,6 +46,7 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
    if(!Object.hasOwn(roles,data.role)){deny();return null;}
    access={role:data.role,owner:data.role==='owner'&&data.owner===true,permissions:{}};
    for(const name of ['roles','lookup','comments','communityBan','commentBan'])access.permissions[name]=data.permissions?.[name]===true&&(name!=='roles'||access.owner);
+   statusAt=now();statusIdentity=cachedIdentity;
    entry.hidden=false;return access;
   }catch{if(current(stamp,person)&&ticket===statusTicket)deny();return null;}
   finally{if(current(stamp,person)&&ticket===statusTicket){entry.disabled=false;entry.setAttribute?.('aria-busy','false');}}
@@ -44,7 +56,7 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
  }
  function changed(){
   connect();const next=(uid()||'')+':'+(user()?.emailVerified===true?'verified':'unverified');
-  if(next===identity)return;identity=next;epoch++;access=null;hideEntry();close();resetContent();host.innerHTML='';refreshStatus();
+  if(next===identity)return;identity=next;epoch++;access=null;statusAt=null;statusIdentity=null;hideEntry();close();resetContent();host.innerHTML='';refreshStatus();
  }
  function button(label,action,attrs=''){return `<button type="button" data-admin-action="${action}"${(busy||loading)&&action!=='close'?' disabled':''}${attrs}>${label}</button>`;}
  function date(value){const d=new Date(value);return Number.isFinite(d.getTime())?d.toLocaleString('tr',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';}
@@ -82,7 +94,7 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
     const data=await request(queue,older&&cursor?{cursor}:{});if(!current(stamp,person)||!opened||tab!=='comments')return;
     const result=data[queue];if(!Array.isArray(result))throw Error('Liste doğrulanamadı.');rows=older?[...rows,...result]:result;cursor=data.nextCursor||null;
    }else if(tab==='roles'&&allowed('roles')){const data=await request('roles',older&&roleCursor?{cursor:roleCursor}:{});if(!current(stamp,person)||!opened||tab!=='roles')return;if(!Array.isArray(data.roles))throw Error('Yetkiler doğrulanamadı.');roleRows=older?[...roleRows,...data.roles]:data.roles;roleCursor=data.nextCursor||null;}
-  }catch(e){if(current(stamp,person)&&opened){error=e.message;if(['ADMIN_REQUIRED','OWNER_REQUIRED'].includes(e.errorCode))deny();}}
+  }catch(e){if(current(stamp,person)&&opened){error=e.message;if(['ADMIN_REQUIRED','OWNER_REQUIRED','AUTH_REQUIRED','EMAIL_UNVERIFIED','PREVIEW_RESTRICTED'].includes(e.errorCode))deny();}}
   finally{if(current(stamp,person)&&opened){loading=false;render();}}
  }
  async function open(){
@@ -133,7 +145,7 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
    host.addEventListener('change',event=>{const field=event.target.dataset?.adminField;if(Object.hasOwn(fields,field))fields[field]=event.target.value;});
    host.addEventListener('submit',event=>{const kind=event.target.dataset?.adminForm;if(kind){event.preventDefault();submit(kind);}});
    eventTarget?.addEventListener?.('elifa:account-changed',authEvent);connect();changed();
-  },open,close,refreshStatus,dispatch,submit,
+  },open,close,refreshStatus:()=>refreshStatus({force:true}),dispatch,submit,
   dispose(){disposed=true;epoch++;unsubscribe?.();eventTarget?.removeEventListener?.('elifa:account-changed',authEvent);deny();host.innerHTML='';}
  };
 }

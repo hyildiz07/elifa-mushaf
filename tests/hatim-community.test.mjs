@@ -11,7 +11,7 @@ function harness(fetcher,options={}){
  const c={...client,createHatimComments:()=>({mount(){},pause(){},dispose(){},dispatch:async()=>{}}),downloadHatimReport:async(o,options)=>reports.push({org:o,...options}),console,URL,URLSearchParams,AbortSignal,Uint8Array,Map,Set,Object,Number,JSON,Date,crypto:webcrypto,
   document:{getElementById:get,querySelector:()=>null,addEventListener(type,fn){events.set(type,fn)},hidden:false},
   window:{localStorage:storage,sessionStorage:options.blockSession?{getItem(){throw Error('blocked')},setItem(){throw Error('blocked')},removeItem(){throw Error('blocked')}}:{getItem:k=>sessionMap.get(k)||null,setItem:(k,v)=>sessionMap.set(k,v),removeItem:k=>sessionMap.delete(k)},elifaAccountSession:{getUser:()=>currentUser,isReady:()=>ready,getIdToken:async()=>currentUser?'proof-'+currentUser.uid:null,onChange(fn){sessionListeners.add(fn);if(ready)fn(currentUser);return ()=>sessionListeners.delete(fn)}},addEventListener(type,fn){if(!windowEvents.has(type))windowEvents.set(type,[]);windowEvents.get(type).push(fn)},removeEventListener(type,fn){windowEvents.set(type,(windowEvents.get(type)||[]).filter(x=>x!==fn))}},
-  location:{origin:'https://example.test',href:options.url||'https://example.test/'},history:{state:{elifaTrap:true,custom:'preserve'},replaceState(state,title,url){navigation.push({state,title,url});c.location.href=String(url)}},navigator:{},setInterval:()=>1,clearInterval(){},show(){},openTogetherScreen(){},setElifaRoute(){},gotoPage(){},JUZ_PAGE:[],readerReturn:null,
+  location:{origin:'https://example.test',href:options.url||'https://example.test/'},history:{state:{elifaTrap:true,custom:'preserve'},replaceState(state,title,url){navigation.push({state,title,url});c.location.href=String(url)}},navigator:{},setInterval:()=>1,clearInterval(){},show(){},openTogetherScreen(){if(options.realNavigation){c.window.elifaHatimNavigation?.('birlikte');c.window.renderBirlikte?.();}},setElifaRoute(){},gotoPage(){},JUZ_PAGE:[],readerReturn:null,
   fetch:async(_url,options)=>{const p=JSON.parse(options.body);calls.push(p);return fetcher?fetcher(p,{map,calls}):Response.json({org:org(p.code),code:p.code});}
  };
  vm.createContext(c);vm.runInContext(source+`\nwindow.review={showReturnEntry,showManage,showAdminCuz,showJuz,showCreate,confirmRelease,confirmDeleteHatim,showClaim,showRecovery,bkOpen,bkSilentRefresh,renderBirlikte,setTab:t=>{tab=t;},setCurrent:c=>{current=c;generation=c.ticket;},setLocal:l=>local=loadLocal({getItem:()=>JSON.stringify(l)},'fixture'),state:()=>({local,current})};`,c);
@@ -147,8 +147,9 @@ test('create visibility distinguishes pending, failed, enabled and explicitly di
  assert.match(h.get('hcVisibilityOptions').innerHTML,/durumu doğrulanamadı/);assert.doesNotMatch(h.get('hcVisibilityOptions').innerHTML,/value="public"|şu an kapalı|disabled/);
  const retry=h.get('hcVisibilityRetry').handlers.click();await new Promise(r=>setImmediate(r));resolve(Response.json({enabled:true}));await retry;
  assert.match(h.get('hcVisibilityOptions').innerHTML,/value="public"/);assert.doesNotMatch(h.get('hcVisibilityOptions').innerHTML,/disabled|şu an kapalı/);
- h.review.showCreate();await new Promise(r=>setImmediate(r));resolve(Response.json({enabled:false}));await new Promise(r=>setImmediate(r));
- assert.match(h.get('hcVisibilityOptions').innerHTML,/şu an kapalı/);assert.doesNotMatch(h.get('hcVisibilityOptions').innerHTML,/value="public"/);
+ const before=h.calls.length;h.review.showCreate();assert.equal(h.calls.length,before);assert.match(h.get('hcVisibilityOptions').innerHTML,/value="public"/);
+ const disabled=harness(()=>Response.json({enabled:false}));disabled.review.showCreate();await new Promise(r=>setImmediate(r));
+ assert.match(disabled.get('hcVisibilityOptions').innerHTML,/şu an kapalı/);assert.doesNotMatch(disabled.get('hcVisibilityOptions').innerHTML,/value="public"/);
 });
 
 test('late discovery configuration cannot rewrite a replacement dialog',async()=>{
@@ -313,4 +314,54 @@ test('a silent hatim read started before a comment mutation cannot undo the newe
  const selected=current(codeA);selected.org.commentsClosed=true;h.review.setCurrent(selected);const refreshing=h.review.bkSilentRefresh();await new Promise(r=>setImmediate(r));
  await h.c.window.bkApi({action:'commentSettings',code:codeA,closed:true});resolve();await refreshing;
  assert.equal(h.review.state().current.org.commentsClosed,true);
+});
+
+
+test('repeated list opens share one request and preserve the mounted shell and fresh list',async()=>{
+ let resolve;const h=harness(()=>new Promise(r=>resolve=r),{uid:'member'}),holder=h.get('birlikte');let shellWrites=0,html='';Object.defineProperty(holder,'innerHTML',{get:()=>html,set:value=>{html=value;shellWrites++;}});
+ const a=h.review.renderBirlikte(),b=h.review.renderBirlikte();await new Promise(r=>setImmediate(r));assert.equal(h.calls.length,1);resolve(Response.json({enabled:true,items:[{code:codeA,type:'hatim',title:'Fresh group'}]}));await Promise.all([a,b]);
+ let listWrites=0,body=h.get('hatimList').innerHTML;Object.defineProperty(h.get('hatimList'),'innerHTML',{get:()=>body,set:value=>{body=value;listWrites++;}});await h.review.renderBirlikte();assert.equal(h.calls.length,1);assert.equal(shellWrites,1);assert.equal(listWrites,0);assert.match(body,/Fresh group/);
+ h.review.showCreate();assert.match(h.get('hcVisibilityOptions').innerHTML,/Tüm üyelere açık/);assert.equal(h.calls.length,1,'verified discovery configuration is reused immediately');
+});
+
+test('creation opens the authoritative creation response without waiting for a second GET',async()=>{
+ const h=harness(p=>p.action==='discoverConfig'?Response.json({enabled:true}):p.action==='create'?Response.json({code:codeA,adminToken:admin,org:{...org(codeA),title:'Ready immediately'}}):new Promise(()=>{}));h.review.showCreate();h.get('hcTitle').value='Ready immediately';h.get('hcAdminName').value='Guest';h.get('hcDue').value='';await h.click('create');
+ assert.equal(h.calls.filter(p=>p.action==='get').length,0);assert.equal(h.review.state().current.org.title,'Ready immediately');assert.match(h.get('hatimDialog').innerHTML,/Hatmin hazır/);
+});
+
+test('unchanged silent refresh preserves the reader detail DOM and its interactive state',async()=>{
+ const value={...org(codeA),code:codeA};const h=harness(()=>Response.json({code:codeA,org:value}));const c=current(codeA);c.org=value;h.review.setCurrent(c);let writes=0;Object.defineProperty(h.get('orgView'),'innerHTML',{get:()=>'<existing detail>',set:()=>writes++});await h.review.bkSilentRefresh();assert.equal(writes,0);
+});
+
+test('unresolved authentication waits before discovery and does not warn that the user is a guest',async()=>{
+ const h=harness(p=>Response.json({enabled:true,items:[]}),{ready:false});const pending=h.review.renderBirlikte();assert.equal(h.calls.length,0);h.review.showCreate();assert.match(h.get('hatimDialog').innerHTML,/Hesap durumu hazırlanıyor/);assert.doesNotMatch(h.get('hatimDialog').innerHTML,/Hesapsız devam ediyorsun/);await h.click('create');assert.equal(h.calls.some(p=>p.action==='create'),false);h.account('member');await pending;await new Promise(r=>setImmediate(r));assert.equal(h.calls.filter(p=>p.action==='discoverList').length,1);assert.equal(h.calls.find(p=>p.action==='discoverList').expectedUser,'member');
+});
+
+
+test('repeated actual together navigation does not invalidate its shared in-flight list',async()=>{
+ let resolve;const h=harness(()=>new Promise(r=>resolve=r));h.c.window.elifaHatimNavigation('birlikte');const first=h.review.renderBirlikte();h.c.window.elifaHatimNavigation('birlikte');const second=h.review.renderBirlikte();await new Promise(r=>setImmediate(r));resolve(Response.json({enabled:true,items:[{code:codeA,type:'hatim',title:'Navigation completed'}]}));await Promise.all([first,second]);assert.equal(h.calls.length,1);assert.match(h.get('hatimList').innerHTML,/Navigation completed/);assert.equal(h.get('hatimStatus').textContent,'');
+});
+
+test('the personal and created tabs reuse the same membership page until a mutation invalidates it',async()=>{
+ const h=harness(p=>Response.json(p.action==='myList'?{items:[{code:codeA,type:'hatim',title:'Owned',isAdmin:true,items:[{no:1,status:'alindi'}]}]}:{ok:true}),{uid:'member'});h.review.setTab('created');await h.review.renderBirlikte();h.review.setTab('mine');await h.review.renderBirlikte();assert.equal(h.calls.filter(p=>p.action==='myList').length,1);await h.c.window.bkApi({action:'commentReport',code:codeA,id:'test',reason:'Review'});await h.review.renderBirlikte();assert.equal(h.calls.filter(p=>p.action==='myList').length,2);
+});
+
+
+test('opening a personal hatim link does not also fetch an unrelated public discovery list',async()=>{
+ const h=harness(p=>Response.json({code:codeA,org:org(codeA)}),{url:'https://example.test/#yonetim='+admin,realNavigation:true});await new Promise(r=>setImmediate(r));await new Promise(r=>setImmediate(r));assert.deepEqual(h.calls.map(p=>p.action),['get']);assert.equal(h.review.state().current.code,codeA);
+});
+
+test('list freshness expires and manual retry remains authoritative without replacing existing rows while loading',async()=>{
+ let now=Date.now(),resolve;const h=harness(()=>new Promise(r=>resolve=r),{uid:'member'});h.c.Date=class extends Date{static now(){return now;}};const first=h.review.renderBirlikte();await new Promise(r=>setImmediate(r));resolve(Response.json({enabled:true,items:[{code:codeA,type:'hatim',title:'Existing rows'}]}));await first;now+=16000;const refresh=h.review.renderBirlikte();assert.match(h.get('hatimList').innerHTML,/Existing rows/);assert.doesNotMatch(h.get('hatimList').innerHTML,/Açık hatimler yükleniyor/);await new Promise(r=>setImmediate(r));resolve(Response.json({enabled:true,items:[{code:codeB,type:'hatim',title:'Updated rows'}]}));await refresh;assert.equal(h.calls.length,2);assert.match(h.get('hatimList').innerHTML,/Updated rows/);
+ const manual=h.review.renderBirlikte({force:true});await new Promise(r=>setImmediate(r));resolve(Response.json({enabled:true,items:[]}));await manual;assert.equal(h.calls.length,3);
+});
+
+
+test('returning to an in-flight membership tab restores rows and loading status after the real parent shell resets',async()=>{
+ let resolve;const h=harness(p=>p.action==='discoverList'?Response.json({enabled:true,items:[{code:codeB,type:'hatim',title:'Public cached'}]}):new Promise(r=>resolve=r),{uid:'member'});
+ let shell='';Object.defineProperty(h.get('birlikte'),'innerHTML',{get:()=>shell,set:value=>{shell=value;h.get('hatimList').innerHTML='';h.get('hatimStatus').textContent='';}});
+ h.review.setLocal({mine:[{code:codeA,type:'hatim',title:'My saved participation'}],capabilities:{[codeA]:{1:capA}},snapshots:{[codeA]:{items:[{no:1,status:'alindi',mine:true}]}}});
+ await h.review.renderBirlikte();h.review.setTab('mine');const first=h.review.renderBirlikte();await new Promise(r=>setImmediate(r));h.review.setTab('open');await h.review.renderBirlikte();assert.match(h.get('hatimList').innerHTML,/Public cached/);
+ h.review.setTab('mine');const second=h.review.renderBirlikte();assert.match(h.get('hatimList').innerHTML,/My saved participation/);assert.match(h.get('hatimStatus').textContent,/Güncel bilgiler alınıyor/);assert.equal(h.calls.filter(p=>p.action==='myList').length,1);
+ resolve(Response.json({items:[{code:codeA,type:'hatim',title:'My verified participation',items:[{no:1,status:'alindi'}]}]}));await Promise.all([first,second]);assert.match(h.get('hatimList').innerHTML,/My verified participation/);assert.equal(h.get('hatimStatus').textContent,'');
 });

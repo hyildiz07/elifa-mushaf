@@ -13,10 +13,10 @@ class Element{
  close(){this.open=false;this.handlers.close?.();}
 }
 const settle=async()=>{await new Promise(r=>setImmediate(r));await new Promise(r=>setImmediate(r));};
-function fixture(handler,{role='owner',uid='alice',verified=true,late=false,preview=false,hostname='localhost',token}={}){
+function fixture(handler,{role='owner',uid='alice',verified=true,late=false,preview=false,hostname='localhost',token,now}={}){
  let user=uid?{uid,emailVerified:verified}:null,bridgeReady=!late;const listeners=new Set(),events=new Set(),calls=[];
  const entry=new Element(),host=new Element(),bridge={getUser:()=>user,getIdToken:async()=>token?token():user?'token-'+user.uid:null,onChange(fn){listeners.add(fn);fn(user);return ()=>listeners.delete(fn);}};
- const controller=createCommunityAdmin({entry,host,session:()=>bridgeReady?bridge:null,preview:()=>preview,location:{hostname},eventTarget:{addEventListener(_event,fn){events.add(fn);},removeEventListener(_event,fn){events.delete(fn);}},fetcher:async(url,options)=>{
+ const controller=createCommunityAdmin({entry,host,session:()=>bridgeReady?bridge:null,preview:()=>preview,location:{hostname},...(now?{now}:{}),eventTarget:{addEventListener(_event,fn){events.add(fn);},removeEventListener(_event,fn){events.delete(fn);}},fetcher:async(url,options)=>{
   const p=JSON.parse(options.body);calls.push({url,...p});
   if(handler){const result=await handler(p,{calls});if(result instanceof Response)return result;if(result)return Response.json(result);}
   if(p.action==='status')return Response.json({role,owner:role==='owner',permissions:permissions(role)});
@@ -33,8 +33,44 @@ test('a late account bridge makes one status request per identity; entry visibil
  const f=fixture(null,{late:true});await f.initialize();assert.equal(f.calls.length,0);assert.equal(f.entry.hidden,true);
  f.lateBridge();await settle();assert.equal(f.calls.filter(p=>p.action==='status').length,1);assert.equal(f.entry.hidden,false);assert.equal(f.host.open,false);
  f.emit();await settle();assert.equal(f.calls.length,1);
- await f.controller.open();assert.equal(f.calls.filter(p=>p.action==='status').length,2);assert.equal(f.host.open,true);assert.match(f.host.innerHTML,/Yönetim paneli/);assert.match(f.host.innerHTML,/data-tab="roles"/);
- f.account({uid:'bob',emailVerified:true});await settle();assert.equal(f.calls.filter(p=>p.action==='status').length,3);assert.equal(f.host.open,false);assert.equal(f.host.innerHTML,'');
+ await f.controller.open();assert.equal(f.calls.filter(p=>p.action==='status').length,1);assert.equal(f.host.open,true);assert.match(f.host.innerHTML,/Yönetim paneli/);assert.match(f.host.innerHTML,/data-tab="roles"/);
+ f.account({uid:'bob',emailVerified:true});await settle();assert.equal(f.calls.filter(p=>p.action==='status').length,2);assert.equal(f.host.open,false);assert.equal(f.host.innerHTML,'');
+});
+test('opening while the initial role request is pending shares one status request and then loads the queue once',async()=>{
+ let resolve;
+ const f=fixture(p=>p.action==='status'?new Promise(r=>resolve=()=>r({role:'owner',owner:true,permissions:permissions('owner')})):undefined);
+ f.controller.initialize();await settle();const opening=f.controller.open();await settle();
+ assert.equal(f.calls.filter(p=>p.action==='status').length,1);assert.equal(f.calls.filter(p=>p.action==='comments').length,0);
+ resolve();await opening;assert.equal(f.host.open,true);assert.equal(f.calls.filter(p=>p.action==='comments').length,1);
+});
+test('a recent server role avoids a sequential status waterfall, expires after fifteen seconds and can be explicitly refreshed',async()=>{
+ let clock=1000;const f=fixture(null,{now:()=>clock});await f.initialize();await f.controller.open();
+ assert.equal(f.calls.filter(p=>p.action==='status').length,1);
+ f.controller.close();clock+=14999;await f.controller.open();assert.equal(f.calls.filter(p=>p.action==='status').length,1);
+ f.controller.close();clock++;await f.controller.open();assert.equal(f.calls.filter(p=>p.action==='status').length,2);
+ await f.controller.refreshStatus();assert.equal(f.calls.filter(p=>p.action==='status').length,3);
+});
+test('cached entry visibility never authorizes data after server revocation',async()=>{
+ let revoked=false;const f=fixture(p=>p.action==='comments'&&revoked?Response.json({error:'Yetki kaldırıldı',errorCode:'ADMIN_REQUIRED'},{status:403}):undefined);
+ await f.initialize();revoked=true;await f.controller.open();
+ assert.equal(f.calls.filter(p=>p.action==='status').length,1);assert.equal(f.calls.filter(p=>p.action==='comments').length,1);
+ assert.equal(f.entry.hidden,true);assert.equal(f.host.open,false);assert.equal(f.host.innerHTML,'');
+});
+
+test('queue authorization rejection clears cached access and any previously loaded private rows',async()=>{
+ for(const errorCode of ['AUTH_REQUIRED','EMAIL_UNVERIFIED','PREVIEW_RESTRICTED']){
+  for(const alreadyOpen of [false,true]){
+   let rejected=false;const f=fixture(p=>p.action==='comments'&&rejected?Response.json({error:'Erişim kapalı',errorCode},{status:errorCode==='AUTH_REQUIRED'?401:403}):undefined);
+   await f.initialize();
+   if(alreadyOpen){await f.controller.open();assert.match(f.host.innerHTML,/Yerel yorum/);}
+   rejected=true;
+   if(alreadyOpen)await f.controller.dispatch('reload');else await f.controller.open();
+   assert.equal(f.calls.filter(p=>p.action==='status').length,1,errorCode);
+   assert.equal(f.entry.hidden,true,errorCode);assert.equal(f.host.open,false,errorCode);assert.equal(f.host.innerHTML,'',errorCode);
+   rejected=false;await f.controller.open();
+   assert.equal(f.calls.filter(p=>p.action==='status').length,2,'denial invalidates cached role');
+  }
+ }
 });
 test('owner-only role controls and lookup are absent for lower roles and cannot be activated through commands',async()=>{
  for(const role of ['owner','admin','moderator']){const f=fixture(null,{role});await f.initialize();await f.controller.open();

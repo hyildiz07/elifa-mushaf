@@ -64,13 +64,15 @@ export function forgetLocalHatim(state,code){
  return clean;
 }
 export function createOrgClient({fetcher,session,base='',onError}){
- return async function api(payload){
+ const reads=new Set(['get','myList','discoverConfig','discoverList','commentList','commentReplies','commentReports','pollGet']),pending=new Map();let revision=0;
+ const identity=()=>{const value=session()?.getUser();return String(value?.uid||'guest')+':'+(value?.emailVerified===true?'verified':'unverified');};
+ async function request(payload,capturedIdentity){
   const user=session()?.getUser(),uid=user?.uid||null,headers={'Content-Type':'application/json'};
-  if(uid){const token=await session().getIdToken();if(!token||session()?.getUser()?.uid!==uid)throw Error('Hesap değişti. İşlemi yeniden aç.');headers.Authorization='Bearer '+token;payload={...payload,expectedUser:uid};}
+  if(uid){const token=await session().getIdToken();if(!token||session()?.getUser()?.uid!==uid||identity()!==capturedIdentity)throw Error('Hesap değişti. İşlemi yeniden aç.');headers.Authorization='Bearer '+token;payload={...payload,expectedUser:uid};}
   let result,data;
   try{result=await fetcher(base+'/api/org',{method:'POST',headers,body:JSON.stringify(payload),signal:AbortSignal.timeout(20000)});data=await result.json();}
   catch{throw Error('Sunucuya ulaşılamadı. İşlem kaydedildi sayılmadı; durumunu kontrol edip yeniden dene.');}
-  if((session()?.getUser()?.uid||null)!==uid)throw Error('Hesap değişti. İşlemi yeniden aç.');
+  if((session()?.getUser()?.uid||null)!==uid||identity()!==capturedIdentity)throw Error('Hesap değişti. İşlemi yeniden aç.');
   if(!result.ok){const e=Object.assign(Error(data.error||'İşlem tamamlanamadı.'),{status:result.status,...(typeof data.errorCode==='string'?{errorCode:data.errorCode}:{})});onError?.(e);throw e;}
   if(!data||typeof data!=='object'||Array.isArray(data))throw Error('Sunucu yanıtı geçersiz. İşlem durumunu yenileyerek kontrol et.');
   if(data.org&&typeof data.org==='object'&&!Array.isArray(data.org)){
@@ -78,5 +80,13 @@ export function createOrgClient({fetcher,session,base='',onError}){
    data={...data,code,org:{...data.org,code}};
   }
   return data;
+ }
+ return async function api(payload){
+  const capturedIdentity=identity();
+  if(!reads.has(payload.action)){revision++;return request(payload,capturedIdentity);}
+  const key=JSON.stringify([capturedIdentity,revision,payload]);
+  let task=pending.get(key);if(!task){task=request(payload,capturedIdentity);pending.set(key,task);task.then(()=>pending.delete(key),()=>pending.delete(key));}
+  // Only requests in flight are shared; authorization responses are not cached.
+  return JSON.parse(JSON.stringify(await task));
  };
 }
