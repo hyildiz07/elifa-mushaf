@@ -23,3 +23,17 @@ Sanat kaynağı, kullanıcının paylaştığı `codex-clipboard-7cb20347-80b4-4
 20 Ekim 2026: Varsayılan Türkçe mağaza girişinin simgesi ve özellik grafiği bu iki dosyayla değiştirildi. İki yeni görsel yapay zekâyla düzenlenmiş olarak işaretlendi. Yayın özetinde yalnız bu iki görsel değişikliği gönderildi ve **İncelenmekte olan değişiklikler** durumu doğrulandı. Bu, herkese açık mağazada yayına girdiği anlamına gelmez; Google incelemesi bekleniyor. Android AAB sürümü bu görsel gönderiminden ayrıdır.
 
 Yerel gönderim kanıtı: `artifacts/google-play-2026-10-20/play-review-submitted.png`.
+
+## Yerelleştirilmiş mağaza adları
+
+20 Ekim 2026'daki sonraki kontrolde önceki görsel değişikliği mağaza düzenleme ekranında **Canlı** olarak göründü. Yeni simge ve özellik grafiği, başka görsel tanımlanmayan dillerde varsayılan görsel olarak kullanılır.
+
+Uygulamanın 21 arayüz dilini kapsayan mağaza adları ve açıklamaları hazırlandı. Mevcut Türkçe giriş korunurken **24 yeni dil/bölge girişi** eklendi: de-DE, en-US, en-GB, ru-RU, fr-FR, es-ES, es-419, el-GR, it-IT, nl-NL, pt-PT, pt-BR, ar, zh-CN, zh-TW, ja-JP, ko-KR, hi-IN, ur, id, fa, bn-BD, ms, sw. Türkçeyle birlikte 25 mağaza dil/bölge girişi vardır.
+
+- `localization-west.json` ve `localization-east.json`: ad, kısa telefon adı, kısa/tam mağaza açıklamaları.
+- `node store-assets/google-play/prepare-localizations.mjs`: 30/80/4000 karakter sınırlarını ve dil kapsamını denetler; `play-listing-translations.md` içe aktarma dosyasını üretir.
+- Google Play'in dosya içe aktarma arayüzüyle 24 yeni çeviri eklendi. Her birinin üç metin alanı tarayıcı formundan geri okunup kaynakla **birebir** karşılaştırıldı.
+- Kayıttan sonra yayın özetindeki 24 dil satırı kontrol edildi ve gönderildi. Son doğrulanan durum **İncelenmekte olan değişiklikler**; yeni dil adları henüz herkese açık mağazada doğrulanmadı. Yönetilen yayınlama kapalı olduğundan Google onayından sonra yayımlanır.
+- `localization-readback.json` alan karşılaştırmalarını ve gönderim durumunu tutar. Ekran kanıtı: `artifacts/google-play-2026-10-20/play-localizations-in-review.png`.
+
+Android paketindeki telefon adları ve simge de bu kaynaklarla güncellendi; bu ayrı imzasız aday henüz Play'e gönderilmedi. Android imzalama ve cihaz doğrulama durumu `android-twa/VALIDATION.md` içindedir.

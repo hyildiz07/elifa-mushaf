@@ -1,0 +1,98 @@
+[
+  {
+    "locale": "ar",
+    "webLanguage": "ar",
+    "appName": "حفظ القرآن بسهولة",
+    "launcherName": "حفظ القرآن",
+    "shortDescription": "اقرأ واستمع وكرّر الآيات، ونظّم جلساتك لحفظ القرآن ومراجعته.",
+    "fullDescription": "اجعل حفظ القرآن عادة منتظمة من خلال القراءة والاستماع والتكرار، ونظّم وقتك للحفظ والمراجعة بما يناسبك.\n\nاقرأ القرآن واختر سورة أو آيات أو مقطعًا للتدرّب عليه. استمع إلى التلاوة واضبط سرعة التشغيل وعدد مرات التكرار وفترات التوقف بين التكرارات.\n\nتدرّب على كل آية أو على أجزاء أصغر منها بشكل منفصل، أو اجمع ما تتعلّمه تدريجيًا: ١+٢، ثم ١+٢+٣. احفظ جلسات تدريب مختلفة وعُد إليها لمتابعة المراجعة. ويمكنك إخفاء النص لاختبار ما حفظته.\n\nاقرأ الأدعية بالنص العربي، مع كتابة النطق ومعاني الأدعية. وتتوفر تسجيلات صوتية لأدعية مختارة.\n\nشارك في ختمة مشتركة واختر جزءًا لقراءته، لتتابع القراءة مع المشاركين في الختمة.\n\nيمكنك القراءة دون إنشاء حساب. أما الختمات المشتركة المخصّصة للأعضاء فتتطلب تسجيل الدخول.\n\nقد تختلف خيارات النصوص والتلاوات بحسب القارئ واللغة والمحتوى."
+  },
+  {
+    "locale": "zh-CN",
+    "webLanguage": "zh",
+    "appName": "轻松背诵古兰经",
+    "launcherName": "古兰经背诵",
+    "shortDescription": "阅读、聆听与反复练习，逐步背诵《古兰经》，按自己的节奏安排复习。",
+    "fullDescription": "通过阅读、聆听和反复练习，养成规律背诵《古兰经》的习惯，让学习与复习融入日常。\n\n阅读《古兰经》，选择一章、若干经文或一个片段开始练习。聆听诵读时，可以调整播放速度、重复次数和停顿时间，按照适合自己的节奏学习。\n\n可以单独练习一节经文，也可以将经文分成更小的部分，逐步合并练习，例如先练习 1+2，再练习 1+2+3。保存多组练习，日后回来继续复习。隐藏文字，还可以检验自己记住了多少。\n\n阅读祈祷词的阿拉伯文原文、音译和译意。部分祈祷词提供录音，可供聆听。\n\n参加共同完诵《古兰经》的活动，选择自己要阅读的分卷（朱兹）。\n\n无需账号即可阅读。仅面向会员的共同完诵活动需要登录。\n\n可用的音频和文字选项可能因诵读者、语言和内容而有所不同。"
+  },
+  {
+    "locale": "zh-TW",
+    "webLanguage": "zh",
+    "appName": "輕鬆背誦古蘭經",
+    "launcherName": "古蘭經背誦",
+    "shortDescription": "透過閱讀、聆聽與反覆練習，逐步背誦《古蘭經》，依自己的步調安排複習。",
+    "fullDescription": "透過閱讀、聆聽與反覆練習，建立規律背誦《古蘭經》的習慣，讓學習與複習成為日常的一部分。\n\n閱讀《古蘭經》，選擇一章、數節經文或一段內容開始練習。聆聽誦讀時，可以調整播放速度、重複次數與停頓時間，依照適合自己的步調學習。\n\n可以單獨練習一節經文，也可以分成更小的片段，再逐步合併練習，例如先練習 1+2，再練習 1+2+3。儲存多組練習，之後回來繼續複習。也能隱藏文字，檢查自己記住了多少。\n\n閱讀祈禱詞的阿拉伯文原文、音譯與譯意。部分祈禱詞附有錄音，可供聆聽。\n\n參加共同完誦《古蘭經》的活動，選擇自己要閱讀的分卷（朱茲）。\n\n不必建立帳號即可閱讀。僅限會員參加的共同完誦活動則需要登入。\n\n可用的音訊與文字選項可能因誦讀者、語言及內容而有所不同。"
+  },
+  {
+    "locale": "ja-JP",
+    "webLanguage": "ja",
+    "appName": "クルアーンをやさしく暗記",
+    "launcherName": "クルアーン暗記",
+    "shortDescription": "読んで、聴いて、繰り返す。節や短い区切りごとの練習で、クルアーンの暗記と復習を習慣に。",
+    "fullDescription": "読む、聴く、繰り返す練習を通して、クルアーンを暗記する習慣を身につけましょう。\n\nクルアーンを読み、練習したい章や節、文章の一部を選べます。朗誦を聴きながら、再生速度、繰り返し回数、間隔を自分に合わせて調整できます。\n\n一つの節や、さらに短く区切った部分を個別に練習できます。また、1+2、1+2+3 のように、覚えた部分を段階的につなげて練習することもできます。複数の学習セッションを保存して、あとから戻って復習しましょう。文字を隠せば、どこまで覚えたかを確かめられます。\n\nドゥアー（祈り）は、アラビア語の原文、発音の文字表記、意味を読めます。一部のドゥアーには録音も用意されています。\n\nみんなで分担してクルアーンを完読するハトムに参加し、自分が読むジュズを選べます。\n\n読むだけならアカウントは不要です。会員限定の共同ハトムへの参加にはログインが必要です。\n\n音声やテキストの選択肢は、朗誦者、言語、内容によって異なる場合があります。"
+  },
+  {
+    "locale": "ko-KR",
+    "webLanguage": "ko",
+    "appName": "쉽게 암기하는 꾸란",
+    "launcherName": "꾸란 암기",
+    "shortDescription": "읽고 듣고 반복하며 꾸란 암기를 습관으로 만드세요. 구절별로 연습하고 배운 내용을 복습할 수 있습니다.",
+    "fullDescription": "읽기, 듣기, 반복 연습으로 꾸란을 꾸준히 암기하는 습관을 만들어 보세요.\n\n꾸란을 읽으며 연습할 장이나 구절, 원하는 부분을 선택하세요. 낭송을 들을 때 재생 속도와 반복 횟수, 반복 사이의 쉬는 시간을 조절할 수 있습니다.\n\n구절 하나를 따로 연습하거나 더 짧은 부분으로 나누어 연습할 수 있습니다. 1+2, 1+2+3처럼 배운 부분을 차례로 이어 가며 연습하는 것도 가능합니다. 여러 학습 세션을 저장해 두었다가 다시 돌아와 복습하세요. 글자를 숨기고 얼마나 암기했는지 확인할 수도 있습니다.\n\n두아는 아랍어 원문, 발음을 옮긴 표기, 뜻과 함께 읽을 수 있습니다. 일부 두아에는 녹음도 제공됩니다.\n\n여러 사람이 나누어 꾸란을 완독하는 카트므에 참여하고, 자신이 읽을 주즈를 선택하세요.\n\n계정 없이도 읽을 수 있습니다. 회원 전용 공동 카트므에 참여하려면 로그인이 필요합니다.\n\n이용할 수 있는 음성과 본문 옵션은 낭송자, 언어, 콘텐츠에 따라 달라질 수 있습니다."
+  },
+  {
+    "locale": "hi-IN",
+    "webLanguage": "hi",
+    "appName": "आसानी से क़ुरआन याद करें",
+    "launcherName": "क़ुरआन याद करें",
+    "shortDescription": "पढ़ें, सुनें और दोहराएँ। अपनी गति से क़ुरआन याद करने का अभ्यास करें।",
+    "fullDescription": "पढ़ने, सुनने और दोहराने के साथ क़ुरआन याद करने की नियमित आदत बनाएँ।\n\nक़ुरआन पढ़ें और अभ्यास के लिए कोई सूरह, आयतें या एक अंश चुनें। तिलावत सुनें और पढ़ने की गति, दोहराव की संख्या और बीच के विराम अपने अनुसार तय करें।\n\nआयतों या उनके छोटे हिस्सों का अलग-अलग अभ्यास करें, या उन्हें धीरे-धीरे जोड़ें: पहले 1+2, फिर 1+2+3। अलग-अलग अभ्यास सत्र सहेजें और दोहराने के लिए वापस आएँ। कितना याद हुआ है, यह जाँचने के लिए पाठ छिपा सकते हैं।\n\nदुआएँ अरबी पाठ, लिप्यंतरण और अर्थ के साथ पढ़ें। चुनी हुई दुआओं की रिकॉर्डिंग भी उपलब्ध हैं।\n\nसामूहिक ख़त्म में शामिल हों और पढ़ने के लिए कोई जुज़ चुनें।\n\nबिना खाता बनाए पढ़ सकते हैं। केवल सदस्यों के लिए बने सामूहिक ख़त्म में शामिल होने के लिए साइन इन ज़रूरी है।\n\nऑडियो और पाठ के विकल्प क़ारी, भाषा और सामग्री के अनुसार अलग हो सकते हैं।"
+  },
+  {
+    "locale": "ur",
+    "webLanguage": "ur",
+    "appName": "قرآن حفظ کرنا آسان",
+    "launcherName": "حفظِ قرآن",
+    "shortDescription": "پڑھیں، سنیں اور دہرائیں۔ اپنی رفتار سے قرآن حفظ کرنے اور دہرانے کی عادت بنائیں۔",
+    "fullDescription": "پڑھنے، سننے اور دہرانے کے ذریعے قرآن حفظ کرنے کا باقاعدہ معمول بنائیں۔\n\nقرآن پڑھیں اور مشق کے لیے کوئی سورت، آیات یا ایک حصہ منتخب کریں۔ تلاوت سنیں اور پڑھنے کی رفتار، دہرانے کی تعداد اور درمیان کے وقفے اپنی ضرورت کے مطابق رکھیں۔\n\nہر آیت یا اس کے چھوٹے حصوں کی الگ الگ مشق کریں، یا انہیں بتدریج ملائیں: پہلے 1+2، پھر 1+2+3۔ مشق کے مختلف سیشن محفوظ کریں اور دوبارہ دہرانے کے لیے ان کی طرف لوٹیں۔ اپنا حفظ جانچنے کے لیے متن چھپا بھی سکتے ہیں۔\n\nدعائیں عربی متن، تلفظ کی تحریری صورت اور معنی کے ساتھ پڑھیں۔ منتخب دعاؤں کی صوتی ریکارڈنگ بھی دستیاب ہیں۔\n\nاجتماعی ختمِ قرآن میں شامل ہوں اور پڑھنے کے لیے کوئی پارہ منتخب کریں۔\n\nپڑھنے کے لیے اکاؤنٹ ضروری نہیں۔ صرف اراکین کے لیے مخصوص اجتماعی ختم میں شامل ہونے کے لیے سائن ان کرنا ضروری ہے۔\n\nآواز اور متن کے دستیاب اختیارات قاری، زبان اور مواد کے لحاظ سے مختلف ہو سکتے ہیں۔"
+  },
+  {
+    "locale": "id",
+    "webLanguage": "id",
+    "appName": "Mudah Menghafal Al-Qur'an",
+    "launcherName": "Hafalan Qur'an",
+    "shortDescription": "Baca, dengarkan, dan ulangi ayat untuk membangun kebiasaan menghafal Al-Qur'an.",
+    "fullDescription": "Bangun kebiasaan menghafal Al-Qur'an secara rutin melalui membaca, mendengarkan, dan mengulang bacaan.\n\nBaca Al-Qur'an lalu pilih surah, beberapa ayat, atau bagian yang ingin dipelajari. Dengarkan tilawah dan sesuaikan kecepatan bacaan, jumlah pengulangan, serta jeda sesuai kebutuhan Anda.\n\nLatih setiap ayat atau bagian yang lebih pendek secara terpisah. Anda juga dapat menggabungkannya bertahap: 1+2, lalu 1+2+3. Simpan beberapa sesi belajar dan kembali ke sesi tersebut untuk melanjutkan murajaah. Sembunyikan teks untuk menguji sejauh mana Anda sudah hafal.\n\nBaca doa dengan teks Arab, transliterasi, dan artinya. Rekaman audio tersedia untuk beberapa doa pilihan.\n\nIkuti khataman bersama dan pilih juz yang ingin Anda baca sebagai bagian dari khataman tersebut.\n\nAnda dapat membaca tanpa akun. Khataman bersama khusus anggota memerlukan login.\n\nPilihan audio dan teks yang tersedia dapat berbeda menurut qari, bahasa, dan konten yang dipilih."
+  },
+  {
+    "locale": "fa",
+    "webLanguage": "fa",
+    "appName": "حفظ آسان قرآن",
+    "launcherName": "حفظ قرآن",
+    "shortDescription": "با خواندن، شنیدن و تکرار آیات، حفظ و مرور قرآن را به عادت روزانه تبدیل کنید.",
+    "fullDescription": "با خواندن، شنیدن و تکرار آیات، برنامه‌ای منظم برای حفظ قرآن بسازید و زمانی را به تمرین و مرور اختصاص دهید.\n\nقرآن را بخوانید و سوره، آیات یا بخشی از متن را برای تمرین انتخاب کنید. به تلاوت گوش دهید و سرعت پخش، تعداد تکرارها و فاصلهٔ میان آن‌ها را متناسب با نیاز خود تنظیم کنید.\n\nآیات یا بخش‌های کوتاه‌تر را جداگانه تمرین کنید، یا آن‌ها را به‌تدریج کنار هم بگذارید: ۱+۲، سپس ۱+۲+۳. جلسه‌های مختلف تمرین را ذخیره کنید و برای مرور به آن‌ها برگردید. با پنهان کردن متن می‌توانید حفظ خود را بسنجید.\n\nدعاها را همراه با متن عربی، آوانویسی و معنی بخوانید. برای برخی دعاهای منتخب، فایل صوتی نیز موجود است.\n\nدر ختم گروهی قرآن شرکت کنید و جزئی را برای خواندن انتخاب کنید.\n\nبرای خواندن نیازی به حساب کاربری ندارید. ختم‌های گروهی ویژهٔ اعضا به ورود به حساب نیاز دارند.\n\nگزینه‌های صوتی و متنی ممکن است بسته به قاری، زبان و محتوا متفاوت باشند."
+  },
+  {
+    "locale": "bn-BD",
+    "webLanguage": "bn",
+    "appName": "সহজে কুরআন মুখস্থ",
+    "launcherName": "কুরআন মুখস্থ",
+    "shortDescription": "পড়ুন, শুনুন ও বারবার অনুশীলন করুন। নিয়মিত কুরআন মুখস্থ করার অভ্যাস গড়ুন।",
+    "fullDescription": "পড়া, শোনা ও বারবার অনুশীলনের মাধ্যমে নিয়মিত কুরআন মুখস্থ করার অভ্যাস গড়ে তুলুন।\n\nকুরআন পড়ুন এবং অনুশীলনের জন্য কোনো সূরা, কয়েকটি আয়াত বা একটি অংশ বেছে নিন। তিলাওয়াত শুনুন এবং আপনার সুবিধামতো পড়ার গতি, পুনরাবৃত্তির সংখ্যা ও মাঝের বিরতি ঠিক করুন।\n\nআয়াত বা তার ছোট ছোট অংশ আলাদাভাবে অনুশীলন করুন। চাইলে ধাপে ধাপে অংশগুলো জুড়েও পড়তে পারেন: প্রথমে 1+2, তারপর 1+2+3। আলাদা অনুশীলন সেশন সংরক্ষণ করুন এবং পরে ফিরে এসে পড়া ঝালিয়ে নিন। কতটা মুখস্থ হয়েছে, তা যাচাই করতে লেখা লুকিয়ে রাখতে পারেন।\n\nআরবি লেখা, উচ্চারণ ও অর্থসহ দোয়া পড়ুন। নির্বাচিত কিছু দোয়ার অডিও রেকর্ডিংও রয়েছে।\n\nসম্মিলিত খতমে অংশ নিন এবং পড়ার জন্য একটি পারা বেছে নিন।\n\nঅ্যাকাউন্ট ছাড়াই পড়তে পারবেন। শুধু সদস্যদের জন্য নির্ধারিত সম্মিলিত খতমে অংশ নিতে সাইন ইন করতে হবে।\n\nঅডিও ও লেখার বিকল্প কারি, ভাষা এবং নির্বাচিত বিষয়বস্তু অনুযায়ী ভিন্ন হতে পারে।"
+  },
+  {
+    "locale": "ms",
+    "webLanguage": "ms",
+    "appName": "Hafazan Al-Quran Mudah",
+    "launcherName": "Hafazan Quran",
+    "shortDescription": "Baca, dengar dan ulang ayat untuk membina rutin hafazan serta murajaah al-Quran.",
+    "fullDescription": "Bina rutin menghafaz al-Quran melalui bacaan, pendengaran dan pengulangan yang teratur.\n\nBaca al-Quran dan pilih surah, beberapa ayat atau bahagian yang ingin dipelajari. Dengar bacaan dan laraskan kelajuan, bilangan ulangan serta tempoh jeda mengikut keperluan anda.\n\nLatih ayat atau bahagian yang lebih pendek secara berasingan. Anda juga boleh menggabungkannya secara berperingkat: 1+2, kemudian 1+2+3. Simpan beberapa sesi pembelajaran dan kembali kepadanya untuk meneruskan murajaah. Sembunyikan teks untuk menguji sejauh mana anda telah menghafaz.\n\nBaca doa bersama teks Arab, transliterasi dan maknanya. Rakaman audio disediakan untuk beberapa doa terpilih.\n\nSertai khatam al-Quran bersama dan pilih juzuk yang ingin anda baca sebagai bahagian anda dalam khatam tersebut.\n\nAnda boleh membaca tanpa akaun. Khatam bersama yang dikhaskan untuk ahli memerlukan log masuk.\n\nPilihan audio dan teks yang tersedia mungkin berbeza mengikut qari, bahasa dan kandungan yang dipilih."
+  },
+  {
+    "locale": "sw",
+    "webLanguage": "sw",
+    "appName": "Kukariri Qurani kwa Urahisi",
+    "launcherName": "Hifdhi Qurani",
+    "shortDescription": "Soma, sikiliza na rudia aya ili kujenga mazoea ya kuhifadhi Qurani kichwani.",
+    "fullDescription": "Jenga mazoea ya kuhifadhi Qurani kichwani kwa kusoma, kusikiliza na kurudia kwa utaratibu.\n\nSoma Qurani na uchague sura, aya au sehemu unayotaka kujifunza. Sikiliza kisomo na urekebishe kasi, idadi ya marudio na muda wa mapumziko kulingana na mahitaji yako.\n\nFanya mazoezi ya aya au sehemu ndogo moja moja. Unaweza pia kuziunganisha hatua kwa hatua: 1+2, kisha 1+2+3. Hifadhi vipindi tofauti vya kujifunza na uvirudie baadaye kwa ajili ya mapitio. Ficha maandishi ili kujipima ni kiasi gani umekumbuka.\n\nSoma dua zenye maandishi ya Kiarabu, matamshi yaliyoandikwa na maana yake. Baadhi ya dua zilizochaguliwa zina rekodi za sauti.\n\nShiriki katika khatma ya pamoja na uchague juzuu utakayosoma.\n\nUnaweza kusoma bila akaunti. Khatma za pamoja zinazowahusu wanachama pekee zinahitaji kuingia katika akaunti.\n\nChaguo za sauti na maandishi zinaweza kutofautiana kulingana na msomaji, lugha na maudhui."
+  }
+]

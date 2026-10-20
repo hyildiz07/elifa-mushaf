@@ -39,11 +39,21 @@ Mevcut imzalama bilgileri sağlandığında dört değer **yalnız ortam değiş
 
 Kısmi yapılandırma hata verir; debug key'e veya yeni anahtara fallback yapılmaz. Parola/keystore yolu Gradle property, kaynak dosya veya rapora yazılmaz. Bu depoda özel anahtar ve parola yoktur.
 
-## Korunan davranış ve görseller
+## Korunan davranış ve güncellenen görseller
 
-Açılış URL, host, HTTPS autoVerify App Links, intent URL delegation, label, ikonlar, splash renk/süre, status/navigation renkleri, any orientation, customtabs fallback, bildirim delegation kapalı, FileProvider ve alan yönetimi girişi korunur. Transitive AndroidX manifest bileşenleri yeni bağımlılıklar tarafından merge edilir. `androix.browser.trusted.NAVIGATION_BAR_DIVIDER_COLOR` anahtarındaki tarihsel yazım Browser Helper 2.7.3'te de aynıdır; bilerek korunmuştur.
+Açılış URL, host, HTTPS autoVerify App Links, intent URL delegation, splash renk/süre, status/navigation renkleri, any orientation, customtabs fallback, bildirim delegation kapalı, FileProvider ve alan yönetimi girişi korunur. Transitive AndroidX manifest bileşenleri yeni bağımlılıklar tarafından merge edilir. `androix.browser.trusted.NAVIGATION_BAR_DIVIDER_COLOR` anahtarındaki tarihsel yazım Browser Helper 2.7.3'te de aynıdır; bilerek korunmuştur.
 
-15 PNG ve gömülü web manifesti AAB'den byte-for-byte alındı. Adaptive icon XML aynı beyaz arka plan, 8.5dp inset maskable görsel ve şeffaf foreground ile yeniden yazıldı. Dosya SHA256 ve kaynak entry adları `resource-provenance.json` içindedir. Görsel hakları mevcut uygulama sahibine aittir; üçüncü taraf implementation kaynakları kopyalanmaz. Maven bağımlılıkları kendi lisanslarına tabidir; Android Browser Helper Apache 2.0'dır.
+İlk yeniden oluşturma sırasında 15 PNG ve gömülü web manifesti AAB'den byte-for-byte alındı. 20 Ekim 2026'da kullanıcının onayladığı `store-assets/google-play/play-icon-512.png`, beş yoğunluk için native launcher simgesine aktarıldı. Eski lacivert hilal/yıldız kaynaklarının 10 PNG'si değiştirildi; beş splash PNG ve tarihsel web manifesti korunur. Güncel dosya hash'leri, yeni sanat kaynağının hash'i ve değişen dosyaların eski AAB entry/hash kayıtları (`originalExtraction`) `resource-provenance.json` içindedir.
+
+Legacy simge 48dp kare görseldir. Adaptive simgede 108dp şeffaf foreground içine 56dp boyutunda onaylı kare yerleştirilir; arka plan koyu yeşildir (`#063D2E`). Bu boşluk farklı launcher maskelerinde metnin kesilmesini önler; daire maskesi yalnız dekoratif köşe piksellerine dokunabilir. Kaynak sanat yeniden çizilmedi, metni değiştirilmedi; Lanczos3 küçültme ve merkezleme yapıldı. `scripts/generate-launcher-icons.mjs` (sharp 0.34.x gerekir) kaynakları ve `artifacts/android-branding-2026-10-20/launcher-preview.png` önizlemesini üretir. Önizleme daire, yuvarlatılmış kare, squircle ve 48px örnekler içerir. Bu simgeler yeni Android sürümünün parçasıdır; mağaza simgesi güncellemesinden bağımsızdır.
+
+Görsel hakları mevcut uygulama sahibine aittir; üçüncü taraf implementation kaynakları kopyalanmaz. Maven bağımlılıkları kendi lisanslarına tabidir; Android Browser Helper Apache 2.0'dır.
+
+## Dil bazında uygulama adı
+
+Uygulama adı ve kısa ana ekran adı, web uygulamasının 21 dili için yerelleştirilmiştir. Varsayılan İngilizce adlar `Easy Quran Memorization` / `Easy Quran`; Türkçe adlar `Kolay Hafızlık: Kuran Ezberle` / `Kolay Hafızlık` biçimindedir. `app-labels.json` tüm adları ve kaynak klasörlerini listeler. Android cihaz/uygulama dili uygun kaynağı seçer; Play ülke hedeflemesi launcher adını belirlemez.
+
+20 dil klasörü İngilizce varsayılan kaynağı tamamlar. Ek olarak Brezilya Portekizcesi, Tayvan Çincesi ve Geleneksel Çince yazı sistemi için kaynaklar vardır: toplam 24 konfigürasyon. Endonezce Android'in `values-in` kodunu kullanır; apostroflar Android string kurallarına uygun kaçırılır. URL, host ve diğer bağlantı ayarları yalnız varsayılan kaynakta, `translatable="false"` olarak korunur. `node scripts/sync-app-labels.mjs`, iki mağaza yerelleştirme JSON'undan adları yeniden üretir.
 
 AGP 9 artık `proguard-android.txt` desteklemez; `proguard-android-optimize.txt` ve AGP 9'un R8 full mode/resource shrinking yolu kullanılır. Eski AAB'de kapalı olan kod optimizasyonu bu adayda açılır; kaynak küçültme de aktiftir. Manifest bileşenlerini AGP'nin ürettiği kurallar korur, gereksiz geniş keep veya `-dontoptimize` kuralı yoktur. Gerçek cihazda performans kazancı ölçülmeden varsayılmaz.
 
@@ -63,4 +73,5 @@ Bağımlılık yükseltmesi bütün eski API referanslarının yok olduğu anlam
 - [Browser Helper 2.7.3 kaynak etiketi](https://github.com/GoogleChrome/android-browser-helper/tree/android-browser-helper-2.7.3)
 - [jadx 1.5.6 resmi sürümü](https://github.com/skylot/jadx/releases/tag/v1.5.6)
 - [Android imzalama](https://developer.android.com/studio/publish/app-signing)
+- [Android adaptive icon katmanları ve güvenli alan](https://developer.android.com/develop/ui/compose/system/icon_design_adaptive)
 - [TWA ve Digital Asset Links](https://developer.chrome.com/docs/android/trusted-web-activity/android-for-web-devs)
