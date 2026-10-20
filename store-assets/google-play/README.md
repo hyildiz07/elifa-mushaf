@@ -17,3 +17,9 @@ Sanat kaynağı, kullanıcının paylaştığı `codex-clipboard-7cb20347-80b4-4
 - `play-feature-generated-master.png` — 1795 × 876
 
 `generation-notes.json`, kaynak ve üretim yöntemi ile yerel çıktıların teknik bilgilerini içerir. Bu klasördeki iki PNG, mağazaya yüklenmek üzere seçilen son kopyalardır.
+
+## Mağaza durumu
+
+20 Ekim 2026: Varsayılan Türkçe mağaza girişinin simgesi ve özellik grafiği bu iki dosyayla değiştirildi. İki yeni görsel yapay zekâyla düzenlenmiş olarak işaretlendi. Yayın özetinde yalnız bu iki görsel değişikliği gönderildi ve **İncelenmekte olan değişiklikler** durumu doğrulandı. Bu, herkese açık mağazada yayına girdiği anlamına gelmez; Google incelemesi bekleniyor. Android AAB sürümü bu görsel gönderiminden ayrıdır.
+
+Yerel gönderim kanıtı: `artifacts/google-play-2026-10-20/play-review-submitted.png`.
