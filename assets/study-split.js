@@ -525,13 +525,15 @@
   ui.combine.addEventListener('click', () => {
     if (!contextMatches() || ui.results.hidden) return;
     SET.cumu=!SET.cumu;
+    const mode=SET.cumu?'cumulative':'verse';
+    window.elifaSetPracticeMode?.(mode);
     if(typeof saveSet==='function')saveSet();
     if(typeof syncRep==='function')syncRep();
     if(typeof syncRep2==='function')syncRep2();
     if(typeof syncCumu==='function')syncCumu();
     if(typeof syncCumu2==='function')syncCumu2();
     renderLiveStatus();
-    if(typeof queuePracticeModeChange==='function')queuePracticeModeChange(SET.cumu);
+    if(typeof queuePracticeModeChange==='function')queuePracticeModeChange(mode);
   });
   ui.settings.addEventListener('click', () => {
     if (!contextMatches() || ui.results.hidden || typeof fillGearSheet!=='function') return;

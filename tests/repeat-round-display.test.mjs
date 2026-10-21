@@ -24,7 +24,7 @@ function harness(){
   heard,console});
  for(const name of ['stepReps','planCycleReps','buildLadder','practiceUnit','practicePlan','applyPendingPracticeTransition',
   'advancePracticeCycle','handleBoundary','runPlan','finishPlan','stopPlan','syncRepeatScope','readerRepeatKey',
-  'remainingStudyRounds','splitRepeatKey','remainingStepRepeats','syncPlaybackRepeatCounters','syncRep','syncRep2',
+  'remainingReaderRepeats','remainingStudyRounds','splitRepeatKey','remainingStepRepeats','syncPlaybackRepeatCounters','syncRep','syncRep2',
   'goStep','skipDisabledPracticeStep','pausePlayback','resumePlayback'])vm.runInContext(source(name),c);
  return {c,node,heard,count:()=>Number(node('repN').textContent)};
 }
@@ -113,4 +113,31 @@ test('a multi-source part consumes a repetition only after its last audio piece'
  c.handleBoundary();assert.equal(c.pieceCursor,0);assert.equal(node('repN2').textContent,1);
  c.handleBoundary();assert.equal(node('repN2').textContent,1);
  c.handleBoundary();assert.equal(node('repN2').textContent,0);assert.equal(c.SET.rep,2);
+});
+
+test('reader verse scope counts down every verse and restarts at the next verse, preserving whole-study rounds',()=>{
+ const {c,node,count}=harness();c.SET.studyMode='verse';c.SET.rep=3;c.SET.rangeRep=2;
+ c.runPlan(c.practicePlan({kind:'ayah',from:1,to:3},'verse'));
+ assert.equal(count(),3);assert.equal(node('readerRepeatScope').textContent,'Âyet âyet');
+ c.handleBoundary();assert.equal(count(),2);assert.equal(c.planCycle,0);
+ c.pausePlayback();c.syncRep();assert.equal(count(),2);c.resumePlayback();
+ c.handleBoundary();assert.equal(count(),1);c.handleBoundary();assert.equal(count(),3);assert.equal(c.pi,1);
+ for(let i=0;i<6;i++)c.handleBoundary();assert.equal(c.planCycle,1);assert.equal(count(),3);
+ for(let i=0;i<9;i++)c.handleBoundary();assert.equal(count(),0);assert.equal(c.SET.rep,3);assert.equal(c.SET.rangeRep,2);
+});
+
+test('reader verse adjustments change only the per-verse count, including a completed countdown',()=>{
+ const {c,node,count}=harness();c.SET.studyMode='verse';
+ for(const id of ['repPlus','repMinus'])vm.runInContext(html.split('\n').find(line=>line.startsWith("$('"+id+"').onclick=")),c);
+ node('repPlus').onclick();assert.equal(count(),3);assert.equal(c.SET.rep,3);assert.equal(c.SET.rangeRep,9);
+ node('repMinus').onclick();assert.equal(count(),2);assert.equal(c.SET.rep,2);assert.equal(c.SET.rangeRep,9);
+});
+
+test('a newly selected verse scope never consumes the previous full-range or combined count',()=>{
+ const {c,count}=harness();c.SET.studyMode='verse';c.SET.rep=7;c.pr=5;
+ for(const st of [{repeatKind:'range',dyn:true},{repeatKind:'combine',combo:true,dyn:true},{repeatKind:'ayah',dyn:false,x:1}]){
+  c.plan=[st];c.syncRep();assert.equal(count(),7);
+ }
+ c.plan=[{repeatKind:'ayah',dyn:true}];c.syncRep();assert.equal(count(),2);
+ c.SET.repOn=false;c.pr=0;c.syncRep();assert.equal(count(),1);
 });

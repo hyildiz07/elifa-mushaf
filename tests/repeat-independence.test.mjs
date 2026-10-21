@@ -182,11 +182,11 @@ test('quick repeat labels follow their own scope, count, enabled state and langu
   let mode='range',split=false,language='tr';
   const c=vm.createContext({SET:{rep:3,rangeRep:0,combineRep:7,repOn:false},$:node,document:{querySelector:()=>node('repctl')},playing:false,splitAy:null,
     activeStudySplitSelection:()=>split,window:{elifaPracticeMode:()=>mode,elifaT:key=>({tr:{repeat_scope_work:'Tüm çalışma',repeat_scope_unit:'Âyet / parça'},en:{repeat_scope_work:'Whole study',repeat_scope_unit:'Verse / part'}})[language][key]}});
-  for(const name of ['syncRepeatScope','readerRepeatKey','remainingStudyRounds','syncRep','syncRep2'])vm.runInContext(fn(name),c);
+  for(const name of ['syncRepeatScope','readerRepeatKey','remainingReaderRepeats','remainingStudyRounds','syncRep','syncRep2'])vm.runInContext(fn(name),c);
   c.syncRep();c.syncRep2();
   assert.equal(node('readerRepeatScope').textContent,'Tüm çalışma');assert.equal(node('repN').textContent,1);assert.equal(node('repTog').attrs['aria-pressed'],'false');
   assert.equal(node('splitRepeatScope').textContent,'Âyet / parça');assert.equal(node('repN2').textContent,3);
-  mode='cumulative';c.SET.repOn=true;c.syncRep();assert.equal(node('readerRepeatScope').dataset.i18n,'repeat_scope_work');assert.equal(node('repN').textContent,1);assert.equal(node('repTog').attrs['aria-pressed'],'true');
+  mode='cumulative';c.SET.repOn=true;c.syncRep();assert.equal(node('readerRepeatScope').dataset.i18n,'repeat_scope_verse');assert.equal(node('repN').textContent,3);assert.equal(node('repTog').attrs['aria-pressed'],'true');
   mode='range';split=true;c.syncRep();assert.equal(node('readerRepeatScope').textContent,'Tüm çalışma');
   split=false;language='en';c.syncRep();c.syncRep2();assert.equal(node('readerRepeatScope').textContent,'Whole study');assert.equal(node('splitRepeatScope').textContent,'Verse / part');
   assert.deepEqual([c.SET.rep,c.SET.rangeRep,c.SET.combineRep],[3,0,7],'presentation never changes independent counts');

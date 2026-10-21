@@ -160,13 +160,15 @@ test('selected repaired words use their verse source and exact positions',async(
   const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
   const start=html.indexOf('async function playSelection(');
   const src=html.slice(start,html.indexOf('\n}',start)+2);
+  const plannerStart=html.indexOf('function practicePlan(');
+  const planner=html.slice(plannerStart,html.indexOf('\n}',plannerStart)+2);
   const planned=[];
   const c=vm.createContext({selA:0,selB:1,audioRequestId:0,
     selRange:()=>[0,1],SET:{reciter:12},curS:11,
     wordArr:[{ay:26,pos:1},{ay:26,pos:2}],ayGi:{26:[0,10]},
     HUSARY_WORD_REPAIRS:new Set(['11:26']),HUSARY_CHAPTER_GAPS:new Set(),
     runPlan:steps=>planned.push(steps),console});
-  vm.runInContext(src,c);
+  vm.runInContext(planner+src,c);
   await c.playSelection();
   assert.equal(planned.length,1);
   assert.equal(planned[0][0].sourceRanges[0].verseSource,26);
@@ -340,6 +342,8 @@ test('Husary 2:145 skips the duplicated next two verses in whole and cumulative 
 test('Husary 2:145 full selection uses verified span; partial selection fails closed',async()=>{
   const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
   const start=html.indexOf('async function playSelection('),messages=[],plans=[];
+  const plannerStart=html.indexOf('function practicePlan(');
+  const planner=html.slice(plannerStart,html.indexOf('\n}',plannerStart)+2);
   const chapter={ay:{145:[5976160,6091565]},verseRanges:{145:[5976160,6094230]}};
   const c=vm.createContext({SET:{reciter:12},curS:2,selA:0,selB:2,audioRequestId:0,
     selectedRange:[0,2],selRange:()=>c.selectedRange,
@@ -347,7 +351,7 @@ test('Husary 2:145 full selection uses verified span; partial selection fails cl
     HUSARY_CHAPTER_GAPS:new Set(['2:145']),HUSARY_WORD_REPAIRS:new Set(),normalChapterAudio:null,AD_:chapter,
     normalVerseStep:(audio,first,last,extra)=>({audio,first,last,...extra}),
     normalVersePlanReady:()=>true,runPlan:plan=>plans.push(plan),toast:msg=>messages.push(msg),console});
-  vm.runInContext(html.slice(start,html.indexOf('\n}',start)+2),c);
+  vm.runInContext(planner+html.slice(start,html.indexOf('\n}',start)+2),c);
   await c.playSelection();
   assert.equal(plans.length,1);
   assert.equal(plans[0][0].first,145);

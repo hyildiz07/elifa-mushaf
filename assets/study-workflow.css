@@ -32,6 +32,26 @@ body[data-theme=nahlyildizlari] .workflowMethodDialog{--method-bg:#0d1427;--meth
 @media(max-width:380px){.workflowMethodDialog{padding:15px}.workflowMethodOption{padding:11px;gap:10px}}
 
 /* Dense option rows keep the entire method choice comfortably in view. */
+.pbcell.rep{position:relative}
+#pbar .readerRepeatToggle{display:inline-flex;align-items:center;justify-content:center;gap:3px;max-width:100%;padding:0 2px;margin:0;border:0;border-radius:4px;background:transparent;color:inherit;font-family:inherit;cursor:pointer;line-height:1.3}
+#pbar .readerRepeatToggle svg{width:10px;height:10px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s}
+#pbar .readerRepeatToggle[aria-expanded=true] svg{transform:rotate(180deg)}
+#pbar .readerRepeatMenu{position:absolute;bottom:calc(100% + 8px);inset-inline-start:0;z-index:30;width:max-content;min-width:155px;max-width:min(260px,88vw);padding:5px;border:1px solid var(--line);border-radius:13px;background:var(--surface);color:var(--ink);box-shadow:0 8px 24px #0003,inset 0 1px 0 #ffffff60}
+#pbar .readerRepeatMenu[hidden]{display:none!important}
+#pbar .readerRepeatMenu button{display:flex;align-items:center;gap:9px;width:100%;min-height:44px;padding:9px 12px;border:0;border-radius:9px;background:transparent;color:inherit;font:600 13px/1.25 var(--font,system-ui);text-align:start;cursor:pointer;white-space:nowrap}
+#pbar .readerRepeatMenu button:before{content:'✓';color:transparent;width:14px;flex:none}
+#pbar .readerRepeatMenu button[aria-checked=true]{background:color-mix(in srgb,var(--gold) 17%,transparent)}
+#pbar .readerRepeatMenu button[aria-checked=true]:before{color:var(--gold)}
+#pbar .readerRepeatMenu button:hover{background:color-mix(in srgb,var(--gold) 12%,transparent)}
+#pbar .readerRepeatToggle:focus-visible,#pbar .readerRepeatMenu button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+body[data-layout=saray] #pbar .readerRepeatToggle{color:var(--saray-muted,#746e56)}
+body[data-layout=saray] #pbar .readerRepeatMenu{background:#fffaf0;color:#18334f;border-color:#c9b77d}
+body[data-dark='1'] #pbar .readerRepeatMenu{background:#1c2940;color:#f7f5ef;border-color:#667489}
+body[data-theme=saraygece] #pbar .readerRepeatMenu{background:#1b2a41;color:#f8e8b6;border-color:#957a49}
+body[data-theme=nahlyildizlari] #pbar .readerRepeatMenu{background:#17233e;color:#f6f8ff;border-color:#5169a1}
+/* Keep the scope chooser usable when other landscape captions are hidden. */
+body[data-layout=saray] #pbar .readerRepeatToggle.pbl{display:inline-flex!important}
+@media(max-width:360px){#pbar .repctl{max-width:100%}#pbar .repctl .rpm{flex:0 0 20px;min-width:0;width:20px;padding:0}#pbar .repctl .rptog{min-width:0;padding:0 2px;gap:2px;font-size:12px}#pbar .repctl .rptog svg{width:12px;height:12px}#pbar .readerRepeatToggle{font-size:9px;gap:2px}#pbar .readerRepeatToggle svg{width:9px;height:9px}}
 .workflowMethodDialog{width:min(92vw,410px);padding:15px;border-radius:18px}
 .workflowMethodDialog h3{font-size:20px;margin-bottom:10px}
 .workflowMethodOption{min-height:58px;padding:10px;margin:6px 0;gap:10px;border-radius:11px}

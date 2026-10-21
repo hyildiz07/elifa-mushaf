@@ -1,6 +1,7 @@
 import {validStudySettings,validStudyProgress} from './study-settings.mjs';
+import {initReaderRepeatMenu} from './reader-repeat-menu.mjs';
 const $=id=>document.getElementById(id),t=key=>window.tr(key);
-let mode='range',pendingResume=null,lastProgress=null,attempt=null,draftCombine=false;
+let mode='range',pendingResume=null,lastProgress=null,attempt=null,draftCombine=false,repeatMenu=null;
 const modeKeys={range:'mode_range',verse:'mode_verse',cumulative:'mode_cumulative'};
 const methodMenus=[];
 function modeControl(id,onChange){
@@ -48,7 +49,13 @@ for(const [key,[label,min,max,step]] of Object.entries(fields)){const input=docu
   render();
 });}
 $('studyOpen').before(choiceField,details);
-const gearMode=modeControl('practiceMode',value=>{mode=value;SET.studyMode=value;SET.cumu=value==='cumulative';SET.repOn=true;saveSet();syncModes();showPracticeNotice(t(modeKeys[value]));if(typeof queuePracticeModeChange==='function')queuePracticeModeChange(value);});
+function selectPracticeMode(value){
+  if(!modeKeys[value])return;
+  mode=value;SET.studyMode=value;SET.cumu=value==='cumulative';SET.repOn=true;
+  saveSet();syncModes();showPracticeNotice(t(modeKeys[value]));
+  if(typeof queuePracticeModeChange==='function')queuePracticeModeChange(value);
+}
+const gearMode=modeControl('practiceMode',selectPracticeMode);
 const gearField=field('study_method',gearMode.picker);gearField.classList.add('workflowMode');$('gearRepeats').before(gearField);
 // Short explanations stay visible next to each independent repeat scope.
 for(const [inputId,labelKey] of Object.entries({rangeRepInp:'repeat_range_count',combineRepInp:'repeat_combine_count',repInp:'repeat_ayah_count'})){
@@ -70,7 +77,8 @@ function fill(v){draftCombine=v.mode==='cumulative'||v.splitCombine;choice.value
 // pause (or an old saved unchecked box) must not silently disable that program.
 function read(){const v={...current(),splitCombine:draftCombine,reciter:Number(reciter.value),mode:choice.value,repOn:true};for(const key of Object.keys(fields))v[key]=Number($('studySetting_'+key).value);if(v.rangeRep===0)v.rangeRep=1;return validStudySettings(v)&&RECITERS.some(r=>r.id===v.reciter)?v:null;}
 function syncGearRows(){
-  const parts=typeof gearCtx!=='undefined'&&gearCtx!=='ayah';
+  repeatMenu?.sync();
+  const parts=typeof gearCtx!=='undefined'&&gearCtx==='parts';
   const activeMode=parts?(SET.cumu?'cumulative':'verse'):mode;
   const verse=$('gearRepRow'),combined=$('gearCombineRow');
   if(verse)verse.hidden=activeMode==='range';
@@ -85,7 +93,7 @@ function render(){
   if(fieldRows.rep)fieldRows.rep.hidden=choice.value==='range';
   if(fieldRows.combineRep)fieldRows.combineRep.hidden=choice.value!=='cumulative';
   methodHelp.textContent=t('mode_'+choice.value+'_help');choice.setAttribute('aria-label',t('study_method'));
-  gearField.hidden=typeof gearCtx!=='undefined'&&gearCtx!=='ayah';
+  gearField.hidden=typeof gearCtx!=='undefined'&&gearCtx==='parts';
   gearMode.setAttribute('aria-label',t('study_method'));
   if(!lastProgress||noticeText){status.textContent=noticeText||t(modeKeys[mode]);readerStatus.textContent=status.textContent;status.hidden=!progressVisible||!studyRange||studyRange.sid!==curS;readerStatus.hidden=!progressVisible||!status.hidden;return;}
   const p=lastProgress;if(p.sid!==curS){status.hidden=true;readerStatus.hidden=true;return;}
@@ -98,11 +106,12 @@ function render(){
 }
 window.elifaPracticeMode=()=>mode;
 window.elifaSetPracticeMode=value=>{if(modeKeys[value]){mode=value;SET.studyMode=value;syncModes();}};
+repeatMenu=initReaderRepeatMenu({document,readMode:()=>mode,onSelect:selectPracticeMode,translate:t});
 // An explicit count edit enables its practice without requiring a second
 // Combine tap. Changing whole-study rounds never replaces the inner method.
 window.elifaRepeatSettingChanged=(key,context=typeof gearCtx!=='undefined'?gearCtx:'ayah')=>{
   SET.repOn=true;
-  const parts=context!=='ayah';
+  const parts=context==='parts';
   let next=mode;
   if(key==='rep'&&mode==='range'&&!parts)next='verse';
   if(key==='combineRep'&&SET.combineRep>0){if(parts)SET.cumu=true;else next='cumulative';}
@@ -126,7 +135,7 @@ window.elifaPlaybackEvent=(event)=>{
   if(event==='progress'&&st){
     const part=st.studyPart??st.part;
     const ay=split?.ay||(mode==='range'?(studyRange?.from||rangeSelectionDraft?.from||curAy):(st.ayEnd||curAy));
-    lastProgress={sid:curS,from:studyRange?.from||rangeSelectionDraft?.from||ay,to:studyRange?.to||rangeSelectionDraft?.to||ay,mode:part!==undefined?(SET.cumu?'cumulative':'verse'):mode,part,combinedFrom:st.combinedFrom,current:pr+1,total:stepReps(st),cycle:typeof planCycle==='number'?planCycle+1:1,cycles:typeof planCycleReps==='function'?planCycleReps():1,completed:false};
+    lastProgress={sid:curS,from:studyRange?.from||rangeSelectionDraft?.from||ay,to:studyRange?.to||rangeSelectionDraft?.to||ay,mode:plan.practice?.mode||(part!==undefined?(SET.cumu?'cumulative':'verse'):mode),part,combinedFrom:st.combinedFrom,current:pr+1,total:stepReps(st),cycle:typeof planCycle==='number'?planCycle+1:1,cycles:typeof planCycleReps==='function'?planCycleReps():1,completed:false};
     if(studyRange)window.elifaStudySessions?.rememberProgress({ay, ...(Number.isInteger(part)?{part}:{}),completed:false});
     render();
   }
@@ -159,5 +168,5 @@ function refreshLanguage(){window.elifaApplyI18n?.();syncRep();syncRep2();render
   choice.setAttribute('aria-label',t('study_method'));reason.setAttribute('aria-label',t('report_issue'));
 }
 window.addEventListener('elifa:language-changed',refreshLanguage);
-new MutationObserver(()=>{gearField.hidden=gearCtx!=='ayah';gearMode.value=mode;syncGearRows();}).observe($('gearSheet'),{attributes:true,attributeFilter:['class']});
+new MutationObserver(()=>{gearField.hidden=gearCtx==='parts';gearMode.value=mode;syncGearRows();}).observe($('gearSheet'),{attributes:true,attributeFilter:['class']});
 fill(current());refreshLanguage();

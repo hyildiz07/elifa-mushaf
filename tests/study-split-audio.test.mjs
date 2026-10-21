@@ -13,7 +13,7 @@ function source(name){
 }
 const names=['validStudyWordRange','studyWordBounds','buildStudySplitParts','studyValidateManualCut','playStudySplitRange',
   'playStudySplitPart','activeStudySplitSelection','studySplitRecipeCurrent',
-  'playActiveStudySplit','stepBounds','stepReps'];
+  'playActiveStudySplit','stepBounds','stepReps','practiceUnit','practicePlan'];
 function audio(){
   const rows={
     1:[[1,100,250],[2,250,450],[3,450,870]],
