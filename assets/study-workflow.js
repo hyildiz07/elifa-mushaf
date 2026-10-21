@@ -8,6 +8,70 @@
     return object(v) && Object.keys(v).every((k) => ["ay", "part", "completed"].includes(k)) && Number.isInteger(v.ay) && v.ay >= from && v.ay <= to && typeof v.completed === "boolean" && (v.part === void 0 || Number.isInteger(v.part) && v.part >= 0 && v.part < 1e3);
   }
 
+  // src/reader-repeat-menu.mjs
+  function initReaderRepeatMenu({ document: document2, readMode, onSelect, translate }) {
+    const toggle = document2.getElementById("readerRepeatToggle");
+    const menu = document2.getElementById("readerRepeatMenu");
+    if (!toggle || !menu) return null;
+    const options = [["range", "readerRepeatRange", "repeat_scope_work"], ["verse", "readerRepeatVerse", "repeat_scope_verse"]].map(([mode2, id, key]) => ({ mode: mode2, key, button: document2.getElementById(id) }));
+    function selected() {
+      return readMode() === "range" ? "range" : "verse";
+    }
+    function sync() {
+      for (const o of options) {
+        o.button.textContent = translate(o.key);
+        o.button.setAttribute("aria-checked", String(o.mode === selected()));
+      }
+      toggle.setAttribute("aria-label", translate(selected() === "range" ? "repeat_scope_work" : "repeat_scope_verse"));
+      menu.setAttribute("aria-label", translate("study_method"));
+    }
+    function close2(restoreFocus = false) {
+      menu.hidden = true;
+      toggle.setAttribute("aria-expanded", "false");
+      if (restoreFocus) toggle.focus();
+    }
+    function open() {
+      sync();
+      menu.hidden = false;
+      toggle.setAttribute("aria-expanded", "true");
+      options.find((o) => o.mode === selected()).button.focus();
+    }
+    toggle.onclick = () => menu.hidden ? open() : close2(true);
+    toggle.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowUp" || event.key === "ArrowDown") {
+        event.preventDefault();
+        open();
+      }
+    });
+    for (const o of options) o.button.onclick = () => {
+      onSelect(o.mode);
+      sync();
+      close2(true);
+    };
+    menu.addEventListener("keydown", (event) => {
+      const index = options.findIndex((o) => o.button === document2.activeElement);
+      if (["ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) {
+        event.preventDefault();
+        const next = event.key === "Home" ? 0 : event.key === "End" ? 1 : (index + (event.key === "ArrowDown" ? 1 : -1) + 2) % 2;
+        options[next].button.focus();
+      }
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        close2(true);
+      }
+      if (event.key === "Tab") close2(true);
+    });
+    document2.addEventListener("click", (event) => {
+      if (!menu.hidden && !menu.contains(event.target) && !toggle.contains(event.target)) close2();
+    });
+    document2.addEventListener("focusin", (event) => {
+      if (!menu.hidden && !menu.contains(event.target) && !toggle.contains(event.target)) close2();
+    });
+    sync();
+    return { sync, close: close2 };
+  }
+
   // src/study-workflow.mjs
   var $ = (id) => document.getElementById(id);
   var t = (key) => window.tr(key);
@@ -16,6 +80,7 @@
   var lastProgress = null;
   var attempt = null;
   var draftCombine = false;
+  var repeatMenu = null;
   var modeKeys = { range: "mode_range", verse: "mode_verse", cumulative: "mode_cumulative" };
   var methodMenus = [];
   function modeControl(id, onChange) {
@@ -182,7 +247,8 @@
     });
   }
   $("studyOpen").before(choiceField, details);
-  var gearMode = modeControl("practiceMode", (value) => {
+  function selectPracticeMode(value) {
+    if (!modeKeys[value]) return;
     mode = value;
     SET.studyMode = value;
     SET.cumu = value === "cumulative";
@@ -191,7 +257,8 @@
     syncModes();
     showPracticeNotice(t(modeKeys[value]));
     if (typeof queuePracticeModeChange === "function") queuePracticeModeChange(value);
-  });
+  }
+  var gearMode = modeControl("practiceMode", selectPracticeMode);
   var gearField = field("study_method", gearMode.picker);
   gearField.classList.add("workflowMode");
   $("gearRepeats").before(gearField);
@@ -253,7 +320,8 @@
     return validStudySettings(v) && RECITERS.some((r) => r.id === v.reciter) ? v : null;
   }
   function syncGearRows() {
-    const parts = typeof gearCtx !== "undefined" && gearCtx !== "ayah";
+    repeatMenu?.sync();
+    const parts = typeof gearCtx !== "undefined" && gearCtx === "parts";
     const activeMode = parts ? SET.cumu ? "cumulative" : "verse" : mode;
     const verse = $("gearRepRow"), combined = $("gearCombineRow");
     if (verse) verse.hidden = activeMode === "range";
@@ -273,7 +341,7 @@
     if (fieldRows.combineRep) fieldRows.combineRep.hidden = choice.value !== "cumulative";
     methodHelp.textContent = t("mode_" + choice.value + "_help");
     choice.setAttribute("aria-label", t("study_method"));
-    gearField.hidden = typeof gearCtx !== "undefined" && gearCtx !== "ayah";
+    gearField.hidden = typeof gearCtx !== "undefined" && gearCtx === "parts";
     gearMode.setAttribute("aria-label", t("study_method"));
     if (!lastProgress || noticeText) {
       status.textContent = noticeText || t(modeKeys[mode]);
@@ -305,9 +373,10 @@
       syncModes();
     }
   };
+  repeatMenu = initReaderRepeatMenu({ document, readMode: () => mode, onSelect: selectPracticeMode, translate: t });
   window.elifaRepeatSettingChanged = (key, context2 = typeof gearCtx !== "undefined" ? gearCtx : "ayah") => {
     SET.repOn = true;
-    const parts = context2 !== "ayah";
+    const parts = context2 === "parts";
     let next = mode;
     if (key === "rep" && mode === "range" && !parts) next = "verse";
     if (key === "combineRep" && SET.combineRep > 0) {
@@ -370,7 +439,7 @@
     if (event === "progress" && st) {
       const part = st.studyPart ?? st.part;
       const ay = split?.ay || (mode === "range" ? studyRange?.from || rangeSelectionDraft?.from || curAy : st.ayEnd || curAy);
-      lastProgress = { sid: curS, from: studyRange?.from || rangeSelectionDraft?.from || ay, to: studyRange?.to || rangeSelectionDraft?.to || ay, mode: part !== void 0 ? SET.cumu ? "cumulative" : "verse" : mode, part, combinedFrom: st.combinedFrom, current: pr + 1, total: stepReps(st), cycle: typeof planCycle === "number" ? planCycle + 1 : 1, cycles: typeof planCycleReps === "function" ? planCycleReps() : 1, completed: false };
+      lastProgress = { sid: curS, from: studyRange?.from || rangeSelectionDraft?.from || ay, to: studyRange?.to || rangeSelectionDraft?.to || ay, mode: plan.practice?.mode || (part !== void 0 ? SET.cumu ? "cumulative" : "verse" : mode), part, combinedFrom: st.combinedFrom, current: pr + 1, total: stepReps(st), cycle: typeof planCycle === "number" ? planCycle + 1 : 1, cycles: typeof planCycleReps === "function" ? planCycleReps() : 1, completed: false };
       if (studyRange) window.elifaStudySessions?.rememberProgress({ ay, ...Number.isInteger(part) ? { part } : {}, completed: false });
       render();
     }
@@ -455,7 +524,7 @@
   }
   window.addEventListener("elifa:language-changed", refreshLanguage);
   new MutationObserver(() => {
-    gearField.hidden = gearCtx !== "ayah";
+    gearField.hidden = gearCtx === "parts";
     gearMode.value = mode;
     syncGearRows();
   }).observe($("gearSheet"), { attributes: true, attributeFilter: ["class"] });

@@ -3,16 +3,17 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import {validStudySettings,validStudyProgress} from '../src/study-settings.mjs';
+import {initReaderRepeatMenu} from '../src/reader-repeat-menu.mjs';
 function harness(initial={}){
  const nodes=new Map(),timers=new Map();let timerId=0;class Element{
   constructor(){this.dataset={};this.children=[];this.value='';this.hidden=false;this.handlers={};this.attrs={};this.classes=new Set();this.classList={contains:c=>this.classes.has(c),add:c=>this.classes.add(c),toggle:(c,on)=>on?this.classes.add(c):this.classes.delete(c)};}
   set id(v){this._id=v;nodes.set(v,this);}get id(){return this._id;}
   append(...v){this.children.push(...v);for(const child of v)child.parent=this;}before(){}after(){}setAttribute(k,v){this.attrs[k]=v;}
-  addEventListener(k,fn){this.handlers[k]=fn;}dispatchEvent(e){this.handlers[e.type]?.(e);}showModal(){this.open=true;}close(){this.open=false;}
+  addEventListener(k,fn){this.handlers[k]=fn;}dispatchEvent(e){this.handlers[e.type]?.(e);}showModal(){this.open=true;}close(){this.open=false;}focus(){}contains(el){return el===this||this.children.some(child=>child.contains?.(el));}
  }
  for(const m of fs.readFileSync('index.html','utf8').matchAll(/\bid="([^"]+)"/g)){const el=new Element();el.id=m[1];}
  nodes.get('studySetup').classes.add('on');const events=[],progress=[];
- const c=vm.createContext({document:{getElementById:id=>nodes.get(id)||null,querySelector:selector=>selector==='.repctl'?nodes.get('repTog'):null,createElement:()=>new Element(),body:new Element()},$:id=>nodes.get(id)||null,
+ const c=vm.createContext({initReaderRepeatMenu,document:{addEventListener(){},getElementById:id=>nodes.get(id)||null,querySelector:selector=>selector==='.repctl'?nodes.get('repTog'):null,createElement:()=>new Element(),body:new Element()},$:id=>nodes.get(id)||null,
   window:{tr:k=>k,addEventListener(){},elifaApplyI18n(){},elifaLog:(event,p)=>events.push({event,...p}),elifaStudySessions:{rememberProgress:p=>progress.push(p)}},
   SET:{reciter:223,speed:1,rep:5,repOn:true,wait:0,cumu:true,...initial},RECITERS:[{id:223,n:'Afasy'},{id:7,n:'Husary'}],SURAHS:[{tr:'Fatiha'}],
   plan:[],pi:0,pr:0,playing:false,curS:1,curAy:1,studyRange:{sid:1,from:1,to:5},rangeSelectionDraft:null,gearCtx:'ayah',
@@ -20,12 +21,12 @@ function harness(initial={}){
   setTimeout:(fn,delay)=>{timers.set(++timerId,{fn,delay});return timerId;},clearTimeout:id=>timers.delete(id),
   MutationObserver:class{observe(){}},Event:class{constructor(type){this.type=type;}},navigator:{onLine:true},validStudySettings,validStudyProgress});
  const html=fs.readFileSync('index.html','utf8');
- for(const name of ['syncRepeatScope','readerRepeatKey','remainingStudyRounds','syncRep','syncRep2','syncCumu','syncCumu2','syncPracticeControls','commitInputs','commitInputs2']){
+ for(const name of ['syncRepeatScope','readerRepeatKey','remainingReaderRepeats','remainingStudyRounds','syncRep','syncRep2','syncCumu','syncCumu2','syncPracticeControls','commitInputs','commitInputs2']){
   const start=html.indexOf('function '+name+'('),line=html.slice(start,html.indexOf('\n',start)).trimEnd();
   vm.runInContext(line.endsWith('}')?line:html.slice(start,html.indexOf('\n}',start)+2),c);
  }
  c.applyLiveSpeed=()=>{};
- vm.runInContext(fs.readFileSync('src/study-workflow.mjs','utf8').replace(/^import[^\n]*\n/,''),c);
+ vm.runInContext(fs.readFileSync('src/study-workflow.mjs','utf8').replace(/^import[^\n]*\n/gm,''),c);
  return {c,nodes,events,progress,timers};
 }
 test('practice status disappears after three seconds and progress ticks cannot reopen it',()=>{
@@ -57,6 +58,14 @@ test('study progress is bounded and completion emits once without a false stop',
  assert.deepEqual(events.map(x=>x.event),['playback_start','playback_complete']);assert.equal(progress.at(-1).completed,true);
 });
 
+test('saved parts show the actual whole-study mode in the short playback notice',()=>{
+ const {c,nodes}=harness({cumu:false});nodes.get('studySetup').classes.delete('on');
+ c.plan=[{ayEnd:2,studyPart:0,dyn:false}];c.plan.practice={kind:'studyParts',mode:'range'};
+ c.window.elifaPlaybackEvent('start');c.window.elifaPlaybackEvent('progress');
+ assert.match(nodes.get('practiceProgress').textContent,/mode_range/);
+ assert.doesNotMatch(nodes.get('practiceProgress').textContent,/mode_verse/);
+});
+
 test('three repeat counts save independently and display the outer study round',()=>{
  const {c,nodes}=harness();const settings={reciter:223,speed:1,rep:2,combineRep:3,rangeRep:4,repOn:true,wait:0,mode:'cumulative',splitCombine:true};
  c.window.elifaStudySettings.load({settings});assert.deepEqual(JSON.parse(JSON.stringify(c.window.elifaStudySettings.capture())),settings);
@@ -71,6 +80,18 @@ test('live mode selection queues the requested mode while setup selection remain
  nodes.get('studyMode').value='verse';nodes.get('studyMode').handlers.change();assert.deepEqual(queued,[]);
  nodes.get('practiceMode').value='verse';nodes.get('practiceMode').handlers.change();assert.deepEqual(queued,['verse']);assert.equal(c.SET.cumu,false);
  nodes.get('practiceMode').value='cumulative';nodes.get('practiceMode').handlers.change();assert.deepEqual(queued,['verse','cumulative']);assert.equal(c.SET.cumu,true);
+});
+
+test('bottom menu applies the shared practice mode without playing and preserves independent counts',()=>{
+ const {c,nodes}=harness({rep:2,combineRep:3,rangeRep:8,repOn:false}),queued=[];c.queuePracticeModeChange=mode=>queued.push(mode);
+ nodes.get('readerRepeatVerse').onclick();
+ assert.equal(c.window.elifaPracticeMode(),'verse');assert.equal(c.SET.studyMode,'verse');assert.equal(c.SET.cumu,false);assert.equal(c.SET.repOn,true);
+ assert.equal(nodes.get('practiceMode').value,'verse');assert.equal(nodes.get('repN').textContent,2);assert.equal(nodes.get('readerRepeatVerse').attrs['aria-checked'],'true');
+ assert.equal(nodes.get('readerRepeatMenu').hidden,true);assert.equal(nodes.get('readerRepeatToggle').attrs['aria-expanded'],'false');
+ nodes.get('readerRepeatRange').onclick();assert.equal(c.window.elifaPracticeMode(),'range');assert.equal(nodes.get('repN').textContent,8);
+ assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,3,8]);assert.deepEqual(queued,['verse','range']);assert.equal(c.playing,false);
+ nodes.get('practiceMode').value='verse';nodes.get('practiceMode').handlers.change();
+ assert.equal(nodes.get('readerRepeatVerse').attrs['aria-checked'],'true');assert.equal(nodes.get('readerRepeatRange').attrs['aria-checked'],'false');
 });
 test('split resume focuses the saved verse and part without starting playback',()=>{
  const {c}=harness();const restored=[];c.window.elifaResumeStudySplit=(a,p)=>restored.push([a,p]);
@@ -102,10 +123,19 @@ test('both settings panels expose only relevant repeat counts without losing ina
   assert.equal(nodes.get('gearCombineRow').hidden,mode!=='cumulative');
   assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,3,4]);
  }
- c.gearCtx='studyParts';c.SET.cumu=false;c.syncPracticeControls();
+ c.gearCtx='parts';c.SET.cumu=false;c.syncPracticeControls();
  assert.equal(nodes.get('gearRepRow').hidden,false);assert.equal(nodes.get('gearCombineRow').hidden,true);
  c.SET.cumu=true;c.syncPracticeControls();assert.equal(nodes.get('gearCombineRow').hidden,false);
  assert.equal(c.playing,false);
+});
+
+test('saved split studies share reader mode and gear count activation',()=>{
+ const {c,nodes}=harness({rep:2,combineRep:3,rangeRep:4}),queued=[];c.gearCtx='studyParts';c.activeStudySplitSelection=()=>({parts:[{},{}]});c.queuePracticeModeChange=mode=>queued.push(mode);
+ nodes.get('readerRepeatRange').onclick();assert.equal(nodes.get('gearRepRow').hidden,true);assert.equal(nodes.get('gearCombineRow').hidden,true);
+ c.window.elifaRepeatSettingChanged('rep','studyParts');assert.equal(c.window.elifaPracticeMode(),'verse');assert.equal(nodes.get('gearRepRow').hidden,false);assert.equal(nodes.get('readerRepeatVerse').attrs['aria-checked'],'true');
+ c.window.elifaRepeatSettingChanged('combineRep','studyParts');assert.equal(c.window.elifaPracticeMode(),'cumulative');assert.equal(c.SET.cumu,true);assert.equal(nodes.get('gearCombineRow').hidden,false);
+ nodes.get('readerRepeatRange').onclick();assert.equal(c.SET.cumu,false);assert.equal(nodes.get('gearRepRow').hidden,true);assert.equal(c.playing,false);
+ assert.deepEqual(queued,['range','verse','cumulative','range']);assert.deepEqual([c.SET.rep,c.SET.combineRep,c.SET.rangeRep],[2,3,4]);
 });
 
 
@@ -141,7 +171,7 @@ test('editing verse repeats selects verse practice and activates both repeat con
  assert.equal(c.window.elifaPracticeMode(),'verse');assert.equal(c.SET.rep,2);assert.equal(c.SET.repOn,true);
  for(const id of ['repTog','repTog2'])assert.equal(nodes.get(id).attrs['aria-pressed'],'true');
  for(const id of ['cumuTog','cumuTog2'])assert.equal(nodes.get(id).attrs['aria-pressed'],'false');
- assert.equal(nodes.get('readerRepeatScope').textContent,'Tüm çalışma');assert.equal(c.playing,false);
+ assert.equal(nodes.get('readerRepeatScope').textContent,'Âyet âyet');assert.equal(c.playing,false);
 });
 
 test('explicit cumulative method also applies to split parts and both Combine buttons immediately',()=>{
@@ -214,7 +244,7 @@ test('editing positive combine count activates cumulative practice; zero remains
 });
 
 test('parts gear changes stay local to parts and refresh the manual-part buttons',()=>{
- const {c,nodes}=harness();c.SET.cumu=false;c.SET.combineRep=2;c.SET.rangeRep=3;c.gearCtx='studyParts';
+ const {c,nodes}=harness();c.SET.cumu=false;c.SET.combineRep=2;c.SET.rangeRep=3;c.gearCtx='parts';
  let refreshes=0;c.window.elifaStudySplitRefreshStatus=()=>refreshes++;
  c.window.elifaRepeatSettingChanged('combineRep');assert.equal(c.SET.cumu,true);assert.equal(c.window.elifaPracticeMode(),'range');assert.ok(refreshes>0);
  assert.equal(nodes.get('cumuTog2').attrs['aria-pressed'],'true');

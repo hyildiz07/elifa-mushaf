@@ -24,6 +24,7 @@ function context(af){
     WAQF_RE:/[\u06D6-\u06DC]/,splitLastReady:null};
   c.QTEXT=vm.runInContext('QTEXT',textContext);c.ensureSplitAudio=async()=>{};
   vm.createContext(c);
+  vm.runInContext(fn('practicePlan'),c);
   for(const name of ['alignTurkishWords','splitAudioKey','splitAudioReady','splitPauseAllowed','splitPhraseBoundary','splitChunkPositions','repeatedTimeline','repeatedAudioRanges','computeParts','partKey','partStep','terminalMuallimTailEnd','splitBounds','stepBounds','buildPartsPlan','selectedBufferCovers','offerSplitReciterChoice','showUnsafeSplitTiming','showSplitError','startFromPart','startPartsRange','ensureSelAudio','rewireTimings','tryStartPendingSplitPlay','stepReps','seekPlay'])vm.runInContext(fn(name),c);
   const start=html.indexOf('  const ay={},ws={},verseEnds={},verseRanges={},verseSegments={}');
   const end=html.indexOf('  allSegs.sort',start);

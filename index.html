@@ -5690,7 +5690,11 @@ window.elifaLog=function(event,params){
           <button class="rptog" id="repTog" title="Tekrar aç/kapa (uzun bas: ayarlar)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg><b id="repN">5</b>×</button>
           <button class="rpm" id="repPlus" title="Artır">+</button>
         </div>
-        <span class="pbl" id="readerRepeatScope" data-i18n="repeat_scope_work">Tüm çalışma</span>
+        <button class="pbl readerRepeatToggle" id="readerRepeatToggle" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="readerRepeatMenu"><span id="readerRepeatScope" data-i18n="repeat_scope_work">Tüm çalışma</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg></button>
+        <div class="readerRepeatMenu" id="readerRepeatMenu" role="menu" hidden>
+          <button type="button" role="menuitemradio" aria-checked="true" id="readerRepeatRange" data-i18n="repeat_scope_work">Tüm çalışma</button>
+          <button type="button" role="menuitemradio" aria-checked="false" id="readerRepeatVerse" data-i18n="repeat_scope_verse">Âyet âyet</button>
+        </div>
       </div>
       <div class="pbcell">
         <button class="pbi spdbtn" id="spdBtn" title="Okuma hızı">1.0×</button>
@@ -6326,7 +6330,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v363</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v364</span></div>
   </div>
 
   <div class="tesekkur">
@@ -8994,18 +8998,17 @@ async function playStudySplitRange(parts,firstIndex=0,lastIndex=parts?.length-1,
     !audio.selBuf||audio.selBuf.lo>from.f+1||audio.selBuf.hi<to.t-1){
     toast('Parça sesinin tamamı hazırlanamadı.');return false;
   }
-  const plan=[];
+  const units=[];
   for(let i=0;i<fresh.length;i++){
     const p=fresh[i],number=firstIndex+i+1;
-    plan.push({f:p.f,t:p.t,x:1,dyn:true,studyExact:true,
+    units.push({f:p.f,t:p.t,x:1,dyn:true,studyExact:true,
       ayEnd:p.toPos===ayGi[p.ay][1]-ayGi[p.ay][0]+1?p.ay:null,
       l:p.ay+'. âyet · '+number+'. parça',studyPart:firstIndex+i,repeatKind:'ayah'});
-    if(SET.cumu&&i>0){
-      plan.push({f:fresh[0].f,t:p.t,x:1,dyn:true,studyExact:true,
-        l:(firstIndex+1)+'–'+number+'. parçalar birleşik',studyPart:firstIndex+i,combinedFrom:firstIndex,repeatKind:'combine'});
-    }
   }
-  plan.practice={kind:'studyParts',units:plan.filter(st=>st.repeatKind!=='combine'),mode:SET.cumu?'cumulative':'verse',cycle};plan.rangeCycles=cycle;
+  // The reader scope also applies to saved cuts. A direct tap on one part
+  // still studies that part; only the complete program uses whole-study tours.
+  const mode=SET.cumu?'cumulative':cycle&&window.elifaPracticeMode?.()==='range'?'range':'verse';
+  const plan=practicePlan({kind:'studyParts',units,cycle},mode);
   if(!normalVersePlanReady(plan))return false;
   runPlan(plan);
   if(playing){
@@ -10048,7 +10051,7 @@ function queuePracticeModeChange(value){
   const parts=plan.practice.kind==='parts'||plan.practice.kind==='studyParts';
   const mode=typeof value==='string'?value:value?'cumulative':parts?'verse':'range';
   if(!['range','verse','cumulative'].includes(mode))return false;
-  if(parts&&plan.practice.units?.length===1){pendingPracticeTransition=null;return false;}
+  if(parts&&plan.practice.units?.length===1&&mode!=='range'&&plan.practice.mode!=='range'){pendingPracticeTransition=null;return false;}
   if(mode===plan.practice.mode){pendingPracticeTransition=null;return false;}
   pendingPracticeTransition=mode;
   if(waiting&&pendingFn)pendingFn=()=>{if(!applyPendingPracticeTransition())goStep();};
@@ -10738,7 +10741,7 @@ function playAyahProgram(a,endAy=null){
       }
     }
     if(guardedTail&&p.length)p[p.length-1].guardedTail=true;
-    const steps=p.length?p:[normalVerseStep(chapter,a,a,{x:1,dyn:true,ayEnd:a,l:a+'. âyet'})];
+    const steps=p.length?p:[normalVerseStep(chapter,a,a,{x:1,dyn:true,repeatKind:'ayah',ayEnd:a,l:a+'. âyet'})];
     steps.practice={kind:'ayah',from:start,to:lastAy,mode:'cumulative',cycle:endAy==null};steps.rangeCycles=endAy==null;
     if(normalVersePlanReady(steps))runPlan(steps);
     return;
@@ -10750,6 +10753,21 @@ function playAyahProgram(a,endAy=null){
   if(normalVersePlanReady(steps))runPlan(steps);
 }
 
+function playReaderProgram(a){
+  const mode=window.elifaPracticeMode?.()||'range';
+  if(!SET.repOn||mode==='cumulative'){playAyahProgram(a);return;}
+  const last=SURAHS[curS-1]?.n,chapter=normalChapterAudio||AD_;
+  if(!Number.isInteger(last)||!chapter?.ay?.[a])return;
+  // Main Play studies the remainder of the chapter. Keep the single-ayah
+  // tap/previous/next entry points unchanged, and validate every verse first.
+  const verses=buildLadder(a,last,false);
+  if(!verses.length){toast(window.tr?tr('study_audio_missing'):'Aralıktaki ses kayıtları tamamlanmadı.');return;}
+  if(!normalVersePlanReady(verses))return;
+  const steps=mode==='range'?practicePlan({kind:'ayah',from:a,to:last},'range'):verses;
+  if(mode!=='range'){steps.practice={kind:'ayah',from:a,to:last,mode:'verse'};steps.rangeCycles=true;}
+  if(!normalVersePlanReady(steps))return;
+  curAy=a;runPlan(steps);
+}
 $('playBtn').onclick=()=>{
   if(audioTimingUnverified(SET.reciter,curS)){
     toast('Bu hocanın bu sûre kaydında âyet sınırları güvenilir değil. Ses için başka bir hoca seç.');
@@ -10773,7 +10791,7 @@ $('playBtn').onclick=()=>{
     playSelection();return;
   }
   if(studyRange?.sid===curS){playStudyRange();return;}
-  playAyahProgram(curAy||visAy||1);
+  playReaderProgram(curAy||visAy||1);
 };
 /* SEÇİMİ ÇAL: tam seçilen aralık, deterministik kesim korumalı.
    Tam âyet seçiliyse âyet-sonu güvenliği; kelime/parçaysa kelime kesimi güvenliği. */
@@ -10788,6 +10806,10 @@ async function playSelection(){
   // A pending decode must not start an old selection after Stop, navigation,
   // or a newer Play tap. stopPlan invalidates this same request counter.
   const request=++audioRequestId;
+  // Verified fallback recordings still obey the reader's selected repeat
+  // scope. Keep their original source and exact bounds as one selection unit.
+  const singleSelectionPlan=step=>practicePlan({kind:'selection',units:[{...step,selectionUnit:step.ayEnd}]},
+    globalThis.window?.elifaPracticeMode?.()||'range');
   const selectedRange=selRange();
   if(SET.reciter===3&&selectedRange){
     const unsafeAy=curS===3?160:curS===4?143:curS===5?5:null;
@@ -10803,8 +10825,8 @@ async function playSelection(){
         selectedRange[0]===ayGi[139]?.[0]&&selectedRange[1]===ayGi[139]?.[1];
       if(fullHani139){
         const chapter=normalChapterAudio||AD_;
-        const steps=[normalVerseStep(chapter,139,139,
-          {x:1,dyn:true,ayEnd:139,l:'139. âyet'})];
+        const steps=singleSelectionPlan(normalVerseStep(chapter,139,139,
+          {x:1,dyn:true,repeatKind:'ayah',ayEnd:139,l:'139. âyet'}));
         if(normalVersePlanReady(steps))runPlan(steps);
         return;
       }
@@ -10817,9 +10839,9 @@ async function playSelection(){
     if(first&&last&&first.ay===last.ay&&HUSARY_WORD_REPAIRS.has(curS+':'+first.ay)){
       const ay=first.ay,whole=selectedRange[0]===ayGi[ay]?.[0]&&
         selectedRange[1]===ayGi[ay]?.[1];
-      runPlan([{sourceRanges:[{verseSource:ay,f:0,t:null,fullVerse:whole,
-        verifiedWordRange:whole?null:[first.pos,last.pos]}],x:1,dyn:true,
-        ayEnd:ay,l:whole?ay+'. âyet':'Seçili parça'}]);
+      runPlan(singleSelectionPlan({sourceRanges:[{verseSource:ay,f:0,t:null,fullVerse:whole,
+        verifiedWordRange:whole?null:[first.pos,last.pos]}],x:1,dyn:true,repeatKind:'ayah',
+        ayEnd:ay,l:whole?ay+'. âyet':'Seçili parça'}));
       return;
     }
     const containsMissing=wordArr.slice(selectedRange[0],selectedRange[1]+1)
@@ -10829,8 +10851,8 @@ async function playSelection(){
         selectedRange[0]===ayGi[first.ay]?.[0]&&selectedRange[1]===ayGi[first.ay]?.[1];
       if(full){
         const chapter=normalChapterAudio||AD_;
-        const steps=[normalVerseStep(chapter,first.ay,first.ay,
-          {x:1,dyn:true,ayEnd:first.ay,l:first.ay+'. âyet'})];
+        const steps=singleSelectionPlan(normalVerseStep(chapter,first.ay,first.ay,
+          {x:1,dyn:true,repeatKind:'ayah',ayEnd:first.ay,l:first.ay+'. âyet'}));
         if(normalVersePlanReady(steps))runPlan(steps);
       }else if(curS===2&&first?.ay===145&&last?.ay===145){
         toast('Bu âyetin bazı iç ses sınırları doğrulanmadı. Tam âyeti dinleyebilirsin.');
@@ -10866,8 +10888,8 @@ async function playSelection(){
     const full=first&&last&&first.ay===last.ay&&
       selectedRange[0]===ayGi[first.ay]?.[0]&&selectedRange[1]===ayGi[first.ay]?.[1];
     if(full&&AD_?.ay?.[first.ay]){
-      const steps=[normalVerseStep(AD_,first.ay,first.ay,
-        {x:1,dyn:true,ayEnd:first.ay,l:first.ay+'. âyet'})];
+      const steps=singleSelectionPlan(normalVerseStep(AD_,first.ay,first.ay,
+        {x:1,dyn:true,repeatKind:'ayah',ayEnd:first.ay,l:first.ay+'. âyet'}));
       if(normalVersePlanReady(steps))runPlan(steps);
       return;
     }
@@ -10942,20 +10964,31 @@ $('nextAy').onclick=()=>{
 let repLongFired=false;
 function syncRep(){
   const key=readerRepeatKey();
-  const remaining=typeof remainingStudyRounds==='function'?remainingStudyRounds():SET[key];
+  const remaining=remainingReaderRepeats();
   syncRepeatScope('readerRepeatScope','repTog',key,remaining);
   const rn=$('repN');if(rn)rn.textContent=remaining;
   const rc=document.querySelector('.repctl');if(rc)rc.classList.toggle('on',SET.repOn);
 }
 function syncRepeatScope(labelId,buttonId,key,count=SET[key]){
-  const token=key==='rangeRep'?'repeat_scope_work':key==='combineRep'?'pb_combine':'repeat_scope_unit';
+  const token=key==='rangeRep'?'repeat_scope_work':key==='combineRep'?'pb_combine':labelId==='readerRepeatScope'?'repeat_scope_verse':'repeat_scope_unit';
   const translated=window.elifaT?.(token);
-  const text=translated&&translated!==token?translated:(key==='rangeRep'?'Tüm çalışma':key==='combineRep'?'1+2':'Âyet / parça');
+  const text=translated&&translated!==token?translated:(key==='rangeRep'?'Tüm çalışma':key==='combineRep'?'1+2':labelId==='readerRepeatScope'?'Âyet âyet':'Âyet / parça');
   const label=$(labelId);if(label){label.dataset.i18n=token;label.textContent=text;}
   const button=$(buttonId);if(button){button.setAttribute('aria-label',text+' · '+count+'×');button.setAttribute('aria-pressed',String(!!SET.repOn));}
 }
 function readerRepeatKey(){
-  return 'rangeRep';
+  const mode=window.elifaPracticeMode?.()||SET.studyMode||'range';
+  return mode==='range'?'rangeRep':'rep';
+}
+function remainingReaderRepeats(){
+  if(readerRepeatKey()==='rangeRep')return remainingStudyRounds();
+  if(typeof completedStudyRounds!=='undefined'&&completedStudyRounds)return 0;
+  const configured=Math.min(99,Math.max(1,Math.round(Number(SET.rep)||1)));
+  const st=typeof plan!=='undefined'?plan[pi]:null;
+  // A pending mode change still finishes the old step. Never subtract its
+  // whole-range or combined repetitions from the individual-verse counter.
+  if(st?.repeatKind==='ayah'&&st.dyn&&!st.combo)return Math.max(0,stepReps(st)-(typeof pr==='number'?pr:0));
+  return st&&!SET.repOn?1:configured;
 }
 function remainingStudyRounds(){
   const configured=Math.min(99,Math.max(1,Math.round(Number(SET.rangeRep??SET.rep)||1)));
@@ -11005,8 +11038,9 @@ $('cumuTog').onclick=()=>{
   if(cumuLongFired){cumuLongFired=false;return;}
   const partsActive=!!activeStudySplitSelection();
   SET.cumu=partsActive?!SET.cumu:!(window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu);
-  if(!partsActive)window.elifaSetPracticeMode?.(SET.cumu?'cumulative':'range');
-  saveSet();syncPracticeControls();queuePracticeModeChange(SET.cumu);
+  const mode=SET.cumu?'cumulative':partsActive?'verse':'range';
+  window.elifaSetPracticeMode?.(mode);
+  saveSet();syncPracticeControls();queuePracticeModeChange(mode);
   toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');
 };
 let cumuLongFired=false;
@@ -11068,7 +11102,7 @@ $('optAuto').onclick=e=>{if(e.target.closest('#autoSw'))return;$('autoSw').click
 ['repInp2','waitInp2'].forEach(id=>$(id).onchange=commitInputs2);
 function commitInputs2(change){
   SET.rep=Math.min(99,Math.max(1,Math.round(+$('repInp2').value||5)));SET.wait=Math.min(60,Math.max(0,+$('waitInp2').value||0));
-  if(change==='rep'||change?.target?.id==='repInp2')window.elifaRepeatSettingChanged?.('rep',activeStudySplitSelection()||$('split').classList.contains('on')?'parts':'ayah');
+  if(change==='rep'||change?.target?.id==='repInp2')window.elifaRepeatSettingChanged?.('rep',activeStudySplitSelection()?'studyParts':$('split').classList.contains('on')?'parts':'ayah');
   saveSet();syncPracticeControls();
 }
 
@@ -12516,7 +12550,7 @@ updateStat();
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v363-community-startup';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v364-repeat-scope';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){

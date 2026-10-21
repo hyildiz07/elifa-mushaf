@@ -59,7 +59,7 @@ test('Hânî full 6:139 selection uses verified source; uncertain tails stay blo
       ayGi:{[ayah]:[0,2]},AD_:{recordingUrl:'chapter'},normalChapterAudio:null,
       normalVerseStep:(audio,first,last,extra)=>({audio,first,last,...extra}),
       normalVersePlanReady:()=>true,toast:m=>messages.push(m),runPlan:p=>plans.push(p)});
-    vm.runInContext(extract('playSelection',true),c);
+    vm.runInContext(extract('practicePlan')+extract('playSelection',true),c);
     await c.playSelection();c.selectedRange=[0,1];await c.playSelection();
     assert.equal(plans.length,surah===6?1:0);
     assert.equal(messages.length,surah===6?1:2);
