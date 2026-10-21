@@ -11,7 +11,7 @@
    · version.json / duyuru.json / manual-*.json → her zaman ağ öncelikli.
    · Yönlendirilmiş (redirected) navigasyon yanıtı önbelleğe yazılmaz.
    ═══════════════════════════════════════════════════════════════ */
-const VERSION = 'elifa-mushaf-v364-repeat-scope';
+const VERSION = 'elifa-mushaf-v365-repeat-menu-cache';
 const CACHE   = VERSION;
 
 /* Fontlar index.html içinde base64 gömülü → ayrıca cache'lenmez. */
@@ -25,8 +25,8 @@ const CORE = [
   './assets/locale.js?v=2', './assets/reader-help.js?v=2', './assets/reader-help-drafts.js?v=1', './assets/reader-help.css?v=1',
   './assets/ui-extra-drafts.js?v=2', './assets/ui-extra.js?v=1',
   './assets/dua-practice.js?v=351', './assets/dua-practice.css?v=351',
-  './assets/gear-sheet.css?v=358', './assets/workflow-i18n.js?v=358', './assets/study-workflow.js?v=360', './assets/study-workflow.css?v=355',
-  './assets/study-split.js?v=360', './assets/study-sessions.js?v=360',
+  './assets/gear-sheet.css?v=358', './assets/workflow-i18n.js?v=365', './assets/study-workflow.js?v=365', './assets/study-workflow.css?v=365',
+  './assets/study-split.js?v=365', './assets/study-sessions.js?v=360',
   './assets/study-surah-picker.js?v=330', './assets/home-study-polish.css?v=360',
   './assets/split-audio.js?v=294', './assets/split-cache.js?v=291',
   './assets/mp3quran-reciter.js?v=2',

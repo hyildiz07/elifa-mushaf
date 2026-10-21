@@ -3,15 +3,17 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 
-function workerHarness(worker='sw.js',{fail=null,htmlFallback=null}={}){
+function workerHarness(worker='sw.js',{fail=null,htmlFallback=null,versionOverride=null}={}){
   const events={},deleted=[],stores=new Map([['elifa-audio-v1',new Map()],['elifa-mushaf-v224-loopfix',new Map()],['another-app-cache',new Map()]]);
   let claimed=false;
-  const response=(url)=>({ok:true,status:200,type:'basic',redirected:false,headers:{get:()=>url===htmlFallback?'text/html':url.endsWith('.html')?'text/html':'application/javascript'}});
+  const requestUrl=r=>r.url||new URL(r,'https://app.test/sw.js').href;
+  const response=(url)=>({url,served:'network',ok:true,status:200,type:'basic',redirected:false,headers:{get:()=>url===htmlFallback?'text/html':url.endsWith('.html')?'text/html':'application/javascript'},clone:()=>response(url)});
   const c=vm.createContext({Request,URL,fetch:async req=>{if(fail&&req.url.includes(fail))throw Error('network');return response(req.url);},
     self:{location:{href:'https://app.test/sw.js'},addEventListener:(name,fn)=>events[name]=fn,clients:{claim:async()=>{claimed=true;}}},
-    caches:{open:async name=>{if(!stores.has(name))stores.set(name,new Map());const m=stores.get(name),url=r=>r.url||new URL(r,'https://app.test/sw.js').href;return {put:async(r,v)=>m.set(url(r),v),match:async r=>m.get(url(r))};},keys:async()=>[...stores.keys()],delete:async key=>{deleted.push(key);return stores.delete(key);}}});
+    caches:{open:async name=>{if(!stores.has(name))stores.set(name,new Map());const m=stores.get(name);return {put:async(r,v)=>m.set(requestUrl(r),v),match:async r=>m.get(requestUrl(r))};},match:async r=>{for(const store of stores.values()){const found=store.get(requestUrl(r));if(found)return found;}},keys:async()=>[...stores.keys()],delete:async key=>{deleted.push(key);return stores.delete(key);}}});
   c.importScripts=()=>vm.runInContext(fs.readFileSync('sw.js','utf8'),c);
-  vm.runInContext(fs.readFileSync(worker,'utf8'),c);
+  const workerCode=fs.readFileSync(worker,'utf8');
+  vm.runInContext(versionOverride?workerCode.replace(/const VERSION = '[^']+'/,`const VERSION = '${versionOverride}'`):workerCode,c);
   c.self.location.origin='https://app.test';
   return {c,deleted,stores,claimed:()=>claimed,run:async type=>{let p;events[type]({waitUntil:value=>p=value});return p;},fetch:async request=>{let p;events.fetch({request,respondWith:value=>p=value});return p;}};
 }
@@ -49,6 +51,41 @@ test('app, worker and release manifest versions agree',()=>{
   const v=JSON.parse(fs.readFileSync('version.json')).version;
   assert.ok(fs.readFileSync('sw.js','utf8').includes(`const VERSION = '${v}'`));
   assert.ok(fs.readFileSync('index.html','utf8').includes(`var SW_CACHE_EXPECTED = '${v}'`));
+});
+const repeatAssets=[['study-workflow.css','355'],['study-workflow.js','360'],['workflow-i18n.js','358'],['study-split.js','360']];
+function readerAssetUrls(){
+  const html=fs.readFileSync('index.html','utf8');
+  return repeatAssets.map(([name,oldVersion])=>{
+    const path='/assets/'+name;
+    const urls=[...html.matchAll(/(?:src|href)="([^"]+)"/g)].map(match=>new URL(match[1],'https://app.test/')).filter(url=>url.pathname===path);
+    assert.equal(urls.length,1,name+' has one explicit reader asset URL');
+    assert.notEqual(urls[0].searchParams.get('v'),oldVersion,name+' must not reuse the previous release cache key');
+    assert.ok(Number(urls[0].searchParams.get('v'))>=365,name+' includes the repeat-menu cache repair');
+    return urls[0].href;
+  });
+}
+test('reader repeat assets use matching new URLs in HTML and the required offline shell',()=>{
+  const urls=readerAssetUrls(),h=workerHarness();
+  const core=vm.runInContext('CORE.map(path=>new URL(path,self.location.href).href)',h.c);
+  const required=vm.runInContext('REQUIRED.map(path=>new URL(path,self.location.href).href)',h.c);
+  assert.equal(new Set(urls.map(url=>new URL(url).search)).size,1,'the related reader assets advance together');
+  for(const url of urls){assert.ok(core.includes(url),url+' is preloaded');assert.ok(required.includes(url),url+' is required before activation');}
+});
+test('new reader HTML bypasses v363 cached workflow CSS and scripts before the new worker activates',async()=>{
+  const oldVersion='elifa-mushaf-v363-old-shell',h=workerHarness('sw.js',{versionOverride:oldVersion});
+  const oldUrls=repeatAssets.map(([name,version])=>`https://app.test/assets/${name}?v=${version}`);
+  h.stores.set(oldVersion,new Map(oldUrls.map(url=>[url,{url,served:'old shell'}])));
+  const network=h.c.fetch,requested=[];
+  h.c.fetch=async req=>{requested.push(req.url);if(oldUrls.includes(req.url))throw Error('old asset unavailable');return network(req);};
+  const navigation=await h.fetch({method:'GET',mode:'navigate',url:'https://app.test/'});
+  assert.equal(navigation.served,'network','new HTML can arrive while the previous worker still controls the page');
+  for(const url of oldUrls)assert.equal((await h.fetch({method:'GET',mode:'cors',url})).served,'old shell','unchanged URLs reproduce the stale-asset failure');
+  for(const url of readerAssetUrls()){
+    const asset=await h.fetch({method:'GET',mode:'cors',url});
+    assert.equal(asset.served,'network');assert.equal(asset.url,url);assert.ok(requested.includes(url));
+  }
+  assert.equal(h.claimed(),false,'the repair works before any new worker is installed or activated');
+  assert.deepEqual(h.deleted,[],'reading the update preserves existing offline and audio data');
 });
 test('downloaded current chapter becomes the next playback source without interrupting playback or split view',async()=>{
   const html=fs.readFileSync('index.html','utf8');

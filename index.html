@@ -5451,8 +5451,31 @@ window.elifaLog=function(event,params){
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
 <link rel="stylesheet" href="/assets/home-study-polish.css?v=360">
-<link rel="stylesheet" href="/assets/study-workflow.css?v=355">
+<link rel="stylesheet" href="/assets/study-workflow.css?v=365">
 <link rel="stylesheet" href="/assets/dua-practice.css?v=351">
+<!-- Keep the reader control styled even while an older worker serves cached assets. -->
+<style id="readerRepeatCriticalStyles">
+.pbcell.rep{position:relative}
+#pbar .readerRepeatToggle{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;justify-content:center;gap:3px;height:auto;min-height:0;max-width:100%;padding:0 2px;margin:0;border:0;border-radius:4px;background:transparent;color:inherit;font-family:inherit;cursor:pointer;line-height:1.3}
+#pbar .readerRepeatToggle svg{width:10px;height:10px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s}
+#pbar .readerRepeatToggle[aria-expanded=true] svg{transform:rotate(180deg)}
+#pbar .readerRepeatMenu{position:absolute;bottom:calc(100% + 8px);inset-inline-start:0;z-index:30;width:max-content;min-width:155px;max-width:min(260px,88vw);padding:5px;border:1px solid var(--line);border-radius:13px;background:var(--surface);color:var(--ink);box-shadow:0 8px 24px #0003,inset 0 1px 0 #ffffff60}
+#pbar .readerRepeatMenu[hidden]{display:none!important}
+#pbar .readerRepeatMenu button{display:flex;align-items:center;gap:9px;width:100%;min-height:44px;padding:9px 12px;border:0;border-radius:9px;background:transparent;color:inherit;font:600 13px/1.25 var(--font,system-ui);text-align:start;cursor:pointer;white-space:nowrap}
+#pbar .readerRepeatMenu button:before{content:'✓';color:transparent;width:14px;flex:none}
+#pbar .readerRepeatMenu button[aria-checked=true]{background:color-mix(in srgb,var(--gold) 17%,transparent)}
+#pbar .readerRepeatMenu button[aria-checked=true]:before{color:var(--gold)}
+#pbar .readerRepeatMenu button:hover{background:color-mix(in srgb,var(--gold) 12%,transparent)}
+#pbar .readerRepeatToggle:focus-visible,#pbar .readerRepeatMenu button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+body[data-layout=saray] #pbar .readerRepeatToggle{color:var(--saray-muted,#746e56)}
+body[data-layout=saray] #pbar .readerRepeatMenu{background:#fffaf0;color:#18334f;border-color:#c9b77d}
+body[data-dark='1'] #pbar .readerRepeatMenu{background:#1c2940;color:#f7f5ef;border-color:#667489}
+body[data-theme=saraygece] #pbar .readerRepeatMenu{background:#1b2a41;color:#f8e8b6;border-color:#957a49}
+body[data-theme=nahlyildizlari] #pbar .readerRepeatMenu{background:#17233e;color:#f6f8ff;border-color:#5169a1}
+/* Keep the scope chooser usable when other landscape captions are hidden. */
+body[data-layout=saray] #pbar .readerRepeatToggle.pbl{display:inline-flex!important}
+@media(max-width:360px){#pbar .repctl{max-width:100%}#pbar .repctl .rpm{flex:0 0 20px;min-width:0;width:20px;padding:0}#pbar .repctl .rptog{min-width:0;padding:0 2px;gap:2px;font-size:12px}#pbar .repctl .rptog svg{width:12px;height:12px}#pbar .readerRepeatToggle{font-size:9px;gap:2px}#pbar .readerRepeatToggle svg{width:9px;height:9px}}
+</style>
 </head>
 <body>
 <div id="tabletBootError" style="display:none;position:fixed;z-index:99999;left:14px;right:14px;top:14px;background:#fff8e8;color:#0e2c55;border:2px solid #c99a35;border-radius:14px;padding:14px 16px;box-shadow:0 12px 34px rgba(0,0,0,.22);font-family:Arial,sans-serif">
@@ -5690,7 +5713,7 @@ window.elifaLog=function(event,params){
           <button class="rptog" id="repTog" title="Tekrar aç/kapa (uzun bas: ayarlar)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 014-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg><b id="repN">5</b>×</button>
           <button class="rpm" id="repPlus" title="Artır">+</button>
         </div>
-        <button class="pbl readerRepeatToggle" id="readerRepeatToggle" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="readerRepeatMenu"><span id="readerRepeatScope" data-i18n="repeat_scope_work">Tüm çalışma</span><svg viewBox="0 0 16 16" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg></button>
+        <button class="pbl readerRepeatToggle" id="readerRepeatToggle" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="readerRepeatMenu"><span id="readerRepeatScope" data-i18n="repeat_scope_work">Tüm çalışma</span><svg viewBox="0 0 16 16" width="10" height="10" fill="none" stroke="currentColor" aria-hidden="true"><path d="m4 10 4-4 4 4"/></svg></button>
         <div class="readerRepeatMenu" id="readerRepeatMenu" role="menu" hidden>
           <button type="button" role="menuitemradio" aria-checked="true" id="readerRepeatRange" data-i18n="repeat_scope_work">Tüm çalışma</button>
           <button type="button" role="menuitemradio" aria-checked="false" id="readerRepeatVerse" data-i18n="repeat_scope_verse">Âyet âyet</button>
@@ -6330,7 +6353,7 @@ window.elifaLog=function(event,params){
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
-    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v364</span></div>
+    <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v365</span></div>
   </div>
 
   <div class="tesekkur">
@@ -12550,7 +12573,7 @@ updateStat();
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v364-repeat-scope';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v365-repeat-menu-cache';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16066,10 +16089,10 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/reader-help.js?v=2"></script>
 <script src="/assets/ui-extra-drafts.js?v=2"></script>
 <script src="/assets/ui-extra.js?v=1"></script>
-<script src="/assets/workflow-i18n.js?v=358"></script>
+<script src="/assets/workflow-i18n.js?v=365"></script>
 <script src="/assets/dua-practice.js?v=351"></script>
-<script src="/assets/study-workflow.js?v=360"></script>
-<script src="/assets/study-split.js?v=360"></script>
+<script src="/assets/study-workflow.js?v=365"></script>
+<script src="/assets/study-split.js?v=365"></script>
 <script src="/assets/study-sessions.js?v=360"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>
 </body>
