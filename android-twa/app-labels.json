@@ -1,5 +1,5 @@
 {
-  "updatedOn": "2026-10-20",
+  "updatedOn": "2026-10-23",
   "sources": [
     "../store-assets/google-play/localization-west.json",
     "../store-assets/google-play/localization-east.json"
@@ -22,8 +22,8 @@
       "directory": "values-tr",
       "language": "tr",
       "locale": "tr-TR",
-      "appName": "Kolay Hafızlık: Kuran Ezberle",
-      "launcherName": "Kolay Hafızlık"
+      "appName": "Kur’an-ı Kerim Hafız",
+      "launcherName": "Kur’an-ı Kerim Hafız"
     },
     {
       "directory": "values-de",

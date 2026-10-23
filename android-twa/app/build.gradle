@@ -12,8 +12,8 @@ android {
         applicationId = 'com.elifaplatform.mushaf'
         minSdk = 24
         targetSdk = 36
-        versionCode = 5
-        versionName = '1.1.1'
+        versionCode = 6
+        versionName = '1.1.2'
     }
     if (signingPresent == signingNames.size()) {
         signingConfigs {
@@ -51,5 +51,5 @@ if (signingPresent != 0 && signingPresent != signingNames.size()) {
 }
 
 dependencies {
-    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.7.3'
+    implementation 'com.google.androidbrowserhelper:androidbrowserhelper:2.7.4'
 }

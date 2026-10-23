@@ -1,5 +1,13 @@
 # Android TWA aday doğrulaması — 20 Ekim 2026
 
+## 23 Ekim 2026 — v1.1.2, Android 15+ ve telefon adı
+
+- Kaynak: versionCode **6**, versionName **1.1.2**, minSdk **24**, targetSdk **36**; Android Browser Helper **2.7.4**. Türkçe `appName` ve `launcherName` **Kur’an-ı Kerim Hafız**; Play mağaza başlığı aynı.
+- Resmî JDK 17 ve Android SDK 36 ile release bundle/lint başarılı. Kaynak/simge/yerelleştirme kontrolü geçti; lint **0 hata, 9 uyarı** (önceki sürümle aynı sınıflar).
+- İmzalı AAB'nin JAR imzası doğrulandı. Yükleme sertifikası SHA-256 **AC:5D:03:E1:ED:F1:E7:28:F8:C0:4E:1F:F5:CF:0C:75:5D:2B:6F:D4:EC:AA:2A:F7:EF:A9:D7:D7:DE:D3:9D:9C** Play'deki etkin yükleme sertifikasıyla eşleşiyor. `bundletool validate` başarılı; derlenmiş manifest versionCode 6 / 1.1.2 / API 24–36.
+- Play **dahili test** bu AAB'yi kabul etti ve sürümü test kullanıcılarına açtı. Yeni sürüm karşılaştırması telefon ve tablette **0 destek kaybı** gösterdi. Play lansman öncesi raporu Android 16 sanal telefonda bir test yaptı; kararlılık, performans ve erişilebilirlik için **0 sorun** bildirdi. Bu, Android 15 fiziksel telefon veya tablet kabulünün yerini tutmaz.
+- Google Play'in uçtan uca ekran ve eski Window API uyarıları hâlâ üretimdeki **v1.1.1** için gösteriliyor. v1.1.2'nin üretim analizi tamamlanmadan kalktıkları iddia edilmez.
+
 ## 23 Ekim 2026 — kullanıcı onaylı yeni simge
 
 Kullanıcının 23 Ekim'de sağladığı Kur’an görseli Google Play için 512 × 512 PNG'ye dönüştürüldü; aynı görselin 10 Android launcher yoğunluğu/maskesi üretildi. `node scripts/verify-source.mjs`, `:app:bundleRelease` ve `:app:lintRelease` başarılıdır. İmzalı AAB içindeki 10 simgenin açılmış pikselleri kaynak PNG'lerle birebir eşleşir.

@@ -11,7 +11,7 @@ const listingGroups = await Promise.all(sourceFiles.map(async file => {
   return JSON.parse(text);
 }));
 const listings = listingGroups.flat();
-const turkish = {locale:'tr-TR',webLanguage:'tr',appName:'Kolay Hafızlık: Kuran Ezberle',launcherName:'Kolay Hafızlık'};
+const turkish = {locale:'tr-TR',webLanguage:'tr',appName:'Kur’an-ı Kerim Hafız',launcherName:'Kur’an-ı Kerim Hafız'};
 const expectedLanguages = ['tr','de','en','ru','ar','fr','es','el','zh','ja','ko','hi','ur','it','id','nl','pt','fa','bn','ms','sw'];
 const byLanguage = new Map();
 for (const listing of [turkish,...listings]) {
@@ -52,7 +52,7 @@ await writeLabels('values-zh-rTW',traditional);
 await writeLabels('values-b+zh+Hant',traditional);
 
 const manifest = {
-  updatedOn:'2026-10-20',
+  updatedOn:'2026-10-23',
   sources:sourceFiles.map(file=>`../store-assets/google-play/${file}`),
   languageCount:expectedLanguages.length,
   defaultLanguage:'en',
