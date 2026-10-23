@@ -4,6 +4,8 @@ Mevcut `com.elifaplatform.mushaf` uygulamasının küçük, tarayıcı tabanlı 
 
 ## Durum ve aday
 
+**23 Ekim 2026, v1.1.3:** Türkçe Android uygulama ve ana ekran adı kullanıcı isteğiyle yeniden `Kolay Hafızlık` oldu. Yeni simge ve diğer dillerin adları korundu. Google Play mağaza başlığı değiştirilmedi. versionCode 7 imzalı AAB üretim incelemesine gönderildi; inceleme tamamlanmadan cihazlara ulaştığı varsayılmaz.
+
 **23 Ekim 2026, v1.1.2 adayı:** Üretimdeki v1.1.1'in üzerine versionCode 6 hazırlanmıştır. Android Browser Helper 2.7.4, Android 15+ kenar yerleşimi için güncel `WindowCompat.enableEdgeToEdge` yolunu kullanır. Türkçe Android uygulama ve ana ekran adı `Kur’an-ı Kerim Hafız` olarak değişti; Google Play mağaza başlığı değiştirilmedi. Aynı ad, tarayıcıdan ana ekrana yeni eklenen sürüm için kök `manifest.json` dosyasında da bulunur. İmzalı AAB Play dahili testinde kabul edildi; üretim durumu ve cihaz kabulü `VALIDATION.md` içinde izlenir. Aşağıdaki v1.1.1 açıklaması tarihsel kaynak hazırlığıdır.
 
 **23 Ekim güncellemesi:** Kullanıcının seçtiği yeni simge mağaza için hazırlandı ve Play incelemesine gönderildi. Aynı simgeli versionCode 5 / 1.1.1 AAB mevcut etkin upload anahtarıyla imzalandı; sertifika Play Console ile karşılaştırıldı. İlk Play yüklemesi, otomatik korumanın minSdk 24 şartı nedeniyle reddedildi. Bu yüzden güncel adayın minSdk değeri 24'e yükseltildi; Android 6.0/6.0.1 cihazları yeni güncellemeyi alamayacak. Dahili test ve gerçek cihaz kabulü tamamlanmadan telefon simgesi herkese ulaşmış sayılmaz. Aşağıdaki ilk aday açıklamaları 20 Ekim'deki tarihsel hazırlığı anlatır.

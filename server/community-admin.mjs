@@ -11,10 +11,12 @@ const idValid=id=>typeof id==='string'&&/^\d{13}-[a-f0-9]{16}$/.test(id);
 const roleKey=uid=>'_ca_role_'+hash(uid),restrictionKey=uid=>'_ca_restrict_'+hash(uid),userPrefix=uid=>'_ca_user_'+hash(uid)+'_';
 const json=(data,status=200)=>Response.json(data,{status,headers:{'cache-control':'private, no-store','vary':'Authorization, Origin','x-content-type-options':'nosniff'}});
 export const adminFailure=(error,status,errorCode)=>json({error,errorCode},status);
-function permissions(role){return {roles:role==='owner',lookup:role==='owner'||role==='admin',comments:!!role,communityBan:role==='owner'||role==='admin',commentBan:!!role};}
+function permissions(role){return {roles:role==='owner',announcements:role==='owner',lookup:role==='owner'||role==='admin',comments:!!role,communityBan:role==='owner'||role==='admin',commentBan:!!role};}
 export async function getCommunityAccess(store,session={}){
  if(!session.uid)return {role:null,restriction:{communityBanned:false,commentsRestricted:false}};
- const owner=await store.get('_ca_owner',{type:'json'}),assigned=await store.get(roleKey(session.uid),{type:'json'}),restriction=await store.get(restrictionKey(session.uid),{type:'json'});
+ const [owner,assigned,restriction]=await Promise.all([
+  store.get('_ca_owner',{type:'json'}),store.get(roleKey(session.uid),{type:'json'}),store.get(restrictionKey(session.uid),{type:'json'})
+ ]);
  const role=owner?.uid===session.uid?'owner':['admin','moderator'].includes(assigned?.role)&&assigned.uid===session.uid?assigned.role:null;
  return {role,restriction:{communityBanned:restriction?.communityBanned===true,commentsRestricted:restriction?.commentsRestricted===true}};
 }

@@ -1,5 +1,12 @@
 # Android TWA aday doğrulaması — 20 Ekim 2026
 
+## 23 Ekim 2026 — v1.1.3, Türkçe telefon adı
+
+- versionCode **7**, versionName **1.1.3**: Türkçe `appName` ve `launcherName` yeniden **Kolay Hafızlık**. Google Play mağaza başlığı ve yeni simge değişmedi.
+- Kaynak, 21 dil / 24 Android kaynak yapılandırması ve 10 simge için doğrulandı. Release AAB ve lint başarıyla derlendi; 692 test geçti, 6 entegrasyon testi atlandı.
+- İmzalı AAB `bundletool validate` ile doğrulandı. Yükleme sertifikası SHA-256 **AC:5D:03:E1:ED:F1:E7:28:F8:C0:4E:1F:F5:CF:0C:75:5D:2B:6F:D4:EC:AA:2A:F7:EF:A9:D7:D7:DE:D3:9D:9C** önceki etkin yükleme sertifikasıyla aynı. Paket SHA-256 **11230342DCB1C1652FE96C460525282BF781204FFC471CD8DF9588DDED4022B9**.
+- Google Play üretim kanalına yüklendi ve incelemeye gönderildi. Play karşılaştırmasında telefon ve tablette **0 destek kaybı** görüldü. Google incelemesi ve kullanıcı cihazlarına dağıtım henüz tamamlanmış sayılmaz.
+
 ## 23 Ekim 2026 — v1.1.2, Android 15+ ve telefon adı
 
 - Kaynak: versionCode **6**, versionName **1.1.2**, minSdk **24**, targetSdk **36**; Android Browser Helper **2.7.4**. Türkçe `appName` ve `launcherName` **Kur’an-ı Kerim Hafız**; Play mağaza başlığı aynı.
