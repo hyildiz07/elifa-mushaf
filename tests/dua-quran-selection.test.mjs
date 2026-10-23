@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8');
+const html=fs.readFileSync(new URL('../index.html',import.meta.url),'utf8').replace(/\r\n/g,'\n');
 function fn(name,indent='  '){
   const start=html.indexOf('function '+name+'(');assert.ok(start>=0,name);
   const lineEnd=html.indexOf('\n',start),line=html.slice(start,lineEnd);

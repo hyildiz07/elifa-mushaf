@@ -2,6 +2,7 @@ import {firebaseServices} from '../../server/firebase.mjs';
 import {withOrgTransaction} from '../../server/database.mjs';
 import {deploymentContext} from '../../server/deploy-context.mjs';
 import {handleCommunityAdmin,adminFailure} from '../../server/community-admin.mjs';
+import {handleAdminAnnouncements} from '../../server/admin-announcements.mjs';
 const NATIVE='capacitor://localhost';
 export function createCommunityAdminHandler({services=firebaseServices,transaction,environment=()=>process.env}={}){
  return async(req,runtime)=>{
@@ -16,8 +17,15 @@ export function createCommunityAdminHandler({services=firebaseServices,transacti
   try{auth=services().auth;const verified=await auth.verifyIdToken(token,true);user=await auth.getUser(verified.uid);if(user.disabled)return adminFailure('Oturum geçersiz.',401,'AUTH_REQUIRED');if(p.expectedUser!==user.uid)return adminFailure('Hesap değişti.',409,'ACCOUNT_CHANGED');}
   catch{return adminFailure('Oturum doğrulanamadı.',401,'AUTH_REQUIRED');}
   try{
-   const session={uid:user.uid,email:user.email,emailVerified:user.emailVerified===true},work=store=>handleCommunityAdmin(p,store,session,{auth});
-   return await (transaction?transaction(work):withOrgTransaction(work,{environment:environment(),deployment,services}));
+   const session={uid:user.uid,email:user.email,emailVerified:user.emailVerified===true};
+   const run=work=>transaction?transaction(work):withOrgTransaction(work,{environment:environment(),deployment,services});
+   if(['announcements','saveAnnouncement','setAnnouncementActive','deleteAnnouncement'].includes(p.action)){
+    const status=await run(store=>handleCommunityAdmin({action:'status'},store,session,{auth}));
+    if(!status.ok)return status;
+    const access=await status.json();
+    return await handleAdminAnnouncements(p.action,p,services().db,{role:access.role});
+   }
+   return await run(store=>handleCommunityAdmin(p,store,session,{auth}));
   }catch{return adminFailure('Yönetim hizmetine ulaşılamadı. İşlemi yeniden kontrol et.',503,'SERVICE_UNAVAILABLE');}
  };
 }

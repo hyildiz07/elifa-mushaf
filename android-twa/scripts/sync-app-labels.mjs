@@ -11,7 +11,7 @@ const listingGroups = await Promise.all(sourceFiles.map(async file => {
   return JSON.parse(text);
 }));
 const listings = listingGroups.flat();
-const turkish = {locale:'tr-TR',webLanguage:'tr',appName:'Kur’an-ı Kerim Hafız',launcherName:'Kur’an-ı Kerim Hafız'};
+const turkish = {locale:'tr-TR',webLanguage:'tr',appName:'Kolay Hafızlık',launcherName:'Kolay Hafızlık'};
 const expectedLanguages = ['tr','de','en','ru','ar','fr','es','el','zh','ja','ko','hi','ur','it','id','nl','pt','fa','bn','ms','sw'];
 const byLanguage = new Map();
 for (const listing of [turkish,...listings]) {

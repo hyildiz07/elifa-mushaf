@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createCommunityAdmin} from '../src/community-admin-ui.mjs';
 const code='aaaaaa',id='1792400000000-aaaaaaaaaaaaaaaa';
-const permissions=role=>({roles:role==='owner',lookup:['owner','admin'].includes(role),comments:!!role,communityBan:['owner','admin'].includes(role),commentBan:!!role});
+const permissions=role=>({roles:role==='owner',announcements:role==='owner',lookup:['owner','admin'].includes(role),comments:!!role,communityBan:['owner','admin'].includes(role),commentBan:!!role});
 class Element{
  constructor(){this.innerHTML='';this.hidden=false;this.disabled=false;this.open=false;this.handlers={};this.classList={add(){}};}
  addEventListener(type,fn){this.handlers[type]=fn;}
@@ -23,6 +23,7 @@ function fixture(handler,{role='owner',uid='alice',verified=true,late=false,prev
   if(p.action==='comments')return Response.json({comments:[{code,id,text:'Yerel yorum',name:'Takma ad',ownerUid:'target',createdAt:1792400000000}],nextCursor:null});
   if(p.action==='reports')return Response.json({reports:[],nextCursor:null});
   if(p.action==='roles')return Response.json({roles:[{uid:'alice',email:'owner@example.test',role:'owner'},{uid:'target',email:'target@example.test',role:'moderator'}],nextCursor:null});
+  if(p.action==='announcements')return Response.json({announcements:[]});
   return Response.json({ok:true});
  }});
  const input=(name,value)=>host.handlers.input({target:{dataset:{adminField:name},value}});
@@ -35,6 +36,22 @@ test('a late account bridge makes one status request per identity; entry visibil
  f.emit();await settle();assert.equal(f.calls.length,1);
  await f.controller.open();assert.equal(f.calls.filter(p=>p.action==='status').length,1);assert.equal(f.host.open,true);assert.match(f.host.innerHTML,/Yönetim paneli/);assert.match(f.host.innerHTML,/data-tab="roles"/);
  f.account({uid:'bob',emailVerified:true});await settle();assert.equal(f.calls.filter(p=>p.action==='status').length,2);assert.equal(f.host.open,false);assert.equal(f.host.innerHTML,'');
+});
+
+test('only owner sees announcements and publishing uses the verified management endpoint',async()=>{
+ const owner=fixture(p=>p.action==='announcements'?{announcements:[]}:
+  p.action==='saveAnnouncement'?{ok:true,id:'new'}:undefined);
+ await owner.initialize();await owner.controller.open();assert.match(owner.host.innerHTML,/data-tab="announcements"/);
+ await owner.controller.dispatch('tab',{tab:'announcements'});
+ owner.input('announcementTitle','Yeni sürüm');owner.input('announcementMessage','Hoş geldiniz');
+ await owner.controller.submit('announcement');
+ const save=owner.calls.find(p=>p.action==='saveAnnouncement');
+ assert.equal(save.baslik,'Yeni sürüm');assert.equal(save.mesaj,'Hoş geldiniz');assert.equal(save.expectedUser,'alice');
+ assert.match(owner.host.innerHTML,/Duyuru yayınlandı/);
+ const moderator=fixture(null,{role:'moderator'});await moderator.initialize();await moderator.controller.open();
+ assert.doesNotMatch(moderator.host.innerHTML,/data-tab="announcements"/);
+ const before=moderator.calls.length;await moderator.controller.dispatch('tab',{tab:'announcements'});
+ assert.equal(moderator.calls.length,before);
 });
 test('opening while the initial role request is pending shares one status request and then loads the queue once',async()=>{
  let resolve;

@@ -4,8 +4,8 @@ const socialNote='Topluluk engeli yalnız hatim, katılım ve yorum alanları i�
 export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=globalThis.fetch,preview=()=>false,eventTarget=globalThis.window,location=globalThis.location,now=Date.now}){
  let initialized=false,disposed=false,boundBridge=null,unsubscribe=null,identity='',epoch=0,statusTicket=0;
  let statusJob=null,statusAt=null,statusIdentity=null;
- let access=null,opened=false,tab='comments',queue='comments',rows=[],cursor=null,people=null,roleRows=[],roleCursor=null,busy=false,loading=false,error='',notice='',confirmation=null,edit=null;
- const fields={email:'',grantEmail:'',grantRole:'moderator'};
+ let access=null,opened=false,tab='comments',queue='comments',rows=[],cursor=null,people=null,roleRows=[],roleCursor=null,announcements=[],busy=false,loading=false,error='',notice='',confirmation=null,edit=null;
+ const fields={email:'',grantEmail:'',grantRole:'moderator',announcementId:'',announcementTitle:'',announcementMessage:'',announcementMode:'once',announcementStart:'',announcementEnd:''};
  const user=()=>session?.()?.getUser?.()||null;
  const uid=()=>user()?.uid||null;
  const blockedPreview=()=>{try{return !!preview()||/^deploy-preview-\d+--/.test(location?.hostname||'');}catch{return true;}};
@@ -13,7 +13,8 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
  const current=(stamp,person)=>!disposed&&epoch===stamp&&uid()===person;
  const snapshot=()=>({stamp:epoch,person:uid()});
  function hideEntry(){entry.hidden=true;entry.disabled=false;entry.setAttribute?.('aria-busy','false');}
- function resetContent(){rows=[];cursor=null;people=null;roleRows=[];roleCursor=null;confirmation=null;edit=null;error='';notice='';loading=false;busy=false;fields.email='';fields.grantEmail='';fields.grantRole='moderator';}
+ function clearAnnouncement(){fields.announcementId='';fields.announcementTitle='';fields.announcementMessage='';fields.announcementMode='once';fields.announcementStart='';fields.announcementEnd='';}
+ function resetContent(){rows=[];cursor=null;people=null;roleRows=[];roleCursor=null;announcements=[];confirmation=null;edit=null;error='';notice='';loading=false;busy=false;fields.email='';fields.grantEmail='';fields.grantRole='moderator';clearAnnouncement();}
  function close(){if(!opened)return;opened=false;epoch++;resetContent();if(host.open)host.close();host.innerHTML='';}
  function deny(){access=null;statusAt=null;statusIdentity=null;hideEntry();close();host.innerHTML='';}
  async function request(action,payload={}){
@@ -45,7 +46,7 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
   try{const data=await request('status');if(!current(stamp,person)||ticket!==statusTicket)return null;
    if(!Object.hasOwn(roles,data.role)){deny();return null;}
    access={role:data.role,owner:data.role==='owner'&&data.owner===true,permissions:{}};
-   for(const name of ['roles','lookup','comments','communityBan','commentBan'])access.permissions[name]=data.permissions?.[name]===true&&(name!=='roles'||access.owner);
+   for(const name of ['roles','announcements','lookup','comments','communityBan','commentBan'])access.permissions[name]=data.permissions?.[name]===true&&(!['roles','announcements'].includes(name)||access.owner);
    statusAt=now();statusIdentity=cachedIdentity;
    entry.hidden=false;return access;
   }catch{if(current(stamp,person)&&ticket===statusTicket)deny();return null;}
@@ -76,10 +77,16 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
   if(!allowed('roles'))return '';
   return `<p class="ca-note">Admin: topluluk ve yorum yönetimi. Yönetici: yorum yönetimi ve yorum yasağı. Yalnız kayıtlı bir hesaba yetki verilebilir.</p><form data-admin-form="grant" class="ca-role-form"><label>Tam e-posta adresi<input type="email" required maxlength="254" data-admin-field="grantEmail" value="${esc(fields.grantEmail)}" autocomplete="off"></label><div class="ca-role-choice" role="group" aria-label="Verilecek yetki"><span>Yetki</span><div>${[['moderator','Yönetici'],['admin','Admin']].map(([value,label])=>button(label,'choose-role',' data-role="'+value+'" aria-pressed="'+(fields.grantRole===value)+'"')).join('')}</div></div><button type="submit"${busy?' disabled':''}>Yetkiyi ver</button></form><div class="ca-roles">${roleRows.map(r=>`<article class="ca-role-row"><div><strong>${esc(r.email)}</strong><small>${esc(roles[r.role]||r.role)}</small></div>${r.uid!==uid()&&r.role!=='owner'?button('Yetkiyi kaldır','ask-revoke',` data-target="${esc(r.uid)}" data-email="${esc(r.email)}"`):'<span class="ca-badge">Korunan</span>'}</article>`).join('')}</div>${roleCursor?button('Daha eski yetkiler','older-roles'):''}`;
  }
+ function announcementView(){
+  if(!allowed('announcements'))return '';
+  const entries=announcements.map(item=>`<article class="ca-ann-row"><div><strong>${esc(item.baslik||'Başlıksız duyuru')}</strong><small>${item.aktif?'Yayında':'Kapalı'}${item.mode==='scheduled'?' · Zamanlı':''}</small></div><div>${button('Düzenle','edit-announcement',` data-id="${esc(item.id)}"`)}${button(item.aktif?'Kapat':'Yayınla','toggle-announcement',` data-id="${esc(item.id)}"`)}${button('Sil','ask-delete-announcement',` data-id="${esc(item.id)}"`)}</div></article>`).join('');
+  return `<p class="ca-note">Yayınladığın mesaj uygulama açıldığında ve ana sayfadaki duyuru zilinde görünür. Aynı cihaz her yeni duyuruyu bir kez açılışta görür.</p><div class="ca-queue">${button('Yeni mesaj','new-announcement')}${button('Yenile','reload')}</div>${!loading&&!announcements.length?'<p class="ca-note">Henüz duyuru yok.</p>':''}<div class="ca-ann-list">${entries}</div><form class="ca-ann-form" data-admin-form="announcement"><h3>${fields.announcementId?'Duyuruyu düzenle':'Yeni duyuru'}</h3><label>Başlık<input data-admin-field="announcementTitle" maxlength="140" value="${esc(fields.announcementTitle)}" placeholder="Kısa bir başlık"></label><label>Mesaj<textarea data-admin-field="announcementMessage" maxlength="3000" rows="4" placeholder="Kullanıcılara görünecek mesaj">${esc(fields.announcementMessage)}</textarea></label><label>Ne zaman görünsün?<select data-admin-field="announcementMode"><option value="once"${fields.announcementMode==='once'?' selected':''}>Şimdi yayınla</option><option value="scheduled"${fields.announcementMode==='scheduled'?' selected':''}>Tarih ve saat seç</option></select></label>${fields.announcementMode==='scheduled'?`<div class="ca-ann-times"><label>Başlangıç<input type="datetime-local" data-admin-field="announcementStart" value="${esc(fields.announcementStart)}"></label><label>Bitiş<input type="datetime-local" data-admin-field="announcementEnd" value="${esc(fields.announcementEnd)}"></label></div>`:''}<div><button type="submit"${busy?' disabled':''}>${fields.announcementId?'Değişiklikleri yayınla':'Mesajı yayınla'}</button>${fields.announcementId?button('Vazgeç','new-announcement'):''}</div></form>`;
+ }
  function render(){
-  if(!opened||!access)return;
+  if(!opened)return;
+  if(!access){host.innerHTML='<header class="ca-header"><div><h2>Yönetim paneli</h2></div><button type="button" data-admin-action="close" class="ca-close" aria-label="Kapat">×</button></header><div class="ca-content"><p class="ca-note" role="status">Yönetim açılıyor…</p></div>';return;}
   const focus=host.querySelector?.(':focus')?.dataset?.adminField;
-  host.innerHTML=`<header class="ca-header"><div><h2>Yönetim paneli</h2><small>${roles[access.role]}</small></div>${button('×','close',' aria-label="Kapat" class="ca-close"')}</header><nav class="ca-tabs" aria-label="Yönetim bölümleri">${[['comments','Yorumlar'],['people','Kişiler'],...(allowed('roles')?[['roles','Yetkiler']]:[])].map(([id,label])=>`<button type="button" data-admin-action="tab" data-tab="${id}" aria-pressed="${tab===id}">${label}</button>`).join('')}</nav><div class="ca-content">${error?`<p class="ca-error" role="alert">${esc(error)}</p>`:''}${notice?`<p class="ca-note" role="status">${esc(notice)}</p>`:''}${loading?'<p class="ca-note" role="status">Bilgiler alınıyor…</p>':''}${confirmation?`<section class="ca-confirm" role="group" aria-label="İşlem onayı"><p>${esc(confirmation.text)}</p><div>${button('Vazgeç','cancel-confirm')}${button('Onayla','confirm')}</div></section>`:''}${edit?`<form class="ca-edit" data-admin-form="edit"><label>Yorumu düzenle<textarea data-admin-field="editText" maxlength="1500" rows="3">${esc(edit.text)}</textarea></label><small>Herkese “Yönetici düzenledi” bilgisi gösterilir.</small><div>${button('Vazgeç','cancel-edit')}<button type="submit"${busy?' disabled':''}>Kaydet</button></div></form>`:''}${tab==='comments'?`<div class="ca-queue">${button('Yorumlar','queue',' data-queue="comments" aria-pressed="'+(queue==='comments')+'"')}${button('Bildirimler','queue',' data-queue="reports" aria-pressed="'+(queue==='reports')+'"')}${button('Yenile','reload')}</div>${!loading&&!rows.length?'<p class="ca-note">Gösterilecek kayıt yok.</p>':''}<div>${rows.map(r=>row(r,queue==='reports')).join('')}</div>${cursor?button('Daha eski kayıtlar','older'):''}`:tab==='people'?peopleView():rolesView()}</div>`;
+  host.innerHTML=`<header class="ca-header"><div><h2>Yönetim paneli</h2><small>${roles[access.role]}</small></div>${button('×','close',' aria-label="Kapat" class="ca-close"')}</header><nav class="ca-tabs" aria-label="Yönetim bölümleri">${[['comments','Yorumlar'],['people','Kişiler'],...(allowed('announcements')?[['announcements','Duyurular']]:[]),...(allowed('roles')?[['roles','Yetkiler']]:[])].map(([id,label])=>`<button type="button" data-admin-action="tab" data-tab="${id}" aria-pressed="${tab===id}">${label}</button>`).join('')}</nav><div class="ca-content">${error?`<p class="ca-error" role="alert">${esc(error)}</p>`:''}${notice?`<p class="ca-note" role="status">${esc(notice)}</p>`:''}${loading?'<p class="ca-note" role="status">Bilgiler alınıyor…</p>':''}${confirmation?`<section class="ca-confirm" role="group" aria-label="İşlem onayı"><p>${esc(confirmation.text)}</p><div>${button('Vazgeç','cancel-confirm')}${button('Onayla','confirm')}</div></section>`:''}${edit?`<form class="ca-edit" data-admin-form="edit"><label>Yorumu düzenle<textarea data-admin-field="editText" maxlength="1500" rows="3">${esc(edit.text)}</textarea></label><small>Herkese “Yönetici düzenledi” bilgisi gösterilir.</small><div>${button('Vazgeç','cancel-edit')}<button type="submit"${busy?' disabled':''}>Kaydet</button></div></form>`:''}${tab==='comments'?`<div class="ca-queue">${button('Yorumlar','queue',' data-queue="comments" aria-pressed="'+(queue==='comments')+'"')}${button('Bildirimler','queue',' data-queue="reports" aria-pressed="'+(queue==='reports')+'"')}${button('Yenile','reload')}</div>${!loading&&!rows.length?'<p class="ca-note">Gösterilecek kayıt yok.</p>':''}<div>${rows.map(r=>row(r,queue==='reports')).join('')}</div>${cursor?button('Daha eski kayıtlar','older'):''}`:tab==='people'?peopleView():tab==='announcements'?announcementView():rolesView()}</div>`;
   if(focus)host.querySelector?.(`[data-admin-field="${focus}"]`)?.focus?.({preventScroll:true});
  }
  async function task(action,done){
@@ -94,12 +101,14 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
     const data=await request(queue,older&&cursor?{cursor}:{});if(!current(stamp,person)||!opened||tab!=='comments')return;
     const result=data[queue];if(!Array.isArray(result))throw Error('Liste doğrulanamadı.');rows=older?[...rows,...result]:result;cursor=data.nextCursor||null;
    }else if(tab==='roles'&&allowed('roles')){const data=await request('roles',older&&roleCursor?{cursor:roleCursor}:{});if(!current(stamp,person)||!opened||tab!=='roles')return;if(!Array.isArray(data.roles))throw Error('Yetkiler doğrulanamadı.');roleRows=older?[...roleRows,...data.roles]:data.roles;roleCursor=data.nextCursor||null;}
+   else if(tab==='announcements'&&allowed('announcements')){const data=await request('announcements');if(!current(stamp,person)||!opened||tab!=='announcements')return;if(!Array.isArray(data.announcements))throw Error('Duyurular alınamadı.');announcements=data.announcements;}
   }catch(e){if(current(stamp,person)&&opened){error=e.message;if(['ADMIN_REQUIRED','OWNER_REQUIRED','AUTH_REQUIRED','EMAIL_UNVERIFIED','PREVIEW_RESTRICTED'].includes(e.errorCode))deny();}}
   finally{if(current(stamp,person)&&opened){loading=false;render();}}
  }
  async function open(){
-  if(disposed)return;const {stamp,person}=snapshot(),status=await refreshStatus();if(!status||!current(stamp,person))return;
-  opened=true;tab='comments';queue='comments';resetContent();host.classList?.add('community-admin-dialog');render();if(!host.open)host.showModal();await load();
+  if(disposed||opened)return;const {stamp,person}=snapshot();opened=true;tab='comments';queue='comments';resetContent();host.classList?.add('community-admin-dialog');render();if(!host.open)host.showModal();
+  const status=await refreshStatus();if(!status||!current(stamp,person)||!opened){close();return;}
+  render();await load();
  }
  function confirm(text,action){confirmation={text,action};render();}
  function targetAllowed(){return people?.user?.uid&&people.user.uid!==uid()&&!people.protected&&people.user.role!=='owner';}
@@ -107,11 +116,18 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
   if(action==='close'){close();return;}
   if(!opened||busy||!access)return;
   if(action==='tab'){
-   if(!['comments','people','roles'].includes(data.tab)||(data.tab==='roles'&&!allowed('roles')))return;epoch++;tab=data.tab;rows=[];cursor=null;edit=null;confirmation=null;loading=false;error='';render();if(tab!=='people')await load();return;
+   if(!['comments','people','roles','announcements'].includes(data.tab)||(data.tab==='roles'&&!allowed('roles'))||(data.tab==='announcements'&&!allowed('announcements')))return;epoch++;tab=data.tab;rows=[];cursor=null;edit=null;confirmation=null;loading=false;error='';render();if(tab!=='people')await load();return;
   }
   if(action==='queue'){if(!['comments','reports'].includes(data.queue))return;epoch++;queue=data.queue;rows=[];cursor=null;loading=false;await load();return;}
   if(loading)return;
   if(action==='choose-role'&&allowed('roles')&&['admin','moderator'].includes(data.role)){fields.grantRole=data.role;render();return;}
+  if(tab==='announcements'&&allowed('announcements')){
+   if(action==='new-announcement'){clearAnnouncement();error='';notice='';render();return;}
+   const selected=announcements.find(item=>item.id===data.id);
+   if(action==='edit-announcement'&&selected){fields.announcementId=selected.id;fields.announcementTitle=selected.baslik;fields.announcementMessage=selected.mesaj;fields.announcementMode=selected.mode;const local=ms=>{if(!ms)return '';const d=new Date(ms),pad=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;};fields.announcementStart=local(selected.startAt);fields.announcementEnd=local(selected.endAt);render();return;}
+   if(action==='toggle-announcement'&&selected){await task(()=>request('setAnnouncementActive',{id:selected.id,active:!selected.aktif}),async()=>{notice=selected.aktif?'Duyuru kapatıldı.':'Duyuru yayında.';await load();});return;}
+   if(action==='ask-delete-announcement'&&selected){confirm('Bu duyuru tamamen silinsin mi?',async()=>{await request('deleteAnnouncement',{id:selected.id});if(fields.announcementId===selected.id)clearAnnouncement();await load();});return;}
+  }
   if(action==='reload'||action==='older'){await load(action==='older');return;}
   if(action==='older-roles'){await load(true);return;}
   if(action==='cancel-confirm'){confirmation=null;render();return;}
@@ -136,13 +152,21 @@ export function createCommunityAdmin({entry,host,session,apiBase='',fetcher=glob
   if(kind==='lookup'&&allowed('lookup')){const email=fields.email.trim();if(!email||!email.includes('@')){error='Hesabın tam e-posta adresini yaz.';render();return;}await task(()=>request('userLookup',{email}),result=>{people=personResult(result);});}
   if(kind==='grant'&&allowed('roles')){const email=fields.grantEmail.trim(),role=fields.grantRole;if(!email||!email.includes('@')||!['admin','moderator'].includes(role)){error='Tam e-posta adresini ve yetkiyi seç.';render();return;}confirm(`${email} hesabına ${roles[role]} yetkisi verilsin mi?`,async()=>{await request('grantRole',{email,role});fields.grantEmail='';await load();});}
   if(kind==='edit'&&edit&&allowed('comments')){const selected={...edit},text=selected.text.trim();if(!text||text.length>1500){error='1–1500 karakterlik bir yorum yaz.';render();return;}await task(()=>request('moderateComment',{code:selected.code,id:selected.id,operation:'edit',text}),async()=>{edit=null;notice='Yorum güncellendi; yönetici düzenlemesi olarak işaretlendi.';await load();});}
+  if(kind==='announcement'&&tab==='announcements'&&allowed('announcements')){
+   const baslik=fields.announcementTitle.trim(),mesaj=fields.announcementMessage.trim(),mode=fields.announcementMode;
+   if(!baslik&&!mesaj){error='Başlık veya mesaj yaz.';render();return;}
+   const startAt=mode==='scheduled'?new Date(fields.announcementStart).getTime():0,endAt=mode==='scheduled'?new Date(fields.announcementEnd).getTime():0;
+   if(mode==='scheduled'&&(!Number.isFinite(startAt)||!Number.isFinite(endAt)||endAt<=startAt)){error='Başlangıç ve bitiş saatlerini kontrol et.';render();return;}
+   const payload={id:fields.announcementId||undefined,baslik,mesaj,mode,startAt,endAt};
+   await task(()=>request('saveAnnouncement',payload),async()=>{clearAnnouncement();notice='Duyuru yayınlandı. Kullanıcılar uygulamayı açtığında görecek.';await load();});
+  }
  }
  const authEvent=()=>changed();
  return {
   initialize(){if(initialized||disposed)return;initialized=true;hideEntry();entry.addEventListener('click',()=>open());host.addEventListener('cancel',close);host.addEventListener('close',close);
    host.addEventListener('click',event=>{const node=event.target.closest?.('[data-admin-action]');if(node&&host.contains(node)){event.preventDefault();dispatch(node.dataset.adminAction,node.dataset);}});
    host.addEventListener('input',event=>{const field=event.target.dataset?.adminField;if(field==='editText'&&edit)edit.text=event.target.value;else if(Object.hasOwn(fields,field))fields[field]=event.target.value;});
-   host.addEventListener('change',event=>{const field=event.target.dataset?.adminField;if(Object.hasOwn(fields,field))fields[field]=event.target.value;});
+   host.addEventListener('change',event=>{const field=event.target.dataset?.adminField;if(Object.hasOwn(fields,field)){fields[field]=event.target.value;if(field==='announcementMode')render();}});
    host.addEventListener('submit',event=>{const kind=event.target.dataset?.adminForm;if(kind){event.preventDefault();submit(kind);}});
    eventTarget?.addEventListener?.('elifa:account-changed',authEvent);connect();changed();
   },open,close,refreshStatus:()=>refreshStatus({force:true}),dispatch,submit,
