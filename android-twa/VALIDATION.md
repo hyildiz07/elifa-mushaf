@@ -1,5 +1,19 @@
 # Android TWA aday doğrulaması — 20 Ekim 2026
 
+## 23 Ekim 2026 — kullanıcı onaylı yeni simge
+
+Kullanıcının 23 Ekim'de sağladığı Kur’an görseli Google Play için 512 × 512 PNG'ye dönüştürüldü; aynı görselin 10 Android launcher yoğunluğu/maskesi üretildi. `node scripts/verify-source.mjs`, `:app:bundleRelease` ve `:app:lintRelease` başarılıdır. İmzalı AAB içindeki 10 simgenin açılmış pikselleri kaynak PNG'lerle birebir eşleşir.
+
+- Paket: `com.elifaplatform.mushaf`, versionCode **5**, versionName **1.1.1**, minSdk **24**. İlk minSdk 23 paketi Play otomatik korumasının Android 7.0 (API 24) alt sınırına takıldı; koruma korunarak yeniden derlendi. Android 6 cihazları bu güncellemeyi alamaz.
+- İmzalı AAB: ignored `artifacts/android-branding-2026-10-23/elifa-mushaf-v5-new-icon-signed.aab`; SHA256 `870E2C9478A1249A9F6D43A14315A335FB11FC8B761BB33BB5D3509A6F1BD020`.
+- `jarsigner -verify` başarılı; sertifika SHA256 `AC:5D:03:E1:ED:F1:E7:28:F8:C0:4E:1F:F5:CF:0C:75:5D:2B:6F:D4:EC:AA:2A:F7:EF:A9:D7:D7:DE:D3:9D:9C` Play Console'daki etkin upload sertifikasıyla eşleşti.
+- Mağaza simgesi 25 yerel mağaza girişi için Play incelemesine gönderildi; bu **canlı yayında göründüğü anlamına gelmez**. Telefon simgesi, versionCode 5 uygulama güncellemesi test ve yayın aşamalarını geçince cihazlara ulaşır.
+- Play paketi **5 (1.1.1), Android 7.0+** olarak kabul etti. Dahili test kanalı **etkin** ve “Dahili test kullanıcıları tarafından kullanılabilir” durumunu gösteriyor. Test hesabı mevcut listede kayıtlı; katılım bağlantısı `https://play.google.com/apps/internaltest/4701555052609236260`.
+- Play bu alt sınır nedeniyle eski sürümün desteklediği **1.144 cihaz modelinin** yeni paketi alamayacağını uyardı (995 telefon, 148 tablet, 1 TV). Bu gerçek kullanıcı sayısı değildir; herkese açık yayından önce uyumluluk kararında dikkate alınmalıdır.
+- Fiziksel cihazda mevcut uygulamanın üzerine güncelleme, hesap/veri korunması, ses tekrarı ve Android 15/16 güvenli alanlarının kabulü hâlâ gereklidir. Bu bilgisayara ADB cihazı bağlı değildi.
+
+Aşağıdaki 20 Ekim bölümü tarihsel adayın o günkü durumudur; anahtar/parola engeli artık geçerli değildir.
+
 Bu rapor imzasız yerel aday içindir. Play gönderimi kullanıcı tarafından yetkilendirilmiştir; mevcut engel upload anahtarının parolasına erişilememesi ve cihaz güncelleme kabulüdür. Anahtar sıfırlama veya imzalama kimliğini değiştirme yapılmadı.
 
 - `:app:bundleRelease :app:lintRelease` başarılı. Görsel/yerelleştirme sonrası kontrol 42 saniye, 44 task (24 up-to-date).

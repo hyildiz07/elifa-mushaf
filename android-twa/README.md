@@ -4,6 +4,8 @@ Mevcut `com.elifaplatform.mushaf` uygulamasının küçük, tarayıcı tabanlı 
 
 ## Durum ve aday
 
+**23 Ekim güncellemesi:** Kullanıcının seçtiği yeni simge mağaza için hazırlandı ve Play incelemesine gönderildi. Aynı simgeli versionCode 5 / 1.1.1 AAB mevcut etkin upload anahtarıyla imzalandı; sertifika Play Console ile karşılaştırıldı. İlk Play yüklemesi, otomatik korumanın minSdk 24 şartı nedeniyle reddedildi. Bu yüzden güncel adayın minSdk değeri 24'e yükseltildi; Android 6.0/6.0.1 cihazları yeni güncellemeyi alamayacak. Dahili test ve gerçek cihaz kabulü tamamlanmadan telefon simgesi herkese ulaşmış sayılmaz. Aşağıdaki ilk aday açıklamaları 20 Ekim'deki tarihsel hazırlığı anlatır.
+
 Kaynak, kullanıcı tarafından sağlanan `4.aab` (versionCode 4, 1.1.0) incelenerek yeniden oluşturuldu. Bu, kayıp orijinal Gradle projesinin birebir kopyası değildir. Üç uygulama sınıfı resmi jadx 1.5.6 ile çözüldü: Application ve DelegationService yalnız superclass çağırır; LauncherActivity superclass URL/intent işleyişini ve unspecified orientation davranışını korur. API koşulunun her iki kolu da aynı -1 değerini kullandığından temiz kaynakta tek çağrı vardır.
 
 Aday: versionCode **5**, versionName **1.1.1**. Bu değer, Play Console'daki bütün yükleme kanalları kontrol edilmeden yayına hazır kabul edilmez.
@@ -13,14 +15,14 @@ Aday: versionCode **5**, versionName **1.1.1**. Bu değer, Play Console'daki bü
 | applicationId / namespace | com.elifaplatform.mushaf |
 | Açılış ve App Links | https://mushaf.elifaplatform.com/ |
 | compileSdk / targetSdk | 36 / 36 |
-| minSdk | 23 (Android 6.0) |
+| minSdk | 24 (Android 7.0; Google Play otomatik koruma gereği) |
 | Browser Helper | 2.7.3, sabit sürüm |
 | Android Gradle Plugin | 9.0.1 |
 | Gradle / JDK | 9.1.0 / 17 |
 | Build Tools | 36.0.0 |
 | Varsayılan çıktı | İmzasız release AAB |
 
-**Uyumluluk değişikliği:** eski paket minSdk 21 idi. Browser Helper 2.7.3 minSdk 23 gerektirir; Android 5.0/5.1 (API 21/22) bu yeni adayı yükleyemez. Aynı packageId/domain ve browser storage kullanılır; kurulu uygulamayı silme, tarayıcı verisini temizleme veya yeni applicationId oluşturma adımı yoktur.
+**Uyumluluk değişikliği:** eski paket minSdk 21 idi. Browser Helper 2.7.3 en az 23 ister; Play otomatik koruma en az 24 ister. Bu nedenle Android 5 ve 6 (API 21–23) cihazları yeni güncellemeyi alamaz. Aynı packageId/domain ve browser storage kullanılır; kurulu uygulamayı silme, tarayıcı verisini temizleme veya yeni applicationId oluşturma adımı yoktur.
 
 ## Derleme
 

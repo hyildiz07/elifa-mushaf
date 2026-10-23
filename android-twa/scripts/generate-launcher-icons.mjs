@@ -15,6 +15,7 @@ const densities = {mdpi: 1, hdpi: 1.5, xhdpi: 2, xxhdpi: 3, xxxhdpi: 4};
 const background = '#063D2E';
 const canvasDp = 108;
 const artworkDp = 56;
+const artworkDate = '2026-10-23';
 const provenancePath = path.join(root, 'resource-provenance.json');
 const provenance = JSON.parse(await fs.readFile(provenancePath, 'utf8'));
 
@@ -50,23 +51,23 @@ for (const [density, scale] of Object.entries(densities)) {
 }
 
 provenance.iconReplacement = {
-  updatedOn: '2026-10-20',
+  updatedOn: artworkDate,
   source: sourceRelative,
   sourceSha256: sourceHash,
-  method: `sharp ${sharp.versions.sharp}, Lanczos3 resize only; no redrawing, generated content or recoloring of the artwork`,
+  method: `User-supplied artwork reduced to 512px; only edge-connected white corner matte changed to ${background} by prepare-icon.mjs; sharp ${sharp.versions.sharp} Lanczos3 launcher resize; no redrawing of the Quran or title`,
   legacy: 'Approved square artwork resized to 48dp at five standard density scales',
   adaptive: {
     canvasDp, artworkDp, background,
     foreground: 'Approved artwork centered on transparent 108dp canvas',
     viewportDp: 72,
     textSafety: '56dp artwork keeps the title inside the central safe area; shaped launchers may crop decorative corner pixels',
-    preview: 'artifacts/android-branding-2026-10-20/launcher-preview.png'
+    preview: `artifacts/android-branding-${artworkDate}/launcher-preview.png`
   },
   historicalResources: 'originalExtraction on replaced entries preserves the 4.aab extraction hashes; other resources retain their original hash'
 };
 await fs.writeFile(provenancePath, JSON.stringify(provenance, null, 2)+'\n');
 
-const previewDirectory = path.join(repository, 'artifacts/android-branding-2026-10-20');
+const previewDirectory = path.join(repository, `artifacts/android-branding-${artworkDate}`);
 await fs.mkdir(previewDirectory, {recursive: true});
 const previewSource = await sharp(source).resize(336,336,{kernel:'lanczos3'}).png().toBuffer();
 const fullAdaptiveCanvas = await sharp({create:{width:648,height:648,channels:4,background}})

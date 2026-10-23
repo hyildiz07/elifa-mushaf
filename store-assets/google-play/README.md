@@ -1,13 +1,17 @@
 # Google Play mağaza görselleri
 
-20 Ekim 2026 tarihinde hazırlanan son görseller:
+23 Ekim 2026 tarihinde kullanıcının seçtiği güncel simge:
 
 | Dosya | Boyut | Kullanım |
 | --- | --- | --- |
-| `play-icon-512.png` | 512 × 512 piksel | Google Play uygulama simgesi |
+| `play-icon-512.png` | 512 × 512 piksel | Google Play uygulama simgesi ve Android başlatıcı kaynağı |
 | `play-feature-1024x500.png` | 1024 × 500 piksel | Google Play özellik grafiği / kapak |
 
-Her iki dosya da opak PNG biçimindedir. Simge tam kare olarak hazırlanmıştır; köşeleri önceden yuvarlatılmamıştır. Yeşil/altın sanat dili ve “Easy Quran Memorization” metni korunmuştur.
+Yeni simgenin kaynağı `approved-icon-2026-10-23.jpg` dosyasındaki, kullanıcının gönderdiği “Kur’an-ı Kerim Hafız” görselidir. `node store-assets/google-play/prepare-icon.mjs` komutu bu görseli 512 × 512 opak PNG'ye indirger. Android'in farklı simge maskelerinde beyaz köşeler görünmemesi için yalnızca kenara bağlı beyaz zemin pikselleri koyu yeşile çevrilir; Kur'an resmi ve yazı korunur. Başlatıcı boyutları `node android-twa/scripts/generate-launcher-icons.mjs` ile bu PNG'den üretilir.
+
+Özellik grafiği 20 Ekim tarihli önceki çalışmadır; bu yeni simge isteği onu değiştirmez.
+
+## 20 Ekim görsel çalışması
 
 Sanat kaynağı, kullanıcının paylaştığı `codex-clipboard-7cb20347-80b4-41ad-a3e6-3c7181daf7e0.jpg` ekidir. İki farklı yerleşim built-in `image_gen` ile bu görselden uyarlanmıştır. Son ölçülere deterministik küçültme ve opak PNG dışa aktarımı için `sharp` / Lanczos3 kullanılmıştır; son aşamada yeni öğe eklenmemiştir.
 
@@ -19,6 +23,8 @@ Sanat kaynağı, kullanıcının paylaştığı `codex-clipboard-7cb20347-80b4-4
 `generation-notes.json`, kaynak ve üretim yöntemi ile yerel çıktıların teknik bilgilerini içerir. Bu klasördeki iki PNG, mağazaya yüklenmek üzere seçilen son kopyalardır.
 
 ## Mağaza durumu
+
+23 Ekim 2026: Yeni `play-icon-512.png` Google Play varsayılan mağaza girişine yüklendi. Yayın özeti bu tek simge değişikliğini Türkçe ve mevcut 24 diğer mağaza diline yansıyan **25 simge değişikliği** olarak gösterdi; başka öğe değişikliği yoktu. Değişiklikler incelemeye gönderildi ve yayın özetinde **İncelenmekte olan değişiklikler** başlığıyla geri okundu. Yönetilen yayınlama kapalı; Google onayından sonra otomatik yayımlanması beklenir. Telefon başlatıcı simgesi ayrı bir Android AAB güncellemesi gerektirir. Kanıt: `artifacts/android-branding-2026-10-23/play-icon-review.png`.
 
 20 Ekim 2026: Varsayılan Türkçe mağaza girişinin simgesi ve özellik grafiği bu iki dosyayla değiştirildi. İki yeni görsel yapay zekâyla düzenlenmiş olarak işaretlendi. Yayın özetinde yalnız bu iki görsel değişikliği gönderildi ve **İncelenmekte olan değişiklikler** durumu doğrulandı. Bu, herkese açık mağazada yayına girdiği anlamına gelmez; Google incelemesi bekleniyor. Android AAB sürümü bu görsel gönderiminden ayrıdır.
 
@@ -36,4 +42,4 @@ Uygulamanın 21 arayüz dilini kapsayan mağaza adları ve açıklamaları hazı
 - Kayıttan sonra yayın özetindeki 24 dil satırı kontrol edildi ve gönderildi. Son doğrulanan durum **İncelenmekte olan değişiklikler**; yeni dil adları henüz herkese açık mağazada doğrulanmadı. Yönetilen yayınlama kapalı olduğundan Google onayından sonra yayımlanır.
 - `localization-readback.json` alan karşılaştırmalarını ve gönderim durumunu tutar. Ekran kanıtı: `artifacts/google-play-2026-10-20/play-localizations-in-review.png`.
 
-Android paketindeki telefon adları ve simge de bu kaynaklarla güncellendi; bu ayrı imzasız aday henüz Play'e gönderilmedi. Android imzalama ve cihaz doğrulama durumu `android-twa/VALIDATION.md` içindedir.
+Android paketindeki telefon adları ve simge de bu kaynaklarla güncellendi. 23 Ekim'deki yeni simgeli imzalı AAB dahili test kanalında kullanıma sunuldu; cihaz doğrulaması ve herkese açık güncelleme durumu `android-twa/VALIDATION.md` içindedir.

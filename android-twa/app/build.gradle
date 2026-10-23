@@ -10,7 +10,7 @@ android {
     buildToolsVersion = '36.0.0'
     defaultConfig {
         applicationId = 'com.elifaplatform.mushaf'
-        minSdk = 23
+        minSdk = 24
         targetSdk = 36
         versionCode = 5
         versionName = '1.1.1'

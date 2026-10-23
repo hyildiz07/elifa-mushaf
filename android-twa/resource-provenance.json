@@ -36,10 +36,10 @@
     {
       "source": "../store-assets/google-play/play-icon-512.png",
       "target": "app/src/main/res/mipmap-hdpi/ic_launcher.png",
-      "bytes": 15094,
-      "sha256": "8024367232769cefcc33c78b48b9cb91e7692a8e2790a095e38a55765980321a",
+      "bytes": 14445,
+      "sha256": "425990145a8e2fc7e276df35c704d44c2230667cd37abc59ab9e7b203654521a",
       "origin": "approved-store-artwork",
-      "sourceSha256": "e9f4fd2f149b1a55940079eabfb19f5f57090b696fd386ce9b1e57b9a2169af5",
+      "sourceSha256": "aa0fd0df94a3fcedc4298f895c64fc55b13a36a0c124a0950a214b29838577ba",
       "dimensions": {
         "width": 72,
         "height": 72
@@ -53,10 +53,10 @@
     {
       "source": "../store-assets/google-play/play-icon-512.png",
       "target": "app/src/main/res/mipmap-hdpi/ic_maskable.png",
-      "bytes": 23307,
-      "sha256": "a29b222c67006d67fa1d8ab2c1ed2c639d1c74728da75be48fec4ef4a3bd486b",
+      "bytes": 22391,
+      "sha256": "a90772b22a030b2dc2af691126cbfe154e7aa92aeda8539144b09fcc7967159c",
       "origin": "approved-store-artwork",
-      "sourceSha256": "e9f4fd2f149b1a55940079eabfb19f5f57090b696fd386ce9b1e57b9a2169af5",
+      "sourceSha256": "aa0fd0df94a3fcedc4298f895c64fc55b13a36a0c124a0950a214b29838577ba",
       "dimensions": {
         "width": 162,
         "height": 162
@@ -70,10 +70,10 @@
     {
       "source": "../store-assets/google-play/play-icon-512.png",
       "target": "app/src/main/res/mipmap-mdpi/ic_launcher.png",
-      "bytes": 6847,
-      "sha256": "64662f9e25d01319cbca3f75ba86c2f96880f3e30c1c0247a2c580d379ba8eb6",
+      "bytes": 6623,
+      "sha256": "96e1431cc7f6a82079397a23c90192f8a6e3ff2903707c4c8d1439777e5a1d4f",
       "origin": "approved-store-artwork",
-      "sourceSha256": "e9f4fd2f149b1a55940079eabfb19f5f57090b696fd386ce9b1e57b9a2169af5",
+      "sourceSha256": "aa0fd0df94a3fcedc4298f895c64fc55b13a36a0c124a0950a214b29838577ba",
       "dimensions": {
         "width": 48,
         "height": 48
@@ -87,10 +87,10 @@
     {
       "source": "../store-assets/google-play/play-icon-512.png",
       "target": "app/src/main/res/mipmap-mdpi/ic_maskable.png",
-      "bytes": 10636,
-      "sha256": "42d43a0840c811c32da63c4769106c55b4e6b42f71feb096ea2d24fbbd93b473",
+      "bytes": 10390,
+      "sha256": "366cdb416a646ef00e9e75e79f8e7695262f8fb1ee2c1482765fec43d54b2be7",
       "origin": "approved-store-artwork",
-      "sourceSha256": "e9f4fd2f149b1a55940079eabfb19f5f57090b696fd386ce9b1e57b9a2169af5",
+      "sourceSha256": "aa0fd0df94a3fcedc4298f895c64fc55b13a36a0c124a0950a214b29838577ba",
       "dimensions": {
         "width": 108,
         "height": 108
@@ -104,10 +104,10 @@
     {
       "source": "../store-assets/google-play/play-icon-512.png",
       "target": "app/src/main/res/mipmap-xhdpi/ic_launcher.png",
-      "bytes": 26416,
-      "sha256": "f67a4365b1f00100d5a7bd8f7ab4161893efb648e26498b79ea8ae62872aee00",
+      "bytes": 25103,
+      "sha256": "f601f83f2aa6dcc05c74be84f15ce66cf2e15728ad583a3e1935294c4cc5cfaa",
       "origin": "approved-store-artwork",
-      "sourceSha256": "e9f4fd2f149b1a55940079eabfb19f5f57090b696fd386ce9b1e57b9a2169af5",
+      "sourceSha256": "aa0fd0df94a3fcedc4298f895c64fc55b13a36a0c124a0950a214b29838577ba",
       "dimensions": {
         "width": 96,
         "height": 96
@@ -121,10 +121,10 @@
     {
       "source": "../store-assets/google-play/play-icon-512.png",
       "target": "app/src/main/res/mipmap-xhdpi/ic_maskable.png",
-      "bytes": 40595,
-      "sha256": "133f6b2db482d702cafccf78f7e00eb546fe36c4337c7d0b436bf34533ab685c",
+      "bytes": 38893,
+      "sha256": "4abdab51aded01d68bb5543bf39407066c87c5edad5d018e2c2fabfd99e6845b",
       "origin": "approved-store-artwork",
-      "sourceSha256": "e9f4fd2f149b1a55940079eabfb19f5f57090b696fd386ce9b1e57b9a2169af5",
+      "sourceSha256": "aa0fd0df94a3fcedc4298f895c64fc55b13a36a0c124a0950a214b29838577ba",
       "dimensions": {
         "width": 216,
         "height": 216
@@ -138,10 +138,10 @@
     {
       "source": "../store-assets/google-play/play-icon-512.png",
       "target": "app/src/main/res/mipmap-xxhdpi/ic_launcher.png",
-      "bytes": 57634,
-      "sha256": "183107d7e9bd5d1788372b9d8eb798b6c62b501e8922a74ecb38cefef7114f17",
+      "bytes": 54562,
+      "sha256": "a249d731e791f5109da92e1926ea5357eda680b94d84ea329614530ba4cfad52",
       "origin": "approved-store-artwork",
-      "sourceSha256": "e9f4fd2f149b1a55940079eabfb19f5f57090b696fd386ce9b1e57b9a2169af5",
+      "sourceSha256": "aa0fd0df94a3fcedc4298f895c64fc55b13a36a0c124a0950a214b29838577ba",
       "dimensions": {
         "width": 144,
         "height": 144
@@ -155,10 +155,10 @@
     {
       "source": "../store-assets/google-play/play-icon-512.png",
       "target": "app/src/main/res/mipmap-xxhdpi/ic_maskable.png",
-      "bytes": 88003,
-      "sha256": "dd8b2d7d30e5f812d2d7a444f2c2493da15dcfaa59fc973815bba6a75eafb33c",
+      "bytes": 84164,
+      "sha256": "61eea0b34ff96c9124d43ffdab399183fac4397e88db627c065b681f66501412",
       "origin": "approved-store-artwork",
-      "sourceSha256": "e9f4fd2f149b1a55940079eabfb19f5f57090b696fd386ce9b1e57b9a2169af5",
+      "sourceSha256": "aa0fd0df94a3fcedc4298f895c64fc55b13a36a0c124a0950a214b29838577ba",
       "dimensions": {
         "width": 324,
         "height": 324
@@ -172,10 +172,10 @@
     {
       "source": "../store-assets/google-play/play-icon-512.png",
       "target": "app/src/main/res/mipmap-xxxhdpi/ic_launcher.png",
-      "bytes": 100093,
-      "sha256": "e8464f58209ccba230b35447feb63764b3bb0beacc43925907e9b1baecb45ef1",
+      "bytes": 94754,
+      "sha256": "3fd04c6f47539e98e955a04cc06002ee6b38ce292ecd29c9bc111c370dde3331",
       "origin": "approved-store-artwork",
-      "sourceSha256": "e9f4fd2f149b1a55940079eabfb19f5f57090b696fd386ce9b1e57b9a2169af5",
+      "sourceSha256": "aa0fd0df94a3fcedc4298f895c64fc55b13a36a0c124a0950a214b29838577ba",
       "dimensions": {
         "width": 192,
         "height": 192
@@ -189,10 +189,10 @@
     {
       "source": "../store-assets/google-play/play-icon-512.png",
       "target": "app/src/main/res/mipmap-xxxhdpi/ic_maskable.png",
-      "bytes": 151501,
-      "sha256": "ea082acb0505bd83408f0af21c1f2687c3b583c831772c9294d841feafec8b0e",
+      "bytes": 145991,
+      "sha256": "8f7ce5613d9db245373bab6464f171d560fcaeab5f19b0690993f01c7031a2ff",
       "origin": "approved-store-artwork",
-      "sourceSha256": "e9f4fd2f149b1a55940079eabfb19f5f57090b696fd386ce9b1e57b9a2169af5",
+      "sourceSha256": "aa0fd0df94a3fcedc4298f895c64fc55b13a36a0c124a0950a214b29838577ba",
       "dimensions": {
         "width": 432,
         "height": 432
@@ -234,10 +234,10 @@
     "wrapperChecksumSource": "https://services.gradle.org/distributions/gradle-9.1.0-wrapper.jar.sha256"
   },
   "iconReplacement": {
-    "updatedOn": "2026-10-20",
+    "updatedOn": "2026-10-23",
     "source": "../store-assets/google-play/play-icon-512.png",
-    "sourceSha256": "e9f4fd2f149b1a55940079eabfb19f5f57090b696fd386ce9b1e57b9a2169af5",
-    "method": "sharp 0.35.5, Lanczos3 resize only; no redrawing, generated content or recoloring of the artwork",
+    "sourceSha256": "aa0fd0df94a3fcedc4298f895c64fc55b13a36a0c124a0950a214b29838577ba",
+    "method": "User-supplied artwork reduced to 512px; only edge-connected white corner matte changed to #063D2E by prepare-icon.mjs; sharp 0.35.5 Lanczos3 launcher resize; no redrawing of the Quran or title",
     "legacy": "Approved square artwork resized to 48dp at five standard density scales",
     "adaptive": {
       "canvasDp": 108,
@@ -246,7 +246,7 @@
       "foreground": "Approved artwork centered on transparent 108dp canvas",
       "viewportDp": 72,
       "textSafety": "56dp artwork keeps the title inside the central safe area; shaped launchers may crop decorative corner pixels",
-      "preview": "artifacts/android-branding-2026-10-20/launcher-preview.png"
+      "preview": "artifacts/android-branding-2026-10-23/launcher-preview.png"
     },
     "historicalResources": "originalExtraction on replaced entries preserves the 4.aab extraction hashes; other resources retain their original hash"
   }
