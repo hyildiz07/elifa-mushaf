@@ -1,0 +1,28 @@
+{
+  "sourceReference": "C:/Users/HUSEY_~1/AppData/Local/Temp/codex-clipboard-7cb20347-80b4-41ad-a3e6-3c7181daf7e0.jpg",
+  "method": "Built-in image_gen edits, one generation per asset; sharp used only for exact final dimensions and opaque PNG export.",
+  "invariants": [
+    "Original emerald/gold palette, open Quran, carved stand, mosque/arch/lantern atmosphere, gold head and brain motif",
+    "Exact Easy Quran Memorization text retained",
+    "Full-bleed square icon without pre-rounded corners or black wedges",
+    "Feature graphic horizontal: Quran on left, typography on right"
+  ],
+  "outputs": [
+    {
+      "file": "C:\\Users\\husey_iw8m9tf\\.codex\\worktrees\\kehf-repeat-audio\\Elıfa Mushaf\\artifacts\\google-play-2026-10-20\\play-icon-512.png",
+      "width": 512,
+      "height": 512,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 619444
+    },
+    {
+      "file": "C:\\Users\\husey_iw8m9tf\\.codex\\worktrees\\kehf-repeat-audio\\Elıfa Mushaf\\artifacts\\google-play-2026-10-20\\play-feature-1024x500.png",
+      "width": 1024,
+      "height": 500,
+      "format": "png",
+      "hasAlpha": false,
+      "bytes": 1253076
+    }
+  ]
+}

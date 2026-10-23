@@ -1,0 +1,183 @@
+{
+  "updatedOn": "2026-10-23",
+  "sources": [
+    "../store-assets/google-play/localization-west.json",
+    "../store-assets/google-play/localization-east.json"
+  ],
+  "languageCount": 21,
+  "defaultLanguage": "en",
+  "selection": "Android device/app locale selects the label, independently of Play Store country targeting",
+  "androidLocaleAliases": {
+    "id": "in"
+  },
+  "configurations": [
+    {
+      "directory": "values",
+      "language": "en",
+      "locale": "en-US",
+      "appName": "Easy Quran Memorization",
+      "launcherName": "Easy Quran"
+    },
+    {
+      "directory": "values-tr",
+      "language": "tr",
+      "locale": "tr-TR",
+      "appName": "Kur’an-ı Kerim Hafız",
+      "launcherName": "Kur’an-ı Kerim Hafız"
+    },
+    {
+      "directory": "values-de",
+      "language": "de",
+      "locale": "de-DE",
+      "appName": "Koran auswendig lernen",
+      "launcherName": "Koran lernen"
+    },
+    {
+      "directory": "values-ru",
+      "language": "ru",
+      "locale": "ru-RU",
+      "appName": "Заучивание Корана",
+      "launcherName": "Учим Коран"
+    },
+    {
+      "directory": "values-fr",
+      "language": "fr",
+      "locale": "fr-FR",
+      "appName": "Mémoriser le Coran",
+      "launcherName": "Coran"
+    },
+    {
+      "directory": "values-es",
+      "language": "es",
+      "locale": "es-ES",
+      "appName": "Memoriza el Corán",
+      "launcherName": "Corán"
+    },
+    {
+      "directory": "values-el",
+      "language": "el",
+      "locale": "el-GR",
+      "appName": "Απομνημόνευση Κορανίου",
+      "launcherName": "Κοράνι"
+    },
+    {
+      "directory": "values-it",
+      "language": "it",
+      "locale": "it-IT",
+      "appName": "Memorizza il Corano",
+      "launcherName": "Corano"
+    },
+    {
+      "directory": "values-nl",
+      "language": "nl",
+      "locale": "nl-NL",
+      "appName": "Koran uit het hoofd leren",
+      "launcherName": "Koran leren"
+    },
+    {
+      "directory": "values-pt",
+      "language": "pt",
+      "locale": "pt-PT",
+      "appName": "Memorizar o Alcorão",
+      "launcherName": "Alcorão"
+    },
+    {
+      "directory": "values-ar",
+      "language": "ar",
+      "locale": "ar",
+      "appName": "حفظ القرآن بسهولة",
+      "launcherName": "حفظ القرآن"
+    },
+    {
+      "directory": "values-zh",
+      "language": "zh",
+      "locale": "zh-CN",
+      "appName": "轻松背诵古兰经",
+      "launcherName": "古兰经背诵"
+    },
+    {
+      "directory": "values-ja",
+      "language": "ja",
+      "locale": "ja-JP",
+      "appName": "クルアーンをやさしく暗記",
+      "launcherName": "クルアーン暗記"
+    },
+    {
+      "directory": "values-ko",
+      "language": "ko",
+      "locale": "ko-KR",
+      "appName": "쉽게 암기하는 꾸란",
+      "launcherName": "꾸란 암기"
+    },
+    {
+      "directory": "values-hi",
+      "language": "hi",
+      "locale": "hi-IN",
+      "appName": "आसानी से क़ुरआन याद करें",
+      "launcherName": "क़ुरआन याद करें"
+    },
+    {
+      "directory": "values-ur",
+      "language": "ur",
+      "locale": "ur",
+      "appName": "قرآن حفظ کرنا آسان",
+      "launcherName": "حفظِ قرآن"
+    },
+    {
+      "directory": "values-in",
+      "language": "id",
+      "locale": "id",
+      "appName": "Mudah Menghafal Al-Qur'an",
+      "launcherName": "Hafalan Qur'an"
+    },
+    {
+      "directory": "values-fa",
+      "language": "fa",
+      "locale": "fa",
+      "appName": "حفظ آسان قرآن",
+      "launcherName": "حفظ قرآن"
+    },
+    {
+      "directory": "values-bn",
+      "language": "bn",
+      "locale": "bn-BD",
+      "appName": "সহজে কুরআন মুখস্থ",
+      "launcherName": "কুরআন মুখস্থ"
+    },
+    {
+      "directory": "values-ms",
+      "language": "ms",
+      "locale": "ms",
+      "appName": "Hafazan Al-Quran Mudah",
+      "launcherName": "Hafazan Quran"
+    },
+    {
+      "directory": "values-sw",
+      "language": "sw",
+      "locale": "sw",
+      "appName": "Kukariri Qurani kwa Urahisi",
+      "launcherName": "Hifdhi Qurani"
+    },
+    {
+      "directory": "values-pt-rBR",
+      "language": "pt",
+      "locale": "pt-BR",
+      "appName": "Memorize o Alcorão",
+      "launcherName": "Alcorão"
+    },
+    {
+      "directory": "values-zh-rTW",
+      "language": "zh",
+      "locale": "zh-TW",
+      "appName": "輕鬆背誦古蘭經",
+      "launcherName": "古蘭經背誦"
+    },
+    {
+      "directory": "values-b+zh+Hant",
+      "language": "zh",
+      "locale": "zh-TW",
+      "appName": "輕鬆背誦古蘭經",
+      "launcherName": "古蘭經背誦"
+    }
+  ]
+}

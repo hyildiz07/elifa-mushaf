@@ -1,0 +1,5 @@
+plugins {
+    id 'com.android.application' version '9.0.1' apply false
+}
+// A plain Gradle invocation packages the unsigned release, never a debug key.
+defaultTasks 'app:bundleRelease'

@@ -1,0 +1,153 @@
+{
+  "checkedAt": "2026-10-20T07:15:17.481Z",
+  "phase": "submitted-for-review",
+  "publicationStatus": "Google review pending",
+  "allFieldsExact": true,
+  "checks": [
+    {
+      "locale": "de-DE",
+      "name": "Koran auswendig lernen",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "ar",
+      "name": "حفظ القرآن بسهولة",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "bn-BD",
+      "name": "সহজে কুরআন মুখস্থ",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "id",
+      "name": "Mudah Menghafal Al-Qur'an",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "fa",
+      "name": "حفظ آسان قرآن",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "nl-NL",
+      "name": "Koran uit het hoofd leren",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "fr-FR",
+      "name": "Mémoriser le Coran",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "hi-IN",
+      "name": "आसानी से क़ुरआन याद करें",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "ja-JP",
+      "name": "クルアーンをやさしく暗記",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "ko-KR",
+      "name": "쉽게 암기하는 꾸란",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "ms",
+      "name": "Hafazan Al-Quran Mudah",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "pt-BR",
+      "name": "Memorize o Alcorão",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "pt-PT",
+      "name": "Memorizar o Alcorão",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "ru-RU",
+      "name": "Заучивание Корана",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "sw",
+      "name": "Kukariri Qurani kwa Urahisi",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "ur",
+      "name": "قرآن حفظ کرنا آسان",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "el-GR",
+      "name": "Απομνημόνευση Κορανίου",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "zh-CN",
+      "name": "轻松背诵古兰经",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "zh-TW",
+      "name": "輕鬆背誦古蘭經",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "en-US",
+      "name": "Easy Quran Memorization",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "en-GB",
+      "name": "Easy Quran Memorization",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "es-419",
+      "name": "Memoriza el Corán",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "es-ES",
+      "name": "Memoriza el Corán",
+      "exact": true,
+      "differences": []
+    },
+    {
+      "locale": "it-IT",
+      "name": "Memorizza il Corano",
+      "exact": true,
+      "differences": []
+    }
+  ],
+  "submittedLocaleCount": 24
+}
