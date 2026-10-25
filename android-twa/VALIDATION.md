@@ -4,6 +4,9 @@
 
 - versionCode **8**, versionName **1.1.4**: Android başlatıcı için kullanıcının yazısız lacivert Kur'an görseli; Google Play arama/mağaza simgesi için yazılı krem zeminli görsel hazırlanır. Kaynaklar 1280 × 1280 pikseldir, kırpılmadan küçültülür.
 - Türkçe telefon adı **Kolay Hafızlık** ve Google Play başlığı **Kolay Hafızlık: Kuran Ezberle** olarak korunur. Bu sürümün imzalama, yükleme ve dağıtım sonuçları ayrıca geri okunmalıdır.
+- `npm test`: 698 testten 692 geçti, 6 atlandı; `npm run build` başarılı. `scripts/verify-source.mjs` kaynak ve 10 Android simge hash'ini doğruladı.
+- İmzalı AAB `bundletool validate` ve `jarsigner -verify` ile doğrulandı. SHA-256: `46AA39216EB63041A68CFEBEE2B0D916DA5D97569DA551E5B0F000B77B2E701D`; yükleme sertifikası SHA-256: **AC:5D:03:E1:ED:F1:E7:28:F8:C0:4E:1F:F5:CF:0C:75:5D:2B:6F:D4:EC:AA:2A:F7:EF:A9:D7:D7:DE:D3:9D:9C**. Derlenmiş manifest versionCode 8'dir.
+- Google Play mağaza simgesi ayrı olarak yüklendi ve yayın özetinde son yayınlanma tarihi 25 Ekim 2026 göründü. Android 1.1.4 üretim kanalına yüklendi ve incelemeye gönderildi. Play karşılaştırmasında telefon ve tablette **0 destek kaybı** görüldü. Android güncellemesinin kullanıcı cihazlarına ulaştığı henüz doğrulanmadı.
 
 ## 23 Ekim 2026 — v1.1.3, Türkçe telefon adı
 
