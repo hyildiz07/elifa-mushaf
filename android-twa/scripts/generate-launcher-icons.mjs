@@ -8,14 +8,14 @@ import {fileURLToPath} from 'node:url';
 const sharp = createRequire(import.meta.url)('sharp');
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const repository = path.dirname(root);
-const sourceRelative = '../store-assets/google-play/play-icon-512.png';
+const sourceRelative = '../store-assets/android/phone-icon-512.png';
 const source = await fs.readFile(path.resolve(root, sourceRelative));
 const sourceHash = crypto.createHash('sha256').update(source).digest('hex');
 const densities = {mdpi: 1, hdpi: 1.5, xhdpi: 2, xxhdpi: 3, xxxhdpi: 4};
-const background = '#063D2E';
+const background = '#061A37';
 const canvasDp = 108;
 const artworkDp = 56;
-const artworkDate = '2026-10-23';
+const artworkDate = '2026-10-25';
 const provenancePath = path.join(root, 'resource-provenance.json');
 const provenance = JSON.parse(await fs.readFile(provenancePath, 'utf8'));
 
@@ -42,7 +42,7 @@ for (const [density, scale] of Object.entries(densities)) {
       target,
       bytes: output.length,
       sha256: crypto.createHash('sha256').update(output).digest('hex'),
-      origin: 'approved-store-artwork',
+      origin: 'user-phone-artwork',
       sourceSha256: sourceHash,
       dimensions: {width: size, height: size},
       originalExtraction
@@ -54,13 +54,13 @@ provenance.iconReplacement = {
   updatedOn: artworkDate,
   source: sourceRelative,
   sourceSha256: sourceHash,
-  method: `User-supplied artwork reduced to 512px; only edge-connected white corner matte changed to ${background} by prepare-icon.mjs; sharp ${sharp.versions.sharp} Lanczos3 launcher resize; no redrawing of the Quran or title`,
+  method: `User-supplied square phone artwork proportionally reduced to 512px without cropping or retouching; sharp ${sharp.versions.sharp} Lanczos3 launcher resize`,
   legacy: 'Approved square artwork resized to 48dp at five standard density scales',
   adaptive: {
     canvasDp, artworkDp, background,
-    foreground: 'Approved artwork centered on transparent 108dp canvas',
+    foreground: 'User-supplied phone artwork centered on transparent 108dp canvas',
     viewportDp: 72,
-    textSafety: '56dp artwork keeps the title inside the central safe area; shaped launchers may crop decorative corner pixels',
+    imageSafety: '56dp artwork keeps the central Quran inside the safe area of shaped launchers',
     preview: `artifacts/android-branding-${artworkDate}/launcher-preview.png`
   },
   historicalResources: 'originalExtraction on replaced entries preserves the 4.aab extraction hashes; other resources retain their original hash'

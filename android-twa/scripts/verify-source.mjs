@@ -13,9 +13,9 @@ for(const item of provenance.resources){
  const data=fs.readFileSync(target);
  assert.equal(data.length,item.bytes,item.target+' size');
  assert.equal(hash(data),item.sha256,item.target+' SHA-256');
- if(item.origin==='approved-store-artwork'){
+ if(item.origin==='user-phone-artwork'){
   replacements++;
-  assert.equal(item.source,'../store-assets/google-play/play-icon-512.png');
+  assert.equal(item.source,'../store-assets/android/phone-icon-512.png');
   assert.equal(hash(fs.readFileSync(path.resolve(root,item.source))),item.sourceSha256,'Approved source artwork SHA-256');
   assert.match(item.originalExtraction.source,/^base\/res\/mipmap-/);
   assert.match(item.originalExtraction.sha256,/^[a-f0-9]{64}$/);
