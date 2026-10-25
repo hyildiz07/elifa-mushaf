@@ -1,5 +1,7 @@
 # Google Play mağaza görselleri
 
+25 Ekim 2026: Kullanıcının yeni yazılı `play-artwork-2026-10-25.jpg` görseli, kırpma veya rötuş yapılmadan 512 × 512, 32 bit PNG `play-icon-512.png` dosyasına küçültüldü. Bu dosya yalnız Google Play mağaza/aramanın simgesi içindir. Telefonun başlatıcı simgesi ayrı `../android/phone-artwork-2026-10-25.jpg` kaynağından hazırlanır. Önceki özellik grafiği değişmez.
+
 23 Ekim 2026 tarihinde kullanıcının seçtiği güncel simge:
 
 | Dosya | Boyut | Kullanım |

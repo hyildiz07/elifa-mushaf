@@ -1,4 +1,9 @@
-# Android TWA aday doğrulaması — 20 Ekim 2026
+# Android TWA aday doğrulaması — 25 Ekim 2026
+
+## 25 Ekim 2026 — v1.1.4, ayrı telefon ve mağaza görselleri
+
+- versionCode **8**, versionName **1.1.4**: Android başlatıcı için kullanıcının yazısız lacivert Kur'an görseli; Google Play arama/mağaza simgesi için yazılı krem zeminli görsel hazırlanır. Kaynaklar 1280 × 1280 pikseldir, kırpılmadan küçültülür.
+- Türkçe telefon adı **Kolay Hafızlık** ve Google Play başlığı **Kolay Hafızlık: Kuran Ezberle** olarak korunur. Bu sürümün imzalama, yükleme ve dağıtım sonuçları ayrıca geri okunmalıdır.
 
 ## 23 Ekim 2026 — v1.1.3, Türkçe telefon adı
 
