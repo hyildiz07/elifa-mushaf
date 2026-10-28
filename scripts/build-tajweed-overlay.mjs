@@ -24,7 +24,8 @@ const refs = Object.keys(edition.ayahs).sort((a, b) => {
   return sa - sb || aa - ab;
 });
 const digest = createHash('sha256').update(refs.map(ref => `${ref}\0${edition.ayahs[ref]}`).join('\u0001')).digest('hex');
-if (digest !== annotations.edition.sha256 || refs.length !== 6236 || rules.riwayah !== annotations.riwayah)
+if (digest !== annotations.edition.sha256 || refs.length !== 6236 ||
+    annotations.corpusVersion !== rules.version || rules.riwayah !== annotations.riwayah)
   throw Error('Edition, annotation, and rule set do not agree');
 
 const ruleById = new Map(rules.rules.map(rule => [rule.id, rule]));
@@ -36,7 +37,7 @@ const topicByRule = annotations.ruleIds.map(id => {
   const hukum = hukumById.get(rule?.hukum);
   const category = categoryById.get(hukum?.category);
   if (!category || !topics.includes(category.topic)) throw Error(`Unknown rule ${id}`);
-  return rule.status === 'stable' ? topics.indexOf(category.topic) : -1;
+  return rule.status === 'stable' && !rule.needsReview ? topics.indexOf(category.topic) : -1;
 });
 
 // The two editions mostly differ in vowel/stop marks. A base letter can be
@@ -56,7 +57,9 @@ function letters(text) {
   }
   return result;
 }
-const stats = { ayahs: refs.length, mappedAyahs: 0, unmappedAyahs: [], sourceSpans: 0, stableSpans: 0, mappedSpans: 0, skippedSpans: 0, outputSegments: 0, wordTextMismatches: 0 };
+const stats = { ayahs: refs.length, mappedAyahs: 0, unmappedAyahs: [], sourceSpans: 0,
+  stableSpans: 0, excludedSpans: 0, unmappedAyahSpans: 0, unmatchedSpans: 0,
+  shadowedSpans: 0, mappedSpans: 0, skippedSpans: 0, outputSegments: 0, wordTextMismatches: 0 };
 const bySurah = {};
 function fingerprint(text) {
   let hash = 2166136261;
@@ -76,6 +79,7 @@ for (const ref of refs) {
   stats.sourceSpans += sourceSpans.length;
   if (sourceLetters.map(x => x.base).join('') !== targetLetters.map(x => x.base).join('')) {
     stats.unmappedAyahs.push(ref);
+    stats.unmappedAyahSpans += sourceSpans.length;
     stats.skippedSpans += sourceSpans.length;
     continue;
   }
@@ -90,18 +94,19 @@ for (const ref of refs) {
   const chosen = new Array(sourceLetters.length).fill(-1);
   for (const [start, end, ruleIndex] of [...sourceSpans].sort((a, b) => a[0] - b[0] || (b[1] - b[0]) - (a[1] - a[0]))) {
     const topic = topicByRule[ruleIndex];
-    if (topic < 0) { stats.skippedSpans++; continue; }
+    if (topic < 0) { stats.excludedSpans++; stats.skippedSpans++; continue; }
     stats.stableSpans++;
-    if (start < 0 || end > sourceText.length || end <= start) { stats.skippedSpans++; continue; }
+    if (start < 0 || end > sourceText.length || end <= start) throw Error(`Invalid source span ${ref}`);
     const covered = [];
     for (let i = 0; i < sourceLetters.length; i++) {
       const letter = sourceLetters[i];
       if (letter.start < end && letter.end > start) covered.push(i);
     }
-    if (!covered.length) { stats.skippedSpans++; continue; }
+    if (!covered.length) { stats.unmatchedSpans++; stats.skippedSpans++; continue; }
     let used = false;
     for (const i of covered) if (chosen[i] === -1) { chosen[i] = topic; used = true; }
     if (used) stats.mappedSpans++;
+    else stats.shadowedSpans++;
   }
   const segments = [];
   for (let i = 0; i < targetLetters.length; i++) {
@@ -120,6 +125,8 @@ for (const ref of refs) {
   if (segments.length) (bySurah[sid] ||= {})[ayah] = [fingerprint(text), segments];
 }
 if (stats.wordTextMismatches) throw Error(`Mapped letters crossed word bounds: ${stats.wordTextMismatches}`);
+if (stats.sourceSpans !== stats.excludedSpans + stats.unmappedAyahSpans + stats.unmatchedSpans + stats.shadowedSpans + stats.mappedSpans)
+  throw Error('Projection accounting mismatch');
 const output = resolve(outputDirectory);
 mkdirSync(output, { recursive: true });
 writeFileSync(resolve(output, 'meta.json'), JSON.stringify({ source: 'quran-ws/quran-tajweed', commit: '4fec00b726d32163fba72b41c2f4cfdd025fe645', license: 'CC BY 4.0', editionDigest: digest, topics, stats }));

@@ -2,7 +2,26 @@
 (function () {
   'use strict';
   const names = ['tajweed-heavy', 'tajweed-joining', 'tajweed-noon', 'tajweed-meem', 'tajweed-ghunnah', 'tajweed-madd', 'tajweed-qalqalah'];
-  const labels = ['Kalın okuma', 'Harf birleşmesi', 'Nûn ve tenvin', 'Mîm', 'Gunne', 'Med', 'Kalkale'];
+  const copy = {
+    tr: {
+      labels: ['Kalın okuma', 'Harf birleşmesi', 'Nûn ve tenvin', 'Mîm', 'Gunne', 'Med', 'Kalkale'],
+      toggle: 'Tecvidli gösterim', intro: 'Güvenle eşleşen tecvid işaretlerini renklerle gösterir.',
+      palette: 'Renk düzeni', palettes: ['Klasik', 'Yumuşak', 'Yüksek kontrast', 'Kendi renklerim'],
+      rules: 'İşaretleri ve renkleri ayarla', ruleHelp: 'Her işaret grubunu ayrı açabilir, yanındaki renge dokunup değiştirebilirsin.',
+      gap: 'Renksiz harf, “burada tecvid kuralı yok” demek değildir. Farklı Mushaf yazılarında güvenle eşleşmeyen işaretler gösterilmez.',
+      source: 'Bu renkler uygulamaya aittir; basılı Mushaf renkleriyle aynı olmak zorunda değildir. Kaynak: ',
+      unsupported: 'Bu cihazın tarayıcısı harfleri düzeni bozmadan renklendirmeyi desteklemiyor.', color: 'rengi'
+    },
+    en: {
+      labels: ['Heavy letters', 'Letter joining', 'Noon and tanween', 'Meem', 'Ghunnah', 'Madd', 'Qalqalah'],
+      toggle: 'Tajweed colours', intro: 'Colours markings that safely match this Mushaf text.',
+      palette: 'Colour palette', palettes: ['Classic', 'Soft', 'High contrast', 'My colours'],
+      rules: 'Choose markings and colours', ruleHelp: 'Turn each group on or off, and tap its colour to change it.',
+      gap: 'An uncoloured letter does not mean that no Tajweed rule applies. Markings that cannot be safely matched to this Mushaf text are left uncoloured.',
+      source: 'These colours belong to the app and may differ from printed Mushafs. Source: ',
+      unsupported: 'This browser cannot colour letters without risking the text layout.', color: 'colour'
+    }
+  };
   const defaults = ['#a33135', '#855f08', '#6e42a0', '#007a87', '#a2496e', '#1765a4', '#ab4d15'];
   const supported = !!(window.CSS?.highlights && window.Highlight && document.createRange);
   const datasets = new Map();
@@ -16,7 +35,10 @@
     for (let i = 0; i < text.length; i++) hash = Math.imul(hash ^ text.charCodeAt(i), 16777619);
     return hash >>> 0;
   }
-  function clear() { for (const name of names) CSS.highlights.delete(name); }
+  function clear() {
+    if (!supported) return;
+    for (const name of names) CSS.highlights.delete(name);
+  }
   function getDataset(mode) {
     if (!datasets.has(mode)) datasets.set(mode, fetch(`/assets/tajweed/${mode}.json`).then(response => {
       if (!response.ok || !(response.headers.get('content-type') || '').includes('json')) throw Error('Tecvid verisi yüklenemedi');
@@ -151,12 +173,12 @@
   if (!method) return;
   const section = document.createElement('section');
   section.className = 'tajweedSettings';
-  section.innerHTML = `<label class="tajweedToggle" for="tajweedEnabled"><span><strong>Tecvidli gösterim</strong><small>Kuralları mevcut Kur’an yazısında renklerle gösterir.</small></span><input id="tajweedEnabled" type="checkbox" role="switch"></label><div class="tajweedOptions" id="tajweedOptions" hidden><label for="tajweedPalette">Renk düzeni</label><select id="tajweedPalette"><option value="classic">Klasik</option><option value="soft">Yumuşak</option><option value="contrast">Yüksek kontrast</option><option value="custom">Kendi renklerim</option></select><details class="tajweedRules"><summary>Kuralları ve renkleri ayarla</summary><div id="tajweedRules"></div><p>Her kuralı ayrı ayrı açabilir, yanındaki renge dokunup değiştirebilirsin.</p></details><small>Türk mushafında yalnız güvenle eşleşen harfler renklenir; diğerleri normal kalır.</small><small>Kaynak: <a href="https://quran.ws/docs/build/tajweed/" target="_blank" rel="noopener noreferrer">Quran.ws Tecvid</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>. Konumlar mevcut yazıya uyarlandı.</small></div>`;
+  section.innerHTML = `<label class="tajweedToggle" for="tajweedEnabled"><span><strong>Tecvidli gösterim</strong><small>Güvenle eşleşen tecvid işaretlerini renklerle gösterir.</small></span><input id="tajweedEnabled" type="checkbox" role="switch"></label><div class="tajweedOptions" id="tajweedOptions" hidden><label for="tajweedPalette">Renk düzeni</label><select id="tajweedPalette"><option value="classic">Klasik</option><option value="soft">Yumuşak</option><option value="contrast">Yüksek kontrast</option><option value="custom">Kendi renklerim</option></select><details class="tajweedRules"><summary>İşaretleri ve renkleri ayarla</summary><div id="tajweedRules"></div><p>Her işaret grubunu ayrı açabilir, yanındaki renge dokunup değiştirebilirsin.</p></details><small>Renksiz harf, “burada tecvid kuralı yok” demek değildir. Farklı Mushaf yazılarında güvenle eşleşmeyen işaretler gösterilmez.</small><small>Bu renkler uygulamaya aittir; basılı Mushaf renkleriyle aynı olmak zorunda değildir. Kaynak: <a href="https://quran.ws/docs/build/tajweed/" target="_blank" rel="noopener noreferrer">Quran.ws Tecvid</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>.</small></div>`;
   method.after(section);
   const rules = $('tajweedRules');
   if (!Array.isArray(SET.tajweedTopics)) SET.tajweedTopics = names.map(() => true);
   if (!SET.tajweedColors || typeof SET.tajweedColors !== 'object' || Array.isArray(SET.tajweedColors)) SET.tajweedColors = {};
-  labels.forEach((label, index) => {
+  copy.tr.labels.forEach((label, index) => {
     const row = document.createElement('div'); row.className = 'tajweedRule';
     const check = document.createElement('input'); check.type = 'checkbox'; check.id = 'tajweedTopic'+index; check.checked = SET.tajweedTopics[index] !== false;
     const text = document.createElement('label'); text.htmlFor = check.id; text.textContent = label;
@@ -182,7 +204,25 @@
     SET.tajweedPalette = paletteValues.has(event.target.value) ? event.target.value : 'classic';
     saveSet(); setPalette();
   });
-  if (!supported) section.querySelector('small').textContent = 'Bu cihazın tarayıcısı harfleri düzeni bozmadan renklendirmeyi desteklemiyor.';
+  function updateLocale() {
+    const language = window.ElifaLocale?.current?.() || document.documentElement.lang;
+    const t = copy[language] || copy.en;
+    section.querySelector('.tajweedToggle strong').textContent = t.toggle;
+    section.querySelector('.tajweedToggle small').textContent = supported ? t.intro : t.unsupported;
+    section.querySelector('.tajweedOptions > label').textContent = t.palette;
+    section.querySelectorAll('#tajweedPalette option').forEach((option, index) => { option.textContent = t.palettes[index]; });
+    section.querySelector('.tajweedRules summary').textContent = t.rules;
+    section.querySelector('.tajweedRules p').textContent = t.ruleHelp;
+    const notes = section.querySelectorAll('.tajweedOptions > small');
+    notes[0].textContent = t.gap;
+    notes[1].firstChild.textContent = t.source;
+    section.querySelectorAll('.tajweedRule').forEach((row, index) => {
+      row.querySelector('label').textContent = t.labels[index];
+      row.querySelector('input[type="color"]').setAttribute('aria-label', `${t.labels[index]} ${t.color}`);
+    });
+  }
+  window.addEventListener('elifa:language-changed', updateLocale);
+  updateLocale();
   sync();
   if (typeof curS !== 'undefined' && curS && typeof wordArr !== 'undefined' && wordArr.length) render(curS, wordArr);
 })();
