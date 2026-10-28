@@ -11,10 +11,9 @@
    · version.json / duyuru.json / manual-*.json → her zaman ağ öncelikli.
    · Yönlendirilmiş (redirected) navigasyon yanıtı önbelleğe yazılmaz.
    ═══════════════════════════════════════════════════════════════ */
-const VERSION = 'elifa-mushaf-v374-qcf-v4';
+const VERSION = 'elifa-mushaf-v375-no-tajweed';
 const CACHE   = VERSION;
 
-/* Varsayılan fontlar gömülü; isteğe bağlı QCF V4 fontları sağlayıcı CDN'inden gelir. */
 const CORE = [
   './', './index.html', './manifest.json', './version.json',
   './pwa_icon-192.png', './pwa_icon-512.png',
@@ -26,7 +25,6 @@ const CORE = [
   './assets/ui-extra-drafts.js?v=2', './assets/ui-extra.js?v=1',
   './assets/dua-practice.js?v=351', './assets/dua-practice.css?v=351',
   './assets/gear-sheet.css?v=358', './assets/workflow-i18n.js?v=365', './assets/study-workflow.js?v=365', './assets/study-workflow.css?v=365',
-  './assets/tajweed-qcf-v4.js?v=374', './assets/tajweed-qcf-v4.css?v=374',
   './assets/study-split.js?v=365', './assets/study-sessions.js?v=360',
   './assets/study-surah-picker.js?v=330', './assets/home-study-polish.css?v=360',
   './assets/split-audio.js?v=294', './assets/split-cache.js?v=291',

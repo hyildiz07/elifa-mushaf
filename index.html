@@ -5448,7 +5448,6 @@ window.elifaLog=function(event,params){
 <link rel="stylesheet" href="/assets/reader-toolbar.css?v=326">
 <link rel="stylesheet" href="/assets/split-toolbar.css?v=1">
 <link rel="stylesheet" href="/assets/gear-sheet.css?v=358">
-<link rel="stylesheet" href="/assets/tajweed-qcf-v4.css?v=374">
 <link rel="stylesheet" href="/assets/reader-help.css?v=1">
 <link rel="stylesheet" href="/assets/home-toolbar.css?v=305">
 <link rel="stylesheet" href="/assets/home-study-polish.css?v=360">
@@ -6352,7 +6351,6 @@ body[data-layout=saray] #pbar .readerRepeatToggle.pbl{display:inline-flex!import
     <div class="abrow"><b data-i18n="ab_kiraat">Kıraat (ses)</b><span data-i18n="ab_kiraat_s">QUL / Tarteel · Mişârî Râşid el-Afâsî ve diğerleri</span></div>
     <div class="abrow"><b data-i18n="ab_latin">Latin okunuş</b><span data-i18n="ab_latin_s">alquran.cloud · hemze ve ayn işaretleri Elifa tarafından onarıldı</span></div>
     <div class="abrow"><b data-i18n="ab_word">Kelime zamanlaması</b><span data-i18n="ab_word_s">QuranCDN segment verisi</span></div>
-    <div class="abrow"><b>Tecvidli Mushaf</b><span><a href="https://github.com/quran/qf-api-docs/blob/main/docs/tutorials/fonts/font-rendering.md" target="_blank" rel="noopener noreferrer">Quran.Foundation QCF V4</a> renkli Mushaf fontu. Açıldığında sayfaya uygun font kullanılır; normal yazı seçildiğinde mevcut font korunur.</span></div>
     <div class="abrow"><b>Mişârî kaydı ve kelime zamanları</b><span><a href="https://www.mp3quran.net/eng/afs" target="_blank" rel="noopener">MP3Quran Murattal</a> · <a href="https://github.com/QUD-Technologies/quranic-universal-audio/releases/tag/v3.2.0" target="_blank" rel="noopener">Qur'anic Universal Audio v3.2.0</a> zamanlaması CC BY 4.0; ses hakları özgün kaynakta</span></div>
     <div class="abrow"><b>Hüsarî Muallim ve Südeys âyet zamanları</b><span><a href="https://huggingface.co/datasets/quranlab/quran-audio" target="_blank" rel="noopener">QuranLab / cpfair quran-align</a> · zamanlama CC BY 4.0; âyet sesi <a href="https://everyayah.com" target="_blank" rel="noopener">EveryAyah</a> kaynağından, ses hakları icracı ve yapımcıda</span></div>
     <div class="abrow"><b data-i18n="ab_ver">Sürüm</b><span id="appVer">v365</span></div>
@@ -6521,7 +6519,7 @@ const QFONTS=[
      Bu yüzden turkOnly: seçilince imlâ otomatik Türk'e geçer.          */
   {id:'utn',   n:'Uthman Taha Nesih',       d:'Türk mushafı hattı · Diyanet imlâsı',   ff:'"Uthman Taha Naskh"', lh:2.52, turkOnly:true, rec:true},
 ];
-let SET=Object.assign({reciter:223,speed:1,rep:5,repOn:false,wait:0,fs:1,qfont:'utn',mushaf:'turk',folder:'Ezber',ayRep:5,cumu:false,cumuRep:5,auto:true,theme:'elifasaray',custom:null,selMulti:false,startPad:0,endPad:-60,latin:false,stacked:false,tajweed:false},store.get('set',{}));
+let SET=Object.assign({reciter:223,speed:1,rep:5,repOn:false,wait:0,fs:1,qfont:'utn',mushaf:'turk',folder:'Ezber',ayRep:5,cumu:false,cumuRep:5,auto:true,theme:'elifasaray',custom:null,selMulti:false,startPad:0,endPad:-60,latin:false,stacked:false},store.get('set',{}));
 // Preserve the old count once, then keep the three repeat scopes independent.
 SET.rep=Math.min(99,Math.max(1,Math.round(Number(SET.rep)||5)));
 for(const key of ['combineRep','rangeRep'])SET[key]=Math.min(99,Math.max(0,Math.round(Number(SET[key]??SET.rep)||0)));
@@ -6934,7 +6932,6 @@ let testing=false;
 function setTest(on){
   testing=on;
   document.body.classList.toggle('testing',on);
-  window.elifaTajweed?.setTesting?.(on);
   const tb=$('testbar');if(tb)tb.classList.toggle('show',on);
   syncTestBtn();
   if(!on)document.querySelectorAll('#rbody .w.revealed').forEach(w=>w.classList.remove('revealed'));
@@ -8184,7 +8181,6 @@ function buildDOM(meta,jumpAy){
   curAy=jumpAy||(focused?.from||1);
   if(jumpAy){requestAnimationFrame(()=>{const el=$('ay-'+jumpAy);if(el)el.scrollIntoView({block:'start'});$('rscroll').scrollTop-=70;});}
   else $('rscroll').scrollTop=0;
-  window.elifaTajweed?.render(meta.id,wordArr);
 }
 
 /* Çalışma Masası aynı okuyucuyu ve aynı sûre kaydını kullanır. */
@@ -12577,7 +12573,7 @@ updateStat();
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v374-qcf-v4';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v375-no-tajweed';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){
@@ -16096,7 +16092,6 @@ sw:{meal:"Tafsiri",tefsir:"Tafsir",tefsirLink:"Ona tafsir",copy:"Nakili",share:"
 <script src="/assets/workflow-i18n.js?v=365"></script>
 <script src="/assets/dua-practice.js?v=351"></script>
 <script src="/assets/study-workflow.js?v=365"></script>
-<script src="/assets/tajweed-qcf-v4.js?v=374"></script>
 <script src="/assets/study-split.js?v=365"></script>
 <script src="/assets/study-sessions.js?v=360"></script>
 <script src="/assets/study-surah-picker.js?v=330"></script>
