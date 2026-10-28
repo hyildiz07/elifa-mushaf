@@ -10,6 +10,7 @@
   let current = null;
   const $ = id => document.getElementById(id);
   const paletteValues = new Set(['classic', 'soft', 'contrast', 'custom']);
+  const graphemeSegmenter = typeof Intl.Segmenter === 'function' ? new Intl.Segmenter('ar', { granularity: 'grapheme' }) : null;
   function fingerprint(text) {
     let hash = 2166136261;
     for (let i = 0; i < text.length; i++) hash = Math.imul(hash ^ text.charCodeAt(i), 16777619);
@@ -34,13 +35,46 @@
     }
     return last && at === seen ? [last, last.length] : null;
   }
-  function addRange(ranges, record, start, end, topic) {
+  // A lām-alif can be drawn as one glyph. Painting its two letters in
+  // different colours can leave part of that glyph looking cut off.
+  // Keep both letters in the reader's normal ink when their topics differ.
+  function unsafeClusters(word, candidates) {
+    const topics = Array(word.length).fill(-1);
+    for (const [start, end, topic] of candidates) for (let i = start; i < end; i++) topics[i] = topic;
+    const unsafe = new Set();
+    // A colour boundary inside a grapheme can paint only part of a written
+    // letter (including its vowel or a joining control). Leave it untouched.
+    if (graphemeSegmenter) {
+      for (const { index, segment } of graphemeSegmenter.segment(word)) {
+        const end = index + segment.length;
+        if (!candidates.some(([start, finish]) => (start > index && start < end) || (finish > index && finish < end))) continue;
+        for (let at = index; at < end; at++) unsafe.add(at);
+      }
+    }
+    for (let i = 0; i < word.length; i++) {
+      if (word[i] !== 'ل') continue;
+      let next = i + 1;
+      while (next < word.length && /\p{Mark}/u.test(word[next])) next++;
+      if (!/[اأإآٱ]/u.test(word[next] || '') || topics[i] === topics[next]) continue;
+      let end = next + 1;
+      while (end < word.length && /\p{Mark}/u.test(word[end])) end++;
+      for (let at = i; at < end; at++) unsafe.add(at);
+    }
+    return unsafe;
+  }
+  function addRange(ranges, record, start, end, topic, unsafe) {
     if (!record || start < 0 || end <= start || end > record.txt.length || record.el.textContent !== record.txt || !ranges[topic]) return;
-    const left = textPoint(record.el, start), right = textPoint(record.el, end);
-    if (!left || !right) return;
-    const range = document.createRange();
-    range.setStart(...left); range.setEnd(...right);
-    ranges[topic].push(range);
+    for (let at = start; at < end;) {
+      while (at < end && unsafe?.has(at)) at++;
+      const leftAt = at;
+      while (at < end && !unsafe?.has(at)) at++;
+      if (leftAt === at) continue;
+      const left = textPoint(record.el, leftAt), right = textPoint(record.el, at);
+      if (!left || !right) continue;
+      const range = document.createRange();
+      range.setStart(...left); range.setEnd(...right);
+      ranges[topic].push(range);
+    }
   }
   function setPalette() {
     document.body.dataset.tajweedPalette = paletteValues.has(SET.tajweedPalette) ? SET.tajweedPalette : 'classic';
@@ -81,8 +115,9 @@
       const [expectedHash, segments] = entry;
       const text = words.map((word, index) => word.txt + (index < words.length - 1 && !word.joinNext ? ' ' : '')).join('');
       if (fingerprint(text) !== expectedHash) continue; // stale or differently grouped text: fail closed
+      const candidates = words.map(() => []);
       if (mode === 'medine') {
-        for (const [wordIndex, start, end, topic] of segments) addRange(ranges, words[wordIndex], start, end, topic);
+        for (const [wordIndex, start, end, topic] of segments) if (candidates[wordIndex]) candidates[wordIndex].push([start, end, topic]);
       } else {
         let offset = 0;
         const bounds = words.map((word, index) => {
@@ -93,10 +128,15 @@
         for (const [start, end, topic] of segments) for (let i = 0; i < words.length; i++) {
           const [wordStart, wordEnd] = bounds[i];
           const left = Math.max(start, wordStart), right = Math.min(end, wordEnd);
-          if (left < right) addRange(ranges, words[i], left - wordStart, right - wordStart, topic);
+          if (left < right) candidates[i].push([left - wordStart, right - wordStart, topic]);
           if (wordStart >= end) break;
         }
       }
+      candidates.forEach((spans, i) => {
+        if (!spans.length) return;
+        const unsafe = unsafeClusters(words[i].txt, spans);
+        for (const [start, end, topic] of spans) addRange(ranges, words[i], start, end, topic, unsafe);
+      });
     }
     if (ticket !== generation || document.body.classList.contains('testing')) return;
     for (let i = 0; i < names.length; i++) if (ranges[i].length && SET.tajweedTopics?.[i] !== false) CSS.highlights.set(names[i], new Highlight(...ranges[i]));
