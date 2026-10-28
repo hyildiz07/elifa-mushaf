@@ -1,5 +1,9 @@
 # Tecvid renkleri: kaynak, eşleme ve görünüm denetimi
 
+> Tarihsel rapor: Quran.ws renk aktarımı kaldırıldı. Güncel özellik, Quran
+> Foundation QCF V4 renkli sayfa fontunu yalnızca kullanıcı açtığında yükler.
+> Bu rapordaki dosyalar ve testler artık uygulamanın parçası değildir.
+
 Tarih: 28 Ekim 2026. Bu rapor `codex/tajweed-glyph-safety` dalındaki
 değişiklikleri kapsar. Mushaf metni, fontu, kelime düğümleri ve ses sistemi
 değiştirilmedi. Canlı yayın ve dinî uzman onayı bu teknik denetimin parçası

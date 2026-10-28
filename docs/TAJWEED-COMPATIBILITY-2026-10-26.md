@@ -1,5 +1,8 @@
 # Tecvidli gösterim: mevcut metne güvenli eşleme
 
+> Tarihsel rapor: burada anlatılan Quran.ws renk aktarımı kaldırıldı.
+> Güncel renkli tecvid görünümü Quran Foundation QCF V4 fontuyla açılır.
+
 > Güncel kapsam ve test sonuçları: [28 Ekim 2026 tecvid denetimi](TAJWEED-AUDIT-2026-10-28.md).
 > Aşağıdaki sayılar ilk uyarlamanın tarihî kaydıdır.
 
