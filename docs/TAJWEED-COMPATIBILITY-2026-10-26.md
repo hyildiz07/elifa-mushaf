@@ -1,5 +1,8 @@
 # Tecvidli gösterim: mevcut metne güvenli eşleme
 
+> Güncel kapsam ve test sonuçları: [28 Ekim 2026 tecvid denetimi](TAJWEED-AUDIT-2026-10-28.md).
+> Aşağıdaki sayılar ilk uyarlamanın tarihî kaydıdır.
+
 Tarih: 26 Ekim 2026. Çalışma `codex/tajweed-feasibility` dalındadır; canlı
 siteye dağıtılmadı. Mushaf metni, fontlar, kelime elemanları ve ses zamanlaması
 değiştirilmedi.

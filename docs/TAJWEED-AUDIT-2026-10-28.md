@@ -54,7 +54,9 @@ gerçek okuyucu kelime gruplarını, tüm renkli kelimelerin görünür birleşi
 harflerini ve lâm-elif çiftlerini tarar. `npm run build` sonucu 700 test geçti,
 6 atlandı, hata yok. Masaüstü Chrome'da varsayılan Mushafın 49. sayfasında
 veri yüklenmesi, gerçek CSS Highlight aralıkları ve 2:283 örneği kontrol
-edildi. Tarayıcı tecvid renklendirmesini desteklemiyorsa seçenek pasif kalır;
+edildi. Aynı sayfanın telefon boyutunda görünümü ve Bakara 2:6'daki `لَا`
+kelimesinin bölünmeden normal renkte kalması da Chrome'da kontrol edildi.
+Tarayıcı tecvid renklendirmesini desteklemiyorsa seçenek pasif kalır;
 test moduna girişte de eksik CSS API çağrılmaz. Ayar açıklamaları Türkçe ve
 İngilizce sunulur; diğer diller İngilizce açıklama görür.
 
