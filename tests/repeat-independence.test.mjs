@@ -30,6 +30,32 @@ test('plain range uses only rangeRep; unrelated counts do not multiply it',()=>{
   const p=[{from:1,to:3,f:0,t:3000,x:1,dyn:true,repeatKind:'range',ayEnd:3}];p.practice={kind:'ayah',from:1,to:3,mode:'range'};
   start(c,p);assert.deepEqual(finish(c),[[1,3],[1,3],[1,3]]);
 });
+test('quick repeat and 1+2 start at the verse under the playhead without crediting a partial tour',()=>{
+  const c=harness();c.pausedAtMs=null;c.curMs=()=>1500;c.curAy=1;c.srcNode={};c.clipAudio=null;
+  c.runPlan=p=>{c.restarted=p;c.plan=p;c.pi=0;c.pr=0;c.planCycle=0;c.curAy=p.practice.from;};
+  vm.runInContext(fn('restartReadingPracticeAtCurrentAyah'),c);
+  c.plan=c.practicePlan({kind:'ayah',from:1,to:3},'range');c.planCycle=1;
+  c.SET.repOn=true;
+  assert.equal(c.restartReadingPracticeAtCurrentAyah('range'),2);
+  assert.deepEqual([c.restarted[0].from,c.restarted[0].to,c.planCycle],[2,3,0]);
+  assert.equal(c.restarted.rangeCycles,true);
+  assert.equal(c.restartReadingPracticeAtCurrentAyah('cumulative'),2);
+  assert.deepEqual(Array.from(c.restarted,s=>[s.from,s.to]),[[2,2],[3,3],[2,3]]);
+  assert.equal(c.restarted.practice.from,2);
+  c.pausedAtMs=1500;
+  assert.equal(c.restartReadingPracticeAtCurrentAyah('verse'),false,'paused audio does not restart');
+  c.pausedAtMs=null;c.plan[0].sourceRanges=[{verseSource:2}];
+  assert.equal(c.restartReadingPracticeAtCurrentAyah('verse'),false,'alternate recordings are not timed against the chapter');
+});
+test('two quick taps keep the verse chosen before the new audio seek completes',()=>{
+  const c=harness();c.pausedAtMs=null;c.curMs=()=>2500;c.curAy=1;c.srcNode={};c.clipAudio=null;
+  c.AD_.audio.paused=false;c.runPlan=p=>{c.plan=p;c.curAy=p.practice.from;c.srcNode=null;c.AD_.audio.paused=true;};
+  vm.runInContext(fn('restartReadingPracticeAtCurrentAyah'),c);
+  c.plan=c.practicePlan({kind:'ayah',from:1,to:3},'range');
+  assert.equal(c.restartReadingPracticeAtCurrentAyah('verse'),3);
+  assert.equal(c.restartReadingPracticeAtCurrentAyah('cumulative'),3);
+  assert.equal(c.plan.practice.from,3);
+});
 test('changing one count live leaves the other repeat scopes unchanged',()=>{
   const c=harness(),ayah={dyn:true,repeatKind:'ayah'},combined={dyn:true,repeatKind:'combine'},range={dyn:true,repeatKind:'range'};
   c.SET.combineRep=4;assert.deepEqual([c.stepReps(ayah),c.stepReps(combined),c.stepReps(range)],[2,4,2]);
