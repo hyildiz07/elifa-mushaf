@@ -9849,7 +9849,7 @@ let repLongFired2=false;
 $('repTog2').onclick=()=>{if(repLongFired2){repLongFired2=false;return;}SET.repOn=!SET.repOn;saveSet();syncPracticeControls();toast(SET.repOn?'Tekrar açık · '+(SET[splitRepeatKey()]??SET.rep)+'×':'Tekrar kapalı');};
 $('repPlus2').onclick=()=>{const key=splitRepeatKey();SET[key]=Math.min(99,(SET[key]??SET.rep)+1);SET.repOn=true;saveSet();syncPracticeControls();};
 $('repMinus2').onclick=()=>{const key=splitRepeatKey();SET[key]=Math.max(key==='combineRep'?0:1,(SET[key]??SET.rep)-1);saveSet();syncPracticeControls();};
-$('cumuTog2').onclick=()=>{SET.cumu=!SET.cumu;saveSet();syncPracticeControls();queuePracticeModeChange(SET.cumu);toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');};
+$('cumuTog2').onclick=()=>{SET.cumu=!SET.cumu;if(SET.cumu)SET.repOn=true;saveSet();syncPracticeControls();queuePracticeModeChange(SET.cumu);toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');};
 (function(){const b=$('repTog2');if(!b)return;let t=null;
   b.addEventListener('pointerdown',()=>{repLongFired2=false;t=setTimeout(()=>{t=null;repLongFired2=true;if(navigator.vibrate)navigator.vibrate(30);gearCtx='parts';fillGearSheet();openSheet('gearSheet');},480);});
   const c=()=>{if(t){clearTimeout(t);t=null;}};b.addEventListener('pointerup',c);b.addEventListener('pointerleave',c);b.addEventListener('pointercancel',c);})();
@@ -10066,6 +10066,33 @@ function practicePlan(context,mode){
   }
   p.practice={...context,mode};p.rangeCycles=context.cycle!==false;
   return p;
+}
+// Quick controls pressed during fluent reading begin the chosen practice at
+// the verse actually under the playhead. The new plan starts a fresh count;
+// no partly heard verse or earlier tour is reported as completed.
+function restartReadingPracticeAtCurrentAyah(mode){
+  const context=plan.practice,step=plan[pi],chapter=normalChapterAudio||AD_;
+  if(!playing||pausedAtMs!=null||waiting||context?.kind!=='ayah'||!step||
+    step.sourceRanges||step.preserveTail||!chapter?.ay||
+    !['range','verse','cumulative'].includes(mode))return false;
+  // A second quick tap can arrive before the restarted audio has sought.
+  // In that gap use the verse selected by the first tap, not stale media time.
+  const loading=!srcNode&&!clipAudio&&chapter.audio?.paused&&
+    Number.isFinite(chapter.ay[curAy]?.[0]);
+  const position=loading?chapter.ay[curAy][0]:curMs(),first=context.from,last=context.to;
+  if(!Number.isFinite(position)||!Number.isInteger(first)||!Number.isInteger(last)||
+    last<first)return false;
+  let ay=first;
+  for(let a=first;a<=last;a++){
+    const [start,end]=chapter.ay[a]||[];
+    if(!Number.isFinite(start)||!Number.isFinite(end)||end<=start)return false;
+    if(start>position)break;
+    ay=a;
+  }
+  const next=practicePlan({kind:'ayah',from:ay,to:last,cycle:context.cycle},mode);
+  if(!next.length||!normalVersePlanReady(next))return false;
+  curAy=ay;runPlan(next);
+  return ay;
 }
 // Apply a mode switch only at the current audio boundary. No marked words,
 // range bounds or cycle counter are lost, and toggling while idle stays silent.
@@ -11044,6 +11071,8 @@ $('repTog').onclick=()=>{
   SET.repOn=!SET.repOn;saveSet();
   document.querySelector('.repctl').classList.toggle('on',SET.repOn);
   syncPracticeControls();
+  if(SET.repOn&&typeof restartReadingPracticeAtCurrentAyah==='function')
+    restartReadingPracticeAtCurrentAyah(window.elifaPracticeMode?.()||SET.studyMode||'range');
   toast(SET.repOn?'Tekrar açık · '+SET[readerRepeatKey()]+'×':'Tekrar kapalı');
 };
 $('repPlus').onclick=()=>{const key=readerRepeatKey();SET[key]=Math.min(99,SET[key]+1);SET.repOn=true;saveSet();syncPracticeControls();};
@@ -11061,9 +11090,13 @@ $('cumuTog').onclick=()=>{
   if(cumuLongFired){cumuLongFired=false;return;}
   const partsActive=!!activeStudySplitSelection();
   SET.cumu=partsActive?!SET.cumu:!(window.elifaPracticeMode?window.elifaPracticeMode()==='cumulative':SET.cumu);
+  if(SET.cumu)SET.repOn=true;
   const mode=SET.cumu?'cumulative':partsActive?'verse':'range';
   window.elifaSetPracticeMode?.(mode);
-  saveSet();syncPracticeControls();queuePracticeModeChange(mode);
+  saveSet();syncPracticeControls();
+  const restarted=SET.cumu&&!partsActive&&typeof restartReadingPracticeAtCurrentAyah==='function'&&
+    restartReadingPracticeAtCurrentAyah(mode);
+  if(!restarted)queuePracticeModeChange(mode);
   toast(SET.cumu?'Birleşik açık · 1+2, 1+2+3…':'Birleşik kapalı');
 };
 let cumuLongFired=false;
@@ -12573,7 +12606,7 @@ updateStat();
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v375-no-tajweed';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v376-quick-repeat';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){

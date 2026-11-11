@@ -11,7 +11,7 @@
    · version.json / duyuru.json / manual-*.json → her zaman ağ öncelikli.
    · Yönlendirilmiş (redirected) navigasyon yanıtı önbelleğe yazılmaz.
    ═══════════════════════════════════════════════════════════════ */
-const VERSION = 'elifa-mushaf-v375-no-tajweed';
+const VERSION = 'elifa-mushaf-v376-quick-repeat';
 const CACHE   = VERSION;
 
 const CORE = [

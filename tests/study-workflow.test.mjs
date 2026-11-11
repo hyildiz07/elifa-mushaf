@@ -184,6 +184,51 @@ test('explicit cumulative method also applies to split parts and both Combine bu
  assert.equal(c.playing,false);
 });
 
+test('first tap enables repeat and 1+2 in both reader and split controls',()=>{
+ const html=fs.readFileSync('index.html','utf8');
+ for(const split of [false,true]){
+  const {c,nodes}=harness({repOn:false,cumu:false,rangeRep:3,combineRep:2});
+  c.queuePracticeModeChange=()=>false;
+  c.splitRepeatKey=()=> 'rep';
+  if(split){
+   vm.runInContext("let repLongFired2=false;",c);
+   vm.runInContext(html.split('\n').find(line=>line.startsWith("$('repTog2').onclick=")),c);
+   vm.runInContext(html.split('\n').find(line=>line.startsWith("$('cumuTog2').onclick=")),c);
+  }else{
+   vm.runInContext("let repLongFired=false; let cumuLongFired=false;",c);
+   for(const id of ['repTog','cumuTog']){
+    const start=html.indexOf("$('"+id+"').onclick=");
+    const end=html.indexOf('\n};',start)+3;
+    vm.runInContext(html.slice(start,end),c);
+   }
+  }
+  nodes.get(split?'repTog2':'repTog').onclick();
+  assert.equal(c.SET.repOn,true,'repeat starts on its first tap');
+  assert.equal(nodes.get('repTog').attrs['aria-pressed'],'true');
+  c.SET.repOn=false;c.syncPracticeControls();
+  nodes.get(split?'cumuTog2':'cumuTog').onclick();
+  assert.equal(c.SET.cumu,true);
+  assert.equal(c.SET.repOn,true,'1+2 activates its repetition count immediately');
+  for(const id of split?['repTog','repTog2','cumuTog2']:['repTog','repTog2','cumuTog','cumuTog2'])
+   assert.equal(nodes.get(id).attrs['aria-pressed'],'true',id+' reflects the active method');
+  assert.equal(c.playing,false,'changing a setting does not start audio');
+ }
+});
+test('reader quick buttons restart the active verse instead of queuing a whole-range change',()=>{
+ const html=fs.readFileSync('index.html','utf8'),{c,nodes}=harness({repOn:false,cumu:false});
+ const modes=[];c.playing=true;c.restartReadingPracticeAtCurrentAyah=mode=>{modes.push(mode);return 2;};
+ c.queuePracticeModeChange=mode=>modes.push('queued:'+mode);
+ vm.runInContext('let repLongFired=false; let cumuLongFired=false;',c);
+ for(const id of ['repTog','cumuTog']){
+  const start=html.indexOf("$('"+id+"').onclick=");
+  vm.runInContext(html.slice(start,html.indexOf('\n};',start)+3),c);
+ }
+ nodes.get('repTog').onclick();
+ nodes.get('cumuTog').onclick();
+ assert.deepEqual(modes,['range','cumulative']);
+ assert.equal(c.SET.repOn,true);assert.equal(c.SET.cumu,true);
+});
+
 test('legacy saved cumulative studies repair the missing parts flag without changing whole-section preferences',()=>{
  const {c}=harness();const saved={reciter:223,speed:1,rep:2,combineRep:3,rangeRep:4,repOn:true,wait:0,mode:'cumulative',splitCombine:false};
  c.window.elifaStudySettings.load({settings:saved});assert.equal(c.window.elifaStudySettings.capture().splitCombine,true);
