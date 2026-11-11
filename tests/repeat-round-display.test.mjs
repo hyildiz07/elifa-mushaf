@@ -25,7 +25,7 @@ function harness(){
  for(const name of ['stepReps','planCycleReps','buildLadder','practiceUnit','practicePlan','applyPendingPracticeTransition',
   'advancePracticeCycle','handleBoundary','runPlan','finishPlan','stopPlan','syncRepeatScope','readerRepeatKey',
   'remainingReaderRepeats','remainingStudyRounds','splitRepeatKey','remainingStepRepeats','syncPlaybackRepeatCounters','syncRep','syncRep2',
-  'goStep','skipDisabledPracticeStep','pausePlayback','resumePlayback'])vm.runInContext(source(name),c);
+  'goStep','skipDisabledPracticeStep','playbackEndForCurrentBuffer','pausePlayback','resumePlayback'])vm.runInContext(source(name),c);
  return {c,node,heard,count:()=>Number(node('repN').textContent)};
 }
 test('single-step whole-range counter decreases once per complete pass, preserves settings, survives pause and resets only for a new or stopped program',()=>{
