@@ -52,3 +52,64 @@ test('stopping or changing the program while PCM loads cannot start stale audio'
 test('failed precise decoding cannot silently fall back to the leaking stream path',async()=>{
  const f=scheduler();f.chapter.decodePromise=Promise.resolve();await f.c.goStep();assert.equal(f.started(),0);assert.equal(f.stopped(),1);
 });
+
+function boundedStep(duration=12000){
+ let finish,started=[],stopped=0;
+ const chapter={audio:{},buffer:null,selBuf:null,exactChapter:false};
+ const st={f:300000,t:300000+duration,normalVerse:true,verseFrom:12,verseTo:13,
+  ayEnd:13,repeatKind:'combine'};
+ const c=vm.createContext({console:{warn(){}},SET:{reciter:7},curS:2,
+  AD_:chapter,normalChapterAudio:chapter,plan:[st],pi:0,pieceCursor:0,
+  playing:true,audioRequestId:0,stepRequestId:0,
+  ac:()=>({state:'running'}),stepBounds:s=>({f:s.f,t:s.t}),
+  ensureSelAudio:()=>new Promise(resolve=>{finish=()=>{
+   chapter.selBuf={lo:299000,hi:st.t+200};resolve();};}),
+  selectedBufferCovers:(buffer,from,to)=>!!buffer&&buffer.lo<=from&&buffer.hi>=to,
+  seekPlay:(from,to)=>started.push([from,to]),
+  stopPlan(){stopped++;c.playing=false;},toast(){}});
+ vm.runInContext(fn('goStep'),c);
+ return {c,chapter,st,finish:()=>finish?.(),started,stopped:()=>stopped};
+}
+test('a short repeated passage in a long surah waits for a precise window',async()=>{
+ const f=boundedStep(),pending=f.c.goStep();
+ assert.equal(f.started.length,0);
+ f.finish();await pending;
+ assert.deepEqual(f.started,[[300000,312000]]);
+ assert.equal(f.stopped(),0);
+});
+test('a stale decoded window cannot start after changing the step',async()=>{
+ const f=boundedStep(),pending=f.c.goStep();
+ f.c.stepRequestId++;f.finish();await pending;
+ assert.equal(f.started.length,0);
+});
+test('an unavailable precise window cannot fall back to timer-stopped playback',async()=>{
+ const f=boundedStep();f.c.ensureSelAudio=async()=>{throw Error('offline');};
+ await f.c.goStep();assert.equal(f.started.length,0);assert.equal(f.stopped(),1);
+});
+test('a verified physical file end stops at the last decoded sample',async()=>{
+ const f=boundedStep();
+ f.c.ensureSelAudio=async()=>{f.chapter.selBuf={lo:299000,hi:311800,
+  finalTailRequestedEnd:312000};};
+ f.c.selectedBufferCovers=(buffer,from,to)=>buffer.lo<=from&&
+  (buffer.hi>=to||buffer.finalTailRequestedEnd===to);
+ await f.c.goStep();
+ assert.deepEqual(f.started,[[300000,311800]]);
+ assert.equal(f.stopped(),0);
+});
+test('a long continuous passage keeps the existing streaming path',async()=>{
+ const f=boundedStep(61000);await f.c.goStep();
+ assert.deepEqual(f.started,[[300000,361000]]);
+});
+test('the prepared passage actually enters the sample-bounded player',()=>{
+ const calls=[];
+ const window={buffer:{duration:14},lo:299000,hi:313000,off:299000};
+ const c=vm.createContext({AD_:{selBuf:window,audio:{}},plan:[{normalVerse:true}],pi:0,
+  useWA:false,seekPlayWA:(from,to)=>calls.push(['pcm',from,to]),
+  seekPlayHTML:()=>calls.push(['timer'])});
+ vm.runInContext('let activeBuf=null,activeOff=0;',c);
+ vm.runInContext(fn('seekPlay'),c);
+ c.seekPlay(300000,312000);
+ assert.deepEqual(calls,[['pcm',300000,312000]]);
+ assert.equal(c.useWA,true);
+ assert.equal(vm.runInContext('activeOff',c),299000);
+});

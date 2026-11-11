@@ -8820,6 +8820,18 @@ function selTimes(){
   }
   return s==null||e<=s?null:[s,e];
 }
+function guardedSelectedWordCut(start,end,nextStart,measuredCut,selectionStart=start){
+  const candidate=Number.isFinite(measuredCut)?measuredCut:end-35;
+  if(!(Number.isFinite(start)&&Number.isFinite(end)&&end>start&&
+       Number.isFinite(candidate)))return null;
+  const minCut=Math.max(start+1,selectionStart+120);
+  if(!Number.isFinite(nextStart))return candidate>=minCut?candidate:null;
+  // If provider labels overlap substantially, a complete last word and an
+  // excluded following word cannot both be guaranteed from these timings.
+  if(nextStart<end-40)return null;
+  const cut=Math.min(candidate,nextStart-70);
+  return cut>=minCut?cut:null;
+}
 /* Çalışma Masası parçaları aynı sûre kaydının kelime ekseninde kalır.
    Metin ses yüklenmeden çizilebilir; oynatma her seferinde yeniden doğrulanır. */
 function buildStudySplitParts(fromAy,toAy,mode='auto',cutsByAy={}){
@@ -9818,10 +9830,11 @@ function pausePlayback(){
 function resumePlayback(){
   if(pausedAtMs==null)return;
   const b=stepBounds(plan[pi]);
-  if(!Number.isFinite(b.t))return;
-  const from=Math.max(b.f,Math.min(pausedAtMs,b.t-20));
+  const end=playbackEndForCurrentBuffer(plan[pi],b.t);
+  if(!Number.isFinite(end)||end<=b.f)return;
+  const from=Math.max(b.f,Math.min(pausedAtMs,end-20));
   pausedAtMs=null;
-  seekPlay(from,b.t);
+  seekPlay(from,end);
   setIco(true);
 }
 function togglePause(){
@@ -10200,6 +10213,17 @@ async function goStep(){
     }
     const b=stepBounds(st);
     if(!(Number.isFinite(b.f)&&Number.isFinite(b.t)&&b.t>b.f))throw Error('AUDIO_STEP_RANGE');
+    // Repeated short passages in a long surah must end at a decoded sample,
+    // not at a throttled HTMLAudio timer. Keep fluent/full-chapter reading
+    // streaming; only the requested passage is decoded for practice.
+    if(st.normalVerse&&!st.fluent&&!st.full&&!st.preserveTail&&!piece&&
+      !target.buffer&&b.t-b.f<=60000){
+      const context=ac();if(context.state==='suspended')context.resume().catch(()=>{});
+      await ensureSelAudio(st.verseFrom,st.verseTo,[b.f,b.t]);
+      if(!playing||request!==audioRequestId||stepRequest!==stepRequestId||plan[pi]!==st||AD_!==target)return;
+      if(!selectedBufferCovers(target.selBuf,b.f,b.t))throw Error('PRECISE_VERSE_AUDIO_UNAVAILABLE');
+      if(target.selBuf.hi<b.t-1)b.t=target.selBuf.hi;
+    }
     seekPlay(b.f,b.t);
   }catch(e){
     console.warn('Tam âyet sesi başlatılamadı:',e);
@@ -10290,7 +10314,9 @@ function seekPlayPitchClip(buffer,ms,endMs,offSec,durSec,rate){
   const blob=cached&&cached.buffer===buffer&&cached.offSec===offSec&&cached.durSec===durSec&&cached.fadeMs===fadeMs
     ?cached.blob:boundedPitchClip(buffer,offSec,durSec,fadeMs);
   if(!blob){
-    if(plan[pi]?.preserveTail){stopPlan(false);toast('Bu uzun parçanın kesin ses sınırı korunamadı. Daha kısa bir bölüm seç.');return;}
+    if(plan[pi]?.preserveTail||plan[pi]?.normalVerse&&endMs-ms<=60000){
+      stopPlan(false);toast('Bu parçanın kesin ses sınırı korunamadı. Daha kısa bir bölüm seç.');return;
+    }
     useWA=false;seekPlayHTML(ms,endMs);return;
   }
   clipCache={buffer,offSec,durSec,fadeMs,blob};
@@ -10494,20 +10520,30 @@ function scheduleBoundary(){}
 /* Çalarken bir konuma atla (hibrit) */
 function seekTo(ms){
   if(!playing||!AD_)return;
+  if(!srcNode&&!clipAudio&&(!htmlPlaybackWatch||AD_.audio?.paused))return;
   const b=stepBounds(plan[pi]);
-  if(!Number.isFinite(b.t))return;
-  const from=Math.max(b.f,Math.min(ms,b.t-20));
+  const end=playbackEndForCurrentBuffer(plan[pi],b.t);
+  if(!Number.isFinite(end)||end<=b.f)return;
+  const from=Math.max(b.f,Math.min(ms,end-20));
   if(pausedAtMs!=null){pausedAtMs=from;return;}
-  seekPlay(from,b.t);
+  seekPlay(from,end);
 }
 /* Hız değişince mevcut konumdan yeni hızla devam (hibrit) */
 function applyLiveSpeed(){
   if(!playing||waiting||pausedAtMs!=null)return;
-  if(useWA&&!srcNode&&!clipAudio)return;
+  if(!srcNode&&!clipAudio&&(!htmlPlaybackWatch||AD_?.audio?.paused))return;
   const b=stepBounds(plan[pi]);
-  if(!Number.isFinite(b.t))return;
-  const from=Math.max(b.f,Math.min(curMs(),b.t-20));
-  seekPlay(from,b.t);
+  const end=playbackEndForCurrentBuffer(plan[pi],b.t);
+  if(!Number.isFinite(end)||end<=b.f)return;
+  const from=Math.max(b.f,Math.min(curMs(),end-20));
+  seekPlay(from,end);
+}
+function playbackEndForCurrentBuffer(st,end){
+  const buffer=AD_?.selBuf;
+  return st?.normalVerse&&!st.preserveTail&&buffer&&
+    Number.isFinite(buffer.finalTailRequestedEnd)&&
+    Math.abs(buffer.finalTailRequestedEnd-end)<=1&&buffer.hi<end?
+    buffer.hi:end;
 }
 
 function handleBoundary(){
@@ -10678,8 +10714,9 @@ function autoScroll(el){
 
 /* word tap / ayah play */
 function normalVerseStep(chapter,first,last,extra){
+  const normal={...extra,normalVerse:true,verseFrom:first,verseTo:last};
   const ranges=verifiedNormalRanges(chapter,curS,first,last);
-  if(ranges)return {...extra,sourceRanges:ranges,
+  if(ranges)return {...normal,sourceRanges:ranges,
     unsafeHani65Tail:SET.reciter===5&&curS===65&&first===12&&last===12,
     ...(SET.reciter===5?{preserveTail:true,wholeVerse:true}:{})};
   // Hânî's source-matched Fâtiha 1:1 has only one word row, ending 93 ms
@@ -10689,9 +10726,9 @@ function normalVerseStep(chapter,first,last,extra){
     chapter.recordingUrl==='https://download.quranicaudio.com/qdc/hani_ar_rifai/murattal/1.mp3'&&
     chapter.verseRanges?.[1]?.[1]>chapter.ay?.[1]?.[1]){
     const [f,t]=chapter.verseRanges[1];
-    return {...extra,f,t,preserveTail:true,wholeVerse:true};
+    return {...normal,f,t,preserveTail:true,wholeVerse:true};
   }
-  return {...extra,f:chapter.ay[first][0],t:chapter.ay[last][1],
+  return {...normal,f:chapter.ay[first][0],t:chapter.ay[last][1],
     unsafeHani139Source:SET.reciter===5&&curS===6&&first<=139&&last>=139,
     unsafeHani65Tail:SET.reciter===5&&curS===65&&first===12&&last===12};
 }
@@ -10977,7 +11014,17 @@ async function playSelection(){
   if(isFullAyah){step.ayEnd=wa.ay;step.l=wa.ay+'. âyet';}
   else if(!physicalEnd){
     step.wordCut=true;
-    if(wb){step.cutKey=wb.ay+':'+wb.pos; if(AD_&&AD_.wcut){const rc=AD_.wcut[step.cutKey]; if(rc!=null)step.cutMs=rc;}}
+    if(wb){
+      step.cutKey=wb.ay+':'+wb.pos;
+      const next=wordArr[Math.max(selA,selB)+1];
+      const cut=guardedSelectedWordCut(wb.s,wb.e,next?.s,AD_?.wcut?.[step.cutKey],
+        Math.max(0,t[0]+(SET.startPad||0)));
+      if(cut==null){
+        toast('Bu seçimin ses sınırı güvenle ayrılamadı. Tam âyeti dinle veya başka hoca seç.');
+        return;
+      }
+      step.cutMs=cut;
+    }
   }
   const selectedPlan=typeof selectionPracticePlan==='function'?selectionPracticePlan(step):[step];
   runPlan(selectedPlan);
@@ -12606,7 +12653,7 @@ updateStat();
      Çözüm: beklenen önbellek adı yoksa ama eski bir Elifa önbelleği varsa,
      kayıt ÖMÜR BOYU BİR KEZ tazelenir. İşaret önce yazılır → tekrar etmez.
      ═══════════════════════════════════════════════════════════════ */
-    var SW_CACHE_EXPECTED = 'elifa-mushaf-v376-quick-repeat';   /* sw.js içindeki VERSION ile AYNI olmalı */
+    var SW_CACHE_EXPECTED = 'elifa-mushaf-v377-audio-boundaries';   /* sw.js içindeki VERSION ile AYNI olmalı */
   var SW_FRESH_KEY = 'elifaSwFresh_' + SW_CACHE_EXPECTED;
 
   function _forceSwRefresh(){

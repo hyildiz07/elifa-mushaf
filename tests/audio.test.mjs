@@ -25,7 +25,7 @@ function context(af){
   c.QTEXT=vm.runInContext('QTEXT',textContext);c.ensureSplitAudio=async()=>{};
   vm.createContext(c);
   vm.runInContext(fn('practicePlan'),c);
-  for(const name of ['alignTurkishWords','splitAudioKey','splitAudioReady','splitPauseAllowed','splitPhraseBoundary','splitChunkPositions','repeatedTimeline','repeatedAudioRanges','computeParts','partKey','partStep','terminalMuallimTailEnd','splitBounds','stepBounds','buildPartsPlan','selectedBufferCovers','offerSplitReciterChoice','showUnsafeSplitTiming','showSplitError','startFromPart','startPartsRange','ensureSelAudio','rewireTimings','tryStartPendingSplitPlay','stepReps','seekPlay'])vm.runInContext(fn(name),c);
+  for(const name of ['alignTurkishWords','splitAudioKey','splitAudioReady','splitPauseAllowed','splitPhraseBoundary','splitChunkPositions','repeatedTimeline','repeatedAudioRanges','computeParts','partKey','partStep','terminalMuallimTailEnd','splitBounds','stepBounds','buildPartsPlan','selectedBufferCovers','guardedSelectedWordCut','offerSplitReciterChoice','showUnsafeSplitTiming','showSplitError','startFromPart','startPartsRange','ensureSelAudio','rewireTimings','tryStartPendingSplitPlay','stepReps','seekPlay'])vm.runInContext(fn(name),c);
   const start=html.indexOf('  const ay={},ws={},verseEnds={},verseRanges={},verseSegments={}');
   const end=html.indexOf('  allSegs.sort',start);
   c.af=af;
@@ -1044,7 +1044,7 @@ test('Hânî Fâtiha 1:1 plays the whole verse but rejects incomplete word selec
 test('stopping while selected audio decodes cannot restart an old selection',async()=>{
   const c=context(fixture(4,4));
   c.SET.reciter=4;c.selA=0;c.selB=1;
-  c.wordArr=[{ay:12,pos:1},{ay:12,pos:2}];
+  c.wordArr=[{ay:12,pos:1,s:310000,e:315000},{ay:12,pos:2,s:315000,e:320000}];
   c.selRange=()=>[0,1];c.selTimes=()=>[310000,320000];
   c.AD_.audio={};c.AD_.sourceUrl='https://example.test/chapter.mp3';c.AD_.buffer=null;
   let finishDecode;
@@ -1059,7 +1059,7 @@ test('stopping while selected audio decodes cannot restart an old selection',asy
 test('only the latest selected-audio preparation may start playback',async()=>{
   const c=context(fixture(4,4));
   c.SET.reciter=4;c.selA=0;c.selB=1;
-  c.wordArr=[{ay:12,pos:1},{ay:12,pos:2}];
+  c.wordArr=[{ay:12,pos:1,s:310000,e:315000},{ay:12,pos:2,s:315000,e:320000}];
   c.selRange=()=>[0,1];c.selTimes=()=>[310000,320000];
   c.AD_.audio={};c.AD_.sourceUrl='https://example.test/chapter.mp3';c.AD_.buffer=null;c.AD_.decodePromise=null;
   const finishes=[];c.ensureSelAudio=()=>new Promise(resolve=>finishes.push(resolve));

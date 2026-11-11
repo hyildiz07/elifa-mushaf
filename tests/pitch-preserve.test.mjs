@@ -75,3 +75,13 @@ test('non-1x step uses pitch-preserving media and revokes its clip URL on stop',
   assert.equal(players[0].playbackRate,.75);
   assert.equal(reads,1,'a repeated step reuses its encoded samples');
 });
+test('an oversized short practice clip never falls back to a timer cut',()=>{
+  let stopped=0,timerStarted=0;
+  const c=vm.createContext({plan:[{normalVerse:true}],pi:0,
+    boundedPitchClip:()=>null,stopPlan:()=>{stopped++;},toast(){},
+    seekPlayHTML:()=>{timerStarted++;},useWA:true});
+  vm.runInContext('let clipCache=null;',c);
+  vm.runInContext(fn('seekPlayPitchClip'),c);
+  c.seekPlayPitchClip({},1000,31000,0,30,1.25);
+  assert.equal(stopped,1);assert.equal(timerStarted,0);
+});
